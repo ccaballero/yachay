@@ -1,0 +1,11 @@
+Options -Indexes
+DirectoryIndex index.php
+
+RewriteEngine on
+
+# Si se utiliza con userdir cambiar al directorio correspondiente
+RewriteBase /
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^(.*)$ index.php/$1
+

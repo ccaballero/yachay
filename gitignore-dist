@@ -1,0 +1,22 @@
+syntax: glob
+*~
+*.swp
+*.orig
+*.tmp.
+.svn
+*.bak
+*.log
+.cache/
+.settings/
+.buildpath
+.hgignore
+.project
+.htaccess
+media/upload/
+media/users/thumbnail_large/
+media/users/thumbnail_medium/
+media/users/thumbnail_small/
+libs/Yeah/Settings/Database.php
+libs/Yeah/Settings/Config.php
+sql/_database.sql
+
