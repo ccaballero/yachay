@@ -1,0 +1,61 @@
+\documentclass[letterpaper,spanish]{report}
+\usepackage{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+
+\oddsidemargin -0.3cm \topmargin -1.1cm \headheight 2.5cm
+\textwidth 16.8cm \textheight 19.8cm
+
+\newsavebox{\fondo}
+\sbox{\fondo}{\includegraphics[keepaspectratio,height=1.35\textheight,width=1.35\textwidth]{margin.png}}
+
+\pagestyle{fancy}
+\fancyfoot[C]{}
+\fancyhead[C]{\setlength{\unitlength}{1in}
+\begin{picture}(0,0)\put(-3.9,-9.3){\usebox{\fondo}}\end{picture}}
+
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+
+\begin{center}
+    {\bfseries \large{Certificado de Inspección}}
+\end{center}
+
+\vspace{0.5cm}
+
+Yo ......................................., inspector del equipo conformado por .......................... y .................................
+certifico que han sido verificadas las siguientes funciones y estandares de calidad:
+
+\vspace{3.5cm}
+
+\begin{itemize}
+    \item Documentacion de codigo entendible y claro.
+    \item Documentacion de las funciones desempeñadas entendible y claro.
+\end{itemize}
+
+\vspace{4.5cm}
+
+Por lo tanto mi recomendacion es:
+\begin{verbatim}
+.........................................................................................
+.........................................................................................
+.........................................................................................
+.........................................................................................
+.........................................................................................
+\end{verbatim}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \begin{tabular}{c c}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ &
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \\
+  &  \\
+Inspector & Jefe de equipo de desarrollo\\
+    \end{tabular}
+\end{center}
+\end{document}

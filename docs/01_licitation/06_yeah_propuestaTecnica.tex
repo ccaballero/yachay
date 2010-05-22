@@ -1,0 +1,434 @@
+\documentclass[letterpaper,spanish]{article}
+\usepackage{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{fancyhdr}
+\usepackage{latexsym}
+
+\oddsidemargin -0.3cm \topmargin -1.1cm \headheight 2.5cm
+\textwidth 16.8cm \textheight 19.8cm
+
+\newsavebox{\fondo}
+\sbox{\fondo}{\includegraphics[keepaspectratio,height=1.35\textheight,width=1.35\textwidth]{margen.png}}
+
+\pagestyle{fancy}
+\fancyhead[C]{\setlength{\unitlength}{1in}
+\begin{picture}(0,0)\put(-3.9,-9.3){\usebox{\fondo}}\end{picture}}
+
+\renewcommand{\headrulewidth}{0pt}
+
+\title{\huge{\textbf{PROPUESTA TÉCNICA}}}
+\author{Yeah! S.R.L.}
+\date{\small{Marzo del 2009}}
+
+\begin{document}
+\maketitle \pagebreak \tableofcontents \pagebreak
+
+\section{PROPUESTA DE SERVICIOS}
+
+\subsection{PROPÓSITO}
+La presente propuesta técnica tiene como propósito exponer nuestra alternativa de
+solución al problema de la empresa de TIS para su sistema web de administración de
+cursos y notas. Además el documento servirá de guía para el proceso de desarrollo
+del producto de software y formará parte indivisible del contrato estipulado entre
+la empresa TIS y el proponente, esperando que cumpla y satisfaga con las exigencias
+emitidas por parte de la empresa licitante.
+
+\subsection{OBJETIVOS}
+
+\subsubsection{OBJETIVO GENERAL}
+Desarrollar una plataforma social basada en tecnologia web 2.0, que posea fines
+educativos y de evaluación, de manera que mejore el proceso enseñanza-aprendizaje
+y la interacción entre docentes y estudiantes.
+
+\subsubsection{OBJETIVO ESPECÍFICOS}
+\begin{itemize}
+    \item Desarrollo de componentes de gestión de usuarios.
+    \item Desarrollo de componentes de gestion de espacios virtuales.
+    \item Desarrollo de componentes de roles y privilegios.
+    \item Desarrollo de una infraestructura para la adición de nuevas caracteristicas.
+    \item Desarrollo de funcionalidad interactiva entre usuarios.
+\end{itemize}
+
+\subsubsection{TECNOLOGIA A UTILIZAR}
+Para el cumplimiento de los objetivos de esta propuesta y las condiciones
+establecidas en el pliego de especificaciones de la empresa TIS, se ha
+considerado desarrollar el sistema web de administración de cursos y notas,
+con las siguientes herramientas de software:
+
+\begin{center}
+    \begin{tabular}{|l|l|c|}
+    \hline
+    \textbf{Herramienta}    & \textbf{Software}  & \textbf{Versión} \\
+    \hline
+    Servidor web                        & Apache web server   &  2.2.9 \\
+    Gestor de base de datos             & MySQL               &  5.0.67 \\
+    Lenguaje de programación            & PHP                 &  5.2.6 \\
+    Librerias de apoyo                  & Zend Framework      &  1.7.6 \\
+                                        & jQuery              &  1.3.2 \\
+    Sistema de Control de Versiones     & Mercurial           &  1.2 \\
+    \hline
+    \end{tabular}
+\end{center}
+
+\subsection{TIPOS DE USUARIOS}
+\begin{enumerate}
+    \item Administrador.
+    \item Moderador.
+    \item Regente.
+    \item Docente.
+    \item Auxiliar.
+    \item Estudiante.
+    \item Invitado especial.
+    \item Visitante anonimo.
+\end{enumerate}
+
+\subsection{FUNCIONALIDADES GLOBALES}
+\begin{description}
+    \item[Gestión de usuarios]
+    Componente encargado de la gestión de usuarios y roles de usuarios.
+    \item[Gestión de espacios virtuales]
+    Componente encargado de la gestión de espacios de materias,
+    espacios de discusión y espacios privados.
+    \item[Gestión de equipos de trabajo]
+    Componente encargado de la gestion de equipos de trabajo entre los
+    usuarios del sistema.
+    \item[Sub-sistema de administración del sistema]
+    Componente encargado de facilitar la administración del sistema.
+    \item[Sub-sistema de administración de modulos]
+    Componente encargado de la gestion de los modulos del sistema.
+\end{description}
+
+\subsubsection{MODULOS DEL SISTEMA}
+Una vez desarrollado el sub-sistema administrador de modulos, esta
+herramienta será provista de los modulos necesarios para gestionar
+los siguientes elementos:
+\begin{itemize}
+    \item Ficheros.
+    \item Avisos, actividaddes y eventos.
+    \item Generación dinamica de contenido.
+    \item Foros.
+    \item Valoraciones de usuarios.
+    \item Comentarios.
+    \item Busquedas.
+    \item Etiquetas dinamicas.
+    \item Evaluaciones y calificaciones.
+\end{itemize}
+
+\section{METODOLOG\'IA DE DESARROLLO}
+El modo de trabajo a usarse ser\'a un modelo incremental, y utilizando la forma de trabajo basada en SCRUM.
+
+El \textbf{modelo incremental} se basa en incrementos, cada incremento sigue el modelo cascada y posee caracteristicas de retro alimentaci\'on.
+
+Estos modelos iterativos se basan en dividir el proyecto de desarrollo en varias etapas, llamadas 
+iteraciones. Las iteraciones son cortas (unas cuantas semanas, excepto en proyectos enormes) y su duración es 
+fija (no puede alargarse: si hay retrasos, estos se incluyen en otra iteración).
+
+La idea central es que, en cada una de esas iteraciones, se construye una parte pequeña del sistema (esto se 
+llama a veces "desarrollo incremental"). Para esa parte del sistema, se realiza todo el proceso: análisis, 
+diseño, programación y pruebas. Se acaba la iteración con un ejecutable que incluye todas las partes del 
+sistema construidas hasta el momento. Los aspectos del sistema con más riesgo (por ejemplo, la arquitectura) 
+se construyen en las primeras iteraciones. El esquema de un modelo iterativo se muestra gráficamente en la 
+siguiente figura.
+
+\begin{center}\includegraphics[width=12cm,height=05.88cm]{modeloIterativo.png}\end{center}
+
+Las ventajas de este tipo de modelo son las siguientes:
+\begin{itemize}
+    \item \textbf{Flexibilidad.} Los requerimientos no quedan totalmente fijados hasta el final del proyecto 
+    de desarrollo. Por ello, se pueden realizar cambios de forma flexible. Por una parte, el conocimiento que 
+    se adquiere en una iteración sirve para plantear de forma más realista los requerimientos de la 
+    siguiente. Por otra parte, este conocimiento nos puede hacer reformar partes del sistema construidas en 
+    iteraciones anteriores. En una palabra, todos los documentos del sistema
+    (requerimientos, diseño y código) no son rígidos sino que pueden cambiarse durante todo el proceso de 
+    desarrollo. (Típicamente suelen ser modificados en mayor medida en las primeras iteraciones y en menor 
+    medida en las últimas).
+    \item \textbf{Mitigación de riesgos.} Como las pruebas se hacen desde el principio del proyecto, puede 
+    determinarse la viabilidad o eficiencia de las decisiones de diseño. Además, los elementos con más riesgo 
+    se tratan en las primeras iteraciones, con lo cual se puede implementar una mitigación de riesgos más 
+    temprana y exitosa.
+    \item \textbf{Retroalimentación.} Como hay ejecutables desde el mismo comienzo del proyecto, el cliente 
+    puede examinarlos y proponer los cambios que necesita para su negocio. También los desarrolladores tienen 
+    una rápida retroalimentación de lo que funciona y lo que no, ya que las pruebas se realizan desde el 
+    comienzo mismo del proyecto y no se debe esperar al final para hacer las modificaciones necesarias. 
+\end{itemize}
+
+Como consecuencia, un modelo de desarrollo iterativo es condición necesaria (aunque no suficiente) para la correcta ejecución de un proceso de desarrollo de software. En el mencionado estudio de dos años sobre proyectos de desarrollo exitosos, se determinó que el primer factor de éxito para un proyecto de desarrollo es adoptar un modelo iterativo, en vez de un modelo en cascada. 
+
+\begin{center}\includegraphics[width=6cm,height=6cm]{cicloIterativo02.png}\end{center}
+
+\textbf{Scrum} es una forma de auto-gestión de los equipos de programadores. Un grupo de programadores deciden cómo hacer sus tareas y cuánto van a tardar en ello. Scrum ayuda a que trabajen todos juntos, en la misma dirección, con un objetivo claro.
+
+Scrum permite además seguir de forma clara el avance de las tareas a realizar, de forma que se pueda ver día a día cómo progresa el trabajo.
+
+Aunque surgió como modelo para el desarrollo de productos tecnológicos, también se emplea en entornos que trabajan con requisitos inestables y que requieren rapidez y flexibilidad; situaciones frecuentes en el desarrollo de determinados sistemas de software.
+
+\section{PLANIFICACIÓN}
+A continuación se presenta una descripción acerca del cronograma de actividades
+que se realizará para la ejecución, desarrollo, capacitación y puesta en marcha
+del sistema web de administración de cursos y notas.
+
+\begin{center}\includegraphics[width=14.50cm,height=05.88cm]{planificacion01.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=05.99cm]{planificacion02.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=06.39cm]{planificacion03.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=05.99cm]{planificacion04.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=05.99cm]{planificacion05.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=06.39cm]{planificacion06.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=07.91cm]{planificacion07.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=07.91cm]{planificacion08.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=05.99cm]{planificacion09.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=10.22cm]{planificacion10.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=04.87cm]{planificacion11.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=05.26cm]{planificacion12.png}\end{center}
+\begin{center}\includegraphics[width=16.00cm,height=02.55cm]{planificacion13.png}\end{center}
+
+\pagebreak
+
+\section{DEFINICI\'ON DE PRODUCTOS ENTREGABLES}
+Para la correcta medicion de los avances por parte de la empresa TIS, se define los productos y documentos a ser
+presentados por parte de la empresa Yeah! S.R.L., mismos que seran parte integrante del software a ser desarrollado.\
+
+\begin{center}
+    \begin{tabular}{|l|p{13cm}|}
+        \hline
+        \textbf{Concepto} & \textbf{Descripcion} \\
+        \hline
+        PROTOTIPO & El concepto de prototipo se refiere a la creaci\'on de paginas web que detallen el contenido y la
+        utilizaci\'on de conceptos gr\'aficos creados por la empresa, a continuaci\'on se detallan los documentos que
+        asegur\'an la calidad del proceso de desarrollo, seguido por la empresa Yeah! S.R.L.:
+
+        \begin{itemize}
+            \item C\'odigo fuente.
+            \item Plantilla de diseño web.
+        \end{itemize}\\
+        \hline
+        MODULO & Los módulos son unidades que pueden ser usadas por separado y los hace reusables y permite que
+        múltiples programadores trabajen en diferentes módulos en forma simultánea, produciendo ahorro en los tiempos de 
+        desarrollo.
+
+        Los módulos promueven la modularidad y el encapsulamiento, pudiendo generar programas complejos de fácil 
+        comprensión.\\
+        \hline
+        PLATAFORMA & El concepto de Plataforma se refiere a la base de la aplicaci\'on la cual sirve para ejecutar 
+        determinadas aplicaciones compatibles al sistema.\\
+        \hline
+        INTERFAZ & Se refiere al conjunto de vistas que facilitan la interacci\'on entre un usuario y el sistema web.\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\pagebreak
+
+\section{CLASIFICACI\'ON DE PRODUCTOS ENTREGABLES POR FECHA DE REVISI\'ON }
+A continuaci\'on se detallan los entregables:
+
+\begin{center}
+    \begin{tabular}{|l|c|p{8cm}|}
+        \hline
+        \textbf{Nro}    & \textbf{Fecha}  & \textbf{Detalle} \\
+        \hline
+        1 & 9 de abril & \begin{itemize}
+                            \item {\bfseries Prototipo a utilizarse:}
+                                  El usuario podr\'a ver a modo general las caracter\'isticas del sistema, para los 
+                                  diferentes tipos de usuarios.
+                            \item {\bfseries Modulo de gesti\'on de usuarios:}
+                                  El sistema ya podr\'a gestionar los diferentes tipos de usuarios.
+                            \item {\bfseries Modulo de gesti\'on de espacios virtuales, materias, cursos y equipos:}
+                                  Los espacios virtuales ya estar\'an listos para su uso.
+                            \item Orden de pago.
+                         \end{itemize}\\
+        \hline
+        2 & 30 de abril & \begin{itemize}
+                            \item {\bfseries Plataforma del sistema:}
+                                  Es la base de todo el sistema, el cual dar\'a el soporte a todas las aplicaciones que se 
+                                  ir\'an desarrollando posteriormente.
+                            \item {\bfseries Interfaz de administraci\'on:}
+                                  Son las paginas web que le permitir\'an al administrador del sistema realizar las
+                                  operaciones que solo el puede realizarlas.
+                            \item {\bfseries Modulo de gesti\'on del sistema y tabla de privilegios:}
+                                  La gesti\'on del sistema es la que se encarga de poner disponibles todas las 
+                                  aplicaciones que se instalan. En cambio, la tabla de privilegios es la se encarga de 
+                                  regular el acceso a las distintas partes del sistema.
+                            \item Orden de pago.
+                          \end{itemize}\\
+        \hline
+    \end{tabular}
+\end{center}
+\begin{center}
+    \begin{tabular}{|l|c|p{8cm}|}
+        \hline
+        3 & 28 de mayo & \begin{itemize}
+                            \item {\bfseries Modulos de calendario, archivos y evaluaci\'on:}
+                                  Los modulos de calendario, archivo y evaluaci\'on, ya estar\'an listos para ser evaluados 
+                                  por el cliente.
+                            \item {\bfseries Modulos de foro y paginas:}
+                                  Los modulos de foro y paginas ya estar\'an listos para ser evaluados por el cliente.
+                            \item {\bfseries Modulos de valoraci\'on y evaluaci\'on:}
+                                  Los modulos de valoraci\'on y evaluaci\'on, ya estar\'an listos para ser evaluados por el 
+                                  cliente. 
+                            \item {\bfseries Modulos de busqueda, comentarios y etiquetas:}
+                                  Los modulos de busqueda, comentarios y etiquetas, ya estar\'an listos para ser evaluados 
+                                  por el cliente.
+                            \item Orden de pago.
+                         \end{itemize}\\
+        \hline
+        4 & 18 de junio & \begin{itemize}
+                            \item {\bfseries Manual t\'ecnico:}
+                                  Tendr\'a la informaci\'on que el administrador del sistema necesita para poder agregar 
+                                  nuevas aplicaciones a la plataforma del sistema y poder manejar los errores que pueden 
+                                  ocurrir por el manejo incorrecto del sistema.
+                            \item {\bfseries Manual de usuario:}
+                                  Tendr\'a la informaci\'on que el usuario necesite para poder utilizar el sistema 
+                                  correctamente, detallando las ventanas que le ir\'an apareciendo de acuerdo a como va 
+                                  usando el sistema.
+                            \item {\bfseries Manual de instalaci\'on:}
+                                  Contendr\'a toda la informaci\'on con respecto a como instalar y como configurar el 
+                                  sistema.
+                            \item Orden de pago.
+                                  % se emitara la siguiente orden de pago de acuerdo a las funcionalidades entregadas 
+                                  % sitadas anteriormente.
+                          \end{itemize}\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\pagebreak
+
+\section{MEDIDAS DE EXCEPCI\'ON Y CONTINGENCIAS}
+En esta sección se detallan ciertos aspectos negativos que podrían suscitarse y las medidas a tomar al respecto.
+
+Aspectos relativos al servidor:
+\begin{itemize}
+    \item \textit {El servidor provisto por la empresa TIS parece estar caído}:\\
+          Es responsabilidad exclusiva de la empresa proveer de espacios de prueba del software que la
+          empresa Yeah! S.R.L. esta desarrollando para ellos. Yeah! S.R.L. no se responsabilizara por las
+          faltas de compatibilidad que el software pueda tener con respecto a los servidores de la empresa
+          TIS.
+    \item \textit {El servidor provisto por la empresa TIS parece denegar peticiones desde fuera de su red intern}:\\
+          Si bien las políticas de provisión de servicios que tenga la empresa TIS con terceros, la empresa 
+          Yeah! S.R.L. se reserva el derecho de usar los  servidores que faciliten su labor de desarrollo, 
+          esto implica que dado el caso, podrían migrarse ciertas tareas de la empresa a servidores externos.
+    \item \textit {El servidor provisto por la empresa TIS requiere algún software adicional}:\\
+          En cuanto al software requerido por la empresa Yeah! S.R.L., este se detallará en una petición 
+          formal hacia la empresa TIS, este software respetará siempre la condición de no poseer una licencia 
+          privativa, vale decir que en todo caso serán siempre software libre, en caso de no poder contar con 
+          el software requerido por la empresa Yeah! S.R.L., esta se compromete a buscar alternativas a este.
+\end{itemize}
+
+Cabe recalcar que siendo aspectos ajenos a la responsabilidad de la empresa Yeah! S.R.L., deberán ser resueltos por la empresa TIS.
+
+En caso de ocasionarse un problema entre las partes, este deberá someterse a arbitraje.
+
+\section{PLAZO DE CONCLUSIÓN DEL CONTRATO}
+Una vez entregado el software y firmado un documento de conformidad por parte de la empresa TIS, se dar\'a 
+por concluida la relaci\'on contractual con la empresa TIS. Tales acciones en ning\'un caso podr\'an exceder 
+el d\'ia jueves 18 de Junio del 2009.
+
+\section{PROPUESTA ECON\'OMICA}
+La cotización de la solución informática que Yeah! S.R.L. pretende construir para la empresa TIS, presenta 
+los siguientes costes:
+
+\subsection{COSTOS OPERATIVOS}
+Los costos operativos se refieren a los conceptos de servicios básicos y otras necesidades, estos se basan en un calculo aproximado:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf {Mes}   &  \textbf{Servicios B\'asicos} & \textbf{Fletes y alquileres} & \textbf{Total}\\
+        \hline
+        Abril &  640                 & 1270                & 1810\\
+        Mayo  &  640                 & 1270                & 1810\\
+        Junio &  640                 & 1270                & 1810\\
+        \hline
+        \textbf {Total} &  1960      & 3810                & 5430\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection{COSTOS DEL PERSONAL}
+Los costos del personal se refieren a los conceptos de salario del personal, estos se basan en un calculo aproximado:
+
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf {Mes}   &  \textbf{Salarios (Bs.)} & \textbf{Bonos (Bs.)} & \textbf{Total}\\
+        \hline
+        Abril &  10500                 & 300                & 10800\\
+        Mayo  &  10500                 & 300                & 10800\\
+        Junio &  10500                 & 300                & 10800\\
+        \hline
+        \textbf {Total} &  31500       & 900                & 32400\\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection{ESTIMACI\'ON DEL ESFUERZO}
+Los costos por esfuerzo tratan de subsanar las diferencia por complejidad del desarrollo de sistemas, estos se basan en un calculo aproximado que depende en gran medida de la ponderación que se hicieron a los funcionalidades provistas a la aplicación web a desarrollar:
+
+\begin{center}
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf {Modulo}   &  \textbf{Esfuerzo} & \textbf{Costo Normal (Bs.)} & \textbf{Total}\\
+        \hline
+        USERS          & 48/16       &    1700      &              5100 \\
+        LOGIN          & 9/16        &    1700      &              956 \\
+        SPACE          & 71/16       &    1700      &              7544 \\
+        TEAM           & 22/16       &    1700      &              2338 \\
+        ADMIN          & 28/16       &    1700      &              2975 \\
+        CORE           & 28/16       &    1700      &              2975 \\
+        ACL            & 4/16        &    1700      &              425 \\
+        FILE           & 17/16       &    1700      &              1806 \\ 
+        SCHEDULE       & 31/16       &    1700      &              3294 \\
+        PAGES          & 21/16       &    1700      &              2231 \\
+        FORUM          & 34/16       &    1700      &              3612 \\
+        RATING         & 24/16       &    1700      &              2550 \\
+        SEARCH         & 15/16       &    1700      &              1594 \\
+        COMMENT        & 25/16       &    1700      &              2656 \\
+        TAGS           & 16/16       &    1700      &              1700 \\
+        EVALUATION     & 60/16       &    1700      &              6375 \\
+        \hline
+        \textbf {Total} &         &                 & 48131 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection{COSTO TOTAL DE LA APLICACI\'ON WEB}
+
+Basado en los costes obtenidos en las anteriores secciones, se estima el coste total como sigue:
+
+\begin{center}
+    \begin{tabular}{|l|c|}
+    \hline
+    \textbf{Costo} & \textbf{Importe (Bs.)} \\
+    \hline
+    Costos Operativos                           &   5430 \\
+    Costos de Personal                          &   32400 \\
+    Soporte de riesgos (10\%)                   &   3783 \\
+    Costo del Producto                          &   41613 \\
+    Precio de Venta incluidas utilidades (20\%) &   49935.6 \\
+    \hline
+    \textbf {Precio Final incluidos impuestos}            &   56427 \\
+    \hline
+    \end{tabular}
+\end{center}
+Son: 56427 (Cincuenta y seis mil cuatrocientos veinte y siete Bolivianos)
+
+\section{PLAN DE PAGOS}
+El plan de pagos se detalla a continuaci\'on, no se toma en cuenta tazas de interes:
+
+\begin{center}
+    \begin{tabular}{|c|l|c|}
+    \hline
+    \textbf{Pago} & \textbf {Evento} & \textbf {Monto (Bs.)} \\
+    \hline
+    1 & Firma del Contrato & 5642.7 \\
+    2 & 1er Hito           & 12696.075 \\
+    3 & 2do Hito           & 12696.075 \\
+    4 & 3er Hito           & 12696.075 \\
+    5 & Fin del Contrato   & 12696.075 \\
+    \hline
+    \end{tabular}
+\end{center}
+
+\end{document}

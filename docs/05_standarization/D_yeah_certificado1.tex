@@ -1,0 +1,82 @@
+\documentclass[letterpaper,spanish]{report}
+\usepackage{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+
+\oddsidemargin -0.3cm \topmargin -1.1cm \headheight 2.5cm
+\textwidth 16.8cm \textheight 19.8cm
+
+\newsavebox{\fondo}
+\sbox{\fondo}{\includegraphics[keepaspectratio,height=1.35\textheight,width=1.35\textwidth]{margin.png}}
+
+\pagestyle{fancy}
+\fancyfoot[C]{}
+\fancyhead[C]{\setlength{\unitlength}{1in}
+\begin{picture}(0,0)\put(-3.9,-9.3){\usebox{\fondo}}\end{picture}}
+
+\renewcommand{\headrulewidth}{0pt}
+
+\begin{document}
+
+\begin{center}
+    {\bfseries \large{Certificado de Inspección}}
+\end{center}
+
+\vspace{0.5cm}
+
+Yo ......................................., inspector del equipo conformado por .......................... y .................................
+certifico que han sido verificadas las siguientes funciones y estandares de calidad:
+
+\begin{itemize}
+    \item Cumplimiento del estandar de codificacion, acorde al documento de calidad recomendada 
+    por la W3C.
+    \item Cumplimiento de las funciones mencionadas en la historia de usuario respectiva.
+    \item Cumplimiento de que en los siguientes sistemas operativos se ejecutan correctamente:
+    \begin{itemize}
+        \item Windows XP.
+        \item Windows Vista.
+        \item MacOS X.
+        \item Ubuntu Linux.
+    \end{itemize}
+    \item Cumplimiento de que en los siguientes navegadores se muestra correctamente:
+    \begin{itemize}
+        \item Mozilla firefox 3.0.
+        \item Google Chrome 1.0.
+        \item Opera 10.
+        \item Internet Explorer 5.5.
+        \item Internet Explorer 6.0.
+        \item Internet Explorer 7.0.
+        \item Links2.
+        \item Safari.
+    \end{itemize}
+    \item Cumplimiento de que en las siguientes resoluciones de pantalla se muestra correctamente:
+    \begin{itemize}
+        \item 800x600.
+        \item 1024x768.
+        \item 1280x800.
+    \end{itemize}
+\end{itemize}
+
+Por lo tanto mi recomendacion es:
+\begin{verbatim}
+.........................................................................................
+.........................................................................................
+.........................................................................................
+.........................................................................................
+.........................................................................................
+\end{verbatim}
+
+\vspace{1.5cm}
+
+\begin{center}
+    \begin{tabular}{c c}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ &
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \\
+  &  \\
+Inspector & Jefe de equipo de desarrollo\\
+    \end{tabular}
+\end{center}
+\end{document}

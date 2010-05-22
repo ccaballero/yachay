@@ -1,0 +1,152 @@
+\documentclass[letterpaper,spanish]{article}
+\usepackage{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage[dvipsnames,usenames]{color}
+\usepackage{fancyhdr}
+\usepackage{latexsym}
+\usepackage{verbatim}
+
+\oddsidemargin -0.3cm \topmargin -1.1cm \headheight 2.5cm
+\textwidth 16.8cm \textheight 19.8cm
+
+\newsavebox{\fondo}
+\sbox{\fondo}{\includegraphics[keepaspectratio,height=1.35\textheight,width=1.35\textwidth]{../../02_publicimage/margin.png}}
+
+\pagestyle{fancy}
+\fancyhead[C]{\setlength{\unitlength}{1in}
+\begin{picture}(0,0)\put(-3.9,-9.3){\usebox{\fondo}}\end{picture}}
+
+\renewcommand{\headrulewidth}{0pt}
+\title{\huge{\textbf{DOCUMENTO DE AN\'ALISIS \\ Gesti\'on de equipos}}}
+\author{Yeah! S.R.L.}
+\date{\small{2 de abril 2009}}
+
+\begin{document}
+\maketitle \pagebreak \tableofcontents \pagebreak
+
+\section{INTRODUCCI\'ON}
+
+Para el buen funcionamiento del sistema de gesti\'on de cursos y notas, es necesario tener equipos de 
+trababajo en algunos grupos de las diferentes materias, donde el profesor puede crear los equipos de 
+distinta manera. 
+
+\section{DESCRIPCI\'ON DEL PROBLEMA}
+
+Como ya se menciono en la introducci\'on es necesario la creaci\'on y la evaluaci\'on de los equipos de los 
+estudiantes.
+
+Lo que la empresa TIS requiere para la creaci\'on de equipos es: \\
+\begin{itemize}
+	\item Creaci\'on de equipos seg\'un al orden de lista (apellido paterno,nombres).
+        \item Creaci\'on de equipos aleatoriamente(nadie sabe quien ser\'a su compa\~nero).
+        \item Asignaci\'on Manual.
+
+\end{itemize} 
+
+\section{DESCRIPCI\'ON DE LA SOLUCI\'ON}
+
+La creaci\'on de equipos ser\'a un modulo que el profesor de cada materia podr\'a habilitar cuando lo 
+requiera.
+
+\subsection{Creaci\'on de equipos seg\'un al orden de lista (apellido paterno,nombres)}
+\begin{itemize}
+    \item El docente habilita  el soporte de equipos en el grupo.
+    \item El docente pulsa crear equipos por orden de lista de $n$ estudiantes.
+\end{itemize}
+
+\subsection{Creaci\'on de equipos aleatoriamente(nadie sabe quien ser\'a su compa\~nero)}
+\begin{itemize}
+    \item El docente habilita el soporte de equipos en el grupo.
+    \item El docente pulsa crear equipos aleatoriamente de $n$ estudiantes.
+\end{itemize}
+
+\subsection{Asignaci\'on Manual}
+\begin{itemize}
+    \item El docente arma los equipos a su criterio.
+\end{itemize}
+
+\section{MODULOS PROPUESTOS}
+
+\begin{description}
+    \item [SUBJECT] Se encarga de manejar las materias su descripci\'on de estas y ademas se encarga de editar, 
+    crear o y eliminar grupos.
+    \item [GROUP] Se encarga del control de su grupo de usuarios(o estudiantes).
+    \item [USER] El modulo USER es el que se encarga de organizar a los diferentes tipos de usuarios
+    del sistema mediante sus roles.
+\end{description}
+
+\section{FUNCIONES PROPUESTAS}
+    \subsection{SUBJECT}
+        \begin{description}
+            \item [Ver materias] Lista todas las materias con un resumen de sus grupos y la descripci\'on de la 
+            materia.
+            \item [Editar materia] Permite editar el t\'itulo y la descripci\'on de la materia, y ademas de poder 
+            eliminar a los grupos de la misma.
+            \item [Ver grupos] Lista todos los grupos, con las opciones de editar a los mismos.
+        \end{description}
+    
+    \subsection{GROUP}
+        \begin{description}
+            \item [Ver grupo] Muestra el detalle del grupo, y permite su edici\'on del mismo.
+            \item [Ver usuarios] Lista a todos los usuarios(o estudiantes) de ese grupo.
+            \item [Enviar invitaci\'on] Permite invitar a personas a unirse al grupo.
+        \end{description}
+    \subsection{USER}
+        \begin {description}
+            \item [Ver datos personales] Permite ver al usuario sus datos.
+            \item [Editar datos personales] Permite al usuario editar sus datos.
+        \end {description}
+
+\section{RESTRICCIONES ENCONTRADAS}
+Por el corto espacio de tiempo solo se desarrollaran tres formas de creaci\'on de equipos, quedando cuatro como 
+ideas planteadas para desarrollar en un futuro.
+
+\subsection {Creaci\'on de equipos seg\'un los estudiantes}
+\begin{itemize}
+    \item El docente habilita el soporte de equipos en el grupo con un numero m\'aximo y un m\'inimo.
+    \item Se habilita la creaci\'on de los grupos para los estudiantes.
+    \item Un estudiante puede crear un equipo.
+    \item Un estudiante puede eliminar el equipo si esta solo.
+    \item El estudiante puede inscribirse o entrar al equipo X creado por algun estudiante.
+    \item Los estudiantes pueden abandonar el equipo o cambiar de equipo seg\'un el tiempo limite asignado 
+    por el docente.
+    \item El docente verif\'ica los grupos completos en la fecha limite.
+    \item Si existen equipos incompletos el docente puede dar mas plazo para que se unan, puede asignar a 
+    otros grupos aumentando su tama\~no, puede permitir que el equipo este conformado como esta, puede hacer 
+    una fusi\'on de equipos peque\~nos.
+\end{itemize}
+
+\subsection{Balanceo por puntuaci\'on}
+\begin{itemize}
+    \item El sistema arma autom\'aticamente los grupos balanceando la puntuaci\'on de los estudiantes.
+\end{itemize}
+
+\subsection{Afinidad de intereses}
+\begin{itemize}
+    \item El sistema verif\'ica que los estudiantes tengan completo su perfil mas sus intereses.
+    \item El sistema arma los equipos mediante el perfil de cada usuario.
+\end{itemize}
+
+\subsection{Por seleccion del alumno}
+\begin{itemize}
+    \item El docente designa capitanes para cada equipo.
+    \item Los capitanes designados arman sus equipos escogiendo entre todos los alumnos de la clase.
+\end{itemize}
+
+\begin{comment}
+\vspace{8cm}
+    \begin{table}[htbp]
+        \begin{center}
+            \begin{tabular}{c c}
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ &
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \\
+Lic. Leticia Blanco Coca & Luis Arce Claros \\
+Representante legal de la empresa TIS & Director del proceso de analisis de la empresa Yeah! S.R.L.\\
+            \end{tabular}
+        \label{tab1}
+        \end{center}
+    \end{table}
+\end{comment}
+
+\end{document}
