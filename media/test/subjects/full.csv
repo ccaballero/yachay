@@ -1,0 +1,8 @@
+"Codigo", "Materia", "Moderador", "Visibilidad", "Descripcion"
+"2008060", "Calculo Numérico", "admin", "public", "Curso de calculo usando calculadora enves de cerebro"
+"2010024", "Taller de Ingeniería de Software", "carlos", "register", "Taller de ingenieria de software"
+"2010017", "Taller de Sistemas Operativos", "antonio", "private", "Cosas de sistemas operativos"
+"2010035", "Aplicación de Sistemas Operativos", "leticia", "public", "Mas cosas de sistemas operativos"
+"2010020", "Ingeniería de software", "admin", "register", "Modelamiento de mas sistemas"
+"2010027", "Inteligéncia artificial", "carlos", "public", "Imitar el comportamiento del ser humano"
+"2010029", "Sistemas expertos", "leticia", "register", "Desarrollar sistemas especializados basados en la inteligencia artificial"
