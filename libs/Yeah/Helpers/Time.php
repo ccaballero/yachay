@@ -9,7 +9,7 @@ class Yeah_Helpers_Time
         if (is_int($value)) {
             $value = date('Y-n-j-H-i', $value);
         }
-        list($Year, $Month, $Day, $Hour, $Minute) = split('[/.-]', $value);
+        list($Year, $Month, $Day, $Hour, $Minute) = @split('[/.-]', $value);
 
         // generacion del dia
         $day = '<select name="' . $name . '-day" id="' . $name . '-day"><option value="-1">D&iacute;a:</option>';

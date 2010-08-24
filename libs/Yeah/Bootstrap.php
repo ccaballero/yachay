@@ -135,9 +135,9 @@ class Yeah_Bootstrap
                     $class = 'modules_' . strtolower($module->url) . '_Init';
                     $obj = new $class();
                     $obj->setRoutes($front->getRouter());
-                    if (!Yeah_Adapter::check($obj->check)) {
-                        Yeah_Adapter::install($obj->install);
-                    }
+                    //if (!Yeah_Adapter::check($obj->check)) {
+                        //Yeah_Adapter::install($obj->install);
+                    //}
                 }
             }
         }

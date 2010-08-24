@@ -73,8 +73,8 @@ SELECT 'groups';
 SELECT 'teams';
 \. teams.sql
 
-SELECT 'communities';
-\. communities.sql
+/*SELECT 'communities';
+\. communities.sql*/
 
 /*====================================================================================================================*/
 

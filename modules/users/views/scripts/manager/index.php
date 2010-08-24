@@ -30,14 +30,12 @@
     <hr />
 <?php if (count($this->users)) { ?>
     <center>
-        <?= $this->paginator($this->users, 'users_manager') ?>
         <table width="100%">
             <tr>
                 <th>&nbsp;</th>
                 <th><?= $this->utf2html($this->model->_mapping['label']) ?></th>
                 <th>Nombre Completo</th>
                 <th>Opciones</th>
-                <th><?= $this->utf2html($this->model->_mapping['tslastlogin']) ?></th>
                 <th><?= $this->utf2html($this->model->_mapping['tsregister']) ?></th>
             </tr>
         <?php foreach ($this->users as $user) { ?>
@@ -93,12 +91,10 @@
                     <?php } ?>
                 <?php } ?>
                 </td>
-                <td><center><?= $this->timestamp($user->tslastlogin) ?></center></td>
                 <td><center><?= $this->timestamp($user->tsregister) ?></center></td>
             </tr>
         <?php } ?>
         </table>
-        <?= $this->paginator($this->users, 'users_manager') ?>
     </center>
 <?php } else { ?>
     <p>No existen usuarios registrados</p>

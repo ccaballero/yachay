@@ -34,7 +34,8 @@ class Users_ManagerController extends Yeah_Action
         $paginator->setPageRange(25);
 
         $this->view->model = $users;
-        $this->view->users = $paginator;
+        //$this->view->users = $paginator;
+        $this->view->users = $users->selectAll();
 
         history('users/manager');
         breadcrumb();

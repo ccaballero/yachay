@@ -198,14 +198,14 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('communities')->status == 'active') {
+            /*if ($modules->findByLabel('communities')->status == 'active') {
                 if (Yeah_Acl::hasPermission('communities', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'communities_list'),
                         'icon' => '<img src="' . $this->view->media . 'communities.png" alt="[Lista de comunidades]" />',
                     );
                 }
-            }
+            }*/
 
             if ($modules->findByLabel('groupsets')->status == 'active') {
                 if (Yeah_Acl::hasPermission('subjects', 'teach')) {
