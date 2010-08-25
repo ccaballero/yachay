@@ -166,8 +166,8 @@ class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegiste
     }
 
     public function lastLogin() {
-        //$this->tslastlogin = time();
-        //return parent::save();
+        $this->tslastlogin = time();
+        return parent::save();
     }
 
     public function getAvatar() {

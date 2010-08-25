@@ -22,4 +22,4 @@ foreach ($items as $item) {
     }
 }
 
-$FOOTER->copyright = '&copy; 2009 Yeah S.R.L.';
+$FOOTER->copyright = '2010 Yeah';

@@ -23,7 +23,7 @@ CREATE TABLE `calification` (
 INSERT INTO `module`
 (`label`,          `url`,              `type`,        `tsregister`,       `description`)
 VALUES
-('califications',  'califications',    'application', UNIX_TIMESTAMP(),   'Modulo manejador de las calificaciones de los estudiantes del sistema');
+('califications',  'califications',    'middleware',  UNIX_TIMESTAMP(),   'Modulo manejador de las calificaciones de los estudiantes del sistema');
 
 /*====================================================================================================================*/
 /* Registro de paginas para el modulo                                                                                 */
@@ -33,4 +33,13 @@ INSERT INTO `page`
 VALUES
 ('Gestor de calificaciones',      '',      FALSE,      'califications', 'manager',     'index',            '',                      'califications_manager'),
 ('Importar calificaciones',       '',      FALSE,      'califications', 'manager',     'import',           '',                      'califications_import'),
-('Exportar calificaciones',       '',      FALSE,      'califications', 'manager',     'export',           '',                      'califications_export');
+('Exportar calificaciones',       '',      FALSE,      'califications', 'manager',     'export',           '',                      'califications_export'),
+('Ver calificaciones',            '',      FALSE,      'califications', 'index',       'index',            '',                      'califications_view');
+
+/*====================================================================================================================*/
+/* Registro de widgets para el modulo                                                                                 */
+/*====================================================================================================================*/
+INSERT INTO `widget`
+(`label`,                              `title`,                                `module`,           `script`)
+VALUES
+('Ver Calificaciones',                 'Ver Calificaciones',                   'califications',    'califications.php');
