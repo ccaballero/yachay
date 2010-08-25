@@ -15,8 +15,9 @@
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage Sitemap
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @version    $Id: Changefreq.php 22697 2010-07-26 21:14:47Z alexander $
  */
 
 /**
@@ -32,7 +33,7 @@ require_once 'Zend/Validate/Abstract.php';
  * @category   Zend
  * @package    Zend_Validate
  * @subpackage Sitemap
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Validate_Sitemap_Changefreq extends Zend_Validate_Abstract
@@ -41,7 +42,8 @@ class Zend_Validate_Sitemap_Changefreq extends Zend_Validate_Abstract
      * Validation key for not valid
      *
      */
-    const NOT_VALID = 'invalidSitemapChangefreq';
+    const NOT_VALID = 'sitemapChangefreqNotValid';
+    const INVALID   = 'sitemapChangefreqInvalid';
 
     /**
      * Validation failure message template definitions
@@ -49,7 +51,8 @@ class Zend_Validate_Sitemap_Changefreq extends Zend_Validate_Abstract
      * @var array
      */
     protected $_messageTemplates = array(
-        self::NOT_VALID => "'%value%' is not a valid sitemap changefreq",
+        self::NOT_VALID => "'%value%' is no valid sitemap changefreq",
+        self::INVALID   => "Invalid type given, the value should be a string",
     );
 
     /**
@@ -72,14 +75,18 @@ class Zend_Validate_Sitemap_Changefreq extends Zend_Validate_Abstract
      */
     public function isValid($value)
     {
-        $this->_setValue($value);
+        if (!is_string($value)) {
+            $this->_error(self::INVALID);
+            return false;
+        }
 
+        $this->_setValue($value);
         if (!is_string($value)) {
             return false;
         }
 
         if (!in_array($value, $this->_changeFreqs, true)) {
-            $this->_error();
+            $this->_error(self::NOT_VALID);
             return false;
         }
 

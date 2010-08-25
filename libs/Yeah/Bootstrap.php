@@ -135,12 +135,17 @@ class Yeah_Bootstrap
                     $class = 'modules_' . strtolower($module->url) . '_Init';
                     $obj = new $class();
                     $obj->setRoutes($front->getRouter());
-                    //if (!Yeah_Adapter::check($obj->check)) {
-                        //Yeah_Adapter::install($obj->install);
-                    //}
+                    if (!Yeah_Adapter::check($obj->check)) {
+                        Yeah_Adapter::install($obj->install);
+                    }
                 }
             }
         }
+
+        // Change the suffix of phtml to php
+        $renderer = new Zend_Controller_Action_Helper_ViewRenderer();
+        $renderer->setViewSuffix('php');
+        Zend_Controller_Action_HelperBroker::addHelper($renderer);
 
         $layoutoptions = array(
             'layout'     => 'minimal',

@@ -15,9 +15,9 @@
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Mail.php 13626 2009-01-14 18:24:57Z matthew $
+ * @version    $Id: Mail.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 /** Zend_Log_Writer_Abstract */
@@ -39,9 +39,9 @@ require_once 'Zend/Log/Formatter/Simple.php';
  * @category   Zend
  * @package    Zend_Log
  * @subpackage Writer
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Mail.php 13626 2009-01-14 18:24:57Z matthew $
+ * @version    $Id: Mail.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
 {
@@ -116,6 +116,18 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
         $this->_mail      = $mail;
         $this->_layout    = $layout;
         $this->_formatter = new Zend_Log_Formatter_Simple();
+    }
+    
+    /**
+     * Create a new instance of Zend_Log_Writer_Mail
+     * 
+     * @param  array|Zend_Config $config
+     * @return Zend_Log_Writer_Mail
+     * @throws Zend_Log_Exception
+     */
+    static public function factory($config)
+    {
+        throw new Zend_Exception('Zend_Log_Writer_Mail does not currently implement a factory');
     }
 
     /**
@@ -245,17 +257,34 @@ class Zend_Log_Writer_Mail extends Zend_Log_Writer_Abstract
             // are assuming that the layout is for use with HTML.
             $this->_layout->events =
                 implode('', $this->_layoutEventsToMail);
-            $this->_mail->setBodyHtml($this->_layout->render());
+
+            // If an exception occurs during rendering, convert it to a notice
+            // so we can avoid an exception thrown without a stack frame.
+            try {
+                $this->_mail->setBodyHtml($this->_layout->render());
+            } catch (Exception $e) {
+                trigger_error(
+                    "exception occurred when rendering layout; " .
+                        "unable to set html body for message; " .
+                        "message = {$e->getMessage()}; " .
+                        "code = {$e->getCode()}; " .
+                        "exception class = " . get_class($e),
+                    E_USER_NOTICE);
+            }
         }
 
-        // Finally, send the mail, but re-throw any exceptions at the
-        // proper level of abstraction.
+        // Finally, send the mail.  If an exception occurs, convert it into a
+        // warning-level message so we can avoid an exception thrown without a
+        // stack frame.
         try {
             $this->_mail->send();
         } catch (Exception $e) {
-            throw new Zend_Log_Exception(
-                $e->getMessage(),
-                $e->getCode());
+            trigger_error(
+                "unable to send log entries via email; " .
+                    "message = {$e->getMessage()}; " .
+                    "code = {$e->getCode()}; " .
+                        "exception class = " . get_class($e),
+                E_USER_WARNING);
         }
     }
 

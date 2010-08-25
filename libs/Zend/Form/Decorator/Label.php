@@ -15,7 +15,7 @@
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -39,9 +39,9 @@ require_once 'Zend/Form/Decorator/Abstract.php';
  * @category   Zend
  * @package    Zend_Form
  * @subpackage Decorator
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Label.php 13615 2009-01-13 19:52:10Z norm2782 $
+ * @version    $Id: Label.php 22129 2010-05-06 11:20:39Z alab $
  */
 class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
 {
@@ -103,6 +103,9 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
         } else {
             $this->_tag = (string) $tag;
         }
+
+        $this->removeOption('tag');
+
         return $this;
     }
 
@@ -307,7 +310,7 @@ class Zend_Form_Decorator_Label extends Zend_Form_Decorator_Abstract
             $options['class'] = $class;
             $label = $view->formLabel($element->getFullyQualifiedName(), trim($label), $options);
         } else {
-            $label = '&nbsp;';
+            $label = '&#160;';
         }
 
         if (null !== $tag) {

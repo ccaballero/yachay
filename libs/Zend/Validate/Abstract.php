@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Abstract.php 14317 2009-03-13 20:39:31Z thomas $
+ * @version    $Id: Abstract.php 22473 2010-06-20 08:30:04Z thomas $
  */
 
 /**
@@ -27,7 +27,7 @@ require_once 'Zend/Validate/Interface.php';
 /**
  * @category   Zend
  * @package    Zend_Validate
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
@@ -94,6 +94,13 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     protected $_translatorDisabled = false;
 
     /**
+     * Limits the maximum returned length of a error message
+     *
+     * @var Integer
+     */
+    protected static $_messageLength = -1;
+
+    /**
      * Returns array of validation failure messages
      *
      * @return array
@@ -135,12 +142,17 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     {
         if ($messageKey === null) {
             $keys = array_keys($this->_messageTemplates);
-            $messageKey = current($keys);
+            foreach($keys as $key) {
+                $this->setMessage($messageString, $key);
+            }
+            return $this;
         }
+
         if (!isset($this->_messageTemplates[$messageKey])) {
             require_once 'Zend/Validate/Exception.php';
             throw new Zend_Validate_Exception("No message template exists for key '$messageKey'");
         }
+
         $this->_messageTemplates[$messageKey] = $messageString;
         return $this;
     }
@@ -204,10 +216,10 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         $message = $this->_messageTemplates[$messageKey];
 
         if (null !== ($translator = $this->getTranslator())) {
-            if ($translator->isTranslated($message)) {
-                $message = $translator->translate($message);
-            } elseif ($translator->isTranslated($messageKey)) {
+            if ($translator->isTranslated($messageKey)) {
                 $message = $translator->translate($messageKey);
+            } else {
+                $message = $translator->translate($message);
             }
         }
 
@@ -229,15 +241,21 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
         foreach ($this->_messageVariables as $ident => $property) {
             $message = str_replace("%$ident%", (string) $this->$property, $message);
         }
+
+        $length = self::getMessageLength();
+        if (($length > -1) && (strlen($message) > $length)) {
+            $message = substr($message, 0, (self::getMessageLength() - 3)) . '...';
+        }
+
         return $message;
     }
 
     /**
-     * @param  string $messageKey OPTIONAL
+     * @param  string $messageKey
      * @param  string $value      OPTIONAL
      * @return void
      */
-    protected function _error($messageKey = null, $value = null)
+    protected function _error($messageKey, $value = null)
     {
         if ($messageKey === null) {
             $keys = array_keys($this->_messageTemplates);
@@ -335,6 +353,16 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
+     * Does this validator have its own specific translator?
+     *
+     * @return bool
+     */
+    public function hasTranslator()
+    {
+        return (bool)$this->_translator;
+    }
+
+    /**
      * Set default translation object for all validate objects
      *
      * @param  Zend_Translate|Zend_Translate_Adapter|null $translator
@@ -375,6 +403,16 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     }
 
     /**
+     * Is there a default translation object set?
+     *
+     * @return boolean
+     */
+    public static function hasDefaultTranslator()
+    {
+        return (bool)self::$_defaultTranslator;
+    }
+
+    /**
      * Indicate whether or not translation should be disabled
      *
      * @param  bool $flag
@@ -394,5 +432,25 @@ abstract class Zend_Validate_Abstract implements Zend_Validate_Interface
     public function translatorIsDisabled()
     {
         return $this->_translatorDisabled;
+    }
+
+    /**
+     * Returns the maximum allowed message length
+     *
+     * @return integer
+     */
+    public static function getMessageLength()
+    {
+        return self::$_messageLength;
+    }
+
+    /**
+     * Sets the maximum allowed message length
+     *
+     * @param integer $length
+     */
+    public static function setMessageLength($length = -1)
+    {
+        self::$_messageLength = $length;
     }
 }

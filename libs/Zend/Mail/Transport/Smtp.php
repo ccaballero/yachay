@@ -11,13 +11,13 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@zend.com so we can send you a copy immediately.
- * 
+ *
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Transport
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Smtp.php 15577 2009-05-14 12:43:34Z matthew $
+ * @version    $Id: Smtp.php 20096 2010-01-06 02:05:09Z bkarwin $
  */
 
 
@@ -45,7 +45,7 @@ require_once 'Zend/Mail/Transport/Abstract.php';
  * @category   Zend
  * @package    Zend_Mail
  * @subpackage Transport
- * @copyright  Copyright (c) 2005-2008 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
@@ -111,6 +111,9 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
      * @param  string $host OPTIONAL (Default: 127.0.0.1)
      * @param  array|null $config OPTIONAL (Default: null)
      * @return void
+     * 
+     * @todo Someone please make this compatible
+     *       with the SendMail transport class.
      */
     public function __construct($host = '127.0.0.1', Array $config = array())
     {
@@ -177,6 +180,7 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
      * developer to add a custom adapter if required before mail is sent.
      *
      * @return void
+     * @todo Rename this to sendMail, it's a public method...
      */
     public function _sendMail()
     {
@@ -199,8 +203,8 @@ class Zend_Mail_Transport_Smtp extends Zend_Mail_Transport_Abstract
             $this->_connection->rset();
         }
 
-        // Set mail return path from sender email address
-        $this->_connection->mail($this->_mail->getReturnPath());
+        // Set sender email address
+        $this->_connection->mail($this->_mail->getFrom());
 
         // Set recipient forward paths
         foreach ($this->_mail->getRecipients() as $recipient) {

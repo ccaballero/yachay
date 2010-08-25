@@ -24,5 +24,11 @@ class modules_califications_Init extends Yeah_Init
                                                         'controller' => 'manager',
                                                         'action'     => 'index',
                                                     )),
+        'califications_view'                     => array('califications',
+                                                    array(
+                                                        'module'     => 'califications',
+                                                        'controller' => 'index',
+                                                        'action'     => 'index',
+                                                    )),
     );
 }

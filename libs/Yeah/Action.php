@@ -191,7 +191,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
         global $USER;
         $user = Yeah_Adapter::getModel('users')->findByIdent($USER->ident);
         if (!empty($user)) {
-            //$user->lastLogin();
+            $user->lastLogin();
         }
 
         // Log register
