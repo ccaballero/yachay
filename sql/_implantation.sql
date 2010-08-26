@@ -3,9 +3,6 @@
 /* Datos de implantacion del sistema                                                                                  */
 /*====================================================================================================================*/
 
-/*====================================================================================================================*/
-/* Insercion de usuarios del sistema                                                                                */
-/*====================================================================================================================*/
 INSERT INTO `user`
 (`role`, `label`,       `url`,         `password`,  `tsregister`,     `status`,   `surname`,          `name`,        `code`,    `email`)
 VALUES
@@ -36,6 +33,12 @@ VALUES
 (3,      'hugo',        'hugo',        md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Alconz',           'Hugo',        200904390, 'id25@gmail.com'),
 (2,      'alexey',      'alexey',      md5('asdf'), UNIX_TIMESTAMP(), 'inactive', 'Rodriguez',        'Alexey',      200982298, 'id26@gmail.com'),
 (2,      'aquilino',    'aquilino',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Davalos',          'Aquilino',    200873187, 'id27@gmail.com');
+
+INSERT INTO `community`
+(`label`,          `url`,              `mode`,   `author`, `members`,     `tsregister`,     `description`)
+VALUES
+('Gentoosa',       'gentoosa',         'open',   3,        1,             UNIX_TIMESTAMP(), 'Gente que use la distribucion Gentoo, o que simplemente le encante compilar su kernel'),
+('FechaFiferos',   'fechafiferos',     'close',  18,       1,             UNIX_TIMESTAMP(), 'Los que juegan futbol cada sabado en las canchas de la U');
 
 INSERT INTO `gestion`
 (`label`,          `url`,              `status`,      `tsregister`)

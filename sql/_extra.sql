@@ -205,6 +205,7 @@ UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 3 WHERE `ident` = 22;
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 4 WHERE `ident` = 33;
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 6 WHERE `ident` = 38;
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 5 WHERE `ident` = 49;
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 7 WHERE `ident` = 68;
 
 UPDATE `page` SET `menutype` = 'footer', `menuorder` = 1 WHERE `ident` = 1;
 UPDATE `page` SET `menutype` = 'footer', `menuorder` = 2 WHERE `ident` = 7;
@@ -326,7 +327,6 @@ VALUES
 ( 4,25),
 ( 3,25),
 ( 2,25),
-( 1,25),
 /*====================================================================================================================*/
 /* Inserciones extra para el modulo GESTIONS                                                                          */
 /*====================================================================================================================*/

@@ -6,7 +6,7 @@ class Yeah_Helpers_Date
         if (empty($value)) {
             $value = '0-0-0';
         }
-        list($Year, $Month, $Day) = split('[/.-]', $value);
+        list($Year, $Month, $Day) = @split('[/.-]', $value);
 
         // generacion del dia
         $day = '<select name="' . $name . '-day" id="' . $name . '-day"><option value="-1">D&iacute;a:</option>';
