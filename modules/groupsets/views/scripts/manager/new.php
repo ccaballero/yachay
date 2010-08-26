@@ -28,6 +28,7 @@
                 <?php } else { ?>
 					<p>No existen asignaciones suyas en ninguna materia.</p>
                 <?php } ?>
+            </tr>
             <tr>
                 <td colspan="2">(*) Campos obligatorios.</td>
             </tr>

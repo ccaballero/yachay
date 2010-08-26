@@ -21,7 +21,7 @@ class Users_IndexController extends Yeah_Action
         $this->view->users = $paginator;
         $this->view->route = array (
             'key' => 'users_list',
-            'params' => array (),
+            'params' => array(),
         );
 
         history('users');

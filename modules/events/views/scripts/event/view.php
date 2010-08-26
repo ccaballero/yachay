@@ -4,22 +4,36 @@
 <?php } ?>
 </h1>
 
-<b>Autor: </b><i>
-<?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
-	<a href="<?= $this->url(array('user' => $this->resource->getAuthor()->url), 'users_user_view') ?>"><?= $this->resource->getAuthor()->label ?></a>
-<?php } else { ?>
-	<?= $this->resource->getAuthor()->label ?>
-<?php } ?>
-</i>
-<br/>
-<b>Fecha: </b><i><?= $this->timestamp($this->resource->tsregister) ?></i>
-
-<br />
-<?php if ($this->event->duration == 0) { ?>
-	<b>A partir del:</b> <?= $this->timestamp($this->event->event) ?>
-<?php } else { ?>
-	<b>Del</b> <?= $this->timestamp($this->event->event) ?> <b>al</b> <?= $this->timestamp($this->event->event + $this->event->duration) ?>
-<?php } ?>
-<br />
+<table>
+    <tr>
+        <td rowspan="3" width="50px" valign="top">
+            <img src="<?= $this->media . '../users/thumbnail_small/' . $this->resource->getAuthor()->getAvatar() ?>" />
+        </td>
+        <td>
+            <b>Autor: </b>
+            <i>
+            <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
+                <a href="<?= $this->url(array('user' => $this->resource->getAuthor()->url), 'users_user_view') ?>"><?= $this->resource->getAuthor()->label ?></a>
+            <?php } else { ?>
+                <?= $this->resource->getAuthor()->label ?>
+            <?php } ?>
+            </i>
+        </td>
+    </tr>
+    <tr valign="top">
+        <td>
+            <b>Fecha: </b><i><?= $this->timestamp($this->resource->tsregister) ?></i>
+        </td>
+    </tr>
+    <tr valign="top">
+        <td>
+            <?php if ($this->event->duration == 0) { ?>
+                <b>A partir del:</b> <?= $this->timestamp($this->event->event) ?>
+            <?php } else { ?>
+                <b>Del</b> <?= $this->timestamp($this->event->event) ?> <b>al</b> <?= $this->timestamp($this->event->event + $this->event->duration) ?>
+            <?php } ?>
+        </td>
+    </tr>
+</table>
 <br />
 <?= $this->event->message ?>

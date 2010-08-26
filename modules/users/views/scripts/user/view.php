@@ -5,20 +5,20 @@
 </h1>
 
 <table width="100%">
-    <tr>
-        <td rowspan="4">
-            <img src="<?= $this->media . 'thumbnail_medium/0.jpg' ?>" />
+    <tr valign="top">
+        <td rowspan="4" width="200px">
+            <img src="<?= $this->media . 'thumbnail_large/' . $this->user->getAvatar() ?>" />
         </td>
         <td colspan="4"><b>Nombre Completo: </b><?= $this->utf2html($this->user->getFullName()) ?></td>
     </tr>
-    <tr>
+    <tr valign="top">
         <td colspan="4"><b>Correo Electronico: </b><?= $this->user->email ?></td>
     </tr>
-    <tr>
+    <tr valign="top">
         <td colspan="2"><b>Cargo: </b><?= $this->user->getRole()->label ?></td>
         <td colspan="2"><b>Carrera: </b><?= $this->none($this->user->career) ?></td>
     </tr>
-    <tr>
+    <tr valign="top">
         <td><b>Conocimiento: </b><?= $this->user->knowledge ?></td>
         <td><b>Participacion: </b><?= $this->user->participation ?></td>
         <td><b>Popularidad: </b><?= $this->user->popularity ?></td>
