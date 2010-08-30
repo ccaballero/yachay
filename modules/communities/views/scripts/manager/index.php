@@ -1,6 +1,6 @@
 <h1>Administrador de comunidades</h1>
 
-<form method="post" action="#">
+<form method="post" action="">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
 
     <table>
@@ -30,9 +30,9 @@
                 <td><center><?= $this->utf2html($community->members) ?></center></td>
                 <td>
                     <center>
-                        <a href="<?= $this->url(array('community' => $community->ident), 'communities_community_view') ?>">Ver</a>
-                        <a href="<?= $this->url(array('community' => $community->ident), 'communities_community_edit') ?>">Editar</a>
-                        <a href="<?= $this->url(array('community' => $community->ident), 'communities_community_delete') ?>">Eliminar</a>
+                        <a href="<?= $this->url(array('community' => $community->url), 'communities_community_view') ?>">Ver</a>
+                        <a href="<?= $this->url(array('community' => $community->url), 'communities_community_edit') ?>">Editar</a>
+                        <a href="<?= $this->url(array('community' => $community->url), 'communities_community_delete') ?>">Eliminar</a>
                     </center>
                 </td>
                 <td><center><?= $this->timestamp($community->tsregister) ?></center></td>

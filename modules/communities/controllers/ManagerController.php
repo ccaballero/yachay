@@ -38,26 +38,138 @@ class Communities_ManagerController extends Yeah_Action
             $session = new Zend_Session_Namespace();
 
             $model_communities = Yeah_Adapter::getModel('communities');
+            $model_communities_users = Yeah_Adapter::getModel('communities', 'Communities_Users');
 
             $community = $model_communities->createRow();
+
             $community->label = $request->getParam('label');
             $community->mode = $request->getParam('mode');
             $community->interests = $request->getParam('interests');
             $community->description = $request->getParam('description');
 
-            if ($area->isValid()) {
-                $area->tsregister = time();
-                $area->save();
-                $session->messages->addMessage("El area {$area->label} se ha creado correctamente");
-                $session->url = $area->url;
+            if ($community->isValid()) {
+                $community->author = $USER->ident;
+                $community->tsregister = time();
+                $community->save();
+
+                // add author to community's users
+                $assignement = $model_communities_users->createRow();
+                $assignement->community = $community->ident;
+                $assignement->user = $USER->ident;
+                $assignement->type = 'moderator';
+                $assignement->status = 'active';
+                $assignement->tsregister = time();
+
+                // config of avatar
+                $upload = new Zend_File_Transfer_Adapter_Http();
+                $upload->setDestination($CONFIG->dirroot . 'media/upload');
+                $upload->addValidator('Size', false, 2097152)
+                       ->addValidator('Extension', false, array('jpg', 'png', 'gif'));
+                if ($upload->receive()) {
+                    $filename = $upload->getFileName('file');
+                    $extension = strtolower(substr($filename, -3));
+                    switch ($extension) {
+                        case 'jpg':
+                            $uploaded = imagecreatefromjpeg($filename);
+                            break;
+                        case 'png':
+                            $uploaded = imagecreatefrompng($filename);
+                            break;
+                        case 'gif':
+                            $uploaded = imagecreatefromgif($filename);
+                            break;
+                    }
+
+                    $width = imagesx($uploaded);
+                    $height = imagesy($uploaded);
+
+                    // creo y redimensiono la imagen grande
+                    $maxwidth = 200;
+                    $maxheight = 200;
+                    $newwidth = $maxwidth + 1;
+                    $newheight = $maxheight + 1;
+
+                    while ($newwidth > $maxwidth && $newheight > $maxheight) {
+                        $ratio = $width / $height;
+                        if ($ratio == 1) {
+                            $newwidth = $maxwidth;
+                            $newheigth = $maxwidth;
+                        } else if ($ratio > 1) {
+                            $newwidth = $maxwidth;
+                            $newheight = $maxwidth / $ratio;
+                        } else if ($ratio < 1) {
+                            $newwidth = $maxheight * $ratio;
+                            $newheight = $maxheight;
+                        }
+                    }
+
+                    $thumb = imagecreatetruecolor($newwidth, $newheight);
+                    imagecopyresized($thumb, $uploaded, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                    imagejpeg($thumb, $CONFIG->dirroot . 'media/communities/thumbnail_large/' . $community->ident . '.jpg', 100);
+
+                    // creo y redimensiono la imagen mediana
+                    $maxwidth = 100;
+                    $maxheight = 100;
+                    $newwidth = $maxwidth + 1;
+                    $newheight = $maxheight + 1;
+
+                    while ($newwidth > $maxwidth && $newheight > $maxheight) {
+                        $ratio = $width / $height;
+                        if ($ratio == 1) {
+                            $newwidth = $maxwidth;
+                            $newheigth = $maxwidth;
+                        } else if ($ratio > 1) {
+                            $newwidth = $maxwidth;
+                            $newheight = $maxwidth / $ratio;
+                        } else if ($ratio < 1) {
+                            $newwidth = $maxheight * $ratio;
+                            $newheight = $maxheight;
+                        }
+                    }
+
+                    $thumb = imagecreatetruecolor($newwidth, $newheight);
+                    imagecopyresized($thumb, $uploaded, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                    imagejpeg($thumb, $CONFIG->dirroot . 'media/communities/thumbnail_medium/' . $community->ident . '.jpg', 100);
+
+                    // creo y redimensiono la imagen pequeña
+                    $maxwidth = 50;
+                    $maxheight = 50;
+                    $newwidth = $maxwidth + 1;
+                    $newheight = $maxheight + 1;
+
+                    while ($newwidth > $maxwidth && $newheight > $maxheight) {
+                        $ratio = $width / $height;
+                        if ($ratio == 1) {
+                            $newwidth = $maxwidth;
+                            $newheigth = $maxwidth;
+                        } else if ($ratio > 1) {
+                            $newwidth = $maxwidth;
+                            $newheight = $maxwidth / $ratio;
+                        } else if ($ratio < 1) {
+                            $newwidth = $maxheight * $ratio;
+                            $newheight = $maxheight;
+                        }
+                    }
+
+                    $thumb = imagecreatetruecolor($newwidth, $newheight);
+                    imagecopyresized($thumb, $uploaded, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+                    imagejpeg($thumb, $CONFIG->dirroot . 'media/communities/thumbnail_small/' . $community->ident . '.jpg', 100);
+
+                    unlink($filename);
+                    $community->avatar = true;
+                    $community->save();
+                }
+
+                $session->messages->addMessage("La comunidad {$community->label} se ha creado correctamente");
+                $session->url = $community->url;
                 $this->_redirect($request->getParam('return'));
             } else {
-                foreach ($area->getMessages() as $message) {
+                foreach ($community->getMessages() as $message) {
                     $session->messages->addMessage($message);
                 }
             }
 
-            $this->view->area = $area;
+            $this->view->community = $community;
         }
 
         history('communities/new');
@@ -67,8 +179,6 @@ class Communities_ManagerController extends Yeah_Action
     }
 
     public function deleteAction() {
-        global $USER;
-
         $this->requirePermission('communities', 'enter');
 
         $request = $this->getRequest();
@@ -79,11 +189,9 @@ class Communities_ManagerController extends Yeah_Action
             $count = 0;
             foreach ($check as $value) {
                 $community = $model_communities->findByIdent($value);
-                if (!empty($community)) {
-                    if ($community->author == $USER->ident) {
-                        $community->delete();
-                        $count++;
-                    }
+                if (!empty($community) && $community->amAuthor()) {
+                    $community->delete();
+                    $count++;
                 }
             }
 

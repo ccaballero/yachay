@@ -24,7 +24,7 @@ class Communities_IndexController extends Yeah_Action
 
         history('communities');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('communities', array('list', 'enter'))) {
+        if (Yeah_Acl::hasPermission('communities', array('enter'))) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_manager');
         }
         breadcrumb($breadcrumb);

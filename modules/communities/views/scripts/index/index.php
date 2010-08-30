@@ -17,8 +17,7 @@
                         <b><?= $this->utf2html($community->label) ?></b>
                     <?php } ?>
                     &nbsp;
-                    <?php global $USER; ?>
-                    <?php if ($community->author == $USER->ident) { ?>
+                    <?php if ($community->amAuthor()) { ?>
                     <a href="<?= $this->url(array('community' => $community->url), 'communities_community_edit') ?>">
                         <b><i>[Editar]</i></b>
                     </a>
@@ -27,6 +26,9 @@
             </tr>
             <tr>
                 <td colspan="4"><b>Descripci&oacute;n: </b><?= $this->utf2html($community->description) ?></td>
+            </tr>
+            <tr>
+                <td colspan="4"><b>Intereses: </b><?= $this->utf2html($community->interests) ?></td>
             </tr>
             <tr>
                 <td colspan="4"><b>Miembros: </b><?= $this->utf2html($community->members) ?></td>

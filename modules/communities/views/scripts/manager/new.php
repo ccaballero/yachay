@@ -1,7 +1,7 @@
 <h1>Nueva comunidad</h1>
 
 <center>
-    <form method="post" action="#">
+    <form method="post" action="" enctype="multipart/form-data">
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table>
             <tr>

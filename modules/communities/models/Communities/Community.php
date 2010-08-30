@@ -1,6 +1,6 @@
 <?php
 
-class modules_communities_models_Communities_Community extends Yeah_Model_Row_WithTsRegister
+class modules_communities_models_Communities_Community extends Yeah_Model_Row_WithUrlAndTsRegister
 {
     protected $_validationRules = array(
         'label' => array(
@@ -14,11 +14,6 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Wi
                     'validator' => 'StringLength',
                     'options'   => array(1, 64),
                     'message'   => 'El nombre de la comunidad debe tener entre 1 y 64 caracteres',
-                ),
-                array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El nombre de la comunidad debe contener unicamente caracteres y numeros',
                 ),
                 array(
                     'validator' => 'UniqueLabel',
@@ -49,6 +44,11 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Wi
             'filters' => array('StringTrim', 'StripNewlines', 'StripTags'),
         ),
     );
+
+    public function amAuthor() {
+        global $USER;
+        return $this->author == $USER->ident;
+    }
 
     public function getAuthor() {
         $users = Yeah_Adapter::getModel('users');
