@@ -1,7 +1,10 @@
 <h1>Lista de materias</h1>
-<i><b>Gestion: </b><?= $this->utf2html($this->gestion->label) ?></i>
 
-<?php if (count($this->subjects)) { ?>
+<?php if (!empty($this->gestion)) { ?>
+<i><b>Gestion: </b><?= $this->utf2html($this->gestion->label) ?></i>
+<?php } ?>
+
+<?php if (count($this->subjects) > 0) { ?>
     <ul>
     <?php foreach ($this->subjects as $subject) { ?>
         <li>

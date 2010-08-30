@@ -1,7 +1,7 @@
 <h1>Miembros: Grupo <?= $this->utf2html($this->group->label) ?></h1>
 <i><b>Materia: </b><?= $this->utf2html($this->subject->label) ?></i>
 
-<form method="post" action="#">
+<form method="post" action="">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>

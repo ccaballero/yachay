@@ -18,11 +18,6 @@ class modules_events_models_Events_Event extends Yeah_Model_Row_Validation
                     'options'   => array(1, 64),
                     'message'   => 'El nombre del evento debe tener entre 1 y 64 caracteres',
                 ),
-                array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El nombre del evento debe contener unicamente caracteres y numeros',
-                ),
             ),
         ),
         'place' => array(

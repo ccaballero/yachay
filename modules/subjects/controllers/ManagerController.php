@@ -31,7 +31,12 @@ class Subjects_ManagerController extends Yeah_Action
 
         $this->view->model = $subjects;
         $this->view->gestion = $gestion;
-        $this->view->subjects = $subjects->selectAll($gestion->ident);
+
+        if (!empty($gestion)) {
+            $this->view->subjects = $subjects->selectAll($gestion->ident);
+        } else {
+            $this->view->subjects = array();
+        }
 
         history('subjects/manager');
         breadcrumb();

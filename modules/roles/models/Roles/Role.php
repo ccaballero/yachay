@@ -16,11 +16,6 @@ class modules_roles_models_Roles_Role extends Yeah_Model_Row_WithUrlAndTsRegiste
                     'message'   => 'El nombre del rol debe tener entre 1 y 64 caracteres',
                 ),
                 array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El nombre del rol debe contener unicamente caracteres y numeros',
-                ),
-                array(
                     'validator' => 'UniqueLabel',
                     'options'   => array('roles'),
                     'message'   => 'El nombre seleccionado del rol ya existe o no puede utilizarse',

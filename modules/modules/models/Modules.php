@@ -30,7 +30,7 @@ class modules_modules_models_Modules extends Zend_Db_Table_Abstract
 
     // Selects in table
     public function selectAll() {
-        return $this->fetchAll($this->select()->order('type')->order('label ASC'));
+        return $this->fetchAll($this->select()->order('label ASC'));
     }
 
     public function selectByStatus($status) {

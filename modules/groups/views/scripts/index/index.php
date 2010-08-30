@@ -1,5 +1,8 @@
 <h1>Lista de grupos</h1>
+
+<?php if (!empty($this->gestion)) { ?>
 <i><b>Gestion: </b><?= $this->utf2html($this->gestion->label) ?></i>
+<?php } ?>
 
 <?php if (count($this->subjects)) { ?>
     <ul>

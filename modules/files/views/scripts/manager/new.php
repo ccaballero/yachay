@@ -1,7 +1,7 @@
 <h1>Nuevo archivo</h1>
 
 <center>
-    <form enctype="multipart/form-data" method="post" action="#">
+    <form enctype="multipart/form-data" method="post" action="">
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table>
         	<tr>

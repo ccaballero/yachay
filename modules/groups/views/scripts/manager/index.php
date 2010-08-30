@@ -3,7 +3,7 @@
 <br />
 <i><b>Gestion: </b><?= $this->utf2html($this->gestion->label) ?></i>
 
-<form method="post" action="#">
+<form method="post" action="">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>

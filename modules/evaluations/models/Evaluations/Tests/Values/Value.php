@@ -18,11 +18,6 @@ class modules_evaluations_models_Evaluations_Tests_Values_Value extends Yeah_Mod
                     'message'   => 'El valor cualitativo debe tener entre 1 y 64 caracteres',
                 ),
                 array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El valor cualitativo debe contener unicamente caracteres y numeros',
-                ),
-                array(
                     'validator' => 'UniqueLabelDual',
                     'options'   => array(array('evaluations', 'Evaluations_Tests_Values')),
                     'message'   => 'El valor cualitativo ya existe o no puede utilizarse',

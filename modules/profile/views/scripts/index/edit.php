@@ -6,7 +6,7 @@
 </p>
 
 <center>
-    <form method="post" action="#" enctype="multipart/form-data">
+    <form method="post" action="" enctype="multipart/form-data">
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table>
             <tr>

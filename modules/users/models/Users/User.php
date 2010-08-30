@@ -52,11 +52,6 @@ class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegiste
                     'message'   => 'El nombre de usuario debe tener entre 1 y 64 caracteres',
                 ),
                 array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El nombre de usuario debe contener unicamente caracteres y numeros',
-                ),
-                array(
                     'validator' => 'UniqueLabel',
                     'options'   => array('users'),
                     'message'   => 'El nombre seleccionado para el usuario ya existe o no puede utilizarse',

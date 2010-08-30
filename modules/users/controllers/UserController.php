@@ -8,6 +8,7 @@ class Users_UserController extends Yeah_Action
         $this->requirePermission('users', 'view');
 
         $request = $this->getRequest();
+        $model_friends = Yeah_Adapter::getModel('friends');
         $users = Yeah_Adapter::getModel('users');
         $user = $users->findByUrl($request->getParam('user'));
 
@@ -25,6 +26,7 @@ class Users_UserController extends Yeah_Action
         $paginator->setPageRange(10);
 
         $this->view->model = $users;
+        $this->view->friends = $model_friends;
         $this->view->user = $user;
         $this->view->resources = $paginator;
         $this->view->route = array (

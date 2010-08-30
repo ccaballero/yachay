@@ -1,7 +1,7 @@
 <h1>Asignacion de roles a usuarios</h1>
 
 <center>
-    <form method="post" action="#">
+    <form method="post" action="">
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table width="100%">
             <tr>

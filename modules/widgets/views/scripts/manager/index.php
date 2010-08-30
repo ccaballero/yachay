@@ -1,6 +1,6 @@
 <h1>Configuraci&oacute;n de widgets por pagina</h1>
 
-<form method="post" action="#">
+<form method="post" action="">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
 
     <table>

@@ -18,11 +18,6 @@ class modules_teams_models_Teams_Team extends Yeah_Model_Row_WithUrlAndTsRegiste
                     'message'   => 'El nombre del equipo debe tener entre 1 y 64 caracteres',
                 ),
                 array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El nombre del equipo debe contener unicamente caracteres y numeros',
-                ),
-                array(
                     'validator' => 'UniqueLabelDual',
                     'options'   => array('teams'),
                     'message'   => 'El nombre seleccionado para el equipo ya existe o no puede utilizarse',

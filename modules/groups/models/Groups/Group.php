@@ -46,11 +46,6 @@ class modules_groups_models_Groups_Group extends Yeah_Model_Row_WithUrlAndTsRegi
                     'message'   => 'El nombre del grupo debe tener entre 1 y 64 caracteres',
                 ),
                 array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El nombre del grupo debe contener unicamente caracteres y numeros',
-                ),
-                array(
                     'validator' => 'UniqueLabelDual',
                     'options'   => array('groups'),
                     'message'   => 'El nombre seleccionado para el grupo ya existe o no puede utilizarse',

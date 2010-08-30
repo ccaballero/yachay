@@ -16,11 +16,6 @@ class modules_gestions_models_Gestions_Gestion extends Yeah_Model_Row_WithUrlAnd
                     'message'   => 'El nombre de la gestion debe tener entre 1 y 64 caracteres',
                 ),
                 array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El nombre de la gestion debe contener unicamente caracteres y numeros',
-                ),
-                array(
                     'validator' => 'UniqueLabel',
                     'options'   => array('gestions'),
                     'message'   => 'El nombre seleccionado de la gestion ya existe o no puede utilizarse',

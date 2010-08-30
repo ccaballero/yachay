@@ -6,7 +6,7 @@
 </p>
 
 <center>
-    <form method="post" action="#">
+    <form method="post" action="">
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table>
             <tr>

@@ -1,7 +1,7 @@
 <h1>Miembros: <?= $this->utf2html($this->subject->label) ?></h1>
 <i><b>Gestion: </b><?= $this->utf2html($this->subject->getGestion()->label) ?></i>
 
-<form method="post" action="#">
+<form method="post" action="">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>
@@ -30,7 +30,7 @@
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td rowspan="2"><img src="<?= $this->media . '../users/thumbnail_small/' . $teacher->getAvatar() ?>" /></td>
+                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $teacher->getAvatar() ?>" /></td>
                 <td>
                 <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $teacher->url), 'users_user_view') ?>"><?= $teacher->label ?></a>
@@ -78,7 +78,7 @@
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td rowspan="2"><img src="<?= $this->media . '../users/thumbnail_small/' . $auxiliar->getAvatar() ?>" /></td>
+                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $auxiliar->getAvatar() ?>" /></td>
                 <td>
                 <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $auxiliar->url), 'users_user_view') ?>"><?= $auxiliar->label ?></a>
@@ -126,7 +126,7 @@
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td rowspan="2"><img src="<?= $this->media . '../users/thumbnail_small/' . $student->getAvatar() ?>" /></td>
+                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $student->getAvatar() ?>" /></td>
                 <td>
                 <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $student->url), 'users_user_view') ?>"><?= $student->label ?></a>
@@ -174,7 +174,7 @@
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td rowspan="2"><img src="<?= $this->media . '../users/thumbnail_small/' . $guest->getAvatar() ?>" /></td>
+                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $guest->getAvatar() ?>" /></td>
                 <td>
                 <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $guest->url), 'users_user_view') ?>"><?= $guest->label ?></a>

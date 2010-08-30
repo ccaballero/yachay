@@ -10,6 +10,7 @@ class modules_resources_models_Resources extends Zend_Db_Table_Abstract
                                         'modules_resources_models_Subjects_Resources',
                                         'modules_resources_models_Groups_Resources',
                                         'modules_resources_models_Teams_Resources',
+                                        'modules_resources_models_Communities_Resources',
                                         'modules_resources_models_Users_Resources',
                                         'modules_tags_models_Tags_Resources',
                                         'modules_comments_models_Comments',

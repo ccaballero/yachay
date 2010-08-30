@@ -18,11 +18,6 @@ class modules_evaluations_models_Evaluations_Tests_Test extends Yeah_Model_Row_V
                     'message'   => 'El nombre de la calificacion debe tener entre 1 y 64 caracteres',
                 ),
                 array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El nombre de la calificacion debe contener unicamente caracteres y numeros',
-                ),
-                array(
                     'validator' => 'UniqueLabelDual',
                     'options'   => array(array('evaluations', 'Evaluations_Tests')),
                     'message'   => 'El nombre seleccionado para la calificacion ya existe o no puede utilizarse',

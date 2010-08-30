@@ -16,11 +16,6 @@ class modules_groupsets_models_Groupsets_Groupset extends Yeah_Model_Row_WithTsR
                     'message'   => 'El nombre del conjunto debe tener entre 1 y 64 caracteres',
                 ),
                 array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El nombre del conjunto debe contener unicamente caracteres y numeros',
-                ),
-                array(
                     'validator' => 'UniqueLabel',
                     'options'   => array('groupsets'),
                     'message'   => 'El nombre seleccionado para el conjunto ya existe o no puede utilizarse',

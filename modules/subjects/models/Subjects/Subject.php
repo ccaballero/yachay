@@ -60,11 +60,6 @@ class modules_subjects_models_Subjects_Subject extends Yeah_Model_Row_WithUrlAnd
                     'message'   => 'El nombre de materia debe tener entre 1 y 64 caracteres',
                 ),
                 array(
-                    'validator' => 'Regex',
-                    'options'   => array('/^[\w\s]+$/i'),
-                    'message'   => 'El nombre de materia debe contener unicamente caracteres y numeros',
-                ),
-                array(
                     'validator' => 'UniqueLabelDual',
                     'options'   => array('subjects'),
                     'message'   => 'El nombre seleccionado para la materia ya existe o no puede utilizarse',

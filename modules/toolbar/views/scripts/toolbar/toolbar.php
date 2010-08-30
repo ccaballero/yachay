@@ -8,7 +8,7 @@ $role = $roles->findByIdent($USER->role);
 
 $session = new Zend_Session_Namespace();
 $context = $session->context;
-$TOOLBAR->items[] = '[' . $context . ']';
+$TOOLBAR->items[] = '[' . $context->__toString() . ']';
 
 if ($USER->role == 1) {
     $TOOLBAR->items[] = '[' . $role->label . ']';

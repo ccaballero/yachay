@@ -31,7 +31,7 @@
 <h3>Crear nuevo valor cualitativo</h3>
 
 <center>
-    <form method="post" action="#">
+    <form method="post" action="">
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table>
             <tr>

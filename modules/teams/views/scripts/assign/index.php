@@ -1,6 +1,6 @@
 <h1>Asignacion de miembros a equipo</h1>
 
-<form method="post" action="#">
+<form method="post" action="">
     <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
 
     <table>

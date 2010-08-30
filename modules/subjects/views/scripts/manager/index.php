@@ -1,7 +1,10 @@
 <h1>Administrador de materias</h1>
-<i><b>Gestion: </b><?= $this->utf2html($this->gestion->label) ?></i>
 
-<form method="post" action="#">
+<?php if (!empty($this->gestion)) { ?>
+<i><b>Gestion: </b><?= $this->utf2html($this->gestion->label) ?></i>
+<?php } ?>
+
+<form method="post" action="">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>
