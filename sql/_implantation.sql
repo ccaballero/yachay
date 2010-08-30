@@ -6,7 +6,6 @@
 INSERT INTO `user`
 (`role`, `label`,       `url`,         `password`,  `tsregister`,     `status`,   `surname`,          `name`,        `code`,    `email`)
 VALUES
-(7,      'admin',       'admin',       md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Administrador',    'Señor',       200229397, 'cijkb.j@gmail.com'),
 (6,      'antonio',     'antonio',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Mamani',           'Antonio',     200212474, 'id02@gmail.com'),
 (6,      'carlos',      'carlos',      md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Caballero',        'Carlos',      200323785, 'id03@gmail.com'),
 (5,      'leticia',     'leticia',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Blanco',           'Leticia',     200437576, 'id04@gmail.com'),
@@ -35,10 +34,16 @@ VALUES
 (2,      'aquilino',    'aquilino',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Davalos',          'Aquilino',    200873187, 'id27@gmail.com');
 
 INSERT INTO `community`
-(`label`,          `url`,              `mode`,   `author`, `members`,     `tsregister`,     `description`)
+(`label`,          `url`,              `mode`,   `author`, `members`,     `tsregister`,     `interests`, `description`)
 VALUES
-('Gentoosa',       'gentoosa',         'open',   3,        1,             UNIX_TIMESTAMP(), 'Gente que use la distribucion Gentoo, o que simplemente le encante compilar su kernel'),
-('FechaFiferos',   'fechafiferos',     'close',  18,       1,             UNIX_TIMESTAMP(), 'Los que juegan futbol cada sabado en las canchas de la U');
+('Gentoosa',       'gentoosa',         'open',   3,        1,             UNIX_TIMESTAMP(), 'linux, gentoo, software libre', 'Gente que use la distribucion Gentoo, o que simplemente le encante compilar su kernel'),
+('FechaFiferos',   'fechafiferos',     'close',  18,       1,             UNIX_TIMESTAMP(), 'futbol, deporte, umss', 'Los que juegan futbol cada sabado en las canchas de la U');
+
+INSERT INTO `community_user`
+(`community`, `user`, `type`, `status`, `tsregister`)
+VALUES
+(1,  3, 'moderator', 'active', UNIX_TIMESTAMP()),
+(2, 18, 'moderator', 'active', UNIX_TIMESTAMP());
 
 INSERT INTO `gestion`
 (`label`,          `url`,              `status`,      `tsregister`)

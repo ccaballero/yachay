@@ -377,3 +377,9 @@ VALUES
 ( 3,52), ( 3,53), ( 3,54), ( 3,55),
 ( 2,52), ( 2,53), ( 2,54), ( 2,55),
          ( 1,53);
+
+INSERT INTO `user`
+(`role`, `label`,       `url`,         `password`,  `tsregister`,     `status`,   `surname`,          `name`,        `code`,    `email`)
+VALUES
+(7,      'admin',       'admin',       md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Administrador',    'Señor',       200229397, 'cijkb.j@gmail.com');
+
