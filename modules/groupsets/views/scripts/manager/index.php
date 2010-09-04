@@ -5,7 +5,7 @@
 
     <table>
         <tr>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'groupsets_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'groupsets_new') ?>">Nuevo</a>]</td>
             <td><input type="submit" name="delete" value="Eliminar" /></td>
         </tr>
     </table>
@@ -43,7 +43,7 @@
 
     <table>
         <tr>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'groupsets_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'groupsets_new') ?>">Nuevo</a>]</td>
             <td><input type="submit" name="delete" value="Eliminar" /></td>
         </tr>
     </table>

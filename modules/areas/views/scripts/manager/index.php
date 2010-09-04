@@ -6,10 +6,10 @@
     <table>
         <tr>
         <?php if (Yeah_Acl::hasPermission('areas', 'list')) { ?>
-            <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'areas_list') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'areas_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('areas', 'new')) { ?>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'areas_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'areas_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         </tr>
     </table>
@@ -54,10 +54,10 @@
     <table>
         <tr>
         <?php if (Yeah_Acl::hasPermission('areas', 'list')) { ?>
-            <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'areas_list') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'areas_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('areas', 'new')) { ?>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'areas_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'areas_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         </tr>
     </table>

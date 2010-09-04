@@ -15,7 +15,7 @@
                 <td>&nbsp;</td>
                 <td>
                     <input type="submit" value="Importar miembros" />
-                    <input type="button" value="Cancelar" onclick="location.href='<?= $this->lastPage() ?>'" />
+                    <a href="<?= $this->lastPage() ?>">Cancelar</a>
                 </td>
             </tr>
         </table>

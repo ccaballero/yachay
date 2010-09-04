@@ -36,44 +36,46 @@ VALUES
 INSERT INTO `community`
 (`label`,          `url`,              `mode`,   `author`, `members`,     `tsregister`,     `interests`, `description`)
 VALUES
-('Gentoosa',       'gentoosa',         'open',   3,        1,             UNIX_TIMESTAMP(), 'linux, gentoo, software libre', 'Gente que use la distribucion Gentoo, o que simplemente le encante compilar su kernel'),
+('Gentoosa',       'gentoosa',         'open',   3,        3,             UNIX_TIMESTAMP(), 'linux, gentoo, software libre', 'Gente que use la distribucion Gentoo, o que simplemente le encante compilar su kernel'),
 ('FechaFiferos',   'fechafiferos',     'close',  18,       1,             UNIX_TIMESTAMP(), 'futbol, deporte, umss', 'Los que juegan futbol cada sabado en las canchas de la U');
 
 INSERT INTO `community_user`
 (`community`, `user`, `type`, `status`, `tsregister`)
 VALUES
 (1,  3, 'moderator', 'active', UNIX_TIMESTAMP()),
+(1, 15, 'moderator', 'active', UNIX_TIMESTAMP()),
+(1, 23, 'member',    'active', UNIX_TIMESTAMP()),
 (2, 18, 'moderator', 'active', UNIX_TIMESTAMP());
 
 INSERT INTO `gestion`
 (`label`,          `url`,              `status`,      `tsregister`)
 VALUES
-('2009_01',        '2009_01',          'inactive',    UNIX_TIMESTAMP()),
-('2009_02',        '2009_02',          'active',      UNIX_TIMESTAMP());
+('2009/01',        '2009-01',          'inactive',    UNIX_TIMESTAMP()),
+('2009/02',        '2009-02',          'active',      UNIX_TIMESTAMP());
 
 INSERT INTO `subject`
 (`gestion`, `author`, `moderator`, `code`,  `label`,                           `url`,                            `tsregister`,     `status`,   `visibility`, `description`)
 VALUES
-(1,         1,        2,           2010010, 'Introducción a la programación',  'introduccion_a_la_programacion', UNIX_TIMESTAMP(), 'active',   'public',     'Principios de programacion'),
-(1,         1,        2,           2010003, 'Elementos de programación',       'elementos_de_programacion',      UNIX_TIMESTAMP(), 'active',   'register',   'Estructuras de datos'),
-(1,         1,        2,           2008054, 'Calculo I',                       'calculo_i',                      UNIX_TIMESTAMP(), 'inactive', 'register',   'Matematicas basicas'),
-(1,         1,        2,           2008019, 'Algebra I',                       'algebra_i',                      UNIX_TIMESTAMP(), 'inactive', 'private',    'Matematicas basicas'),
-(1,         1,        2,           2010018, 'Sistemas de información I',       'sistemas_de_informacion_i',      UNIX_TIMESTAMP(), 'active',   'private',    'Modelamiento de sistemas'),
-(1,         1,        2,           2010020, 'Ingeniería de software',          'ingenieria_de_software',         UNIX_TIMESTAMP(), 'active',   'public',     'Modelamiento de sistemas'),
-(2,         1,        2,           2010010, 'Introducción a la programación',  'introduccion_a_la_programacion', UNIX_TIMESTAMP(), 'active',   'register',   'Principios de programacion'),
-(2,         1,        2,           2010003, 'Elementos de programación',       'elementos_de_programacion',      UNIX_TIMESTAMP(), 'active',   'public',     'Estructuras de datos'),
-(2,         1,        2,           2010018, 'Sistemas de información I',       'sistemas_de_informacion_i',      UNIX_TIMESTAMP(), 'active',   'register',   'Modelamiento de sistemas'),
-(2,         1,        2,           2010020, 'Ingeniería de software',          'ingenieria_de_software',         UNIX_TIMESTAMP(), 'active',   'public',     'Modelamiento de sistemas'),
-(2,         1,        3,           2010027, 'Inteligéncia artificial',         'inteligencia_artificial',        UNIX_TIMESTAMP(), 'active',   'private',    'Imitar el comportamiento del ser humano'),
-(2,         1,        3,           2010029, 'Sistemas expertos',               'sistemas_expertos',              UNIX_TIMESTAMP(), 'active',   'public',     'Desarrollar sistemas especializados basados en la inteligencia Artificial');
+(1,         1,        2,           2010010, 'Introducción a la programación',  'introduccion-a-la-programacion', UNIX_TIMESTAMP(), 'active',   'public',     'Principios de programacion'),
+(1,         1,        2,           2010003, 'Elementos de programación',       'elementos-de-programacion',      UNIX_TIMESTAMP(), 'active',   'register',   'Estructuras de datos'),
+(1,         1,        2,           2008054, 'Calculo I',                       'calculo-i',                      UNIX_TIMESTAMP(), 'inactive', 'register',   'Matematicas basicas'),
+(1,         1,        2,           2008019, 'Algebra I',                       'algebra-i',                      UNIX_TIMESTAMP(), 'inactive', 'private',    'Matematicas basicas'),
+(1,         1,        2,           2010018, 'Sistemas de información I',       'sistemas-de-informacion-i',      UNIX_TIMESTAMP(), 'active',   'private',    'Modelamiento de sistemas'),
+(1,         1,        2,           2010020, 'Ingeniería de software',          'ingenieria-de-software',         UNIX_TIMESTAMP(), 'active',   'public',     'Modelamiento de sistemas'),
+(2,         1,        2,           2010010, 'Introducción a la programación',  'introduccion-a-la-programacion', UNIX_TIMESTAMP(), 'active',   'register',   'Principios de programacion'),
+(2,         1,        2,           2010003, 'Elementos de programación',       'elementos-de-programacion',      UNIX_TIMESTAMP(), 'active',   'public',     'Estructuras de datos'),
+(2,         1,        2,           2010018, 'Sistemas de información I',       'sistemas-de-informacion_i',      UNIX_TIMESTAMP(), 'active',   'register',   'Modelamiento de sistemas'),
+(2,         1,        2,           2010020, 'Ingeniería de software',          'ingenieria-de-software',         UNIX_TIMESTAMP(), 'active',   'public',     'Modelamiento de sistemas'),
+(2,         1,        3,           2010027, 'Inteligéncia artificial',         'inteligencia-artificial',        UNIX_TIMESTAMP(), 'active',   'private',    'Imitar el comportamiento del ser humano'),
+(2,         1,        3,           2010029, 'Sistemas expertos',               'sistemas-expertos',              UNIX_TIMESTAMP(), 'active',   'public',     'Desarrollar sistemas especializados basados en la inteligencia Artificial');
 
 INSERT INTO `area`
 (`label`,                    `url`,                        `description`,                                           `tsregister`)
 VALUES
-('Programacion',             'programacion',               'Area sobre temas de programacion de sistemas',          UNIX_TIMESTAMP()),
+('Programación',             'programacion',               'Area sobre temas de programacion de sistemas',          UNIX_TIMESTAMP()),
 ('Matematicas',              'matematicas',                'Area sobre topicos matematicos variados',               UNIX_TIMESTAMP()),
-('Analisis de sistemas',     'analisis_de_sistemas',       'Area sobre temas respectivos al analisis de sistemas',  UNIX_TIMESTAMP()),
-('Inteligencia artificial',  'inteligencia_artificial',    'Area sobre topicos en inteligencia artificial',         UNIX_TIMESTAMP());
+('Analisis de sistemas',     'analisis-de-sistemas',       'Area sobre temas respectivos al analisis de sistemas',  UNIX_TIMESTAMP()),
+('Inteligencia artificial',  'inteligencia-artificial',    'Area sobre topicos en inteligencia artificial',         UNIX_TIMESTAMP());
 
 INSERT INTO `area_subject`
 (`area`, `subject`, `gestion`)
@@ -158,18 +160,11 @@ VALUES
 INSERT INTO `evaluation`
 (`author`, `label`,          `access`,  `tsregister`, `useful`, `description`)
 VALUES
-(1,        'Metodo clasico', 'public',  1249974000,   TRUE,     'El metodo clasico de evaluacion'),
 (1,        'Metodo moderno', 'public',  1249974001,   TRUE,     'El metodo moderno de calificacion');
 
 INSERT INTO `evaluation_test`
 (`evaluation`, `label`,         `key`, `order`, `minimumnote`, `defaultnote`, `maximumnote`, `formula`)
 VALUES
-(1,            '1er Parcial',    '1P',  1,       0,             1,              100,          null),
-(1,            '2do Parcial',    '2P',  2,       0,             1,              100,          null),
-(1,            'Promedio',       'PP',  3,       0,             1,              100,          '(1P + 2P) / 2'),
-(1,            'Examen Final',   'EF',  4,       0,             1,              100,          null),
-(1,            '2da Instancia',  '2I',  5,       0,             1,              51,           null),
-(1,            'Observaciones',  'Obs', 6,       0,             1,              100,          'PROXIMO(MAXIMO(PP, EF, 2I), 0, 100)'),
 (2,            '1er Repaso',    '1R',   1,       0,             1,              100,          null),
 (2,            '2do Repaso',    '2R',   2,       0,             1,              100,          null),
 (2,            '3er Repaso',    '3R',   3,       0,             1,              100,          null),
@@ -192,8 +187,6 @@ VALUES
 INSERT INTO `evaluation_test_value`
 (`evaluation`, `test`, `label`,         `value`)
 VALUES
-(1,            6,      'Reprobado',       0),
-(1,            6,      'Aprobado',      100),
 (2,            12,     'No entregado',    0),
 (2,            12,     'Malo',            5),
 (2,            12,     'Regular',        10),
@@ -247,7 +240,7 @@ INSERT INTO `team`
 (`group`, `author`, `label`,          `url`,            `status`, `tsregister`,     `description`)
 VALUES
 (12,      4,        'Delta',          'delta',          'active', UNIX_TIMESTAMP(), ''),
-(12,      4,        'Canal cultural', 'canal_cultural', 'active', UNIX_TIMESTAMP(), '');
+(12,      4,        'Canal cultural', 'canal-cultural', 'active', UNIX_TIMESTAMP(), '');
 
 INSERT INTO `team_user`
 (`team`, `user`, `tsregister`)
@@ -285,8 +278,8 @@ VALUES
 (24, 1249974183),		 /* EVENT 25 */
 (25, 1249974184),		 /* FILE  26 */
 (26, 1249974185),	     /* NOTE  27 */
-(26, 1249974186),		 /* NOTE  28 */
-(27, 1249974187);		 /* EVENT 29 */
+(15, 1249974186),		 /* NOTE  28 */
+(23, 1249974187);		 /* EVENT 29 */
 
 INSERT INTO `note`
 (`resource`, `priority`, `note`)
@@ -340,9 +333,7 @@ VALUES
 (16, UNIX_TIMESTAMP()),
 (19, UNIX_TIMESTAMP()),
 (25, UNIX_TIMESTAMP()),
-(26, UNIX_TIMESTAMP()),
-(28, UNIX_TIMESTAMP()),
-(29, UNIX_TIMESTAMP());
+(26, UNIX_TIMESTAMP());
 
 INSERT INTO `area_resource`
 (`resource`, `area`)
@@ -372,6 +363,12 @@ INSERT INTO `team_resource`
 VALUES
 (17, 1),
 (18, 2);
+
+INSERT INTO `community_resource`
+(`resource`, `community`)
+VALUES
+(28, 1),
+(29, 1);
 
 INSERT INTO `user_resource`
 (`resource`, `user`)

@@ -6,12 +6,12 @@
     <table>
         <tr>
         <?php if ($this->group->amTeacher()) { ?>
-            <td><input type="button" value="Agregar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_new') ?>">Agregar</a>]</td>
             <td><input type="submit" value="Habilitar" name="unlock" /></td>
             <td><input type="submit" value="Deshabilitar" name="lock" /></td>
             <td><input type="submit" value="Retirar" name="delete" /></td>
-            <td><input type="button" value="Importar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_import') ?>'" /></td>
-            <td><input type="button" value="Exportar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_export') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_import') ?>">Importar</a>]</td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_export') ?>">Exportar</a>]</td>
         <?php } ?>
         </tr>
     </table>
@@ -165,12 +165,12 @@
     <table>
         <tr>
         <?php if ($this->group->amTeacher()) { ?>
-            <td><input type="button" value="Agregar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_new') ?>">Agregar</a>]</td>
             <td><input type="submit" value="Habilitar" name="unlock" /></td>
             <td><input type="submit" value="Deshabilitar" name="lock" /></td>
             <td><input type="submit" value="Retirar" name="delete" /></td>
-            <td><input type="button" value="Importar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_import') ?>'" /></td>
-            <td><input type="button" value="Exportar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_export') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_import') ?>">Importar</a>]</td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_export') ?>">Exportar</a>]</td>
         <?php } ?>
         </tr>
     </table>

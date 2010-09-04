@@ -31,6 +31,10 @@ class Yeah_Bootstrap
         ini_set('display_errors', 'on');
         ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . 'libs' . PATH_SEPARATOR . 'modules');
 
+        // PHP's settings for encoding
+        mb_internal_encoding('UTF-8');
+        mb_http_output('UTF-8');
+
         require_once 'Utils.php';
 
         require_once 'Zend/Loader/Autoloader.php';
@@ -82,6 +86,7 @@ class Yeah_Bootstrap
         }
 
         // Set for localization
+        setlocale(LC_CTYPE, $CONFIG->locale);
         Zend_Locale::setDefault($CONFIG->locale);
         
         // Setting logging system

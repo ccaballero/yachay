@@ -18,6 +18,24 @@ class modules_communities_Init extends Yeah_Init
                                                         'controller' => 'community',
                                                         'action'     => 'delete',
                                                     )),
+        'communities_community_assign_member_lock'    => array('communities/:community/assign/:user/lock',
+                                                    array(
+                                                        'module'     => 'communities',
+                                                        'controller' => 'member',
+                                                        'action'     => 'lock',
+                                                    )),
+        'communities_community_assign_member_unlock'  => array('communities/:community/assign/:user/unlock',
+                                                    array(
+                                                        'module'     => 'communities',
+                                                        'controller' => 'member',
+                                                        'action'     => 'unlock',
+                                                    )),
+        'communities_community_assign_member_delete'  => array('communities/:community/assign/:user/delete',
+                                                    array(
+                                                        'module'     => 'communities',
+                                                        'controller' => 'member',
+                                                        'action'     => 'delete',
+                                                    )),
         'communities_community_assign'           => array('communities/:community/assign',
                                                     array(
                                                         'module'     => 'communities',

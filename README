@@ -1,6 +1,34 @@
+###############################################################################
 
-copie htaccess-dist a un archivo .htaccess
-el archivo yeah.log debe tener todos los permisos($ chmod 777 yeah.log)
+Yeah version 0.1
 
-consultas de soporte a: yeahsrl.bo@gmail.com
+== Developers ==
+    Antonio Mamani Q. (antonio.mq@gmail.com)
+    Carlos Caballero B. (cijkb.j@gmail.com)
+    Luis Arce C. (amigox100pre111@gmail.com)
+    Benjamin Perez S.
+    Juan Jose Olivera R.
+
+== Dependencies ==
+    PHP 5.0 or higher.
+    Apache Web Server (with mod_rewrite).
+    Zend Framework 1.8.3 or higher.
+    MySQL 5.0 or higher.
+
+== License ==
+    GNU GPL 5.0.
+
+== Description ==
+    A free and open source e-learning platform for management of courses and
+    social network.
+
+== Instalation ==
+    1. Copy the htaccess-dist to .htaccess.
+    2. Copy the hgignore-dist to .hgignore.
+    3. Copy the libs/Yeah/Settings/Config-dist.php to libs/Yeah/Settings/Config.php
+    4. Edit the Config.php file.
+    5. Copy the libs/Yeah/Settings/Database-dist.php to libs/Yeah/Database/Database.php
+    6. Edit the Database.php file.
+    7. Create an empty file called yeah.log and put write permissions (chmod ugo+w).
+    8. Create a symbolic link from libs/Zend1.10.7 to libs/Zend (ln -s libs/Zend1.10.7 libs/Zend).
 

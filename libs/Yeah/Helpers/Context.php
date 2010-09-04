@@ -167,6 +167,30 @@ class Yeah_Helpers_Context
             $options[] = '</optiongroup>';
         }
 
+        // set for community context
+        $commnities_model = Yeah_Adapter::getModel('communities');
+        $assignement4 = Yeah_Adapter::getModel('communities', 'Communities_Users');
+        $communities1 = $commnities_model->selectAll();
+        $communities2 = array();
+        foreach ($communities1 as $community) {
+            $assign = $assignement4->findByCommunityAndUser($community->ident, $USER->ident);
+            if (!empty($assign)) {
+                $communities2[] = $community;
+            }
+        }
+        if (count($communities2) != 0) {
+            if ($context_type == 'community') {
+                $default = true;
+            } else {
+                $default = false;
+            }
+            $options[] = '<optgroup label="Comunidades">';
+            foreach ($communities2 as $community) {
+                $options[] = '<option value="community-' . $community->ident . '" ' . (($default && ($context->{$context_type}->ident == $community->ident)) ? $select : '') . '>' . $_->utf2html($community->label) . '</option>';
+            }
+            $options[] = '</optiongroup>';
+        }
+
         // set for user context
         $users_model = Yeah_Adapter::getModel('users');
         $users_list = $users_model->selectByStatus('active');

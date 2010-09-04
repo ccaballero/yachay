@@ -6,12 +6,12 @@
     <table>
         <tr>
         <?php if ($this->subject->amModerator()) { ?>
-            <td><input type="button" value="Agregar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') ?>">Agregar</a>]</td>
             <td><input type="submit" value="Habilitar" name="unlock" /></td>
             <td><input type="submit" value="Deshabilitar" name="lock" /></td>
             <td><input type="submit" value="Retirar" name="delete" /></td>
-            <td><input type="button" value="Importar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>'" /></td>
-            <td><input type="button" value="Exportar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>">Importar</a>]</td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') ?>">Exportar</a>]</td>
         <?php } ?>
         </tr>
     </table>
@@ -23,7 +23,7 @@
         <?php $assign = $this->subject->getAssignement($teacher); ?>
         <table width="100%">
             <tr>
-                <td rowspan="2">
+                <td rowspan="2" width="18px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <input type="checkbox" name="members[]" value="<?= $teacher->ident ?>" />
                 <?php } else { ?>
@@ -38,18 +38,18 @@
                     <?= $teacher->label ?>
                 <?php } ?>
                 </td>
-                <td colspan="2"><?= $teacher->getFullName() ?></td>
+                <td colspan="2"><?= $this->utf2html($teacher->getFullName()) ?></td>
             </tr>
             <tr>
                 <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td>
+                <td width="80px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <?= $this->enable($assign->status) ?>
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td>
+                <td width="240px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_unlock') ?>">[Habilitar]</a>
                     <a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_lock') ?>">[Deshabilitar]</a>
@@ -71,7 +71,7 @@
         <?php $assign = $this->subject->getAssignement($auxiliar); ?>
         <table width="100%">
             <tr>
-                <td rowspan="2">
+                <td rowspan="2" width="18px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <input type="checkbox" name="members[]" value="<?= $auxiliar->ident ?>" />
                 <?php } else { ?>
@@ -86,18 +86,18 @@
                     <?= $auxiliar->label ?>
                 <?php } ?>
                 </td>
-                <td colspan="2"><?= $auxiliar->getFullName() ?></td>
+                <td colspan="2"><?= $this->utf2html($auxiliar->getFullName()) ?></td>
             </tr>
             <tr>
                 <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td>
+                <td width="80px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <?= $this->enable($assign->status) ?>
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td>
+                <td width="240px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_unlock') ?>">[Habilitar]</a>
                     <a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_lock') ?>">[Deshabilitar]</a>
@@ -119,7 +119,7 @@
         <?php $assign = $this->subject->getAssignement($student); ?>
         <table width="100%">
             <tr>
-                <td rowspan="2">
+                <td rowspan="2" width="18px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <input type="checkbox" name="members[]" value="<?= $student->ident ?>" />
                 <?php } else { ?>
@@ -134,18 +134,18 @@
                     <?= $student->label ?>
                 <?php } ?>
                 </td>
-                <td colspan="2"><?= $student->getFullName() ?></td>
+                <td colspan="2"><?= $this->utf2html($student->getFullName()) ?></td>
             </tr>
             <tr>
                 <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td>
+                <td width="80px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <?= $this->enable($assign->status) ?>
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td>
+                <td width="240px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_unlock') ?>">[Habilitar]</a>
                     <a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_lock') ?>">[Deshabilitar]</a>
@@ -167,7 +167,7 @@
         <?php $assign = $this->subject->getAssignement($guest); ?>
         <table width="100%">
             <tr>
-                <td rowspan="2">
+                <td rowspan="2" width="18px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <input type="checkbox" name="members[]" value="<?= $guest->ident ?>" />
                 <?php } else { ?>
@@ -182,18 +182,18 @@
                     <?= $guest->label ?>
                 <?php } ?>
                 </td>
-                <td colspan="2"><?= $guest->getFullName() ?></td>
+                <td colspan="2"><?= $this->utf2html($guest->getFullName()) ?></td>
             </tr>
             <tr>
                 <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td>
+                <td width="80px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <?= $this->enable($assign->status) ?>
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td>
+                <td width="240px">
                 <?php if ($this->subject->amModerator()) { ?>
                     <a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_unlock') ?>">[Habilitar]</a>
                     <a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_lock') ?>">[Deshabilitar]</a>
@@ -213,12 +213,12 @@
     <table>
         <tr>
         <?php if ($this->subject->amModerator()) { ?>
-            <td><input type="button" value="Agregar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') ?>">Agregar</a>]</td>
             <td><input type="submit" value="Habilitar" name="unlock" /></td>
             <td><input type="submit" value="Deshabilitar" name="lock" /></td>
             <td><input type="submit" value="Retirar" name="delete" /></td>
-            <td><input type="button" value="Importar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>'" /></td>
-            <td><input type="button" value="Exportar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>">Importar</a>]</td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') ?>">Exportar</a>]</td>
         <?php } ?>
         </tr>
     </table>

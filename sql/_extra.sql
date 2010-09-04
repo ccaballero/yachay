@@ -317,7 +317,7 @@ VALUES
 ( 4,17),                            ( 4,21),
 ( 3,17),                            ( 3,21),
 ( 2,17),                            ( 2,21),
-( 1,17),
+( 1,17),                            ( 1,21),
 /*====================================================================================================================*/
 /* Inserciones extra para el modulo FRIENDS                                                                           */
 /*====================================================================================================================*/
@@ -366,7 +366,7 @@ VALUES
 ( 4,49), ( 4,50), ( 4,51),
 ( 3,49), ( 3,50), ( 3,51),
 ( 2,49), ( 2,50), ( 2,51),
-( 1,49),
+( 1,49),          ( 1,51),
 /*====================================================================================================================*/
 /* Inserciones extra para el modulo RESOURCES                                                                         */
 /*====================================================================================================================*/
@@ -378,8 +378,30 @@ VALUES
 ( 2,52), ( 2,53), ( 2,54), ( 2,55),
          ( 1,53);
 
+
 INSERT INTO `user`
 (`role`, `label`,       `url`,         `password`,  `tsregister`,     `status`,   `surname`,          `name`,        `code`,    `email`)
 VALUES
 (7,      'admin',       'admin',       md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Administrador',    'Señor',       200229397, 'cijkb.j@gmail.com');
 
+
+INSERT INTO `evaluation`
+(`author`, `label`,          `access`,  `tsregister`, `useful`, `description`)
+VALUES
+(1,        'Metodo clasico', 'public',  1249974000,   TRUE,     'El metodo clasico de evaluacion');
+
+INSERT INTO `evaluation_test`
+(`evaluation`, `label`,         `key`, `order`, `minimumnote`, `defaultnote`, `maximumnote`, `formula`)
+VALUES
+(1,            '1er Parcial',    '1P',  1,       0,             1,              100,          null),
+(1,            '2do Parcial',    '2P',  2,       0,             1,              100,          null),
+(1,            'Promedio',       'PP',  3,       0,             1,              100,          '(1P + 2P) / 2'),
+(1,            'Examen Final',   'EF',  4,       0,             1,              100,          null),
+(1,            '2da Instancia',  '2I',  5,       0,             1,              51,           null),
+(1,            'Observaciones',  'Obs', 6,       0,             1,              100,          'PROXIMO(MAXIMO(PP, EF, 2I), 0, 100)');
+
+INSERT INTO `evaluation_test_value`
+(`evaluation`, `test`, `label`,         `value`)
+VALUES
+(1,            6,      'Reprobado',       0),
+(1,            6,      'Aprobado',      100);

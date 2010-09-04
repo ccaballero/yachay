@@ -6,10 +6,10 @@
     <table>
         <tr>
         <?php if (Yeah_Acl::hasPermission('modules', 'list')) { ?>
-            <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'modules_list') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'modules_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('modules', 'new')) { ?>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'modules_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'modules_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('modules', 'lock')) { ?>
             <td><input type="submit" name="unlock" value="Activar" /></td>
@@ -65,10 +65,10 @@
     <table>
         <tr>
         <?php if (Yeah_Acl::hasPermission('modules', 'list')) { ?>
-            <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'modules_list') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'modules_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('modules', 'new')) { ?>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'modules_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'modules_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('modules', 'lock')) { ?>
             <td><input type="submit" name="unlock" value="Activar" /></td>

@@ -5,7 +5,7 @@
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table>
             <tr>
-                <td><b>Nombre de grupo (*):</b></td>
+                <td><b>Nombre/Numero de grupo (*):</b></td>
                 <td><input type="text" name="label" value="<?= $this->group->label ?>" maxlength="64" /></td>
             </tr>
             <tr>
@@ -31,7 +31,7 @@
                 <td>&nbsp;</td>
                 <td>
                     <input type="submit" value="Crear grupo" />
-                    <input type="button" value="Cancelar" onclick="location.href='<?= $this->lastPage() ?>'" />
+                    <a href="<?= $this->lastPage() ?>">Cancelar</a>
                 </td>
             </tr>
         </table>

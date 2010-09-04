@@ -5,12 +5,12 @@
 <center>
     <?= $this->paginator($this->resources, $this->route) ?>
     <hr />
-<?php foreach ($this->resources as $resource) { ?>
-	<table width="90%">
+    <table width="90%">
+    <?php foreach ($this->resources as $resource) { ?>
 		<tr>
 			<td rowspan="3" valign="top" width="50px"><img src="<?= $CONFIG->wwwroot . 'media/users/thumbnail_small/' . $resource->getAuthor()->getAvatar() ?>" /></td>
-			<td><?= $this->utf2html($resource->getAuthor()->getFullName()) ?></td>
-			<td><?= $this->timestamp($resource->tsregister) ?></td>
+			<td><b><?= $this->utf2html($resource->getAuthor()->getFullName()) ?></b></td>
+            <td width="150px" align="right"><?= $this->timestamp($resource->tsregister) ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -23,9 +23,11 @@
 				<a href="<?= $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_view') ?>">[Ver mas]</a>
 			</td>
 		</tr>
+        <tr>
+            <td colspan="3">&nbsp;</td>
+        </tr>
+    <?php } ?>
 	</table>
-	<br />
-<?php } ?>
 	<hr />
     <?= $this->paginator($this->resources, $this->route) ?>
 </center>

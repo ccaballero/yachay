@@ -84,6 +84,12 @@ class modules_resources_models_Resources_Resource extends Yeah_Model_Row_WithTsR
                 $team_resource->team = $ident;
                 $team_resource->save();
                 break;
+            case 'community':
+                $communities_resource_model = Yeah_Adapter::getModel('communities', 'Communities_Resources');
+                $community_resource = $communities_resource_model->createRow();
+                $community_resource->resource = $this->ident;
+                $community_resource->community = $ident;
+                $community_resource->save();
             case 'user':
                 $users_resource_model = Yeah_Adapter::getModel('users', 'Users_Resources');
                 $user_resource = $users_resource_model->createRow();

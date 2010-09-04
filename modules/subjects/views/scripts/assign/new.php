@@ -6,7 +6,7 @@
     <table>
         <tr>
             <td><input type="submit" value="Agregar usuarios" /></td>
-            <td><input type="button" value="Cancelar" onclick="location.href='<?= $this->lastPage() ?>'" /></td>
+            <td><a href="<?= $this->lastPage() ?>">Cancelar</a></td>
         </tr>
     </table>
 
@@ -40,7 +40,7 @@
     <table>
         <tr>
             <td><input type="submit" value="Agregar usuarios" /></td>
-            <td><input type="button" value="Cancelar" onclick="location.href='<?= $this->lastPage() ?>'" /></td>
+            <td><a href="<?= $this->lastPage() ?>">Cancelar</a></td>
         </tr>
     </table>
 </form>

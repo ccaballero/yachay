@@ -9,10 +9,10 @@
     <table>
         <tr>
         <?php if (Yeah_Acl::hasPermission('subjects', 'list')) { ?>
-            <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'subjects_list') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'subjects_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('subjects', 'new')) { ?>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'subjects_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'subjects_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('subjects', 'lock')) { ?>
             <td><input type="submit" name="unlock" value="Activar" /></td>
@@ -22,10 +22,10 @@
             <td><input type="submit" name="delete" value="Eliminar" /></td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('subjects', 'import')) { ?>
-            <td><input type="button" value="Importar" onclick="location.href='<?= $this->url(array(), 'subjects_import') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'subjects_import') ?>">Importar</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('subjects', 'export')) { ?>
-            <td><input type="button" value="Exportar" onclick="location.href='<?= $this->url(array(), 'subjects_export') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'subjects_export') ?>">Exportar</a>]</td>
         <?php } ?>
         </tr>
     </table>
@@ -83,10 +83,10 @@
     <table>
         <tr>
         <?php if (Yeah_Acl::hasPermission('subjects', 'list')) { ?>
-            <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'subjects_list') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'subjects_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('subjects', 'new')) { ?>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'subjects_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'subjects_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('subjects', 'lock')) { ?>
             <td><input type="submit" name="unlock" value="Activar" /></td>
@@ -96,10 +96,10 @@
             <td><input type="submit" name="delete" value="Eliminar" /></td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('subjects', 'import')) { ?>
-            <td><input type="button" value="Importar" onclick="location.href='<?= $this->url(array(), 'subjects_import') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'subjects_import') ?>">Importar</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('subjects', 'export')) { ?>
-            <td><input type="button" value="Exportar" onclick="location.href='<?= $this->url(array(), 'subjects_export') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'subjects_export') ?>">Exportar</a>]</td>
         <?php } ?>
         </tr>
     </table>

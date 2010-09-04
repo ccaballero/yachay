@@ -6,7 +6,7 @@
     <table>
         <tr>
             <?php if (Yeah_Acl::hasPermission('widgets', 'list')) { ?>
-                <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'widgets_list') ?>'" /></td>
+                <td>[<a href="<?= $this->url(array(), 'widgets_list') ?>">Lista</a>]</td>
             <?php } ?>
             <?php if (Yeah_Acl::hasPermission('widgets', 'manage')) { ?>
                 <td><input type="submit" value="Actualizar" /></td>
@@ -44,7 +44,7 @@
     <table>
         <tr>
             <?php if (Yeah_Acl::hasPermission('widgets', 'list')) { ?>
-                <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'widgets_list') ?>'" /></td>
+                <td>[<a href="<?= $this->url(array(), 'widgets_list') ?>">Lista</a>]</td>
             <?php } ?>
             <?php if (Yeah_Acl::hasPermission('widgets', 'manage')) { ?>
                 <td><input type="submit" value="Actualizar" /></td>

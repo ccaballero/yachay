@@ -8,7 +8,7 @@
 
 <table width="100%">
     <tr valign="top">
-        <td rowspan="5" width="200px">
+        <td rowspan="6" width="200px">
             <img src="<?= $this->media . 'thumbnail_large/' . $this->community->getAvatar() ?>" />
         </td>
         <td><b>Descripci&oacute;n: </b></td>
@@ -18,8 +18,20 @@
     <tr valign="top"><td><b>Intereses: </b><?= $this->community->interests ?></td></tr>
     <tr valign="top">
         <td>
+            <b>Autor: </b>
+            <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
+                <a href="<?= $this->url(array('user' => $this->community->getAuthor()->url), 'users_user_view') ?>"><?= $this->community->getAuthor()->getFullName() ?></a>
+            <?php } else { ?>
+                <?= $this->community->getAuthor()->getFullName() ?>
+            <?php } ?>
+        </td>
+    </tr>
+    <tr valign="top">
+        <td>
             <b>Miembros: </b><?= $this->community->members ?>
+            <?php if (Yeah_Acl::hasPermission('communities', 'enter')) { ?>
             <i><a href="<?= $this->url(array('community' => $this->community->url), 'communities_community_assign') ?>">[Ver miembros]</a></i>
+            <?php } ?>
         </td>
     </tr>
 </table>

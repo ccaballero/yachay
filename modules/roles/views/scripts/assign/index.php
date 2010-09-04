@@ -24,6 +24,6 @@
         <?php } ?>
         </table>
         <input type="submit" value="Actualizar asignacion" />
-        <input type="button" value="Cancelar" onclick="location.href='<?= $this->lastPage() ?>'" />
+        <a href="<?= $this->lastPage() ?>">Cancelar</a>
     </form>
 </center>

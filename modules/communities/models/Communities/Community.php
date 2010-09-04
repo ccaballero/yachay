@@ -62,4 +62,32 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Wi
             return '0.jpg';
         }
     }
+
+    public function delete() {
+        // FIXME ??
+        global $DB;
+        $DB->delete('community_petition', 'community = ' . $this->ident);
+        $DB->delete('community_user', 'community = ' . $this->ident);
+        parent::delete();
+    }
+
+    public function getAssignement($user) {
+        global $DB;
+        $select = $DB->select()->from('community_user')->where('community = ?' , $this->ident)->where('user = ?', $user->ident);
+        $result = $DB->fetchRow($select);
+
+        $obj = new stdClass;
+        $obj->type = $result['type'];
+        $obj->status = $result['status'];
+        $obj->tsregister =  $result['tsregister'];
+
+        return $obj;
+    }
+
+    public function amModerator() {
+        global $USER;
+
+        $communities_user_model = Yeah_Adapter::getModel('communities', 'Communities_Users');
+        return ($communities_user_model->findByCommunityAndUser($this->ident, $USER->ident) <> NULL);
+    }
 }

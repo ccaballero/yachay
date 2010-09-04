@@ -16,8 +16,8 @@
         <tr>
             <td><input type="submit" value="Guardar" name="save" /></td>
             <td><input type="submit" value="Limpiar" name="clean" /></td>
-            <td><input type="button" value="Importar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_import') ?>'" /></td>
-            <td><input type="button" value="Exportar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_export') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_import') ?>">Importar</a>]</td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_export') ?>">Exportar</a>]</td>
             <td>&nbsp;|&nbsp;</td>
             <td><?= $this->evaluation('evaluation', $this->group->evaluation) ?></td>
             <td><input type="submit" value="Cambiar" name="change" /></td>
@@ -60,8 +60,8 @@
         <tr>
             <td><input type="submit" value="Guardar" name="save" /></td>
             <td><input type="submit" value="Limpiar" name="clean" /></td>
-            <td><input type="button" value="Importar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_import') ?>'" /></td>
-            <td><input type="button" value="Exportar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_export') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_import') ?>">Importar</a>]</td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_export') ?>">Exportar</a>]</td>
         </tr>
     </table>
 </form>

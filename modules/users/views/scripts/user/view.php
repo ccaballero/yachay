@@ -26,9 +26,6 @@
         <td colspan="4"><b>Nombre Completo: </b><?= $this->utf2html($this->user->getFullName()) ?></td>
     </tr>
     <tr valign="top">
-        <td colspan="4"><b>Correo Electronico: </b><?= $this->user->email ?></td>
-    </tr>
-    <tr valign="top">
         <td colspan="2"><b>Cargo: </b><?= $this->user->getRole()->label ?></td>
         <td colspan="2"><b>Carrera: </b><?= $this->none($this->user->career) ?></td>
     </tr>

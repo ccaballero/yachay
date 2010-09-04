@@ -71,7 +71,7 @@ class modules_teams_models_Teams_Team extends Yeah_Model_Row_WithUrlAndTsRegiste
         $users = Yeah_Adapter::getModel('users');
         $assignement = Yeah_Adapter::getModel('teams', 'Teams_Users');
         $user = $users->findByIdent($USER->ident);
-        $assign = $assignement->findByTeamAndUser($this->ident, $user->ident);
+        $assign = $assignement->findByTeamAndUser($this->ident, $USER->ident);
         if (!empty($assign)) {
             return true;
         }

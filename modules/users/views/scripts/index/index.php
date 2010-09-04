@@ -42,8 +42,8 @@
                 <td colspan="4"><b>Nombre Completo: </b><?= $this->utf2html($user->getFullName()) ?></td>
             </tr>
             <tr>
-                <td colspan="2"><b>Cargo: </b><?= $user->getRole()->label ?></td>
-                <td colspan="2"><b>Carrera: </b><?= $this->none($user->career) ?></td>
+                <td colspan="2" width="50%"><b>Cargo: </b><?= $user->getRole()->label ?></td>
+                <td colspan="2" width="50%"><b>Carrera: </b><?= $this->none($user->career) ?></td>
             </tr>
             <!--<tr>
                 <td><b>Conocimiento: </b><?= $user->knowledge ?></td>

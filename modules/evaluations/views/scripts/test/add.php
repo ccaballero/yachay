@@ -42,7 +42,7 @@
                 <td>&nbsp;</td>
                 <td>
                     <input type="submit" value="Agregar calificaci&oacute;n" />
-                    <input type="button" value="Volver" onclick="location.href='<?= $this->lastPage() ?>'" />
+                    <a href="<?= $this->lastPage() ?>">Volver</a>
                 </td>
             </tr>
         </table>

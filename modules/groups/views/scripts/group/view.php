@@ -30,7 +30,11 @@
 <ul>
     <?php foreach ($this->teams as $team) { ?>
     <li>
-        <i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_view') ?>">Equipo <?= $this->utf2html($team->label) ?></a></i>
+        <?php if ($team->amMemberTeam()) { ?>
+            <i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_view') ?>">Equipo <?= $this->utf2html($team->label) ?></a></i>
+        <?php } else { ?>
+            <i>Equipo <?= $this->utf2html($team->label) ?></i>
+        <?php } ?>
     </li>
     <?php } ?>
 </ul>

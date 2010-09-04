@@ -3,13 +3,13 @@
 <table>
     <tr>
         <?php if (Yeah_Acl::hasPermission('roles', 'list')) { ?>
-        <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'roles_list') ?>'" /></td>
+        <td>[<a href="<?= $this->url(array(), 'roles_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('roles', 'new')) { ?>
-        <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'roles_new') ?>'" /></td>
+        <td>[<a href="<?= $this->url(array(), 'roles_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('roles', 'assign')) { ?>
-        <td><input type="button" value="Asignaci&oacute;n" onclick="location.href='<?= $this->url(array(), 'roles_assign') ?>'" /></td>
+        <td>[<a href="<?= $this->url(array(), 'roles_assign') ?>">Asignaci&oacute;n</a>]</td>
         <?php } ?>
     </tr>
 </table>
@@ -55,13 +55,13 @@
 <table>
     <tr>
         <?php if (Yeah_Acl::hasPermission('roles', 'list')) { ?>
-        <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'roles_list') ?>'" /></td>
+        <td>[<a href="<?= $this->url(array(), 'roles_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('roles', 'new')) { ?>
-        <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'roles_new') ?>'" /></td>
+        <td>[<a href="<?= $this->url(array(), 'roles_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('roles', 'assign')) { ?>
-        <td><input type="button" value="Asignaci&oacute;n" onclick="location.href='<?= $this->url(array(), 'roles_assign') ?>'" /></td>
+        <td>[<a href="<?= $this->url(array(), 'roles_assign') ?>">Asignaci&oacute;n</a>]</td>
         <?php } ?>
     </tr>
 </table>

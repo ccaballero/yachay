@@ -7,7 +7,7 @@
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'groups_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'groups_new') ?>">Nuevo</a>]</td>
             <td><input type="submit" value="Activar" name="unlock" /></td>
             <td><input type="submit" value="Desactivar" name="lock" /></td>
             <td><input type="submit" value="Eliminar" name="delete" /></td>
@@ -54,7 +54,7 @@
 
     <table>
         <tr>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'groups_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'groups_new') ?>">Nuevo</a>]</td>
             <td><input type="submit" value="Activar" name="unlock" /></td>
             <td><input type="submit" value="Desactivar" name="lock" /></td>
             <td><input type="submit" value="Eliminar" name="delete" /></td>

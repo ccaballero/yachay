@@ -6,10 +6,10 @@
     <table>
         <tr>
         <?php if (Yeah_Acl::hasPermission('users', 'list')) { ?>
-            <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'users_list') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'users_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('users', 'new')) { ?>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'users_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'users_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('users', 'lock')) { ?>
             <td><input type="submit" name="lock" value="Bloquear" /></td>
@@ -19,10 +19,10 @@
             <td><input type="submit" name="delete" value="Eliminar" /></td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('users', 'import')) { ?>
-            <td><input type="button" value="Importar" onclick="location.href='<?= $this->url(array(), 'users_import') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'users_import') ?>">Importar</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('users', 'export')) { ?>
-            <td><input type="button" value="Exportar" onclick="location.href='<?= $this->url(array(), 'users_export') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'users_export') ?>">Exportar</a>]</td>
         <?php } ?>
         </tr>
     </table>
@@ -104,10 +104,10 @@
     <table>
         <tr>
         <?php if (Yeah_Acl::hasPermission('users', 'list')) { ?>
-            <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'users_list') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'users_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('users', 'new')) { ?>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'users_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'users_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('users', 'lock')) { ?>
             <td><input type="submit" name="lock" value="Bloquear" /></td>
@@ -117,10 +117,10 @@
             <td><input type="submit" name="delete" value="Eliminar" /></td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('users', 'import')) { ?>
-            <td><input type="button" value="Importar" onclick="location.href='<?= $this->url(array(), 'users_import') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'users_import') ?>">Importar</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('users', 'export')) { ?>
-            <td><input type="button" value="Exportar" onclick="location.href='<?= $this->url(array(), 'users_export') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'users_export') ?>">Exportar</a>]</td>
         <?php } ?>
         </tr>
     </table>

@@ -5,7 +5,7 @@
 
     <table>
         <tr>
-            <td><input type="button" value="Administrador" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_manager') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_manager') ?>">Administrador</a>]</td>
             <td><input type="submit" value="Actualizar" /></td>
         </tr>
     </table>
@@ -35,7 +35,7 @@
 
     <table>
         <tr>
-            <td><input type="button" value="Administrador" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_manager') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_manager') ?>">Administrador</a>]</td>
             <td><input type="submit" value="Actualizar" /></td>
         </tr>
     </table>

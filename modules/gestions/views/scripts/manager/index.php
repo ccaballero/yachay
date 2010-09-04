@@ -6,10 +6,10 @@
     <table>
         <tr>
         <?php if (Yeah_Acl::hasPermission('gestions', 'list')) { ?>
-            <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'gestions_list') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'gestions_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('gestions', 'new')) { ?>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'gestions_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'gestions_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('gestions', 'active')) { ?>
             <td><input type="submit" value="Actualizar" /></td>
@@ -73,10 +73,10 @@
     <table>
         <tr>
         <?php if (Yeah_Acl::hasPermission('gestions', 'list')) { ?>
-            <td><input type="button" value="Lista" onclick="location.href='<?= $this->url(array(), 'gestions_list') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'gestions_list') ?>">Lista</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('gestions', 'new')) { ?>
-            <td><input type="button" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'gestions_new') ?>'" /></td>
+            <td>[<a href="<?= $this->url(array(), 'gestions_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         <?php if (Yeah_Acl::hasPermission('gestions', 'active')) { ?>
             <td><input type="submit" value="Actualizar" /></td>

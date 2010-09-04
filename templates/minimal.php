@@ -29,7 +29,11 @@
     function renderMessage() {
         $session = new Zend_Session_Namespace();
         $messages = $session->messages->getMessages();
-        $ret = implode('<br />', $messages);        
+        $ret = implode('<br />', $messages);
+
+        $utf = new Yeah_Helpers_Utf2html;
+        $ret = $utf->utf2html($ret);
+
         $session->messages->clean();
         return "<center>$ret</center>";
     }
@@ -48,9 +52,9 @@
     function renderFooter($footer) {
         $foot = array();
         foreach($footer->items as $item) {
-            $foot[] = '<a href="' . $item['link'] . '">' . $item['label'] . '</a>';
+            $foot[] = '<a href="' . $item['link'] . '">[' . $item['label'] . ']</a>';
         }
-        return '<center>' . implode(' | ', $foot) . '<br/>' . $footer->copyright . '</center>';
+        return '<center>' . implode('&nbsp;', $foot) . '<br/>' . $footer->copyright . '</center>';
     }
 
     function renderWidget($widget) {

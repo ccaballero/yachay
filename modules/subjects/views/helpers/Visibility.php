@@ -6,7 +6,7 @@ class Subjects_View_Helper_Visibility
         $visibilities = array (
             'public'   => 'Visible a cualquier persona',
             'register' => 'Visible solo a usuarios registrados',
-            'private'  => 'Visible sola a usuarios asignados a la materia',
+            'private'  => 'Visible solo a usuarios asignados a la materia',
         );
         
         if ($name == null) {

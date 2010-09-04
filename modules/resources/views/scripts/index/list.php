@@ -5,15 +5,15 @@
 <table>
     <tr>
     <?php if (isset($this->newroute)) { ?>
-        <td><input type="button" value="Nuevo"        onclick="location.href='<?= $this->url(array(), $this->newroute) ?>'" /></td>
+        <td>[<a href="<?= $this->url(array(), $this->newroute) ?>">Nuevo</a>]</td>
         <td>&nbsp;|&nbsp;</td>
     <?php } ?>
-    	<td><input type="button" value="Todas"        onclick="location.href='<?= $this->url(array(), 'resources_list') ?>'" /></td>
-        <td><input type="button" value="Notas"        onclick="location.href='<?= $this->url(array('filter' => 'notes'),       'resources_filtered') ?>'" /></td>
-        <td><input type="button" value="Archivos"     onclick="location.href='<?= $this->url(array('filter' => 'files'),       'resources_filtered') ?>'" /></td>
-        <td><input type="button" value="Eventos"      onclick="location.href='<?= $this->url(array('filter' => 'events'),      'resources_filtered') ?>'" /></td>
+    	<td>[<a href="<?= $this->url(array(), 'resources_list') ?>">Todas</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'notes'),       'resources_filtered') ?>">Notas</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'files'),       'resources_filtered') ?>">Archivos</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'events'),      'resources_filtered') ?>">Eventos</a>]</td>
     <?php if (Yeah_Acl::hasPermission('subjects', 'teach')) { ?>
-        <td><input type="button" value="Evaluaciones" onclick="location.href='<?= $this->url(array('filter' => 'evaluations'), 'resources_filtered') ?>'" /></td>
+        <td>[<a href="<?= $this->url(array('filter' => 'evaluations'), 'resources_filtered') ?>">Evaluaciones</a>]</td>
     <?php } ?>
 	</tr>
 </table>
@@ -51,15 +51,15 @@
 <table>
     <tr>
     <?php if (isset($this->newroute)) { ?>
-        <td><input type="button" value="Nuevo"        onclick="location.href='<?= $this->url(array(), $this->newroute) ?>'" /></td>
+        <td>[<a href="<?= $this->url(array(), $this->newroute) ?>">Nuevo</a>]</td>
         <td>&nbsp;|&nbsp;</td>
     <?php } ?>
-    	<td><input type="button" value="Todas"        onclick="location.href='<?= $this->url(array(), 'resources_list') ?>'" /></td>
-        <td><input type="button" value="Notas"        onclick="location.href='<?= $this->url(array('filter' => 'notes'),       'resources_filtered') ?>'" /></td>
-        <td><input type="button" value="Archivos"     onclick="location.href='<?= $this->url(array('filter' => 'files'),       'resources_filtered') ?>'" /></td>
-        <td><input type="button" value="Eventos"      onclick="location.href='<?= $this->url(array('filter' => 'events'),      'resources_filtered') ?>'" /></td>
+    	<td>[<a href="<?= $this->url(array(), 'resources_list') ?>">Todas</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'notes'),       'resources_filtered') ?>">Notas</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'files'),       'resources_filtered') ?>">Archivos</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'events'),      'resources_filtered') ?>">Eventos</a>]</td>
     <?php if (Yeah_Acl::hasPermission('subjects', 'teach')) { ?>
-        <td><input type="button" value="Evaluaciones" onclick="location.href='<?= $this->url(array('filter' => 'evaluations'), 'resources_filtered') ?>'" /></td>
+        <td>[<a href="<?= $this->url(array('filter' => 'evaluations'), 'resources_filtered') ?>">Evaluaciones</a>]</td>
     <?php } ?>
 	</tr>
 </table>
