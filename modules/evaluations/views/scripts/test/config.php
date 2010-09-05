@@ -19,7 +19,7 @@
     <li>
         <b>[<?= $this->utf2html($value->label) ?>]&nbsp;</b><?= $this->utf2html($value->value) ?>
         <?php if ($this->evaluation->author == $USER->ident && count($this->groups) == 0) { ?>
-        	<i><a href="<?= $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $this->test->ident, 'value' => $value->ident), 'evaluations_evaluation_test_value_delete') ?>">[Eliminar]</a></i>
+        	[<i><a href="<?= $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $this->test->ident, 'value' => $value->ident), 'evaluations_evaluation_test_value_delete') ?>">Eliminar</a></i>]
         <?php } ?>
     </li>
 <?php } ?>

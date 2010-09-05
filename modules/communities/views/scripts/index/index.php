@@ -18,7 +18,7 @@
                     <?php } ?>
                     &nbsp;
                     <?php if ($community->amAuthor()) { ?>
-                        [<a href="<?= $this->url(array('community' => $community->url), 'communities_community_edit') ?>"><b><i>Editar</i></b></a>]
+                        <b><i>[<a href="<?= $this->url(array('community' => $community->url), 'communities_community_edit') ?>">Editar</a>]</i></b>
                     <?php } ?>
                     <?php if (Yeah_Acl::hasPermission('communities', 'enter')) { ?>
                         <?php if (!$community->amModerator() && !$community->amMember()) { ?>

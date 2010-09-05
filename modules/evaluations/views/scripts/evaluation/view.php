@@ -1,7 +1,7 @@
 <?php global $USER; ?>
 <h1>Evaluaci&oacute;n: <?= $this->utf2html($this->evaluation->label) ?>
     <?php if ($this->evaluation->author == $USER->ident && count($this->groups) == 0) { ?>
-    <i><a href="<?= $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_edit') ?>">[Editar]</a></i>
+    [<i><a href="<?= $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_edit') ?>">Editar</a></i>]
     <?php } ?>
 </h1>
 
@@ -16,7 +16,7 @@
 
 <h2>Calificaciones previstas
 <?php if ($this->evaluation->author == $USER->ident && count($this->groups) == 0) { ?>
-	<i><a href="<?= $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_test_add') ?>">[Agregar]</a></i>
+	[<i><a href="<?= $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_test_add') ?>">Agregar</a></i>]
 <?php } ?>
 </h2>
 <?php if (count($this->tests)) { ?>
@@ -28,7 +28,7 @@
         	: <?= $test->formula ?>
         <?php } ?>
         <?php if ($this->evaluation->author == $USER->ident && count($this->groups) == 0) { ?>
-        	<i><a href="<?= $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_delete') ?>">[Eliminar]</a></i>
+        	[<i><a href="<?= $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_delete') ?>">Eliminar</a></i>]
         <?php } ?>
     </dt>
     <dd>

@@ -14,9 +14,7 @@
             <?php } ?>
             &nbsp;
             <?php if (Yeah_Acl::hasPermission('users', 'edit')) { ?>
-            <a href="<?= $this->url(array('user' => $user->url), 'users_user_edit') ?>">
-                <b><i>[Editar]</i></b>
-            </a>
+                <b><i>[<a href="<?= $this->url(array('user' => $user->url), 'users_user_edit') ?>">Editar</a>]</i></b>
             <?php } ?>
             <b><i>Fecha de contacto: <?= $this->timestamp($friend->tsregister) ?></i></b>
             <a href="<?= $this->url(array('user' => $user->url), 'friends_delete') ?>">
@@ -35,12 +33,12 @@
                     <td colspan="2"><b>Cargo: </b><?= $user->getRole()->label ?></td>
                     <td colspan="2"><b>Carrera: </b><?= $this->none($user->career) ?></td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td><b>Conocimiento: </b><?= $user->knowledge ?></td>
                     <td><b>Participacion: </b><?= $user->participation ?></td>
                     <td><b>Popularidad: </b><?= $user->popularity ?></td>
                     <td><b>Actividad: </b><?= $user->activity ?></td>
-                </tr>
+                </tr>-->
                 <tr>
                     <td colspan="4">&nbsp;<?= $user->interests ?></td>
                 </tr>

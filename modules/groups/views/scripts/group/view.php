@@ -1,6 +1,6 @@
 <h1>Grupo: <?= $this->utf2html($this->group->label) ?>
     <?php if ($this->subject->amModerator()) { ?>
-        <i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_edit') ?>">[Editar]</a></i>
+        [<i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_edit') ?>">Editar</a></i>]
     <?php } ?>
 </h1>
 <i><b>Materia: </b><?= $this->utf2html($this->subject->label) ?></i>
@@ -15,15 +15,17 @@
 
 <p><?= $this->group->description ?></p>
 
-<i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign') ?>">[Ver miembros]</a></i>
+<?php if ($this->group->amTeacher() || $this->group->amMember()) { ?>
+[<i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign') ?>">Ver miembros</a></i>]
 <br/>
+<?php } ?>
 <?php if ($this->group->amTeacher()) { ?>
-	<i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_manager') ?>">[Calificaciones]</a></i>
+	[<i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_manager') ?>">Calificaciones</a></i>]
 <?php } ?>
 
 <h2>Equipos registrados
 <?php if ($this->group->amTeacher()) { ?>
-    <i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_manager') ?>">[Administrar]</a></i>
+    [<i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_manager') ?>">Administrar</a></i>]
 <?php } ?>
 </h2>
 <?php if (count($this->teams)) { ?>

@@ -132,4 +132,12 @@ class modules_subjects_models_Subjects_Subject extends Yeah_Model_Row_WithUrlAnd
         global $USER;
         return ($this->moderator == $USER->ident);
     }
+
+    public function amMember() {
+        global $DB;
+        global $USER;
+        $select = $DB->select()->from('subject_user')->where('subject = ?' , $this->ident)->where('user = ?', $USER->ident);
+        $result = $DB->fetchRow($select);
+        return ($result <> NULL);
+    }
 }

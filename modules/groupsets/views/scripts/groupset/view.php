@@ -1,7 +1,7 @@
 <?php global $USER; ?>
 <h1>Conjunto: <?= $this->utf2html($this->groupset->label) ?>
     <?php if ($this->groupset->author == $USER->ident) { ?>
-    <i><a href="<?= $this->url(array('groupset' => $this->groupset->ident), 'groupsets_groupset_edit') ?>">[Editar]</a></i>
+    [<i><a href="<?= $this->url(array('groupset' => $this->groupset->ident), 'groupsets_groupset_edit') ?>">Editar</a></i>]
     <?php } ?>
 </h1>
 

@@ -24,9 +24,7 @@
             <?php } ?>
             &nbsp;
             <?php if (Yeah_Acl::hasPermission('subjects', 'edit')) { ?>
-            <a href="<?= $this->url(array('subject' => $subject->url), 'subjects_subject_edit') ?>">
-                <b><i>[Editar]</i></b>
-            </a>
+                <b><i>[<a href="<?= $this->url(array('subject' => $subject->url), 'subjects_subject_edit') ?>">Editar</a>]</i></b>
             <?php } ?>
             <br />
             <i><?= $this->utf2html($subject->description) ?></i>

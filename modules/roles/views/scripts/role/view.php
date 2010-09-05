@@ -1,6 +1,6 @@
 <h1>Rol: <?= $this->utf2html($this->role->label) ?>
     <?php if (Yeah_Acl::hasPermission('roles', 'edit')) { ?>
-    <i><a href="<?= $this->url(array('role' => $this->role->url), 'roles_role_edit') ?>">[Editar]</a></i>
+    [<i><a href="<?= $this->url(array('role' => $this->role->url), 'roles_role_edit') ?>">Editar</a></i>]
     <?php } ?>
 </h1>
 <p>

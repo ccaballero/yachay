@@ -51,9 +51,9 @@
                 </td>
                 <td>
                 <?php if ($this->group->amTeacher()) { ?>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $auxiliar->url), 'groups_group_assign_member_unlock') ?>">[Habilitar]</a>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $auxiliar->url), 'groups_group_assign_member_lock') ?>">[Deshabilitar]</a>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $auxiliar->url), 'groups_group_assign_member_delete') ?>">[Retirar]</a>
+                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $auxiliar->url), 'groups_group_assign_member_unlock') ?>">Habilitar</a>]
+                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $auxiliar->url), 'groups_group_assign_member_lock') ?>">Deshabilitar</a>]
+                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $auxiliar->url), 'groups_group_assign_member_delete') ?>">Retirar</a>]
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
@@ -99,9 +99,9 @@
                 </td>
                 <td>
                 <?php if ($this->group->amTeacher()) { ?>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $student->url), 'groups_group_assign_member_unlock') ?>">[Habilitar]</a>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $student->url), 'groups_group_assign_member_lock') ?>">[Deshabilitar]</a>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $student->url), 'groups_group_assign_member_delete') ?>">[Retirar]</a>
+                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $student->url), 'groups_group_assign_member_unlock') ?>">Habilitar</a>]
+                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $student->url), 'groups_group_assign_member_lock') ?>">Deshabilitar</a>]
+                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $student->url), 'groups_group_assign_member_delete') ?>">Retirar</a>]
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
@@ -147,9 +147,9 @@
                 </td>
                 <td>
                 <?php if ($this->group->amTeacher()) { ?>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $guest->url), 'groups_group_assign_member_unlock') ?>">[Habilitar]</a>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $guest->url), 'groups_group_assign_member_lock') ?>">[Deshabilitar]</a>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $guest->url), 'groups_group_assign_member_delete') ?>">[Retirar]</a>
+                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $guest->url), 'groups_group_assign_member_unlock') ?>">Habilitar</a>]
+                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $guest->url), 'groups_group_assign_member_lock') ?>">Deshabilitar</a>]
+                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $guest->url), 'groups_group_assign_member_delete') ?>">Retirar</a>]
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>

@@ -1,6 +1,6 @@
 <h1>Area: <?= $this->utf2html($this->area->label) ?>
     <?php if (Yeah_Acl::hasPermission('areas', 'edit')) { ?>
-    <i><a href="<?= $this->url(array('area' => $this->area->url), 'areas_area_edit') ?>">[Editar]</a></i>
+    [<i><a href="<?= $this->url(array('area' => $this->area->url), 'areas_area_edit') ?>">Editar</a></i>]
     <?php } ?>
 </h1>
 

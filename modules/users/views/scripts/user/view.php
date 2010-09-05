@@ -1,6 +1,6 @@
 <h1>Usuario: <?= $this->utf2html($this->user->label) ?>
     <?php if (Yeah_Acl::hasPermission('users', 'edit')) { ?>
-    <i><a href="<?= $this->url(array('user' => $this->user->url), 'users_user_edit') ?>">[Editar]</a></i>
+        [<i><a href="<?= $this->url(array('user' => $this->user->url), 'users_user_edit') ?>">Editar</a></i>]
     <?php } ?>
     <?php if (Yeah_Acl::hasPermission('friends', 'contact')) { ?>
         <?php global $USER; ?>

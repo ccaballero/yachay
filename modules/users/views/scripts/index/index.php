@@ -18,9 +18,7 @@
                     <?php } ?>
                     &nbsp;
                     <?php if (Yeah_Acl::hasPermission('users', 'edit')) { ?>
-                    <a href="<?= $this->url(array('user' => $user->url), 'users_user_edit') ?>">
-                        <b><i>[Editar]</i></b>
-                    </a>
+                    <b><i>[<a href="<?= $this->url(array('user' => $user->url), 'users_user_edit') ?>">Editar</a>]</i></b>
                     <?php } ?>
                     <?php if (Yeah_Acl::hasPermission('friends', 'contact')) { ?>
                         <?php global $USER; ?>

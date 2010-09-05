@@ -1,6 +1,6 @@
 <h1>
     <?= $this->utf2html($this->none($this->user->getFullName())) ?>
-    <i><a href="<?= $this->url(array('user' => $this->user->url), 'profile_edit') ?>">[Editar]</a></i>
+    [<i><a href="<?= $this->url(array('user' => $this->user->url), 'profile_edit') ?>">Editar</a></i>]
 </h1>
 
 <hr />
@@ -48,12 +48,12 @@
         <td colspan="2"><b>Telefono: </b><?= $this->none($this->user->phone) ?></td>
         <td colspan="2"><b>Celular: </b><?= $this->none($this->user->cellphone) ?></td>
     </tr>
-    <tr>
+    <!--<tr>
         <td><b>Conocimiento: </b><?= $this->user->knowledge ?></td>
         <td><b>Participacion: </b><?= $this->user->participation ?></td>
         <td><b>Popularidad: </b><?= $this->user->popularity ?></td>
         <td><b>Actividad: </b><?= $this->user->activity ?></td>
-    </tr>
+    </tr>-->
     <tr>
         <td colspan="4"><b>Miembro desde: </b><?= $this->timestamp($this->user->tsregister) ?></td>
     </tr>

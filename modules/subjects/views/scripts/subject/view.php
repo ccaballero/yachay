@@ -1,7 +1,7 @@
 <h1>Materia: <?= $this->utf2html($this->subject->label) ?>
     <?php if (!$this->historial) { ?>
         <?php if (Yeah_Acl::hasPermission('subjects', 'edit')) { ?>
-        <i><a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_edit') ?>">[Editar]</a></i>
+        [<i><a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_edit') ?>">Editar</a></i>]
         <?php } ?>
     <?php } ?>
 </h1>
@@ -16,13 +16,15 @@
 <p><?= $this->subject->description ?></p>
 
 <?php if (!$this->historial) { ?>
-    <i><a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign') ?>">[Ver miembros]</a></i>
+    <?php if ($this->subject->amModerator() || $this->subject->amMember()) { ?>
+        [<i><a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign') ?>">Ver miembros</a></i>]
+    <?php } ?>
 <?php } ?>
 
 <h2>Areas involucradas
     <?php if (!$this->historial) { ?>
         <?php if (Yeah_Acl::hasPermission('areas', array('new', 'delete'))) { ?>
-        <i><a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_edit') ?>">[Administrar]</a></i>
+        [<i><a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_edit') ?>">Administrar</a></i>]
         <?php } ?>
     <?php } ?>
 </h2>
@@ -41,7 +43,7 @@
 <?php if (!$this->historial) { ?>
     <h2>Grupos registrados
     <?php if ($this->subject->amModerator()) { ?>
-        <i><a href="<?= $this->url(array('subject' => $this->subject->url), 'groups_manager') ?>">[Administrar]</a></i>
+        [<i><a href="<?= $this->url(array('subject' => $this->subject->url), 'groups_manager') ?>">Administrar</a></i>]
     <?php } ?>
     </h2>
     <?php if (count($this->groups)) { ?>

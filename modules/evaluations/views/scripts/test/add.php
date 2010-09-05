@@ -60,7 +60,7 @@
         	: <?= $test->formula ?>
         <?php } ?>
         <?php if ($this->evaluation->author == $USER->ident && count($this->groups) == 0) { ?>
-        	<i><a href="<?= $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_delete') ?>">[Eliminar]</a></i>
+        	[<i><a href="<?= $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_delete') ?>">Eliminar</a></i>]
         <?php } ?>
     </dt>
     <dd>

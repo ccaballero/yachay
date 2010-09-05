@@ -1,6 +1,6 @@
 <h1>Equipo: <?= $this->utf2html($this->team->label) ?>
     <?php if ($this->team->amMemberTeam()) { ?>
-        <i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $this->team->url), 'teams_team_edit') ?>">[Editar]</a></i>
+        [<i><a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $this->team->url), 'teams_team_edit') ?>">Editar</a></i>]
     <?php } ?>
 </h1>
 <i><b>Grupo: </b><?= $this->utf2html($this->group->label) ?></i>
@@ -27,7 +27,7 @@
             <?php } ?>
             &nbsp;
             <?php if ($this->team->amMemberTeam()) { ?>
-            	<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $this->team->url, 'user' => $member->url), 'teams_team_member_delete') ?>">[Retirar]</a>
+            	[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $this->team->url, 'user' => $member->url), 'teams_team_member_delete') ?>">Retirar</a>]
             <?php } ?>
             </td>
         </tr>

@@ -13,9 +13,7 @@
             <?php } ?>
             &nbsp;
             <?php if (Yeah_Acl::hasPermission('roles', 'edit')) { ?>
-            <a href="<?= $this->url(array('role' => $role->url), 'roles_role_edit') ?>">
-                <b><i>[Editar]</i></b>
-            </a>
+                <b><i>[<a href="<?= $this->url(array('role' => $role->url), 'roles_role_edit') ?>">Editar</a>]</i></b>
             <?php } ?>
             <br />
             <i><?= $this->utf2html($role->description) ?></i>

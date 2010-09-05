@@ -1,13 +1,13 @@
 <?php if ($this->note->priority) { ?>
 	<h1>Aviso
 <?php if ($this->resource->amAuthor()) { ?>
-	<i><a href="<?= $this->url(array('note' => $this->resource->ident), 'notes_note_edit') ?>">[Editar]</a></i>
+	[<i><a href="<?= $this->url(array('note' => $this->resource->ident), 'notes_note_edit') ?>">Editar</a></i>]
 <?php } ?>
     </h1>
 <?php } else {?>
 	<h1>Nota
 <?php if ($this->resource->amAuthor()) { ?>
-	<i><a href="<?= $this->url(array('note' => $this->resource->ident), 'notes_note_edit') ?>">[Editar]</a></i>
+	[<i><a href="<?= $this->url(array('note' => $this->resource->ident), 'notes_note_edit') ?>">Editar</a></i>]
 <?php } ?>
 	</h1>
 <?php } ?>
@@ -15,7 +15,13 @@
 <table>
     <tr>
         <td rowspan="2" width="50px">
+        <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
+            <a href="<?= $this->url(array('user' => $this->resource->getAuthor()->url), 'users_user_view') ?>">
+                <img src="<?= $this->media . '../users/thumbnail_small/' . $this->resource->getAuthor()->getAvatar() ?>" />
+            </a>
+        <?php } else { ?>
             <img src="<?= $this->media . '../users/thumbnail_small/' . $this->resource->getAuthor()->getAvatar() ?>" />
+        <?php } ?>
         </td>
         <td>
             <b>Autor: </b>

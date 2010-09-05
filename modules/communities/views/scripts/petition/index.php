@@ -38,8 +38,8 @@
                 <td>Fecha de solicitud: <?= $this->timestamp($assign->tsregister) ?></td>
                 <td width="240px">
                 <?php if ($this->community->amModerator()) { ?>
-                    <a href="<?= $this->url(array('community' => $this->community->url, 'user' => $applicant->url), 'communities_community_petition_applicant_accept') ?>">[Aceptar]</a>
-                    <a href="<?= $this->url(array('community' => $this->community->url, 'user' => $applicant->url), 'communities_community_petition_applicant_decline') ?>">[Denegar]</a>
+                    [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $applicant->url), 'communities_community_petition_applicant_accept') ?>">Aceptar</a>]
+                    [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $applicant->url), 'communities_community_petition_applicant_decline') ?>">Denegar</a>]
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>

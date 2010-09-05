@@ -3,10 +3,10 @@
     <a href="http://ajayu.memi.umss.edu.bo" target="_BLANK">Comunidad&nbsp;Ajayu</a>
     </td></tr>
     <tr><td>
-    <a href="http://memi.umss.edu.bo" target="_BLANK">Programa&nbsp;MEMI</a>
+    <a href="http://www.memi.umss.edu.bo" target="_BLANK">Programa&nbsp;MEMI</a>
     </td></tr>
     <tr><td>
-    <a href="http://fcyt.umss.edu.bo" target="_BLANK">FCyT</a>
+    <a href="http://www.fcyt.umss.edu.bo" target="_BLANK">FCyT</a>
     </td></tr>
     <tr><td>
     <a href="http://www.cs.umss.edu.bo" target="_BLANK">Informatica&nbsp;y&nbsp;Sistemas</a>

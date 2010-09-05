@@ -109,4 +109,12 @@ class modules_groups_models_Groups_Group extends Yeah_Model_Row_WithUrlAndTsRegi
         global $USER;
         return ($this->teacher == $USER->ident);
     }
+
+    public function amMember() {
+        global $DB;
+        global $USER;
+        $select = $DB->select()->from('group_user')->where('`group` = ?' , $this->ident)->where('user = ?', $USER->ident);
+        $result = $DB->fetchRow($select);
+        return ($result <> NULL);
+    }
 }
