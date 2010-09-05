@@ -84,10 +84,36 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Wi
         return $obj;
     }
 
+    public function getPetition($user) {
+        global $DB;
+        $select = $DB->select()->from('community_petition')->where('community = ?' , $this->ident)->where('user = ?', $user->ident);
+        $result = $DB->fetchRow($select);
+
+        $obj = new stdClass;
+        $obj->tsregister =  $result['tsregister'];
+
+        return $obj;
+    }
+
     public function amModerator() {
         global $USER;
 
         $communities_user_model = Yeah_Adapter::getModel('communities', 'Communities_Users');
-        return ($communities_user_model->findByCommunityAndUser($this->ident, $USER->ident) <> NULL);
+        $user = $communities_user_model->findByCommunityAndUser($this->ident, $USER->ident);
+        if ($user == NULL) {
+            return FALSE;
+        }
+        return $user->type == 'moderator';
+    }
+
+    public function amMember() {
+        global $USER;
+
+        $communities_user_model = Yeah_Adapter::getModel('communities', 'Communities_Users');
+        $user = $communities_user_model->findByCommunityAndUser($this->ident, $USER->ident);
+        if ($user == NULL) {
+            return FALSE;
+        }
+        return $user->type == 'member';
     }
 }

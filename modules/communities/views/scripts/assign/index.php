@@ -1,10 +1,16 @@
+<?php global $USER; ?>
+
 <h1>Miembros: <?= $this->utf2html($this->community->label) ?></h1>
 
 <form method="post" action="">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>
-        <?php if ($this->community->amModerator()) { ?>
+            <?php if ($this->community->amAuthor()) { ?>
+                <td><input type="submit" value="Convertir en moderador" name="moderate" /></td>
+                <td><input type="submit" value="Convertir en miembro" name="unmoderate" /></td>
+            <?php } ?>
+            <?php if ($this->community->amModerator()) { ?>
             <td><input type="submit" value="Habilitar" name="unlock" /></td>
             <td><input type="submit" value="Deshabilitar" name="lock" /></td>
             <td><input type="submit" value="Retirar" name="delete" /></td>
@@ -20,7 +26,7 @@
         <table width="100%">
             <tr>
                 <td rowspan="2" width="18px">
-                <?php if ($this->community->amModerator()) { ?>
+                <?php if ($this->community->amModerator() && $moderator->ident <> $this->community->author && $moderator->ident <> $USER->ident) { ?>
                     <input type="checkbox" name="members[]" value="<?= $moderator->ident ?>" />
                 <?php } else { ?>
                     &nbsp;
@@ -39,14 +45,10 @@
             <tr>
                 <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
                 <td width="80px">
-                <?php if ($this->community->amModerator()) { ?>
                     <?= $this->enable($assign->status) ?>
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
                 </td>
                 <td width="240px">
-                <?php if ($this->community->amModerator() && $this->community->author <> $moderator->ident) { ?>
+                <?php if ($this->community->amModerator() && $this->community->author <> $moderator->ident && $moderator->ident <> $USER->ident) { ?>
                     <a href="<?= $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_unlock') ?>">[Habilitar]</a>
                     <a href="<?= $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_lock') ?>">[Deshabilitar]</a>
                     <a href="<?= $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_delete') ?>">[Retirar]</a>
@@ -69,7 +71,9 @@
             <tr>
                 <td rowspan="2" width="18px">
                 <?php if ($this->community->amModerator()) { ?>
+                    <?php if ($member->ident <> $this->community->author && $member->ident <> $USER->ident ) { ?>
                     <input type="checkbox" name="members[]" value="<?= $member->ident ?>" />
+                    <?php } ?>
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
@@ -87,14 +91,10 @@
             <tr>
                 <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
                 <td width="80px">
-                <?php if ($this->community->amModerator()) { ?>
                     <?= $this->enable($assign->status) ?>
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
                 </td>
                 <td width="240px">
-                <?php if ($this->community->amModerator() && $this->community->author <> $moderator->ident) { ?>
+                <?php if ($this->community->amModerator() && $this->community->author <> $member->ident && $member->ident <> $USER->ident) { ?>
                     <a href="<?= $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_unlock') ?>">[Habilitar]</a>
                     <a href="<?= $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_lock') ?>">[Deshabilitar]</a>
                     <a href="<?= $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_delete') ?>">[Retirar]</a>
@@ -112,6 +112,10 @@
     <hr />
     <table>
         <tr>
+        <?php if ($this->community->amAuthor()) { ?>
+            <td><input type="submit" value="Convertir en moderador" name="moderate" /></td>
+            <td><input type="submit" value="Convertir en miembro" name="unmoderate" /></td>
+        <?php } ?>
         <?php if ($this->community->amModerator()) { ?>
             <td><input type="submit" value="Habilitar" name="unlock" /></td>
             <td><input type="submit" value="Deshabilitar" name="lock" /></td>

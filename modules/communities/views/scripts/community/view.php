@@ -4,11 +4,18 @@
         <b><i>[Editar]</i></b>
     </a>
     <?php } ?>
+    <?php if (Yeah_Acl::hasPermission('communities', 'enter')) { ?>
+        <?php if (!$this->community->amModerator() && !$this->community->amMember()) { ?>
+            [<a href="<?= $this->url(array('community' => $this->community->url), 'communities_community_join') ?>">Unirse</a>]
+        <?php } else if (!$this->community->amAuthor()) { ?>
+            [<a href="<?= $this->url(array('community' => $this->community->url), 'communities_community_leave') ?>">Retirarse</a>]
+        <?php } ?>
+    <?php } ?>
 </h1>
 
 <table width="100%">
     <tr valign="top">
-        <td rowspan="6" width="200px">
+        <td rowspan="7" width="200px">
             <img src="<?= $this->media . 'thumbnail_large/' . $this->community->getAvatar() ?>" />
         </td>
         <td><b>Descripci&oacute;n: </b></td>
@@ -34,6 +41,16 @@
             <?php } ?>
         </td>
     </tr>
+<?php if ($this->community->mode == 'close') { ?>
+    <tr valign="top">
+        <td>
+            <b>Peticiones: </b><?= $this->community->petitions ?>
+            <?php if ($this->community->amModerator()) { ?>
+            <i><a href="<?= $this->url(array('community' => $this->community->url), 'communities_community_petition') ?>">[Ver peticiones]</a></i>
+            <?php } ?>
+        </td>
+    </tr>
+<?php } ?>
 </table>
 
 <?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route)) ?>

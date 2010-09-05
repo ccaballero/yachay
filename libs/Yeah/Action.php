@@ -83,6 +83,13 @@ abstract class Yeah_Action extends Zend_Controller_Action
         }
     }
 
+    public function requireCommunityModerator($community) {
+        global $USER;
+        if (!$community->amModerator()) {
+            $this->_redirect($this->view->url(array('community' => $community->url), 'communities_community_view'));
+        }
+    }
+
     public function preDispatch() {
         global $CONFIG;
         $this->getRequest()->setBaseUrl($CONFIG->wwwroot);

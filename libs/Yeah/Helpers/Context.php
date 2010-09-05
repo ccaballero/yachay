@@ -174,7 +174,7 @@ class Yeah_Helpers_Context
         $communities2 = array();
         foreach ($communities1 as $community) {
             $assign = $assignement4->findByCommunityAndUser($community->ident, $USER->ident);
-            if (!empty($assign)) {
+            if (!empty($assign) && $assign->status <> 'inactive') {
                 $communities2[] = $community;
             }
         }

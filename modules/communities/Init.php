@@ -42,6 +42,36 @@ class modules_communities_Init extends Yeah_Init
                                                         'controller' => 'assign',
                                                         'action'     => 'index',
                                                     )),
+        'communities_community_petition_applicant_accept' => array('communities/:community/petition/:user/accept',
+                                                    array(
+                                                        'module'     => 'communities',
+                                                        'controller' => 'applicant',
+                                                        'action'     => 'accept',
+                                                    )),
+        'communities_community_petition_applicant_decline' => array('communities/:community/petition/:user/decline',
+                                                    array(
+                                                        'module'     => 'communities',
+                                                        'controller' => 'applicant',
+                                                        'action'     => 'decline',
+                                                    )),
+        'communities_community_petition'         => array('communities/:community/petition',
+                                                    array(
+                                                        'module'     => 'communities',
+                                                        'controller' => 'petition',
+                                                        'action'     => 'index',
+                                                    )),
+        'communities_community_join'             => array('communities/:community/join',
+        											array(
+        											    'module'     => 'communities',
+        											    'controller' => 'assign',
+        											    'action'     => 'join',
+        											)),
+        'communities_community_leave'            => array('communities/:community/leave',
+        											array(
+        											    'module'     => 'communities',
+        											    'controller' => 'assign',
+        											    'action'     => 'leave',
+        											)),
         'communities_community_view'             => array('communities/:community',
                                                     array(
                                                         'module'     => 'communities',

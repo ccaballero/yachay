@@ -3,12 +3,12 @@
 <?php if (count($this->communities)) { ?>
     <center><?= $this->paginator($this->communities, $this->route) ?></center>
     <?php foreach ($this->communities as $community) { ?>
-        <table>
+        <table width="100%">
             <tr>
                 <td rowspan="5" width="100px">
                     <img src="<?= $this->media . 'thumbnail_medium/' . $community->getAvatar() ?>" />
                 </td>
-                <td colspan="4">
+                <td colspan="2">
                     <?php if (Yeah_Acl::hasPermission('communities', 'view')) { ?>
                     <a href="<?= $this->url(array('community' => $community->url), 'communities_community_view') ?>">
                         <b><?= $this->utf2html($community->label) ?></b>
@@ -18,20 +18,26 @@
                     <?php } ?>
                     &nbsp;
                     <?php if ($community->amAuthor()) { ?>
-                    <a href="<?= $this->url(array('community' => $community->url), 'communities_community_edit') ?>">
-                        <b><i>[Editar]</i></b>
-                    </a>
+                        [<a href="<?= $this->url(array('community' => $community->url), 'communities_community_edit') ?>"><b><i>Editar</i></b></a>]
+                    <?php } ?>
+                    <?php if (Yeah_Acl::hasPermission('communities', 'enter')) { ?>
+                        <?php if (!$community->amModerator() && !$community->amMember()) { ?>
+                            [<a href="<?= $this->url(array('community' => $community->url), 'communities_community_join') ?>">Unirse</a>]
+                        <?php } else if (!$community->amAuthor()) { ?>
+                            [<a href="<?= $this->url(array('community' => $community->url), 'communities_community_leave') ?>">Retirarse</a>]
+                        <?php } ?>
                     <?php } ?>
                 </td>
             </tr>
             <tr>
-                <td colspan="4"><b>Descripci&oacute;n: </b><?= $this->utf2html($community->description) ?></td>
+                <td colspan="2"><b>Descripci&oacute;n: </b><?= $this->utf2html($community->description) ?></td>
             </tr>
             <tr>
-                <td colspan="4"><b>Intereses: </b><?= $this->utf2html($community->interests) ?></td>
+                <td colspan="2"><b>Intereses: </b><?= $this->utf2html($community->interests) ?></td>
             </tr>
             <tr>
-                <td colspan="4"><b>Miembros: </b><?= $this->utf2html($community->members) ?></td>
+                <td width="300px"><b>Modalidad: </b><?= $this->mode(NULL, $community->mode) ?></td>
+                <td><b>Miembros: </b><?= $this->utf2html($community->members) ?></td>
             </tr>
         </table>
     <?php } ?>

@@ -11,6 +11,7 @@ CREATE TABLE `community` (
     `url`               varchar(64)                                                 NOT NULL,
     `mode`              enum('open', 'close')                                       NOT NULL DEFAULT 'open',
     `members`           int unsigned                                                NOT NULL DEFAULT 1,
+    `petitions`         int unsigned                                                NOT NULL DEFAULT 0,
     `description`       text                                                        NOT NULL DEFAULT '',
     `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,
     `interests`         text                                                        NOT NULL DEFAULT '',
@@ -79,7 +80,7 @@ VALUES
 ('Vista de una comunidad',           '',                 FALSE,         'communities',      'community',   'view',             '',                      'communities_community_view'),
 ('Edicion de una comunidad',         '',                 FALSE,         'communities',      'community',   'edit',             '',                      'communities_community_edit'),
 ('Miembros de una comunidad',        '',                 FALSE,         'communities',      'assign',      'index',            '',                      'communities_community_assign'),
-('Peticiones de una comunidad',      '',                 FALSE,         'communities',      'assign',      'petition',         '',                      'communities_community_assign_petitions');
+('Peticiones de una comunidad',      '',                 FALSE,         'communities',      'petition',    'index',            '',                      'communities_community_petition');
 
 /*====================================================================================================================*/
 /* Registro de privilegios para el modulo                                                                             */
