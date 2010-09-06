@@ -15,4 +15,11 @@ class modules_groupsets_models_Groupsets_Groups extends Zend_Db_Table_Abstract
             'refColumns'        => array('ident'),
         ),
     );
+
+    public function selectByGroupset($groupset) {
+        global $DB;
+        $select = $DB->select()->from('groupset_group')->where('groupset = ?' , $groupset);
+        $result = $DB->fetchAll($select);
+        return $result;
+    }
 }

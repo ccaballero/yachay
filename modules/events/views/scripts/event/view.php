@@ -4,9 +4,9 @@
 <?php } ?>
 </h1>
 
-<table>
+<table width="100%">
     <tr>
-        <td rowspan="3" width="50px" valign="top">
+        <td rowspan="4" width="50px" valign="top">
         <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
             <a href="<?= $this->url(array('user' => $this->resource->getAuthor()->url), 'users_user_view') ?>">
                 <img src="<?= $this->media . '../users/thumbnail_small/' . $this->resource->getAuthor()->getAvatar() ?>" />
@@ -24,6 +24,11 @@
                 <?= $this->resource->getAuthor()->label ?>
             <?php } ?>
             </i>
+        </td>
+    </tr>
+    <tr valign="top">
+        <td>
+            <b>Publicado en: </b><i><?= $this->recipient($this->resource->recipient) ?></i>
         </td>
     </tr>
     <tr valign="top">

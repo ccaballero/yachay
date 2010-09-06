@@ -23,36 +23,47 @@ class Files_ManagerController extends Yeah_Action
             $upload->setDestination($CONFIG->dirroot . 'media/upload');
             $upload->addValidator('Size', false, 2097152);
              
-            if ($upload->receive()) {
-                $filename = $upload->getFileName('file');
-                $extension = strtolower(substr($filename, -3));
-                $file = $files_model->createRow();
-                $file->filename = basename($filename);
-                $file->mime = mime_content_type($filename);
-                $file->size = filesize($filename);
-                $file->description = $request->getParam('description');
-                
-                if ($file->isValid()) {
-                    $resource = $resources_model->createRow();
-                    $resource->author = $USER->ident;
-                    $resource->tsregister = time();
-                    $resource->save();
+            $publish = $request->getParam('publish');
 
-                    $file->resource = $resource->ident;
-                    $file->save();
+            $context = new Yeah_Helpers_Context();
+            $spaces_valids = $context->context(NULL, TRUE);
 
-                    rename($CONFIG->dirroot . 'media/upload/' . $file->filename, $CONFIG->dirroot . 'media/files/' . $file->resource);
+            if (in_array($publish, $spaces_valids)) {
+                if ($upload->receive()) {
+                    $filename = $upload->getFileName('file');
+                    $extension = strtolower(substr($filename, -3));
 
-                    $resource->saveContext($request);
+                    $file = $files_model->createRow();
+                    $file->filename = basename($filename);
+                    $file->mime = mime_content_type($filename);
+                    $file->size = filesize($filename);
+                    $file->description = $request->getParam('description');
 
-                    $session->messages->addMessage('El archivo fue cargado exitosamente');
-                    $session->url = $file->resource;
-                    $this->_redirect($request->getParam('return'));
-                } else {
-                    foreach ($note->getMessages() as $message) {
-                        $session->messages->addMessage($message);
+                    if ($file->isValid()) {
+                        $resource = $resources_model->createRow();
+                        $resource->author = $USER->ident;
+                        $resource->recipient = $request->getParam('publish');
+                        $resource->tsregister = time();
+                        $resource->save();
+
+                        $file->resource = $resource->ident;
+                        $file->save();
+
+                        rename($CONFIG->dirroot . 'media/upload/' . $file->filename, $CONFIG->dirroot . 'media/files/' . $file->resource);
+
+                        $resource->saveContext($request);
+
+                        $session->messages->addMessage('El archivo fue cargado exitosamente');
+                        $session->url = $file->resource;
+                        $this->_redirect($request->getParam('return'));
+                    } else {
+                        foreach ($note->getMessages() as $message) {
+                            $session->messages->addMessage($message);
+                        }
                     }
                 }
+            } else {
+                $session->messages->addMessage("Usted no tiene privilegios para publicar en ese espacio");
             }
         }
 

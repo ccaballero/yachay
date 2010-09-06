@@ -12,6 +12,6 @@ class modules_resources_models_Resources_Globales extends Zend_Db_Table_Abstract
     );
 
     public function selectAll() {
-        return $this->fetchAll($this->select()->order('tsregister DESC'));
+        return $this->fetchAll($this->select());
     }
 }

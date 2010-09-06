@@ -25,13 +25,19 @@ class Files_FileController extends Yeah_Action
     }
 
     public function editAction() {
-        $this->requirePermission('resources', 'view');
+        $this->requirePermission('resources', 'edit');
         $request = $this->getRequest();
 
-        $file_url = $request->getParam('file');
+        $file_ident = $request->getParam('file');
+
+        $resources_model = Yeah_Adapter::getModel('resources');
         $files_model = Yeah_Adapter::getModel('files');
-        $file = $files_model->findByResource($file_url);
+
+        $resource = $resources_model->findByIdent($file_ident);
+        $file = $files_model->findByResource($file_ident);
+
         $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+        $this->requireResourceAuthor($resource);
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -79,5 +85,32 @@ class Files_FileController extends Yeah_Action
         flush();
         readfile($CONFIG->dirroot . '/media/files/' . $file->resource);
         exit;
+    }
+
+    public function deleteAction() {
+        global $CONFIG;
+
+        $this->requirePermission('resources', 'delete');
+        $request = $this->getRequest();
+
+        $file_ident = $request->getParam('file');
+
+        $resources_model = Yeah_Adapter::getModel('resources');
+        $files_model = Yeah_Adapter::getModel('files');
+
+        $resource = $resources_model->findByIdent($file_ident);
+        $file = $files_model->findByResource($file_ident);
+
+        $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+        $this->requireResourceAuthor($resource);
+
+        unlink($CONFIG->dirroot . '/media/files/' . $file->resource);
+
+        $file->delete();
+        $resource->delete();
+
+        $session = new Zend_Session_Namespace();
+        $session->messages->addMessage("El archivo ha sido eliminado");
+        $this->_redirect($this->view->currentPage());
     }
 }

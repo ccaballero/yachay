@@ -1,8 +1,5 @@
 <table>
     <tr><td>
-    <a href="http://ajayu.memi.umss.edu.bo" target="_BLANK">Comunidad&nbsp;Ajayu</a>
-    </td></tr>
-    <tr><td>
     <a href="http://www.memi.umss.edu.bo" target="_BLANK">Programa&nbsp;MEMI</a>
     </td></tr>
     <tr><td>

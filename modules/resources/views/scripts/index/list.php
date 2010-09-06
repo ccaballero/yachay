@@ -26,7 +26,7 @@
 		<tr>
 			<td rowspan="3" valign="top" width="50px"><img src="<?= $CONFIG->wwwroot . 'media/users/thumbnail_small/' . $resource->getAuthor()->getAvatar() ?>" /></td>
 			<td><?= $this->utf2html($resource->getAuthor()->getFullName()) ?></td>
-			<td><?= $this->timestamp($resource->tsregister) ?></td>
+            <td align="right"><?= $this->timestamp($resource->tsregister) ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -35,9 +35,18 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">
-				<a href="<?= $this->url(array($extended->__type => $resource->ident), $extended->__element . '_' . $extended->__type . '_view') ?>">[Ver mas]</a>
+			<td>
+				[<a href="<?= $this->url(array($extended->__type => $resource->ident), $extended->__element . '_' . $extended->__type . '_view') ?>">Ver mas</a>]
+            <?php if ($resource->amAuthor()) { ?>
+				[<a href="<?= $this->url(array($extended->__type => $resource->ident), $extended->__element . '_' . $extended->__type . '_edit') ?>">Editar</a>]
+				[<a href="<?= $this->url(array($extended->__type => $resource->ident), $extended->__element . '_' . $extended->__type . '_delete') ?>">Eliminar</a>]
+            <?php } ?>
 			</td>
+            <td align="right">
+            <?php if (isset($resource->recipient)) { ?>
+                <?= $this->recipient($resource->recipient) ?>
+            <?php } ?>
+            </td>
 		</tr>
 	</table>
 	<br />

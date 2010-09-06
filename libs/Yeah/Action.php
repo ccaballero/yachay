@@ -90,6 +90,13 @@ abstract class Yeah_Action extends Zend_Controller_Action
         }
     }
 
+    public function requireResourceAuthor($resource) {
+        global $USER;
+        if (!$resource->amAuthor()) {
+            $this->_redirect($this->view->url(array(), 'frontpage_user'));
+        }
+    }
+
     public function preDispatch() {
         global $CONFIG;
         $this->getRequest()->setBaseUrl($CONFIG->wwwroot);

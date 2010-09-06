@@ -27,6 +27,8 @@ class IndexController extends Yeah_Action
                 $resources[] = $model_resources->findByIdent($resource_global->resource);
             }
 
+            $resources = array_reverse($resources);
+
             // PAGINATOR
             $request = $this->getRequest();
             $page = $request->getParam('page', 1);
@@ -225,23 +227,6 @@ class IndexController extends Yeah_Action
                 }
             }
 
-/*
-            if ($this->modules->findByLabel('invitations')->status == 'active') {
-                if (Yeah_Acl::hasPermission('invitations', 'new') || Yeah_Acl::hasPermission('invitations', 'delete')) { ?>
-            <a href="<?= $this->url(array(), 'invitations_manager') ?>"><img src="<?= $this->media . 'invitations.png' ?>" alt="[Gestion de invitaciones]" /></a>
-        <?php } else { ?>
-            <?php if (Yeah_Acl::hasPermission('invitations', 'list')) { ?>
-                <a href="<?= $this->url(array(), 'invitations_list') ?>"><img src="<?= $this->media . 'invitations.png' ?>" alt="[Lista de invitaciones]" /></a>
-            <?php } ?>
-        <?php } ?>
-    <?php } ?>
-
-    <?php if ($this->modules->findByLabel('search')->status == 'active') { ?>
-        <?php if (Yeah_Acl::hasPermission('search', 'list')) { ?>
-            <a href="<?= $this->url(array(), 'search_list') ?>"><img src="<?= $this->media . 'search.png' ?>" alt="[Busqueda]" /></a>
-        <?php } ?>
-    <?php } ?>*/
-
             $model_resources_globales = Yeah_Adapter::getModel('resources', 'Resources_Globales');
             $resources_globales = $model_resources_globales->selectAll();
             $model_resources = Yeah_Adapter::getModel('resources');
@@ -250,6 +235,8 @@ class IndexController extends Yeah_Action
             foreach($resources_globales as $resource_global) {
                 $resources[] = $model_resources->findByIdent($resource_global->resource);
             }
+
+            $resources = array_reverse($resources);
 
             // PAGINATOR     
             $request = $this->getRequest();

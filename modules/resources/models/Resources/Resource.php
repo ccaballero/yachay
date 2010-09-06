@@ -34,14 +34,13 @@ class modules_resources_models_Resources_Resource extends Yeah_Model_Row_WithTsR
 
     public function saveContext ($request) {
         $publish = $request->getParam('publish');
-        list($element, $ident) = split('-', $publish);
+        list($element, $ident) = @split('-', $publish);
 
         switch ($element) {
             case 'global':
                 $global_resource_model = Yeah_Adapter::getModel('resources', 'Resources_Globales');
                 $global_resource = $global_resource_model->createRow();
                 $global_resource->resource = $this->ident;
-                $global_resource->tsregister = time();
                 $global_resource->save();
                 break;
             case 'area':
@@ -98,5 +97,18 @@ class modules_resources_models_Resources_Resource extends Yeah_Model_Row_WithTsR
                 $user_resource->save();
                 break;
         }
+    }
+
+    public function delete() {
+        // FIXME ??
+        global $DB;
+        $DB->delete('resource_global', '`resource` = ' . $this->ident);
+        $DB->delete('area_resource', '`resource` = ' . $this->ident);
+        $DB->delete('subject_resource', '`resource` = ' . $this->ident);
+        $DB->delete('group_resource', '`resource` = ' . $this->ident);
+        $DB->delete('team_resource', '`resource` = ' . $this->ident);
+        $DB->delete('community_resource', '`resource` = ' . $this->ident);
+        $DB->delete('user_resource', '`resource` = ' . $this->ident);
+        parent::delete();
     }
 }

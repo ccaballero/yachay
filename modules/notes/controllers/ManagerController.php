@@ -20,6 +20,7 @@ class Notes_ManagerController extends Yeah_Action
 
             $note = $notes_model->createRow();
             $note->note = $request->getParam('message');
+            $publish = $request->getParam('publish');
             $priority = $request->getParam('priority');
             if (empty($priority)) {
                 $note->priority = false;
@@ -27,24 +28,32 @@ class Notes_ManagerController extends Yeah_Action
                 $note->priority = true;
             }
 
-            if ($note->isValid()) {
-                $resource = $resources_model->createRow();
-                $resource->author = $USER->ident;
-                $resource->tsregister = time();
-                $resource->save();
+            $context = new Yeah_Helpers_Context();
+            $spaces_valids = $context->context(NULL, TRUE);
 
-                $note->resource = $resource->ident;
-                $note->save();
+            if (in_array($publish, $spaces_valids)) {
+                if ($note->isValid()) {
+                    $resource = $resources_model->createRow();
+                    $resource->author = $USER->ident;
+                    $resource->recipient = $publish;
+                    $resource->tsregister = time();
+                    $resource->save();
 
-                $resource->saveContext($request);
+                    $note->resource = $resource->ident;
+                    $note->save();
 
-                $session->messages->addMessage('La nota ha sido creada');
-                $session->url = $note->resource;
-                $this->_redirect($request->getParam('return'));
-            } else {
-                foreach ($note->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $resource->saveContext($request);
+
+                    $session->messages->addMessage('La nota ha sido creada');
+                    $session->url = $note->resource;
+                    $this->_redirect($request->getParam('return'));
+                } else {
+                    foreach ($note->getMessages() as $message) {
+                        $session->messages->addMessage($message);
+                    }
                 }
+            } else {
+                $session->messages->addMessage("Usted no tiene privilegios para publicar en ese espacio");
             }
         }
 

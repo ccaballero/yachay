@@ -87,7 +87,7 @@
         foreach($footer->items as $item) {
             $foot[] = '[<a href="' . $item['link'] . '">' . $item['label'] . '</a>]';
         }
-        return '<center>' . implode('&nbsp;', $foot) . '<br/>' . $footer->copyright . '</center>';
+        return '<center>' . implode('&nbsp;', $foot) . (count($foot) == 0 ? '':'<br />') . $footer->copyright . '</center>';
     }
 
     function renderWidget($widget) {

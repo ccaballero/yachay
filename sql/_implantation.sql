@@ -249,37 +249,37 @@ VALUES
 (2,      19,     UNIX_TIMESTAMP());
 
 INSERT INTO `resource`
-(`author`, `tsregister`)
+(`author`, `recipient`,    `tsregister`)
 VALUES
-( 1, 1249974159),	     /* NOTE   1 AVISE */
-( 2, 1249974160),	     /* NOTE   2 */
-( 2, 1249974161),		 /* EVENT  3 */
-( 3, 1249974162),		 /* FILE   4 */
-( 4, 1249974163),		 /* NOTE   5 AVISE */
-( 4, 1249974164),		 /* NOTE   6 */
-( 8, 1249974165),		 /* FILE   7 */
-(10, 1249974166),	     /* NOTE   8 */
-(11, 1249974167),		 /* NOTE   9 AVISE */
-(11, 1249974168),		 /* FILE  10 */
-(11, 1249974169),		 /* EVENT 11 */
-(14, 1249974170),	     /* NOTE  12 */
-(15, 1249974171),		 /* NOTE  13 */
-(16, 1249974172),	     /* NOTE  14 AVISE */
-(16, 1249974173),		 /* EVENT 15 */
-(17, 1249974174),		 /* FILE  16 */
-(18, 1249974175),		 /* EVENT 17 */
-(19, 1249974176),	     /* NOTE  18 */
-(20, 1249974177),		 /* EVENT 19 */
-(21, 1249974178),		 /* NOTE  20 */
-(21, 1249974179),		 /* NOTE  21 */
-(22, 1249974180),	     /* NOTE  22 */
-(23, 1249974181),		 /* NOTE  23 */
-(24, 1249974182),	     /* NOTE  24 */
-(24, 1249974183),		 /* EVENT 25 */
-(25, 1249974184),		 /* FILE  26 */
-(26, 1249974185),	     /* NOTE  27 */
-(15, 1249974186),		 /* NOTE  28 */
-(23, 1249974187);		 /* EVENT 29 */
+( 1,       'global',       1249974159),	     /* NOTE   1 AVISE */
+( 2,       'area-1',       1249974160),	     /* NOTE   2 */
+( 2,       'subject-8',    1249974161),		 /* EVENT  3 */
+( 3,       'subject-11',   1249974162),		 /* FILE   4 */
+( 4,       'group-12',     1249974163),		 /* NOTE   5 AVISE */
+( 4,       'group-12',     1249974164),		 /* NOTE   6 */
+( 8,       'group-16',     1249974165),		 /* FILE   7 */
+(10,       'subject-7',    1249974166),	     /* NOTE   8 */
+(11,       'global',       1249974167),		 /* NOTE   9 AVISE */
+(11,       'global',       1249974168),		 /* FILE  10 */
+(11,       'global',       1249974169),		 /* EVENT 11 */
+(14,       'subject-12',   1249974170),	     /* NOTE  12 */
+(15,       'global',       1249974171),		 /* NOTE  13 */
+(16,       'subject-7',    1249974172),	     /* NOTE  14 AVISE */
+(16,       'subject-11',   1249974173),		 /* EVENT 15 */
+(17,       'global',       1249974174),		 /* FILE  16 */
+(18,       'team-1',       1249974175),		 /* EVENT 17 */
+(19,       'team-2',       1249974176),	     /* NOTE  18 */
+(20,       'global',       1249974177),		 /* EVENT 19 */
+(21,       'user-22',      1249974178),		 /* NOTE  20 */
+(21,       'user-23',      1249974179),		 /* NOTE  21 */
+(22,       'user-21',      1249974180),	     /* NOTE  22 */
+(23,       'user-24',      1249974181),		 /* NOTE  23 */
+(24,       'user-22',      1249974182),	     /* NOTE  24 */
+(24,       'global',       1249974183),		 /* EVENT 25 */
+(25,       'global',       1249974184),		 /* FILE  26 */
+(26,       'area-1',       1249974185),	     /* NOTE  27 */
+(15,       'community-1',  1249974186),		 /* NOTE  28 */
+(23,       'community-1',  1249974187);		 /* EVENT 29 */
 
 INSERT INTO `note`
 (`resource`, `priority`, `note`)
@@ -323,17 +323,17 @@ VALUES
 (29, 1248332167,     0, 'Publicacion de notas');
 
 INSERT INTO `resource_global`
-(`resource`, `tsregister`)
+(`resource`)
 VALUES
-( 1, UNIX_TIMESTAMP()),
-( 9, UNIX_TIMESTAMP()),
-(10, UNIX_TIMESTAMP()),
-(11, UNIX_TIMESTAMP()),
-(13, UNIX_TIMESTAMP()),
-(16, UNIX_TIMESTAMP()),
-(19, UNIX_TIMESTAMP()),
-(25, UNIX_TIMESTAMP()),
-(26, UNIX_TIMESTAMP());
+( 1),
+( 9),
+(10),
+(11),
+(13),
+(16),
+(19),
+(25),
+(26);
 
 INSERT INTO `area_resource`
 (`resource`, `area`)

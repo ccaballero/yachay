@@ -2,7 +2,7 @@
 
 class modules_groupsets_Init extends Yeah_Init
 {
-    public $check = array ('groupset', 'groupset_group', 'groupset_resource');
+    public $check = array ('groupset', 'groupset_group');
     public $install = 'groupsets';
 
     public $routes = array (

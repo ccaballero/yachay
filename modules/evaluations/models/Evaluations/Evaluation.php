@@ -64,4 +64,9 @@ class modules_evaluations_models_Evaluations_Evaluation extends Yeah_Model_Row_W
     	}
 		$this->save();
     }
+
+    public function amAuthor() {
+        global $USER;
+        return ($USER->ident == $this->author);
+    }
 }

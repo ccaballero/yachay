@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS `resource`;
 CREATE TABLE `resource` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `author`            int unsigned                                                NOT NULL,
+    `recipient`         varchar(32)                                                 NOT NULL,
     `ratings`           int unsigned                                                NOT NULL DEFAULT 0,
     `raters`            int unsigned                                                NOT NULL DEFAULT 0,
     `tsregister`        int unsigned                                                NOT NULL,
@@ -18,7 +19,6 @@ CREATE TABLE `resource` (
 DROP TABLE IF EXISTS `resource_global`;
 CREATE TABLE `resource_global` (
     `resource`          int unsigned                                                NOT NULL,
-    `tsregister`		int unsigned												NOT NULL,
     PRIMARY KEY (`resource`),
     INDEX (`resource`),
     FOREIGN KEY (`resource`)      REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT

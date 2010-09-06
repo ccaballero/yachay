@@ -10,7 +10,7 @@ class Yeah_Model_Row_Validation extends Zend_Db_Table_Row_Abstract
             // filtered
             if (isset($values['filters'])) {
                 foreach ($values['filters'] as $filter) {
-                    $this->$key = Zend_Filter::get($this->$key, $filter);
+                    $this->$key = @Zend_Filter::get($this->$key, $filter);
                 }
             }
             if (isset($values['validators'])) {

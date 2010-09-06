@@ -25,14 +25,19 @@ class Notes_NoteController extends Yeah_Action
     }
 
     public function editAction() {
-        $this->requirePermission('resources', 'view');
+        $this->requirePermission('resources', 'edit');
         $request = $this->getRequest();
 
-        $note_url = $request->getParam('note');
+        $note_ident = $request->getParam('note');
+
+        $resources_model = Yeah_Adapter::getModel('resources');
         $notes_model = Yeah_Adapter::getModel('notes');
-        $note = $notes_model->findByResource($note_url);
+
+        $resource = $resources_model->findByIdent($note_ident);
+        $note = $notes_model->findByResource($note_ident);
 
         $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
+        $this->requireResourceAuthor($resource);
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -67,6 +72,25 @@ class Notes_NoteController extends Yeah_Action
     }
 
     public function deleteAction() {
-        // TODO
+        $this->requirePermission('resources', 'delete');
+        $request = $this->getRequest();
+
+        $note_ident = $request->getParam('note');
+
+        $resources_model = Yeah_Adapter::getModel('resources');
+        $notes_model = Yeah_Adapter::getModel('notes');
+
+        $resource = $resources_model->findByIdent($note_ident);
+        $note = $notes_model->findByResource($note_ident);
+
+        $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
+        $this->requireResourceAuthor($resource);
+
+        $note->delete();
+        $resource->delete();
+
+        $session = new Zend_Session_Namespace();
+        $session->messages->addMessage("La nota ha sido eliminada");
+        $this->_redirect($this->view->currentPage());
     }
 }

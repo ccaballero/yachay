@@ -37,7 +37,7 @@ class Yeah_Settings_Context
     public function __toString() {
         $utf = new Yeah_Helpers_Utf2html;
         if (!empty($this->global)) {
-            return 'Sistema';
+            return 'Pagina principal';
         }
         if (!empty($this->area)) {
             return 'Area: ' . $utf->utf2html($this->area->label);

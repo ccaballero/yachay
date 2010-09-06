@@ -25,15 +25,19 @@ class Events_EventController extends Yeah_Action
     }
 
     public function editAction() {
-        global $USER;
-
-        $this->requirePermission('resources', 'view');
+        $this->requirePermission('resources', 'edit');
         $request = $this->getRequest();
 
-        $event_url = $request->getParam('event');
+        $event_ident = $request->getParam('event');
+
+        $resources_model = Yeah_Adapter::getModel('resources');
         $events_model = Yeah_Adapter::getModel('events');
-        $event = $events_model->findByResource($event_url);
+
+        $resource = $resources_model->findByIdent($event_ident);
+        $event = $events_model->findByResource($event_ident);
+
         $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
+        $this->requireResourceAuthor($resource);
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -78,6 +82,25 @@ class Events_EventController extends Yeah_Action
     }
 
     public function deleteAction() {
-        // TODO
+        $this->requirePermission('resources', 'delete');
+        $request = $this->getRequest();
+
+        $event_ident = $request->getParam('event');
+
+        $resources_model = Yeah_Adapter::getModel('resources');
+        $events_model = Yeah_Adapter::getModel('events');
+
+        $resource = $resources_model->findByIdent($event_ident);
+        $event = $events_model->findByResource($event_ident);
+
+        $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
+        $this->requireResourceAuthor($resource);
+
+        $event->delete();
+        $resource->delete();
+
+        $session = new Zend_Session_Namespace();
+        $session->messages->addMessage("El evento ha sido eliminado");
+        $this->_redirect($this->view->currentPage());
     }
 }

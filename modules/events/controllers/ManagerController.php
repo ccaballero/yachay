@@ -17,6 +17,7 @@ class Events_ManagerController extends Yeah_Action
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
+            $publish = $request->getParam('publish');
         
             $event = $events_model->createRow();
             $event->label = $request->getParam('name');
@@ -36,24 +37,32 @@ class Events_ManagerController extends Yeah_Action
             $event->duration = $duration * $ts_interval;
             $event->message = $request->getParam('message');
 
-            if ($event->isValid()) {
-                $resource = $resources_model->createRow();
-                $resource->author = $USER->ident;
-                $resource->tsregister = time();
-                $resource->save();
+            $context = new Yeah_Helpers_Context();
+            $spaces_valids = $context->context(NULL, TRUE);
 
-                $event->resource = $resource->ident;
-                $event->save();
+            if (in_array($publish, $spaces_valids)) {
+                if ($event->isValid()) {
+                    $resource = $resources_model->createRow();
+                    $resource->author = $USER->ident;
+                    $resource->recipient = $request->getParam('publish');
+                    $resource->tsregister = time();
+                    $resource->save();
 
-                $resource->saveContext($request);
+                    $event->resource = $resource->ident;
+                    $event->save();
 
-                $session->messages->addMessage('El evento ha sido creado');
-                $session->url = $note->resource;
-                $this->_redirect($request->getParam('return'));
-            } else {
-                foreach ($event->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $resource->saveContext($request);
+
+                    $session->messages->addMessage('El evento ha sido creado');
+                    $session->url = $note->resource;
+                    $this->_redirect($request->getParam('return'));
+                } else {
+                    foreach ($event->getMessages() as $message) {
+                        $session->messages->addMessage($message);
+                    }
                 }
+            } else {
+                $session->messages->addMessage("Usted no tiene privilegios para publicar en ese espacio");
             }
         }
 
