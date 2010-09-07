@@ -24,6 +24,12 @@ class modules_files_Init extends Yeah_Init
                                                         'controller' => 'file',
                                                         'action'     => 'delete',
                                                     )),
+        'files_file_drop'                        => array('files/:file/drop',
+                                                    array(
+                                                        'module'     => 'files',
+                                                        'controller' => 'file',
+                                                        'action'     => 'drop',
+                                                    )),
         'files_file_view'                        => array('files/:file',
                                                     array(
                                                         'module'     => 'files',

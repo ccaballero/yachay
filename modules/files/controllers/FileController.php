@@ -97,6 +97,7 @@ class Files_FileController extends Yeah_Action
 
         $resources_model = Yeah_Adapter::getModel('resources');
         $files_model = Yeah_Adapter::getModel('files');
+        $valorations_model = Yeah_Adapter::getModel('valorations');
 
         $resource = $resources_model->findByIdent($file_ident);
         $file = $files_model->findByResource($file_ident);
@@ -108,6 +109,36 @@ class Files_FileController extends Yeah_Action
 
         $file->delete();
         $resource->delete();
+        $valorations_model->decreaseActivity(2);
+
+        $session = new Zend_Session_Namespace();
+        $session->messages->addMessage("El archivo ha sido eliminado");
+        $this->_redirect($this->view->currentPage());
+    }
+
+    // FIXME: Agregar mas infraestructura, evitar la eliminacion directa en lo posible, peligroso!
+    public function dropAction() {
+        global $CONFIG;
+
+        $this->requirePermission('resources', 'drop');
+        $request = $this->getRequest();
+
+        $file_ident = $request->getParam('file');
+
+        $resources_model = Yeah_Adapter::getModel('resources');
+        $files_model = Yeah_Adapter::getModel('files');
+        $valorations_model = Yeah_Adapter::getModel('valorations');
+
+        $resource = $resources_model->findByIdent($file_ident);
+        $file = $files_model->findByResource($file_ident);
+
+        $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+
+        unlink($CONFIG->dirroot . '/media/files/' . $file->resource);
+
+        $file->delete();
+        $resource->delete();
+        $valorations_model->decreaseActivity(2);
 
         $session = new Zend_Session_Namespace();
         $session->messages->addMessage("El archivo ha sido eliminado");

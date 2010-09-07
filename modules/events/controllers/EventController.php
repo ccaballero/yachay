@@ -89,6 +89,7 @@ class Events_EventController extends Yeah_Action
 
         $resources_model = Yeah_Adapter::getModel('resources');
         $events_model = Yeah_Adapter::getModel('events');
+        $valorations_model = Yeah_Adapter::getModel('valorations');
 
         $resource = $resources_model->findByIdent($event_ident);
         $event = $events_model->findByResource($event_ident);
@@ -98,6 +99,32 @@ class Events_EventController extends Yeah_Action
 
         $event->delete();
         $resource->delete();
+        $valorations_model->decreaseActivity(4);
+
+        $session = new Zend_Session_Namespace();
+        $session->messages->addMessage("El evento ha sido eliminado");
+        $this->_redirect($this->view->currentPage());
+    }
+
+    // FIXME: Agregar mas infraestructura, evitar la eliminacion directa en lo posible, peligroso!
+    public function dropAction() {
+        $this->requirePermission('resources', 'drop');
+        $request = $this->getRequest();
+
+        $event_ident = $request->getParam('event');
+
+        $resources_model = Yeah_Adapter::getModel('resources');
+        $events_model = Yeah_Adapter::getModel('events');
+        $valorations_model = Yeah_Adapter::getModel('valorations');
+
+        $resource = $resources_model->findByIdent($event_ident);
+        $event = $events_model->findByResource($event_ident);
+
+        $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
+
+        $event->delete();
+        $resource->delete();
+        $valorations_model->decreaseActivity(4);
 
         $session = new Zend_Session_Namespace();
         $session->messages->addMessage("El evento ha sido eliminado");

@@ -23,14 +23,14 @@
         <?php $assign = $this->group->getAssignement($auxiliar); ?>
         <table width="100%">
             <tr>
-                <td rowspan="2">
+                <td rowspan="2" width="18px">
                 <?php if ($this->group->amTeacher()) { ?>
                     <input type="checkbox" name="members[]" value="<?= $auxiliar->ident ?>" />
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td rowspan="2"><img src="<?= $this->media . '../users/thumbnail_small/' . $auxiliar->getAvatar() ?>" /></td>
+                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $auxiliar->getAvatar() ?>" /></td>
                 <td>
                 <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $auxiliar->url), 'users_user_view') ?>"><?= $auxiliar->label ?></a>
@@ -42,14 +42,14 @@
             </tr>
             <tr>
                 <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td>
+                <td width="80px">
                 <?php if ($this->group->amTeacher()) { ?>
                     <?= $this->enable($assign->status) ?>
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td>
+                <td width="350px">
                 <?php if ($this->group->amTeacher()) { ?>
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $auxiliar->url), 'groups_group_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $auxiliar->url), 'groups_group_assign_member_lock') ?>">Deshabilitar</a>]
@@ -71,14 +71,14 @@
         <?php $assign = $this->group->getAssignement($student); ?>
         <table width="100%">
             <tr>
-                <td rowspan="2">
+                <td rowspan="2" width="18px">
                 <?php if ($this->group->amTeacher()) { ?>
                     <input type="checkbox" name="members[]" value="<?= $student->ident ?>" />
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td rowspan="2"><img src="<?= $this->media . '../users/thumbnail_small/' . $student->getAvatar() ?>" /></td>
+                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $student->getAvatar() ?>" /></td>
                 <td>
                 <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $student->url), 'users_user_view') ?>"><?= $student->label ?></a>
@@ -90,14 +90,14 @@
             </tr>
             <tr>
                 <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td>
+                <td width="80px">
                 <?php if ($this->group->amTeacher()) { ?>
                     <?= $this->enable($assign->status) ?>
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td>
+                <td width="350px">
                 <?php if ($this->group->amTeacher()) { ?>
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $student->url), 'groups_group_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $student->url), 'groups_group_assign_member_lock') ?>">Deshabilitar</a>]
@@ -119,14 +119,14 @@
         <?php $assign = $this->group->getAssignement($guest); ?>
         <table width="100%">
             <tr>
-                <td rowspan="2">
+                <td rowspan="2" width="18px">
                 <?php if ($this->group->amTeacher()) { ?>
                     <input type="checkbox" name="members[]" value="<?= $guest->ident ?>" />
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td rowspan="2"><img src="<?= $this->media . '../users/thumbnail_small/' . $guest->getAvatar() ?>" /></td>
+                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $guest->getAvatar() ?>" /></td>
                 <td>
                 <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $guest->url), 'users_user_view') ?>"><?= $guest->label ?></a>
@@ -138,14 +138,14 @@
             </tr>
             <tr>
                 <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td>
+                <td width="80px">
                 <?php if ($this->group->amTeacher()) { ?>
                     <?= $this->enable($assign->status) ?>
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td>
+                <td width="350px">
                 <?php if ($this->group->amTeacher()) { ?>
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $guest->url), 'groups_group_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'user' => $guest->url), 'groups_group_assign_member_lock') ?>">Deshabilitar</a>]

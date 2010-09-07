@@ -18,6 +18,12 @@ class modules_events_Init extends Yeah_Init
                                                         'controller' => 'event',
                                                         'action'     => 'delete',
                                                     )),
+        'events_event_drop'                      => array('events/:event/drop',
+                                                    array(
+                                                        'module'     => 'events',
+                                                        'controller' => 'event',
+                                                        'action'     => 'drop',
+                                                    )),
         'events_event_view'                      => array('events/:event',
                                                     array(
                                                         'module'     => 'events',

@@ -49,7 +49,7 @@
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td width="240px">
+                <td width="350px">
                 <?php if ($this->subject->amModerator()) { ?>
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_lock') ?>">Deshabilitar</a>]
@@ -97,7 +97,7 @@
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td width="240px">
+                <td width="350px">
                 <?php if ($this->subject->amModerator()) { ?>
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_lock') ?>">Deshabilitar</a>]
@@ -145,7 +145,7 @@
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td width="240px">
+                <td width="350px">
                 <?php if ($this->subject->amModerator()) { ?>
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_lock') ?>">Deshabilitar</a>]
@@ -193,7 +193,7 @@
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td width="240px">
+                <td width="350px">
                 <?php if ($this->subject->amModerator()) { ?>
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_lock') ?>">Deshabilitar</a>]

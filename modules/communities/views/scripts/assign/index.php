@@ -47,7 +47,7 @@
                 <td width="80px">
                     <?= $this->enable($assign->status) ?>
                 </td>
-                <td width="240px">
+                <td width="350px">
                 <?php if ($this->community->amModerator() && $this->community->author <> $moderator->ident && $moderator->ident <> $USER->ident) { ?>
                     [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_lock') ?>">Deshabilitar</a>]
@@ -93,7 +93,7 @@
                 <td width="80px">
                     <?= $this->enable($assign->status) ?>
                 </td>
-                <td width="240px">
+                <td width="350px">
                 <?php if ($this->community->amModerator() && $this->community->author <> $member->ident && $member->ident <> $USER->ident) { ?>
                     [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_lock') ?>">Deshabilitar</a>]

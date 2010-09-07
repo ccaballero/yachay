@@ -12,18 +12,20 @@
 
 <table width="100%">
     <tr>
-        <td rowspan="14">
-            <b><i>Imagen grande:</i></b>
-            <br />
-            <img src="<?= $this->media . '../users/thumbnail_large/' . $this->user->getAvatar() ?>" />
-            <br />
-            <b><i>Imagen mediana:</i></b>
-            <br />
-            <img src="<?= $this->media . '../users/thumbnail_medium/' . $this->user->getAvatar() ?>" />
-            <br />
-            <b><i>Imagen peque&ntilde;a:</i></b>
-            <br />
-            <img src="<?= $this->media . '../users/thumbnail_small/' . $this->user->getAvatar() ?>" />
+        <td rowspan="14" width="200px" valign="top">
+            <center>
+                <b><i>Imagen grande:</i></b>
+                <br />
+                <img src="<?= $this->media . '../users/thumbnail_large/' . $this->user->getAvatar() ?>" />
+                <br />
+                <b><i>Imagen mediana:</i></b>
+                <br />
+                <img src="<?= $this->media . '../users/thumbnail_medium/' . $this->user->getAvatar() ?>" />
+                <br />
+                <b><i>Imagen peque&ntilde;a:</i></b>
+                <br />
+                <img src="<?= $this->media . '../users/thumbnail_small/' . $this->user->getAvatar() ?>" />
+            </center>
         </td>
         <td colspan="2"><b>Usuario: </b><?= $this->user->label ?></td>
         <td colspan="2"><b>Codigo: </b><?= $this->user->code ?></td>
@@ -48,12 +50,12 @@
         <td colspan="2"><b>Telefono: </b><?= $this->none($this->user->phone) ?></td>
         <td colspan="2"><b>Celular: </b><?= $this->none($this->user->cellphone) ?></td>
     </tr>
-    <!--<tr>
-        <td><b>Conocimiento: </b><?= $this->user->knowledge ?></td>
-        <td><b>Participacion: </b><?= $this->user->participation ?></td>
-        <td><b>Popularidad: </b><?= $this->user->popularity ?></td>
-        <td><b>Actividad: </b><?= $this->user->activity ?></td>
-    </tr>-->
+    <tr>
+        <!--<td><b>Conocimiento: </b><?= $this->user->knowledge ?></td>
+        <td><b>Participación: </b><?= $this->user->participation ?></td>
+        <td><b>Popularidad: </b><?= $this->user->popularity ?></td>-->
+        <td colspan="4"><b>Actividad: </b><?= $this->user->activity ?></td>
+    </tr>
     <tr>
         <td colspan="4"><b>Miembro desde: </b><?= $this->timestamp($this->user->tsregister) ?></td>
     </tr>

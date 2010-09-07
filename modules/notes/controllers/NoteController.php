@@ -79,6 +79,7 @@ class Notes_NoteController extends Yeah_Action
 
         $resources_model = Yeah_Adapter::getModel('resources');
         $notes_model = Yeah_Adapter::getModel('notes');
+        $valorations_model = Yeah_Adapter::getModel('valorations');
 
         $resource = $resources_model->findByIdent($note_ident);
         $note = $notes_model->findByResource($note_ident);
@@ -88,6 +89,32 @@ class Notes_NoteController extends Yeah_Action
 
         $note->delete();
         $resource->delete();
+        $valorations_model->decreaseActivity(1);
+
+        $session = new Zend_Session_Namespace();
+        $session->messages->addMessage("La nota ha sido eliminada");
+        $this->_redirect($this->view->currentPage());
+    }
+
+    // FIXME: Agregar mas infraestructura, evitar la eliminacion directa en lo posible, peligroso!
+    public function dropAction() {
+        $this->requirePermission('resources', 'drop');
+        $request = $this->getRequest();
+
+        $note_ident = $request->getParam('note');
+
+        $resources_model = Yeah_Adapter::getModel('resources');
+        $notes_model = Yeah_Adapter::getModel('notes');
+        $valorations_model = Yeah_Adapter::getModel('valorations');
+
+        $resource = $resources_model->findByIdent($note_ident);
+        $note = $notes_model->findByResource($note_ident);
+
+        $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
+
+        $note->delete();
+        $resource->delete();
+        $valorations_model->decreaseActivity(1);
 
         $session = new Zend_Session_Namespace();
         $session->messages->addMessage("La nota ha sido eliminada");

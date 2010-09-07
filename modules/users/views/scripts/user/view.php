@@ -29,20 +29,18 @@
         <td colspan="2"><b>Cargo: </b><?= $this->user->getRole()->label ?></td>
         <td colspan="2"><b>Carrera: </b><?= $this->none($this->user->career) ?></td>
     </tr>
-    <!--<tr valign="top">
-        <td><b>Conocimiento: </b><?= $this->user->knowledge ?></td>
+    <tr valign="top">
+        <!--<td><b>Conocimiento: </b><?= $this->user->knowledge ?></td>
         <td><b>Participacion: </b><?= $this->user->participation ?></td>
-        <td><b>Popularidad: </b><?= $this->user->popularity ?></td>
-        <td><b>Actividad: </b><?= $this->user->activity ?></td>
-    </tr>-->
-    <tr valign="top"><td><b>Descripcion Personal:</b></td></tr>
-    <tr valign="top"><td><?= $this->none($this->utf2html($this->user->description)) ?></td></tr>
-    <tr valign="top"><td><b>Pasatiempos:</b></td></tr>
-    <tr valign="top"><td><?= $this->none($this->utf2html($this->user->hobbies)) ?></td></tr>
-    <tr valign="top"><td><b>Intereses:</b></td></tr>
-    <tr valign="top"><td><?= $this->none($this->utf2html($this->user->interests)) ?></td></tr>
+        <td><b>Popularidad: </b><?= $this->user->popularity ?></td>-->
+        <td colspan="4"><b>Actividad: </b><?= $this->user->activity ?></td>
+    </tr>
+    <tr valign="top"><td colspan="4"><b>Descripcion Personal:</b></td></tr>
+    <tr valign="top"><td colspan="4"><?= $this->none($this->utf2html($this->user->description)) ?></td></tr>
+    <tr valign="top"><td colspan="4"><b>Pasatiempos:</b></td></tr>
+    <tr valign="top"><td colspan="4"><?= $this->none($this->utf2html($this->user->hobbies)) ?></td></tr>
+    <tr valign="top"><td colspan="4"><b>Intereses:</b></td></tr>
+    <tr valign="top"><td colspan="4"><?= $this->none($this->utf2html($this->user->interests)) ?></td></tr>
 </table>
-
 <hr />
-
 <?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route)) ?>

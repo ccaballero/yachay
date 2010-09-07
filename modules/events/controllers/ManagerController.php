@@ -7,13 +7,14 @@ class Events_ManagerController extends Yeah_Action
     public function newAction() {
         global $USER;
 
-        $this->requirePermission('resources', 'view');
+        $this->requirePermission('resources', array('new', 'view'));
         $request = $this->getRequest();
 
         $event = new modules_events_models_Events_Empty();
         
         $events_model = Yeah_Adapter::getModel('events');
         $resources_model = Yeah_Adapter::getModel('resources');
+        $valorations_model = Yeah_Adapter::getModel('valorations');
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -52,6 +53,7 @@ class Events_ManagerController extends Yeah_Action
                     $event->save();
 
                     $resource->saveContext($request);
+                    $valorations_model->addActivity(4);
 
                     $session->messages->addMessage('El evento ha sido creado');
                     $session->url = $note->resource;

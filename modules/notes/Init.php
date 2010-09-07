@@ -18,6 +18,12 @@ class modules_notes_Init extends Yeah_Init
                                                         'controller' => 'note',
                                                         'action'     => 'delete',
                                                     )),
+        'notes_note_drop'                        => array('notes/:note/drop',
+                                                    array(
+                                                        'module'     => 'notes',
+                                                        'controller' => 'note',
+                                                        'action'     => 'drop',
+                                                    )),
         'notes_note_view'                        => array('notes/:note',
                                                     array(
                                                         'module'     => 'notes',

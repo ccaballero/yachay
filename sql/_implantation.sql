@@ -3,35 +3,37 @@
 /* Datos de implantacion del sistema                                                                                  */
 /*====================================================================================================================*/
 
+UPDATE `user` SET `activity` = 1 WHERE `ident` = 1;
+
 INSERT INTO `user`
-(`role`, `label`,       `url`,         `password`,  `tsregister`,     `status`,   `surname`,          `name`,        `code`,    `email`)
+(`role`, `label`,       `url`,         `password`,  `tsregister`,     `status`,   `surname`,          `name`,        `code`,    `activity`, `email`)
 VALUES
-(6,      'antonio',     'antonio',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Mamani',           'Antonio',     200212474, 'id02@gmail.com'),
-(6,      'carlos',      'carlos',      md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Caballero',        'Carlos',      200323785, 'id03@gmail.com'),
-(5,      'leticia',     'leticia',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Blanco',           'Leticia',     200437576, 'id04@gmail.com'),
-(5,      'ruperto',     'ruperto',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Leon',             'Ruperto',     200175667, 'id05@gmail.com'),
-(5,      'johnny',      'johnny',      md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Arias',            'Jhonny',      200257678, 'id06@gmail.com'),
-(5,      'americo',     'americo',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Vargas',           'Americo',     200346789, 'id07@gmail.com'),
-(5,      'indira',      'indira',      md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Camacho',          'Indira',      200437870, 'id08@gmail.com'),
-(5,      'carrasco',    'carrasco',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Carrasco',         'Alvaro',      200529877, 'id09@gmail.com'),
-(4,      'viviana',     'viviana',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Morales',          'Viviana',     200687577, 'id10@gmail.com'),
-(4,      'juanpa',      'juanpa',      md5('asdf'), UNIX_TIMESTAMP(), 'inactive', 'Ruiz',             'Juan Pablo',  200776154, 'id11@gmail.com'),
-(4,      'christian',   'christian',   md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Mamani',           'Christian',   200865043, 'id12@gmail.com'),
-(4,      'wilfredo',    'wilfredo',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Vargas',           'Wilfredo',    200954932, 'id13@gmail.com'),
-(3,      'luis',        'luis',        md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Arce',             'Luis',        200048321, 'id14@gmail.com'),
-(3,      'pedro',       'pedro',       md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Valdes',           'Pedro',       200636211, 'id15@gmail.com'),
-(3,      'juan',        'juan',        md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Gomez',            'Juan',        200424121, 'id16@gmail.com'),
-(3,      'benjamin',    'benjamin',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Perez',            'Benjamin',    200213212, 'id17@gmail.com'),
-(3,      'juanjo',      'juanjo',      md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Olivera',          'Juan Jose',   200237323, 'id18@gmail.com'),
-(3,      'tatiana',     'tatiana',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Moruno',           'Tatiana',     200430434, 'id19@gmail.com'),
-(3,      'pablo',       'pablo',       md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Hurtado',          'Pablo',       200449545, 'id20@gmail.com'),
-(3,      'vladimir',    'vladimir',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Garcia',           'Vladimir',    200558656, 'id21@gmail.com'),
-(3,      'marcelo',     'marcelo',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Pavon',            'Marcelo',     200667667, 'id22@gmail.com'),
-(3,      'jorge',       'jorge',       md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Alameda',          'Jorge',       200788578, 'id23@gmail.com'),
-(3,      'eduardo',     'eduardo',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Dipp',             'Eduardo',     200879489, 'id24@gmail.com'),
-(3,      'hugo',        'hugo',        md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Alconz',           'Hugo',        200904390, 'id25@gmail.com'),
-(2,      'alexey',      'alexey',      md5('asdf'), UNIX_TIMESTAMP(), 'inactive', 'Rodriguez',        'Alexey',      200982298, 'id26@gmail.com'),
-(2,      'aquilino',    'aquilino',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Davalos',          'Aquilino',    200873187, 'id27@gmail.com');
+(6,      'antonio',     'antonio',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Mamani',           'Antonio',     200212474, 5,          'id02@gmail.com'), /*  2 */
+(6,      'carlos',      'carlos',      md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Caballero',        'Carlos',      200323785, 2,          'id03@gmail.com'), /*  3 */
+(5,      'leticia',     'leticia',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Blanco',           'Leticia',     200437576, 2,          'id04@gmail.com'), /*  4 */
+(5,      'ruperto',     'ruperto',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Leon',             'Ruperto',     200175667, 0,          'id05@gmail.com'), /*  5 */
+(5,      'johnny',      'johnny',      md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Arias',            'Jhonny',      200257678, 0,          'id06@gmail.com'), /*  6 */
+(5,      'americo',     'americo',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Vargas',           'Americo',     200346789, 0,          'id07@gmail.com'), /*  7 */
+(5,      'indira',      'indira',      md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Camacho',          'Indira',      200437870, 2,          'id08@gmail.com'), /*  8 */
+(5,      'carrasco',    'carrasco',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Carrasco',         'Alvaro',      200529877, 0,          'id09@gmail.com'), /*  9 */
+(4,      'viviana',     'viviana',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Morales',          'Viviana',     200687577, 1,          'id10@gmail.com'), /* 10 */
+(4,      'juanpa',      'juanpa',      md5('asdf'), UNIX_TIMESTAMP(), 'inactive', 'Ruiz',             'Juan Pablo',  200776154, 7,          'id11@gmail.com'), /* 11 */
+(4,      'christian',   'christian',   md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Mamani',           'Christian',   200865043, 0,          'id12@gmail.com'), /* 12 */
+(4,      'wilfredo',    'wilfredo',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Vargas',           'Wilfredo',    200954932, 0,          'id13@gmail.com'), /* 13 */
+(3,      'luis',        'luis',        md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Arce',             'Luis',        200048321, 1,          'id14@gmail.com'), /* 14 */
+(3,      'pedro',       'pedro',       md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Valdes',           'Pedro',       200636211, 2,          'id15@gmail.com'), /* 15 */
+(3,      'juan',        'juan',        md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Gomez',            'Juan',        200424121, 5,          'id16@gmail.com'), /* 16 */
+(3,      'benjamin',    'benjamin',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Perez',            'Benjamin',    200213212, 2,          'id17@gmail.com'), /* 17 */
+(3,      'juanjo',      'juanjo',      md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Olivera',          'Juan Jose',   200237323, 4,          'id18@gmail.com'), /* 18 */
+(3,      'tatiana',     'tatiana',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Moruno',           'Tatiana',     200430434, 1,          'id19@gmail.com'), /* 19 */
+(3,      'pablo',       'pablo',       md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Hurtado',          'Pablo',       200449545, 4,          'id20@gmail.com'), /* 20 */
+(3,      'vladimir',    'vladimir',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Garcia',           'Vladimir',    200558656, 2,          'id21@gmail.com'), /* 21 */
+(3,      'marcelo',     'marcelo',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Pavon',            'Marcelo',     200667667, 1,          'id22@gmail.com'), /* 22 */
+(3,      'jorge',       'jorge',       md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Alameda',          'Jorge',       200788578, 5,          'id23@gmail.com'), /* 23 */
+(3,      'eduardo',     'eduardo',     md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Dipp',             'Eduardo',     200879489, 5,          'id24@gmail.com'), /* 24 */
+(3,      'hugo',        'hugo',        md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Alconz',           'Hugo',        200904390, 2,          'id25@gmail.com'), /* 25 */
+(2,      'alexey',      'alexey',      md5('asdf'), UNIX_TIMESTAMP(), 'inactive', 'Rodriguez',        'Alexey',      200982298, 1,          'id26@gmail.com'), /* 26 */
+(2,      'aquilino',    'aquilino',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Davalos',          'Aquilino',    200873187, 0,          'id27@gmail.com'); /* 27 */
 
 INSERT INTO `community`
 (`label`,          `url`,              `mode`,   `author`, `members`,     `tsregister`,     `interests`, `description`)

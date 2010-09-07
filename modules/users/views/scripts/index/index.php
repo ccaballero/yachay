@@ -43,12 +43,12 @@
                 <td colspan="2" width="50%"><b>Cargo: </b><?= $user->getRole()->label ?></td>
                 <td colspan="2" width="50%"><b>Carrera: </b><?= $this->none($user->career) ?></td>
             </tr>
-            <!--<tr>
-                <td><b>Conocimiento: </b><?= $user->knowledge ?></td>
+            <tr>
+                <!--<td><b>Conocimiento: </b><?= $user->knowledge ?></td>
                 <td><b>Participacion: </b><?= $user->participation ?></td>
-                <td><b>Popularidad: </b><?= $user->popularity ?></td>
-                <td><b>Actividad: </b><?= $user->activity ?></td>
-            </tr>-->
+                <td><b>Popularidad: </b><?= $user->popularity ?></td>-->
+                <td colspan="4"><b>Actividad: </b><?= $user->activity ?></td>
+            </tr>
             <tr>
                 <td colspan="4">&nbsp;<?= $user->interests ?></td>
             </tr>

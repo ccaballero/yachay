@@ -14,6 +14,7 @@ class Notes_ManagerController extends Yeah_Action
         
         $notes_model = Yeah_Adapter::getModel('notes');
         $resources_model = Yeah_Adapter::getModel('resources');
+        $valorations_model = Yeah_Adapter::getModel('valorations');
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -43,6 +44,7 @@ class Notes_ManagerController extends Yeah_Action
                     $note->save();
 
                     $resource->saveContext($request);
+                    $valorations_model->addActivity(1);
 
                     $session->messages->addMessage('La nota ha sido creada');
                     $session->url = $note->resource;

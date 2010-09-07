@@ -8,13 +8,14 @@ class Files_ManagerController extends Yeah_Action
         global $CONFIG;
         global $USER;
 
-        $this->requirePermission('resources', 'view');
+        $this->requirePermission('resources', array('new', 'view'));
         $request = $this->getRequest();
 
         $file = new modules_files_models_Files_Empty();
         
         $files_model = Yeah_Adapter::getModel('files');
         $resources_model = Yeah_Adapter::getModel('resources');
+        $valorations_model = Yeah_Adapter::getModel('valorations');
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -52,6 +53,7 @@ class Files_ManagerController extends Yeah_Action
                         rename($CONFIG->dirroot . 'media/upload/' . $file->filename, $CONFIG->dirroot . 'media/files/' . $file->resource);
 
                         $resource->saveContext($request);
+                        $valorations_model->addActivity(2);
 
                         $session->messages->addMessage('El archivo fue cargado exitosamente');
                         $session->url = $file->resource;
