@@ -45,8 +45,12 @@ class Login_IndexController extends Yeah_Action
             if ($input->isValid()) {
 	            $user = Yeah_Adapter::getModel('users')->findByLogin($input->username, md5($input->password));
 	            if (!empty($user)) {
-	                $session->user = $user;
-	                $this->_redirect($request->getParam('return'));
+                    if ($user->status == 'active') {
+    	                $session->user = $user;
+    	                $this->_redirect($request->getParam('return'));
+                    } else {
+                        $session->messages->addMessage("El usuario {$user->label} ha sido bloqueado, comuniquese con algun encargado");
+                    }
 	            } else {
                     // validation for login forgot process
                     $login = Yeah_Adapter::getModel('login');

@@ -70,7 +70,7 @@ class Yeah_Helpers_Context
                                 $subjects2[] = $subject;
                             } else {
                                 $assign = $assignement1->findBySubjectAndUser($subject->ident, $USER->ident);
-                                if (!empty($assign)) {
+                                if (!empty($assign) && $assign->status == 'active') {
                                     $subjects2[] = $subject;
                                 }
                             }
@@ -122,7 +122,7 @@ class Yeah_Helpers_Context
                     $groups[] = $group;
                 }
                 $assign = $assignement2->findByGroupAndUser($group->ident, $USER->ident);
-                if (!empty($assign)) {
+                if (!empty($assign) && $assign->status == 'active') {
                     $groups[] = $group;
                 }
             }

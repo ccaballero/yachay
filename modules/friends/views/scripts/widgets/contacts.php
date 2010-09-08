@@ -6,7 +6,7 @@
     $users_model = Yeah_Adapter::getModel('users');
 
     $count = 0;
-    $limit = 5;
+    $limit = 4;
     $friends = $friends_model->selectFriendsByUser($USER->ident);
     $followings = $friends_model->selectFollowingsByUser($USER->ident);
     $followers = $friends_model->selectFollowersByUser($USER->ident);
@@ -17,7 +17,7 @@
 
 <table width="100%">
 <?php foreach ($friends as $friend) { ?>
-    <?php if ($count <= $limit) { ?>
+    <?php if ($count < $limit) { ?>
         <?php $user = $users_model->findByIdent($friend->friend); ?>
         <tr>
             <td width="50px" valign="top" rowspan="2">
@@ -54,7 +54,7 @@
 
 <table width="100%">
 <?php foreach ($followings as $following) { ?>
-    <?php if ($count <= $limit) { ?>
+    <?php if ($count < $limit) { ?>
         <?php $user = $users_model->findByIdent($following->friend); ?>
         <tr>
             <td width="50px" valign="top" rowspan="2">
@@ -91,7 +91,7 @@
 
 <table width="100%">
 <?php foreach ($followers as $follower) { ?>
-    <?php if ($count <= $limit) { ?>
+    <?php if ($count < $limit) { ?>
         <?php $user = $users_model->findByIdent($follower->user); ?>
         <tr>
             <td width="50px" valign="top" rowspan="2">
