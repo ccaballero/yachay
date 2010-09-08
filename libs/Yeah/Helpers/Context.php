@@ -201,21 +201,26 @@ class Yeah_Helpers_Context
 
         // set for user context
         $users_model = Yeah_Adapter::getModel('users');
-        $users_list = $users_model->selectByStatus('active');
-        if (count($users_list) != 0) {
+        $friends_model = Yeah_Adapter::getModel('friends');
+        $friends_list = $friends_model->selectFriendsByUser($USER->ident);
+        if (count($friends_list) != 0) {
             if ($context_type == 'user') {
                 $default = true;
             } else {
                 $default = false;
             }
-            $options[] = '<optgroup label="Usuarios">';
-            foreach ($users_list as $user) {
-                $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context->{$context_type}->ident == $user->ident)) ? $select : '') . '>' . $_->utf2html($user->label) . '</option>';
-                $plain[] = 'user-' . $user->ident;
+            $options[] = '<optgroup label="Contactos">';
+            foreach ($friends_list as $friend) {
+                $user = $users_model->findByIdent($friend->friend);
+                if ($user->status == 'active') {
+                    $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context->{$context_type}->ident == $user->ident)) ? $select : '') . '>' . $_->utf2html($user->label) . '</option>';
+                    $plain[] = 'user-' . $user->ident;
+                }
             }
             $options[] = '</optiongroup>';
         }
 
+        // OK, all ready!
         $select = '<select name="' . $name . '" id="' . $name . '">' . implode('', $options) . '</select>';
 
         if ($plain_format) {

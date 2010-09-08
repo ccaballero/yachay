@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS `friend`;
 CREATE TABLE `friend` (
     `user`            int unsigned                                                  NOT NULL,
     `friend`          int unsigned                                                  NOT NULL,
+    `mutual`          boolean                                                       NOT NULL DEFAULT FALSE,
     `tsregister`      int unsigned                                                  NOT NULL,
     PRIMARY KEY (`user`, `friend`),
     INDEX (`user`),
@@ -29,7 +30,9 @@ VALUES
 INSERT INTO `page`
 (`label`,                         `title`,            `menuable`,    `module`,           `controller`,  `action`,           `privilege`,             `route`)
 VALUES
-('Lista de contactos',           'Contactos',         TRUE,          'friends',          'index',     'index',            '',                      'friends_list');
+('Lista de contactos',            'Contactos',        TRUE,          'friends',          'index',       'friends',          'contact',               'friends_friends'),
+('Lista de solicitudes',          'Solicitudes',      TRUE,          'friends',          'index',       'followings',       'contact',               'friends_followings'),
+('Lista de peticiones',           'Peticiones',       TRUE,          'friends',          'index',       'followers',        'contact',               'friends_followers');
 
 /*====================================================================================================================*/
 /* Registro de privilegios para el modulo                                                                             */

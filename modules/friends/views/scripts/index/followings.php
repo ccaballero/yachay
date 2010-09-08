@@ -1,8 +1,19 @@
-<h1>Lista de contactos</h1>
+<h1>Lista de solicitudes</h1>
 
-<?php if (count($this->friends)) { ?>
-    <?php foreach ($this->friends as $friend) { ?>
-        <?php $user = $this->users->findByIdent($friend->friend); ?>
+<?php if (Yeah_Acl::hasPermission('friends', 'contact')) { ?>
+<table>
+    <tr>
+        <td>[<a href="<?= $this->url(array(), 'friends_friends') ?>">Amigos</a>]</td>
+        <td>[<a href="<?= $this->url(array(), 'friends_followings') ?>">Solicitudes</a>]</td>
+        <td>[<a href="<?= $this->url(array(), 'friends_followers') ?>">Peticiones</a>]</td>
+    </tr>
+</table>
+<?php } ?>
+<hr/>
+
+<?php if (count($this->followings)) { ?>
+    <?php foreach ($this->followings as $following) { ?>
+        <?php $user = $this->users->findByIdent($following->friend); ?>
         <table width="100%">
             <tr>
                 <td rowspan="6" width="100px" valign="top">
@@ -10,17 +21,13 @@
                 </td>
                 <td colspan="4">
                     <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
-                    <a href="<?= $this->url(array('user' => $user->url), 'users_user_view') ?>">
-                        <b><?= $this->utf2html($user->label) ?></b>
-                    </a>
+                        <b><a href="<?= $this->url(array('user' => $user->url), 'users_user_view') ?>"><?= $this->utf2html($user->label) ?></a></b>
                     <?php } else { ?>
                         <b><?= $this->utf2html($user->label) ?></b>
                     <?php } ?>
                     &nbsp;
                     <?php if (Yeah_Acl::hasPermission('friends', 'contact')) { ?>
-                    <a href="<?= $this->url(array('user' => $user->url), 'friends_delete') ?>">
-                        <b><i>[Retirar contacto]</i></b>
-                    </a>
+                        [<a href="<?= $this->url(array('user' => $user->url), 'friends_delete') ?>"><b><i>Retirar contacto</i></b></a>]
                     <?php } ?>
                 </td>
             </tr>
@@ -41,11 +48,22 @@
                 <td colspan="4"><b>Intereses: </b><?= $this->none($user->interests) ?></td>
             </tr>
             <tr>
-                <td colspan="4"><b>Fecha de contacto: </b><?= $this->timestamp($friend->tsregister) ?></td>
+                <td colspan="4"><b>Fecha de contacto: </b><?= $this->timestamp($following->tsregister) ?></td>
             </tr>
         </table>
         <br />
     <?php } ?>
 <?php } else { ?>
-<p>No existen contactos registrados</p>
+<p>No existen solicitudes registradas</p>
+<?php } ?>
+
+<hr/>
+<?php if (Yeah_Acl::hasPermission('friends', 'contact')) { ?>
+<table>
+    <tr>
+        <td>[<a href="<?= $this->url(array(), 'friends_friends') ?>">Amigos</a>]</td>
+        <td>[<a href="<?= $this->url(array(), 'friends_followings') ?>">Solicitudes</a>]</td>
+        <td>[<a href="<?= $this->url(array(), 'friends_followers') ?>">Peticiones</a>]</td>
+    </tr>
+</table>
 <?php } ?>

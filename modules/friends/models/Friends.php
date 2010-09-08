@@ -29,11 +29,15 @@ class modules_friends_models_Friends extends Zend_Db_Table_Abstract
     }
     
     // Selects in table
-    public function selectByUser($user) {
-        return $this->fetchAll($this->select()->where('user = ?', $user)->order('tsregister ASC'));
+    public function selectFriendsByUser($user) {
+        return $this->fetchAll($this->select()->where('user = ?', $user)->where('mutual = ?', TRUE)->order('tsregister ASC'));
     }
 
-    public function selectByFriend($friend) {
-        return $this->fetchAll($this->select()->where('friend = ?', $friend)->order('tsregister DESC'));
+    public function selectFollowingsByUser($user) {
+        return $this->fetchAll($this->select()->where('user = ?', $user)->where('mutual = ?', FALSE)->order('tsregister ASC'));
+    }
+
+    public function selectFollowersByUser($user) {
+        return $this->fetchAll($this->select()->where('friend = ?', $user)->where('mutual = ?', FALSE)->order('tsregister ASC'));
     }
 }

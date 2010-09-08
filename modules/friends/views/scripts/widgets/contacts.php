@@ -7,13 +7,16 @@
 
     $count = 0;
     $limit = 5;
-    $friends = $friends_model->selectByUser($USER->ident);
+    $friends = $friends_model->selectFriendsByUser($USER->ident);
+    $followings = $friends_model->selectFollowingsByUser($USER->ident);
+    $followers = $friends_model->selectFollowersByUser($USER->ident);
 ?>
 
+<h2>Amigos</h2>
 <?php if (count($friends) != 0) { ?>
 
 <table width="100%">
-    <?php foreach ($friends as $friend) { ?>
+<?php foreach ($friends as $friend) { ?>
     <?php if ($count <= $limit) { ?>
         <?php $user = $users_model->findByIdent($friend->friend); ?>
         <tr>
@@ -34,10 +37,84 @@
         </tr>
         <?php $count++; ?>
     <?php } ?>
-    <?php } ?>
+<?php } ?>
     <tr>
         <td colspan="2">
-            <center><a href="<?= $this->url(array(), 'friends_list') ?>">[Ver todos]</a></center>
+            <center><a href="<?= $this->url(array(), 'friends_friends') ?>">[Ver todos]</a></center>
+        </td>
+    </tr>
+</table>
+
+<?php } else { ?>
+<p>No se encontraron contactos</p>
+<?php } ?>
+
+<h2>Solicitudes</h2>
+<?php if (count($followings) != 0) { ?>
+
+<table width="100%">
+<?php foreach ($followings as $following) { ?>
+    <?php if ($count <= $limit) { ?>
+        <?php $user = $users_model->findByIdent($following->friend); ?>
+        <tr>
+            <td width="50px" valign="top" rowspan="2">
+                <a href="<?= $this->url(array('user' => $user->url), 'users_user_view'); ?>">
+                    <img src="<?= $CONFIG->media_base . '../users/thumbnail_small/' . $user->getAvatar() ?>" title="<?= $this->utf2html($user->getfullName()) ?>" alt="<?= $this->utf2html($user->getfullName()) ?>" />
+                </a>
+            </td>
+            <td valign="top">
+                [<a href="<?= $this->url(array('user' => $user->url), 'users_user_view'); ?>"><?= $this->utf2html($user->label) ?></a>]
+                Act: <?= $user->activity ?>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <?= $user->getFullName() ?>
+            </td>
+        </tr>
+        <?php $count++; ?>
+    <?php } ?>
+<?php } ?>
+    <tr>
+        <td colspan="2">
+            <center><a href="<?= $this->url(array(), 'friends_followings') ?>">[Ver todos]</a></center>
+        </td>
+    </tr>
+</table>
+
+<?php } else { ?>
+<p>No se encontraron contactos</p>
+<?php } ?>
+
+<h2>Peticiones</h2>
+<?php if (count($followers) != 0) { ?>
+
+<table width="100%">
+<?php foreach ($followers as $follower) { ?>
+    <?php if ($count <= $limit) { ?>
+        <?php $user = $users_model->findByIdent($follower->user); ?>
+        <tr>
+            <td width="50px" valign="top" rowspan="2">
+                <a href="<?= $this->url(array('user' => $user->url), 'users_user_view'); ?>">
+                    <img src="<?= $CONFIG->media_base . '../users/thumbnail_small/' . $user->getAvatar() ?>" title="<?= $this->utf2html($user->getfullName()) ?>" alt="<?= $this->utf2html($user->getfullName()) ?>" />
+                </a>
+            </td>
+            <td valign="top">
+                [<a href="<?= $this->url(array('user' => $user->url), 'users_user_view'); ?>"><?= $this->utf2html($user->label) ?></a>]
+                Act: <?= $user->activity ?>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <?= $user->getFullName() ?>
+            </td>
+        </tr>
+        <?php $count++; ?>
+    <?php } ?>
+<?php } ?>
+    <tr>
+        <td colspan="2">
+            <center><a href="<?= $this->url(array(), 'friends_followers') ?>">[Ver todos]</a></center>
         </td>
     </tr>
 </table>

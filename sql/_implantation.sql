@@ -35,6 +35,16 @@ VALUES
 (2,      'alexey',      'alexey',      md5('asdf'), UNIX_TIMESTAMP(), 'inactive', 'Rodriguez',        'Alexey',      200982298, 1,          'id26@gmail.com'), /* 26 */
 (2,      'aquilino',    'aquilino',    md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Davalos',          'Aquilino',    200873187, 0,          'id27@gmail.com'); /* 27 */
 
+INSERT INTO `friend`
+(`user`, `friend`, `mutual`, `tsregister`)
+VALUES
+( 3,  2, TRUE,  UNIX_TIMESTAMP()),
+( 3,  4, TRUE,  UNIX_TIMESTAMP()),
+( 2,  3, TRUE,  UNIX_TIMESTAMP()),
+( 4,  3, TRUE,  UNIX_TIMESTAMP()),
+( 3,  5, FALSE, UNIX_TIMESTAMP()),
+( 6,  3, FALSE, UNIX_TIMESTAMP());
+
 INSERT INTO `community`
 (`label`,          `url`,              `mode`,   `author`, `members`,     `tsregister`,     `interests`, `description`)
 VALUES

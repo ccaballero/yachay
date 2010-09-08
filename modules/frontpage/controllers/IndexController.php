@@ -95,7 +95,7 @@ class IndexController extends Yeah_Action
             if ($modules->findByLabel('friends')->status == 'active') {
                 if (Yeah_Acl::hasPermission('friends', 'contact')) {
                     $icons[] = array(
-                        'url' => $this->view->url(array(), 'friends_list'),
+                        'url' => $this->view->url(array(), 'friends_friends'),
                         'alt' => 'Lista de contactos',
                         'icon' => 'friends.png',
                     );

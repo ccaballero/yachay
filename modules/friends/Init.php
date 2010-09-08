@@ -2,27 +2,39 @@
 
 class modules_friends_Init extends Yeah_Init
 {
-    public $check = array ('friend');
+    public $check = array ('friend', 'friend_petition');
     public $install = 'friends';
 
     public $routes = array (
         'friends_add'                            => array('friends/:user/add',
         											array(
         											    'module'     => 'friends',
-        											    'controller' => 'index',
+        											    'controller' => 'friend',
         											    'action'     => 'add',
         											)),
         'friends_delete'	                     => array('friends/:user/delete',
         											array(
         											    'module'     => 'friends',
-        											    'controller' => 'index',
+        											    'controller' => 'friend',
         											    'action'     => 'delete',
         											)),
-        'friends_list'                           => array('friends',
+        'friends_followers'                      => array('friends/followers',
                                                     array(
                                                         'module'     => 'friends',
                                                         'controller' => 'index',
-                                                        'action'     => 'index',
+                                                        'action'     => 'followers',
+                                                    )),
+        'friends_followings'                      => array('friends/followings',
+                                                    array(
+                                                        'module'     => 'friends',
+                                                        'controller' => 'index',
+                                                        'action'     => 'followings',
+                                                    )),
+        'friends_friends'                        => array('friends',
+                                                    array(
+                                                        'module'     => 'friends',
+                                                        'controller' => 'index',
+                                                        'action'     => 'friends',
                                                     )),
     );
 }
