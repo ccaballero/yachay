@@ -1,6 +1,6 @@
 <h1>Configuraci&oacute;n de paginas</h1>
 
-<form method="post" action="">
+<form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
 
     <table>

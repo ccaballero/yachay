@@ -28,6 +28,7 @@
             <td valign="top">
                 [<a href="<?= $this->url(array('user' => $user->url), 'users_user_view'); ?>"><?= $this->utf2html($user->label) ?></a>]
                 Act: <?= $user->activity ?>
+                Soc: <?= $user->sociability ?>
             </td>
         </tr>
         <tr>
@@ -37,7 +38,7 @@
         </tr>
         <?php $count++; ?>
     <?php } ?>
-<?php } ?>
+<?php }; $count = 0; ?>
     <tr>
         <td colspan="2">
             <center><a href="<?= $this->url(array(), 'friends_friends') ?>">[Ver todos]</a></center>
@@ -65,6 +66,7 @@
             <td valign="top">
                 [<a href="<?= $this->url(array('user' => $user->url), 'users_user_view'); ?>"><?= $this->utf2html($user->label) ?></a>]
                 Act: <?= $user->activity ?>
+                Soc: <?= $user->sociability ?>
             </td>
         </tr>
         <tr>
@@ -74,7 +76,7 @@
         </tr>
         <?php $count++; ?>
     <?php } ?>
-<?php } ?>
+<?php }; $count = 0; ?>
     <tr>
         <td colspan="2">
             <center><a href="<?= $this->url(array(), 'friends_followings') ?>">[Ver todos]</a></center>
@@ -102,6 +104,7 @@
             <td valign="top">
                 [<a href="<?= $this->url(array('user' => $user->url), 'users_user_view'); ?>"><?= $this->utf2html($user->label) ?></a>]
                 Act: <?= $user->activity ?>
+                Soc: <?= $user->sociability ?>
             </td>
         </tr>
         <tr>

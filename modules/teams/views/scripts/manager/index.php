@@ -3,7 +3,7 @@
 <br />
 <b>Materia: </b><i><?= $this->utf2html($this->subject->label) ?></i>
 
-<form method="post" action="">
+<form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>

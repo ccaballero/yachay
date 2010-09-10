@@ -48,10 +48,11 @@ class modules_users_models_Users extends Zend_Db_Table_Abstract
         'interests'             => 'Intereses',
         'description'           => 'Descripcion',
         'sign'                  => 'Firma',
+        'activity'              => 'Actividad',
+        'sociability'           => 'Sociabilidad',
         'knowledge'             => 'Conocimiento',
         'participation'         => 'Participacion',
         'popularity'            => 'Popularidad',
-        'activity'              => 'Actividad',
         'tsregister'            => 'Fecha de registro',
         'tslastlogin'           => 'Ultimo acceso',
     );

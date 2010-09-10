@@ -6,14 +6,14 @@ class Profile_IndexController extends Yeah_Action
         global $USER;
         global $CONFIG;
 
-        $request = $this->getRequest();
-
-        $url = $request->getParam('user');
-        if ($url != $USER->url) {
+        if ($USER->role == 1) {
             $this->_redirect($CONFIG->wwwroot);
         }
+
+        $request = $this->getRequest();
+
         $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByUrl($url);
+        $user = $users->findByUrl($USER->url);
         $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
 
         context('user', $user);
@@ -21,7 +21,7 @@ class Profile_IndexController extends Yeah_Action
         $this->view->model = $users;
         $this->view->user = $user;
 
-        history('profile/' . $user->url);
+        history('profile');
         breadcrumb();
     }
 
@@ -29,14 +29,14 @@ class Profile_IndexController extends Yeah_Action
         global $USER;
         global $CONFIG;
 
-        $request = $this->getRequest();
-
-        $url = $request->getParam('user');
-        if ($url != $USER->url) {
+        if ($USER->role == 1) {
             $this->_redirect($CONFIG->wwwroot);
         }
+
+        $request = $this->getRequest();
+
         $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByUrl($url);
+        $user = $users->findByUrl($USER->url);
         $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
 
         context('user', $user);
@@ -174,9 +174,9 @@ class Profile_IndexController extends Yeah_Action
         $this->view->model = $users;
         $this->view->user = $user;
 
-        history('profile/' . $user->url . '/edit');
+        history('profile/edit');
         $breadcrumb = array();
-        $breadcrumb[$user->label] = $this->view->url(array('user' => $user->url), 'profile_view');
+        $breadcrumb[$user->label] = $this->view->url(array(), 'profile_view');
         breadcrumb($breadcrumb);
     }
 }

@@ -2,7 +2,7 @@
 <p>Escriba su direcci&oacute;n de correo electr&oacute;nico para que le enviemos una nueva contrase&ntilde;a.</p>
 
 <center>
-    <form method="post" action="">
+    <form method="post" action="" accept-charset="utf-8">
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table width="60%">
             <tr>

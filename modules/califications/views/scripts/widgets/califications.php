@@ -1,4 +1,4 @@
-<form method="post" action="califications">
+<form method="post" action="califications" accept-charset="utf-8">
     <table>
         <tr>
             <td>

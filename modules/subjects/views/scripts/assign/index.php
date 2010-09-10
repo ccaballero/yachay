@@ -1,7 +1,7 @@
 <h1>Miembros: <?= $this->utf2html($this->subject->label) ?></h1>
 <i><b>Gestion: </b><?= $this->utf2html($this->subject->getGestion()->label) ?></i>
 
-<form method="post" action="">
+<form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>

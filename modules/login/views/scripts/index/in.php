@@ -2,7 +2,7 @@
 <p>Para acceder al sistema, debe colocar su nombre de usuario y la contrase&ntilde;a que le haya sido provista.</p>
 
 <center>
-    <form method="post" action="">
+    <form method="post" action="" accept-charset="utf-8">
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table width="60%">
             <tr>

@@ -10,6 +10,7 @@ class Friends_FriendController extends Yeah_Action
 
         $users = Yeah_Adapter::getModel('users');
         $friends = Yeah_Adapter::getModel('friends');
+        $valorations = Yeah_Adapter::getModel('valorations');
 
         $url = $request->getParam('user');
         $user = $users->findByUrl($url);
@@ -41,6 +42,9 @@ class Friends_FriendController extends Yeah_Action
                 $row = $friends->getContact($user->ident, $USER->ident);
                 $row->mutual = TRUE;
                 $row->save();
+
+                $valorations->addSociability($user, 3, 2);
+
                 $session->messages->addMessage("El usuario {$user->label} ha sido agregado a la lista de amigos");
             } else {
                 $row = $friends->createRow();
@@ -49,6 +53,9 @@ class Friends_FriendController extends Yeah_Action
                 $row->mutual = FALSE;
                 $row->tsregister = time();
                 $row->save();
+
+                $valorations->addSociability($user, 2, 1);
+
                 $session->messages->addMessage("Se envio un petición al usuario {$user->label}");
             }
         }
@@ -64,6 +71,7 @@ class Friends_FriendController extends Yeah_Action
 
         $users = Yeah_Adapter::getModel('users');
         $friends = Yeah_Adapter::getModel('friends');
+        $valorations = Yeah_Adapter::getModel('valorations');
 
         $url = $request->getParam('user');
         $user = $users->findByUrl($url);
@@ -85,10 +93,16 @@ class Friends_FriendController extends Yeah_Action
                 $row = $friends->getContact($user->ident, $USER->ident);
                 $row->mutual = FALSE;
                 $row->save();
+
+                $valorations->decreaseSociability($user, 3, 2);
+
                 $session->messages->addMessage("El usuario {$user->label} ha sido retirado de la lista de amigos");
             } else {
                 $row = $friends->getContact($USER->ident, $user->ident);
                 $row->delete();
+
+                $valorations->decreaseSociability($user, 2, 1);
+
                 $session->messages->addMessage("Has cancelado tu petición al usuario {$user->label}");
             }
         } else {

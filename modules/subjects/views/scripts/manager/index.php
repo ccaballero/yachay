@@ -4,7 +4,7 @@
 <i><b>Gestion: </b><?= $this->utf2html($this->gestion->label) ?></i>
 <?php } ?>
 
-<form method="post" action="">
+<form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>

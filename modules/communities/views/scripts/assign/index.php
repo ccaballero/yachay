@@ -2,7 +2,7 @@
 
 <h1>Miembros: <?= $this->utf2html($this->community->label) ?></h1>
 
-<form method="post" action="">
+<form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>

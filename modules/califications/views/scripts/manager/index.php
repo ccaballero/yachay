@@ -10,7 +10,7 @@
 <b>Estado: <i><?= $this->status($this->group->status) ?></i></b>
 <br />
 
-<form method="post" action="">
+<form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>

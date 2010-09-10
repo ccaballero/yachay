@@ -1,7 +1,7 @@
 <h1>Importar miembros</h1>
 
 <center>
-    <form method="post" action="" enctype="multipart/form-data">
+    <form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table>
             <tr>
