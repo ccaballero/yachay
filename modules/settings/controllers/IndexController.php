@@ -25,7 +25,7 @@ class Settings_IndexController extends Yeah_Action
             $password2 = $request->getParam('password2');
 
             if ($password1 == $password2) {
-                $user->password = md5($password1);
+                $user->password = md5($CONFIG->key . $password1);
                 $user->save();
 
                 $session->messages->addMessage("Tu has cambiado tus preferencias correctamente");

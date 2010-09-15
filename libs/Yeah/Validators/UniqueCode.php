@@ -7,7 +7,7 @@ class Yeah_Validators_UniqueCode extends Zend_Validate_Abstract
 
     public function __construct($model, $ident) {
         $this->_model = $model;
-        $this->ident = $ident;
+        $this->_ident = $ident;
     }
 
     public function isValid($value) {
@@ -16,7 +16,7 @@ class Yeah_Validators_UniqueCode extends Zend_Validate_Abstract
         if (empty($element)) {
             return true;
         } else {
-            if ($element->ident == $this->ident) {
+            if ($element->ident == $this->_ident) {
                 return true;
             }
         }

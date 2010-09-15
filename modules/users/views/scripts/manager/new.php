@@ -9,23 +9,31 @@
                 <td><input type="text" name="label" value="<?= $this->user->label ?>" maxlength="20" /></td>
             </tr>
             <tr>
-                <td><b>Correo electronico (*):</b></td>
-                <td><input type="text" name="email" value="<?= $this->user->email ?>" maxlength="50" /></td>
-            </tr>
-            <tr>
-                <td><b>Rol (*):</b></td>
-                <td><?= $this->role('role', $this->user->role) ?></td>
+                <td><b>Generador de contraseña:</b></td>
+                <td><?= $this->password('password', $this->user->password) ?></td>
             </tr>
             <tr>
                 <td><b>Codigo SISS (*):</b></td>
                 <td><input type="text" name="code" value="<?= $this->user->code ?>" maxlength="9" /></td>
             </tr>
             <tr>
-                <td><b>Apellidos (*):</b></td>
+                <td><b>Nombre Formal (*):</b></td>
+                <td><input type="text" name="formal" value="<?= $this->user->formalname ?>" maxlength="128" /></td>
+            </tr>
+            <tr>
+                <td><b>Rol (*):</b></td>
+                <td><?= $this->role('role', $this->user->role) ?></td>
+            </tr>
+            <tr>
+                <td><b>Correo electronico:</b></td>
+                <td><input type="text" name="email" value="<?= $this->user->email ?>" maxlength="50" /></td>
+            </tr>
+            <tr>
+                <td><b>Apellidos:</b></td>
                 <td><input type="text" name="surname" value="<?= $this->user->surname ?>" maxlength="128" /></td>
             </tr>
             <tr>
-                <td><b>Nombres (*):</b></td>
+                <td><b>Nombres:</b></td>
                 <td><input type="text" name="name" value="<?= $this->user->name ?>" maxlength="128" /></td>
             </tr>
             <tr>

@@ -25,6 +25,9 @@
             <?php if (!empty($assign)) { ?>
             	[<?= $this->typeAssign($assign->type) ?>]
             <?php } ?>
+            <?php if ($subject->moderator == $USER->ident) { ?>
+                [Moderador]
+            <?php } ?>
             <br />
             <i><?= $this->utf2html($subject->description) ?></i>
         </li>

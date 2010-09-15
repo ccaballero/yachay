@@ -23,12 +23,14 @@ Yeah version 0.1
     social network.
 
 == Instalation ==
-    1. Copy the htaccess-dist to .htaccess.
-    2. Copy the hgignore-dist to .hgignore.
-    3. Copy the libs/Yeah/Settings/Config-dist.php to libs/Yeah/Settings/Config.php
-    4. Edit the Config.php file.
-    5. Copy the libs/Yeah/Settings/Database-dist.php to libs/Yeah/Database/Database.php
-    6. Edit the Database.php file.
-    7. Create an empty file called yeah.log and put write permissions (chmod ugo+w).
-    8. Create a symbolic link from libs/Zend1.10.7 to libs/Zend (ln -s libs/Zend1.10.7 libs/Zend).
+     1. Copy the htaccess-dist to .htaccess.
+     2. Copy the hgignore-dist to .hgignore.
+     3. Copy the libs/Yeah/Settings/Config-dist.php to libs/Yeah/Settings/Config.php
+     4. Edit the Config.php file.
+     5. Run the key.php file.
+     6. Copy the key in Config.php file in key field.
+     7. Copy the libs/Yeah/Settings/Database-dist.php to libs/Yeah/Database/Database.php
+     8. Edit the Database.php file.
+     9. Create an empty file called yeah.log and put write permissions (chmod ugo+w).
+    10. Create a symbolic link from libs/Zend1.10.7 to libs/Zend (ln -s libs/Zend1.10.7 libs/Zend).
 

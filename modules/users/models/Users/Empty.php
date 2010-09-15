@@ -3,9 +3,11 @@
 class modules_users_models_Users_Empty
 {
     public $label = '';
-    public $email = '';
-    public $role = 0;
+    public $password = 'alphanum';
     public $code = '';
+    public $formalname = '';
+    public $role = 0;
+    public $email = '';
     public $surname = '';
     public $name = '';
     public $birthdate = '0-0-0';

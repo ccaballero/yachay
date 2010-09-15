@@ -2,7 +2,8 @@
 
 <p>
     En esta pagina usted puede configurar algunos aspectos del comportamiento del sistema, como por ejemplo: 
-    su contrase&ntilde;a, el aspecto, las notificaciones, los boletines y otros dependiendo de los modulos que use.
+    su contrase&ntilde;a, el aspecto, las notificaciones, los boletines y otros dependiendo de los modulos que
+    esten instalados.
 </p>
 
 <center>

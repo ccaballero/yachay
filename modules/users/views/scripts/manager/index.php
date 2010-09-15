@@ -1,5 +1,5 @@
 <h1>Administrador de usuarios</h1>
-
+<?php global $USER; ?>
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
 
@@ -51,42 +51,18 @@
                 <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
                         <a href="<?= $this->url(array('user' => $user->url), 'users_user_view') ?>">Ver</a>
                 <?php } ?>
-                <?php if (Yeah_Acl::hasPermission('users', 'edit')) { ?>
+                <?php if ($USER->hasFewerPrivileges($user)) { ?>
+                    <?php if (Yeah_Acl::hasPermission('users', 'edit')) { ?>
                         <a href="<?= $this->url(array('user' => $user->url), 'users_user_edit') ?>">Editar</a>
-                <?php } ?>
-                <?php if (Yeah_Acl::hasPermission('users', 'lock')) { ?>
-                <?php
-                    // FIXME Cambiar de lugar tanta logica interna
-                    global $USER;
-                    $model = Yeah_Adapter::getModel('roles');
-                    $roles = $model->selectByIncludes($USER->role);
-                    $valid_role = false;
-                    foreach ($roles as $role) {
-                        if ($role->ident == $user->role) {
-                            $valid_role |= true;
-                        }
-                    }
-                    if ($valid_role) { ?>
-                    <?php if ($user->status == 'active') { ?>
-                        <a href="<?= $this->url(array('user' => $user->url), 'users_user_lock') ?>">Bloquear</a>
-                    <?php } else { ?>
-                        <a href="<?= $this->url(array('user' => $user->url), 'users_user_unlock') ?>">Desbloquear</a>
                     <?php } ?>
-                <?php } ?>
-                <?php } ?>
-                <?php if (Yeah_Acl::hasPermission('users', 'delete')) { ?>
-                <?php
-                    // FIXME Cambiar de lugar tanta logica interna
-                    global $USER;
-                    $model = Yeah_Adapter::getModel('roles');
-                    $roles = $model->selectByIncludes($USER->role);
-                    $valid_role = false;
-                    foreach ($roles as $role) {
-                        if ($role->ident == $user->role) {
-                            $valid_role |= true;
-                        }
-                    }
-                    if ($valid_role) { ?>
+                    <?php if (Yeah_Acl::hasPermission('users', 'lock')) { ?>
+                        <?php if ($user->status == 'active') { ?>
+                            <a href="<?= $this->url(array('user' => $user->url), 'users_user_lock') ?>">Bloquear</a>
+                        <?php } else { ?>
+                            <a href="<?= $this->url(array('user' => $user->url), 'users_user_unlock') ?>">Desbloquear</a>
+                        <?php } ?>
+                    <?php } ?>
+                    <?php if (Yeah_Acl::hasPermission('users', 'delete')) { ?>
                         <a href="<?= $this->url(array('user' => $user->url), 'users_user_delete') ?>">Eliminar</a>
                     <?php } ?>
                 <?php } ?>

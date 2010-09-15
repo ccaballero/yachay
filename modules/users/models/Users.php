@@ -30,31 +30,32 @@ class modules_users_models_Users extends Zend_Db_Table_Abstract
         ),
     );
     public    $_mapping         = array(
-        'ident'                 => 'Codigo',
+        'ident'                 => 'Código',
         'role'                  => 'Rol',                   // required
-        'code'                  => 'Codigo',                // required
+        'code'                  => 'Código',                // required
         'label'                 => 'Usuario',                           // optional
         'url'                   => 'Identificador',
-        'email'                 => 'Correo electronico',    // required
+        'email'                 => 'Correo electrónico',                // optional
         'status'                => 'Estado',
+        'formalname'            => 'Nombre Completo',       // required
         'surname'               => 'Apellidos',                         // optional
         'name'                  => 'Nombres',                           // optional
         'avatar'                => 'Tiene avatar',
         'birdthdate'            => 'Fecha de nacimiento',
         'career'                => 'Carrera',                           // optional
-        'phone'                 => 'Telefono',                          // optional
+        'phone'                 => 'Teléfono',                          // optional
         'cellphone'             => 'Celular',                           // optional
         'hobbies'               => 'Pasatiempos',
         'interests'             => 'Intereses',
-        'description'           => 'Descripcion',
+        'description'           => 'Descripción',
         'sign'                  => 'Firma',
         'activity'              => 'Actividad',
         'sociability'           => 'Sociabilidad',
         'knowledge'             => 'Conocimiento',
-        'participation'         => 'Participacion',
+        'participation'         => 'Participación',
         'popularity'            => 'Popularidad',
         'tsregister'            => 'Fecha de registro',
-        'tslastlogin'           => 'Ultimo acceso',
+        'tslastlogin'           => 'Último acceso',
     );
 
     // Especial method

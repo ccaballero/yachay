@@ -54,6 +54,7 @@ class Users_UserController extends Yeah_Action
         $user = $users->findByUrl($request->getParam('user'));
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
+        $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
 
         context('user', $user);
 
@@ -61,9 +62,9 @@ class Users_UserController extends Yeah_Action
             $session = new Zend_Session_Namespace();
 
             $user->label = $request->getParam('label');
-            $user->email = $request->getParam('email');
-            $user->role = $request->getParam('role');
             $user->code = $request->getParam('code');
+            $user->formalname= $request->getParam('formal');
+            $user->email = $request->getParam('email');
             $user->surname = $request->getParam('surname');
             $user->name = $request->getParam('name');
             $user->birthdate = $request->getParam('birthdate-year') . '-' . $request->getParam('birthdate-month') . '-' . $request->getParam('birthdate-day');
@@ -71,16 +72,23 @@ class Users_UserController extends Yeah_Action
             $user->phone = $request->getParam('phone');
             $user->cellphone = $request->getParam('cellphone');
 
+            global $USER;
+            if ($USER->ident <> $user->ident) {
+                $user->role = $request->getParam('role');
+            }
+
             if ($user->isValid()) {
-                global $CONFIG;
                 // role validation,, critical point
-                global $USER;
-                $model = Yeah_Adapter::getModel('roles');
-                $roles = $model->selectByIncludes($USER->role);
                 $valid_role = false;
-                foreach ($roles as $role) {
-                    if ($role->ident == $user->role) {
-                        $valid_role |= true;
+                if ($USER->ident == $user->ident) {
+                    $valid_role = true;
+                } else {
+                    $model = Yeah_Adapter::getModel('roles');
+                    $roles = $model->selectByIncludes($USER->role);
+                    foreach ($roles as $role) {
+                        if ($role->ident == $user->role) {
+                            $valid_role |= true;
+                        }
                     }
                 }
 
@@ -117,8 +125,6 @@ class Users_UserController extends Yeah_Action
     }
 
     public function lockAction() {
-        global $USER;
-
         $this->requirePermission('users', 'lock');
         $request = $this->getRequest();
 
@@ -127,31 +133,17 @@ class Users_UserController extends Yeah_Action
         $user = $users->findByUrl($url);
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
-
-        $model = Yeah_Adapter::getModel('roles');
-        $roles = $model->selectByIncludes($USER->role);
-        $valid_role = false;
-        foreach ($roles as $role) {
-            if ($role->ident == $user->role) {
-                $valid_role |= true;
-            }
-        }
+        $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
 
         $session = new Zend_Session_Namespace();
-        if ($valid_role) {
-            $user->status = 'inactive';
-            $user->save();
-            $session->messages->addMessage("El usuario {$user->label} ha sido bloqueado");
-        } else {
-            $session->messages->addMessage("El usuario {$user->label} no puede ser bloqueado");
-        }
+        $user->status = 'inactive';
+        $user->save();
+        $session->messages->addMessage("El usuario {$user->label} ha sido bloqueado");
 
         $this->_redirect($this->view->currentPage());
     }
 
     public function unlockAction() {
-        global $USER;
-
         $this->requirePermission('users', 'lock');
         $request = $this->getRequest();
 
@@ -160,31 +152,17 @@ class Users_UserController extends Yeah_Action
         $user = $users->findByUrl($url);
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
-
-        $model = Yeah_Adapter::getModel('roles');
-        $roles = $model->selectByIncludes($USER->role);
-        $valid_role = false;
-        foreach ($roles as $role) {
-            if ($role->ident == $user->role) {
-                $valid_role |= true;
-            }
-        }
+        $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
 
         $session = new Zend_Session_Namespace();
-        if ($valid_role) {
-            $user->status = 'active';
-            $user->save();
-            $session->messages->addMessage("El usuario {$user->label} ha sido desbloqueado");
-        } else {
-            $session->messages->addMessage("El usuario {$user->label} no puede ser desbloqueado");
-        }
+        $user->status = 'active';
+        $user->save();
+        $session->messages->addMessage("El usuario {$user->label} ha sido desbloqueado");
 
         $this->_redirect($this->view->currentPage());
     }
 
     public function deleteAction() {
-        global $USER;
-
         $this->requirePermission('users', 'delete');
         $request = $this->getRequest();
 
@@ -193,25 +171,13 @@ class Users_UserController extends Yeah_Action
         $user = $users->findByUrl($url);
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
-
-        $model = Yeah_Adapter::getModel('roles');
-        $roles = $model->selectByIncludes($USER->role);
-        $valid_role = false;
-        foreach ($roles as $role) {
-            if ($role->ident == $user->role) {
-                $valid_role |= true;
-            }
-        }
+        $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
 
         $session = new Zend_Session_Namespace();
-        if ($valid_role) {
-            // FIXME Agregar prohibiciones para usuarios con asignaciones criticas.
-            $label = $user->label;
-            $user->delete();
-            $session->messages->addMessage("El usuario $label ha sido eliminado");
-        } else {
-            $session->messages->addMessage("El usuario no puede ser eliminado");
-        }
+        // FIXME Agregar prohibiciones para usuarios con asignaciones criticas.
+        $label = $user->label;
+        $user->delete();
+        $session->messages->addMessage("El usuario $label ha sido eliminado");
 
         $this->_redirect($this->view->currentPage());
     }

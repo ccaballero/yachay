@@ -1,5 +1,5 @@
 <h1>Lista de usuarios</h1>
-
+<?php global $USER; ?>
 <?php if (count($this->users)) { ?>
     <center><?= $this->paginator($this->users, $this->route) ?></center>
     <?php foreach ($this->users as $user) { ?>
@@ -10,26 +10,23 @@
                 </td>
                 <td colspan="4">
                     <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
-                    <a href="<?= $this->url(array('user' => $user->url), 'users_user_view') ?>">
-                        <b><?= $this->utf2html($user->label) ?></b>
-                    </a>
+                    <a href="<?= $this->url(array('user' => $user->url), 'users_user_view') ?>"><b><?= $this->utf2html($user->label) ?></b></a>
                     <?php } else { ?>
                         <b><?= $this->utf2html($user->label) ?></b>
                     <?php } ?>
                     &nbsp;
-                    <?php if (Yeah_Acl::hasPermission('users', 'edit')) { ?>
-                    <b><i>[<a href="<?= $this->url(array('user' => $user->url), 'users_user_edit') ?>">Editar</a>]</i></b>
+                    <?php if (Yeah_Acl::hasPermission('users', 'edit') && $USER->hasFewerPrivileges($user)) { ?>
+                    <b>[<i><a href="<?= $this->url(array('user' => $user->url), 'users_user_edit') ?>">Editar</a></i>]</b>
                     <?php } ?>
                     <?php if (Yeah_Acl::hasPermission('friends', 'contact')) { ?>
-                        <?php global $USER; ?>
                         <?php if ($USER->ident != $user->ident) { ?>
                             <?php if ($this->friends->hasContact($USER->ident, $user->ident)) { ?>
                             <a href="<?= $this->url(array('user' => $user->url), 'friends_delete') ?>">
-                                <b><i>[Retirar contacto]</i></b>
+                                <b>[<i>Retirar contacto</i>]</b>
                             </a>
                             <?php } else { ?>
                             <a href="<?= $this->url(array('user' => $user->url), 'friends_add') ?>">
-                                <b><i>[Agregar contacto]</i></b>
+                                <b>[<i>Agregar contacto</i>]</b>
                             </a>
                             <?php } ?>
                         <?php } ?>

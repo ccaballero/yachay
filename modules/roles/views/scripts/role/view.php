@@ -36,14 +36,14 @@
 <center>
     <table width="100%">
         <tr>
-            <th>Modulo</th>
             <th>Privilegio</th>
+            <th>Modulo</th>
             <th>Funcion</th>
         </tr>
         <?php foreach ($privileges as $privilege) { ?>
         <tr>
-            <td><?= $privilege->module ?></td>
             <td><?= $this->utf2html($privilege->label) ?></td>
+            <td><?= $privilege->module ?></td>
             <td><?= $privilege->privilege ?></td>
         </tr>
         <?php } ?>

@@ -192,7 +192,6 @@ VALUES
 /* Conecciones adicionales para la habilitacion de los menus                                                          */
 /*====================================================================================================================*/
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 1 WHERE `ident` = 5;
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 2 WHERE `ident` = 13;
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 3 WHERE `ident` = 22;
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 3 WHERE `ident` = 32;
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 4 WHERE `ident` = 35;
@@ -200,11 +199,12 @@ UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 6 WHERE `ident` = 40;
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 5 WHERE `ident` = 51;
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 7 WHERE `ident` = 70;
 
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 1 WHERE `ident` = 1;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 2 WHERE `ident` = 7;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 3 WHERE `ident` = 9;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 4 WHERE `ident` = 11;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 5 WHERE `ident` = 81;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 1 WHERE `ident` = 13;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 2 WHERE `ident` = 1;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 3 WHERE `ident` = 7;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 4 WHERE `ident` = 9;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 5 WHERE `ident` = 11;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 6 WHERE `ident` = 81;
 
 /*====================================================================================================================*/
 /*====================================================================================================================*/
@@ -304,8 +304,8 @@ VALUES
 /* Inserciones extra para el modulo USERS                                                                             */
 /*====================================================================================================================*/
 ( 7,17), ( 7,18), ( 7,19), ( 7,20), ( 7,21), ( 7,22), ( 7,23), ( 7,24),
-( 6,17), ( 6,18), ( 6,19), ( 6,20), ( 6,21),          ( 6,23),
-( 5,17), ( 5,18), ( 5,19), ( 5,20), ( 5,21),         
+( 6,17), ( 6,18), ( 6,19), ( 6,20), ( 6,21), ( 6,22), ( 6,23),
+( 5,17), ( 5,18), ( 5,19), ( 5,20), ( 5,21), ( 5,22),
 ( 4,17),                            ( 4,21),
 ( 3,17),                            ( 3,21),
 ( 2,17),                            ( 2,21),
@@ -332,9 +332,9 @@ VALUES
 /*====================================================================================================================*/
 /* Inserciones extra para el modulo SUBJECTS                                                                          */
 /*====================================================================================================================*/
-( 7,31), ( 7,32), ( 7,33), ( 7,34), ( 7,35), ( 7,36), ( 7,37), ( 7,38), ( 7,39), (7, 40), ( 7,41), ( 7,42), ( 7,43),
-( 6,31),                            ( 6,35),                            ( 6,39),                            ( 6,43),
-( 5,31),                            ( 5,35),                                     ( 5,40), ( 5,41),          ( 5,43),
+( 7,31), ( 7,32), ( 7,33), ( 7,34), ( 7,35), ( 7,36), ( 7,37), ( 7,38), ( 7,39), ( 7,40), ( 7,41), ( 7,42), ( 7,43),
+( 6,31),                            ( 6,35),                            ( 6,39), ( 6,40), ( 6,41), ( 6,42), ( 6,43),
+( 5,31),                            ( 5,35),                                     ( 5,40), ( 5,41), ( 5,42), ( 5,43),
 ( 4,31),                            ( 4,35),                                              ( 4,41), ( 4,42), ( 4,43),
 ( 3,31),                            ( 3,35),                                                       ( 3,42), ( 3,43),
 ( 2,31),                            ( 2,35),                                                                ( 2,43),
@@ -372,9 +372,9 @@ VALUES
 
 
 INSERT INTO `user`
-(`role`, `label`,       `url`,         `password`,  `tsregister`,     `status`,   `surname`,          `name`,        `code`,    `email`)
+(`role`, `label`,       `url`,         `password`,                                             `tsregister`,     `status`,   `surname`,          `name`)
 VALUES
-(7,      'admin',       'admin',       md5('asdf'), UNIX_TIMESTAMP(), 'active',   'Administrador',    'Señor',       200229397, 'cijkb.j@gmail.com');
+(7,      'admin',       'admin',       md5(CONCAT('KQ01805XG4GLTZHIFX19K0GR3G0K537F','asdf')), UNIX_TIMESTAMP(), 'active',   'Administrador',    'Señor');
 
 
 INSERT INTO `evaluation`

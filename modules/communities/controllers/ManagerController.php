@@ -86,21 +86,19 @@ class Communities_ManagerController extends Yeah_Action
                     // creo y redimensiono la imagen grande
                     $maxwidth = 200;
                     $maxheight = 200;
-                    $newwidth = $maxwidth + 1;
-                    $newheight = $maxheight + 1;
+                    $newwidth = $maxwidth;
+                    $newheight = $maxheight;
 
-                    while ($newwidth > $maxwidth && $newheight > $maxheight) {
-                        $ratio = $width / $height;
-                        if ($ratio == 1) {
-                            $newwidth = $maxwidth;
-                            $newheigth = $maxwidth;
-                        } else if ($ratio > 1) {
-                            $newwidth = $maxwidth;
-                            $newheight = $maxwidth / $ratio;
-                        } else if ($ratio < 1) {
-                            $newwidth = $maxheight * $ratio;
-                            $newheight = $maxheight;
-                        }
+                    $ratio = $width / $height;
+                    if ($ratio == 1) {
+                        $newwidth = $maxwidth;
+                        $newheigth = $maxwidth;
+                    } else if ($ratio > 1) {
+                        $newwidth = $maxwidth;
+                        $newheight = $maxwidth / $ratio;
+                    } else if ($ratio < 1) {
+                        $newwidth = $maxheight * $ratio;
+                        $newheight = $maxheight;
                     }
 
                     $thumb = imagecreatetruecolor($newwidth, $newheight);
@@ -110,21 +108,19 @@ class Communities_ManagerController extends Yeah_Action
                     // creo y redimensiono la imagen mediana
                     $maxwidth = 100;
                     $maxheight = 100;
-                    $newwidth = $maxwidth + 1;
-                    $newheight = $maxheight + 1;
+                    $newwidth = $maxwidth;
+                    $newheight = $maxheight;
 
-                    while ($newwidth > $maxwidth && $newheight > $maxheight) {
-                        $ratio = $width / $height;
-                        if ($ratio == 1) {
-                            $newwidth = $maxwidth;
-                            $newheigth = $maxwidth;
-                        } else if ($ratio > 1) {
-                            $newwidth = $maxwidth;
-                            $newheight = $maxwidth / $ratio;
-                        } else if ($ratio < 1) {
-                            $newwidth = $maxheight * $ratio;
-                            $newheight = $maxheight;
-                        }
+                    $ratio = $width / $height;
+                    if ($ratio == 1) {
+                        $newwidth = $maxwidth;
+                        $newheigth = $maxwidth;
+                    } else if ($ratio > 1) {
+                        $newwidth = $maxwidth;
+                        $newheight = $maxwidth / $ratio;
+                    } else if ($ratio < 1) {
+                        $newwidth = $maxheight * $ratio;
+                        $newheight = $maxheight;
                     }
 
                     $thumb = imagecreatetruecolor($newwidth, $newheight);
@@ -134,21 +130,19 @@ class Communities_ManagerController extends Yeah_Action
                     // creo y redimensiono la imagen pequeña
                     $maxwidth = 50;
                     $maxheight = 50;
-                    $newwidth = $maxwidth + 1;
-                    $newheight = $maxheight + 1;
+                    $newwidth = $maxwidth;
+                    $newheight = $maxheight;
 
-                    while ($newwidth > $maxwidth && $newheight > $maxheight) {
-                        $ratio = $width / $height;
-                        if ($ratio == 1) {
-                            $newwidth = $maxwidth;
-                            $newheigth = $maxwidth;
-                        } else if ($ratio > 1) {
-                            $newwidth = $maxwidth;
-                            $newheight = $maxwidth / $ratio;
-                        } else if ($ratio < 1) {
-                            $newwidth = $maxheight * $ratio;
-                            $newheight = $maxheight;
-                        }
+                    $ratio = $width / $height;
+                    if ($ratio == 1) {
+                        $newwidth = $maxwidth;
+                        $newheigth = $maxwidth;
+                    } else if ($ratio > 1) {
+                        $newwidth = $maxwidth;
+                        $newheight = $maxwidth / $ratio;
+                    } else if ($ratio < 1) {
+                        $newwidth = $maxheight * $ratio;
+                        $newheight = $maxheight;
                     }
 
                     $thumb = imagecreatetruecolor($newwidth, $newheight);

@@ -1,18 +1,14 @@
 <h1>Usuario: <?= $this->utf2html($this->user->label) ?>
-    <?php if (Yeah_Acl::hasPermission('users', 'edit')) { ?>
+<?php global $USER; ?>
+    <?php if (Yeah_Acl::hasPermission('users', 'edit') && $USER->hasFewerPrivileges($this->user)) { ?>
         [<i><a href="<?= $this->url(array('user' => $this->user->url), 'users_user_edit') ?>">Editar</a></i>]
     <?php } ?>
     <?php if (Yeah_Acl::hasPermission('friends', 'contact')) { ?>
-        <?php global $USER; ?>
         <?php if ($USER->ident != $this->user->ident) { ?>
             <?php if ($this->friends->hasContact($USER->ident, $this->user->ident)) { ?>
-            <a href="<?= $this->url(array('user' => $this->user->url), 'friends_delete') ?>">
-                <b><i>[Retirar contacto]</i></b>
-            </a>
+            [<a href="<?= $this->url(array('user' => $this->user->url), 'friends_delete') ?>"><b><i>Retirar contacto</i></b></a>]
             <?php } else { ?>
-            <a href="<?= $this->url(array('user' => $this->user->url), 'friends_add') ?>">
-                <b><i>[Agregar contacto]</i></b>
-            </a>
+            [<a href="<?= $this->url(array('user' => $this->user->url), 'friends_add') ?>"><b><i>Agregar contacto</i></b></a>]
             <?php } ?>
         <?php } ?>
     <?php } ?>

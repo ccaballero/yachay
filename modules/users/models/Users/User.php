@@ -18,17 +18,13 @@ class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegiste
             'filters' => array('StringTrim', 'StringToUpper'),
             'validators' => array(
                 array(
-                    'validator' => 'NotEmpty',
-                    'message'   => 'El codigo de usuario no puede estar vacio',
-                ),
-                array(
                     'validator' => 'StringLength',
-                    'options'   => array(1, 16),
-                    'message'   => 'El codigo de usuario debe tener entre 1 y 16 caracteres',
+                    'options'   => array(0, 16),
+                    'message'   => 'El codigo de usuario debe tener entre 0 y 16 caracteres',
                 ),
                 array(
                     'validator' => 'Regex',
-                    'options'   => array('/^[[A-Za-z0-9]+$/i'),
+                    'options'   => array('/^[[A-Za-z0-9]*$/i'),
                     'message'   => 'El codigo de usuario debe contener unicamente caracteres y numeros',
                 ),
                 array(
@@ -49,7 +45,7 @@ class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegiste
                 array(
                     'validator' => 'StringLength',
                     'options'   => array(4, 64),
-                    'message'   => 'El nombre de usuario debe tener entre 1 y 64 caracteres',
+                    'message'   => 'El nombre de usuario debe tener entre 4 y 64 caracteres',
                 ),
                 array(
                     'validator' => 'UniqueLabel',
@@ -63,17 +59,15 @@ class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegiste
             'filters' => array('StringTrim', 'StringToLower'),
             'validators' => array(
                 array(
-                    'validator' => 'NotEmpty',
-                    'message'   => 'El correo electronico del usuario no puede estar vacio',
-                ),
-                array(
                     'validator' => 'StringLength',
-                    'options'   => array(1, 64),
-                    'message'   => 'El correo electronico del usuario debe tener entre 1 y 64 caracteres',
+                    'options'   => array(0, 64),
+                    'message'   => 'El correo electronico del usuario debe tener entre 0 y 64 caracteres',
                 ),
                 array(
-                    'validator' => 'EmailAddress',
+                    'validator' => 'EmailAddressOrNull',
+                    'options'   => array(),
                     'message'   => 'El correo electronico del usuario debe ser valido y existir',
+                    'namespace' => 'Yeah_Validators',
                 ),
                 array(
                     'validator' => 'UniqueEmail',
@@ -83,13 +77,23 @@ class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegiste
                 ),
             ),
         ),
+        'formalname' => array(
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array(
+                    'validator' => 'StringLength',
+                    'options'   => array(0, 128),
+                    'message'   => 'El nombre completo debe tener entre 0 y 128 caracteres',
+                ),
+            ),
+        ),
         'surname' => array(
             'filters' => array('StringTrim'),
             'validators' => array(
                 array(
                     'validator' => 'StringLength',
                     'options'   => array(0, 128),
-                    'message'   => 'El apellido debe tener entre 1 y 128 caracteres',
+                    'message'   => 'El apellido debe tener entre 0 y 128 caracteres',
                 ),
             ),
         ),
@@ -99,7 +103,7 @@ class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegiste
                 array(
                     'validator' => 'StringLength',
                     'options'   => array(0, 128),
-                    'message'   => 'El nombre debe tener entre 1 y 128 caracteres',
+                    'message'   => 'El nombre debe tener entre 0 y 128 caracteres',
                 ),
             ),
         ),
@@ -151,13 +155,36 @@ class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegiste
         return in_array($module . '_' . $privilege, $this->_acl);
     }
 
+    public function hasFewerPrivileges($user) {
+        $roles = Yeah_Adapter::getModel('roles');
+
+        $roles_allowed = $roles->selectByIncludes($this->role);
+        foreach ($roles_allowed as $role_allowed) {
+            if ($role_allowed->ident == $user->role) {
+                return true;
+            }
+        }
+    }
+
     public function getFullName() {
-        return $this->name . ' ' . $this->surname;
+        if (!empty($this->name) || !empty($this->surname)) {
+            return "{$this->name} {$this->surname}";
+        } else {
+            return $this->label;
+        }
     }
 
     public function getRole() {
         $roles = Yeah_Adapter::getModel('roles');
         return $roles->findByIdent($this->role);
+    }
+
+    public function needFillProfile() {
+        if (empty($this->email) || empty($this->surname) || empty($this->name)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function lastLogin() {
@@ -171,5 +198,12 @@ class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegiste
         } else {
             return '0.jpg';
         }
+    }
+
+    public function save() {
+        if ($this->email == '') {
+            unset($this->email);
+        }
+        parent::save();
     }
 }

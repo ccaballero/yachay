@@ -14,15 +14,15 @@
                 <td><input type="text" name="label" value="<?= $this->user->label ?>" maxlength="20" /></td>
             </tr>
             <tr>
-                <td><b>Correo electronico (*):</b></td>
+                <td><b>Correo electronico:</b></td>
                 <td><input type="text" name="email" value="<?= $this->user->email ?>" maxlength="50" /></td>
             </tr>
             <tr>
-                <td><b>Apellidos (*):</b></td>
+                <td><b>Apellidos:</b></td>
                 <td><input type="text" name="surname" value="<?= $this->utf2html($this->user->surname) ?>" maxlength="128" /></td>
             </tr>
             <tr>
-                <td><b>Nombres (*):</b></td>
+                <td><b>Nombres:</b></td>
                 <td><input type="text" name="name" value="<?= $this->utf2html($this->user->name) ?>" maxlength="128" /></td>
             </tr>
             <tr>

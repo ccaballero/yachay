@@ -2,7 +2,7 @@
 
 class modules_friends_Init extends Yeah_Init
 {
-    public $check = array ('friend', 'friend_petition');
+    public $check = array ('friend');
     public $install = 'friends';
 
     public $routes = array (

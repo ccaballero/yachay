@@ -13,7 +13,7 @@ CREATE TABLE `subject` (
     `label`             varchar(64)                                                 NOT NULL,
     `url`               varchar(64)                                                 NOT NULL,
     `status`            enum('active', 'inactive')                                  NOT NULL DEFAULT 'inactive',
-    `visibility`        enum('public', 'register', 'private')                       NOT NULL DEFAULT 'public',
+    `visibility`        enum('public', 'register', 'private')                       NOT NULL DEFAULT 'private',
     `description`       text                                                        NOT NULL DEFAULT '',
     `tsregister`        int unsigned                                                NOT NULL,
     PRIMARY KEY (`ident`, `gestion`),

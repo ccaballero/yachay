@@ -53,16 +53,19 @@ class Users_ManagerController extends Yeah_Action
             $users = Yeah_Adapter::getModel('users');
 
             $user = $users->createRow();
+
             $user->label = $request->getParam('label');
-            $user->email = $request->getParam('email');
-            $user->role = $request->getParam('role');
+            $user->password = $request->getParam('password');
             $user->code = $request->getParam('code');
+            $user->email = $request->getParam('email');
             $user->surname = $request->getParam('surname');
             $user->name = $request->getParam('name');
             $user->birthdate = $request->getParam('birthdate-year') . '-' . $request->getParam('birthdate-month') . '-' . $request->getParam('birthdate-day');
             $user->career = $request->getParam('career');
             $user->phone = $request->getParam('phone');
             $user->cellphone = $request->getParam('cellphone');
+
+            $user->role = $request->getParam('role');
 
             if ($user->isValid()) {
                 global $CONFIG;
@@ -78,28 +81,31 @@ class Users_ManagerController extends Yeah_Action
                 }
 
                 if ($valid_role) {
-                    $password = generatecode();
+                    // Password generation
+                    $password = generatecode($user->password, $user->code);
+                    $user->password = md5($CONFIG->key . $password);
 
-                    $user->password = md5($password);
                     $user->tsregister = time();
                     $user->save();
 
-                    // email notification
-                    $view = new Zend_View();
-                    $view->addHelperPath($CONFIG->dirroot . 'libs/Yeah/Helpers', 'Yeah_Helpers');
-                    $view->setScriptPath($CONFIG->dirroot . 'modules/users/views/scripts/user/');
+                    if (!empty($user->email)) {
+                        // email notification
+                        $view = new Zend_View();
+                        $view->addHelperPath($CONFIG->dirroot . 'libs/Yeah/Helpers', 'Yeah_Helpers');
+                        $view->setScriptPath($CONFIG->dirroot . 'modules/users/views/scripts/user/');
 
-                    $view->user       = $user;
-                    $view->servername = $CONFIG->wwwroot;
-                    $view->author     = $USER->label;
-                    $view->password   = $password;
+                        $view->user       = $user;
+                        $view->servername = $CONFIG->wwwroot;
+                        $view->author     = $USER->label;
+                        $view->password   = $password;
 
-                    $content = $view->render('mail.php');
-                    $mail = new Zend_Mail();
-                    $mail->setBodyHtml($content)
-                         ->addTo($user->email, $user->getFullName())
-                         ->setSubject(utf8_decode('Notificación de registro de usuario'))
-                         ->send();
+                        $content = $view->render('mail.php');
+                        $mail = new Zend_Mail();
+                        $mail->setBodyHtml($content)
+                             ->addTo($user->email, $user->getFullName())
+                             ->setSubject(utf8_decode('Notificación de registro de usuario'))
+                             ->send();
+                    }
 
                     $session->messages->addMessage("El usuario {$user->label} se ha creado correctamente");
                     $session->url = $user->url;
@@ -239,128 +245,177 @@ class Users_ManagerController extends Yeah_Action
         $this->requirePermission('users', array('new', 'edit'));
 
         $options = array();
-        if (Yeah_Acl::hasPermission('users', 'new') && Yeah_Acl::hasPermission('users', 'edit')) {
+        if (Yeah_Acl::hasPermission('users', 'new')) {
             $options['CREATE_NOEDIT'] = 'Solo crear usuarios nuevos, e ignorar los restantes.';
-            $options['NOCREATE_EDIT'] = 'Solo actualizar la informacion de los existentes, no registrar nuevos.';
-            $options['CREATE_EDIT'] = 'Crear usuarios, y actualizar la informacion de los existentes.';
+        }
+        if (Yeah_Acl::hasPermission('users', 'edit')) {
+            $options['NOCREATE_EDIT'] = 'Solo actualizar la información de los existentes, no registrar nuevos.';
+        }
+        if (Yeah_Acl::hasPermission('users', 'new') && Yeah_Acl::hasPermission('users', 'edit')) {
+            $options['CREATE_EDIT'] = 'Crear usuarios, y actualizar la información de los existentes.';
         }
         $this->view->options = $options;
+        $this->view->step = 1;
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $upload = new Zend_File_Transfer_Adapter_Http();
-            $upload->setDestination($CONFIG->dirroot . 'media/upload');
-            $upload->addValidator('Size', false, 2097152)
-                   ->addValidator('Extension', false, array('csv'));
+            $users = Yeah_Adapter::getModel('users');
+            $roles = Yeah_Adapter::getModel('roles');
 
-            if ($upload->receive()) {
-                $filename = $upload->getFileName('file');
-                $extension = strtolower(substr($filename, -3));
+            $selections = $request->getParam('users');
+            if (empty($selections)) {
+                $upload = new Zend_File_Transfer_Adapter_Http();
+                $upload->setDestination($CONFIG->dirroot . 'media/upload');
+                $upload->addValidator('Size', false, 2097152)
+                       ->addValidator('Extension', false, array('csv'));
 
-                $count = 0;
-                $model = Yeah_Adapter::getModel('users');
-                $roles = Yeah_Adapter::getModel('roles');
-                $type = $request->getParam('type');
+                if ($upload->receive()) {
+                    $filename = $upload->getFileName('file');
+                    $extension = strtolower(substr($filename, -3));
 
-                switch ($extension) {
-                    case 'csv':
-                        $csv = new File_CSV_DataSource;
-                        $csv->load($filename); //se carga el archivo
-                        $rows = $csv->connect(); //te devuelve el contenido del archivo
-                        // FIXME
-                        if ($csv->hasColumn('Codigo') && $csv->hasColumn('Rol') && $csv->hasColumn('Correo electronico')) {
-                            foreach ($rows as $row) {
-                                $code = $row['Codigo'];
-                                $mode = 'EDIT';
-                                $user = $model->findByCode($code);
-                                if (empty($user)) {
-                                    $mode = 'CREATE';
-                                    $user = $model->createRow();
+                    $type = $request->getParam('type');
+                    $role_default = $request->getParam('role');
+                    $password = $request->getParam('password');
+
+                    switch ($extension) {
+                        case 'csv':
+                            $csv = new File_CSV_DataSource;
+                            $csv->load($filename); //se carga el archivo
+                            $rows = $csv->connect(); //te devuelve el contenido del archivo
+
+                            $this->view->step = 2;
+
+                            $headers = $csv->getHeaders();
+                            $_headers = array();
+                            foreach ($headers as $header) {
+                                $key = trim(strtoupper(normalize($header)));
+                                $_headers[$key] = $header;
+                            }
+
+                            if ($csv->hasColumn($_headers['CODIGO']) && $csv->hasColumn($_headers['NOMBRE COMPLETO'])) {
+                                $results = array();
+
+                                foreach ($rows as $row) {
+                                    $result = array();
+
+                                    $result['CODIGO'] = trim($row[$_headers['CODIGO']]);
+                                    $user = $users->findByCode($result['CODIGO']);
+                                    if (empty($user)) {
+                                        $result['CODIGO_NUE'] = TRUE;
+                                    } else {
+                                        $result['CODIGO_NUE'] = FALSE;
+                                        $result['USUARIO_OBJ'] = $user;
+                                    }
+
+                                    $result['NOMBRE COMPLETO'] = $row[$_headers['NOMBRE COMPLETO']];
+                                    $result['USUARIO'] = isset($_headers['USUARIO']) ? $row[$_headers['USUARIO']] : $result['CODIGO'];
+                                    $result['CORREO ELECTRONICO'] = isset($_headers['CORREO ELECTRONICO']) ? $row[$_headers['CORREO ELECTRONICO']] : '';
+                                    $result['APELLIDOS'] = isset($_headers['APELLIDOS']) ? $row[$_headers['APELLIDOS']] : '';
+                                    $result['NOMBRES'] = isset($_headers['NOMBRES']) ? $row[$_headers['NOMBRES']] : '';
+                                    $result['CARRERA'] = isset($_headers['CARRERA']) ? $row[$_headers['CARRERA']] : '';
+                                    $result['PASSWORD'] = $type;
+
+                                    $role = $roles->findByIdent($role_default);
+
+                                    $result['ROL'] = isset($_headers['ROL']) ? $row[$_headers['ROL']] : $role->label;
+                                    $roles_allowed = $roles->selectByIncludes($USER->role);
+                                    $valid_role = false;
+                                    foreach ($roles_allowed as $role_allowed) {
+                                        if (strtolower($role_allowed->label) == strtolower($result['ROL'])) {
+                                            $valid_role |= true;
+                                            $role = $role_allowed;
+                                        }
+                                    }
+                                    if (!empty($role) && $valid_role) {
+                                        $result['ROL_OBJ'] = $role;
+                                    }
+
+                                    $results[] = $result;
                                 }
-                                if (($type == 'CREATE_NOEDIT' && $mode == 'EDIT') || ($type == 'NOCREATE_EDIT' && $mode == 'CREATE')) {
-                                    
-                                } else {
-                                    $user->code = $code;
-                                    $obj_role = $roles->findByLabel(strtolower($row['Rol']));
-                                    if (!empty($obj_role)) {
-                                        $availables = $roles->selectByIncludes($USER->role);
-                                        $valid_role = false;
-                                        foreach ($availables as $available) {
-                                            if ($available->ident == $obj_role->ident) {
-                                                $valid_role |= true;
-                                            }
-                                        }
-                                        if ($valid_role) {
-                                            $user->role = $obj_role->ident;
-                                        }
-                                    }
-                                    $user->email = $row['Correo electronico'];
-                                    if (!empty($row['Usuario'])) {
-                                        $user->label = $row['Usuario'];
-                                    } else {
-                                        if ($mode == 'CREATE') {
-                                            $user->label = $code;
-                                        }
-                                    }
-                                    if (!empty($row['Apellidos'])) {
-                                        $user->surname = $row['Apellidos'];
-                                    }
-                                    if (!empty($row['Nombres'])) {
-                                        $user->name = $row['Nombres'];
-                                    }
-                                    if (!empty($row['Carrera'])) {
-                                        $user->career = $row['Carrera'];
-                                    }
-                                    if (!empty($row['Telefono'])) {
-                                        $user->phone = $row['Telefono'];
-                                    }
-                                    if (!empty($row['Celular'])) {
-                                        $user->cellphone = $row['Celular'];
-                                    }
 
-                                    if ($user->isValid()) {
-                                        if ($mode == 'EDIT') {
-                                            if (Yeah_Acl::hasPermission('users', 'edit')) {
-                                                $user->save();
-                                                $count++;
-                                            }
-                                        } else if ($mode == 'CREATE') {
-                                            if (Yeah_Acl::hasPermission('users', 'new')) {
-                                                $password = generatecode();
-                                                $user->password = md5($password);
-                                                $user->tsregister = time();
-                                                $user->save();
-                                                $count++;
-                                                // email notification
-                                                $view = new Zend_View();
-                                                $view->addHelperPath($CONFIG->dirroot . 'libs/Yeah/Helpers', 'Yeah_Helpers');
-                                                $view->setScriptPath($CONFIG->dirroot . 'modules/users/views/scripts/user/');
-                                                $view->user       = $user;
-                                                $view->servername = $CONFIG->wwwroot;
-                                                $view->author     = $USER->label;
-                                                $view->password   = $password;
-                                                $content = $view->render('mail.php');
-                                                $mail = new Zend_Mail();
-                                                $mail->setBodyHtml($content)
-                                                     ->addTo($user->email, $user->getFullName())
-                                                     ->setSubject(utf8_decode('Notificación de registro de usuario'))
-                                                     ->send(); // FIXME agregar opcion smtp al gestor de correos
-                                            }
-                                        }
+                                $this->view->headers = array('CODIGO', 'NOMBRE COMPLETO', 'CORREO ELECTRONICO', 'ROL', 'USUARIO', 'APELLIDOS', 'NOMBRES', 'CARRERA');
+                                $this->view->results = $results;
+                                $this->view->type = $type;
+                                $this->view->password = $password;
+
+                                $session->import_users = $results;
+                            } else {
+                                if (!$csv->hasColumn($_headers['CODIGO'])) {
+                                    $session->messages->addMessage('La columna CODIGO no fue encontrada');
+                                    $this->_redirect($this->view->currentPage());
+
+                                }
+                                if (!$csv->hasColumn($_headers['NOMBRE COMPLETO'])) {
+                                    $session->messages->addMessage('La columna NOMBRE COMPLETO no fue encontrada');
+                                    $this->_redirect($this->view->currentPage());
+                                }
+                            }
+                        break;
+                    }
+                    unlink($filename);
+                }
+            } else {
+                if (isset($session->import_users)) {
+                    $count_new = 0;
+                    $count_edit = 0;
+                    foreach ($session->import_users as $result) {
+                        if (in_array($result['CODIGO'], $selections)) {
+                            if ($result['CODIGO_NUE'] && Yeah_Acl::hasPermission('users', 'new')) {
+                                $user = $users->createRow();
+                                $user->code = $result['CODIGO'];
+                                $user->status = 'active';
+                                $user->tsregister = time();
+                                // Password generation
+                                $password = generatecode($result['PASSWORD'], $result['CODIGO']);
+                                $user->password = md5($CONFIG->key . $password);
+                            }
+                            if (!$result['CODIGO_NUE'] && Yeah_Acl::hasPermission('users', 'edit')) {
+                                $user = $users->findByCode($result['CODIGO']);
+                            }
+                            if (isset($user)) {
+                                if (isset($result['ROL_OBJ'])) {
+                                    $user->role = $result['ROL_OBJ']->ident;
+                                }
+                                $user->formalname = $result['NOMBRE COMPLETO'];
+                                $user->label = $result['USUARIO'];
+                                $user->email = $result['CORREO ELECTRONICO'];
+                                $user->surname = $result['APELLIDOS'];
+                                $user->name = $result['NOMBRES'];
+                                $user->career = $result['CARRERA'];
+
+                                if ($user->isValid()) {
+                                    $user->save();
+                                    if ($result['CODIGO_NUE'] && !empty($user->email)) {
+                                        // email notification
+                                        $view = new Zend_View();
+                                        $view->addHelperPath($CONFIG->dirroot . 'libs/Yeah/Helpers', 'Yeah_Helpers');
+                                        $view->setScriptPath($CONFIG->dirroot . 'modules/users/views/scripts/user/');
+                                        $view->user       = $user;
+                                        $view->servername = $CONFIG->wwwroot;
+                                        $view->author     = $USER->label;
+                                        $view->password   = $password;
+                                        $content = $view->render('mail.php');
+                                        $mail = new Zend_Mail();
+                                        $mail->setBodyHtml($content)
+                                        ->addTo($user->email, $user->getFullName())
+                                        ->setSubject(utf8_decode('Notificación de registro de usuario'))
+                                        ->send(); // FIXME agregar opcion smtp al gestor de correos
+                                    }
+                                    if ($result['CODIGO_NUE']) {
+                                        $count_new++;
                                     } else {
-                                        $session->messages->addMessage("Error los datos no son validos!" . $user->label);
+                                        $count_edit++;
                                     }
                                 }
                             }
-                            $session->messages->addMessage("Se han insertado $count usuarios");
-                            unlink($filename);
-                        } else {
-                            $session->messages->addMessage("Una de los columnas requeridas no se encuentran");
                         }
-                        break;
+                    }
+                    $session->messages->addMessage("Se han creado $count_new usuarios nuevos y se han editado $count_edit usuarios");
+                    $this->_redirect($this->view->currentPage());
                 }
+                unset($session->import_users);
             }
         }
 
@@ -394,7 +449,7 @@ class Users_ManagerController extends Yeah_Action
 
                     $headers = array();
                     foreach ($columns as $column) {
-                        $headers[] = '"' . $this->view->utf2html($model->_mapping[$column]) . '"';
+                        $headers[] = '"' . $model->_mapping[$column] . '"';
                     }
                     $csv .= implode(', ', $headers) . '
 ';
@@ -402,9 +457,9 @@ class Users_ManagerController extends Yeah_Action
                         $row = array();
                         foreach ($columns as $column) {
                             if ($column == 'role') {
-                                $row[] = '"' . $this->view->utf2html($user->getRole()->label) . '"';
+                                $row[] = '"' . $user->getRole()->label . '"';
                             } else {
-                                $row[] = '"' . $this->view->utf2html($user->$column) . '"';
+                                $row[] = '"' . $user->$column . '"';
                             }
                         }
                         $csv .= implode(', ', $row) . '

@@ -178,104 +178,150 @@ class Subjects_ManagerController extends Yeah_Action
         $this->requirePermission('subjects', array('new', 'edit'));
 
         $options = array();
-        if (Yeah_Acl::hasPermission('users', 'new') && Yeah_Acl::hasPermission('users', 'edit')) {
+        if (Yeah_Acl::hasPermission('subjects', 'new')) {
             $options['CREATE_NOEDIT'] = 'Solo crear materias nuevas, e ignorar las restantes.';
-            $options['NOCREATE_EDIT'] = 'Solo actualizar la informacion de las existentes, no registrar nuevas.';
-            $options['CREATE_EDIT'] = 'Crear materias, y actualizar la informacion de las existentes.';
+        }
+        if (Yeah_Acl::hasPermission('subjects', 'edit')) {
+            $options['NOCREATE_EDIT'] = 'Solo actualizar la información de las existentes, no registrar nuevas.';
+        }
+        if (Yeah_Acl::hasPermission('subjects', 'new') && Yeah_Acl::hasPermission('subjects', 'edit')) {
+            $options['CREATE_EDIT'] = 'Crear materias, y actualizar la información de las existentes.';
         }
         $this->view->options = $options;
+        $this->view->step = 1;
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $upload = new Zend_File_Transfer_Adapter_Http();
-            $upload->setDestination($CONFIG->dirroot . 'media/upload');
-            $upload->addValidator('Size', false, 2097152)
-                   ->addValidator('Extension', false, array('csv'));
+            $subjects = Yeah_Adapter::getModel('subjects');
+            $users = Yeah_Adapter::getModel('users');
+            $me = $users->findByIdent($USER->ident);
 
-            if ($upload->receive()) {
-                $filename = $upload->getFileName('file');
-                $extension = strtolower(substr($filename, -3));
+            $gestions = Yeah_Adapter::getModel('gestions');
+            $gestion = $gestions->findByActive();
 
-                $count = 0;
-                $model = Yeah_Adapter::getModel('subjects');
-                $type = $request->getParam('type');
+            $selections = $request->getParam('subjects');
+            if (empty($selections)) {
+                $upload = new Zend_File_Transfer_Adapter_Http();
+                $upload->setDestination($CONFIG->dirroot . 'media/upload');
+                $upload->addValidator('Size', false, 2097152)
+                       ->addValidator('Extension', false, array('csv'));
 
-                $users = Yeah_Adapter::getModel('users');
+                if ($upload->receive()) {
+                    $filename = $upload->getFileName('file');
+                    $extension = strtolower(substr($filename, -3));
+                    $type = $request->getParam('type');
 
-                $gestions = Yeah_Adapter::getModel('gestions');
-                $gestion = $gestions->findByActive();
+                    switch ($extension) {
+                        case 'csv':
+                            $csv = new File_CSV_DataSource;
+                            $csv->load($filename); //se carga el archivo
+                            $rows = $csv->connect(); //te devuelve el contenido del archivo
 
-                switch ($extension) {
-                    case 'csv':
-                        $csv = new File_CSV_DataSource;
-                        $csv->load($filename); //se carga el archivo
-                        $rows = $csv->connect(); //te devuelve el contenido del archivo
-                        // FIXME
-                        if ($csv->hasColumn('Codigo') && $csv->hasColumn('Materia')) {
-                            foreach ($rows as $row) {
-                                $code = $row['Codigo'];
-                                $mode = 'EDIT';
-                                $subject = $model->findByCode($gestion->ident, $code);
-                                if (empty($subject)) {
-                                    $mode = 'CREATE';
-                                    $subject = $model->createRow();
-                                    $subject->gestion = $gestion->ident;
-                                    $subject->visibility = 'public';
-                                }
-                                if (($type == 'CREATE_NOEDIT' && $mode == 'EDIT') || ($type == 'NOCREATE_EDIT' && $mode == 'CREATE')) {
-                                    
-                                } else {
-                                    $subject->code = $code;
-                                    if (!empty($row['Moderador'])) {
-                                        $obj_moderator = $users->findByLabel($row['Moderador']);
-                                        if (!empty($obj_moderator)) {
-                                            if ($obj_moderator->hasPermission('subjects', 'moderate')) {
-                                                $subject->moderator = $obj_moderator->ident;
-                                            }
+                            $this->view->step = 2;
+
+                            $headers = $csv->getHeaders();
+                            $_headers = array();
+                            foreach ($headers as $header) {
+                                $key = trim(strtoupper(normalize($header)));
+                                $_headers[$key] = $header;
+                            }
+
+                            if ($csv->hasColumn($_headers['CODIGO']) && $csv->hasColumn($_headers['MATERIA'])) {
+                                $results = array();
+
+                                foreach ($rows as $row) {
+                                    $result = array();
+
+                                    $result['CODIGO'] = trim($row[$_headers['CODIGO']]);
+                                    $subject = $subjects->findByCode($gestion->ident, $result['CODIGO']);
+                                    if (empty($subject)) {
+                                        $result['CODIGO_NUE'] = TRUE;
+                                    } else {
+                                        $result['CODIGO_NUE'] = FALSE;
+                                        $result['MATERIA_OBJ'] = $subject;
+                                    }
+
+                                    $result['MATERIA'] = $row[$_headers['MATERIA']];
+                                    $result['VISIBILIDAD'] = isset($_headers['VISIBILIDAD']) ? $row[$_headers['VISIBILIDAD']] : 'private';
+                                    $result['DESCRIPCION'] = isset($_headers['DESCRIPCION']) ? $row[$_headers['DESCRIPCION']] : '';
+
+                                    $result['MODERADOR'] = isset($_headers['MODERADOR']) ? $row[$_headers['MODERADOR']] : $USER->label;
+                                    $moderator = $users->findByLabel($result['MODERADOR']);
+                                    if (!empty($moderator)) {
+                                        if ($moderator->hasPermission('subjects', 'moderate')) {
+                                            $result['MODERADOR_OBJ'] = $moderator;
+                                        } else {
+                                            $result['MODERADOR_MES'] = 'El usuario no tiene permisos de moderador';
                                         }
                                     } else {
-                                        $me = $users->findByIdent($USER->ident);
-                                        if ($me->hasPermission('subjects', 'moderate')) {
-                                            $subject->moderator = $me->ident;
-                                        }
-                                    }
-                                    if (!empty($row['Materia'])) {
-                                        $subject->label = utf8_decode($row['Materia']);
-                                    }
-                                    if (!empty($row['Visibilidad'])) {
-                                        $subject->visibility = $row['Visibilidad'];
-                                    }
-                                    if (!empty($row['Descripcion'])) {
-                                        $subject->description = $row['Descripcion'];
+                                        $result['MODERADOR_MES'] = 'El usuario no existe';
                                     }
 
-                                    if ($subject->isValid()) {
-                                        if ($mode == 'EDIT') {
-                                            if (Yeah_Acl::hasPermission('subjects', 'edit')) {
-                                                $subject->author = $USER->ident;
-                                                $subject->save();
-                                                $count++;
-                                            }
-                                        } else if ($mode == 'CREATE') {
-                                            if (Yeah_Acl::hasPermission('subjects', 'new')) {
-                                                $subject->author = $USER->ident;
-                                                $subject->tsregister = time();
-                                                $subject->save();
-                                                $count++;
-                                            }
-                                        }
+                                    $results[] = $result;
+                                }
+
+                                $this->view->headers = array('CODIGO', 'MATERIA', 'MODERADOR', 'VISIBILIDAD', 'DESCRIPCION');
+                                $this->view->results = $results;
+                                $this->view->type = $type;
+
+                                $session->import_subjects = $results;
+                            } else {
+                                if (!$csv->hasColumn($_headers['CODIGO'])) {
+                                    $session->messages->addMessage('La columna CODIGO no fue encontrada');
+                                    $this->_redirect($this->view->currentPage());
+
+                                }
+                                if (!$csv->hasColumn($_headers['MATERIA'])) {
+                                    $session->messages->addMessage('La columna MATERIA no fue encontrada');
+                                    $this->_redirect($this->view->currentPage());
+                                }
+                            }
+                        break;
+                    }
+                    unlink($filename);
+                }
+            } else {
+                if (isset($session->import_subjects)) {
+                    $count_new = 0;
+                    $count_edit = 0;
+                    foreach ($session->import_subjects as $result) {
+                        if (in_array($result['CODIGO'], $selections)) {
+                            if ($result['CODIGO_NUE'] && Yeah_Acl::hasPermission('subjects', 'new')) {
+                                $subject = $subjects->createRow();
+                                $subject->gestion = $gestion->ident;
+                                $subject->code = $result['CODIGO'];
+                                $subject->status = 'inactive';
+                                $subject->author = $USER->ident;
+                                $subject->tsregister = time();
+                            }
+                            if (!$result['CODIGO_NUE'] && Yeah_Acl::hasPermission('subjects', 'edit')) {
+                                $subject = $subjects->findByCode($gestion->ident, $result['CODIGO']);
+                            }
+                            if (isset($subject)) {
+                                $subject->label = $result['MATERIA'];
+                                if (isset($result['MODERADOR_OBJ'])) {
+                                    $subject->moderator = $result['MODERADOR_OBJ']->ident;
+                                }
+                                $subject->visibility = $result['VISIBILIDAD'];
+                                $subject->description = $result['DESCRIPCION'];
+
+                                if ($subject->isValid()) {
+                                    $subject->save();
+                                    if ($result['CODIGO_NUE']) {
+                                        $count_new++;
+                                    } else {
+                                        $count_edit++;
                                     }
                                 }
                             }
-                            $session->messages->addMessage("Se han insertado $count materias");
-                            unlink($filename);
-                        } else {
-                            $session->messages->addMessage("Una de los columnas requeridas no se encuentran");
                         }
-                        break;
+                    }
+                    $session->messages->addMessage("Se han creado $count_new materias nuevas y se han editado $count_edit materias");
+                    $this->_redirect($this->view->currentPage());
                 }
+                unset($session->import_subjects);
             }
         }
 
@@ -308,7 +354,7 @@ class Subjects_ManagerController extends Yeah_Action
 
                     $headers = array();
                     foreach ($columns as $column) {
-                        $headers[] = '"' . $this->view->utf2html($model->_mapping[$column]) . '"';
+                        $headers[] = '"' . $model->_mapping[$column] . '"';
                     }
                     $csv .= implode(', ', $headers) . '
 ';
@@ -316,9 +362,9 @@ class Subjects_ManagerController extends Yeah_Action
                         $row = array();
                         foreach ($columns as $column) {
                             if ($column == 'moderator') {
-                                $row[] = '"' . $this->view->utf2html($subject->getModerator()->label) . '"';
+                                $row[] = '"' . $subject->getModerator()->label . '"';
                             } else {
-                                $row[] = '"' . $this->view->utf2html($subject->$column) . '"';
+                                $row[] = '"' . $subject->$column . '"';
                             }
                         }
                         $csv .= implode(', ', $row) . '

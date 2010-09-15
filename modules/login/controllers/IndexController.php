@@ -43,7 +43,7 @@ class Login_IndexController extends Yeah_Action
             $input = new Zend_Filter_Input($filters, $validators, $_POST, $options);
             $session = new Zend_Session_Namespace();
             if ($input->isValid()) {
-	            $user = Yeah_Adapter::getModel('users')->findByLogin($input->username, md5($input->password));
+	            $user = Yeah_Adapter::getModel('users')->findByLogin($input->username, md5($CONFIG->key . $input->password));
 	            if (!empty($user)) {
                     if ($user->status == 'active') {
     	                $session->user = $user;

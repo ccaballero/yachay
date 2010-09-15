@@ -51,7 +51,7 @@ function breadcrumb($elements = array()) {
     }
 }
 
-function convert($label) {
+/*function convert($label) {
     $a = 'ÁÀÄÂáàäâÉÈËÊéèëêÍÌÏÎíìïîÓÒÖÔóòöôÚÙÜÛúùüûÑñ ';
     $b = 'aaaaaaaaeeeeeeeeiiiiiiiioooooooouuuuuuuunn_';
     $label = strtolower($label);
@@ -61,16 +61,43 @@ function convert($label) {
     $search = array('/[^a-z0-9]/', '/--+/', '/^-+/', '/-+$/');
     $replace = array('-', '-', '', '');
     return preg_replace($search, $replace, strtolower($translit));
+}*/
+
+function normalize($string) {
+    $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
+    $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';
+    $string = utf8_decode($string);
+    $string = strtr($string, utf8_decode($a), $b);
+    $string = strtolower($string);
+    return utf8_encode($string);
 }
 
-function generatecode($size = 10) {
-    $values = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890';
-    $length = strlen($values);
-    $code = '';
-    for ($i = 0; $i < $size; $i++) {
-        $code .= $values[rand(0, $length - 1)];
+function convert($label) {
+    $label = normalize($label);
+    
+    $translit = @iconv('UTF-8', 'ASCII//TRANSLIT', $label);
+    $search = array('/[^a-z0-9]/', '/--+/', '/^-+/', '/-+$/');
+    $replace = array('-', '-', '', '');
+    return preg_replace($search, $replace, strtolower($translit));
+}
+
+function generatecode($type = 'alphanum', $code = NULL, $size = 16) {
+    if ($type == 'alphanum') {
+        $values = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890';
+        $length = strlen($values);
+        $code = '';
+        for ($i = 0; $i < $size; $i++) {
+            $code .= $values[rand(0, $length - 1)];
+        }
+        return $code;
     }
-    return $code;
+    if ($type == '.code.') {
+        return ".$code.";
+    }
+    if ($type == '.edoc.') {
+        $code = strrev($code);
+        return ".$code.";
+    }
 }
 
 function context ($type,  $value = null) {

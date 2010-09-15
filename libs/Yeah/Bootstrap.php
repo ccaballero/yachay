@@ -27,8 +27,6 @@ class Yeah_Bootstrap
 {
     public function initialize() {
         error_reporting(E_ALL | E_STRICT);
-        ini_set('display_startup_errors', 'on');
-        ini_set('display_errors', 'on');
         ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . 'libs' . PATH_SEPARATOR . 'modules');
 
         // PHP's settings for encoding
@@ -53,6 +51,10 @@ class Yeah_Bootstrap
         // Set of fundamental element
         global $CONFIG;
         $CONFIG = new Yeah_Settings_Config;
+
+        // Set for debugging level
+        ini_set('display_startup_errors', $CONFIG->startup_errors);
+        ini_set('display_errors', $CONFIG->display_errors);
 
         // Set connector database
         global $DB;

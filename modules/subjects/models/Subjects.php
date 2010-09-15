@@ -28,16 +28,16 @@ class modules_subjects_models_Subjects extends Zend_Db_Table_Abstract
         ),
     );
     public    $_mapping         = array(
-        'ident'                 => 'Codigo',
-        'gestion'               => 'Gestion',
+        'ident'                 => 'Código',
+        'gestion'               => 'Gestión',
         'author'                => 'Autor',
         'moderator'             => 'Moderador',
-        'code'                  => 'Codigo',
+        'code'                  => 'Código',
         'label'                 => 'Materia',
         'url'                   => 'Identificador',
         'status'                => 'Estado',
         'visibility'            => 'Visibilidad',
-        'description'           => 'Descripcion',
+        'description'           => 'Descripción',
         'tsregister'            => 'Fecha de registro',
     );
 

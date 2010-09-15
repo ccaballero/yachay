@@ -2,6 +2,18 @@
 
 abstract class Yeah_Action extends Zend_Controller_Action
 {
+
+    protected function _redirect($url, array $options = array()) {
+        global $CONFIG;
+        global $USER;
+
+        if ($USER->role == 1) {
+            parent::_redirect($this->view->url(array(), 'login_in'));
+        }
+
+        parent::_redirect($url);
+    }
+
     public function requirePermission($module, $privilege) {
         global $CONFIG;
         global $USER;
@@ -17,6 +29,14 @@ abstract class Yeah_Action extends Zend_Controller_Action
             if (!$flag) {
                 $this->_redirect($CONFIG->wwwroot);
             }
+        }
+    }
+
+    public function requireMorePrivileges($user) {
+        global $USER;
+
+        if (!$USER->hasFewerPrivileges($user)) {
+            $this->_redirect($this->view->url(array('user' => $user->url), 'users_user_view'));
         }
     }
 
@@ -168,11 +188,13 @@ abstract class Yeah_Action extends Zend_Controller_Action
         if (isset($this->_ignorePostDispatch)) {
             return;
         }
-        
+
         if (empty($PAGE)) {
             return;
         }
-        
+
+        $session = new Zend_Session_Namespace();
+
         $regions = $PAGE->findManyToManyRowset('modules_regions_models_Regions', 'modules_regions_models_Regions_Pages');
         if (!empty($regions)) {
             foreach ($regions as $region) {
@@ -206,12 +228,14 @@ abstract class Yeah_Action extends Zend_Controller_Action
         $user = Yeah_Adapter::getModel('users')->findByIdent($USER->ident);
         if (!empty($user)) {
             $user->lastLogin();
+            if ($user->needFillProfile()) {
+                $session->messages->addMessage("Se recomienda que ingrese su nombre, apellido y correo electrónico. [<a href=\"{$CONFIG->wwwroot}profile/edit/\">Editar</a>]");
+            }
         }
 
         // Log register
         global $LOG;
 
-        $session = new Zend_Session_Namespace();
         $history = $session->history;
         $LOG->info($history->toString());
 
