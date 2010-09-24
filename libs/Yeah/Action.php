@@ -160,14 +160,13 @@ abstract class Yeah_Action extends Zend_Controller_Action
 
         // register in log
         global $LOG;
-        $LOG->info('----------------------------------------------------------------------------------------');
-        $LOG->info("REQUEST_URI: {$_SERVER['REQUEST_URI']}");
-        $LOG->info("Route: $route");
+        $info = "                                     Route: $route
+";
         if ($PAGE != null) {
-            $LOG->info("Module: {$PAGE->module}");
-            $LOG->info("Controller: {$PAGE->controller}");
-            $LOG->info("Action: {$PAGE->action}");
+            $info .= "                                     Module:{$PAGE->module} - Controller:{$PAGE->controller} - Action:{$PAGE->action}";
         }
+        $LOG->info('----------------------------------------------------------------------------------------
+' . $info);
 
         // Regions settings
         global $TITLE;
@@ -175,10 +174,6 @@ abstract class Yeah_Action extends Zend_Controller_Action
 
         global $ICON;
         $ICON->icon = $CONFIG->media_base . "favicon.ico";
-
-        // Log for params in request
-        $request = $this->getRequest();
-        $LOG->info(print_params($request->getParams()));
     }
 
     public function postDispatch() {
@@ -232,15 +227,6 @@ abstract class Yeah_Action extends Zend_Controller_Action
                 $session->messages->addMessage("Se recomienda que ingrese su nombre, apellido y correo electrónico. [<a href=\"{$CONFIG->wwwroot}profile/edit/\">Editar</a>]");
             }
         }
-
-        // Log register
-        global $LOG;
-
-        $history = $session->history;
-        $LOG->info($history->toString());
-
-        global $BREADCRUMB;
-        $LOG->info($BREADCRUMB->toString());
 
         /*
         // rendering customized layout

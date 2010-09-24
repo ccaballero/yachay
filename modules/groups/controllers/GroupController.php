@@ -117,7 +117,7 @@ class Groups_GroupController extends Yeah_Action
         if (Yeah_Acl::hasPermission('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');
-            $breadcrumb[$group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
+            $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
         }
         breadcrumb($breadcrumb);
     }
