@@ -56,7 +56,7 @@ class Teams_ManagerController extends Yeah_Action
             if ($subject->amModerator()) {
                 $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');
             }
-            $breadcrumb[$group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
+            $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
         }
         breadcrumb($breadcrumb);
     }
@@ -122,7 +122,7 @@ class Teams_ManagerController extends Yeah_Action
             if ($subject->amModerator()) {
                 $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');
             }
-            $breadcrumb[$group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
+            $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
             if ($group->amTeacher()) {
                 $breadcrumb['Equipos'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'teams_manager');
             }

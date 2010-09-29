@@ -16,17 +16,19 @@
         <hr/>
         <table width="100%">
             <tr>
-                <td valign="top" width="20%">
+                <td valign="top" width="15%">
                     <!-- REGION: widget 1 --><?= renderWidget($WIDGETS[1]) ?><!-- END REGION -->
                     <br />
                     <!-- REGION: widget 2 --><?= renderWidget($WIDGETS[3]) ?><!-- END REGION -->
                 </td>
                 <td valign="top">
                     <!-- REGION: breadcrumb --><?= renderBreadcrumb($BREADCRUMB) ?><!-- END REGION -->
+                    <br />
+                    <br />
                     <!-- REGION: message --><?= renderMessage() ?><!-- END REGION -->
                     <!-- REGION: content --><?= $this->layout()->content ?><!-- END REGION -->
                 </td>
-                <td valign="top" width="20%">
+                <td valign="top" width="15%">
                     <!-- REGION: widget 3 --><?= renderWidget($WIDGETS[2]) ?><!-- END REGION -->
                     <br />
                     <!-- REGION: widget 4 --><?= renderWidget($WIDGETS[4]) ?><!-- END REGION -->

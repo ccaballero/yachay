@@ -32,6 +32,9 @@ class modules_evaluations_models_Parser extends Xcel_Parser
             $test = $tests->findByKey($this->_evaluation, $variable);
             $califications = Yeah_Adapter::getModel('califications');
             $value = $califications->getCalification($this->_group, $this->_user, $this->_evaluation, $test);
+            if (empty($value)) {
+                $value = $test->defaultnote;
+            }
             return new Xcel_Syn_Value($value);
         }
     }

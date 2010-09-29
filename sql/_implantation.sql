@@ -6,34 +6,34 @@
 UPDATE `user` SET `activity` = 1 WHERE `ident` = 1;
 
 INSERT INTO `user`
-(`role`, `label`,       `url`,         `tsregister`,     `status`,   `surname`,          `name`,        `code`,    `activity`, `sociability`)
+(`role`, `label`,       `url`,         `tsregister`,     `status`,   `formalname`,        `surname`,          `name`,        `code`,    `activity`, `sociability`)
 VALUES
-(6,      'antonio',     'antonio',     UNIX_TIMESTAMP(), 'active',   'Mamani',           'Antonio',     200212474, 5,           4), /*  2 */
-(6,      'carlos',      'carlos',      UNIX_TIMESTAMP(), 'active',   'Caballero',        'Carlos',      200323785, 2,          11), /*  3 */
-(5,      'leticia',     'leticia',     UNIX_TIMESTAMP(), 'active',   'Blanco',           'Leticia',     200437576, 2,           4), /*  4 */
-(5,      'ruperto',     'ruperto',     UNIX_TIMESTAMP(), 'active',   'Leon',             'Ruperto',     200175667, 0,           1), /*  5 */
-(5,      'johnny',      'johnny',      UNIX_TIMESTAMP(), 'active',   'Arias',            'Jhonny',      200257678, 0,           2), /*  6 */
-(5,      'americo',     'americo',     UNIX_TIMESTAMP(), 'active',   'Vargas',           'Americo',     200346789, 0,           0), /*  7 */
-(5,      'indira',      'indira',      UNIX_TIMESTAMP(), 'active',   'Camacho',          'Indira',      200437870, 2,           0), /*  8 */
-(5,      'carrasco',    'carrasco',    UNIX_TIMESTAMP(), 'active',   'Carrasco',         'Alvaro',      200529877, 0,           0), /*  9 */
-(4,      'viviana',     'viviana',     UNIX_TIMESTAMP(), 'active',   'Morales',          'Viviana',     200687577, 1,           0), /* 10 */
-(4,      'juanpa',      'juanpa',      UNIX_TIMESTAMP(), 'inactive', 'Ruiz',             'Juan Pablo',  200776154, 7,           0), /* 11 */
-(4,      'christian',   'christian',   UNIX_TIMESTAMP(), 'active',   'Mamani',           'Christian',   200865043, 0,           0), /* 12 */
-(4,      'wilfredo',    'wilfredo',    UNIX_TIMESTAMP(), 'active',   'Vargas',           'Wilfredo',    200954932, 0,           0), /* 13 */
-(3,      'luis',        'luis',        UNIX_TIMESTAMP(), 'active',   'Arce',             'Luis',        200048321, 1,           0), /* 14 */
-(3,      'pedro',       'pedro',       UNIX_TIMESTAMP(), 'active',   'Valdes',           'Pedro',       200636211, 2,           0), /* 15 */
-(3,      'juan',        'juan',        UNIX_TIMESTAMP(), 'active',   'Gomez',            'Juan',        200424121, 5,           0), /* 16 */
-(3,      'benjamin',    'benjamin',    UNIX_TIMESTAMP(), 'active',   'Perez',            'Benjamin',    200213212, 2,           0), /* 17 */
-(3,      'juanjo',      'juanjo',      UNIX_TIMESTAMP(), 'active',   'Olivera',          'Juan Jose',   200237323, 4,           0), /* 18 */
-(3,      'tatiana',     'tatiana',     UNIX_TIMESTAMP(), 'active',   'Moruno',           'Tatiana',     200430434, 1,           0), /* 19 */
-(3,      'pablo',       'pablo',       UNIX_TIMESTAMP(), 'active',   'Hurtado',          'Pablo',       200449545, 4,           0), /* 20 */
-(3,      'vladimir',    'vladimir',    UNIX_TIMESTAMP(), 'active',   'Garcia',           'Vladimir',    200558656, 2,           0), /* 21 */
-(3,      'marcelo',     'marcelo',     UNIX_TIMESTAMP(), 'active',   'Pavon',            'Marcelo',     200667667, 1,           0), /* 22 */
-(3,      'jorge',       'jorge',       UNIX_TIMESTAMP(), 'active',   'Alameda',          'Jorge',       200788578, 5,           0), /* 23 */
-(3,      'eduardo',     'eduardo',     UNIX_TIMESTAMP(), 'active',   'Dipp',             'Eduardo',     200879489, 5,           0), /* 24 */
-(3,      'hugo',        'hugo',        UNIX_TIMESTAMP(), 'active',   'Alconz',           'Hugo',        200904390, 2,           0), /* 25 */
-(2,      'alexey',      'alexey',      UNIX_TIMESTAMP(), 'inactive', 'Rodriguez',        'Alexey',      200982298, 1,           0), /* 26 */
-(2,      'aquilino',    'aquilino',    UNIX_TIMESTAMP(), 'active',   'Davalos',          'Aquilino',    200873187, 0,           0); /* 27 */
+(6,      'antonio',     'antonio',     UNIX_TIMESTAMP(), 'active',   'MAMANI ANTONIO',    'Mamani',           'Antonio',     200212474, 5,           4), /*  2 */
+(6,      'carlos',      'carlos',      UNIX_TIMESTAMP(), 'active',   'CABALLERO CARLOS',  'Caballero',        'Carlos',      200323785, 2,          11), /*  3 */
+(5,      'leticia',     'leticia',     UNIX_TIMESTAMP(), 'active',   'BLANCO LETICIA',    'Blanco',           'Leticia',     200437576, 2,           4), /*  4 */
+(5,      'ruperto',     'ruperto',     UNIX_TIMESTAMP(), 'active',   'LEON RUPERTO',      'Leon',             'Ruperto',     200175667, 0,           1), /*  5 */
+(5,      'johnny',      'johnny',      UNIX_TIMESTAMP(), 'active',   'ARIAS JHONNY',      'Arias',            'Jhonny',      200257678, 0,           2), /*  6 */
+(5,      'americo',     'americo',     UNIX_TIMESTAMP(), 'active',   'VARGAS AMERICO',    'Vargas',           'Americo',     200346789, 0,           0), /*  7 */
+(5,      'indira',      'indira',      UNIX_TIMESTAMP(), 'active',   'CAMACHO INDIRA',    'Camacho',          'Indira',      200437870, 2,           0), /*  8 */
+(5,      'carrasco',    'carrasco',    UNIX_TIMESTAMP(), 'active',   'CARRASCO ALVARO',   'Carrasco',         'Alvaro',      200529877, 0,           0), /*  9 */
+(4,      'viviana',     'viviana',     UNIX_TIMESTAMP(), 'active',   'MORALES VIVIANA',   'Morales',          'Viviana',     200687577, 1,           0), /* 10 */
+(4,      'juanpa',      'juanpa',      UNIX_TIMESTAMP(), 'inactive', 'RUIZ JUAN PABLO',   'Ruiz',             'Juan Pablo',  200776154, 7,           0), /* 11 */
+(4,      'christian',   'christian',   UNIX_TIMESTAMP(), 'active',   'MAMANI CHRISTIAN',  'Mamani',           'Christian',   200865043, 0,           0), /* 12 */
+(4,      'wilfredo',    'wilfredo',    UNIX_TIMESTAMP(), 'active',   'VARGAS WILFREDO',   'Vargas',           'Wilfredo',    200954932, 0,           0), /* 13 */
+(3,      'luis',        'luis',        UNIX_TIMESTAMP(), 'active',   'ARCE LUIS',         'Arce',             'Luis',        200048321, 1,           0), /* 14 */
+(3,      'pedro',       'pedro',       UNIX_TIMESTAMP(), 'active',   'VALDES PEDRO',      'Valdes',           'Pedro',       200636211, 2,           0), /* 15 */
+(3,      'juan',        'juan',        UNIX_TIMESTAMP(), 'active',   'GOMEZ JUAN',        'Gomez',            'Juan',        200424121, 5,           0), /* 16 */
+(3,      'benjamin',    'benjamin',    UNIX_TIMESTAMP(), 'active',   'PEREZ BENJAMIN',    'Perez',            'Benjamin',    200213212, 2,           0), /* 17 */
+(3,      'juanjo',      'juanjo',      UNIX_TIMESTAMP(), 'active',   'OLIVERA JUAN JOSE', 'Olivera',          'Juan Jose',   200237323, 4,           0), /* 18 */
+(3,      'tatiana',     'tatiana',     UNIX_TIMESTAMP(), 'active',   'MORUNO TATIANA',    'Moruno',           'Tatiana',     200430434, 1,           0), /* 19 */
+(3,      'pablo',       'pablo',       UNIX_TIMESTAMP(), 'active',   'HURTADO PABLO',     'Hurtado',          'Pablo',       200449545, 4,           0), /* 20 */
+(3,      'vladimir',    'vladimir',    UNIX_TIMESTAMP(), 'active',   'GARCIA VLADIMIR',   'Garcia',           'Vladimir',    200558656, 2,           0), /* 21 */
+(3,      'marcelo',     'marcelo',     UNIX_TIMESTAMP(), 'active',   'PAVON MARCELO',     'Pavon',            'Marcelo',     200667667, 1,           0), /* 22 */
+(3,      'jorge',       'jorge',       UNIX_TIMESTAMP(), 'active',   'ALAMEDA JORGE',     'Alameda',          'Jorge',       200788578, 5,           0), /* 23 */
+(3,      'eduardo',     'eduardo',     UNIX_TIMESTAMP(), 'active',   'DIPP EDUARDO',      'Dipp',             'Eduardo',     200879489, 5,           0), /* 24 */
+(3,      'hugo',        'hugo',        UNIX_TIMESTAMP(), 'active',   'ALCONZ HUGO',       'Alconz',           'Hugo',        200904390, 2,           0), /* 25 */
+(2,      'alexey',      'alexey',      UNIX_TIMESTAMP(), 'inactive', 'RODRIGUEZ ALEXEY',  'Rodriguez',        'Alexey',      200982298, 1,           0), /* 26 */
+(2,      'aquilino',    'aquilino',    UNIX_TIMESTAMP(), 'active',   'DAVALOS AQUILINO',  'Davalos',          'Aquilino',    200873187, 0,           0); /* 27 */
 
 INSERT INTO `friend`
 (`user`, `friend`, `mutual`, `tsregister`)

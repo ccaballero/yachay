@@ -28,7 +28,7 @@ class modules_evaluations_models_Evaluations_Tests extends Zend_Db_Table_Abstrac
 
     public function findByKey($evaluation, $key) {
         return $this->fetchRow($this->select()
-                                    ->where('evaluation = ?', $evaluation)
+                                    ->where('`evaluation` = ?', $evaluation)
                                     ->where('`key` = ?', $key));
     }
 }

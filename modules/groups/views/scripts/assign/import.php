@@ -20,6 +20,10 @@
                 <td><?= $this->assignement(NULL, NULL, NULL, 'type') ?></td>
             </tr>
             <tr>
+                <td><b>Incluir tambien en la materia:</b></td>
+                <td><input type="checkbox" name="include" value="yes" checked="checked" /></td>
+            </tr>
+            <tr>
                 <td colspan="2">(*) Campos obligatorios.</td>
             </tr>
             <tr>
@@ -42,7 +46,8 @@
         <hr />
 
         <p>
-            <b>Cargo: </b><?= $this->assignement(NULL, NULL, NULL, NULL, $this->type) ?>
+            <b>Cargo: </b><?= $this->assignement(NULL, NULL, NULL, NULL, $this->type) ?><br />
+            <?= $this->include == 'yes' ? 'Incluyendo a los usuarios a la materia, en caso de no estar.' : '' ?>
         </p>
 
         <table width="100%">

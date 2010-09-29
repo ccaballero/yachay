@@ -43,7 +43,7 @@ class IndexController extends Yeah_Action
                 'params' => array (),
             );
         } else {
-            $this->_forward('user');
+            $this->_redirect($this->view->url(array(), 'frontpage_user'));
         }
     }
 
@@ -276,7 +276,7 @@ class IndexController extends Yeah_Action
                 'params' => array (),         
             );
         } else {
-            $this->_forward('visitor');
+            $this->_redirect($this->view->url(array(), 'frontpage_visitor'));
         }
     }
 }

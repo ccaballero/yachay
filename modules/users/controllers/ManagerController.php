@@ -57,6 +57,7 @@ class Users_ManagerController extends Yeah_Action
             $user->label = $request->getParam('label');
             $user->password = $request->getParam('password');
             $user->code = $request->getParam('code');
+            $user->formalname= $request->getParam('formal');
             $user->email = $request->getParam('email');
             $user->surname = $request->getParam('surname');
             $user->name = $request->getParam('name');
@@ -345,7 +346,6 @@ class Users_ManagerController extends Yeah_Action
                                 if (!$csv->hasColumn($_headers['CODIGO'])) {
                                     $session->messages->addMessage('La columna CODIGO no fue encontrada');
                                     $this->_redirect($this->view->currentPage());
-
                                 }
                                 if (!$csv->hasColumn($_headers['NOMBRE COMPLETO'])) {
                                     $session->messages->addMessage('La columna NOMBRE COMPLETO no fue encontrada');
@@ -413,7 +413,7 @@ class Users_ManagerController extends Yeah_Action
                         }
                     }
                     $session->messages->addMessage("Se han creado $count_new usuarios nuevos y se han editado $count_edit usuarios");
-                    $this->_redirect($this->view->currentPage());
+                    $this->_redirect($this->view->lastPage());
                 }
                 unset($session->import_users);
             }

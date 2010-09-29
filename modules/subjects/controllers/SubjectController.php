@@ -30,6 +30,8 @@ class Subjects_SubjectController extends Yeah_Action
 
         $url = $this->view->url(array(), 'subjects_list');
         if ($subject->status == 'inactive' && !Yeah_Acl::hasPermission('subjects', 'edit')) {
+            $session = new Zend_Session_Namespace();
+            $session->messages->addMessage("La materia {$subject->label} no esta activa");
             $this->_redirect($url);
         }
 

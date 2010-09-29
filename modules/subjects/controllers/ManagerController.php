@@ -319,7 +319,7 @@ class Subjects_ManagerController extends Yeah_Action
                         }
                     }
                     $session->messages->addMessage("Se han creado $count_new materias nuevas y se han editado $count_edit materias");
-                    $this->_redirect($this->view->currentPage());
+                    $this->_redirect($this->view->lastPage());
                 }
                 unset($session->import_subjects);
             }

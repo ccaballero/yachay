@@ -385,7 +385,7 @@ class Subjects_AssignController extends Yeah_Action
                         }
                     }
                     $session->messages->addMessage("Se han asignado $count_new usuarios a la materia y se encontraron $count_over usuarios ya asignados");
-                    $this->_redirect($this->view->currentPage());
+                    $this->_redirect($this->view->lastPage());
                 }
                 unset($session->assign_users);
             }

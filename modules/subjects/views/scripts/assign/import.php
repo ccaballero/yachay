@@ -80,7 +80,6 @@
         <hr />
         <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_import') ?>">Subir nuevamente</a>
         <input type="submit" value="Importar usuarios" />
-
     </form>
 
 <?php } ?>

@@ -3,7 +3,29 @@
 class modules_califications_models_Califications extends Zend_Db_Table_Abstract
 {
     protected $_name            = 'calification';
-    // FIXME agregar las reference de zend ($reference, $table, $row y demases)
+    protected $_dependentTables = array();
+    protected $_referenceMap    = array(
+        'User'                  => array(
+            'columns'           => 'user',
+            'refTableClass'     => 'modules_users_models_Users',
+            'refColumns'        => 'ident',
+        ),
+        'Group'                 => array(
+            'columns'           => 'group',
+            'refTableClass'     => 'modules_groups_models_Groups',
+            'refColumns'        => 'ident',
+        ),
+        'Evaluation'            => array(
+            'columns'           => 'evaluation',
+            'refTableClass'     => 'modules_evaluations_models_Evaluations',
+            'refColumns'        => 'ident',
+        ),
+        'Test'                  => array(
+            'columns'           => 'evaluation_test',
+            'refTableClass'     => 'modules_evaluations_models_Evaluation_Tests',
+            'refColumns'        => 'ident',
+        ),
+    );
 
     public function getCalification($group, $user, $evaluation, $test) {
         if (empty($test->formula)) {
@@ -13,7 +35,7 @@ class modules_califications_models_Califications extends Zend_Db_Table_Abstract
                                         ->where('`evaluation` = ?', $evaluation)
                                         ->where('`test` = ?', $test->ident));
             if (empty($row)) {
-                return $test->defaultnote;
+                return;
             } else {
                 return $row->calification;
             }

@@ -8,7 +8,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
         global $USER;
 
         if ($USER->role == 1) {
-            parent::_redirect($this->view->url(array(), 'login_in'));
+            parent::_redirect($this->view->url(array(), 'frontpage_visitor'));
         }
 
         parent::_redirect($url);

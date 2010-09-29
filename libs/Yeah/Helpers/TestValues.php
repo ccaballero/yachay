@@ -6,10 +6,10 @@ class Yeah_Helpers_TestValues
         $test_values = $test->findmodules_evaluations_models_Evaluations_Tests_Values();
 
         $options = array();
-        $options[] = '<option value="-">-------------------</option>';
+        $options[] = '<option value="">-------------------</option>';
         foreach ($test_values as $test_value) {
             $selected = '';
-            if ($test_value->value == $value) {
+            if ($test_value->value === $value) {
                 $selected = 'selected="selected" ';
             }
             $options[] = '<option ' . $selected . 'value="' . $test_value->value . '">' . $test_value->label . '</option>';

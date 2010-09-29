@@ -7,11 +7,11 @@
         <table width="60%">
             <tr>
                 <td>Usuario:</td>
-                <td><input type="text" name="username" value="<?= $this->values['username'] ?>" maxlength="15" /></td>
+                <td><input type="text" name="username" value="<?= $this->values['username'] ?>" maxlength="32" /></td>
             </tr>
             <tr>
                 <td>Contrase&ntilde;a:</td>
-                <td><input type="password" name="password" maxlength="25" /></td>
+                <td><input type="password" name="password" maxlength="32" /></td>
             </tr>
             <tr>
                 <td>&nbsp;</td>

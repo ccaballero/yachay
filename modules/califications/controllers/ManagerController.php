@@ -25,7 +25,7 @@ class Califications_ManagerController extends Yeah_Action
         context('group', $group);
 
         $users = Yeah_Adapter::getModel('users');
-        $students = $group->findmodules_users_models_UsersViamodules_groups_models_Groups_Users($group->select()->where('type = ?', 'student'));
+        $students = $group->findmodules_users_models_UsersViamodules_groups_models_Groups_Users($group->select()->where('type = ?', 'student')->order('formalname ASC'));
 
         $evaluations = Yeah_Adapter::getModel('evaluations');
         $evaluation = $group->getEvaluation();
@@ -54,29 +54,36 @@ class Califications_ManagerController extends Yeah_Action
                     foreach ($aux1 as $_user => $aux2) {
                         foreach ($aux2 as $_evaluation => $aux3) {
                             foreach ($aux3 as $_test => $calification) {
-                                $_calification = intval($calification);
-                                if (is_int($_calification)) {
-                                    // check for limits
-                                    $test = $test_model->findByIdent($_test);
-                                    if (!empty($test) && empty($test->formula)) {
-                                        // prune action
-                                        if ($_calification > $test->maximumnote) {
-                                            $_calification = $test->maximumnote;
-                                        } else if ($_calification < $test->minimumnote) {
-                                            $_calification = $test->minimumnote;
-                                        }
-                                        if ($group->ident == $_group && $evaluation->ident == $_evaluation) {
-                                            $note = $califications->findCalification($_group, $_user, $_evaluation, $_test);
-                                            if (empty($note)) {
-                                                $note = $califications->createRow();
+                                if ($calification <> '') {
+                                    $_calification = intval($calification);
+                                    if (is_int($_calification)) {
+                                        // check for limits
+                                        $test = $test_model->findByIdent($_test);
+                                        if (!empty($test) && empty($test->formula)) {
+                                            // prune action
+                                            if ($_calification > $test->maximumnote) {
+                                                $_calification = $test->maximumnote;
+                                            } else if ($_calification < $test->minimumnote) {
+                                                $_calification = $test->minimumnote;
                                             }
-                                            $note->user = $_user;
-                                            $note->group = $_group;
-                                            $note->evaluation = $_evaluation;
-                                            $note->test = $_test;
-                                            $note->calification = $_calification;
-                                            $note->save();
+                                            if ($group->ident == $_group && $evaluation->ident == $_evaluation) {
+                                                $note = $califications->findCalification($_group, $_user, $_evaluation, $_test);
+                                                if (empty($note)) {
+                                                    $note = $califications->createRow();
+                                                }
+                                                $note->user = $_user;
+                                                $note->group = $_group;
+                                                $note->evaluation = $_evaluation;
+                                                $note->test = $_test;
+                                                $note->calification = $_calification;
+                                                $note->save();
+                                            }
                                         }
+                                    }
+                                } else {
+                                    $note = $califications->findCalification($_group, $_user, $_evaluation, $_test);
+                                    if (!empty($note)) {
+                                        $note->delete();
                                     }
                                 }
                             }
@@ -134,14 +141,13 @@ class Califications_ManagerController extends Yeah_Action
             if ($subject->amModerator()) {
                 $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');
             }
-            $breadcrumb[$group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
+            $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
         }
         breadcrumb($breadcrumb);
     }
 
     public function importAction() {
         global $CONFIG;
-        global $USER;
 
         $this->requirePermission('subjects', 'view');
         $request = $this->getRequest();
@@ -183,6 +189,12 @@ class Califications_ManagerController extends Yeah_Action
 
         $califications = Yeah_Adapter::getModel('califications');
 
+        $options = array();
+        $options['REPLACE'] = 'Reemplazar las notas existentes.';
+        $options['IGNORE'] = 'Ignorar las notas ya establecidas';
+
+        $this->view->step = 1;
+        $this->view->options = $options;
         $this->view->model = $califications;
         $this->view->subject = $subject;
         $this->view->group = $group;
@@ -190,96 +202,155 @@ class Califications_ManagerController extends Yeah_Action
         $this->view->tests = $evaluation_tests;
         $this->view->students = $students;
 
-        $options = array();
-        $options['REPLACE'] = 'Reemplazar las notas existentes.';
-        $options['IGNORE'] = 'Ignorar las notas ya establecidas';
-
-        $this->view->options = $options;
-
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $upload = new Zend_File_Transfer_Adapter_Http();
-            $upload->setDestination($CONFIG->dirroot . 'media/upload');
-            $upload->addValidator('Size', false, 2097152)
-                   ->addValidator('Extension', false, array('csv'));
+            $selections = $request->getParam('student');
+            if (empty($selections)) {
+                $upload = new Zend_File_Transfer_Adapter_Http();
+                $upload->setDestination($CONFIG->dirroot . 'media/upload');
+                $upload->addValidator('Size', false, 2097152)
+                       ->addValidator('Extension', false, array('csv'));
 
-            if ($upload->receive()) {
-                $filename = $upload->getFileName('file');
-                $extension = strtolower(substr($filename, -3));
+                if ($upload->receive()) {
+                    $filename = $upload->getFileName('file');
+                    $extension = strtolower(substr($filename, -3));
 
-                $count = 0;
-                $type = $request->getParam('type');
+                    $type = $request->getParam('type');
 
-                switch ($extension) {
-                    case 'csv':
-                        $csv = new File_CSV_DataSource;
-                        $csv->load($filename); //se carga el archivo
-                        $rows = $csv->connect(); //te devuelve el contenido del archivo
-                        // FIXME Cambiar por el mapping en ingles
-                        if ($csv->hasColumn('Codigo') || $csv->hasColumn('Usuario') || $csv->hasColumn('Correo electronico')) {
-                            if ($csv->hasColumn('Codigo')) {
-                                $method = 'findByCode';
-                                $key = 'Codigo';
-                            } else if ($csv->hasColumn('Usuario')) {
-                                $method = 'findByLabel';
-                                $key = 'Usuario';
-                            } else {
-                                $method = 'findByEmail';
-                                $key = 'Correo electronico';
+                    switch ($extension) {
+                        case 'csv':
+                            $csv = new File_CSV_DataSource;
+                            $csv->load($filename); //se carga el archivo
+                            $rows = $csv->connect(); //te devuelve el contenido del archivo
+
+                            $this->view->step = 2;
+
+                            $headers = $csv->getHeaders();
+                            $_headers = array();
+                            foreach ($headers as $header) {
+                                $key = trim(strtoupper(normalize($header)));
+                                $_headers[$key] = $header;
                             }
-                            foreach ($rows as $row) {
-                                $user_info = $row[$key];
-                                $user = $users->{$method}($user_info);
-                                if (!empty($user)) {
-                                    if (in_array($user->ident, $students_list)) {
-                                        foreach ($tests_list as $test_key) {
-                                            if ($csv->hasColumn($test_key)) {
-                                                $test = $test_model->findByKey($evaluation->ident, $test_key);
-                                                if (empty($test->formula)) {
-                                                    $_calification = intval($row[$test_key]);
-                                                    if (is_int($_calification)) {
-                                                        // check for limits
-                                                        // prune action
-                                                        if ($_calification > $test->maximumnote) {
-                                                            $_calification = $test->maximumnote;
-                                                        } else if ($_calification < $test->minimumnote) {
-                                                            $_calification = $test->minimumnote;
-                                                        }
-                                                        $note = $califications->findCalification($group->ident, $user->ident, $evaluation->ident, $test->ident);
-                                                        if (empty($note)) {
-                                                            $new = TRUE;
-                                                            $note = $califications->createRow();
-                                                        } else {
-                                                            $new = FALSE;
-                                                        }
-                                                        if (!$new && $type == 'REPLACE') {
-                                                            $note->user = $user->ident;
-                                                            $note->group = $group->ident;
-                                                            $note->evaluation = $evaluation->ident;
-                                                            $note->test = $test->ident;
-                                                            $note->calification = $_calification;
-                                                            $note->save();
-                                                            $count++;
+
+                            if ($csv->hasColumn($_headers['CODIGO'])) {
+                                $results = array();
+
+                                foreach ($rows as $row) {
+                                    $result = array();
+
+                                    $result['CODIGO'] = trim($row[$_headers['CODIGO']]);
+                                    $user = $users->findByCode($result['CODIGO']);
+
+                                    $result['TYPE'] = $type;
+
+                                    $result['MESS'] = '';
+                                    $result['RES'] = '[OK]';
+
+                                    if (!empty($user)) {
+                                        $result['USER_OBJ'] = $user;
+                                        if (!in_array($user->ident, $students_list)) {
+                                            $result['MESS'] = 'El usuario no se encuentra asignado en el grupo';
+                                            $result['RES'] = '[FALLO]';
+                                        } else {
+                                            foreach ($tests_list as $test_key) {
+                                                if ($csv->hasColumn($test_key)) {
+                                                    $test = $test_model->findByKey($evaluation->ident, $test_key);
+                                                    if (empty($test->formula)) {
+                                                        $_calification = intval($row[$test_key]);
+                                                        if (is_int($_calification)) {
+                                                            if ($_calification > $test->maximumnote) {
+                                                                $_calification = $test->maximumnote;
+                                                            } else if ($_calification < $test->minimumnote) {
+                                                                $_calification = $test->minimumnote;
+                                                            }
+                                                            $note = $califications->findCalification($group->ident, $user->ident, $evaluation->ident, $test->ident);
+
+                                                            $result['CALIF'][$test_key] = $_calification;
+                                                            $result['EXIST'][$test_key] = ($note <> NULL);
                                                         }
                                                     }
                                                 }
                                             }
                                         }
+                                    } else {
+                                        $result['MESS'] = 'El usuario no existe';
+                                        $result['RES'] = '[FALLO]';
+                                    }
+
+                                    $results[] = $result;
+                                }
+
+                                $this->view->results = $results;
+                                $this->view->type = $type;
+
+                                $session->import_califications = $results;
+                            } else {
+                                $session->messages->addMessage('La columna CODIGO no fue encontrada');
+                                $this->_redirect($this->view->currentPage());
+                            }
+                        break;
+                    }
+                    unlink($filename);
+                }
+            } else {
+                if (isset($session->import_califications)) {
+                    $count_new = 0;
+                    $count_edit = 0;
+                    foreach ($session->import_califications as $result) {
+                        if (in_array($result['CODIGO'], $selections)) {
+                            if (isset($result['USER_OBJ'])) {
+                                foreach ($tests_list as $test_key) {
+                                    $test = $test_model->findByKey($evaluation->ident, $test_key);
+
+                                    if (isset($result['CALIF'][$test_key])) {
+                                        $note = $califications->findCalification($group->ident, $result['USER_OBJ']->ident, $evaluation->ident, $test->ident);
+
+                                        if ($note == NULL) {
+                                            $new = TRUE;
+                                            $note = $califications->createRow();
+                                        } else {
+                                            $new = FALSE;
+                                        }
+
+                                        if ($note <> NULL) {
+                                            if ($result['TYPE'] == 'REPLACE') {
+                                                $replace = TRUE;
+                                            } else {
+                                                $replace = FALSE;
+                                            }
+                                        } else {
+                                            $replace = FALSE;
+                                        }
+
+                                        if ($new || $replace) {
+                                            $note->user = $result['USER_OBJ']->ident;
+                                            $note->group = $group->ident;
+                                            $note->evaluation = $evaluation->ident;
+                                            $note->test = $test->ident;
+                                            $note->calification = $result['CALIF'][$test_key];
+                                            $note->save();
+
+                                            if ($new) {
+                                                $count_new++;
+                                            }
+                                            if ($replace) {
+                                                $count_edit++;
+                                            }
+                                        }
                                     }
                                 }
+
                             }
-                            $session->messages->addMessage("Se han importado $count calificaciones");
-                            unlink($filename);
-                            $this->_redirect($this->view->lastPage());
-                        } else {
-                            $session->messages->addMessage("No se encuentra ningun identificador para los usuarios");
                         }
-                    break;
+                    }
+                    $session->messages->addMessage("Se han creado importado $count_new calificaciones nuevas y se han editado $count_edit calificaciones");
+                    $this->_redirect($this->view->lastPage());
                 }
+                unset($session->import_califications);
             }
         }
-        
+
         history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications/import');
         $breadcrumb = array();
         if (Yeah_Acl::hasPermission('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
@@ -292,7 +363,7 @@ class Califications_ManagerController extends Yeah_Action
             if ($subject->amModerator()) {
                 $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');
             }
-            $breadcrumb[$group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
+            $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
             $breadcrumb['Calificaciones'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'califications_manager');
         }
         breadcrumb($breadcrumb);
@@ -357,7 +428,7 @@ class Califications_ManagerController extends Yeah_Action
                 case 'csv':
                     $csv = '';
 
-                    $headers = array();
+                    $headers = array('"Codigo"', '"Nombre Completo"');
                     foreach ($columns as $column) {
                         $headers[] = '"' . $this->view->utf2html($column) . '"';
                     }
@@ -366,13 +437,25 @@ class Califications_ManagerController extends Yeah_Action
                     foreach ($students as $student) {
                         $row = array();
                         $row[] = '"' . $student->code . '"';
+                        $row[] = '"' . $student->formalname . '"';
                         foreach ($columns as $column) {
-                            // FIXME Potencial lugar para SQL Inyection (Revisar)
                             $test = $test_model->findByKey($evaluation->ident, $column);
                             if (!empty($test)) {
-                                $row[] = $califications->getCalification($group->ident, $student->ident, $evaluation->ident, $test);
+                                $calification = $califications->getCalification($group->ident, $student->ident, $evaluation->ident, $test);
+                                if ($test->hasValues()) {
+                                    $test_values = $test->findmodules_evaluations_models_Evaluations_Tests_Values();
+                                    $label = '';
+                                    foreach ($test_values as $test_value) {
+                                        if ($test_value->value === $calification) {
+                                            $label = $test_value->label;
+                                        }
+                                    }
+                                    $row[] = '"' . $label . '"';
+                                } else {
+                                    $row[] = '"' . $calification . '"';
+                                }
                             } else {
-                                $row[] = '"0"';
+                                $row[] = '""';
                             }
                         }
                         $csv .= implode(', ', $row) . '
@@ -382,7 +465,7 @@ class Califications_ManagerController extends Yeah_Action
                     header("HTTP/1.1 200 OK"); //mandamos código de OK
                     header("Status: 200 OK"); //sirve para corregir un bug de IE (fuente: php.net)
                     header('Content-Type: text/csv');
-                    header('Content-Disposition: attachment; filename="calificaciones.csv"');
+                    header('Content-Disposition: attachment; filename="Calificaciones ('. $subject->label . ' - Grupo ' . $group->label . ').csv"');
                     header('Content-Length: '. strlen($csv));
                     echo $csv;
                     die();
@@ -402,7 +485,7 @@ class Califications_ManagerController extends Yeah_Action
             if ($subject->amModerator()) {
                 $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');
             }
-            $breadcrumb[$group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
+            $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
             $breadcrumb['Calificaciones'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'califications_manager');
         }
         breadcrumb($breadcrumb);

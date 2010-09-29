@@ -3,7 +3,7 @@
 class Users_View_Helper_Career
 {
     public function career($name, $value = '') {
-        $careers = array ('Lic. Informatica', 'Ing. de Sistemas');
+        $careers = array ('Lic. Informática', 'Ing. de Sistemas');
 
         $options = '';
         foreach ($careers as $career) {

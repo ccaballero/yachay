@@ -327,6 +327,7 @@ class Groups_AssignController extends Yeah_Action
                     $extension = strtolower(substr($filename, -3));
 
                     $type = $request->getParam('type');
+                    $include = $request->getParam('include', 'no');
 
                     switch ($extension) {
                         case 'csv':
@@ -375,11 +376,12 @@ class Groups_AssignController extends Yeah_Action
                                                 $assign_group = Yeah_Adapter::getModel('groups', 'Groups_Users');
 
                                                 $assign1 = $assign_subject->findBySubjectAndUser($subject->ident, $user->ident);
-                                                if (!empty($assign1)) {
+                                                if (!empty($assign1) || $include == 'yes') {
                                                     $assign2 = $assign_group->findByGroupAndUser($group->ident, $user->ident);
                                                     if (empty($assign2)) {
                                                         $result['ACL'] = $types[$assign_type][0];
                                                         $result['TYPE'] = $types[$assign_type][1];
+                                                        $result['INCL'] = TRUE;
                                                         $result['ASSIGN_RES'] = FALSE;
                                                     } else {
                                                         $result['CARGO_MES'] = 'El usuario ya esta asignado a este grupo';
@@ -405,6 +407,7 @@ class Groups_AssignController extends Yeah_Action
                                 $this->view->headers = array('CODIGO', 'USUARIO', 'CARGO');
                                 $this->view->results = $results;
                                 $this->view->type = $type;
+                                $this->view->include = $include;
 
                                 $session->assign_users = $results;
                             } else {
@@ -435,6 +438,15 @@ class Groups_AssignController extends Yeah_Action
                             $user = $result['USUARIO_OBJ'];
                             if ($user->hasPermission('subjects', $result['ACL'])) {
                                 $assign1 = $assign_subject->findBySubjectAndUser($subject->ident, $user->ident);
+                                if (empty($assign1) && $result['INCL']) {
+                                    $assign1 = $assign_subject->createRow();
+                                    $assign1->subject = $subject->ident;
+                                    $assign1->user = $user->ident;
+                                    $assign1->type = $result['TYPE'];
+                                    $assign1->status = TRUE;
+                                    $assign1->tsregister = time();
+                                    $assign1->save();
+                                }
                                 if (!empty($assign1)) {
                                     $assign2 = $assign_group->findByGroupAndUser($group->ident, $user->ident);
                                     if (empty($assign2)) {
@@ -456,7 +468,7 @@ class Groups_AssignController extends Yeah_Action
                         }
                     }
                     $session->messages->addMessage("Se han asignado $count_new usuarios al grupo y se saltaron $count_over usuarios ");
-                    $this->_redirect($this->view->currentPage());
+                    $this->_redirect($this->view->lastPage());
                 }
                 unset($session->assign_users);
             }

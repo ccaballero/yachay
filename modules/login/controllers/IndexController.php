@@ -17,7 +17,7 @@ class Login_IndexController extends Yeah_Action
             );
             $validators = array(
                 'usuario' => array(
-                    new Zend_Validate_StringLength(4, 15),
+                    new Zend_Validate_StringLength(4, 64),
                     new Zend_Validate_Alnum(),
                     'allowEmpty' => false,
                     'presence'   => 'required',
@@ -28,7 +28,7 @@ class Login_IndexController extends Yeah_Action
                     ),
                 ),
                 'contrase&ntilde;a' => array(
-                    new Zend_Validate_StringLength(1, 25),
+                    new Zend_Validate_StringLength(1, 64),
                     'allowEmpty' => false,
                     'presence'   => 'required',
                     'fields'     => 'password',
