@@ -13,6 +13,7 @@ class Events_EventController extends Yeah_Action
 
         $resources_model = Yeah_Adapter::getModel('resources');
         $resource = $resources_model->findByIdent($event->resource);
+        $this->requireContext($resource);
 
         $this->view->resource = $resource;
         $this->view->event = $event;
@@ -124,7 +125,7 @@ class Events_EventController extends Yeah_Action
 
         $event->delete();
         $resource->delete();
-        $valorations_model->decreaseActivity(4);
+        $valorations_model->decreaseActivity(4, $resource->author);
 
         $session = new Zend_Session_Namespace();
         $session->messages->addMessage("El evento ha sido eliminado");

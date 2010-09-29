@@ -10,7 +10,7 @@ Yeah version 0.1
     Juan Jose Olivera R.
 
 == Dependencies ==
-    PHP 5.0 or higher.
+    PHP 5.3 or higher.
     Apache Web Server (with mod_rewrite).
     Zend Framework 1.8.3 or higher.
     MySQL 5.0 or higher.

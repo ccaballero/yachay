@@ -49,10 +49,12 @@
         <td colspan="2"><b>Celular: </b><?= $this->none($this->user->cellphone) ?></td>
     </tr>
     <tr>
-        <td colspan="2"><b>Actividad: </b><?= $this->user->activity ?></td>
-        <td colspan="2"><b>Sociabilidad: </b><?= $this->user->sociability ?></td>
+        <td colspan="4">
+            <b>Actividad: </b><?= $this->user->activity ?>&nbsp;
+            <b>Participacion: </b><?= $this->user->participation ?>&nbsp;
+            <b>Sociabilidad: </b><?= $this->user->sociability ?>
+        </td>
         <!--<td><b>Conocimiento: </b><?= $this->user->knowledge ?></td>
-        <td><b>Participación: </b><?= $this->user->participation ?></td>
         <td><b>Popularidad: </b><?= $this->user->popularity ?></td>-->
     </tr>
     <tr>

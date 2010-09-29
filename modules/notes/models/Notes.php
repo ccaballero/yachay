@@ -14,6 +14,6 @@ class modules_notes_models_Notes extends Zend_Db_Table_Abstract
     );
 
     public function findByResource($resource) {
-        return $this->fetchRow($this->getAdapter()->quoteInto('resource = ?', $resource));
+        return $this->fetchRow($this->getAdapter()->quoteInto('`resource` = ?', $resource));
     }
 }

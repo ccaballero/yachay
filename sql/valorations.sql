@@ -9,4 +9,4 @@
 INSERT INTO `module`
 (`label`,          `url`,              `type`,        `tsregister`,       `description`)
 VALUES
-('valorations',    'valorations',      'automagic',   UNIX_TIMESTAMP(),   'Modulo manejador de las valoraciones de los usuarios del sistema');
+('valorations',    'valorations',      'application', UNIX_TIMESTAMP(),   'Modulo manejador de las valoraciones de los usuarios del sistema');

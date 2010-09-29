@@ -25,12 +25,14 @@
         <td colspan="2"><b>Cargo: </b><?= $this->user->getRole()->label ?></td>
         <td colspan="2"><b>Carrera: </b><?= $this->none($this->user->career) ?></td>
     </tr>
-    <tr valign="top">
-        <td colspan="2"><b>Actividad: </b><?= $this->user->activity ?></td>
-        <td colspan="2"><b>Sociabilidad: </b><?= $this->user->sociability ?></td>
-        <!--<td><b>Conocimiento: </b><?= $this->user->knowledge ?></td>
-        <td><b>Participacion: </b><?= $this->user->participation ?></td>
-        <td><b>Popularidad: </b><?= $this->user->popularity ?></td>-->
+    <tr>
+        <td colspan="4">
+            <b>Actividad: </b><?= $this->user->activity ?>&nbsp;
+            <b>Participacion: </b><?= $this->user->participation ?>&nbsp;
+            <b>Sociabilidad: </b><?= $this->user->sociability ?>
+        </td>
+        <!--<td><b>Conocimiento: </b><?= $user->knowledge ?></td>
+        <td><b>Popularidad: </b><?= $user->popularity ?></td>-->
     </tr>
     <tr valign="top"><td colspan="4"><b>Descripcion Personal:</b></td></tr>
     <tr valign="top"><td colspan="4"><?= $this->none($this->utf2html($this->user->description)) ?></td></tr>

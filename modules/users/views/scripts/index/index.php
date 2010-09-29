@@ -41,10 +41,12 @@
                 <td colspan="2" width="50%"><b>Carrera: </b><?= $this->none($user->career) ?></td>
             </tr>
             <tr>
-                <td colspan="2"><b>Actividad: </b><?= $user->activity ?></td>
-                <td colspan="2"><b>Sociabilidad: </b><?= $user->sociability ?></td>
+                <td colspan="4">
+                    <b>Actividad: </b><?= $user->activity ?>&nbsp;
+                    <b>Participacion: </b><?= $user->participation ?>&nbsp;
+                    <b>Sociabilidad: </b><?= $user->sociability ?>
+                </td>
                 <!--<td><b>Conocimiento: </b><?= $user->knowledge ?></td>
-                <td><b>Participacion: </b><?= $user->participation ?></td>
                 <td><b>Popularidad: </b><?= $user->popularity ?></td>-->
             </tr>
             <tr>

@@ -17,8 +17,10 @@ abstract class Yeah_Action extends Zend_Controller_Action
     public function requirePermission($module, $privilege) {
         global $CONFIG;
         global $USER;
+        $session = new Zend_Session_Namespace();
         if (!is_array($privilege)) {
             if (!$USER->hasPermission($module, $privilege)) {
+                $session->messages->addMessage('Usted no tiene permisos suficientes');
                 $this->_redirect($CONFIG->wwwroot);
             }
         } else {
@@ -27,6 +29,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
                 $flag |= $USER->hasPermission($module, $priv);
             }
             if (!$flag) {
+                $session->messages->addMessage('Usted no tiene permisos suficientes');
                 $this->_redirect($CONFIG->wwwroot);
             }
         }
@@ -34,8 +37,9 @@ abstract class Yeah_Action extends Zend_Controller_Action
 
     public function requireMorePrivileges($user) {
         global $USER;
-
+        $session = new Zend_Session_Namespace();
         if (!$USER->hasFewerPrivileges($user)) {
+            $session->messages->addMessage('Usted no puede otorgar tantos privilegios');
             $this->_redirect($this->view->url(array('user' => $user->url), 'users_user_view'));
         }
     }
@@ -49,6 +53,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
             } else {
                 $url = $this->view->url(array(), $route2);
             }
+            $session->messages->addMessage('El recurso solicitado no existe');
             $this->_redirect($url);
         }
     }
@@ -62,6 +67,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
             } else {
                 $url = $this->view->url(array('subject' => $subject->url), 'subjects_view');
             }
+            $session->messages->addMessage('El grupo solicitado no existe');
             $this->_redirect($url);
         }
     }
@@ -75,44 +81,65 @@ abstract class Yeah_Action extends Zend_Controller_Action
             } else {
                 $url = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'teams_view');
             }
+            $session->messages->addMessage('El equipo solicitado no existe');
             $this->_redirect($url);
         }
     }
 
     public function requireModerator($subject) {
         global $USER;
+        $session = new Zend_session_Namespace();
         if (!$subject->amModerator()) {
+            $session->messages->addMessage('Usted debe ser el moderador asignado en la materia');
             $this->_redirect($this->view->url(array('subject' => $subject->url), 'subjects_subject_view'));
         }
     }
 
     public function requireTeacher($group) {
         global $USER;
+        $session = new Zend_session_Namespace();
         if (!$group->amTeacher()) {
             $subject = $group->getSubject();
+            $session->messages->addMessage('Usted debe ser el docente asignado al grupo');
             $this->_redirect($this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view'));
         }
     }
     
     public function requireMemberTeam($team) {
         global $USER;
+        $session = new Zend_session_Namespace();
         if (!$team->amMemberTeam()) {
             $group = $team->getGroup();
             $subject = $group->getSubject();
+            $session->messages->addMessage('Usted debe ser un miembro asignado del equipo');
             $this->_redirect($this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view'));
         }
     }
 
     public function requireCommunityModerator($community) {
         global $USER;
+        $session = new Zend_session_Namespace();
         if (!$community->amModerator()) {
+            $session->messages->addMessage('Usted debe ser un moderador de esa comunidad');
             $this->_redirect($this->view->url(array('community' => $community->url), 'communities_community_view'));
         }
     }
 
     public function requireResourceAuthor($resource) {
         global $USER;
+        $session = new Zend_session_Namespace();
         if (!$resource->amAuthor()) {
+            $session->messages->addMessage('Usted debe ser el autor de este recurso');
+            $this->_redirect($this->view->url(array(), 'frontpage_user'));
+        }
+    }
+
+    public function requireContext($resource) {
+        $session = new Zend_session_Namespace();
+        $context = new Yeah_Helpers_Context();
+        $spaces_valids = $context->context(NULL, TRUE);
+        if (!in_array($resource->recipient, $spaces_valids)) {
+            $session->messages->addMessage('Usted debe ser parte de ese espacio para realizar esa accion');
             $this->_redirect($this->view->url(array(), 'frontpage_user'));
         }
     }

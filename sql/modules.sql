@@ -9,7 +9,7 @@ CREATE TABLE `module` (
     `label`             varchar(64)                                                 NOT NULL,
     `url`               varchar(64)                                                 NOT NULL,
     `status`            enum('active', 'inactive')                                  NOT NULL DEFAULT 'active',
-    `type`              enum('platform', 'middleware', 'application', 'utility', 'automagic')  NOT NULL,
+    `type`              enum('platform', 'middleware', 'application', 'utility')    NOT NULL,
     `description`       text                                                        NOT NULL DEFAULT '',
     `tsregister`        int unsigned                                                NOT NULL,
     PRIMARY KEY (`ident`),

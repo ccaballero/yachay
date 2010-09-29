@@ -28,6 +28,7 @@
             <td valign="top">
                 [<a href="<?= $this->url(array('user' => $user->url), 'users_user_view'); ?>"><?= $this->utf2html($user->label) ?></a>]
                 Act: <?= $user->activity ?>
+                Par: <?= $user->participation ?>
                 Soc: <?= $user->sociability ?>
             </td>
         </tr>
@@ -66,6 +67,7 @@
             <td valign="top">
                 [<a href="<?= $this->url(array('user' => $user->url), 'users_user_view'); ?>"><?= $this->utf2html($user->label) ?></a>]
                 Act: <?= $user->activity ?>
+                Par: <?= $user->participation ?>
                 Soc: <?= $user->sociability ?>
             </td>
         </tr>
@@ -104,6 +106,7 @@
             <td valign="top">
                 [<a href="<?= $this->url(array('user' => $user->url), 'users_user_view'); ?>"><?= $this->utf2html($user->label) ?></a>]
                 Act: <?= $user->activity ?>
+                Par: <?= $user->participation ?>
                 Soc: <?= $user->sociability ?>
             </td>
         </tr>

@@ -12,11 +12,11 @@ class modules_resources_models_Resources extends Zend_Db_Table_Abstract
                                         'modules_teams_models_Teams_Resources',
                                         'modules_communities_models_Communities_Resources',
                                         'modules_users_models_Users_Resources',
-                                        /*'modules_tags_models_Tags_Resources',*/
-                                        /*'modules_comments_models_Comments',*/
                                         'modules_notes_models_Notes',
                                         'modules_files_models_Files',
                                         'modules_events_models_Events',
+                                        'modules_comments_models_Comments',
+                                        /*'modules_tags_models_Tags_Resources',*/
                                   );
     protected $_referenceMap    = array(
         'Author'                => array(
@@ -28,6 +28,7 @@ class modules_resources_models_Resources extends Zend_Db_Table_Abstract
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'author'                => 'Autor',
+        'comments'              => 'Comentarios',
         'ratings'               => 'Valoracion',
         'raters'                => 'Votantes',
         'tsregister'            => 'Fecha de registro',

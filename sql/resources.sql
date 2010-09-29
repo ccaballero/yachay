@@ -8,6 +8,7 @@ CREATE TABLE `resource` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `author`            int unsigned                                                NOT NULL,
     `recipient`         varchar(32)                                                 NOT NULL,
+    `comments`          int unsigned                                                NOT NULL DEFAULT 0,
     `ratings`           int unsigned                                                NOT NULL DEFAULT 0,
     `raters`            int unsigned                                                NOT NULL DEFAULT 0,
     `tsregister`        int unsigned                                                NOT NULL,

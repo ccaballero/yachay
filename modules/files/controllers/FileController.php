@@ -13,6 +13,7 @@ class Files_FileController extends Yeah_Action
 
         $resources_model = Yeah_Adapter::getModel('resources');
         $resource = $resources_model->findByIdent($file->resource);
+        $this->requireContext($resource);
 
         $this->view->resource = $resource;
         $this->view->file = $file;
@@ -76,6 +77,10 @@ class Files_FileController extends Yeah_Action
         $file = $files_model->findByResource($file_url);
         $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
 
+        $resources_model = Yeah_Adapter::getModel('resources');
+        $resource = $resources_model->findByIdent($file->resource);
+        $this->requireContext($resource);
+
         header("HTTP/1.1 200 OK"); //mandamos codigo de OK
         header("Status: 200 OK"); //sirve para corregir un bug de IE (fuente: php.net)
         header('Content-Type: ' . $file->mime);
@@ -138,7 +143,7 @@ class Files_FileController extends Yeah_Action
 
         $file->delete();
         $resource->delete();
-        $valorations_model->decreaseActivity(2);
+        $valorations_model->decreaseActivity(2, $resource->author);
 
         $session = new Zend_Session_Namespace();
         $session->messages->addMessage("El archivo ha sido eliminado");

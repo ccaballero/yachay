@@ -17,4 +17,9 @@ class modules_comments_models_Comments_Comment extends Yeah_Model_Row_WithTsRegi
         $users = Yeah_Adapter::getModel('users');
         return $users->findByIdent($this->author);
     }
+
+    public function amAuthor() {
+        global $USER;
+        return ($USER->ident == $this->author);
+    }
 }

@@ -13,6 +13,7 @@ class Notes_NoteController extends Yeah_Action
 
         $resources_model = Yeah_Adapter::getModel('resources');
         $resource = $resources_model->findByIdent($note->resource);
+        $this->requireContext($resource);
 
         $this->view->resource = $resource;
         $this->view->note = $note;
@@ -114,7 +115,7 @@ class Notes_NoteController extends Yeah_Action
 
         $note->delete();
         $resource->delete();
-        $valorations_model->decreaseActivity(1);
+        $valorations_model->decreaseActivity(1, $resource->author);
 
         $session = new Zend_Session_Namespace();
         $session->messages->addMessage("La nota ha sido eliminada");
