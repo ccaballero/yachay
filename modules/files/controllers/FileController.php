@@ -20,8 +20,10 @@ class Files_FileController extends Yeah_Action
 
         history('files/' . $resource->ident);
         $breadcrumb = array();
-        $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
-        $breadcrumb['Archivos'] = $this->view->url(array('filter' => 'files'), 'resources_filtered');
+        if (Yeah_Acl::hasPermission('resources', 'new')) {
+            $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
+            $breadcrumb['Archivos'] = $this->view->url(array('filter' => 'files'), 'resources_filtered');
+        }
         breadcrumb($breadcrumb);
     }
 

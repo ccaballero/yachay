@@ -20,8 +20,10 @@ class Events_EventController extends Yeah_Action
 
         history('events/' . $resource->ident);
         $breadcrumb = array();
-        $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
-        $breadcrumb['Eventos'] = $this->view->url(array('filter' => 'events'), 'resources_filtered');
+        if (Yeah_Acl::hasPermission('resources', 'new')) {
+            $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
+            $breadcrumb['Eventos'] = $this->view->url(array('filter' => 'events'), 'resources_filtered');
+        }
         breadcrumb($breadcrumb);
     }
 

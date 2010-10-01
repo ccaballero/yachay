@@ -17,7 +17,7 @@
 <table width="100%">
     <tr valign="top">
         <td rowspan="9" width="200px">
-            <img src="<?= $this->media . 'thumbnail_large/' . $this->user->getAvatar() ?>" />
+            <img src="<?= $this->media . 'thumbnail_large/' . $this->user->getAvatar() ?>" alt="<?= $this->user->getFullName() ?>" />
         </td>
         <td colspan="4"><b>Nombre Completo: </b><?= $this->utf2html($this->user->getFullName()) ?></td>
     </tr>
@@ -29,10 +29,9 @@
         <td colspan="4">
             <b>Actividad: </b><?= $this->user->activity ?>&nbsp;
             <b>Participacion: </b><?= $this->user->participation ?>&nbsp;
-            <b>Sociabilidad: </b><?= $this->user->sociability ?>
+            <b>Sociabilidad: </b><?= $this->user->sociability ?>&nbsp;
+            <b>Popularidad: </b><?= $this->user->popularity ?>
         </td>
-        <!--<td><b>Conocimiento: </b><?= $user->knowledge ?></td>
-        <td><b>Popularidad: </b><?= $user->popularity ?></td>-->
     </tr>
     <tr valign="top"><td colspan="4"><b>Descripcion Personal:</b></td></tr>
     <tr valign="top"><td colspan="4"><?= $this->none($this->utf2html($this->user->description)) ?></td></tr>

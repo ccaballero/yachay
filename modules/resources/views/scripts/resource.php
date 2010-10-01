@@ -36,6 +36,7 @@
             <tr>
                 <td colspan="2">
                     Comentarios (<?= $resource->comments ?>) | 
+                    Valoración (<?= $resource->ratings ?>/<?= $resource->raters ?>) |
                     [<a href="<?= $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_view') ?>">Ver mas</a>]
                 <?php if (Yeah_Acl::hasPermission('resources', 'drop')) { ?>
                     [<a href="<?= $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_drop') ?>">Eliminar</a>]

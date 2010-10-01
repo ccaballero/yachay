@@ -9,7 +9,7 @@ CREATE TABLE `resource` (
     `author`            int unsigned                                                NOT NULL,
     `recipient`         varchar(32)                                                 NOT NULL,
     `comments`          int unsigned                                                NOT NULL DEFAULT 0,
-    `ratings`           int unsigned                                                NOT NULL DEFAULT 0,
+    `ratings`           int                                                         NOT NULL DEFAULT 0,
     `raters`            int unsigned                                                NOT NULL DEFAULT 0,
     `tsregister`        int unsigned                                                NOT NULL,
     PRIMARY KEY (`ident`, `author`),

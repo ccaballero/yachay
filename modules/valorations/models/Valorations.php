@@ -77,4 +77,24 @@ class modules_valorations_models_Valorations
         $user->participation = $user->participation - $score;
         $user->save();
     }
+
+    public function addPopularity($user) {
+        if (!empty($user)) {
+            $model_users = Yeah_Adapter::getModel('users');
+            $user = $model_users->findByIdent($user);
+
+            $user->popularity = $user->popularity + 1;
+            $user->save();
+        }
+    }
+
+    public function decreasePopularity($user) {
+        if (!empty($user)) {
+            $model_users = Yeah_Adapter::getModel('users');
+            $user = $model_users->findByIdent($user);
+
+            $user->popularity = $user->popularity - 1;
+            $user->save();
+        }
+    }
 }

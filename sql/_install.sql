@@ -106,8 +106,8 @@ SELECT 'califications';
 SELECT 'comments';
 \. comments.sql
 
-/*SELECT 'ratings';
-\. ratings.sql*/
+SELECT 'ratings';
+\. ratings.sql
 
 SELECT 'valorations';
 \. valorations.sql

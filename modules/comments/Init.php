@@ -2,7 +2,7 @@
 
 class modules_comments_Init extends Yeah_Init
 {
-    public $check = array ();
+    public $check = array ('comment');
     public $install = 'comments';
 
     public $routes = array (
@@ -43,14 +43,14 @@ class modules_comments_Init extends Yeah_Init
         'files_file_comment'                     => array('files/:resource/comment',
                                                     array(
                                                         'module'     => 'comments',
-                                                        'controller' => 'resource',
+                                                        'controller' => 'comment',
                                                         'action'     => 'new',
                                                         'type'       => 'file',
                                                     )),
         'events_event_comment'                   => array('events/:resource/comment',
                                                     array(
                                                         'module'     => 'comments',
-                                                        'controller' => 'resource',
+                                                        'controller' => 'comment',
                                                         'action'     => 'new',
                                                         'type'       => 'event',
                                                     )),

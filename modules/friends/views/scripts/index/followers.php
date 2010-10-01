@@ -17,7 +17,7 @@
         <table width="100%">
             <tr>
                 <td rowspan="6" width="100px" valign="top">
-                    <img src="<?= $this->media . '../users/thumbnail_medium/' . $user->getAvatar() ?>" />
+                    <img src="<?= $this->media . '../users/thumbnail_medium/' . $user->getAvatar() ?>" alt="<?= $user->getFullName() ?>" />
                 </td>
                 <td colspan="4">
                     <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
@@ -43,9 +43,8 @@
                     <b>Actividad: </b><?= $user->activity ?>&nbsp;
                     <b>Participacion: </b><?= $user->participation ?>&nbsp;
                     <b>Sociabilidad: </b><?= $user->sociability ?>
+                    <b>Popularidad: </b><?= $user->popularity ?>
                 </td>
-                <!--<td><b>Conocimiento: </b><?= $user->knowledge ?></td>
-                <td><b>Popularidad: </b><?= $user->popularity ?></td>-->
             </tr>
             <tr>
                 <td colspan="4"><b>Intereses: </b><?= $this->none($user->interests) ?></td>

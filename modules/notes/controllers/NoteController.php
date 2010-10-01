@@ -20,8 +20,10 @@ class Notes_NoteController extends Yeah_Action
 
         history('notes/' . $resource->ident);
         $breadcrumb = array();
-        $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
-        $breadcrumb['Notas'] = $this->view->url(array('filter' => 'notes'), 'resources_filtered');
+        if (Yeah_Acl::hasPermission('resources', 'new')) {
+            $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
+            $breadcrumb['Notas'] = $this->view->url(array('filter' => 'notes'), 'resources_filtered');
+        }
         breadcrumb($breadcrumb);
     }
 

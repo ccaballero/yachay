@@ -17,7 +17,7 @@ CREATE TABLE `event` (
     FOREIGN KEY (`resource`)      REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `event_confirmation`;
+/*DROP TABLE IF EXISTS `event_confirmation`;
 CREATE TABLE `event_confirmation` (
     `user`              int unsigned                                                NOT NULL,
     `event`             int unsigned                                                NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE `event_confirmation` (
     FOREIGN KEY (`user`)          REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
     INDEX (`event`),
     FOREIGN KEY (`event`)         REFERENCES `event`(`resource`) ON UPDATE CASCADE ON DELETE RESTRICT
-) DEFAULT CHARACTER SET UTF8;
+) DEFAULT CHARACTER SET UTF8;*/
 
 /*====================================================================================================================*/
 /* Registro del modulo                                                                                                */

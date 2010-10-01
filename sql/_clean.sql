@@ -45,6 +45,7 @@ DROP TABLE IF EXISTS `evaluation_test`;
 DROP TABLE IF EXISTS `evaluation_test_value`;
 DROP TABLE IF EXISTS `calification`;
 DROP TABLE IF EXISTS `comment`;
+DROP TABLE IF EXISTS `rating`;
 
 /*DROP TABLE IF EXISTS `tag`;
 DROP TABLE IF EXISTS `tag_resource`;*/

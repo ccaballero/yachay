@@ -52,10 +52,9 @@
         <td colspan="4">
             <b>Actividad: </b><?= $this->user->activity ?>&nbsp;
             <b>Participacion: </b><?= $this->user->participation ?>&nbsp;
-            <b>Sociabilidad: </b><?= $this->user->sociability ?>
+            <b>Sociabilidad: </b><?= $this->user->sociability ?>&nbsp;
+            <b>Popularidad: </b><?= $this->user->popularity ?>
         </td>
-        <!--<td><b>Conocimiento: </b><?= $this->user->knowledge ?></td>
-        <td><b>Popularidad: </b><?= $this->user->popularity ?></td>-->
     </tr>
     <tr>
         <td colspan="4"><b>Miembro desde: </b><?= $this->timestamp($this->user->tsregister) ?></td>
