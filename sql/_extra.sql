@@ -399,7 +399,7 @@ VALUES
 INSERT INTO `evaluation`
 (`author`, `label`,          `access`,  `tsregister`, `useful`, `description`)
 VALUES
-(1,        'Metodo clasico', 'public',  1249974000,   TRUE,     'El metodo clasico de evaluacion');
+(1,        'Metodo clasico', 'public',  UNIX_TIMESTAMP(),   TRUE,     'El metodo clasico de evaluacion');
 
 INSERT INTO `evaluation_test`
 (`evaluation`, `label`,         `key`, `order`, `minimumnote`, `defaultnote`, `maximumnote`, `formula`)
