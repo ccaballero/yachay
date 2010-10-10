@@ -19,3 +19,11 @@ INSERT INTO `page`
 VALUES
 ('Pagina inicial',                'Inicio',           TRUE,          'frontpage',        'index',       'visitor',     'frontpage_visitor'),
 ('Pagina de usuario',             '',                 FALSE,         'frontpage',        'index',       'user',        'frontpage_user');
+
+/*====================================================================================================================*/
+/* Registro de widgets para el modulo                                                                                 */
+/*====================================================================================================================*/
+INSERT INTO `widget`
+(`label`,                              `title`,                                `module`,           `script`)
+VALUES
+('Espacios Disponibles',               'Espacios Disponibles',                 'frontpage',        'context.php');

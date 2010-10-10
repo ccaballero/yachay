@@ -1,31 +1,5 @@
 
 /*====================================================================================================================*/
-/* Tablas necesarias para el registro de manejadores de region                                                        */
-/*====================================================================================================================*/
-
-DROP TABLE IF EXISTS `region`;
-CREATE TABLE `region` (
-    `ident`             int unsigned                                                NOT NULL auto_increment,
-    `label`             varchar(16)                                                 NOT NULL,
-    `module`            varchar(32)                                                 NOT NULL,
-    `script`            varchar(32)                                                 NOT NULL,
-    `region`            enum('toolbar', 'search', 'menubar', 'footer')              NOT NULL,
-    PRIMARY KEY (`ident`),
-    UNIQUE INDEX (`module`, `script`)
-) DEFAULT CHARACTER SET UTF8;
-
-DROP TABLE IF EXISTS `region_page`;
-CREATE TABLE `region_page` (
-    `page`              int unsigned                                                NOT NULL,
-    `region`            int unsigned                                                NOT NULL,
-    PRIMARY KEY (`page`, `region`),
-    INDEX (page),
-    FOREIGN KEY (page)            REFERENCES page(ident) ON UPDATE CASCADE ON DELETE RESTRICT,
-    INDEX (region),
-    FOREIGN KEY (region)          REFERENCES region(ident) ON UPDATE CASCADE ON DELETE RESTRICT
-) DEFAULT CHARACTER SET UTF8;
-
-/*====================================================================================================================*/
 /* Registro del modulo                                                                                                */
 /*====================================================================================================================*/
 INSERT INTO `module`

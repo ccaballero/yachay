@@ -40,5 +40,5 @@
 </table>
 <?php } else { ?>
 <br />
-	No se encontraron recursos gestionables.
+    No existen recursos gestionables.
 <?php }?>

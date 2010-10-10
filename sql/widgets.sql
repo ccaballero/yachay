@@ -1,31 +1,3 @@
-
-/*====================================================================================================================*/
-/* Tablas necesarias para el registro de manejadores de widgets                                                       */
-/*====================================================================================================================*/
-
-DROP TABLE IF EXISTS `widget`;
-CREATE TABLE `widget` (
-    `ident`             int unsigned                                                NOT NULL auto_increment,
-    `label`             varchar(64)                                                 NOT NULL,
-    `title`             varchar(32)                                                 NOT NULL,
-    `module`            varchar(32)                                                 NOT NULL,
-    `script`            varchar(32)                                                 NOT NULL,
-    PRIMARY KEY (`ident`),
-    UNIQUE INDEX (`module`, `script`)
-) DEFAULT CHARACTER SET UTF8;
-
-DROP TABLE IF EXISTS `widget_page`;
-CREATE TABLE `widget_page` (
-    `page`              int unsigned                                                NOT NULL,
-    `widget`            int unsigned                                                NOT NULL,
-    `position`          enum('1', '2', '3', '4')                                    NOT NULL DEFAULT '1',
-    PRIMARY KEY (`page`, `widget`, `position`),
-    INDEX (`page`),
-    FOREIGN KEY (`page`)          REFERENCES `page`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    INDEX (`widget`),
-    FOREIGN KEY (`widget`)        REFERENCES `widget`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
-) DEFAULT CHARACTER SET UTF8;
-
 /*====================================================================================================================*/
 /* Registro del modulo                                                                                                */
 /*====================================================================================================================*/
