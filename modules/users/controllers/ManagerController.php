@@ -55,6 +55,7 @@ class Users_ManagerController extends Yeah_Action
             $user = $users->createRow();
 
             $user->label = $request->getParam('label');
+            $user->url = convert($user->label);
             $user->password = $request->getParam('password');
             $user->code = $request->getParam('code');
             $user->formalname= $request->getParam('formal');
@@ -380,6 +381,7 @@ class Users_ManagerController extends Yeah_Action
                                 }
                                 $user->formalname = $result['NOMBRE COMPLETO'];
                                 $user->label = $result['USUARIO'];
+                                $user->url = convert($user->label);
                                 $user->email = $result['CORREO ELECTRONICO'];
                                 $user->surname = $result['APELLIDOS'];
                                 $user->name = $result['NOMBRES'];

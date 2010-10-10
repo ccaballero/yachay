@@ -32,6 +32,7 @@ class Roles_ManagerController extends Yeah_Action {
 
             $role = $roles->createRow();
             $role->label = $request->getParam('label');
+            $role->url = convert($role->url);
             $role->description = $request->getParam('description');
             $privileges_idents = $request->getParam('privileges');
 

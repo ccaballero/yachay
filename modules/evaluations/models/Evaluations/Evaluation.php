@@ -1,6 +1,6 @@
 <?php
 
-class modules_evaluations_models_Evaluations_Evaluation extends Yeah_Model_Row_WithTsRegister
+class modules_evaluations_models_Evaluations_Evaluation extends Yeah_Model_Row_Validation
 {
     public $__type = 'evaluation';
     public $__element = 'evaluations';

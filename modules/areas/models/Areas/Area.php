@@ -1,6 +1,6 @@
 <?php
 
-class modules_areas_models_Areas_Area extends Yeah_Model_Row_WithUrlAndTsRegister
+class modules_areas_models_Areas_Area extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(
@@ -19,6 +19,17 @@ class modules_areas_models_Areas_Area extends Yeah_Model_Row_WithUrlAndTsRegiste
                     'validator' => 'UniqueLabel',
                     'options'   => array('areas'),
                     'message'   => 'El nombre seleccionado del area ya existe o no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+            ),
+        ),
+        'url' => array(
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array(
+                    'validator' => 'UniqueUrl',
+                    'options'   => array('areas'),
+                    'message'   => 'El identificador de area ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
             ),

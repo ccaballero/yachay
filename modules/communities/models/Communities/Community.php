@@ -1,6 +1,6 @@
 <?php
 
-class modules_communities_models_Communities_Community extends Yeah_Model_Row_WithUrlAndTsRegister
+class modules_communities_models_Communities_Community extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(
@@ -19,6 +19,17 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Wi
                     'validator' => 'UniqueLabel',
                     'options'   => array('communities'),
                     'message'   => 'El nombre seleccionado para la comunidad ya existe o no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+            ),
+        ),
+        'url' => array(
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array(
+                    'validator' => 'UniqueUrl',
+                    'options'   => array('communities'),
+                    'message'   => 'El identificador de comunidad ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
             ),

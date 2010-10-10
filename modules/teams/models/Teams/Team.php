@@ -1,6 +1,6 @@
 <?php
 
-class modules_teams_models_Teams_Team extends Yeah_Model_Row_WithUrlAndTsRegister
+class modules_teams_models_Teams_Team extends Yeah_Model_Row_Validation
 {
     protected $_foreignkey = 'group';
 
@@ -21,6 +21,17 @@ class modules_teams_models_Teams_Team extends Yeah_Model_Row_WithUrlAndTsRegiste
                     'validator' => 'UniqueLabelDual',
                     'options'   => array('teams'),
                     'message'   => 'El nombre seleccionado para el equipo ya existe o no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+            ),
+        ),
+        'url' => array(
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array(
+                    'validator' => 'UniqueUrlDual',
+                    'options'   => array('teams'),
+                    'message'   => 'El identificador de equipo ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
             ),

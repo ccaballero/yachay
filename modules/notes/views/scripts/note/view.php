@@ -42,9 +42,13 @@
     <tr valign="top">
         <td>
             <b>Valoración: </b>
+        <?php if (Yeah_Acl::hasPermission('ratings', 'new')) { ?>
             <a href="<?= $this->url(array('resource' => $this->resource->ident), 'notes_note_rating_down') ?>"><b>&laquo;</b></a>
+        <?php } ?>
                 <i><?= $this->resource->ratings ?> / <?= $this->resource->raters ?></i>
+        <?php if (Yeah_Acl::hasPermission('ratings', 'new')) { ?>
             <a href="<?= $this->url(array('resource' => $this->resource->ident), 'notes_note_rating_up') ?>"><b>&raquo;</b></a>
+        <?php } ?>
         </td>
     </tr>
     <tr valign="top">

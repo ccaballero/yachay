@@ -44,6 +44,7 @@ class Gestions_ManagerController extends Yeah_Action
             $gestions = Yeah_Adapter::getModel('gestions');
             $gestion = $gestions->createRow();
             $gestion->label = $request->getParam('label');
+            $gestion->url = convert($gestion->label);
 
             if ($gestion->isValid()) {
                 $gestion->tsregister = time();

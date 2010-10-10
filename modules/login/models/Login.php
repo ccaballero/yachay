@@ -4,7 +4,6 @@ class modules_login_models_Login extends Zend_Db_Table_Abstract
 {
     protected $_name            = 'login_forgot';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_login_models_Login_Forgot';
     protected $_referenceMap    = array(
         'User'                  => array(
             'columns'           => 'user',

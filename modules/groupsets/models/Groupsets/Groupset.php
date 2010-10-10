@@ -1,6 +1,6 @@
 <?php
 
-class modules_groupsets_models_Groupsets_Groupset extends Yeah_Model_Row_WithTsRegister
+class modules_groupsets_models_Groupsets_Groupset extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(

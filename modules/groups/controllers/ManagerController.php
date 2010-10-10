@@ -74,6 +74,7 @@ class Groups_ManagerController extends Yeah_Action
             $groups = Yeah_Adapter::getModel('groups');
             $group = $groups->createRow();
             $group->label = $request->getParam('label');
+            $group->url = convert($group->label);
             $group->teacher = $request->getParam('teacher');
             $group->evaluation = $request->getParam('evaluation');
             $group->description = $request->getParam('description');

@@ -1,6 +1,6 @@
 <?php
 
-class modules_tags_models_Tags_Tag extends Yeah_Model_Row_WithTsRegister
+class modules_tags_models_Tags_Tag extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(

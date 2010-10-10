@@ -4,7 +4,6 @@ class modules_modules_models_Modules extends Zend_Db_Table_Abstract
 {
     protected $_name            = 'module';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_modules_models_Modules_Module';
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Modulo',

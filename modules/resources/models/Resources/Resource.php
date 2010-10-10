@@ -1,6 +1,6 @@
 <?php
 
-class modules_resources_models_Resources_Resource extends Yeah_Model_Row_WithTsRegister
+class modules_resources_models_Resources_Resource extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array();
 

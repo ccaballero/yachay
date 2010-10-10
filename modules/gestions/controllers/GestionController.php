@@ -75,7 +75,7 @@ class Gestions_GestionController extends Yeah_Action
             $gestion->delete();
             $session->messages->addMessage("La gestion $label ha sido eliminada");
         } else {
-            $session->messages->addMessage("La gestion no puede ser eliminada");
+            $session->messages->addMessage("La gestion debe estar vacia e inactiva para ser eliminada");
         }
 
         $this->_redirect($this->view->currentPage());

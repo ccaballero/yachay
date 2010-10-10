@@ -44,6 +44,7 @@ class Areas_ManagerController extends Yeah_Action
             $areas = Yeah_Adapter::getModel('areas');
             $area = $areas->createRow();
             $area->label = $request->getParam('label');
+            $area->url = convert($area->label);
             $area->description = $request->getParam('description');
 
             if ($area->isValid()) {

@@ -1,6 +1,6 @@
 <?php
 
-class modules_gestions_models_Gestions_Gestion extends Yeah_Model_Row_WithUrlAndTsRegister
+class modules_gestions_models_Gestions_Gestion extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(
@@ -19,6 +19,17 @@ class modules_gestions_models_Gestions_Gestion extends Yeah_Model_Row_WithUrlAnd
                     'validator' => 'UniqueLabel',
                     'options'   => array('gestions'),
                     'message'   => 'El nombre seleccionado de la gestion ya existe o no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+            ),
+        ),
+        'url' => array(
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array(
+                    'validator' => 'UniqueUrl',
+                    'options'   => array('gestions'),
+                    'message'   => 'El identificador de gestion ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
             ),

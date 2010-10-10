@@ -1,6 +1,6 @@
 <?php
 
-class modules_roles_models_Roles_Role extends Yeah_Model_Row_WithUrlAndTsRegister
+class modules_roles_models_Roles_Role extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(
@@ -19,6 +19,17 @@ class modules_roles_models_Roles_Role extends Yeah_Model_Row_WithUrlAndTsRegiste
                     'validator' => 'UniqueLabel',
                     'options'   => array('roles'),
                     'message'   => 'El nombre seleccionado del rol ya existe o no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+            ),
+        ),
+        'url' => array(
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array(
+                    'validator' => 'UniqueUrl',
+                    'options'   => array('roles'),
+                    'message'   => 'El identificador del rol ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
             ),

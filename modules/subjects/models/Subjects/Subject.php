@@ -1,6 +1,6 @@
 <?php
 
-class modules_subjects_models_Subjects_Subject extends Yeah_Model_Row_WithUrlAndTsRegister
+class modules_subjects_models_Subjects_Subject extends Yeah_Model_Row_Validation
 {
     protected $_foreignkey = 'gestion';
 
@@ -63,6 +63,17 @@ class modules_subjects_models_Subjects_Subject extends Yeah_Model_Row_WithUrlAnd
                     'validator' => 'UniqueLabelDual',
                     'options'   => array('subjects'),
                     'message'   => 'El nombre seleccionado para la materia ya existe o no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+            ),
+        ),
+        'url' => array(
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array(
+                    'validator' => 'UniqueUrlDual',
+                    'options'   => array('subjects'),
+                    'message'   => 'El identificador de la materia ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
             ),

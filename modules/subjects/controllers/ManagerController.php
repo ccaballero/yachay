@@ -60,6 +60,7 @@ class Subjects_ManagerController extends Yeah_Action
             $subjects = Yeah_Adapter::getModel('subjects');
             $subject = $subjects->createRow();
             $subject->label = $request->getParam('label');
+            $subject->url = convert($subject->label);
             $subject->moderator = $request->getParam('moderator');
             $subject->code = $request->getParam('code');
             $subject->visibility = $request->getParam('visibility');
@@ -301,6 +302,7 @@ class Subjects_ManagerController extends Yeah_Action
                             }
                             if (isset($subject)) {
                                 $subject->label = $result['MATERIA'];
+                                $subject->url = convert($subject->label);
                                 if (isset($result['MODERADOR_OBJ'])) {
                                     $subject->moderator = $result['MODERADOR_OBJ']->ident;
                                 }

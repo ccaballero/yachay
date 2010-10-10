@@ -1,6 +1,6 @@
 <?php
 
-class modules_groups_models_Groups_Group extends Yeah_Model_Row_WithUrlAndTsRegister
+class modules_groups_models_Groups_Group extends Yeah_Model_Row_Validation
 {
     protected $_foreignkey = 'subject';
 
@@ -49,6 +49,17 @@ class modules_groups_models_Groups_Group extends Yeah_Model_Row_WithUrlAndTsRegi
                     'validator' => 'UniqueLabelDual',
                     'options'   => array('groups'),
                     'message'   => 'El nombre seleccionado para el grupo ya existe o no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+            ),
+        ),
+        'url' => array(
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array(
+                    'validator' => 'UniqueUrlDual',
+                    'options'   => array('groups'),
+                    'message'   => 'El identificador de grupo ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
             ),

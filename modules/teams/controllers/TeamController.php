@@ -100,6 +100,7 @@ class Teams_TeamController extends Yeah_Action
             $session = new Zend_Session_Namespace();
 
             $team->label = $request->getParam('label');
+            $team->url = convert($team->label);
             $team->description = $request->getParam('description');
 
             if ($team->isValid()) {

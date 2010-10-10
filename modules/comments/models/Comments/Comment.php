@@ -1,6 +1,6 @@
 <?php
 
-class modules_comments_models_Comments_Comment extends Yeah_Model_Row_WithTsRegister
+class modules_comments_models_Comments_Comment extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'comment' => array(

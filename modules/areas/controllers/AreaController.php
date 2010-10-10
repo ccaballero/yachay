@@ -94,6 +94,7 @@ class Areas_AreaController extends Yeah_Action
             $session = new Zend_Session_Namespace();
 
             $area->label = $request->getParam('label');
+            $area->url = convert($area->label);
             $area->description = $request->getParam('description');
 
             if ($area->isValid()) {

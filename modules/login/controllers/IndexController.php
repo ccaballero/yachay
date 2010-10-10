@@ -18,13 +18,11 @@ class Login_IndexController extends Yeah_Action
             $validators = array(
                 'usuario' => array(
                     new Zend_Validate_StringLength(4, 64),
-                    new Zend_Validate_Alnum(),
                     'allowEmpty' => false,
                     'presence'   => 'required',
                     'fields'     => 'username',
                     'messages'   => array(
-                        'El campo usuario debe tener entre 4 y 15 caracteres',
-                        'El campo usuario debe contener unicamente caracteres y numeros',
+                        'El campo usuario debe tener entre 4 y 64 caracteres',
                     ),
                 ),
                 'contrase&ntilde;a' => array(

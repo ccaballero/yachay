@@ -90,6 +90,7 @@ class Teams_ManagerController extends Yeah_Action
             $teams = Yeah_Adapter::getModel('teams');
             $team = $teams->createRow();
             $team->label = $request->getParam('label');
+            $team->url = convert($team->label);
             $team->description = $request->getParam('description');
             $team->group = $group->ident;
 

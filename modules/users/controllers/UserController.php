@@ -62,6 +62,7 @@ class Users_UserController extends Yeah_Action
             $session = new Zend_Session_Namespace();
 
             $user->label = $request->getParam('label');
+            $user->url = convert($user->label);
             $user->code = $request->getParam('code');
             $user->formalname= $request->getParam('formal');
             $user->email = $request->getParam('email');

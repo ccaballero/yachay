@@ -136,6 +136,7 @@ class Subjects_SubjectController extends Yeah_Action
             $session = new Zend_Session_Namespace();
 
             $subject->label = $request->getParam('label');
+            $subject->url = convert($subject->label);
             $subject->moderator = $request->getParam('moderator');
             $subject->code = $request->getParam('code');
             $subject->visibility = $request->getParam('visibility');

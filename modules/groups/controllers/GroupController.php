@@ -87,6 +87,7 @@ class Groups_GroupController extends Yeah_Action
             $session = new Zend_Session_Namespace();
 
             $group->label = $request->getParam('label');
+            $group->url = convert($group->label);
             $group->teacher = $request->getParam('teacher');
             $group->evaluation = $request->getParam('evaluation');
             $group->description = $request->getParam('description');

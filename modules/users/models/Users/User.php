@@ -1,6 +1,6 @@
 <?php
 
-class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegister
+class modules_users_models_Users_User extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'role' => array(
@@ -51,6 +51,17 @@ class modules_users_models_Users_User extends Yeah_Model_Row_WithUrlAndTsRegiste
                     'validator' => 'UniqueLabel',
                     'options'   => array('users'),
                     'message'   => 'El nombre seleccionado para el usuario ya existe o no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+            ),
+        ),
+        'url' => array(
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array(
+                    'validator' => 'UniqueUrl',
+                    'options'   => array('users'),
+                    'message'   => 'El identificador de usuario ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
             ),

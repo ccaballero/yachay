@@ -46,6 +46,7 @@ class Roles_RoleController extends Yeah_Action
             $roles_privileges = Yeah_Adapter::getModel('roles', 'Roles_Privileges');
 
             $role->label = $request->getParam('label');
+            $role->url = convert($role->url);
             $role->description = $request->getParam('description');
             $privileges_idents = $request->getParam('privileges');
 

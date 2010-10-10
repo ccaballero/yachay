@@ -1,6 +1,6 @@
 <?php
 
-class modules_invitations_models_Invitations_Invitation extends Yeah_Model_Row_WithTsRegister
+class modules_invitations_models_Invitations_Invitation extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'email' => array(

@@ -43,6 +43,7 @@ class Communities_ManagerController extends Yeah_Action
             $community = $model_communities->createRow();
 
             $community->label = $request->getParam('label');
+            $community->url = convert($community->label);
             $community->mode = $request->getParam('mode');
             $community->interests = $request->getParam('interests');
             $community->description = $request->getParam('description');
