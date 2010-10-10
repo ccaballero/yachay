@@ -60,6 +60,7 @@ class Communities_ManagerController extends Yeah_Action
                 $assignement->type = 'moderator';
                 $assignement->status = 'active';
                 $assignement->tsregister = time();
+                $assignement->save();
 
                 // config of avatar
                 $upload = new Zend_File_Transfer_Adapter_Http();
