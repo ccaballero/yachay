@@ -39,7 +39,7 @@ class Events_ManagerController extends Yeah_Action
             $event->message = $request->getParam('message');
 
             $context = new Yeah_Helpers_Context();
-            $spaces_valids = $context->context(NULL, TRUE);
+            $spaces_valids = $context->context(NULL, 'plain');
 
             if (in_array($publish, $spaces_valids)) {
                 if ($event->isValid()) {

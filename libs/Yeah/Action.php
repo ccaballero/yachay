@@ -137,7 +137,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
     public function requireContext($resource) {
         $session = new Zend_session_Namespace();
         $context = new Yeah_Helpers_Context();
-        $spaces_valids = $context->context(NULL, TRUE);
+        $spaces_valids = $context->context(NULL, 'plain');
         if (!in_array($resource->recipient, $spaces_valids)) {
             $session->messages->addMessage('Usted debe ser parte de ese espacio para realizar esa accion');
             $this->_redirect($this->view->url(array(), 'frontpage_user'));
@@ -239,10 +239,14 @@ abstract class Yeah_Action extends Zend_Controller_Action
 
             $widget_page = $widgets_pages->getPosition($PAGE->ident, $widget->ident);
             $position = $widget_page->position;
-            $WIDGETS[$position] = array (
-                'title'   => $widget->title,
-                'content' => $view->render($widget->script),
-            );
+
+            $widget_content = $view->render($widget->script);
+            if (!empty($widget_content)) {
+                $WIDGETS[$position] = array (
+                    'title'   => $widget->title,
+                    'content' => $widget_content,
+                );
+            }
         }
 
         // Register last login

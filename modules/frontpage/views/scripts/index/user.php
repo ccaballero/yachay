@@ -1,3 +1,3 @@
-<h1>Yeah!</h1>
-<?php foreach ($this->icons as $icon) { ?><a style="border:0px;" href="<?= $icon['url'] ?>"><img style="border:0px;" src="<?= $this->media . 'thumbnail_medium/' . $icon['icon'] ?>" alt="<?= $icon['alt'] ?>" /></a><?php } ?>
+<?php global $CONFIG; ?>
+<h1><?= $CONFIG->site ?></h1>
 <?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route)) ?>

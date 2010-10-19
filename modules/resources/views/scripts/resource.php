@@ -5,7 +5,6 @@
     <?php if (count($this->resources)) { ?>
     <center>
         <?= $this->paginator($this->resources, $this->route) ?>
-        <hr />
         <table width="90%">
         <?php foreach ($this->resources as $resource) { ?>
             <tr>
@@ -48,7 +47,6 @@
             </tr>
         <?php } ?>
         </table>
-        <hr />
         <?= $this->paginator($this->resources, $this->route) ?>
     </center>
     <?php } else { ?>

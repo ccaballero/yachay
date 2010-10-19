@@ -38,7 +38,4 @@
 		</td>
 	</tr>
 </table>
-<?php } else { ?>
-<br />
-    No existen recursos gestionables.
 <?php }?>

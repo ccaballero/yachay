@@ -2,7 +2,8 @@
 
 class Yeah_Helpers_Context
 {
-    public function context($name, $plain_format = FALSE) {
+    // Values for format: { html, plain, matrix}
+    public function context($name, $format = 'html') {
         global $USER;
         $_ = new Yeah_Helpers_Utf2html();
 
@@ -15,7 +16,17 @@ class Yeah_Helpers_Context
         $select = 'selected="selected"';
 
         $options = array();
-        $plain = array();
+
+        $data = array(
+            'global' => array(),
+            'areas' => array(),
+            'subjects' => array(),
+            'groupsets' => array(),
+            'groups' => array(),
+            'teams' => array(),
+            'communities' => array(),
+            'users' => array(),
+        );
 
         // set for global context
         if ($context_type == 'global') {
@@ -23,7 +34,7 @@ class Yeah_Helpers_Context
         }
         
         $options[] = '<option value="global" ' . $default . '>Pagina principal</option>';
-        $plain[] = 'global';
+        $data['global'][] = 'global';
 
         // set for area context
         $areas_model = Yeah_Adapter::getModel('areas');
@@ -37,7 +48,7 @@ class Yeah_Helpers_Context
             $options[] = '<optgroup label="Areas">';
             foreach ($areas_list as $area) {
                 $options[] = '<option value="area-' . $area->ident . '" ' . (($default && ($context->{$context_type}->ident == $area->ident)) ? $select : '') . '>' . $_->utf2html($area->label) . '</option>';
-                $plain[] = 'area-' . $area->ident;
+                $data['areas'][] = 'area-' . $area->ident;
             }
             $options[] = '</optiongroup>';
         }
@@ -88,7 +99,7 @@ class Yeah_Helpers_Context
             }
             foreach ($subjects2 as $subject) {
                 $options[] = '<option value="subject-' . $subject->ident . '" ' . (($default && ($context->{$context_type}->ident == $subject->ident)) ? $select : '') . '>' . $_->utf2html($subject->label) . '</option>';
-                $plain[] = 'subject-' . $subject->ident;
+                $data['subjects'][] = 'subject-' . $subject->ident;
             }
             $options[] = '</optiongroup>';
         }
@@ -106,7 +117,7 @@ class Yeah_Helpers_Context
             $options[] = '<optgroup label="Conjuntos">';
             foreach ($groupsets2 as $groupset) {
                 $options[] = '<option value="groupset-' . $groupset->ident . '" ' . '>' . $_->utf2html($groupset->label) . '</option>';
-                $plain[] = 'groupset-' . $groupset->ident;
+                $data['groupsets'][] = 'groupset-' . $groupset->ident;
             }
             $options[] = '</optiongroup>';
         }
@@ -137,7 +148,7 @@ class Yeah_Helpers_Context
             foreach ($groups as $group) {
                 $subject = $group->getSubject();
                 $options[] = '<option value="group-' . $group->ident . '" ' . (($default && ($context->{$context_type}->ident == $group->ident)) ? $select : '') . '>' . 'Grupo ' . $_->utf2html($group->label) . ' (' . $_->utf2html($subject->label) . ')</option>';
-                $plain[] = 'group-' . $group->ident;
+                $data['groups'][] = 'group-' . $group->ident;
             }
             $options[] = '</optiongroup>';
         }
@@ -169,7 +180,7 @@ class Yeah_Helpers_Context
                 $group = $team->getGroup();
                 $subject = $group->getSubject();
                 $options[] = '<option value="team-' . $team->ident . '" ' . (($default && ($context->{$context_type}->ident == $team->ident)) ? $select : '') . '>' . 'Equipo ' . $_->utf2html($team->label) . ' - Grupo ' . $_->utf2html($group->label) . ' (' . $_->utf2html($subject->label) . ')</option>';
-                $plain[] = 'team-' . $team->ident;
+                $data['teams'][] = 'team-' . $team->ident;
             }
             $options[] = '</optiongroup>';
         }
@@ -194,7 +205,7 @@ class Yeah_Helpers_Context
             $options[] = '<optgroup label="Comunidades">';
             foreach ($communities2 as $community) {
                 $options[] = '<option value="community-' . $community->ident . '" ' . (($default && ($context->{$context_type}->ident == $community->ident)) ? $select : '') . '>' . $_->utf2html($community->label) . '</option>';
-                $plain[] = 'community-' . $community->ident;
+                $data['communities'][] = 'community-' . $community->ident;
             }
             $options[] = '</optiongroup>';
         }
@@ -214,18 +225,27 @@ class Yeah_Helpers_Context
                 $user = $users_model->findByIdent($friend->friend);
                 if ($user->status == 'active') {
                     $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context->{$context_type}->ident == $user->ident)) ? $select : '') . '>' . $_->utf2html($user->label) . '</option>';
-                    $plain[] = 'user-' . $user->ident;
+                    $data['users'][] = 'user-' . $user->ident;
                 }
             }
             $options[] = '</optiongroup>';
         }
 
         // OK, all ready!
-        $select = '<select name="' . $name . '" id="' . $name . '">' . implode('', $options) . '</select>';
-
-        if ($plain_format) {
-            return $plain;
+        switch ($format) {
+            case 'html':
+                $select = '<select name="' . $name . '" id="' . $name . '">' . implode('', $options) . '</select>';
+                return $select;
+            case 'matrix':
+                return $data;
+            case 'plain':
+                $plain = array();
+                foreach ($data as $spaces) {
+                    foreach ($spaces as $element) {
+                        $plain[] = $element;
+                    }
+                }
+                return $plain;
         }
-        return $select;
     }
 }

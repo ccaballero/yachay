@@ -27,7 +27,7 @@ class Files_ManagerController extends Yeah_Action
             $publish = $request->getParam('publish');
 
             $context = new Yeah_Helpers_Context();
-            $spaces_valids = $context->context(NULL, TRUE);
+            $spaces_valids = $context->context(NULL, 'plain');
 
             if (in_array($publish, $spaces_valids)) {
                 if ($upload->receive()) {

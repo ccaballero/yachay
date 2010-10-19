@@ -1,5 +1,5 @@
-<h1>Yeah!</h1>
-
+<?php global $CONFIG; ?>
+<h1><?= $CONFIG->site ?></h1>
 <p>
     Bienvenido a la red social donde puedes interactuar con estudiantes y docentes, buscar informacion de las
     respectivas materias de tu area de estudio y armar tu red de amigos o compa&ntilde;eros de grupo, disfruta de 

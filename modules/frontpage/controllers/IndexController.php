@@ -24,9 +24,11 @@ class IndexController extends Yeah_Action
 
             $resources = array();
             foreach($resources_globales as $resource_global) {
-                $resources[] = $model_resources->findByIdent($resource_global->resource);
+                $resource = $model_resources->findByIdent($resource_global->resource);
+                $resources[$resource->tsregister] = $resource;
             }
 
+            ksort($resources);
             $resources = array_reverse($resources);
 
             // PAGINATOR
@@ -234,10 +236,6 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            $model_resources_globales = Yeah_Adapter::getModel('resources', 'Resources_Globales');
-            $resources_globales = $model_resources_globales->selectAll();
-            $model_resources = Yeah_Adapter::getModel('resources');
-
             if ($modules->findByLabel('widgets')->status == 'active') {
                 if (Yeah_Acl::hasPermission('widgets', 'manage')) {
                     $icons[] = array(
@@ -254,11 +252,100 @@ class IndexController extends Yeah_Action
                 }
             }
 
+            $model_resources_globales = Yeah_Adapter::getModel('resources', 'Resources_Globales');
+            $resources_globales = $model_resources_globales->selectAll();
+            $model_resources = Yeah_Adapter::getModel('resources');
+
+            // Fetch all posts in system!!
+            $context = new Yeah_Helpers_Context;
+            $list_spaces = $context->context(NULL, 'matrix');
             $resources = array();
+
+            // global
             foreach($resources_globales as $resource_global) {
-                $resources[] = $model_resources->findByIdent($resource_global->resource);
+                $resource = $model_resources->findByIdent($resource_global->resource);
+                $resources[$resource->tsregister] = $resource;
             }
 
+            // areas
+            if (count($list_spaces['areas']) <> 0) {
+                $areas_model = Yeah_Adapter::getModel('areas');
+                foreach ($list_spaces['areas'] as $area) {
+                    @list($element, $ident) = @split('-', $area);
+                    $area = $areas_model->findByIdent($ident);
+                    $_resources = $area->findmodules_resources_models_ResourcesViamodules_areas_models_Areas_Resources();
+                    foreach ($_resources as $resource) {
+                        $resources[$resource->tsregister] = $resource;
+                    }
+                }
+            }
+
+            // subjects
+            if (count($list_spaces['subjects']) <> 0) {
+                $subjects_model = Yeah_Adapter::getModel('subjects');
+                foreach ($list_spaces['subjects'] as $subject) {
+                    @list($element, $ident) = @split('-', $subject);
+                    $subject = $subjects_model->findByIdent($ident);
+                    $_resources = $subject->findmodules_resources_models_ResourcesViamodules_subjects_models_Subjects_Resources();
+                    foreach ($_resources as $resource) {
+                        $resources[$resource->tsregister] = $resource;
+                    }
+                }
+            }
+
+            // groups
+            if (count($list_spaces['groups']) <> 0) {
+                $groups_model = Yeah_Adapter::getModel('groups');
+                foreach ($list_spaces['groups'] as $group) {
+                    @list($element, $ident) = @split('-', $group);
+                    $group = $groups_model->findByIdent($ident);
+                    $_resources = $group->findmodules_resources_models_ResourcesViamodules_groups_models_Groups_Resources();
+                    foreach ($_resources as $resource) {
+                        $resources[$resource->tsregister] = $resource;
+                    }
+                }
+            }
+
+            // teams
+            if (count($list_spaces['teams']) <> 0) {
+                $teams_model = Yeah_Adapter::getModel('teams');
+                foreach ($list_spaces['teams'] as $team) {
+                    @list($element, $ident) = @split('-', $team);
+                    $team = $teams_model->findByIdent($ident);
+                    $_resources = $team->findmodules_resources_models_ResourcesViamodules_teams_models_Teams_Resources();
+                    foreach ($_resources as $resource) {
+                        $resources[$resource->tsregister] = $resource;
+                    }
+                }
+            }
+
+            // community
+            if (count($list_spaces['communities']) <> 0) {
+                $communities_model = Yeah_Adapter::getModel('communities');
+                foreach ($list_spaces['communities'] as $community) {
+                    @list($element, $ident) = @split('-', $community);
+                    $community = $communities_model->findByIdent($ident);
+                    $_resources = $community->findmodules_resources_models_ResourcesViamodules_communities_models_Communities_Resources();
+                    foreach ($_resources as $resource) {
+                        $resources[$resource->tsregister] = $resource;
+                    }
+                }
+            }
+
+            // user
+            if (count($list_spaces['users']) <> 0) {
+                $users_model = Yeah_Adapter::getModel('users');
+                foreach ($list_spaces['users'] as $user) {
+                    @list($element, $ident) = @split('-', $user);
+                    $user = $users_model->findByIdent($ident);
+                    $_resources = $user->findmodules_resources_models_ResourcesViamodules_users_models_Users_Resources();
+                    foreach ($_resources as $resource) {
+                        $resources[$resource->tsregister] = $resource;
+                    }
+                }
+            }
+
+            ksort($resources);
             $resources = array_reverse($resources);
 
             // PAGINATOR     

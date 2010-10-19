@@ -1,44 +1,33 @@
-<!doctype html>
-<?php global $TITLE, $TOOLBAR, $SEARCH, $MENUBAR, $BREADCRUMB, $WIDGETS, $FOOTER; ?>
+<!doctype html><?php global $TITLE, $TOOLBAR, $SEARCH, $MENUBAR, $BREADCRUMB, $WIDGETS, $FOOTER; ?>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <!-- REGION: icon --><!-- END REGION -->
-        <!-- REGION: title --><title><?= $TITLE->toString() ?></title><!-- END REGION -->
+        <title><?= $TITLE->toString() ?></title>
     </head>
     <body>
-        <!-- REGION: toolbar --><?= renderToolbar($TOOLBAR) ?><!-- END REGION -->
-        <!-- REGION: search --><?= renderSearch($SEARCH) ?><!-- END REGION -->
-        <!-- REGION: primary --><?= renderMenubar($MENUBAR) ?><!-- END REGION -->
-        <!-- REGION: banner --><!-- END REGION -->
-        <!-- REGION: secondary --><!-- END REGION -->
-        <br/>
-        <hr/>
+        <?= renderToolbar($TOOLBAR) ?>
+        <?= renderSearch($SEARCH) ?>
+        <?= renderMenubar($MENUBAR) ?>
+        <br/><hr/>
         <table width="100%">
             <tr>
                 <td valign="top" width="15%">
-                    <!-- REGION: widget 1 --><?= renderWidget($WIDGETS[1]) ?><!-- END REGION -->
-                    <br />
-                    <!-- REGION: widget 2 --><?= renderWidget($WIDGETS[3]) ?><!-- END REGION -->
+                    <?= renderWidget($WIDGETS[1]) ?>
+                    <?= renderWidget($WIDGETS[3]) ?>
                 </td>
                 <td valign="top">
-                    <!-- REGION: breadcrumb --><?= renderBreadcrumb($BREADCRUMB) ?><!-- END REGION -->
-                    <br />
-                    <br />
-                    <!-- REGION: message --><?= renderMessage() ?><!-- END REGION -->
-                    <!-- REGION: content --><?= $this->layout()->content ?><!-- END REGION -->
+                    <?= renderBreadcrumb($BREADCRUMB) ?>
+                    <?= renderMessage() ?>
+                    <?= $this->layout()->content ?>
                 </td>
                 <td valign="top" width="15%">
-                    <!-- REGION: widget 3 --><?= renderWidget($WIDGETS[2]) ?><!-- END REGION -->
-                    <br />
-                    <!-- REGION: widget 4 --><?= renderWidget($WIDGETS[4]) ?><!-- END REGION -->
+                    <?= renderWidget($WIDGETS[2]) ?>
+                    <?= renderWidget($WIDGETS[4]) ?>
                 </td>
             </tr>
         </table>
         <hr />
-        <center>
-            <!-- REGION: footer --><?= renderFooter($FOOTER) ?><!-- END REGION -->
-        </center>
+        <center><?= renderFooter($FOOTER) ?></center>
     </body>
 </html>
 

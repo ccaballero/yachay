@@ -4,8 +4,8 @@
     <form method="post" action="" accept-charset="utf-8">
         <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
         <table>
-	        <tr>
-    			<td><b>Publicar en (*):</b></td>
+            <tr>
+                <td><b>Publicar en (*):</b></td>
                 <td><?= $this->context('publish') ?></td>
             </tr>
             <tr>
