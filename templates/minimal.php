@@ -13,7 +13,9 @@
             <tr>
                 <td valign="top" width="15%">
                     <?= renderWidget($WIDGETS[1]) ?>
+                    <?= !empty($WIDGETS[1]) ? '<hr />' : '' ?>
                     <?= renderWidget($WIDGETS[3]) ?>
+                    <?= !empty($WIDGETS[3]) ? '<hr />' : '' ?>
                 </td>
                 <td valign="top">
                     <?= renderBreadcrumb($BREADCRUMB) ?>
@@ -22,7 +24,9 @@
                 </td>
                 <td valign="top" width="15%">
                     <?= renderWidget($WIDGETS[2]) ?>
+                    <?= !empty($WIDGETS[2]) ? '<hr />' : '' ?>
                     <?= renderWidget($WIDGETS[4]) ?>
+                    <?= !empty($WIDGETS[4]) ? '<hr />' : '' ?>
                 </td>
             </tr>
         </table>
@@ -38,8 +42,9 @@
     }
 
     function renderSearch($search) {
-        return '<table><tr><td><form method="' . $search->method . '" action="' .
-                $search->action . '">' . $search->search . '</form></td></tr></table>';
+        return;
+        /*return '<table><tr><td><form method="' . $search->method . '" action="' .
+                $search->action . '">' . $search->search . '</form></td></tr></table>';*/
     }
 
     function renderMenubar($menubar) {
@@ -92,4 +97,3 @@
             return '';
         }
     }
-?>

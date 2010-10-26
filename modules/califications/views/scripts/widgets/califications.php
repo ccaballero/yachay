@@ -1,11 +1,11 @@
 <form method="post" action="califications" accept-charset="utf-8">
-    <table>
+    <table width="100%">
         <tr>
             <td>
                 Codigo SISS:
             </td>
             <td>
-                <input type="text" name="siss" size="10" maxlength="10" />
+                <input type="text" name="siss" size="16" maxlength="16" />
             </td>
         </tr>
         <tr>

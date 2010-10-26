@@ -12,7 +12,8 @@
     $followers = $friends_model->selectFollowersByUser($USER->ident);
 ?>
 
-<h2>Amigos</h2>
+<br />
+<b>Amigos</b>
 <?php if (count($friends) != 0) { ?>
 
 <table width="100%">
@@ -52,7 +53,7 @@
 <p>No se encontraron contactos</p>
 <?php } ?>
 
-<h2>Solicitudes</h2>
+<b>Solicitudes</b>
 <?php if (count($followings) != 0) { ?>
 
 <table width="100%">
@@ -92,7 +93,7 @@
 <p>No se encontraron contactos</p>
 <?php } ?>
 
-<h2>Peticiones</h2>
+<b>Peticiones</b>
 <?php if (count($followers) != 0) { ?>
 
 <table width="100%">

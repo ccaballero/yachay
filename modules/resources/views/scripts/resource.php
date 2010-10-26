@@ -1,5 +1,4 @@
 <?php global $CONFIG; ?>
-
 <?php if (Yeah_Acl::hasPermission('resources', 'view')) { ?>
     <h2>Publicaciones</h2>
     <?php if (count($this->resources)) { ?>
@@ -11,10 +10,10 @@
                 <td rowspan="3" valign="top" width="50px">
                 <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $resource->getAuthor()->url), 'users_user_view') ?>">
-                        <img src="<?= $CONFIG->wwwroot . 'media/users/thumbnail_small/' . $resource->getAuthor()->getAvatar() ?>" />
+                        <img src="<?= $CONFIG->wwwroot . 'media/users/thumbnail_small/' . $resource->getAuthor()->getAvatar() ?>" alt="" />
                     </a>
                 <?php } else { ?>
-                    <img src="<?= $CONFIG->wwwroot . 'media/users/thumbnail_small/' . $resource->getAuthor()->getAvatar() ?>" />
+                    <img src="<?= $CONFIG->wwwroot . 'media/users/thumbnail_small/' . $resource->getAuthor()->getAvatar() ?>" alt="" />
                 <?php } ?>
                 </td>
                 <td>
@@ -24,7 +23,7 @@
                     <b><?= $this->utf2html($resource->getAuthor()->getFullName()) ?></b>
                 <?php } ?>
                 </td>
-                <td width="250px" align="right"><?= $this->timestamp($resource->tsregister) ?></td>
+                <td align="right"><?= $this->timestamp($resource->tsregister) ?></td>
             </tr>
             <tr>
                 <td colspan="2">
@@ -33,12 +32,17 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     Comentarios (<?= $resource->comments ?>) | 
                     Valoración (<?= $resource->ratings ?>/<?= $resource->raters ?>) |
                     [<a href="<?= $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_view') ?>">Ver mas</a>]
                 <?php if (Yeah_Acl::hasPermission('resources', 'drop')) { ?>
                     [<a href="<?= $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_drop') ?>">Eliminar</a>]
+                <?php } ?>
+                </td>
+                <td align="right">
+                <?php if (isset($resource->recipient)) { ?>
+                    <?= $this->recipient($resource->recipient) ?>
                 <?php } ?>
                 </td>
             </tr>

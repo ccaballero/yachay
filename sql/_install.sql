@@ -112,11 +112,11 @@ SELECT 'ratings';
 SELECT 'valorations';
 \. valorations.sql
 
-/*SELECT 'tags';
-\. tags.sql*/
+SELECT 'tags';
+\. tags.sql
 
-/*SELECT 'search';
-\. search.sql*/
+SELECT 'feedback';
+\. feedback.sql
 
 /*====================================================================================================================*/
 
