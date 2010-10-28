@@ -19,4 +19,8 @@ class modules_communities_models_Communities_Users extends Zend_Db_Table_Abstrac
     public function findByCommunityAndUser($community, $user) {
         return $this->fetchRow($this->select()->where('community = ?', $community)->where('user = ?', $user));
     }
+
+    public function deleteUsersInCommunity($community) {
+        $this->delete('`community` = ' . $community);
+    }
 }

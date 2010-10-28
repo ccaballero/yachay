@@ -25,7 +25,6 @@ class modules_communities_models_Communities extends Zend_Db_Table_Abstract
         'members'               => 'Miembros',
         'description'           => 'Descripcion',
         'avatar'                => 'Tiene avatar',
-        'interests'             => 'Intereses',
         'tsregister'            => 'Fecha de registro',
     );
 

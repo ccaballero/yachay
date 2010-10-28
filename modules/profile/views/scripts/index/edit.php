@@ -1,4 +1,4 @@
-<h1><?= $this->utf2html($this->none($this->user->getFullName())) ?></h1>
+<h1><?= $this->user->getFullName() ?></h1>
 
 <p>
     En esta pagina usted debe establecer la informacion que es solicitada, asegurese de mantenerla siempre 
@@ -19,11 +19,11 @@
             </tr>
             <tr>
                 <td><b>Apellidos:</b></td>
-                <td><input type="text" name="surname" value="<?= $this->utf2html($this->user->surname) ?>" maxlength="128" /></td>
+                <td><input type="text" name="surname" value="<?= $this->user->surname ?>" maxlength="128" /></td>
             </tr>
             <tr>
                 <td><b>Nombres:</b></td>
-                <td><input type="text" name="name" value="<?= $this->utf2html($this->user->name) ?>" maxlength="128" /></td>
+                <td><input type="text" name="name" value="<?= $this->user->name ?>" maxlength="128" /></td>
             </tr>
             <tr>
                 <td><b>Fecha de nacimiento:</b></td>
@@ -46,25 +46,28 @@
                 <td><?= $this->formFile('file')?></td>
             </tr>
             <tr>
-                <td><b>Intereses:</b></td>
-                <td><input type="text" name="interests" value="<?= $this->utf2html($this->user->interests) ?>" maxlength="1024" /></td>
+                <td><b>Etiquetas (**):</b></td>
+                <td><input name="tags" value="<?= $this->tags ?>" maxlength="128" /></td>
             </tr>
             <tr>
                 <td><b>Pasatiempos:</b></td>
-                <td><input type="text" name="hobbies" value="<?= $this->utf2html($this->user->hobbies) ?>" maxlength="1024" /></td>
+                <td><input type="text" name="hobbies" value="<?= $this->user->hobbies ?>" maxlength="1024" /></td>
             </tr>
             <tr>
                 <td><b>Firma:</b></td>
-                <td><input type="text" name="sign" value="<?= $this->utf2html($this->user->sign) ?>" maxlength="1024" /></td>
+                <td><input type="text" name="sign" value="<?= $this->user->sign ?>" maxlength="1024" /></td>
             </tr>
             <tr>
                 <td colspan="2"><b>Descripcion personal:</b></td>
             </tr>
             <tr>
-                <td colspan="2"><textarea name="description"><?= $this->utf2html($this->user->description) ?></textarea></td>
+                <td colspan="2"><textarea name="description" cols="50" rows="5"><?= $this->user->description ?></textarea></td>
             </tr>
             <tr>
                 <td colspan="2">(*) Campos obligatorios.</td>
+            </tr>
+            <tr>
+                <td colspan="2">(**) Las etiquetas deben separarse con comas.</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>

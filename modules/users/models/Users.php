@@ -46,7 +46,6 @@ class modules_users_models_Users extends Zend_Db_Table_Abstract
         'phone'                 => 'Teléfono',                          // optional
         'cellphone'             => 'Celular',                           // optional
         'hobbies'               => 'Pasatiempos',
-        'interests'             => 'Intereses',
         'description'           => 'Descripción',
         'sign'                  => 'Firma',
         'activity'              => 'Actividad',

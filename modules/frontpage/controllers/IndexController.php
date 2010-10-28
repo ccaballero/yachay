@@ -360,7 +360,7 @@ class IndexController extends Yeah_Action
             $this->view->resources = $paginator;
             $this->view->route = array (
             	'key' => 'frontpage_user',
-                'params' => array (),         
+                'params' => array(),         
             );
         } else {
             $this->_redirect($this->view->url(array(), 'frontpage_visitor'));

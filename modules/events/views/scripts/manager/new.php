@@ -31,11 +31,18 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <textarea name="message" cols="50" rows="5"><?= $this->utf2html($this->event->message) ?></textarea>
+                    <textarea name="message" cols="50" rows="5"><?= $this->event->message ?></textarea>
                 </td>
             </tr>
             <tr>
+                <td><b>Etiquetas (**):</b></td>
+                <td><input name="tags" value="" maxlength="128" /></td>
+            </tr>
+            <tr>
                 <td colspan="2">(*) Campos obligatorios.</td>
+            </tr>
+            <tr>
+                <td colspan="2">(**) Las etiquetas deben separarse con comas.</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>

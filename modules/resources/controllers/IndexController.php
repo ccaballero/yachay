@@ -25,7 +25,7 @@ class Resources_IndexController extends Yeah_Action
         $list = array_reverse($list);
         $this->view->resources = $list;
 
-		history('resources');
+        history('resources');
         breadcrumb();
     }
 

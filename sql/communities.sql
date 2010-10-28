@@ -14,7 +14,6 @@ CREATE TABLE `community` (
     `petitions`         int unsigned                                                NOT NULL DEFAULT 0,
     `description`       text                                                        NOT NULL DEFAULT '',
     `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,
-    `interests`         text                                                        NOT NULL DEFAULT '',
     `tsregister`        int unsigned                                                NOT NULL,
     PRIMARY KEY (`ident`),
     INDEX (`author`),

@@ -48,9 +48,6 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Va
                 ),
             ),
         ),
-        'interests' => array(
-            'filters' => array('StringTrim', 'StripNewlines', 'StripTags'),
-        ),
         'description' => array(
             'filters' => array('StringTrim', 'StripNewlines', 'StripTags'),
         ),
@@ -126,5 +123,9 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Va
             return FALSE;
         }
         return $user->type == 'member';
+    }
+
+    public function getTags() {
+        return $this->findmodules_tags_models_TagsViamodules_tags_models_Tags_Communities();
     }
 }

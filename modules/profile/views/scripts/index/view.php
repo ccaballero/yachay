@@ -63,7 +63,14 @@
         <td colspan="4"><b>Ultimo acceso: </b><?= $this->timestamp($this->user->tslastlogin) ?></td>
     </tr>
     <tr>
-        <td colspan="4"><b>Intereses: </b><?= $this->utf2html($this->none($this->user->interests)) ?></td>
+        <td colspan="4">
+            <b>Etiquetas: </b>
+        <?php
+            $tags = $this->user->getTags();
+            foreach ($tags as $tag) { ?>
+                <a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><i><?= $tag->label ?></i></a>&nbsp;
+        <?php } ?>
+        </td>
     </tr>
     <tr>
         <td colspan="4"><b>Pasatiempos: </b><?= $this->utf2html($this->none($this->user->hobbies)) ?></td>

@@ -6,7 +6,7 @@
 
 <table width="100%">
     <tr>
-        <td rowspan="4" width="100px" valign="top">
+        <td rowspan="5" width="100px" valign="top">
         <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
             <a href="<?= $this->url(array('user' => $this->resource->getAuthor()->url), 'users_user_view') ?>">
                 <img src="<?= $this->media . '../users/thumbnail_medium/' . $this->resource->getAuthor()->getAvatar() ?>" alt="<?= $this->resource->getAuthor()->getFullName() ?>" />
@@ -29,6 +29,14 @@
     <tr valign="top">
         <td>
             <b>Publicado en: </b><i><?= $this->recipient($this->resource->recipient) ?></i>
+        </td>
+    </tr>
+    <tr valign="top">
+        <td>
+            <b>Etiquetas: </b>
+        <?php foreach ($this->tags as $tag) { ?>
+            <a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><i><?= $tag->label ?></i></a>&nbsp;
+        <?php } ?>
         </td>
     </tr>
     <tr valign="top">

@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <textarea name="description"><?= $this->utf2html($this->evaluation->description) ?></textarea>
+                    <textarea name="description" cols="50" rows="5"><?= $this->evaluation->description ?></textarea>
                 </td>
             </tr>
             <tr>

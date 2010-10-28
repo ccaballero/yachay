@@ -19,4 +19,8 @@ class modules_communities_models_Communities_Petitions extends Zend_Db_Table_Abs
     public function findByCommunityAndUser($community, $user) {
         return $this->fetchRow($this->select()->where('community = ?', $community)->where('user = ?', $user));
     }
+
+    public function deleteAplicantsInCommunity($community) {
+        $this->delete('`community` = ' . $community);
+    }
 }

@@ -15,8 +15,11 @@ class Files_FileController extends Yeah_Action
         $resource = $resources_model->findByIdent($file->resource);
         $this->requireContext($resource);
 
+        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+
         $this->view->resource = $resource;
         $this->view->file = $file;
+        $this->view->tags = $tags;
 
         history('files/' . $resource->ident);
         $breadcrumb = array();
@@ -35,6 +38,8 @@ class Files_FileController extends Yeah_Action
 
         $resources_model = Yeah_Adapter::getModel('resources');
         $files_model = Yeah_Adapter::getModel('files');
+        $tags_model = Yeah_Adapter::getModel('tags');
+        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
 
         $resource = $resources_model->findByIdent($file_ident);
         $file = $files_model->findByResource($file_ident);
@@ -42,12 +47,74 @@ class Files_FileController extends Yeah_Action
         $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
         $this->requireResourceAuthor($resource);
 
+        $_tags = array();
+        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        foreach ($tags as $tag) {
+            $_tags[] = $tag->label;
+        }
+
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
             $file->description = $request->getParam('description');
+            $newTags = $request->getParam('tags');
 
             if ($file->isValid()) {
                 $file->save();
+
+                $newTags = explode(',', $newTags);
+                $oldTags = $_tags;
+
+                for ($i = 0; $i < count($newTags); $i++) {
+                    for ($j = 0; $j < count($oldTags); $j++) {
+                        if (isset($newTags[$i]) && isset($oldTags[$j])) {
+                            if (trim(strtolower($newTags[$i])) == $oldTags[$j]) {
+                                $newTags[$i] = NULL;
+                                $oldTags[$j] = NULL;
+                            }
+                        }
+                    }
+                }
+                foreach ($newTags as $tagLabel) {
+                    if ($tagLabel <> NULL) {
+                        $tagLabel = trim(strtolower($tagLabel));
+                        $tag = $tags_model->findByLabel($tagLabel);
+                        if ($tag == NULL) {
+                            $tag = $tags_model->createRow();
+                            $tag->label = $tagLabel;
+                            $tag->url = convert($tag->label);
+                            $tag->weight = 1;
+                            if ($tag->isValid()) {
+                                $tag->tsregister = time();
+                                $tag->save();
+                            }
+                        } else {
+                            $tag->weight = $tag->weight + 1;
+                            $tag->save();
+                        }
+
+                        if ($tag->ident <> 0) {
+                            $assign = $tags_resources_model->createRow();
+                            $assign->tag = $tag->ident;
+                            $assign->resource = $resource->ident;
+                            $assign->save();
+                        }
+                    }
+                }
+                foreach ($oldTags as $tagLabel) {
+                    if ($tagLabel <> NULL) {
+                        $tag = $tags_model->findByLabel($tagLabel);
+                        $tag->weight = $tag->weight - 1;
+                        $tag->save();
+
+                        $assign = $tags_resources_model->findByTagAndResource($tag->ident, $resource->ident);
+                        $assign->delete();
+
+                        if ($tag->weight == 0) {
+                            $tag->delete();
+                        }
+                    }
+                }
+
                 $session->messages->addMessage('La descripcion se modifico correctamente');
                 $session->url = $file->resource;
                 $this->_redirect($this->view->url(array('file' => $file->resource), 'files_file_view'));
@@ -59,6 +126,7 @@ class Files_FileController extends Yeah_Action
         }
 
         $this->view->file = $file;
+        $this->view->tags = implode(', ', $_tags);
 
         history('files/' . $file->resource . '/edit');
         $breadcrumb = array();
@@ -68,7 +136,7 @@ class Files_FileController extends Yeah_Action
         breadcrumb($breadcrumb);
     }
 
-	public function downloadAction() {
+    public function downloadAction() {
         global $CONFIG;
 
         $this->requirePermission('resources', 'view');
@@ -105,12 +173,26 @@ class Files_FileController extends Yeah_Action
         $resources_model = Yeah_Adapter::getModel('resources');
         $files_model = Yeah_Adapter::getModel('files');
         $valorations_model = Yeah_Adapter::getModel('valorations');
+        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
 
         $resource = $resources_model->findByIdent($file_ident);
         $file = $files_model->findByResource($file_ident);
 
         $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
         $this->requireResourceAuthor($resource);
+
+        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        foreach ($tags as $tag) {
+            $tag->weight = $tag->weight - 1;
+            $tag->save();
+
+            $assign = $tags_resources_model->findByTagAndResource($tag->ident, $resource->ident);
+            $assign->delete();
+
+            if ($tag->weight == 0) {
+                $tag->delete();
+            }
+        }
 
         unlink($CONFIG->dirroot . '/media/files/' . $file->resource);
 
@@ -135,11 +217,25 @@ class Files_FileController extends Yeah_Action
         $resources_model = Yeah_Adapter::getModel('resources');
         $files_model = Yeah_Adapter::getModel('files');
         $valorations_model = Yeah_Adapter::getModel('valorations');
+        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
 
         $resource = $resources_model->findByIdent($file_ident);
         $file = $files_model->findByResource($file_ident);
 
         $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+
+        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        foreach ($tags as $tag) {
+            $tag->weight = $tag->weight - 1;
+            $tag->save();
+
+            $assign = $tags_resources_model->findByTagAndResource($tag->ident, $resource->ident);
+            $assign->delete();
+
+            if ($tag->weight == 0) {
+                $tag->delete();
+            }
+        }
 
         unlink($CONFIG->dirroot . '/media/files/' . $file->resource);
 

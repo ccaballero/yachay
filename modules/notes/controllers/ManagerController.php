@@ -15,6 +15,8 @@ class Notes_ManagerController extends Yeah_Action
         $notes_model = Yeah_Adapter::getModel('notes');
         $resources_model = Yeah_Adapter::getModel('resources');
         $valorations_model = Yeah_Adapter::getModel('valorations');
+        $tags_model = Yeah_Adapter::getModel('tags');
+        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -22,6 +24,7 @@ class Notes_ManagerController extends Yeah_Action
             $note = $notes_model->createRow();
             $note->note = $request->getParam('message');
             $publish = $request->getParam('publish');
+            $tags = $request->getParam('tags');
             $priority = $request->getParam('priority');
             if (empty($priority)) {
                 $note->priority = false;
@@ -45,6 +48,33 @@ class Notes_ManagerController extends Yeah_Action
 
                     $resource->saveContext($request);
                     $valorations_model->addActivity(1);
+
+                    // TAG REGISTER
+                    $tags = explode(',', $tags);
+                    foreach ($tags as $tagLabel) {
+                        $tagLabel = trim(strtolower($tagLabel));
+                        $tag = $tags_model->findByLabel($tagLabel);
+                        if ($tag == NULL) {
+                            $tag = $tags_model->createRow();
+                            $tag->label = $tagLabel;
+                            $tag->url = convert($tag->label);
+                            $tag->weight = 1;
+                            if ($tag->isValid()) {
+                                $tag->tsregister = time();
+                                $tag->save();
+                            }
+                        } else {
+                            $tag->weight = $tag->weight + 1;
+                            $tag->save();
+                        }
+
+                        if ($tag->ident <> 0) {
+                            $assign = $tags_resources_model->createRow();
+                            $assign->tag = $tag->ident;
+                            $assign->resource = $resource->ident;
+                            $assign->save();
+                        }
+                    }
 
                     $session->messages->addMessage('La nota ha sido creada');
                     $session->url = $note->resource;

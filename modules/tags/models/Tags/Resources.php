@@ -15,4 +15,12 @@ class modules_tags_models_Tags_Resources extends Zend_Db_Table_Abstract
             'refColumns'        => array('ident'),
         ),
     );
+
+    public function findByTagAndResource($tag, $resource) {
+        return $this->fetchRow($this->select()->where('`tag` = ?', $tag)->where('`resource` = ?', $resource));
+    }
+
+    public function deleteResourcesInTag($tag) {
+        $this->delete('`tag` = ' . $tag);
+    }
 }

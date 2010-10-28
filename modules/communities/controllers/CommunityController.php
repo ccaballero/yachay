@@ -49,10 +49,19 @@ class Communities_CommunityController extends Yeah_Action
 
         $request = $this->getRequest();
         $model_communities = Yeah_Adapter::getModel('communities');
+        $model_tags = Yeah_Adapter::getModel('tags');
+        $model_tags_communities = Yeah_Adapter::getModel('tags', 'Tags_Communities');
+
         $community = $model_communities->findByUrl($request->getParam('community'));
         $this->requireExistence($community, 'community', 'communities_community_view', 'community_list');
 
         context('community', $community);
+
+        $_tags = array();
+        $tags = $community->findmodules_tags_models_TagsViamodules_tags_models_Tags_Communities();
+        foreach ($tags as $tag) {
+            $_tags[] = $tag->label;
+        }
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -60,7 +69,7 @@ class Communities_CommunityController extends Yeah_Action
             $community->label = $request->getParam('label');
             $community->url = convert($community->label);
             $community->mode = $request->getParam('mode');
-            $community->interests = $request->getParam('interests');
+            $newTags = $request->getParam('tags');
             $community->description = $request->getParam('description');
 
             if ($community->isValid()) {
@@ -164,6 +173,60 @@ class Communities_CommunityController extends Yeah_Action
                 }
                 $community->save();
 
+                $newTags = explode(',', $newTags);
+                $oldTags = $_tags;
+
+                for ($i = 0; $i < count($newTags); $i++) {
+                    for ($j = 0; $j < count($oldTags); $j++) {
+                        if (isset($newTags[$i]) && isset($oldTags[$j])) {
+                            if (trim(strtolower($newTags[$i])) == $oldTags[$j]) {
+                                $newTags[$i] = NULL;
+                                $oldTags[$j] = NULL;
+                            }
+                        }
+                    }
+                }
+                foreach ($newTags as $tagLabel) {
+                    if ($tagLabel <> NULL) {
+                        $tagLabel = trim(strtolower($tagLabel));
+                        $tag = $model_tags->findByLabel($tagLabel);
+                        if ($tag == NULL) {
+                            $tag = $model_tags->createRow();
+                            $tag->label = $tagLabel;
+                            $tag->url = convert($tag->label);
+                            $tag->weight = 1;
+                            if ($tag->isValid()) {
+                                $tag->tsregister = time();
+                                $tag->save();
+                            }
+                        } else {
+                            $tag->weight = $tag->weight + 1;
+                            $tag->save();
+                        }
+
+                        if ($tag->ident <> 0) {
+                            $assign = $model_tags_communities->createRow();
+                            $assign->tag = $tag->ident;
+                            $assign->community = $community->ident;
+                            $assign->save();
+                        }
+                    }
+                }
+                foreach ($oldTags as $tagLabel) {
+                    if ($tagLabel <> NULL) {
+                        $tag = $model_tags->findByLabel($tagLabel);
+                        $tag->weight = $tag->weight - 1;
+                        $tag->save();
+
+                        $assign = $model_tags_communities->findByTagAndCommunity($tag->ident, $community->ident);
+                        $assign->delete();
+
+                        if ($tag->weight == 0) {
+                            $tag->delete();
+                        }
+                    }
+                }
+
                 $session->messages->addMessage("La comunidad {$community->label} se ha actualizado correctamente");
                 $session->url = $community->url;
                 $this->_redirect($request->getParam('return'));
@@ -176,6 +239,7 @@ class Communities_CommunityController extends Yeah_Action
 
         $this->view->model = $model_communities;
         $this->view->community = $community;
+        $this->view->tags = implode(', ', $_tags);
 
         history('community/' . $community->url . '/edit');
         $breadcrumb = array();
@@ -196,11 +260,33 @@ class Communities_CommunityController extends Yeah_Action
 
         $url = $request->getParam('community');
         $model_communities = Yeah_Adapter::getModel('communities');
+        $model_communities_users = Yeah_Adapter::getModel('communities', 'Communities_Users');
+        $model_communities_petitions = Yeah_Adapter::getModel('communities', 'Communities_Petitions');
+        $model_tags_communities = Yeah_Adapter::getModel('tags', 'Tags_Communities');
+
         $community = $model_communities->findByUrl($url);
 
         $session = new Zend_Session_Namespace();
         if (!empty($community) && $community->amAuthor()) {
             $label = $community->label;
+            $model_communities_users->deleteUsersInCommunity($community->ident);
+            if ($community->mode == 'close') {
+                $model_communities_petitions->deleteAplicantsInCommunity($community->ident);
+            }
+
+            $tags = $community->findmodules_tags_models_TagsViamodules_tags_models_Tags_Communities();
+            foreach ($tags as $tag) {
+                $tag->weight = $tag->weight - 1;
+                $tag->save();
+
+                $assign = $model_tags_communities->findByTagAndCommunity($tag->ident, $community->ident);
+                $assign->delete();
+
+                if ($tag->weight == 0) {
+                    $tag->delete();
+                }
+            }
+
             $community->delete();
             $session->messages->addMessage("La comunidad $label ha sido eliminada");
         } else {

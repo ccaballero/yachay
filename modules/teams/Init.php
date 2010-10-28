@@ -30,7 +30,7 @@ class modules_teams_Init extends Yeah_Init
                                                         'controller' => 'team',
                                                         'action'     => 'delete',
                                                     )),
-		'teams_team_member_delete'               => array('subjects/:subject/groups/:group/teams/:team/:user/delete',
+        'teams_team_member_delete'               => array('subjects/:subject/groups/:group/teams/:team/:user/delete',
                                                     array(
                                                         'module'     => 'teams',
                                                         'controller' => 'member',

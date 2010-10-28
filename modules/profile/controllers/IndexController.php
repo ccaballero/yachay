@@ -35,11 +35,20 @@ class Profile_IndexController extends Yeah_Action
 
         $request = $this->getRequest();
 
-        $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByUrl($USER->url);
+        $model_users = Yeah_Adapter::getModel('users');
+        $model_tags = Yeah_Adapter::getModel('tags');
+        $model_tags_users = Yeah_Adapter::getModel('tags', 'Tags_Users');
+
+        $user = $model_users->findByUrl($USER->url);
         $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
 
         context('user', $user);
+
+        $_tags = array();
+        $tags = $user->findmodules_tags_models_TagsViamodules_tags_models_Tags_Users();
+        foreach ($tags as $tag) {
+            $_tags[] = $tag->label;
+        }
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -53,7 +62,7 @@ class Profile_IndexController extends Yeah_Action
             $user->career = $request->getParam('career');
             $user->phone = $request->getParam('phone');
             $user->cellphone = $request->getParam('cellphone');
-            $user->interests = $request->getParam('interests');
+            $newTags = $request->getParam('tags');
             $user->hobbies = $request->getParam('hobbies');
             $user->sign = $request->getParam('sign');
             $user->description = $request->getParam('description');
@@ -155,6 +164,59 @@ class Profile_IndexController extends Yeah_Action
                 $user->save();
                 $session->user = $user;
 
+                $newTags = explode(',', $newTags);
+                $oldTags = $_tags;
+
+                for ($i = 0; $i < count($newTags); $i++) {
+                    for ($j = 0; $j < count($oldTags); $j++) {
+                        if (isset($newTags[$i]) && isset($oldTags[$j])) {
+                            if (trim(strtolower($newTags[$i])) == $oldTags[$j]) {
+                                $newTags[$i] = NULL;
+                                $oldTags[$j] = NULL;
+                            }
+                        }
+                    }
+                }
+                foreach ($newTags as $tagLabel) {
+                    if ($tagLabel <> NULL) {
+                        $tagLabel = trim(strtolower($tagLabel));
+                        $tag = $model_tags->findByLabel($tagLabel);
+                        if ($tag == NULL) {
+                            $tag = $model_tags->createRow();
+                            $tag->label = $tagLabel;
+                            $tag->url = convert($tag->label);
+                            $tag->weight = 1;
+                            if ($tag->isValid()) {
+                                $tag->tsregister = time();
+                                $tag->save();
+                            }
+                        } else {
+                            $tag->weight = $tag->weight + 1;
+                            $tag->save();
+                        }
+
+                        if ($tag->ident <> 0) {
+                            $assign = $model_tags_users->createRow();
+                            $assign->tag = $tag->ident;
+                            $assign->user = $user->ident;
+                            $assign->save();
+                        }
+                    }
+                }
+                foreach ($oldTags as $tagLabel) {
+                    if ($tagLabel <> NULL) {
+                        $tag = $model_tags->findByLabel($tagLabel);
+                        $tag->weight = $tag->weight - 1;
+                        $tag->save();
+
+                        $assign = $model_tags_users->findByTagAndUser($tag->ident, $user->ident);
+                        $assign->delete();
+                        if ($tag->weight == 0) {
+                            $tag->delete();
+                        }
+                    }
+                }
+
                 $session->messages->addMessage("Tu has modificado tu perfil correctamente");
                 $session->url = $user->url;
                 $this->_redirect($request->getParam('return'));
@@ -166,8 +228,9 @@ class Profile_IndexController extends Yeah_Action
         }
 
         $this->view->addHelperPath($CONFIG->dirroot . 'modules/users/views/helpers', 'Users_View_Helper_');
-        $this->view->model = $users;
+        $this->view->model = $model_users;
         $this->view->user = $user;
+        $this->view->tags = implode(', ', $_tags);
 
         history('profile/edit');
         $breadcrumb = array();

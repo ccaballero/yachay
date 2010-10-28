@@ -133,9 +133,6 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
         'hobbies' => array(
             'filters' => array('StringTrim', 'StripNewlines', 'StripTags'),
         ),
-        'interests' => array(
-            'filters' => array('StringTrim', 'StripNewlines', 'StripTags'),
-        ),
         'description' => array(
             'filters' => array('StringTrim', 'StripNewlines', 'StripTags'),
         ),
@@ -216,5 +213,9 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
             unset($this->email);
         }
         parent::save();
+    }
+
+    public function getTags() {
+        return $this->findmodules_tags_models_TagsViamodules_tags_models_Tags_Users();
     }
 }

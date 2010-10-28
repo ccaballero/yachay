@@ -46,10 +46,10 @@ VALUES
 ( 6,  3, FALSE, UNIX_TIMESTAMP());
 
 INSERT INTO `community`
-(`label`,          `url`,              `mode`,   `author`, `members`,     `tsregister`,     `interests`, `description`)
+(`label`,          `url`,              `mode`,   `author`, `members`,     `tsregister`,     `description`)
 VALUES
-('Gentoosa',       'gentoosa',         'open',   3,        3,             UNIX_TIMESTAMP(), 'linux, gentoo, software libre', 'Gente que use la distribucion Gentoo, o que simplemente le encante compilar su kernel'),
-('FechaFiferos',   'fechafiferos',     'close',  18,       1,             UNIX_TIMESTAMP(), 'futbol, deporte, umss', 'Los que juegan futbol cada sabado en las canchas de la U');
+('Gentoosa',       'gentoosa',         'open',   3,        3,             UNIX_TIMESTAMP(), 'Gente que use la distribucion Gentoo, o que simplemente le encante compilar su kernel'),
+('FechaFiferos',   'fechafiferos',     'close',  18,       1,             UNIX_TIMESTAMP(), 'Los que juegan futbol cada sabado en las canchas de la U');
 
 INSERT INTO `community_user`
 (`community`, `user`, `type`, `status`, `tsregister`)
@@ -402,5 +402,54 @@ INSERT INTO `rating`
 VALUES
 (25, 3, true),
 (25, 4, true);
+
+INSERT INTO `tag`
+(`label`,          `url`,            `weight`, `tsregister`)
+VALUES
+('internet',       'internet',       2, 1249975183), /*  1 */
+('opera',          'opera',          1, 1249977183), /*  2 */
+('javascript',     'javascript',     1, 1250076183), /*  3 */
+('ciencia',        'ciencia',        2, 1250084183), /*  4 */
+('tecnologia',     'tecnologia',     2, 1250086183), /*  5 */
+('informatica',    'informatica',    3, 1250081183), /*  6 */
+('linux',          'linux',          1, 1250086183), /*  7 */
+('gentoo',         'gentoo',         1, 1250083241), /*  8 */
+('software libre', 'software-libre', 1, 1250183183), /*  9 */
+('futbol',         'futbol',         1, 1250185183), /* 10 */
+('deporte',        'deporte',        1, 1250188183), /* 11 */
+('umss',           'umss',           1, 1250185183); /* 12 */
+
+INSERT INTO `tag_resource`
+(`tag`, `resource`)
+VALUES
+( 1, 9),
+( 2, 9),
+( 3, 9),
+( 1,20),
+( 4, 1),
+( 4, 6),
+( 5, 6),
+( 5, 8),
+( 6,13),
+( 6,14),
+( 6,15);
+
+INSERT INTO `tag_community`
+(`tag`, `community`)
+VALUES
+( 7, 1),
+( 8, 1),
+( 9, 1),
+(10, 2),
+(11, 2),
+(12, 2);
+
+INSERT INTO `tag_user`
+(`tag`, `user`)
+VALUES
+(1, 2),
+(2, 2),
+(1, 3),
+(2, 3);
 
 UPDATE `user` SET `password` = md5(CONCAT('KQ01805XG4GLTZHIFX19K0GR3G0K537F','asdf'));

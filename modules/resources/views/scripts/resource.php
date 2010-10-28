@@ -4,7 +4,7 @@
     <?php if (count($this->resources)) { ?>
     <center>
         <?= $this->paginator($this->resources, $this->route) ?>
-        <table width="90%">
+        <table width="100%">
         <?php foreach ($this->resources as $resource) { ?>
             <tr>
                 <td rowspan="3" valign="top" width="50px">

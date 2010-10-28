@@ -9,7 +9,7 @@
         <?= renderSearch($SEARCH) ?>
         <?= renderMenubar($MENUBAR) ?>
         <br/><hr/>
-        <table width="100%">
+        <table width="100%" cellspacing="10">
             <tr>
                 <td valign="top" width="15%">
                     <?= renderWidget($WIDGETS[1]) ?>

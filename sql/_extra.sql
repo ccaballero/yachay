@@ -172,21 +172,14 @@ VALUES
 (97, 1), (98, 1), (99, 1), (100, 1),
 (97, 2), (98, 2), (99, 2), (100, 2),
 (97, 3), (98, 3), (99, 3), (100, 3),
-(97, 4), (98, 4), (99, 4), (100, 4);
+(97, 4), (98, 4), (99, 4), (100, 4),
 /*====================================================================================================================*/
 /* Inserciones extra para el modulo TAGS                                                                              */
 /*====================================================================================================================*/
-/*(88, 1),
-(88, 2),
-(88, 3),
-(88, 4),*/
-/*====================================================================================================================*/
-/* Inserciones extra para el modulo SEARCH                                                                            */
-/*====================================================================================================================*/
-/*(89, 1),
-(89, 2),
-(89, 3),
-(89, 4);*/
+(101, 1), (102, 1), (103, 1),
+(101, 2), (102, 2), (103, 2),
+(101, 3), (102, 3), (103, 3),
+(101, 4), (102, 4), (103, 4);
 
 /*====================================================================================================================*/
 /* Conecciones adicionales para la habilitacion de los menus                                                          */
@@ -199,12 +192,13 @@ UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 6 WHERE `ident` = 40;
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 5 WHERE `ident` = 51;
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 7 WHERE `ident` = 70;
 
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 1 WHERE `ident` = 13;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 2 WHERE `ident` = 1;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 3 WHERE `ident` = 7;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 4 WHERE `ident` = 9;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 5 WHERE `ident` = 11;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 6 WHERE `ident` = 81;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 1 WHERE `ident` = 101;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 2 WHERE `ident` = 13;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 3 WHERE `ident` = 1;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 4 WHERE `ident` = 7;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 5 WHERE `ident` = 9;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 6 WHERE `ident` = 11;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 7 WHERE `ident` = 81;
 
 /*====================================================================================================================*/
 /*====================================================================================================================*/
@@ -429,7 +423,18 @@ VALUES
 ( 5,61),
 ( 4,61),
 ( 3,61),
-( 2,61);
+( 2,61),
+/*====================================================================================================================*/
+/* Inserciones extra para el modulo TAGS                                                                              */
+/*====================================================================================================================*/
+( 8,62), (8,63),
+( 7,62), (7,63),
+( 6,62), (6,63),
+( 5,62), (5,63),
+( 4,62),
+( 3,62),
+( 2,62),
+( 1,62);
 
 
 INSERT INTO `user`

@@ -19,24 +19,27 @@
                 <td><?= $this->formFile('file')?></td>
             </tr>
             <tr>
-                <td><b>Intereses:</b></td>
-                <td><input type="text" name="interests" value="<?= $this->utf2html($this->community->interests) ?>" maxlength="1024" /></td>
+                <td><b>Etiquetas (**):</b></td>
+                <td><input name="tags" value="<?= $this->tags ?>" maxlength="128" /></td>
             </tr>
             <tr>
                 <td colspan="2"><b>Descripci&oacute;n :</b></td>
             </tr>
             <tr>
                 <td colspan="2">
-                    <textarea name="description"><?= $this->utf2html($this->community->description) ?></textarea>
+                    <textarea name="description" cols="50" rows="5"><?= $this->community->description ?></textarea>
                 </td>
             </tr>
             <tr>
                 <td colspan="2">(*) Campos obligatorios.</td>
             </tr>
             <tr>
+                <td colspan="2">(**) Las etiquetas deben separarse con comas.</td>
+            </tr>
+            <tr>
                 <td>&nbsp;</td>
                 <td>
-                    <input type="submit" value="Crear comunidad" />
+                    <input type="submit" value="Editar comunidad" />
                     <a href="<?= $this->lastPage() ?>">Cancelar</a>
                 </td>
             </tr>

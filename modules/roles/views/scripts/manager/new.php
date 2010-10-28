@@ -12,7 +12,9 @@
                 <td colspan="2"><b>Descripcion:</b></td>
             </tr>
             <tr>
-                <td colspan="2" align="right"><textarea name="description" ><?= $this->role->description ?></textarea></td>
+                <td colspan="2" align="right">
+                    <textarea name="description" cols="50" rows="5"><?= $this->role->description ?></textarea>
+                </td>
             </tr>
             <tr>
                 <td colspan="2"><b>Privilegios:</b></td>

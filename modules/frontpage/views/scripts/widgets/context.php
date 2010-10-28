@@ -5,7 +5,7 @@
     <?php if (count($spaces) <> 0) { ?>
         <tr><td><b>[<?= $this->typeSpace($category) ?>]</b></td></tr>
         <?php foreach ($spaces as $space) { ?>
-            <tr><td>* [<?= $this->recipient($space) ?>]</td></tr>
+            <tr><td>[<?= $this->recipient($space) ?>]</td></tr>
         <?php } ?>
     <?php } ?>
 <?php } ?>

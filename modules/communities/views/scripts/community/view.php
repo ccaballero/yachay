@@ -13,14 +13,21 @@
 
 <table width="100%">
     <tr valign="top">
-        <td rowspan="7" width="200px">
-            <img src="<?= $this->media . 'thumbnail_large/' . $this->community->getAvatar() ?>" />
-        </td>
+        <td rowspan="8" width="200px"><img src="<?= $this->media . 'thumbnail_large/' . $this->community->getAvatar() ?>" /></td>
         <td><b>Descripci&oacute;n: </b></td>
     </tr>
     <tr><td><?= $this->utf2html($this->community->description) ?></td></tr>
     <tr valign="top"><td><b>Modalidad: </b><?= $this->mode(NULL, $this->community->mode) ?></td></tr>
-    <tr valign="top"><td><b>Intereses: </b><?= $this->community->interests ?></td></tr>
+    <tr valign="top">
+        <td colspan="2">
+            <b>Etiquetas: </b>
+        <?php
+            $tags = $this->community->getTags();
+            foreach ($tags as $tag) { ?>
+                <a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><i><?= $tag->label ?></i></a>&nbsp;
+        <?php } ?>
+        </td>
+    </tr>
     <tr valign="top">
         <td>
             <b>Autor: </b>
@@ -49,6 +56,8 @@
         </td>
     </tr>
 <?php } ?>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
 </table>
 
 <?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route)) ?>

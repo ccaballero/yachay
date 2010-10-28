@@ -22,7 +22,6 @@ CREATE TABLE `user` (
     `phone`             varchar(64)                                                 NOT NULL DEFAULT '',
     `cellphone`         varchar(64)                                                 NOT NULL DEFAULT '',
     `hobbies`           text                                                        NOT NULL DEFAULT '',
-    `interests`         text                                                        NOT NULL DEFAULT '',
     `description`       text                                                        NOT NULL DEFAULT '',
     `sign`              varchar(128)                                                NOT NULL DEFAULT '',
     `activity`          int unsigned                                                NOT NULL DEFAULT 0,

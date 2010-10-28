@@ -13,7 +13,7 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <textarea name="description"><?= $this->team->description ?></textarea>
+                    <textarea name="description" cols="50" rows="5"><?= $this->team->description ?></textarea>
                 </td>
             </tr>
             <tr>

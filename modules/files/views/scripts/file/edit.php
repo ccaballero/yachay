@@ -9,11 +9,18 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <textarea name="description" rows="7" cols="60"><?= $this->file->description ?></textarea>
+                    <textarea name="description" cols="50" rows="5"><?= $this->file->description ?></textarea>
                 </td>
             </tr>
             <tr>
+                <td><b>Etiquetas (**):</b></td>
+                <td><input name="tags" value="<?= $this->tags ?>" maxlength="128" /></td>
+            </tr>
+            <tr>
                 <td colspan="2">(*) Campos obligatorios.</td>
+            </tr>
+            <tr>
+                <td colspan="2">(**) Las etiquetas deben separarse con comas.</td>
             </tr>
             <tr>
                 <td>&nbsp;</td>

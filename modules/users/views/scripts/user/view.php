@@ -25,6 +25,16 @@
         <td colspan="2"><b>Cargo: </b><?= $this->user->getRole()->label ?></td>
         <td colspan="2"><b>Carrera: </b><?= $this->none($this->user->career) ?></td>
     </tr>
+    <tr valign="top">
+        <td colspan="4">
+            <b>Etiquetas: </b>
+        <?php
+            $tags = $this->user->getTags();
+            foreach ($tags as $tag) { ?>
+                <a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><i><?= $tag->label ?></i></a>&nbsp;
+        <?php } ?>
+        </td>
+    </tr>
     <tr>
         <td colspan="4">
             <b>Actividad: </b><?= $this->user->activity ?>&nbsp;
@@ -37,8 +47,6 @@
     <tr valign="top"><td colspan="4"><?= $this->none($this->utf2html($this->user->description)) ?></td></tr>
     <tr valign="top"><td colspan="4"><b>Pasatiempos:</b></td></tr>
     <tr valign="top"><td colspan="4"><?= $this->none($this->utf2html($this->user->hobbies)) ?></td></tr>
-    <tr valign="top"><td colspan="4"><b>Intereses:</b></td></tr>
-    <tr valign="top"><td colspan="4"><?= $this->none($this->utf2html($this->user->interests)) ?></td></tr>
 </table>
 <hr />
 <?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route)) ?>

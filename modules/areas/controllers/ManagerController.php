@@ -8,23 +8,6 @@ class Areas_ManagerController extends Yeah_Action
 
         $areas = Yeah_Adapter::getModel('areas');
 
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            if (Yeah_Acl::hasPermission('gestions', 'active')) {
-                $gestion_ident = $request->getParam('radio');
-                $gestion = $gestions->findByIdent($gestion_ident);
-                if ($gestion->status == 'inactive') {
-                    // clear all gestions
-                    $gestions->desactiveAll();
-                    // Active the selected gestion
-                    $gestion->status = 'active';
-                    $gestion->save();
-                }
-                $session = new Zend_Session_Namespace();
-                $session->messages->addMessage("La gestion {$gestion->label} ha sido establecida como actual");
-            }
-        }
-
         $this->view->model = $areas;
         $this->view->areas = $areas->selectAll();
 

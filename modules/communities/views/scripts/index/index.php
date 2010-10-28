@@ -6,7 +6,7 @@
         <table width="100%">
             <tr>
                 <td rowspan="5" width="100px">
-                    <img src="<?= $this->media . 'thumbnail_medium/' . $community->getAvatar() ?>" />
+                    <img src="<?= $this->media . 'thumbnail_medium/' . $community->getAvatar() ?>" alt="" />
                 </td>
                 <td colspan="2">
                     <?php if (Yeah_Acl::hasPermission('communities', 'view')) { ?>
@@ -33,7 +33,14 @@
                 <td colspan="2"><b>Descripci&oacute;n: </b><?= $this->utf2html($community->description) ?></td>
             </tr>
             <tr>
-                <td colspan="2"><b>Intereses: </b><?= $this->utf2html($community->interests) ?></td>
+                <td colspan="2">
+                    <b>Etiquetas: </b>
+                <?php
+                    $tags = $community->getTags();
+                    foreach ($tags as $tag) { ?>
+                        <a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><i><?= $tag->label ?></i></a>&nbsp;
+                <?php } ?>
+                </td>
             </tr>
             <tr>
                 <td width="300px"><b>Modalidad: </b><?= $this->mode(NULL, $community->mode) ?></td>
