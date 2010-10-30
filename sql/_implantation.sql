@@ -264,34 +264,36 @@ INSERT INTO `resource`
 (`author`, `recipient`,    `comments`, `ratings`, `raters`, `tsregister`)
 VALUES
 ( 1,       'global',       0,          0,         0,        1249111111),     /* NOTE   1 AVISE */
-( 2,       'area-1',       0,          0,         0,        1249211112),	 /* NOTE   2 */
-( 2,       'subject-8',    0,          0,         0,        1249311123),	 /* EVENT  3 */
-( 3,       'subject-11',   0,          0,         0,        1249411124),	 /* FILE   4 */
-( 4,       'group-12',     0,          0,         0,        1249511235),	 /* NOTE   5 AVISE */
-( 4,       'group-12',     0,          0,         0,        1249611236),	 /* NOTE   6 */
-( 8,       'group-16',     0,          0,         0,        1249711247),	 /* FILE   7 */
-(10,       'subject-7',    0,          0,         0,        1249811248),	 /* NOTE   8 */
-(11,       'global',       0,          0,         0,        1249912359),	 /* NOTE   9 AVISE */
-(11,       'global',       0,          0,         0,        1249012350),	 /* FILE  10 */
-(11,       'global',       0,          0,         0,        1249112361),	 /* EVENT 11 */
-(14,       'subject-12',   0,          0,         0,        1249212362),	 /* NOTE  12 */
-(15,       'global',       0,          0,         0,        1249312473),	 /* NOTE  13 */
-(16,       'subject-7',    0,          0,         0,        1249412474),	 /* NOTE  14 AVISE */
-(16,       'subject-11',   0,          0,         0,        1249512485),	 /* EVENT 15 */
-(17,       'global',       0,          0,         0,        1249612486),	 /* FILE  16 */
-(18,       'team-1',       0,          0,         0,        1249723597),	 /* EVENT 17 */
-(19,       'team-2',       0,          0,         0,        1249823598),	 /* NOTE  18 */
-(20,       'global',       0,          0,         0,        1249923509),	 /* EVENT 19 */
-(21,       'user-22',      0,          0,         0,        1249023500),	 /* NOTE  20 */
-(21,       'user-23',      0,          0,         0,        1249123611),	 /* NOTE  21 */
-(22,       'user-21',      0,          0,         0,        1249223612),	 /* NOTE  22 */
-(23,       'user-24',      0,          0,         0,        1249323623),	 /* NOTE  23 */
-(24,       'user-22',      0,          0,         0,        1249423624),	 /* NOTE  24 */
+( 2,       'area-1',       0,          0,         0,        1249211112),     /* NOTE   2 */
+( 2,       'subject-8',    0,          0,         0,        1249311123),     /* EVENT  3 */
+( 3,       'subject-11',   0,          0,         0,        1249411124),     /* FILE   4 */
+( 4,       'group-12',     0,          0,         0,        1249511235),     /* NOTE   5 AVISE */
+( 4,       'group-12',     0,          0,         0,        1249611236),     /* NOTE   6 */
+( 8,       'group-16',     0,          0,         0,        1249711247),     /* FILE   7 */
+(10,       'subject-7',    0,          0,         0,        1249811248),     /* NOTE   8 */
+(11,       'global',       0,          0,         0,        1249912359),     /* NOTE   9 AVISE */
+(11,       'global',       0,          0,         0,        1249012350),     /* FILE  10 */
+(11,       'global',       0,          0,         0,        1249112361),     /* EVENT 11 */
+(14,       'subject-12',   0,          0,         0,        1249212362),     /* NOTE  12 */
+(15,       'global',       0,          0,         0,        1249312473),     /* NOTE  13 */
+(16,       'subject-7',    0,          0,         0,        1249412474),     /* NOTE  14 AVISE */
+(16,       'subject-11',   0,          0,         0,        1249512485),     /* EVENT 15 */
+(17,       'global',       0,          0,         0,        1249612486),     /* FILE  16 */
+(18,       'team-1',       0,          0,         0,        1249723597),     /* EVENT 17 */
+(19,       'team-2',       0,          0,         0,        1249823598),     /* NOTE  18 */
+(20,       'global',       0,          0,         0,        1249923509),     /* EVENT 19 */
+(21,       'user-22',      0,          0,         0,        1249023500),     /* NOTE  20 */
+(21,       'user-23',      0,          0,         0,        1249123611),     /* NOTE  21 */
+(22,       'user-21',      0,          0,         0,        1249223612),     /* NOTE  22 */
+(23,       'user-24',      0,          0,         0,        1249323623),     /* NOTE  23 */
+(24,       'user-22',      0,          0,         0,        1249423624),     /* NOTE  24 */
 (24,       'global',       1,          2,         2,        1249524735),     /* EVENT 25 */
 (25,       'global',       1,          0,         0,        1249624736),     /* FILE  26 */
-(26,       'area-1',       0,          0,         0,        1249724747),	 /* NOTE  27 */
-(15,       'community-1',  0,          0,         0,        1249824748),	 /* NOTE  28 */
-(23,       'community-1',  0,          0,         0,        1249924859);	 /* EVENT 29 */
+(26,       'area-1',       0,          0,         0,        1249724747),     /* NOTE  27 */
+(15,       'community-1',  0,          0,         0,        1249824748),     /* NOTE  28 */
+(23,       'community-1',  0,          0,         0,        1249924859),     /* EVENT 29 */
+(3,        'feedback',     0,          0,         0,        1250124859),     /* FEEDBACK 30 */
+(3,        'feedback',     0,          0,         0,        1260124859);     /* FEEDBACK 31 */
 
 INSERT INTO `note`
 (`resource`, `priority`, `note`)
@@ -333,6 +335,12 @@ VALUES
 (19, 1248332167, 21600, 'Parrillada'),
 (25, 1248332167,     0, 'Entrega de notas'),
 (29, 1248332167,     0, 'Publicacion de notas');
+
+INSERT INTO `feedback`
+(`resource`, `description`)
+VALUES
+(30, 'Sería interesante que le pusierán una plantilla mas vistosa'),
+(31, 'Sería interesante ademas, que dejarán de agregar macanas al sistema, y lo terminen de una vez');
 
 INSERT INTO `resource_global`
 (`resource`)

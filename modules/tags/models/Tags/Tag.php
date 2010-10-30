@@ -16,6 +16,12 @@ class modules_tags_models_Tags_Tag extends Yeah_Model_Row_Validation
                     'message'   => 'El nombre de la etiqueta debe tener entre 1 y 64 caracteres',
                 ),
                 array(
+                    'validator' => 'ReservedWord',
+                    'options'   => array('tags'),
+                    'message'   => 'El nombre seleccionado para la etiqueta no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+                array(
                     'validator' => 'UniqueLabel',
                     'options'   => array('tags'),
                     'message'   => 'El nombre seleccionado para la etiqueta ya existe o no puede utilizarse',
@@ -28,8 +34,8 @@ class modules_tags_models_Tags_Tag extends Yeah_Model_Row_Validation
             'validators' => array(
                 array(
                     'validator' => 'UniqueUrl',
-                    'options'   => array('areas'),
-                    'message'   => 'El identificador de area ya esta siendo usado',
+                    'options'   => array('tags'),
+                    'message'   => 'El identificador de etiqueta ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
             ),

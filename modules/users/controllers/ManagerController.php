@@ -25,17 +25,10 @@ class Users_ManagerController extends Yeah_Action
             }
         }
 
-        $users = Yeah_Adapter::getModel('users');
-        $page = $request->getParam('page', 1);
+        $model_users = Yeah_Adapter::getModel('users');
 
-        $paginator = Zend_Paginator::factory($users->selectAll());
-        $paginator->setItemCountPerPage(25);
-        $paginator->setCurrentPageNumber($page);
-        $paginator->setPageRange(25);
-
-        $this->view->model = $users;
-        //$this->view->users = $paginator;
-        $this->view->users = $users->selectAll();
+        $this->view->model = $model_users;
+        $this->view->users = $model_users->selectAll();
 
         history('users/manager');
         breadcrumb();

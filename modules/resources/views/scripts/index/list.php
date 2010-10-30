@@ -12,6 +12,7 @@
         <td>[<a href="<?= $this->url(array('filter' => 'notes'),       'resources_filtered') ?>">Notas</a>]</td>
         <td>[<a href="<?= $this->url(array('filter' => 'files'),       'resources_filtered') ?>">Archivos</a>]</td>
         <td>[<a href="<?= $this->url(array('filter' => 'events'),      'resources_filtered') ?>">Eventos</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'feedback'),    'resources_filtered') ?>">Sugerencias</a>]</td>
     <?php if (Yeah_Acl::hasPermission('subjects', 'teach')) { ?>
         <td>[<a href="<?= $this->url(array('filter' => 'evaluations'), 'resources_filtered') ?>">Evaluaciones</a>]</td>
     <?php } ?>
@@ -67,6 +68,7 @@
         <td>[<a href="<?= $this->url(array('filter' => 'notes'),       'resources_filtered') ?>">Notas</a>]</td>
         <td>[<a href="<?= $this->url(array('filter' => 'files'),       'resources_filtered') ?>">Archivos</a>]</td>
         <td>[<a href="<?= $this->url(array('filter' => 'events'),      'resources_filtered') ?>">Eventos</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'feedback'),    'resources_filtered') ?>">Sugerencias</a>]</td>
     <?php if (Yeah_Acl::hasPermission('subjects', 'teach')) { ?>
         <td>[<a href="<?= $this->url(array('filter' => 'evaluations'), 'resources_filtered') ?>">Evaluaciones</a>]</td>
     <?php } ?>

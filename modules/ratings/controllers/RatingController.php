@@ -33,6 +33,11 @@ class Ratings_RatingController extends Yeah_Action
                 $event = $events_model->findByResource($resource_url);
                 $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
                 break;
+            case 'entry':
+                $feedback_model = Yeah_Adapter::getModel('feedback');
+                $entry = $feedback_model->findByResource($resource_url);
+                $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+                break;
         }
 
         $this->requireContext($resource);
@@ -102,6 +107,11 @@ class Ratings_RatingController extends Yeah_Action
                 $events_model = Yeah_Adapter::getModel('events');
                 $event = $events_model->findByResource($resource_url);
                 $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
+                break;
+            case 'entry':
+                $feedback_model = Yeah_Adapter::getModel('feedback');
+                $entry = $feedback_model->findByResource($resource_url);
+                $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
                 break;
         }
 

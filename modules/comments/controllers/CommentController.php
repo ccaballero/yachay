@@ -34,6 +34,10 @@ class Comments_CommentController extends Yeah_Action
                 $event = $events_model->findByResource($resource_url);
                 $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
                 break;
+            case 'feedback':
+                $feedback_model = Yeah_Adapter::getModel('feedback');
+                $entry = $feedback_model->findByResource($resource_url);
+                $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
         }
 
         $this->requireContext($resource);
@@ -91,6 +95,10 @@ class Comments_CommentController extends Yeah_Action
                 $event = $events_model->findByResource($resource_url);
                 $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
                 break;
+            case 'feedback':
+                $feedback_model = Yeah_Adapter::getModel('feedback');
+                $entry = $feedback_model->findByResource($resource_url);
+                $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
         }
 
         $this->requireContext($resource);

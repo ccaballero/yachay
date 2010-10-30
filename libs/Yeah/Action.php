@@ -181,7 +181,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
         foreach ($modules as $module) {
             //FIXME Considerar las posibles alternativas en tipos de modulos
             if ($PAGE->controller != 'manager') {
-                $this->view->addScriptPath($CONFIG->dirroot . 'modules/' . $module->url . '/views/scripts/');
+                $this->view->addScriptPath($CONFIG->dirroot . 'modules/' . $module->url . '/views/scripts/application');
             }
         }
 

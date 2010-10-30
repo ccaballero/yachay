@@ -12,6 +12,10 @@
         <td>[<a href="<?= $this->url(array('filter' => 'events'), 'resources_filtered') ?>">Eventos</a>]</td>
         <td align="right"><small>[<a href="<?= $this->url(array(), 'events_new') ?>">Crear</a>]</small></td>
     </tr>
+    <tr>
+        <td>[<a href="<?= $this->url(array('filter' => 'feedback'), 'resources_filtered') ?>">Sugerencias</a>]</td>
+        <td align="right"><small>[<a href="<?= $this->url(array(), 'feedback_new') ?>">Crear</a>]</small></td>
+    </tr>
 <?php if (Yeah_Acl::hasPermission('subjects', 'teach')) { ?>
     <tr>
     	<td>[<a href="<?= $this->url(array('filter' => 'evaluations'), 'resources_filtered') ?>">Evaluaciones</a>]</td>

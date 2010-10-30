@@ -15,8 +15,9 @@ class modules_resources_models_Resources extends Zend_Db_Table_Abstract
                                         'modules_notes_models_Notes',
                                         'modules_files_models_Files',
                                         'modules_events_models_Events',
+                                        'modules_feedback_models_Feedback',
                                         'modules_comments_models_Comments',
-                                        /*'modules_tags_models_Tags_Resources',*/
+                                        'modules_tags_models_Tags_Resources',
                                   );
     protected $_referenceMap    = array(
         'Author'                => array(

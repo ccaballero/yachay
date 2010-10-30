@@ -68,6 +68,15 @@ class Resources_IndexController extends Yeah_Action
                 }
                 $this->view->newroute = 'events_new';
                 break;
+            case 'feedback':
+                foreach ($resources as $resource) {
+                    $extended = $resource->getExtended();
+                    if ($extended->__type == 'entry') {
+                        $list[$resource->tsregister] = $resource;
+                    }
+                }
+                $this->view->newroute = 'feedback_new';
+                break;
             case 'evaluations':
                 $evaluations_model = Yeah_Adapter::getModel('evaluations');
                 $evaluations = $evaluations_model->selectByAuthor($USER->ident);

@@ -25,6 +25,11 @@ class modules_resources_models_Resources_Resource extends Yeah_Model_Row_Validat
         if (!empty($event)) {
             return $event;
         }
+        $model_feedback = Yeah_Adapter::getModel('feedback');
+        $entry = $model_feedback->findByResource($this->ident);
+        if (!empty($entry)) {
+            return $entry;
+        }
     }
 
     public function amAuthor() {

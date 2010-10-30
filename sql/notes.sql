@@ -30,4 +30,3 @@ VALUES
 ('Nueva nota',                    'Nueva nota',       TRUE,          'notes',            'manager',     'new',              '',                      'notes_new'),
 ('Visor de notas',                '',                 FALSE,         'notes',            'note',        'view',             '',                      'notes_note_view'),
 ('Editor de notas',               '',                 FALSE,         'notes',            'note',        'edit',             '',                      'notes_note_edit');
-

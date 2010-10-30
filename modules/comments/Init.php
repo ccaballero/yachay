@@ -33,6 +33,13 @@ class modules_comments_Init extends Yeah_Init
                                                         'action'     => 'delete',
                                                         'type'       => 'event',
                                                     )),
+        'feedback_entry_comment_delete'          => array('feedback/:resource/comments/:comment/delete',
+                                                    array(
+                                                        'module'     => 'comments',
+                                                        'controller' => 'comment',
+                                                        'action'     => 'delete',
+                                                        'type'       => 'feedback',
+                                                    )),
         'notes_note_comment'                     => array('notes/:resource/comment',
                                                     array(
                                                         'module'     => 'comments',
@@ -53,6 +60,13 @@ class modules_comments_Init extends Yeah_Init
                                                         'controller' => 'comment',
                                                         'action'     => 'new',
                                                         'type'       => 'event',
+                                                    )),
+        'feedback_entry_comment'                 => array('feedback/:resource/comment',
+                                                    array(
+                                                        'module'     => 'comments',
+                                                        'controller' => 'comment',
+                                                        'action'     => 'new',
+                                                        'type'       => 'feedback',
                                                     )),
     );
 }
