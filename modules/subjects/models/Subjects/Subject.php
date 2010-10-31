@@ -71,6 +71,12 @@ class modules_subjects_models_Subjects_Subject extends Yeah_Model_Row_Validation
             'filters' => array('StringTrim'),
             'validators' => array(
                 array(
+                    'validator' => 'ReservedWord',
+                    'options'   => array(),
+                    'message'   => 'El nombre seleccionado para la materia no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+                array(
                     'validator' => 'UniqueUrlDual',
                     'options'   => array('subjects'),
                     'message'   => 'El identificador de la materia ya esta siendo usado',

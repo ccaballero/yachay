@@ -8,7 +8,7 @@ class Feedback_IndexController extends Yeah_Action
         $model_feedback = Yeah_Adapter::getModel('feedback');
 
         $this->view->model = $model_feedback;
-        $this->view->feedback = $model_feedback->selectAll();
+        $this->view->feedback = $model_feedback->selectByResolved(false);
 
         history('feedback');
         $breadcrumb = array();

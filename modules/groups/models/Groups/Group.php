@@ -57,6 +57,12 @@ class modules_groups_models_Groups_Group extends Yeah_Model_Row_Validation
             'filters' => array('StringTrim'),
             'validators' => array(
                 array(
+                    'validator' => 'ReservedWord',
+                    'options'   => array(),
+                    'message'   => 'El nombre seleccionado para el grupo no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+                array(
                     'validator' => 'UniqueUrlDual',
                     'options'   => array('groups'),
                     'message'   => 'El identificador de grupo ya esta siendo usado',

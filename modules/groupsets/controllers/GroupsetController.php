@@ -163,7 +163,7 @@ class Groupsets_GroupsetController extends Yeah_Action
         }
 
         $session = new Zend_Session_Namespace();
-        $label = utf8_decode($groupset->label);
+        $label = $groupset->label;
         if (!empty($groupset)) {
             $groupset->delete();
             $session->messages->addMessage("El conjunto $label ha sido eliminado");

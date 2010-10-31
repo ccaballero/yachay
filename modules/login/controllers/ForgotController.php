@@ -62,7 +62,7 @@ class Login_ForgotController extends Yeah_Action
 	                    $mail = new Zend_Mail();
 	                    $mail->setBodyHtml($content)
 	                         ->addTo($user->email, $user->getFullName())
-	                         ->setSubject(utf8_decode('Peticion de cambio de contraseña'))
+	                         ->setSubject('Petición de cambio de contraseña')
 	                         ->send();
 	
 	                    $session->messages->addMessage('Se envi&oacute; la confirmaci&oacute;n de nueva contrase&ntilde;a al correo ' . $user->email);

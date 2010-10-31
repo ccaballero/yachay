@@ -29,6 +29,12 @@ class modules_teams_models_Teams_Team extends Yeah_Model_Row_Validation
             'filters' => array('StringTrim'),
             'validators' => array(
                 array(
+                    'validator' => 'ReservedWord',
+                    'options'   => array(),
+                    'message'   => 'El nombre seleccionado para el equipo no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+                array(
                     'validator' => 'UniqueUrlDual',
                     'options'   => array('teams'),
                     'message'   => 'El identificador de equipo ya esta siendo usado',

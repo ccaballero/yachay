@@ -201,7 +201,7 @@ class Subjects_SubjectController extends Yeah_Action
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $session = new Zend_Session_Namespace();
-        $label = utf8_decode($subject->label);
+        $label = $subject->label;
 
         $subject->status = 'inactive';
         $subject->save();
@@ -222,7 +222,7 @@ class Subjects_SubjectController extends Yeah_Action
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $session = new Zend_Session_Namespace();
-        $label = utf8_decode($subject->label);
+        $label = $subject->label;
 
         $subject->status = 'active';
         $subject->save();
@@ -243,7 +243,7 @@ class Subjects_SubjectController extends Yeah_Action
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $session = new Zend_Session_Namespace();
-        $label = utf8_decode($subject->label);
+        $label = $subject->label;
         if ($subject->isEmpty()) {
             $subject->delete();
             $session->messages->addMessage("La materia $label ha sido eliminada");

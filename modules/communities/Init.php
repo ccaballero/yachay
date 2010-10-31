@@ -61,17 +61,17 @@ class modules_communities_Init extends Yeah_Init
                                                         'action'     => 'index',
                                                     )),
         'communities_community_join'             => array('communities/:community/join',
-        											array(
-        											    'module'     => 'communities',
-        											    'controller' => 'assign',
-        											    'action'     => 'join',
-        											)),
+                                                    array(
+                                                        'module'     => 'communities',
+                                                        'controller' => 'assign',
+                                                        'action'     => 'join',
+                                                    )),
         'communities_community_leave'            => array('communities/:community/leave',
-        											array(
-        											    'module'     => 'communities',
-        											    'controller' => 'assign',
-        											    'action'     => 'leave',
-        											)),
+                                                    array(
+                                                        'module'     => 'communities',
+                                                        'controller' => 'assign',
+                                                        'action'     => 'leave',
+                                                    )),
         'communities_community_view'             => array('communities/:community',
                                                     array(
                                                         'module'     => 'communities',

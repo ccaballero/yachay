@@ -54,7 +54,7 @@ class Profile_IndexController extends Yeah_Action
             $session = new Zend_Session_Namespace();
 
             $user->label = $request->getParam('label');
-            $this->url = convert($user->label);
+            $user->url = convert($user->label);
             $user->email = $request->getParam('email');
             $user->surname = $request->getParam('surname');
             $user->name = $request->getParam('name');

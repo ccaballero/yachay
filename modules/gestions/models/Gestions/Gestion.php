@@ -27,6 +27,12 @@ class modules_gestions_models_Gestions_Gestion extends Yeah_Model_Row_Validation
             'filters' => array('StringTrim'),
             'validators' => array(
                 array(
+                    'validator' => 'ReservedWord',
+                    'options'   => array(),
+                    'message'   => 'El nombre seleccionado de la gestión no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+                array(
                     'validator' => 'UniqueUrl',
                     'options'   => array('gestions'),
                     'message'   => 'El identificador de gestion ya esta siendo usado',

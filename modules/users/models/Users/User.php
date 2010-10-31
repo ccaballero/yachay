@@ -59,6 +59,12 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
             'filters' => array('StringTrim'),
             'validators' => array(
                 array(
+                    'validator' => 'ReservedWord',
+                    'options'   => array(),
+                    'message'   => 'El nombre seleccionado para el usuario no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+                array(
                     'validator' => 'UniqueUrl',
                     'options'   => array('users'),
                     'message'   => 'El identificador de usuario ya esta siendo usado',

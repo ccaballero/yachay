@@ -27,6 +27,12 @@ class modules_areas_models_Areas_Area extends Yeah_Model_Row_Validation
             'filters' => array('StringTrim'),
             'validators' => array(
                 array(
+                    'validator' => 'ReservedWord',
+                    'options'   => array(),
+                    'message'   => 'El nombre seleccionado del area no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+                array(
                     'validator' => 'UniqueUrl',
                     'options'   => array('areas'),
                     'message'   => 'El identificador de area ya esta siendo usado',

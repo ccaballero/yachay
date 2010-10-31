@@ -129,15 +129,15 @@ class modules_subjects_Init extends Yeah_Init
         'subjects_import'                        => array('subjects/import',
                                                     array (
                                                         'module'     => 'subjects',
-														'controller' => 'manager',
-														'action'     => 'import',
+                                                        'controller' => 'manager',
+                                                        'action'     => 'import',
                                                     )),
         'subjects_export'                        => array('subjects/export',
                                                     array (
-														'module'     => 'subjects',
-														'controller' => 'manager',
-														'action'     => 'export',
-													)),
+                                                        'module'     => 'subjects',
+                                                        'controller' => 'manager',
+                                                        'action'     => 'export',
+                                                    )),
         'subjects_list'                          => array('subjects',
                                                     array(
                                                         'module'     => 'subjects',

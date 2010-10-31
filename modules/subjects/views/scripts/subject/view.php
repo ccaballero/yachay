@@ -24,7 +24,7 @@
 <h2>Areas involucradas
     <?php if (!$this->historial) { ?>
         <?php if (Yeah_Acl::hasPermission('areas', array('new', 'delete'))) { ?>
-        [<i><a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_edit') ?>">Administrar</a></i>]
+        [<i><a href="<?= $this->url(array(), 'areas_manager') ?>">Administrar</a></i>]
         <?php } ?>
     <?php } ?>
 </h2>

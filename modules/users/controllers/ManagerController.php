@@ -98,7 +98,7 @@ class Users_ManagerController extends Yeah_Action
                         $mail = new Zend_Mail();
                         $mail->setBodyHtml($content)
                              ->addTo($user->email, $user->getFullName())
-                             ->setSubject(utf8_decode('Notificación de registro de usuario'))
+                             ->setSubject('Notificación de registro de usuario')
                              ->send();
                     }
 
@@ -395,7 +395,7 @@ class Users_ManagerController extends Yeah_Action
                                         $mail = new Zend_Mail();
                                         $mail->setBodyHtml($content)
                                         ->addTo($user->email, $user->getFullName())
-                                        ->setSubject(utf8_decode('Notificación de registro de usuario'))
+                                        ->setSubject('Notificación de registro de usuario')
                                         ->send(); // FIXME agregar opcion smtp al gestor de correos
                                     }
                                     if ($result['CODIGO_NUE']) {

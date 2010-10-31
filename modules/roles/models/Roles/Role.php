@@ -27,6 +27,12 @@ class modules_roles_models_Roles_Role extends Yeah_Model_Row_Validation
             'filters' => array('StringTrim'),
             'validators' => array(
                 array(
+                    'validator' => 'ReservedWord',
+                    'options'   => array(),
+                    'message'   => 'El nombre seleccionado del rol no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+                array(
                     'validator' => 'UniqueUrl',
                     'options'   => array('roles'),
                     'message'   => 'El identificador del rol ya esta siendo usado',

@@ -69,15 +69,15 @@ class modules_users_Init extends Yeah_Init
         'users_import'                           => array('users/import',
                                                     array (
                                                         'module'     => 'users',
-														'controller' => 'manager',
-														'action'     => 'import',
+                                                        'controller' => 'manager',
+                                                        'action'     => 'import',
                                                     )),
         'users_export'                           => array('users/export',
                                                     array (
-														'module'     => 'users',
-														'controller' => 'manager',
-														'action'     => 'export',
-													)),
+                                                        'module'     => 'users',
+                                                        'controller' => 'manager',
+                                                        'action'     => 'export',
+                                                    )),
         'users_list'                             => array('users',
                                                     array(
                                                         'module'     => 'users',

@@ -27,6 +27,12 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Va
             'filters' => array('StringTrim'),
             'validators' => array(
                 array(
+                    'validator' => 'ReservedWord',
+                    'options'   => array(),
+                    'message'   => 'El nombre seleccionado para la comunidad no puede utilizarse',
+                    'namespace' => 'Yeah_Validators',
+                ),
+                array(
                     'validator' => 'UniqueUrl',
                     'options'   => array('communities'),
                     'message'   => 'El identificador de comunidad ya esta siendo usado',

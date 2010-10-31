@@ -41,15 +41,15 @@ class Login_IndexController extends Yeah_Action
             $input = new Zend_Filter_Input($filters, $validators, $_POST, $options);
             $session = new Zend_Session_Namespace();
             if ($input->isValid()) {
-	            $user = Yeah_Adapter::getModel('users')->findByLogin($input->username, md5($CONFIG->key . $input->password));
-	            if (!empty($user)) {
+                $user = Yeah_Adapter::getModel('users')->findByLogin($input->username, md5($CONFIG->key . $input->password));
+                if (!empty($user)) {
                     if ($user->status == 'active') {
-    	                $session->user = $user;
-    	                $this->_redirect($request->getParam('return'));
+                        $session->user = $user;
+                        $this->_redirect($request->getParam('return'));
                     } else {
-                        $session->messages->addMessage("El usuario {$user->label} ha sido bloqueado, comuniquese con algun encargado");
+                        $session->messages->addMessage("El usuario {$user->label} ha sido bloqueado, comuniquese con algún encargado");
                     }
-	            } else {
+                } else {
                     // validation for login forgot process
                     $login = Yeah_Adapter::getModel('login');
                     $users = Yeah_Adapter::getModel('users');
@@ -69,8 +69,8 @@ class Login_IndexController extends Yeah_Action
                             }
                         }
                     }
-	                $session->messages->addMessage('Datos de accesso incorrectos');
-	            }
+                    $session->messages->addMessage('Datos de accesso incorrectos');
+                }
             } else {
                 foreach($input->getMessages() as $messages) {
                     foreach($messages as $message) {
