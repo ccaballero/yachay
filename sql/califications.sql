@@ -42,4 +42,4 @@ VALUES
 INSERT INTO `widget`
 (`label`,                              `title`,                                `module`,           `script`)
 VALUES
-('Ver Calificaciones',                 'Ver Calificaciones',                   'califications',    'califications.php');
+('Ver Calificaciones',                 'Ver Calificaciones',                   'califications',    'califications');

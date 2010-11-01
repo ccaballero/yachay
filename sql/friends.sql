@@ -48,4 +48,4 @@ VALUES
 INSERT INTO `widget`
 (`label`,                              `title`,                                `module`,           `script`)
 VALUES
-('Lista de contactos',                 'Contactos',                            'friends',          'contacts.php');
+('Lista de contactos',                 'Contactos',                            'friends',          'contacts');

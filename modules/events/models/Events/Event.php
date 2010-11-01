@@ -4,6 +4,7 @@ class modules_events_models_Events_Event extends Yeah_Model_Row_Validation
 {
     public $__type = 'event';
     public $__element = 'events';
+    public $__label = 'evento';
 
     protected $_validationRules = array(
         'label' => array(

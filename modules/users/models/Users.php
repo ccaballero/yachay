@@ -28,6 +28,11 @@ class modules_users_models_Users extends Zend_Db_Table_Abstract
             'refTableClass'     => 'modules_roles_models_Roles',
             'refColumns'        => 'ident',
         ),
+        'Theme'                 => array(
+            'columns'           => 'theme',
+            'refTableClass'     => 'modules_themes_models_Themes',
+            'refColumns'        => 'label',
+        ),
     );
     public    $_mapping         = array(
         'ident'                 => 'Código',

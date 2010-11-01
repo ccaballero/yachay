@@ -42,4 +42,4 @@
     <p>El equipo no se posee ningun miembro registrado.</p>
 <?php } ?>
 
-<?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route)) ?>
+<?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config)) ?>

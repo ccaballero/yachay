@@ -51,3 +51,4 @@ DROP TABLE IF EXISTS `tag_resource`;
 DROP TABLE IF EXISTS `tag_community`;
 DROP TABLE IF EXISTS `tag_user`;
 DROP TABLE IF EXISTS `feedback`;
+DROP TABLE IF EXISTS `theme`;

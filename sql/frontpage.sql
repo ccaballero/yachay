@@ -26,4 +26,4 @@ VALUES
 INSERT INTO `widget`
 (`label`,                              `title`,                                `module`,           `script`)
 VALUES
-('Espacios Disponibles',               'Espacios Disponibles',                 'frontpage',        'context.php');
+('Espacios Disponibles',               'Espacios Disponibles',                 'frontpage',        'context');

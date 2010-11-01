@@ -1,2 +1,1 @@
-<?php global $CONFIG; ?>
-<?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route)) ?>
+<?= $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config)) ?>

@@ -8,6 +8,8 @@ class Yeah_Helpers_Paginator
         $view = new Zend_View();
         $view->addHelperPath($CONFIG->dirroot . 'libs/Yeah/Helpers', 'Yeah_Helpers');
         $view->addScriptPath($CONFIG->dirroot . 'modules/paginator/views/scripts');
-        return $view->paginationControl($objects, 'Sliding', 'pagination_control.php', array('route' => $route));
+
+        $template = new Yeah_Helpers_Template;
+        return $view->paginationControl($objects, 'Sliding', $template->template('paginator', 'pagination_control', ''), array('route' => $route));
     }
 }

@@ -1,9 +1,6 @@
-<?php global $CONFIG; ?>
-<h1><?= $CONFIG->site ?></h1>
-<p>
-    Bienvenido a la red social donde puedes interactuar con estudiantes y docentes, buscar informacion de las
-    respectivas materias de tu area de estudio y armar tu red de amigos o compa&ntilde;eros de grupo, disfruta de 
-    este sistema y esperamos enriquecer tus ideas y pensamientos.
-</p>
-
-<?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route)) ?>
+<?php
+    echo '<h1>' . $this->config->site . '</h1>';
+    echo '<p>';
+    echo 'Bienvenido a la red social donde puedes interactuar con estudiantes y docentes, buscar información de las respectivas materias de tu area de estudio y armar tu red de amigos o compañeros de grupo, disfruta de este sistema y esperamos enriquecer tus ideas y pensamientos.';
+    echo '</p>';
+    echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config));

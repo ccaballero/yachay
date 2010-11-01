@@ -2,7 +2,6 @@
 
 abstract class Yeah_Action extends Zend_Controller_Action
 {
-
     protected function _redirect($url, array $options = array()) {
         global $CONFIG;
         global $USER;
@@ -162,6 +161,9 @@ abstract class Yeah_Action extends Zend_Controller_Action
         // add the views in path
         $this->view->addHelperPath($CONFIG->dirroot . 'libs/Yeah/Helpers', 'Yeah_Helpers');
 
+        global $THEME;
+        $this->view->doctype($THEME->doctype);
+
         if (empty($PAGE)) {
             return;
         }
@@ -201,11 +203,16 @@ abstract class Yeah_Action extends Zend_Controller_Action
 
         global $ICON;
         $ICON->icon = $CONFIG->media_base . "favicon.ico";
+
+        $this->view->config = $CONFIG;
+        $this->view->theme = $THEME;
     }
 
     public function postDispatch() {
         global $CONFIG;
         global $PAGE;
+        global $THEME;
+        global $USER;
 
         if (isset($this->_ignorePostDispatch)) {
             return;
@@ -237,10 +244,20 @@ abstract class Yeah_Action extends Zend_Controller_Action
             $view->addHelperPath($CONFIG->dirroot . 'libs/Yeah/Helpers', 'Yeah_Helpers');
             $view->setScriptPath($CONFIG->dirroot . 'modules/' . $widget->module . '/views/scripts/widgets/');
 
+            $view->config = $CONFIG;
+            $view->user = $USER;
+            $view->page = $PAGE;
+
             $widget_page = $widgets_pages->getPosition($PAGE->ident, $widget->ident);
             $position = $widget_page->position;
 
-            $widget_content = $view->render($widget->script);
+            $script = "{$CONFIG->dirroot}modules/{$widget->module}/views/scripts/widgets/{$widget->script}.{$THEME->name}.php";
+            if (file_exists($script)) {
+                $to_render = "{$widget->script}.{$THEME->name}.php";
+            } else {
+                $to_render = "{$widget->script}.php";
+            }
+            $widget_content = $view->render($to_render);
             if (!empty($widget_content)) {
                 $WIDGETS[$position] = array (
                     'title'   => $widget->title,
@@ -259,12 +276,21 @@ abstract class Yeah_Action extends Zend_Controller_Action
             }
         }
 
-        /*
-        // rendering customized layout
-        $script = $this->view->getScriptPath($PAGE->controller) 
-                . '/' . $PAGE->action . '-' . $PAGE->template_name . '.php';
+        global $TITLE, $ICON, $TOOLBAR, $SEARCH, $MENUBAR, $BREADCRUMB, $WIDGETS, $FOOTER;
+
+        $this->view->title = $TITLE;
+        $this->view->icon = $ICON;
+        $this->view->toolbar = $TOOLBAR;
+        $this->view->search = $SEARCH;
+        $this->view->menubar = $MENUBAR;
+        $this->view->breadcrumb = $BREADCRUMB;
+        $this->view->widgets = $WIDGETS;
+        $this->view->footer = $FOOTER;
+
+        // rendering customized theme
+        $script = $this->view->getScriptPath($PAGE->controller) . '/' . $PAGE->action . '.' . $THEME->name . '.php';
         if (file_exists($script)) {
-            $this->render('index.' . $PAGE->template_name);
-        }*/
+            $this->render('index.' . $THEME->name);
+        }
     }
 }

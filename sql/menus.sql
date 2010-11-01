@@ -26,4 +26,4 @@ VALUES
 INSERT INTO `widget`
 (`label`,                              `title`,                                `module`,           `script`)
 VALUES
-('Enlaces',                            'Enlaces recomendados',                 'menus',            'quicklinks.php');
+('Enlaces',                            'Enlaces recomendados',                 'menus',            'quicklinks');

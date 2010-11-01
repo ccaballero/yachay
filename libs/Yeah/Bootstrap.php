@@ -4,6 +4,7 @@
 global $CONFIG;
 global $PAGE;
 global $USER;
+global $THEME;
 
 // Database connector
 global $DB;
@@ -87,6 +88,16 @@ class Yeah_Bootstrap
             $session->history = new Yeah_Settings_History;
         }
 
+        // Set of theme
+        global $THEME;
+        $themes = Yeah_Adapter::getModel('themes');
+        $theme = $themes->findByLabel($CONFIG->template);
+
+        $THEME = json_decode($theme->properties, false);
+        $THEME->name = $CONFIG->template;
+        $THEME->doctype = $theme->doctype;
+        $THEME->htmlbase = $CONFIG->wwwroot . 'templates/' . $THEME->name . '/';
+
         // Set for localization
         setlocale(LC_CTYPE, $CONFIG->locale);
         Zend_Locale::setDefault($CONFIG->locale);
@@ -126,6 +137,7 @@ class Yeah_Bootstrap
 
     public function run() {
         global $CONFIG;
+        global $THEME;
 
         $front = Zend_Controller_Front::getInstance();
         $front->throwExceptions(true)
@@ -133,7 +145,7 @@ class Yeah_Bootstrap
               ->setDefaultModule('frontpage')
               ->returnResponse(true);
 
-        // calculo de la ruta
+        // Routes join
         $modules = Yeah_Adapter::getModel('modules')->selectByStatus('active');
         foreach ($modules as $module) {
             $path = $CONFIG->dirroot . 'modules/' . $module->url;
@@ -155,7 +167,7 @@ class Yeah_Bootstrap
         Zend_Controller_Action_HelperBroker::addHelper($renderer);
 
         $layoutoptions = array(
-            'layout'     => 'minimal',
+            'layout'     => $THEME->name,
             'layoutPath' => $CONFIG->dirroot . 'templates/',
             'viewSuffix' => 'php',
         );

@@ -1,0 +1,174 @@
+* {
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-style: normal;
+    font-size: 11pt;
+    color: #757575;
+}
+
+body {
+    margin: 0pt auto;
+    padding: 0pt 2pt;
+    width: 780px;
+    border-left: 2pt solid #444444;
+    border-right: 2pt solid #444444;
+}
+
+#header {
+    border-bottom: 2pt solid #444444;
+    height: 60px;
+    background-color: #E3FFF5;
+}
+
+#content, #footer {
+    display: block;
+    clear: both;
+}
+
+#primary {
+    padding: 10px 10px 10px 10px;
+    width: 500px;
+    float: left;
+}
+
+#widgets {
+    padding: 10px 10px 10px 10px;
+    width: 240px;
+    float: left;
+}
+
+#footer {
+    border-top: 2pt solid #444444;
+    text-align: center;
+    background-color: #E3FFF5;
+}
+
+.menu {
+    padding-top: 40px;
+    padding-left: 5px;
+}
+
+.tools {
+    float: right;
+    padding-right: 10px;
+}
+
+h1 {
+    font-size: 15pt;
+    border-bottom: 1pt solid #444444;
+}
+
+h2 {
+    font-size: 12pt;
+    border-bottom: 1pt solid #444444;
+}
+
+h3 {
+    font-size: 11pt;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+    color: #45ABCD;
+    cursor: pointer;
+}
+
+#header a, #footer a {
+    font-weight: bold;
+}
+
+img {
+    border: 0px;
+}
+
+p {
+    text-align: justify;
+}
+
+dl, dt, dd, ul, li {
+    margin: 0pt 0pt;
+    padding: 0pt 0pt;
+}
+
+dt {
+    clear: both;
+    font-weight: bold;
+}
+
+dt {
+    margin-top: 4pt;
+    margin-bottom: 4pt;
+}
+
+li {
+    margin-left: 10px;
+}
+
+li {
+    list-style: none;
+}
+
+.text_small {
+    font-size: 9pt;
+}
+
+.align_right {
+    float: right;
+    text-align: right;
+}
+
+.align_left {
+    float: left;
+    text-align: left;
+}
+
+dl.form dt, dl.form dd {
+    display: inline;
+}
+
+dl.form dt {
+    float: left;
+}
+
+dl.form dd {
+    padding: 5pt 0pt 5pt 6pt;
+}
+
+.pagination {
+    margin: 5px 0px 5px 0px;
+    text-align: center;
+}
+
+.clear {
+    clear: both;
+    height: 25px;
+}
+
+.avatar {
+    float: left;
+    width: 55px;
+}
+
+.details {
+    float: left;
+    width: 435px;
+    background-color: #E3FFF5;
+    padding: 3px 5px;
+}
+
+.label {
+    font-weight: bold;
+    position: relative;
+    top: -15px;
+    left: 320px;
+    width: 120px;
+    text-align: center;
+    color: #45ABCD;
+    background-color: #E3FFF5;
+    border-bottom: 1pt dashed #45ABCD;
+}
+
+.user {
+    position: relative;
+    top: 0px;
+}

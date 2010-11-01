@@ -186,7 +186,14 @@ VALUES
 (104, 1), (105, 1), (106, 1), (107, 1), (108, 1),
 (104, 2), (105, 2), (106, 2), (107, 2), (108, 2),
 (104, 3), (105, 3), (106, 3), (107, 3), (108, 3),
-(104, 4), (105, 4), (106, 4), (107, 4), (108, 4);
+(104, 4), (105, 4), (106, 4), (107, 4), (108, 4),
+/*====================================================================================================================*/
+/* Inserciones extra para el modulo THEMES                                                                            */
+/*====================================================================================================================*/
+(109, 1), (110, 1),
+(109, 2), (110, 2),
+(109, 3), (110, 3),
+(109, 4), (110, 4);
 
 /*====================================================================================================================*/
 /* Conecciones adicionales para la habilitacion de los menus                                                          */
@@ -207,7 +214,7 @@ UPDATE `page` SET `menutype` = 'footer', `menuorder` = 5 WHERE `ident` = 9;
 UPDATE `page` SET `menutype` = 'footer', `menuorder` = 6 WHERE `ident` = 11;
 UPDATE `page` SET `menutype` = 'footer', `menuorder` = 7 WHERE `ident` = 81;
 UPDATE `page` SET `menutype` = 'footer', `menuorder` = 8 WHERE `ident` = 104;
-
+/*UPDATE `page` SET `menutype` = 'footer', `menuorder` = 9 WHERE `ident` = 109*/
 /*====================================================================================================================*/
 /*====================================================================================================================*/
 
@@ -453,7 +460,18 @@ VALUES
 ( 5,64),
 ( 4,64),
 ( 3,64),
-( 2,64);
+( 2,64),
+/*====================================================================================================================*/
+/* Inserciones extra para el modulo THEMES                                                                            */
+/*====================================================================================================================*/
+( 8,68), ( 8,69),
+( 7,68), ( 7,69),
+( 6,68), ( 6,69),
+( 5,68), ( 5,69),
+( 4,68), ( 4,69),
+( 3,68), ( 3,69),
+( 2,68), ( 2,69),
+( 1,68), ( 1,69);
 
 INSERT INTO `user`
 (`role`, `label`,       `url`,         `password`,                                             `tsregister`,     `status`,   `surname`,          `name`)
@@ -481,3 +499,9 @@ INSERT INTO `evaluation_test_value`
 VALUES
 (1,            6,      'Reprobado',       0),
 (1,            6,      'Aprobado',      100);
+
+INSERT INTO `theme`
+(`label`,     `description`,                                                                                      `doctype`,          `properties`,  `tsregister`)
+VALUES
+('minimal',   'Plantilla basica diseñada especialmente para navegadores antiguos o de compatibilidades dudosas',  'XHTML_BASIC1',     '{}',          UNIX_TIMESTAMP()),
+('webarte',   'Plantilla simple que utiliza hoja de estilos y no javascript',                                     'XHTML1_STRICT',    '{}',          UNIX_TIMESTAMP());

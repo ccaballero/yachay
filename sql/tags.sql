@@ -54,7 +54,7 @@ CREATE TABLE `tag_user` (
 INSERT INTO `module`
 (`label`,          `url`,              `type`,        `tsregister`,       `description`)
 VALUES
-('tags',           'tags',             'automagic',   UNIX_TIMESTAMP(),   'Modulo manejador de las etiquetas en todos los recursos disponibles del sistema');
+('tags',           'tags',             'application', UNIX_TIMESTAMP(),   'Modulo manejador de las etiquetas en todos los recursos disponibles del sistema');
 
 /*====================================================================================================================*/
 /* Registro de paginas para el modulo                                                                                 */

@@ -1,13 +1,16 @@
-<?php $list_spaces = $this->context(NULL, 'matrix'); ?>
-<?php if (count($list_spaces)) { ?>
-    <table width="100%">
-    <?php foreach ($list_spaces as $category => $spaces) { ?>
-        <?php if (count($spaces) <> 0) { ?>
-            <tr><td><b>[<?= $this->typeSpace($category) ?>]</b></td></tr>
-            <?php foreach ($spaces as $space) { ?>
-                <tr><td>[<?= $this->recipient($space) ?>]</td></tr>
-            <?php } ?>
-        <?php } ?>
-    <?php } ?>
-    </table>
-<?php } ?>
+<?php
+
+$list_spaces = $this->context(NULL, 'matrix');
+if (count($list_spaces)) {
+    echo '<table width="100%">';
+    foreach ($list_spaces as $category => $spaces) {
+        if (count($spaces) <> 0) {
+            echo '<tr><td><b>[' . $this->typeSpace($category) . ']</b></td></tr>';
+            foreach ($spaces as $space) {
+                echo '<tr><td>[' . $this->recipient($space) . ']</td></tr>';
+            }
+        }
+    }
+    echo '</table>';
+}
+

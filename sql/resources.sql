@@ -60,4 +60,4 @@ VALUES
 INSERT INTO `widget`
 (`label`,                              `title`,                                `module`,           `script`)
 VALUES
-('Manejo de recursos',                 'Manejo de recursos',                   'resources',        'manager.php');
+('Manejo de recursos',                 'Manejo de recursos',                   'resources',        'manager');

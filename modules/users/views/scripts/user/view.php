@@ -49,4 +49,4 @@
     <tr valign="top"><td colspan="4"><?= $this->none($this->utf2html($this->user->hobbies)) ?></td></tr>
 </table>
 <hr />
-<?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route)) ?>
+<?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config)) ?>

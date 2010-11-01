@@ -60,4 +60,4 @@
     <tr><td>&nbsp;</td></tr>
 </table>
 
-<?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route)) ?>
+<?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config)) ?>
