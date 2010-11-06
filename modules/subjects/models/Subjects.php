@@ -1,29 +1,29 @@
 <?php
 
-class modules_subjects_models_Subjects extends Zend_Db_Table_Abstract
+class Subjects extends Yeah_Model_Table
 {
     protected $_name            = 'subject';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_subjects_models_Subjects_Subject';
-    protected $_dependentTables = array('modules_areas_models_Areas_Subjects',
-                                        'modules_subjects_models_Subjects_Users',
-                                        'modules_subjects_models_Subjects_Resources',
-                                        'modules_groups_models_Groups',
+    protected $_rowClass        = 'Subjects_Subject';
+    protected $_dependentTables = array('Areas_Subjects',
+                                        'Subjects_Users',
+                                        'Subjects_Resources',
+                                        'Groups',
                                   );
     protected $_referenceMap    = array(
         'Gestion'               => array(
             'columns'           => 'gestion',
-            'refTableClass'     => 'modules_gestions_models_Gestions',
+            'refTableClass'     => 'Gestions',
             'refColumns'        => 'ident',
         ),
         'Author'                => array(
             'columns'           => 'author',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
         'Moderator'             => array(
             'columns'           => 'moderator',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
     );

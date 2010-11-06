@@ -1,6 +1,6 @@
 <?php
 
-class modules_feedback_Init extends Yeah_Init
+class Feedback_Init extends Yeah_Init
 {
     public $check = array ('feedback');
     public $install = 'feedback';

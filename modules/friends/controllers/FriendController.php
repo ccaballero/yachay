@@ -8,12 +8,12 @@ class Friends_FriendController extends Yeah_Action
         $this->requirePermission('friends', 'contact');
         $request = $this->getRequest();
 
-        $users = Yeah_Adapter::getModel('users');
-        $friends = Yeah_Adapter::getModel('friends');
-        $valorations = Yeah_Adapter::getModel('valorations');
+        $model_users = new Users();
+        $model_friends = new Friends();
+        $model_valorations = new Valorations();
 
         $url = $request->getParam('user');
-        $user = $users->findByUrl($url);
+        $user = $model_users->findByUrl($url);
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         if ($USER->ident == $user->ident) {
@@ -22,8 +22,8 @@ class Friends_FriendController extends Yeah_Action
 
         $session = new Zend_Session_Namespace();
 
-        $follower = $friends->hasContact($USER->ident, $user->ident);
-        $following = $friends->hasContact($user->ident, $USER->ident);
+        $follower = $model_friends->hasContact($USER->ident, $user->ident);
+        $following = $model_friends->hasContact($user->ident, $USER->ident);
 
         if ($follower) {
             if ($following) {
@@ -33,28 +33,28 @@ class Friends_FriendController extends Yeah_Action
             }
         } else {
             if ($following) {
-                $row = $friends->createRow();
+                $row = $model_friends->createRow();
                 $row->user = $USER->ident;
                 $row->friend = $user->ident;
                 $row->mutual = TRUE;
                 $row->tsregister = time();
                 $row->save();
-                $row = $friends->getContact($user->ident, $USER->ident);
+                $row = $model_friends->getContact($user->ident, $USER->ident);
                 $row->mutual = TRUE;
                 $row->save();
 
-                $valorations->addSociability($user, 3, 2);
+                $model_valorations->addSociability($user, 3, 2);
 
                 $session->messages->addMessage("El usuario {$user->label} ha sido agregado a la lista de amigos");
             } else {
-                $row = $friends->createRow();
+                $row = $model_friends->createRow();
                 $row->user = $USER->ident;
                 $row->friend = $user->ident;
                 $row->mutual = FALSE;
                 $row->tsregister = time();
                 $row->save();
 
-                $valorations->addSociability($user, 2, 1);
+                $model_valorations->addSociability($user, 2, 1);
 
                 $session->messages->addMessage("Se envio un petición al usuario {$user->label}");
             }
@@ -69,12 +69,12 @@ class Friends_FriendController extends Yeah_Action
         $this->requirePermission('friends', 'contact');
         $request = $this->getRequest();
 
-        $users = Yeah_Adapter::getModel('users');
-        $friends = Yeah_Adapter::getModel('friends');
-        $valorations = Yeah_Adapter::getModel('valorations');
+        $model_users = new Users();
+        $model_friends = new Friends();
+        $model_valorations = new Valorations();
 
         $url = $request->getParam('user');
-        $user = $users->findByUrl($url);
+        $user = $model_users->findByUrl($url);
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         if ($USER->ident == $user->ident) {
@@ -83,25 +83,25 @@ class Friends_FriendController extends Yeah_Action
 
         $session = new Zend_Session_Namespace();
 
-        $follower = $friends->hasContact($USER->ident, $user->ident);
-        $following = $friends->hasContact($user->ident, $USER->ident);
+        $follower = $model_friends->hasContact($USER->ident, $user->ident);
+        $following = $model_friends->hasContact($user->ident, $USER->ident);
 
         if ($follower) {
             if ($following) {
-                $row = $friends->getContact($USER->ident, $user->ident);
+                $row = $model_friends->getContact($USER->ident, $user->ident);
                 $row->delete();
-                $row = $friends->getContact($user->ident, $USER->ident);
+                $row = $model_friends->getContact($user->ident, $USER->ident);
                 $row->mutual = FALSE;
                 $row->save();
 
-                $valorations->decreaseSociability($user, 3, 2);
+                $model_valorations->decreaseSociability($user, 3, 2);
 
                 $session->messages->addMessage("El usuario {$user->label} ha sido retirado de la lista de amigos");
             } else {
-                $row = $friends->getContact($USER->ident, $user->ident);
+                $row = $model_friends->getContact($USER->ident, $user->ident);
                 $row->delete();
 
-                $valorations->decreaseSociability($user, 2, 1);
+                $model_valorations->decreaseSociability($user, 2, 1);
 
                 $session->messages->addMessage("Has cancelado tu petición al usuario {$user->label}");
             }

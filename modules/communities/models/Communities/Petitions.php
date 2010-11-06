@@ -1,17 +1,17 @@
 <?php
 
-class modules_communities_models_Communities_Petitions extends Zend_Db_Table_Abstract
+class Communities_Petitions extends Yeah_Model_Table
 {
     protected $_name            = 'community_petition';
     protected $_referenceMap    = array(
         'Community'             => array(
             'columns'           => array('community'),
-            'refTableClass'     => 'modules_communities_models_Communities',
+            'refTableClass'     => 'Communities',
             'refColumns'        => array('ident'),
         ),
         'User'                  => array(
             'columns'           => array('user'),
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => array('ident'),
         ),
     );

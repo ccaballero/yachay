@@ -1,6 +1,6 @@
 <?php
 
-class modules_communities_Init extends Yeah_Init
+class Communities_Init extends Yeah_Init
 {
     public $check = array ('community', 'community_user', 'community_petition', 'community_resource');
     public $install = 'communities';

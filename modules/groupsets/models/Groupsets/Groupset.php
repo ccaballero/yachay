@@ -1,6 +1,6 @@
 <?php
 
-class modules_groupsets_models_Groupsets_Groupset extends Yeah_Model_Row_Validation
+class Groupsets_Groupset extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(
@@ -26,7 +26,7 @@ class modules_groupsets_models_Groupsets_Groupset extends Yeah_Model_Row_Validat
     );
 
     public function getAuthor() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->author);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->author);
     }
 }

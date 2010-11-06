@@ -31,7 +31,7 @@ class Login_IndexController extends Yeah_Action
                     'presence'   => 'required',
                     'fields'     => 'password',
                     'messages'   => array(
-                        'La contrase&ntilde;a debe tener entre 1 y 25 caracteres',
+                        'La contraseña debe tener entre 1 y 25 caracteres',
                     ),
                 ),
             );
@@ -41,7 +41,8 @@ class Login_IndexController extends Yeah_Action
             $input = new Zend_Filter_Input($filters, $validators, $_POST, $options);
             $session = new Zend_Session_Namespace();
             if ($input->isValid()) {
-                $user = Yeah_Adapter::getModel('users')->findByLogin($input->username, md5($CONFIG->key . $input->password));
+                $model_users = new Users();
+                $user = $model_users->findByLogin($input->username, md5($CONFIG->key . $input->password));
                 if (!empty($user)) {
                     if ($user->status == 'active') {
                         $session->user = $user;
@@ -51,18 +52,18 @@ class Login_IndexController extends Yeah_Action
                     }
                 } else {
                     // validation for login forgot process
-                    $login = Yeah_Adapter::getModel('login');
-                    $users = Yeah_Adapter::getModel('users');
-                    $user = $users->findByLabel($input->username);
+                    $model_login = new Login();
+                    $model_users = new Users();
+                    $user = $model_users->findByLabel($input->username);
                     if (!empty($user)) {
-                        $forgot = $login->selectByUser($user->ident);
+                        $forgot = $model_login->selectByUser($user->ident);
                         if (!empty($forgot)) {
                             if ($input->password == $forgot->password) {
                                 $now = time();
                                 $expiration = $forgot->tsregister + $forgot->tstimeout;
                                 $forgot->delete();
                                 if ($now < $expiration) {
-                                    $session->messages->addMessage('Le recomiendamos que establezca su nueva contrase&ntilde;a');
+                                    $session->messages->addMessage('Le recomiendamos que establezca su nueva contraseña');
                                     $session->user = $user;
                                     $this->_redirect($CONFIG->wwwroot);
                                 }
@@ -95,8 +96,9 @@ class Login_IndexController extends Yeah_Action
         }
 
         $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('Usted salio del sistema');
+        $session->messages->addMessage('Usted salió del sistema');
 
-        $this->_redirect($CONFIG->wwwroot);
+        $url = new Zend_View_Helper_Url();
+        $this->_redirect($url->url(array(), 'login_in'));
     }
 }

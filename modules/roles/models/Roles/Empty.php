@@ -1,6 +1,6 @@
 <?php
 
-class modules_roles_models_Roles_Empty
+class Roles_Empty
 {
     public $label = '';
     public $description = '';

@@ -4,9 +4,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <meta http-equiv="Content-Language" content="es-BO" />
-        <?= $this->headLink()->appendStylesheet($this->theme->htmlbase . 'css/style.css'); ?>
-        <link rel="icon" type="image/x-icon" href="<?= $this->config->media_base . '../' ?>/favicon.ico" />
-        <title><?= $this->title->toString() ?></title>
+        <?= $this->headLink()->appendStylesheet($this->TEMPLATE->htmlbase . 'css/style.css'); ?>
+        <link rel="icon" type="image/x-icon" href="<?= $this->CONFIG->media_base ?>favicon.ico" />
+        <title><?= $this->TITLE->toString() ?></title>
     </head>
     <body>
         <div id="header">
@@ -19,9 +19,13 @@
         </div>
         <div id="content">
             <div id="primary">
-                <?= $this->layout()->content ?>
+                <?= $this->render('webarte/messages.php') ?>
+                <?= $this->render('webarte/breadcrumb.php') ?>
+                <div id="main">
+                    <?= $this->layout()->content ?>
+                </div>
             </div>
-            <div id="widgets">
+            <div id="secondary">
                 <?= $this->render('webarte/widgets.php') ?>
             </div>
         </div>

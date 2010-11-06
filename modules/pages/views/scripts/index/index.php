@@ -1,22 +1,22 @@
-<h1>Lista de paginas</h1>
+<?php
 
-<center>
-    <table width="100%">
-        <tr>
-            <th><?= $this->utf2html($this->model->_mapping['label']) ?></th>
-            <th><?= $this->utf2html($this->model->_mapping['module']) ?></th>
-            <th><?= $this->utf2html($this->model->_mapping['title']) ?></th>
-            <th><?= $this->utf2html($this->model->_mapping['menutype']) ?></th>
-            <th><?= $this->utf2html($this->model->_mapping['menuorder']) ?></th>
-        </tr>
-        <?php foreach ($this->pages as $page) { ?>
-        <tr>
-            <td><?= $this->utf2html($page->label) ?></td>
-            <td><center><?= $this->utf2html($page->module) ?></center></td>
-            <td><center><?= $this->utf2html($page->title) ?></center></td>
-            <td><center><?= $this->utf2html($page->menutype) ?></center></td>
-            <td><center><?= $this->utf2html($page->menuorder) ?></center></td>
-        </tr>
-        <?php } ?>
-    </table>
-</center>
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<center><table width="100%"><tr>';
+echo '<th>' . $this->model_pages->_mapping['label'] . '</th>';
+echo '<th>' . $this->model_pages->_mapping['module'] . '</th>';
+echo '<th>' . $this->model_pages->_mapping['title'] . '</th>';
+echo '<th>' . $this->model_pages->_mapping['menutype'] . '</th>';
+echo '<th>' . $this->model_pages->_mapping['menuorder'] . '</th>';
+echo '</tr>';
+
+foreach ($this->pages as $page) {
+    echo '<tr>';
+    echo '<td>' . $page->label . '</td>';
+    echo '<td>' . $page->module . '</td>';
+    echo '<td>' . $page->title . '</td>';
+    echo '<td>' . $page->menutype . '</td>';
+    echo '<td><center>' . $page->menuorder . '</center></td>';
+    echo '</tr>';
+}
+
+echo '</table></center>';

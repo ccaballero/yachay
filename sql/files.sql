@@ -34,4 +34,3 @@ VALUES
 ('Nuevo archivo',                 'Nuevo archivo',    TRUE,          'files',            'manager',     'new',              '',                      'files_new'),
 ('Visor de archivos',             '',                 FALSE,         'files',            'file',        'view',             '',                      'files_file_view'),
 ('Editor de archivos',            '',                 FALSE,         'files',            'file',        'edit',             '',                      'files_file_edit');
-

@@ -8,20 +8,31 @@ class Roles_RoleController extends Yeah_Action
         $this->requirePermission('roles', 'view');
 
         $request = $this->getRequest();
-        $roles = Yeah_Adapter::getModel('roles');
-        $role = $roles->findByUrl($request->getParam('role'));
+        $model_roles = new Roles();
+        $role = $model_roles->findByUrl($request->getParam('role'));
 
         $this->requireExistence($role, 'role', 'roles_role_view', 'roles_list');
 
-        $this->view->model = $roles;
+        $model_users = new Users();
+        $users = $model_users->selectByRole($role->ident);
+
+        $model_privileges = new Privileges();
+        $privileges = $role->findPrivilegesViaRoles_Privileges($role->select()->order('module ASC')->order('privilege ASC'));
+
+        $this->view->model_roles = $model_roles;
         $this->view->role = $role;
+        $this->view->model_users = $model_users;
+        $this->view->users = $users;
+        $this->view->model_privileges = $model_privileges;
+        $this->view->privileges = $privileges;
 
         history('roles/' . $role->url);
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('roles', array('new', 'assign', 'delete'))) {
-            $breadcrumb['Roles'] = $this->view->url(array(), 'roles_manager');
-        } else if (Yeah_Acl::hasPermission('roles', 'list')) {
+        if ($this->acl('roles', 'list')) {
             $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');
+        }
+        if ($this->acl('roles', array('new', 'assign', 'delete'))) {
+            $breadcrumb['Administrador de roles'] = $this->view->url(array(), 'roles_manager');
         }
         breadcrumb($breadcrumb);
     }
@@ -32,33 +43,33 @@ class Roles_RoleController extends Yeah_Action
         $this->requirePermission('roles', 'edit');
 
         $request = $this->getRequest();
-        $roles = Yeah_Adapter::getModel('roles');
-        $role = $roles->findByUrl($request->getParam('role'));
+        $model_roles = new Roles();
 
+        $role = $model_roles->findByUrl($request->getParam('role'));
         $this->requireExistence($role, 'role', 'roles_role_view', 'roles_list');
 
-        $privileges = Yeah_Adapter::getModel('privileges');
-        $this->view->privileges = $privileges->selectAll();
+        $model_privileges = new Privileges();
+        $this->view->privileges = $model_privileges->selectAll();
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $roles_privileges = Yeah_Adapter::getModel('roles', 'Roles_Privileges');
+            $model_roles_privileges = new Roles_Privileges();
 
             $role->label = $request->getParam('label');
-            $role->url = convert($role->url);
+            $role->url = convert($role->label);
             $role->description = $request->getParam('description');
             $privileges_idents = $request->getParam('privileges');
 
             if ($role->isValid()) {
                 $role->save();
                 // delete of privileges in role
-                $roles_privileges->deletePrivilegesInRole($role->ident);
+                $model_roles_privileges->deletePrivilegesInRole($role->ident);
                 // privileges register
                 foreach ($privileges_idents as $privilege_ident) {
                     $privilege_ident = intval($privilege_ident);
                     if (is_int($privilege_ident)) {
-                        $role_privilege = $roles_privileges->createRow();
+                        $role_privilege = $model_roles_privileges->createRow();
                         $role_privilege->role = $role->ident;
                         $role_privilege->privilege = $privilege_ident;
                         $role_privilege->save();
@@ -77,10 +88,10 @@ class Roles_RoleController extends Yeah_Action
             $this->view->role_privilege = $privileges_idents;
         }
 
-        $this->view->model = $roles;
+        $this->view->model_roles = $model_roles;
         $this->view->role = $role;
 
-        $roles_privileges = $role->findManyToManyRowset('modules_privileges_models_Privileges', 'modules_roles_models_Roles_Privileges');
+        $roles_privileges = $role->findPrivilegesViaRoles_Privileges();
         $idents_privileges = array();
         foreach ($roles_privileges as $rol_privilege) {
             $idents_privileges[] = $rol_privilege->ident;
@@ -89,12 +100,13 @@ class Roles_RoleController extends Yeah_Action
 
         history('roles/' . $role->url . '/edit');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('roles', array('new', 'assign', 'delete'))) {
-            $breadcrumb['Roles'] = $this->view->url(array(), 'roles_manager');
-        } else if (Yeah_Acl::hasPermission('roles', 'list')) {
+        if ($this->acl('roles', 'list')) {
             $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');
         }
-        if (Yeah_Acl::hasPermission('roles', 'view')) {
+        if ($this->acl('roles', array('new', 'assign', 'delete'))) {
+            $breadcrumb['Administrador de roles'] = $this->view->url(array(), 'roles_manager');
+        }
+        if ($this->acl('roles', 'view')) {
             $breadcrumb[$role->label] = $this->view->url(array('role' => $role->url), 'roles_role_view');
         }
         breadcrumb($breadcrumb);
@@ -105,9 +117,9 @@ class Roles_RoleController extends Yeah_Action
         $request = $this->getRequest();
 
         $url = $request->getParam('role');
-        $roles = Yeah_Adapter::getModel('roles');
-        $role = $roles->findByUrl($url);
+        $model_roles = new Roles();
 
+        $role = $model_roles->findByUrl($url);
         $this->requireExistence($role, 'role', 'roles_role_view', 'roles_list');
 
         $session = new Zend_Session_Namespace();

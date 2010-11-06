@@ -1,22 +1,20 @@
 <?php
 
-class modules_teams_models_Teams extends Zend_Db_Table_Abstract
+class Teams extends Yeah_Model_Table
 {
     protected $_name            = 'team';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_teams_models_Teams_Team';
-    protected $_dependentTables = array('modules_teams_models_Teams_Users',
-                                        'modules_teams_models_Teams_Resources',
-                                  );
+    protected $_rowClass        = 'Teams_Team';
+    protected $_dependentTables = array('Teams_Users', 'Teams_Resources', );
     protected $_referenceMap    = array(
         'Group'                 => array(
             'columns'           => 'group',
-            'refTableClass'     => 'modules_groups_models_Groups',
+            'refTableClass'     => 'Groups',
             'refColumns'        => 'ident',
         ),
         'Author'                => array(
             'columns'           => 'author',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
     );

@@ -1,6 +1,6 @@
 <?php
 
-class modules_subjects_models_Subjects_Subject extends Yeah_Model_Row_Validation
+class Subjects_Subject extends Yeah_Model_Row_Validation
 {
     protected $_foreignkey = 'gestion';
 
@@ -104,23 +104,23 @@ class modules_subjects_models_Subjects_Subject extends Yeah_Model_Row_Validation
     );
 
     public function getGestion() {
-        $gestions = Yeah_Adapter::getModel('gestions');
-        return $gestions->findByIdent($this->gestion);
+        $model_gestions = new Gestion();
+        return $model_gestions->findByIdent($this->gestion);
     }
 
     public function getAuthor() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->author);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->author);
     }
 
     public function getModerator() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->moderator);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->moderator);
     }
 
     public function isEmpty() {
-        $model = Yeah_Adapter::getModel('groups');
-        $groups = $model->selectAll($this->ident);
+        $model_groups = new Groups();
+        $groups = $model_groups->selectAll($this->ident);
         return count($groups) == 0;
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class modules_users_Init extends Yeah_Init
+class Users_Init extends Yeah_Init
 {
     public $check = array ('user', 'user_resource');
     public $install = 'users';

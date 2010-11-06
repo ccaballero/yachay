@@ -1,17 +1,17 @@
 <?php
 
-class modules_subjects_models_Subjects_Users extends Zend_Db_Table_Abstract
+class Subjects_Users extends Yeah_Model_Table
 {
     protected $_name            = 'subject_user';
     protected $_referenceMap    = array(
         'Subject'              => array(
             'columns'           => array('subject'),
-            'refTableClass'     => 'modules_subjects_models_Subjects',
+            'refTableClass'     => 'Subjects',
             'refColumns'        => array('ident'),
         ),
         'User'                  => array(
             'columns'           => array('user'),
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => array('ident'),
         ),
     );

@@ -1,18 +1,15 @@
 <?php
 
-class modules_communities_models_Communities extends Zend_Db_Table_Abstract
+class Communities extends Yeah_Model_Table
 {
     protected $_name            = 'community';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_communities_models_Communities_Community';
-    protected $_dependentTables = array('modules_communities_models_Communities_Petitions',
-                                        'modules_communities_models_Communities_Users',
-                                        'modules_communities_models_Communities_Resources',
-                                  );
+    protected $_rowClass        = 'Communities_Community';
+    protected $_dependentTables = array('Communities_Petitions', 'Communities_Users', 'Communities_Resources', );
     protected $_referenceMap    = array(
         'Author'                => array(
             'columns'           => 'author',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
     );

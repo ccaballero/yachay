@@ -1,14 +1,14 @@
 <?php
 
-class modules_events_models_Events extends Zend_Db_Table_Abstract
+class Events extends Yeah_Model_Table
 {
     protected $_name            = 'event';
     protected $_primary         = 'resource';
-    protected $_rowClass        = 'modules_events_models_Events_Event';
+    protected $_rowClass        = 'Events_Event';
     protected $_referenceMap    = array(
         'Resource'              => array(
             'columns'           => array('resource'),
-            'refTableClass'     => 'modules_resources_models_Resources',
+            'refTableClass'     => 'Resources',
             'refColumns'        => array('ident'),
         ),
     );

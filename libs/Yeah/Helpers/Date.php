@@ -9,7 +9,7 @@ class Yeah_Helpers_Date
         list($Year, $Month, $Day) = @split('[/.-]', $value);
 
         // generacion del dia
-        $day = '<select name="' . $name . '-day" id="' . $name . '-day"><option value="-1">D&iacute;a:</option>';
+        $day = '<select name="' . $name . '-day" id="' . $name . '-day"><option value="-1">Día:</option>';
         for ($i = 1; $i <= 31; $i++) {
             $selected = '';
             if ($Day == $i) {
@@ -40,7 +40,7 @@ class Yeah_Helpers_Date
         $month .= '</select>';
 
         // generacion del año
-        $year = '<select name="' . $name . '-year" id="' . $name . '-year"><option value="-1">A&ntilde;o:</option>';
+        $year = '<select name="' . $name . '-year" id="' . $name . '-year"><option value="-1">Año:</option>';
         for ($k = 2009; $k >= 1900; $k--) {
             $selected = '';
             if ($Year == $k) {

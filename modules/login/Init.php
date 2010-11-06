@@ -1,6 +1,6 @@
 <?php
 
-class modules_login_Init extends Yeah_Init
+class Login_Init extends Yeah_Init
 {
     public $routes = array (
         'login_in'                               => array('login',

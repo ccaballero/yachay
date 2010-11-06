@@ -12,13 +12,13 @@ class Profile_IndexController extends Yeah_Action
 
         $request = $this->getRequest();
 
-        $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByUrl($USER->url);
+        $model_users = new Users();
+        $user = $model_users->findByUrl($USER->url);
         $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
 
         context('user', $user);
 
-        $this->view->model = $users;
+        $this->view->model_users = $model_users;
         $this->view->user = $user;
 
         history('profile');
@@ -35,9 +35,9 @@ class Profile_IndexController extends Yeah_Action
 
         $request = $this->getRequest();
 
-        $model_users = Yeah_Adapter::getModel('users');
-        $model_tags = Yeah_Adapter::getModel('tags');
-        $model_tags_users = Yeah_Adapter::getModel('tags', 'Tags_Users');
+        $model_users = new Users();
+        $model_tags = new Tags();
+        $model_tags_users = new Tags_Users();
 
         $user = $model_users->findByUrl($USER->url);
         $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
@@ -45,7 +45,7 @@ class Profile_IndexController extends Yeah_Action
         context('user', $user);
 
         $_tags = array();
-        $tags = $user->findmodules_tags_models_TagsViamodules_tags_models_Tags_Users();
+        $tags = $user->getTags();
         foreach ($tags as $tag) {
             $_tags[] = $tag->label;
         }
@@ -228,13 +228,13 @@ class Profile_IndexController extends Yeah_Action
         }
 
         $this->view->addHelperPath($CONFIG->dirroot . 'modules/users/views/helpers', 'Users_View_Helper_');
-        $this->view->model = $model_users;
+        $this->view->model_users = $model_users;
         $this->view->user = $user;
         $this->view->tags = implode(', ', $_tags);
 
         history('profile/edit');
         $breadcrumb = array();
-        $breadcrumb[$user->label] = $this->view->url(array(), 'profile_view');
+        $breadcrumb['Perfil'] = $this->view->url(array(), 'profile_view');
         breadcrumb($breadcrumb);
     }
 }

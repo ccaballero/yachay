@@ -30,5 +30,7 @@ cat califications.sql >> todo.sql
 cat comments.sql >> todo.sql
 cat ratings.sql >> todo.sql
 cat valorations.sql >> todo.sql
+cat tags.sql >> todo.sql
+cat feedback.sql >> todo.sql
+cat themes.sql >> todo.sql
 cat _extra.sql >> todo.sql
-

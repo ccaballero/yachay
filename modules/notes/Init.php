@@ -1,6 +1,6 @@
 <?php
 
-class modules_notes_Init extends Yeah_Init
+class Notes_Init extends Yeah_Init
 {
     public $check = array ('note');
     public $install = 'notes';

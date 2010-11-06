@@ -1,12 +1,10 @@
 <?php
 
-class modules_regions_models_Regions extends Zend_Db_Table_Abstract
+class Regions extends Yeah_Model_Table
 {
     protected $_name            = 'region';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_regions_models_Regions_Region';
-    protected $_dependentTables = array('modules_regions_models_Regions_Pages',
-                                  );
+    protected $_dependentTables = array('Regions_Pages', );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Region',

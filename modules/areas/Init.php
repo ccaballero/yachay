@@ -1,6 +1,6 @@
 <?php
 
-class modules_areas_Init extends Yeah_Init
+class Areas_Init extends Yeah_Init
 {
     public $check = array ('area', 'area_subject', 'area_resource');
     public $install = 'areas';

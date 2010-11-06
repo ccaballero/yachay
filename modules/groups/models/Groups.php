@@ -1,34 +1,34 @@
 <?php
 
-class modules_groups_models_Groups extends Zend_Db_Table_Abstract
+class Groups extends Yeah_Model_Table
 {
     protected $_name            = 'group';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_groups_models_Groups_Group';
-    protected $_dependentTables = array('modules_groupsets_models_Groupsets_Groups',
-                                        'modules_groups_models_Groups_Users',
-                                        'modules_groups_models_Groups_Resources',
-                                        'modules_teams_models_Teams',
+    protected $_rowClass        = 'Groups_Group';
+    protected $_dependentTables = array('Groupsets_Groups',
+                                        'Groups_Users',
+                                        'Groups_Resources',
+                                        'Teams',
                                   );
     protected $_referenceMap    = array(
         'Subject'               => array(
             'columns'           => 'subject',
-            'refTableClass'     => 'modules_subjects_models_Subjects',
+            'refTableClass'     => 'Subjects',
             'refColumns'        => 'ident',
         ),
         'Author'                => array(
             'columns'           => 'author',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
         'Teacher'               => array(
             'columns'           => 'teacher',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
-        'Evaluation'			=> array(
-            'columns'			=> 'evaluation',
-            'refTableClass'     => 'modules_evaluations_models_Evaluations',
+        'Evaluation'            => array(
+            'columns'           => 'evaluation',
+            'refTableClass'     => 'Evaluations',
             'refColumns'        => 'ident',
         ),
     );

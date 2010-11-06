@@ -1,6 +1,6 @@
 <?php
 
-class modules_evaluations_Init extends Yeah_Init
+class Evaluations_Init extends Yeah_Init
 {
     public $check = array ('evaluation', 'evaluation_test', 'evaluation_test_value');
     public $install = 'evaluations';
@@ -24,7 +24,7 @@ class modules_evaluations_Init extends Yeah_Init
                                                         'controller' => 'test',
                                                         'action'     => 'config',
                                                     )),
-		'evaluations_evaluation_edit'            => array('evaluations/:evaluation/edit',
+        'evaluations_evaluation_edit'            => array('evaluations/:evaluation/edit',
                                                     array(
                                                         'module'     => 'evaluations',
                                                         'controller' => 'evaluation',

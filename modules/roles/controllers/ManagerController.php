@@ -6,49 +6,57 @@ class Roles_ManagerController extends Yeah_Action {
         $this->requirePermission('roles', 'list');
         $this->requirePermission('roles', array('new', 'assign', 'delete'));
 
-        $roles = Yeah_Adapter::getModel('roles');
-        $this->view->model = $roles;
-        $this->view->roles = $roles->selectAll();
+        $model_roles = new Roles();
+
+        $this->view->model_roles = $model_roles;
+        $this->view->roles = $model_roles->selectAll();
 
         history('roles/manager');
-        breadcrumb();
+        $breadcrumb = array();
+        if ($this->acl('roles', 'list')) {
+            $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');
+        }
+        breadcrumb($breadcrumb);
     }
 
     public function newAction() {
         $this->requirePermission('roles', 'new');
 
-        $this->view->role = new modules_roles_models_Roles_Empty;
-        $this->view->role_privilege = array();
+        $model_privileges = new Privileges();
 
-        $privileges = Yeah_Adapter::getModel('privileges');
-        $this->view->privileges = $privileges->selectAll();
+        $this->view->role = new Roles_Empty();
+        $this->view->role_privilege = array();
+        $this->view->privileges = $model_privileges->selectAll();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $roles = Yeah_Adapter::getModel('roles');
-            $roles_privileges = Yeah_Adapter::getModel('roles', 'Roles_Privileges');
+            $model_roles = new Roles();
+            $model_roles_privileges = new Roles_Privileges();
 
-            $role = $roles->createRow();
+            $role = $model_roles->createRow();
             $role->label = $request->getParam('label');
-            $role->url = convert($role->url);
+            $role->url = convert($role->label);
+
             $role->description = $request->getParam('description');
             $privileges_idents = $request->getParam('privileges');
 
             if ($role->isValid()) {
                 $role->tsregister = time();
                 $role->save();
+
                 // privileges register
                 foreach ($privileges_idents as $privilege_ident) {
                     $privilege_ident = intval($privilege_ident);
                     if (is_int($privilege_ident)) {
-                        $role_privilege = $roles_privileges->createRow();
+                        $role_privilege = $model_roles_privileges->createRow();
                         $role_privilege->role = $role->ident;
                         $role_privilege->privilege = $privilege_ident;
                         $role_privilege->save();
                     }
                 }
+
                 $session->messages->addMessage("El rol {$role->label} se ha creado correctamente");
                 $session->url = $role->url;
                 $this->_redirect($request->getParam('return'));
@@ -64,7 +72,12 @@ class Roles_ManagerController extends Yeah_Action {
 
         history('roles/new');
         $breadcrumb = array();
-        $breadcrumb['Roles'] = $this->view->url(array(), 'roles_manager');
+        if ($this->acl('roles', 'list')) {
+            $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');
+        }
+        if ($this->acl('roles', array('new', 'assign', 'delete'))) {
+            $breadcrumb['Administrador de roles'] = $this->view->url(array(), 'roles_manager');
+        }
         breadcrumb($breadcrumb);
     }
 }

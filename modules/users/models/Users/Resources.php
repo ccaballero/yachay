@@ -1,17 +1,17 @@
 <?php
 
-class modules_users_models_Users_Resources extends Zend_Db_Table_Abstract
+class Users_Resources extends Yeah_Model_Table
 {
     protected $_name            = 'user_resource';
     protected $_referenceMap    = array(
         'User'                  => array(
             'columns'           => array('user'),
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => array('ident'),
         ),
         'Resource'              => array(
             'columns'           => array('resource'),
-            'refTableClass'     => 'modules_resources_models_Resources',
+            'refTableClass'     => 'Resources',
             'refColumns'        => array('ident'),
         ),
     );

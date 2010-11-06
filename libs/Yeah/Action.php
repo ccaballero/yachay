@@ -13,6 +13,10 @@ abstract class Yeah_Action extends Zend_Controller_Action
         parent::_redirect($url);
     }
 
+    public function acl($module, $privilege) {
+        return Yeah_Acl::hasPermission($module, $privilege);
+    }
+
     public function requirePermission($module, $privilege) {
         global $CONFIG;
         global $USER;
@@ -154,22 +158,22 @@ abstract class Yeah_Action extends Zend_Controller_Action
             return;
         }
 
-        $pages = Yeah_Adapter::getModel('pages');
+        $model_pages = new Pages();
         global $PAGE;
-        $PAGE = $pages->findByRoute($route);
+        $PAGE = $model_pages->findByRoute($route);
 
         // add the views in path
         $this->view->addHelperPath($CONFIG->dirroot . 'libs/Yeah/Helpers', 'Yeah_Helpers');
 
-        global $THEME;
-        $this->view->doctype($THEME->doctype);
+        global $TEMPLATE;
+        $this->view->doctype($TEMPLATE->doctype);
 
         if (empty($PAGE)) {
             return;
         }
 
         // add the media directory for module
-        $CONFIG->media_base = $CONFIG->wwwroot . 'media/' . $PAGE->module . '/';
+        $CONFIG->media_base = $CONFIG->wwwroot . 'media/';
         $this->view->media  = $CONFIG->media_base;
 
         // set context by default
@@ -178,7 +182,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
         }
 
         // Add the helpers of application
-        $model_modules = Yeah_Adapter::getModel('modules');
+        $model_modules = new Modules();
         $modules = $model_modules->selectByType('application');
         foreach ($modules as $module) {
             //FIXME Considerar las posibles alternativas en tipos de modulos
@@ -204,14 +208,18 @@ abstract class Yeah_Action extends Zend_Controller_Action
         global $ICON;
         $ICON->icon = $CONFIG->media_base . "favicon.ico";
 
-        $this->view->config = $CONFIG;
-        $this->view->theme = $THEME;
+        global $USER;
+
+        $this->view->CONFIG = $CONFIG;
+        $this->view->PAGE = $PAGE;
+        $this->view->TEMPLATE = $TEMPLATE;
+        $this->view->USER = $USER;
     }
 
     public function postDispatch() {
         global $CONFIG;
         global $PAGE;
-        global $THEME;
+        global $TEMPLATE;
         global $USER;
 
         if (isset($this->_ignorePostDispatch)) {
@@ -224,36 +232,37 @@ abstract class Yeah_Action extends Zend_Controller_Action
 
         $session = new Zend_Session_Namespace();
 
-        $regions = $PAGE->findManyToManyRowset('modules_regions_models_Regions', 'modules_regions_models_Regions_Pages');
+        $regions = $PAGE->findRegionsViaRegions_Pages();
         if (!empty($regions)) {
             foreach ($regions as $region) {
                 $view = new Zend_View();
                 $view->addHelperPath($CONFIG->dirroot . 'libs/Yeah/Helpers', 'Yeah_Helpers');
                 $view->setScriptPath($CONFIG->dirroot . 'modules/' . $region->module . '/views/scripts/' . $region->region . '/');
-                $view->render($region->script);
+                $view->render($region->script . '.php');
             }
         }
 
         // FIXME Control de privilegios
-        $widgets = $PAGE->findManyToManyRowset('modules_widgets_models_Widgets', 'modules_widgets_models_Widgets_Pages');
+        $widgets = $PAGE->findWidgetsViaWidgets_Pages();
 
         global $WIDGETS;
-        $widgets_pages = Yeah_Adapter::getModel('widgets', 'Widgets_Pages');
+        $model_widgets_pages = new Widgets_Pages();
         foreach ($widgets as $widget) {
             $view = new Zend_View();
             $view->addHelperPath($CONFIG->dirroot . 'libs/Yeah/Helpers', 'Yeah_Helpers');
             $view->setScriptPath($CONFIG->dirroot . 'modules/' . $widget->module . '/views/scripts/widgets/');
 
-            $view->config = $CONFIG;
-            $view->user = $USER;
-            $view->page = $PAGE;
+            $view->CONFIG = $CONFIG;
+            $view->PAGE = $PAGE;
+            $view->TEMPLATE = $TEMPLATE;
+            $view->USER = $USER;
 
-            $widget_page = $widgets_pages->getPosition($PAGE->ident, $widget->ident);
+            $widget_page = $model_widgets_pages->getPosition($PAGE->ident, $widget->ident);
             $position = $widget_page->position;
 
-            $script = "{$CONFIG->dirroot}modules/{$widget->module}/views/scripts/widgets/{$widget->script}.{$THEME->name}.php";
+            $script = "{$CONFIG->dirroot}modules/{$widget->module}/views/scripts/widgets/{$widget->script}-{$TEMPLATE->name}.php";
             if (file_exists($script)) {
-                $to_render = "{$widget->script}.{$THEME->name}.php";
+                $to_render = "{$widget->script}-{$TEMPLATE->name}.php";
             } else {
                 $to_render = "{$widget->script}.php";
             }
@@ -268,29 +277,33 @@ abstract class Yeah_Action extends Zend_Controller_Action
 
         // Register last login
         global $USER;
-        $user = Yeah_Adapter::getModel('users')->findByIdent($USER->ident);
+        $model_users = new Users();
+        $user = $model_users->findByIdent($USER->ident);
         if (!empty($user)) {
             $user->lastLogin();
             if ($user->needFillProfile()) {
-                $session->messages->addMessage("Se recomienda que ingrese su nombre, apellido y correo electrónico. [<a href=\"{$CONFIG->wwwroot}profile/edit/\">Editar</a>]");
+                $message = "Se recomienda que ingrese su nombre, apellido y correo electrónico. <a href=\"{$CONFIG->wwwroot}profile/edit/\">Editar</a>";
+                if (!in_array($message, $session->messages->getMessages())) {
+                    $session->messages->addMessage($message);
+                }
             }
         }
 
         global $TITLE, $ICON, $TOOLBAR, $SEARCH, $MENUBAR, $BREADCRUMB, $WIDGETS, $FOOTER;
 
-        $this->view->title = $TITLE;
-        $this->view->icon = $ICON;
-        $this->view->toolbar = $TOOLBAR;
-        $this->view->search = $SEARCH;
-        $this->view->menubar = $MENUBAR;
-        $this->view->breadcrumb = $BREADCRUMB;
-        $this->view->widgets = $WIDGETS;
-        $this->view->footer = $FOOTER;
+        $this->view->TITLE = $TITLE;
+        $this->view->ICON = $ICON;
+        $this->view->TOOLBAR = $TOOLBAR;
+        $this->view->SEARCH = $SEARCH;
+        $this->view->MENUBAR = $MENUBAR;
+        $this->view->BREADCRUMB = $BREADCRUMB;
+        $this->view->WIDGETS = $WIDGETS;
+        $this->view->FOOTER = $FOOTER;
 
         // rendering customized theme
-        $script = $this->view->getScriptPath($PAGE->controller) . '/' . $PAGE->action . '.' . $THEME->name . '.php';
+        $script = $this->view->getScriptPath($PAGE->controller) . '/' . $PAGE->action . '-' . $TEMPLATE->name . '.php';
         if (file_exists($script)) {
-            $this->render('index.' . $THEME->name);
+            $this->render($PAGE->action . '-' . $TEMPLATE->name);
         }
     }
 }

@@ -1,17 +1,17 @@
 <?php
 
-class modules_tags_models_Tags_Communities extends Zend_Db_Table_Abstract
+class Tags_Communities extends Yeah_Model_Table
 {
     protected $_name            = 'tag_community';
     protected $_referenceMap    = array(
         'Tag'                   => array(
             'columns'           => array('tag'),
-            'refTableClass'     => 'modules_tags_models_Tags',
+            'refTableClass'     => 'Tags',
             'refColumns'        => array('ident'),
         ),
         'Community'             => array(
             'columns'           => array('community'),
-            'refTableClass'     => 'modules_communities_models_Communities',
+            'refTableClass'     => 'Communities',
             'refColumns'        => array('ident'),
         ),
     );

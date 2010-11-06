@@ -1,6 +1,6 @@
 <?php
 
-class modules_gestions_models_Gestions_Gestion extends Yeah_Model_Row_Validation
+class Gestions_Gestion extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(
@@ -43,8 +43,8 @@ class modules_gestions_models_Gestions_Gestion extends Yeah_Model_Row_Validation
     );
 
     public function isEmpty() {
-        $model = Yeah_Adapter::getModel('subjects');
-        $subjects = $model->selectAll($this->ident);
+        $model_subjects = new Subjects();
+        $subjects = $model_subjects->selectAll($this->ident);
         return count($subjects) == 0;
     }
 }

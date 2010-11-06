@@ -46,5 +46,4 @@ VALUES
 (2,           'Listar invitaciones pendientes',                                'invitations',      'list',             TRUE),
 (2,           'Crear invitacion de acceso',                                    'invitations',      'new',              TRUE),
 (2,           'Ver invitacion pendiente',                                      'invitations',      'view',             TRUE),
-(2,           'Cancelar invitacion pendiente',                                 'invitations',      'delete',           TRUE);
-*/
+(2,           'Cancelar invitacion pendiente',                                 'invitations',      'delete',           TRUE);*/

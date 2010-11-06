@@ -1,33 +1,34 @@
-<h1>Modulo: <?= $this->utf2html($this->module->label) ?></h1>
+<?php
 
-<i><b>Estado:</b><?= $this->utf2html($this->status($this->module->status)) ?></i>
-<br />
-<i><b>Tipo:</b><?= $this->utf2html($this->type($this->module->type)) ?></i>
+echo '<h1>Modulo: ' . $this->module->label . '</h1>';
+echo '<i><b>Estado:</b> ' . $this->status($this->module->status) . '</i>';
+echo '<br />';
+echo '<i><b>Tipo:</b> ' . $this->type($this->module->type) . '</i>';
 
-<p><?= $this->utf2html($this->module->description) ?></p>
+echo '<p>' . $this->module->description . '</p>';
 
-<h2>Rutas registradas</h2>
-<?php if (isset($this->model)) { ?>
-<center>
-	<table border="1">
-	    <tr>
-	        <th>Ruta</th>
-	        <th>Modulo</th>
-	        <th>Controlador</th>
-	        <th>Accion</th>
-	        <th>Url</th>
-	    </tr>
-	<?php foreach($this->model->routes as $label => $route) { ?>
-	    <tr>
-	        <td><?= $label ?></td>
-	        <td><?= $route[1]['module'] ?></td>
-	        <td><?= $route[1]['controller'] ?></td>
-	        <td><?= $route[1]['action'] ?></td>
-	        <td><?= $route[0] ?></td>
-	    </tr>
-	<?php } ?>
-	</table>
-</center>
-<?php } else { ?>
-    <p>No se registraron rutas para este modulo.</p>
-<?php } ?>
+echo '<h2>Rutas registradas</h2>';
+
+if (isset($this->routes)) {
+    echo '<center><table border="1" width="100%"><tr>';
+    echo '<th>' . $this->model_pages->_mapping['route'] . '</th>';
+    echo '<th>' . $this->model_pages->_mapping['module'] . '</th>';
+    echo '<th>' . $this->model_pages->_mapping['controller'] . '</th>';
+    echo '<th>' . $this->model_pages->_mapping['action'] . '</th>';
+    echo '<th>Url</th>';
+    echo '</tr>';
+
+    foreach($this->routes->routes as $label => $route) {
+        echo '<tr>';
+        echo '<td>' . $label . '</td>';
+        echo '<td>' . $route[1]['module'] . '</td>';
+        echo '<td>' . $route[1]['controller'] . '</td>';
+        echo '<td>' . $route[1]['action'] . '</td>';
+        echo '<td>' . $route[0] . '</td>';
+        echo '</tr>';
+    }
+
+    echo '</table></center>';
+} else {
+    echo '<p>No se registraron rutas para este modulo.</p>';
+}

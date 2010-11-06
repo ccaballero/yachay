@@ -1,6 +1,6 @@
 <?php
 
-class modules_evaluations_models_Evaluations_Tests_Empty
+class Evaluations_Tests_Empty
 {
     public $label = '';
     public $key = '';

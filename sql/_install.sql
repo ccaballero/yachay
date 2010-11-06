@@ -118,8 +118,8 @@ SELECT 'tags';
 SELECT 'feedback';
 \. feedback.sql
 
-SELECT 'themes';
-\. themes.sql
+SELECT 'templates';
+\. templates.sql
 
 /*====================================================================================================================*/
 

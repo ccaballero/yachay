@@ -1,6 +1,6 @@
 <?php
 
-class modules_evaluations_models_Evaluations_Tests_Values_Value extends Yeah_Model_Row_Validation
+class Evaluations_Tests_Values_Value extends Yeah_Model_Row_Validation
 {
     protected $_foreignkey = 'test';
 
@@ -19,7 +19,7 @@ class modules_evaluations_models_Evaluations_Tests_Values_Value extends Yeah_Mod
                 ),
                 array(
                     'validator' => 'UniqueLabelDual',
-                    'options'   => array(array('evaluations', 'Evaluations_Tests_Values')),
+                    'options'   => array('Evaluations_Tests_Values'),
                     'message'   => 'El valor cualitativo ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -44,7 +44,7 @@ class modules_evaluations_models_Evaluations_Tests_Values_Value extends Yeah_Mod
                 ),
                 array(
                     'validator' => 'UniqueValueDual',
-                    'options'   => array(array('evaluations', 'Evaluations_Tests_Values')),
+                    'options'   => array('Evaluations_Tests_Values'),
                     'message'   => 'El valor de la nota ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),

@@ -1,12 +1,11 @@
 <?php
 
-class modules_gestions_models_Gestions extends Zend_Db_Table_Abstract
+class Gestions extends Yeah_Model_Table
 {
     protected $_name            = 'gestion';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_gestions_models_Gestions_Gestion';
-    protected $_dependentTables = array('modules_subjects_models_Subjects',
-                                  );
+    protected $_rowClass        = 'Gestions_Gestion';
+    protected $_dependentTables = array('Subjects', );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Gestion',

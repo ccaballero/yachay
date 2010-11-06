@@ -1,13 +1,11 @@
 <?php
 
-class modules_pages_models_Pages extends Zend_Db_Table_Abstract
+class Pages extends Yeah_Model_Table
 {
     protected $_name            = 'page';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_pages_models_Pages_Page';
-    protected $_dependentTables = array('modules_regions_models_Regions_Pages',
-                                        'modules_widgets_models_Widgets_Pages',
-                                  );
+    protected $_rowClass        = 'Pages_Page';
+    protected $_dependentTables = array('Regions_Pages', 'Widgets_Pages', );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Pagina',
@@ -20,7 +18,7 @@ class modules_pages_models_Pages extends Zend_Db_Table_Abstract
         'menuable'              => 'En menu',
         'menutype'              => 'Tipo de menu',
         'menuparent'            => 'Menu superior',
-        'menuorder'             => 'Precedencia',
+        'menuorder'             => 'Peso',
     );
 
     // Find uniques indexes

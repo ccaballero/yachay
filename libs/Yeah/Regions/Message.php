@@ -8,8 +8,7 @@ class Yeah_Regions_Message
         if (empty($message)) {
             return;
         }
-        $conversor = new Yeah_Helpers_Utf2html;
-        $this->_items[] = $conversor->utf2html($message);
+        $this->_items[] = $message;
     }
 
     public function clean() {

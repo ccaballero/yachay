@@ -1,67 +1,61 @@
-<h1>Administrador de roles</h1>
+<?php 
 
-<table>
-    <tr>
-        <?php if (Yeah_Acl::hasPermission('roles', 'list')) { ?>
-        <td>[<a href="<?= $this->url(array(), 'roles_list') ?>">Lista</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('roles', 'new')) { ?>
-        <td>[<a href="<?= $this->url(array(), 'roles_new') ?>">Nuevo</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('roles', 'assign')) { ?>
-        <td>[<a href="<?= $this->url(array(), 'roles_assign') ?>">Asignaci&oacute;n</a>]</td>
-        <?php } ?>
-    </tr>
-</table>
+echo '<h1>' . $this->PAGE->label . '</h1>';
 
-<hr />
-<?php if (count($this->roles)) { ?>
-<center>
-    <table width="100%">
-        <tr>
-            <th><?= $this->utf2html($this->model->_mapping['label']) ?></th>
-            <th>Opciones</th>
-            <th><?= $this->utf2html($this->model->_mapping['tsregister']) ?></th>
-            
-        </tr>
-    <?php foreach ($this->roles as $role) { ?>
-        <tr>
-            <td><?= $this->utf2html($role->label) ?></td>
-            <td>
-                <center>
-                    <?php if (Yeah_Acl::hasPermission('roles', 'view')) { ?>
-                    <a href="<?= $this->url(array('role' => $role->url), 'roles_role_view') ?>">Ver</a>
-                    <?php } ?>
-                    <?php if (Yeah_Acl::hasPermission('roles', 'edit')) { ?>
-                    <a href="<?= $this->url(array('role' => $role->url), 'roles_role_edit') ?>">Editar</a>
-                    <?php } ?>
-                    <?php if (Yeah_Acl::hasPermission('roles', 'delete')) { ?>
-                    <?php if ($role->isEmpty()) { ?>
-                    <a href="<?= $this->url(array('role' => $role->url), 'roles_role_delete') ?>">Eliminar</a>
-                    <?php } ?>
-                    <?php } ?>
-                </center>
-            </td>
-            <td><center><?= $this->timestamp($role->tsregister) ?></center></td>
-        </tr>
-        <?php } ?>
-    </table>
-</center>
-<?php } else { ?>
-    <p>No existen roles registrados</p>
-<?php } ?>
-<hr />
+echo '<table><tr>';
+if ($this->acl('roles', 'list')) {
+    echo '<td>[<a href="' . $this->url(array(), 'roles_list') . '">Lista</a>]</td>';
+}
+if ($this->acl('roles', 'new')) {
+    echo '<td>[<a href="' . $this->url(array(), 'roles_new') . '">Nuevo</a>]</td>';
+}
+if ($this->acl('roles', 'assign')) {
+    echo '<td>[<a href="' . $this->url(array(), 'roles_assign') . '">Asignación</a>]</td>';
+}
+echo '</tr></table>';
+echo '<hr />';
 
-<table>
-    <tr>
-        <?php if (Yeah_Acl::hasPermission('roles', 'list')) { ?>
-        <td>[<a href="<?= $this->url(array(), 'roles_list') ?>">Lista</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('roles', 'new')) { ?>
-        <td>[<a href="<?= $this->url(array(), 'roles_new') ?>">Nuevo</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('roles', 'assign')) { ?>
-        <td>[<a href="<?= $this->url(array(), 'roles_assign') ?>">Asignaci&oacute;n</a>]</td>
-        <?php } ?>
-    </tr>
-</table>
+if (count($this->roles)) {
+    echo '<center><table width="100%"><tr>';
+    echo '<th>' . $this->model_roles->_mapping['label'] . '</th>';
+    echo '<th>Opciones</th>';
+    echo '<th>' . $this->model_roles->_mapping['tsregister'] . '</th>';
+    echo '</tr>';
+
+    foreach ($this->roles as $role) {
+        echo '<tr>';
+        echo '<td>' . $role->label . '</td>';
+        echo '<td><center>';
+
+        if ($this->acl('roles', 'view')) {
+            echo '<a href="' . $this->url(array('role' => $role->url), 'roles_role_view') . '">Ver</a> ';
+        }
+        if ($this->acl('roles', 'edit')) {
+            echo '<a href="' . $this->url(array('role' => $role->url), 'roles_role_edit') . '">Editar</a> ';
+        }
+        if ($this->acl('roles', 'delete')) {
+            if ($role->isEmpty()) {
+                echo '<a href="' . $this->url(array('role' => $role->url), 'roles_role_delete') . '">Eliminar</a>';
+            }
+        }
+        echo '</center></td>';
+        echo '<td><center>' . $this->timestamp($role->tsregister) . '</center></td>';
+        echo '</tr>';
+    }
+    echo '</table></center>';
+} else {
+    echo '<p>No existen roles registrados</p>';
+}
+
+echo '<hr />';
+echo '<table><tr>';
+if ($this->acl('roles', 'list')) {
+    echo '<td>[<a href="' . $this->url(array(), 'roles_list') . '">Lista</a>]</td>';
+}
+if ($this->acl('roles', 'new')) {
+    echo '<td>[<a href="' . $this->url(array(), 'roles_new') . '">Nuevo</a>]</td>';
+}
+if ($this->acl('roles', 'assign')) {
+    echo '<td>[<a href="' . $this->url(array(), 'roles_assign') . '">Asignación</a>]</td>';
+}
+echo '</tr></table>';

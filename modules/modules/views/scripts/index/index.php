@@ -1,17 +1,15 @@
-<h1>Lista de modulos</h1>
+<?php
 
-<ul>
-<?php foreach ($this->modules as $module) { ?>
-    <li>
-        <?php if (Yeah_Acl::hasPermission('modules', 'view')) { ?>
-        <a href="<?= $this->url(array('mod' => $module->url), 'modules_module_view') ?>">
-            <b><?= $this->utf2html($module->label) ?></b>
-        </a>
-        <?php } else { ?>
-            <b><?= $this->utf2html($module->label) ?></b>
-        <?php } ?>
-        <br />
-        <i><?= $this->utf2html($module->description) ?></i>
-    </li>
-<?php } ?>
-</ul>
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<ul>';
+foreach ($this->modules as $module) {
+    echo '<li>';
+    if ($this->acl('modules', 'view')) {
+        echo '<a href="' . $this->url(array('mod' => $module->url), 'modules_module_view') . '"><b>' . $module->label . '</b></a>';
+    } else {
+        echo '<b>' . $module->label . '</b>';
+    }
+    echo '<br /><i>' . $module->description . '</i>';
+    echo '</li>';
+}
+echo '</ul>';

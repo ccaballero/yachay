@@ -2,7 +2,7 @@
 
 class Users_View_Helper_Password
 {
-    public function password($name, $value = '') {
+    public function password($id, $name, $value = '') {
         $generators = array (
             'alphanum' => 'Aleatoria',
             '.code.'   => '.[Codigo].',
@@ -11,6 +11,9 @@ class Users_View_Helper_Password
 
         if ($name == null) {
             return $generators[$value];
+        }
+        if (empty($id)) {
+            $id = $name;
         }
 
         $options = '';
@@ -22,7 +25,7 @@ class Users_View_Helper_Password
             $options .= '<option value="' . $key . '"' . $selected . ' >' . $message . '</option>'; 
         }
 
-        $select = '<select name="' . $name . '" id="' . $name . '">' . $options . '</select>';
+        $select = '<select id="' . $id . '" name="' . $name . '">' . $options . '</select>';
         return $select;
     }
 }

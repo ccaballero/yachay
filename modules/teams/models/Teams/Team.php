@@ -1,6 +1,6 @@
 <?php
 
-class modules_teams_models_Teams_Team extends Yeah_Model_Row_Validation
+class Teams_Team extends Yeah_Model_Row_Validation
 {
     protected $_foreignkey = 'group';
 
@@ -48,13 +48,13 @@ class modules_teams_models_Teams_Team extends Yeah_Model_Row_Validation
     );
 
     public function getGroup() {
-        $groups = Yeah_Adapter::getModel('groups');
-        return $groups->findByIdent($this->group);
+        $model_groups = new Groups();
+        return $model_groups->findByIdent($this->group);
     }
 
     public function getAuthor() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->author);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->author);
     }
 
     public function delete() {
@@ -85,10 +85,10 @@ class modules_teams_models_Teams_Team extends Yeah_Model_Row_Validation
             return true;
         }
 
-        $users = Yeah_Adapter::getModel('users');
-        $assignement = Yeah_Adapter::getModel('teams', 'Teams_Users');
-        $user = $users->findByIdent($USER->ident);
-        $assign = $assignement->findByTeamAndUser($this->ident, $USER->ident);
+        $model_users = new Users();
+        $model_teams_users = new Teams_Users();
+        $user = $model_users->findByIdent($USER->ident);
+        $assign = $model_teams_users->findByTeamAndUser($this->ident, $USER->ident);
         if (!empty($assign)) {
             return true;
         }

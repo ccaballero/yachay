@@ -1,19 +1,19 @@
 <?php
 
-class modules_comments_models_Comments extends Zend_Db_Table_Abstract
+class Comments extends Yeah_Model_Table
 {
     protected $_name            = 'comment';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_comments_models_Comments_Comment';
+    protected $_rowClass        = 'Comments_Comment';
     protected $_referenceMap    = array(
         'Resource'              => array(
             'columns'           => 'resource',
-            'refTableClass'     => 'modules_resources_models_Resources',
+            'refTableClass'     => 'Resources',
             'refColumns'        => 'ident',
         ),
         'Author'                => array(
             'columns'           => 'author',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
     );

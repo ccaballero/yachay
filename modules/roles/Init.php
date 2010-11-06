@@ -1,6 +1,6 @@
 <?php
 
-class modules_roles_Init extends Yeah_Init
+class Roles_Init extends Yeah_Init
 {
     public $check = array ('role', 'role_privilege');
     public $install = 'roles';

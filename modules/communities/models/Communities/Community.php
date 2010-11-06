@@ -1,6 +1,6 @@
 <?php
 
-class modules_communities_models_Communities_Community extends Yeah_Model_Row_Validation
+class Communities_Community extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(
@@ -65,8 +65,8 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Va
     }
 
     public function getAuthor() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->author);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->author);
     }
 
     public function getAvatar() {
@@ -112,8 +112,8 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Va
     public function amModerator() {
         global $USER;
 
-        $communities_user_model = Yeah_Adapter::getModel('communities', 'Communities_Users');
-        $user = $communities_user_model->findByCommunityAndUser($this->ident, $USER->ident);
+        $model_communities_user = new Communities_Users();
+        $user = $model_communities_user->findByCommunityAndUser($this->ident, $USER->ident);
         if ($user == NULL) {
             return FALSE;
         }
@@ -123,8 +123,8 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Va
     public function amMember() {
         global $USER;
 
-        $communities_user_model = Yeah_Adapter::getModel('communities', 'Communities_Users');
-        $user = $communities_user_model->findByCommunityAndUser($this->ident, $USER->ident);
+        $model_communities_user = new Communities_Users();
+        $user = $model_communities_user->findByCommunityAndUser($this->ident, $USER->ident);
         if ($user == NULL) {
             return FALSE;
         }
@@ -132,6 +132,6 @@ class modules_communities_models_Communities_Community extends Yeah_Model_Row_Va
     }
 
     public function getTags() {
-        return $this->findmodules_tags_models_TagsViamodules_tags_models_Tags_Communities();
+        return $this->findTagsViaTags_Communities();
     }
 }

@@ -77,8 +77,8 @@ VALUES
 ('Edicion de una materia',           '',                 FALSE,         'subjects',         'subject',     'edit',             '',                      'subjects_subject_edit'),
 ('Miembros de una materia',          '',                 FALSE,         'subjects',         'assign',      'index',            '',                      'subjects_subject_assign'),
 ('Agregar miembros a una materia',   '',                 FALSE,         'subjects',         'assign',      'new',              '',                      'subjects_subject_assign_new'),
-('Importar miembros a materia',      '',                 FALSE,         'subjects',         'assign',      'import',           '',                      'subjects_subject_assign_import'),
-('Exportar miembros de materia',     '',                 FALSE,         'subjects',         'assign',      'export',           '',                      'subjects_subject_assign_export');
+('Importar miembros a una materia',  '',                 FALSE,         'subjects',         'assign',      'import',           '',                      'subjects_subject_assign_import'),
+('Exportar miembros de una materia', '',                 FALSE,         'subjects',         'assign',      'export',           '',                      'subjects_subject_assign_export');
 
 /*====================================================================================================================*/
 /* Registro de privilegios para el modulo                                                                             */

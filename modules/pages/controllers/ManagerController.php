@@ -5,7 +5,7 @@ class Pages_ManagerController extends Yeah_Action
     public function indexAction() {
         $this->requirePermission('pages', 'manage');
 
-        $pages = Yeah_Adapter::getModel('pages');
+        $model_pages = new Pages();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -15,7 +15,7 @@ class Pages_ManagerController extends Yeah_Action
 
             $config = $request->getParam('pages');
             foreach ($config as $ident => $values) {
-                $page = $pages->findByIdent($ident);
+                $page = $model_pages->findByIdent($ident);
                 if (!empty($page)) {
                     $page->title     = $values['title'];
                     $page->menutype  = $values['menutype'];
@@ -32,16 +32,20 @@ class Pages_ManagerController extends Yeah_Action
             }
 
             if ($bads == 0) {
-                $session->messages->addMessage('La configuraci&oacute;n de las paginas ha sido almacenada');
+                $session->messages->addMessage('La configuración de las paginas ha sido almacenada');
             } else {
                 $session->messages->addMessage("Se han almacenado las paginas correctas, y se han encontrado $bads errores");
             }
         }
 
-        $this->view->model = $pages;
-        $this->view->pages = $pages->selectByMenuable(true);
+        $this->view->model_pages = $model_pages;
+        $this->view->pages = $model_pages->selectByMenuable(true);
 
-        history('pages');
-        breadcrumb();
+        history('pages/manager');
+        $breadcrumb = array();
+        if ($this->acl('pages', 'list')) {
+            $breadcrumb['Paginas'] = $this->view->url(array(), 'pages_list');
+        }
+        breadcrumb($breadcrumb);
     }
 }

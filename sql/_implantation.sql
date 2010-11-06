@@ -40,10 +40,31 @@ INSERT INTO `friend`
 VALUES
 ( 3,  2, TRUE,  UNIX_TIMESTAMP()),
 ( 3,  4, TRUE,  UNIX_TIMESTAMP()),
+( 3,  5, TRUE,  UNIX_TIMESTAMP()),
+( 3,  6, TRUE,  UNIX_TIMESTAMP()),
+( 3,  7, TRUE,  UNIX_TIMESTAMP()),
+( 3,  8, TRUE,  UNIX_TIMESTAMP()),
+( 3,  9, TRUE,  UNIX_TIMESTAMP()),
+( 3, 10, TRUE,  UNIX_TIMESTAMP()),
+( 3, 11, TRUE,  UNIX_TIMESTAMP()),
+( 3, 12, FALSE,  UNIX_TIMESTAMP()),
+( 3, 13, FALSE,  UNIX_TIMESTAMP()),
+( 3, 14, FALSE,  UNIX_TIMESTAMP()),
+( 3, 15, FALSE,  UNIX_TIMESTAMP()),
+( 3, 16, FALSE,  UNIX_TIMESTAMP()),
 ( 2,  3, TRUE,  UNIX_TIMESTAMP()),
 ( 4,  3, TRUE,  UNIX_TIMESTAMP()),
-( 3,  5, FALSE, UNIX_TIMESTAMP()),
-( 6,  3, FALSE, UNIX_TIMESTAMP());
+( 5,  3, TRUE,  UNIX_TIMESTAMP()),
+( 6,  3, TRUE,  UNIX_TIMESTAMP()),
+( 7,  3, TRUE,  UNIX_TIMESTAMP()),
+( 8,  3, TRUE,  UNIX_TIMESTAMP()),
+( 9,  3, TRUE,  UNIX_TIMESTAMP()),
+(10,  3, TRUE,  UNIX_TIMESTAMP()),
+(11,  3, TRUE,  UNIX_TIMESTAMP()),
+(17,  3, FALSE,  UNIX_TIMESTAMP()),
+(18,  3, FALSE,  UNIX_TIMESTAMP()),
+(19,  3, FALSE,  UNIX_TIMESTAMP());
+
 
 INSERT INTO `community`
 (`label`,          `url`,              `mode`,   `author`, `members`,     `tsregister`,     `description`)

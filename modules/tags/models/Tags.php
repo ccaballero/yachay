@@ -1,14 +1,11 @@
 <?php
 
-class modules_tags_models_Tags extends Zend_Db_Table_Abstract
+class Tags extends Yeah_Model_Table
 {
     protected $_name            = 'tag';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_tags_models_Tags_Tag';
-    protected $_dependentTables = array('modules_tags_models_Tags_Resources',
-                                        'modules_tags_models_Tags_Communities',
-                                        'modules_tags_models_Tags_Users',
-                                  );
+    protected $_rowClass        = 'Tags_Tag';
+    protected $_dependentTables = array('Tags_Resources', 'Tags_Communities', 'Tags_Users', );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Etiqueta',

@@ -14,8 +14,8 @@ class Yeah_Validators_UniqueEmail extends Zend_Validate_Abstract
         if (empty($value)) {
             return true; // About of nullity for email
         } else {
-            $elements = Yeah_Adapter::getModel($this->_model);
-            $element = $elements->findByEmail($value);
+            $model = new $this->_model();
+            $element = $model->findByEmail($value);
             if (empty($element)) {
                 return true;
             } else {

@@ -1,54 +1,52 @@
-<h1>Rol: <?= $this->utf2html($this->role->label) ?>
-    <?php if (Yeah_Acl::hasPermission('roles', 'edit')) { ?>
-    [<i><a href="<?= $this->url(array('role' => $this->role->url), 'roles_role_edit') ?>">Editar</a></i>]
-    <?php } ?>
-</h1>
-<p>
-    <?= $this->utf2html($this->role->description) ?>
-</p>
+<?php
 
-<h2>Usuarios asignados</h2>
-<?php $users = Yeah_Adapter::getModel('users')->selectByRole($this->role->ident); ?>
-<?php if (count($users)) { ?>
-<center>
-    <table width="100%">
-        <tr>
-            <th>Usuario</th>
-            <th>Nombre completo</th>
-            <th>Correo electronico</th>
-        </tr>
-        <?php foreach ($users as $user) { ?>
-        <tr>
-            <td><?= $this->utf2html($user->label) ?></td>
-            <td><?= $this->utf2html($user->getFullName()) ?></td>
-            <td><center><?= $this->utf2html($user->email) ?></center></td>
-        </tr>
-        <?php } ?>
-    </table>
-</center>
-<?php } else { ?>
-<p>No se registraron usuarios.</p>
-<?php } ?>
+echo '<h1>Rol: ' . $this->role->label . ' ';
+if ($this->acl('roles', 'edit')) {
+    echo '[<i><a href="' . $this->url(array('role' => $this->role->url), 'roles_role_edit') . '">Editar</a></i>]';
+}
+echo '</h1>';
 
-<h2>Privilegios asignados</h2>
-<?php $privileges = $this->role->findManyToManyRowset('modules_privileges_models_Privileges', 'modules_roles_models_Roles_Privileges') ?>
-<?php if (count($privileges)) { ?>
-<center>
-    <table width="100%">
-        <tr>
-            <th>Privilegio</th>
-            <th>Modulo</th>
-            <th>Funcion</th>
-        </tr>
-        <?php foreach ($privileges as $privilege) { ?>
-        <tr>
-            <td><?= $this->utf2html($privilege->label) ?></td>
-            <td><?= $privilege->module ?></td>
-            <td><?= $privilege->privilege ?></td>
-        </tr>
-        <?php } ?>
-    </table>
-</center>
-<?php } else { ?>
-<p>No se registraron privilegios.</p>
-<?php } ?>
+echo '<p>' . $this->role->description . '</p>';
+
+echo '<h2>Usuarios asignados</h2>';
+if (count($this->users)) {
+    echo '<center><table width="100%"><tr>';
+    echo '<th>' . $this->model_users->_mapping['label'] . '</th>';
+    echo '<th>' . $this->model_users->_mapping['formalname'] . '</th>';
+    echo '<th>' . $this->model_users->_mapping['email'] . '</th>';
+    echo '</tr>';
+
+    foreach ($this->users as $user) {
+        echo '<tr>';
+        echo '<td>' . $user->label . '</td>';
+        echo '<td>' . $user->getFullName() . '</td>';
+        echo '<td><center>' . $user->email . '</center></td>';
+        echo '</tr>';
+    }
+    
+    echo '</table></center>';
+
+} else {
+    echo '<p>No se registraron usuarios.</p>';
+}
+
+echo '<h2>Privilegios asignados</h2>';
+if (count($this->privileges)) {
+    echo '<center><table width="100%"><tr>';
+    echo '<th>' . $this->model_privileges->_mapping['label'] . '</th>';
+    echo '<th>' . $this->model_privileges->_mapping['module'] . '</th>';
+    echo '<th>' . $this->model_privileges->_mapping['privilege'] . '</th>';
+    echo '</tr>';
+
+    foreach ($this->privileges as $privilege) {
+        echo '<tr>';
+        echo '<td>' . $privilege->label . '</td>';
+        echo '<td>' . $privilege->module . '</td>';
+        echo '<td>' . $privilege->privilege . '</td>';
+        echo '</tr>';
+    }
+
+    echo '</table></center>';
+} else {
+    echo '<p>No se registraron privilegios.</p>';
+}

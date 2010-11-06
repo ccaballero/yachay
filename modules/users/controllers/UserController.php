@@ -7,16 +7,17 @@ class Users_UserController extends Yeah_Action
 
         $this->requirePermission('users', 'view');
 
+        $model_friends = new Friends();
+        $model_users = new Users();
+
         $request = $this->getRequest();
-        $model_friends = Yeah_Adapter::getModel('friends');
-        $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByUrl($request->getParam('user'));
+        $user = $model_users->findByUrl($request->getParam('user'));
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
 
         context('user', $user);
 
-        $resources = $user->findmodules_resources_models_ResourcesViamodules_users_models_Users_Resources($user->select()->order('tsregister DESC'));
+        $resources = $user->findResourcesViaUsers_Resources($user->select()->order('tsregister DESC'));
 
         // PAGINATOR
         $page = $request->getParam('page', 1);
@@ -25,9 +26,9 @@ class Users_UserController extends Yeah_Action
         $paginator->setCurrentPageNumber($page);
         $paginator->setPageRange(10);
 
-        $this->view->model = $users;
-        $this->view->friends = $model_friends;
+        $this->view->model_users = $model_users;
         $this->view->user = $user;
+        $this->view->model_friends = $model_friends;
         $this->view->resources = $paginator;
         $this->view->route = array (
             'key' => 'users_user_view',
@@ -38,10 +39,11 @@ class Users_UserController extends Yeah_Action
 
         history('users/' . $user->url);
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('users', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_manager');
-        } else if (Yeah_Acl::hasPermission('users', 'list')) {
+        if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
+        }
+        if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');
         }
         breadcrumb($breadcrumb);
     }
@@ -50,8 +52,8 @@ class Users_UserController extends Yeah_Action
         $this->requirePermission('users', 'edit');
 
         $request = $this->getRequest();
-        $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByUrl($request->getParam('user'));
+        $model_users = new Users();
+        $user = $model_users->findByUrl($request->getParam('user'));
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
@@ -84,8 +86,8 @@ class Users_UserController extends Yeah_Action
                 if ($USER->ident == $user->ident) {
                     $valid_role = true;
                 } else {
-                    $model = Yeah_Adapter::getModel('roles');
-                    $roles = $model->selectByIncludes($USER->role);
+                    $model_roles = new Roles();
+                    $roles = $model_roles->selectByIncludes($USER->role);
                     foreach ($roles as $role) {
                         if ($role->ident == $user->role) {
                             $valid_role |= true;
@@ -109,17 +111,18 @@ class Users_UserController extends Yeah_Action
             }
         }
 
-        $this->view->model = $users;
+        $this->view->model_users = $model_users;
         $this->view->user = $user;
 
         history('users/' . $user->url . '/edit');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('users', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_manager');
-        } else if (Yeah_Acl::hasPermission('users', 'list')) {
+        if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
         }
-        if (Yeah_Acl::hasPermission('users', 'view')) {
+        if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');
+        }
+        if ($this->acl('users', 'view')) {
             $breadcrumb[$user->label] = $this->view->url(array('user' => $user->url), 'users_user_view');
         }
         breadcrumb($breadcrumb);
@@ -130,8 +133,8 @@ class Users_UserController extends Yeah_Action
         $request = $this->getRequest();
 
         $url = $request->getParam('user');
-        $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByUrl($url);
+        $model_users = new Users();
+        $user = $model_users->findByUrl($url);
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
@@ -149,8 +152,8 @@ class Users_UserController extends Yeah_Action
         $request = $this->getRequest();
 
         $url = $request->getParam('user');
-        $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByUrl($url);
+        $model_users = new Users();
+        $user = $model_users->findByUrl($url);
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
@@ -168,8 +171,8 @@ class Users_UserController extends Yeah_Action
         $request = $this->getRequest();
 
         $url = $request->getParam('user');
-        $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByUrl($url);
+        $model_users = new Users();
+        $user = $model_users->findByUrl($url);
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');

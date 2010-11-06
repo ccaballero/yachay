@@ -1,121 +1,84 @@
-<h1>Importar usuarios</h1>
+<?php
 
-<?php if ($this->step == 1) { ?>
+echo '<h1>' . $this->PAGE->label . '</h1>';
 
-    <p>Para importar usuarios se toman en cuenta las siguientes filas:</p>
-    <ul>
-        <li>Código (Imprescindible)</li>
-        <li>Nombre Completo (Imprescindible, útil para exportación de datos)</li>
-        <li>Correo electrónico</li>
-        <li>Rol (Si no se especifica, se usa el rol especificado mas abajo)</li>
-        <li>Usuario (Si no se especifica, se usa el código)</li>
-        <li>Apellidos</li>
-        <li>Nombres</li>
-        <li>Carrera</li>
-    </ul>
+if ($this->step == 1) {
+    echo '<p>Para importar usuarios se toman en cuenta las siguientes filas:</p>';
+    echo '<ul><li>Código (Imprescindible)</li><li>Nombre Completo (Imprescindible, útil para exportación de datos)</li>';
+    echo '<li>Correo electrónico</li><li>Rol (Si no se especifica, se usa el rol especificado mas abajo)</li>';
+    echo '<li>Usuario (Si no se especifica, se usa el código)</li><li>Apellidos</li><li>Nombres</li><li>Carrera</li></ul>';
 
-    <form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">
-        <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
-        <table>
-            <tr>
-                <td><b>Archivo (.csv) (2 MiB max.) (*):</b></td>
-                <td><?= $this->formFile('file')?></td>
-            </tr>
-        <?php $first = true; ?>
-        <?php foreach ($this->options as $key => $option) { ?>
-            <tr>
-                <td><?= $option ?></td>
-                <td><input type="radio" <?= $first ? 'checked="checked "':'' ?>name="type" value="<?= $key ?>" /></td>
-            </tr>
-            <?php $first = false; ?>
-        <?php } ?>
-            <tr>
-                <td><b>Rol:</b></td>
-                <td><?= $this->role('role') ?></td>
-            </tr>
-            <tr>
-                <td><b>Generador de contraseña:</b></td>
-                <td><?= $this->password('password') ?></td>
-            </tr>
-            <tr>
-                <td colspan="2">(*) Campos obligatorios.</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Importar usuarios" />
-                    <a href="<?= $this->lastPage() ?>">Cancelar</a>
-                </td>
-            </tr>
-        </table>
-    </form>
+    echo '<form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">';
+    echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';
+    echo '<table><tr><td><b>Archivo (.csv) (2 MiB max.) (*):</b></td>';
+    echo '<td>' . $this->formFile('file') . '</td></tr>';
 
-<?php } else { ?>
+    $first = true;
+    foreach ($this->options as $key => $option) {
+        echo '<tr><td>' . $option . '</td>';
+        echo '<td><input type="radio"' . ($first ? ' checked="checked" ' : ' ') . 'name="type" value="' . $key . '" /></td></tr>';
+        $first = false;
+    }
 
-    <p>Por favor, revise la información siguiente, si la presentación no es correcta, por favor corrija su fichero y vuelva a subirlo:</p>
+    echo '<tr><td><b>Rol:</b></td>';
+    echo '<td>' . $this->role('role') . '</td></tr>';
+    echo '<tr><td><b>Generador de contraseña:</b></td>';
+    echo '<td>' . $this->password('password') . '</td>';
+    echo '</tr><tr><td colspan="2">(*) Campos obligatorios.</td></tr><tr><td>&nbsp;</td><td><input type="submit" value="Importar usuarios" /> ';
+    echo '<a href="' . $this->lastPage() . '">Cancelar</a>';
+    echo '</td></tr></table></form>';
 
-    <form method="post" action="" accept-charset="utf-8">
-        <a href="<?= $this->url(array(), 'users_import') ?>">Subir nuevamente</a>
-        <input type="submit" value="Importar usuarios" />
-        <hr />
+} else {
+    echo '<p>Por favor, revise la información siguiente, si la presentación no es correcta, por favor corrija su fichero y vuelva a subirlo:</p>';
+    echo '<form method="post" action="" accept-charset="utf-8">';
+    echo '<a href="' . $this->url(array(), 'users_import') . '">Subir nuevamente</a> ';
+    echo '<input type="submit" value="Importar usuarios" /><hr />';
+    echo '<p><b>Modalidad: </b>' . $this->options[$this->type] . '<br />';
+    echo '<b>Generador de contraseña: </b>' . $this->password(NULL, $this->password);
+    echo '</p><table width="100%">';
 
-        <p>
-            <b>Modalidad: </b><?= $this->options[$this->type] ?>
-            <br />
-            <b>Generador de contraseña: </b><?= $this->password(NULL, $this->password) ?>
-        </p>
-        <table width="100%">
-        <?php foreach ($this->results as $results) { ?>
-            <tr>
-                <td rowspan="5" valign="top" width="18px">
-                    <input type="checkbox" name="users[]" <?= (($this->type == 'CREATE_NOEDIT' && $results['CODIGO_NUE']) || ($this->type == 'NOCREATE_EDIT' && !$results['CODIGO_NUE']) || ($this->type == 'CREATE_EDIT')) ? 'checked="checked"':''?> value="<?= $results['CODIGO']?>" />
-                </td>
-                <td colspan="2"><b>[<?= $results['CODIGO'] ?>] <?= $results['NOMBRE COMPLETO'] ?></b></td>
-                <td align="right">
-                <?php if ($results['CODIGO_NUE']) { ?>
-                    [NUEVO]&nbsp;<?php if (Yeah_Acl::hasPermission('users', 'new')) { ?><b>[OK]</b><?php } else { ?>No tienes permiso para crear usuarios.&bnsp;<b>FALLO</b><?php } ?>
-                <?php } else { ?>
-                    <a href="<?= $this->url(array('user' => $results['USUARIO_OBJ']->url), 'users_user_view') ?>" target="_BLANK">Ver Usuario</a>
-                    &nbsp;[EDICION]&nbsp;<?php if (Yeah_Acl::hasPermission('users', 'edit')) { ?><b>[OK]</b><?php } else { ?>No tienes permiso para editar usuarios.&nbsp;<b>FALLO</b><?php } ?>
-                <?php } ?>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2"><b>Rol: </b><?= $results['ROL'] ?></td>
-                <td align="right">
-                <?php if (isset($results['ROL_OBJ'])) { ?>
-                    <a href="<?= $this->url(array('role' => $results['ROL_OBJ']->url), 'roles_role_view') ?>" target="_BLANK">Ver Rol</a>&nbsp;<b>[OK]</b>
-                <?php } else { ?>
-                    <b>[FALLO]</b>
-                <?php } ?>
-            </tr>
-            <tr>
-                <td width="30%">
-                    <b>Usuario: </b><?= $results['USUARIO'] ?>
-                </td>
-                <td>
-                    <b>Correo electrónico: </b><?= $this->none($results['CORREO ELECTRONICO']) ?>
-                </td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td width="30%">
-                    <b>Apellidos: </b><?= $this->none($results['APELLIDOS']) ?>
-                </td>
-                <td>
-                    <b>Nombres: </b><?= $this->none($results['NOMBRES']) ?>
-                </td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="3"><b>Carrera: </b><?= $this->none($results['CARRERA']) ?></td>
-            </tr>
-        <?php } ?>
-        </table>
+    foreach ($this->results as $results) {
+        echo '<tr><td rowspan="5" valign="top" width="18px">';
+        echo '<input type="checkbox" name="users[]"' . ($results['CHECKED'] && (isset($results['ROL_OBJ'])) ? ' checked="checked" ' : ' ') . 'value="' . $results['CODIGO'] . '" />';
+        echo '</td><td colspan="2"><b>[' . $results['CODIGO'] . '] ' . $results['NOMBRE COMPLETO'] . '</b></td>';
+        echo '<td align="right">';
 
-        <hr />
-        <a href="<?= $this->url(array(), 'users_import') ?>">Subir nuevamente</a>
-        <input type="submit" value="Importar usuarios" />
-    </form>
+        if ($results['CODIGO_NUE']) {
+            echo '[NUEVO]&nbsp;';
+            if ($this->acl('users', 'new')) {
+                echo '<b>[OK]</b>';
+            } else {
+                echo 'No tienes permiso para crear usuarios.&bnsp;<b>FALLO</b>';
+            }
+        } else {
+            echo '<a href="' . $this->url(array('user' => $results['USUARIO_OBJ']->url), 'users_user_view') . '" target="_BLANK">Ver Usuario</a>';
+            echo '&nbsp;[EDICION]&nbsp;';
+            if ($this->acl('users', 'edit')) {
+                echo '<b>[OK]</b>';
+            } else {
+                echo 'No tienes permiso para editar usuarios.&nbsp;<b>FALLO</b>';
+            }
+        }
 
-<?php } ?>
+        echo '</td></tr><tr>';
+        echo '<td colspan="2"><b>Rol: </b>' . $results['ROL'] . '</td>';
+        echo '<td align="right">';
+
+        if (isset($results['ROL_OBJ'])) {
+            echo '<a href="' . $this->url(array('role' => $results['ROL_OBJ']->url), 'roles_role_view') . '" target="_BLANK">Ver Rol</a>&nbsp;<b>[OK]</b>';
+        } else {
+            echo '<b>[FALLO]</b>';
+        }
+
+        echo '</tr><tr><td width="30%">';
+        echo '<b>Usuario: </b>' . $results['USUARIO'] . '</td><td>';
+        echo '<b>Correo electrónico: </b>' . $this->none($results['CORREO ELECTRONICO']) . '</td><td>&nbsp;</td></tr><tr><td width="30%">';
+        echo '<b>Apellidos: </b>' . $this->none($results['APELLIDOS']) . '</td><td>';
+        echo '<b>Nombres: </b>' . $this->none($results['NOMBRES']) . '</td><td>&nbsp;</td></tr><tr>';
+        echo '<td colspan="3"><b>Carrera: </b>' . $this->none($results['CARRERA']) . '</td></tr>';
+    }
+
+    echo '</table><hr />';
+    echo '<a href="' . $this->url(array(), 'users_import') . '">Subir nuevamente</a> ';
+    echo '<input type="submit" value="Importar usuarios" /></form>';
+}

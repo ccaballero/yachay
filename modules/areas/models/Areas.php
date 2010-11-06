@@ -1,12 +1,12 @@
 <?php
 
-class modules_areas_models_Areas extends Zend_Db_Table_Abstract
+class Areas extends Yeah_Model_Table
 {
     protected $_name            = 'area';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_areas_models_Areas_Area';
-    protected $_dependentTables = array('modules_areas_models_Areas_Subjects',
-                                        'modules_areas_models_Areas_Resources',
+    protected $_rowClass        = 'Areas_Area';
+    protected $_dependentTables = array('Areas_Subjects',
+                                        'Areas_Resources',
                                   );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',

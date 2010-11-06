@@ -68,6 +68,4 @@ VALUES
 ('Vista de una evaluacion',       '',                 FALSE,         'evaluations',      'evaluation',  'view',             '',                      'evaluations_evaluation_view'),
 ('Edicion de una evaluacion',     '',                 FALSE,         'evaluations',      'evaluation',  'edit',             '',                      'evaluations_evaluation_edit'),
 ('Agregar calificacion a un criterio', '',            FALSE,         'evaluations',      'test',        'add',              '',                      'evaluations_evaluation_test_add'),
-('Configuracion de criterios de evaluacion', '',      FALSE,         'evaluations',      'test',
-'config',           '',                      'evaluations_evaluation_test_config');
-
+('Configuracion de criterios de evaluacion', '',      FALSE,         'evaluations',      'test',        'config',           '',                      'evaluations_evaluation_test_config');

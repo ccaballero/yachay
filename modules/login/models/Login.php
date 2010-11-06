@@ -1,20 +1,20 @@
 <?php
 
-class modules_login_models_Login extends Zend_Db_Table_Abstract
+class Login extends Yeah_Model_Table
 {
     protected $_name            = 'login_forgot';
     protected $_primary         = 'ident';
     protected $_referenceMap    = array(
         'User'                  => array(
             'columns'           => 'user',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
     );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'user'                  => 'Usuario',
-        'password'              => 'Contrase&ntilde;a',
+        'password'              => 'Contraseña',
         'tsregister'            => 'Fecha de Registro',
         'tstimeout'             => 'Expiracion',
     );

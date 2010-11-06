@@ -1,7 +1,8 @@
-<b>ARCHIVO:</b>
-<br />
-<?= $this->utf2html($this->wrapper($this->file->description)) ?>
-<br />
-<?= $this->mime($this->file->mime) ?>&nbsp;
-<a href="<?= $this->url(array('file' => $this->file->resource), 'files_file_download') ?>"><?= $this->utf2html($this->file->filename) ?></a>
-&nbsp;<?= $this->size($this->file->size) ?>
+<?php
+
+echo '<b>' . strtoupper($this->file->getLabel()) . '</b>';
+echo '<br />';
+echo $this->wrapper($this->file->description);
+echo '<br />';
+echo '<center><a href="' . $this->url(array('file' => $this->file->resource), 'files_file_download') . '">' .
+     $this->file->filename . ' (' . $this->size($this->file->size) . ')</a> ' . '</center>';

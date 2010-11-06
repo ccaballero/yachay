@@ -1,36 +1,29 @@
 <?php
 
-class modules_users_models_Users extends Zend_Db_Table_Abstract
+class Users extends Yeah_Model_Table
 {
     protected $_name            = 'user';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_users_models_Users_User';
-    protected $_dependentTables = array('modules_roles_models_Roles',
-                                        'modules_subjects_models_Subjects_Users',
-                                        'modules_groups_models_Groups_Users',
-                                        'modules_teams_models_Teams_Users',
-                                        'modules_subjects_models_Subjects',
-                                        'modules_groupsets_models_Groupsets',
-                                        'modules_groups_models_Groups',
-                                        'modules_teams_models_Teams',
-                                        'modules_resources_models_Resources',
-                                        'modules_users_models_Users_Resources',
-                                        'modules_communities_models_Communities',
-                                        'modules_communities_models_Communities_Users',
-                                        'modules_communities_models_Communities_Petitions',
-                                        'modules_comments_models_Comments',
-                                        'modules_evaluations_models_Evaluations',
-                                        'modules_invitations_models_Invitations',
+    protected $_rowClass        = 'Users_User';
+    protected $_dependentTables = array('Roles',
+                                        'Subjects', 'Subjects_Users',
+                                        'Groups', 'Groups_Users',
+                                        'Teams', 'Teams_Users',
+                                        'Resources', 'Users_Resources',
+                                        'Communities', 'Communities_Users', 'Communities_Petitions',
+                                        'Groupsets',
+                                        'Comments', 'Tags_Users',
+                                        'Evaluations',
                                   );
     protected $_referenceMap    = array(
         'Role'                  => array(
             'columns'           => 'role',
-            'refTableClass'     => 'modules_roles_models_Roles',
+            'refTableClass'     => 'Roles',
             'refColumns'        => 'ident',
         ),
         'Theme'                 => array(
             'columns'           => 'theme',
-            'refTableClass'     => 'modules_themes_models_Themes',
+            'refTableClass'     => 'Themes',
             'refColumns'        => 'label',
         ),
     );
@@ -90,14 +83,14 @@ class modules_users_models_Users extends Zend_Db_Table_Abstract
 
     // Selects in table
     public function selectAll() {
-        return $this->fetchAll($this->select()->order('role DESC')->order('label ASC'));
+        return $this->fetchAll($this->select()->order('surname ASC')->order('name ASC'));
     }
 
     public function selectByRole($role) {
-        return $this->fetchAll($this->select()->where('role = ?', $role));
+        return $this->fetchAll($this->select()->where('role = ?', $role)->order('surname ASC')->order('name ASC'));
     }
 
     public function selectByStatus($status) {
-        return $this->fetchAll($this->select()->where('status = ?', $status)->order('role DESC')->order('label ASC'));
+        return $this->fetchAll($this->select()->where('status = ?', $status)->order('(popularity + activity + participation + sociability) DESC'));
     }
 }

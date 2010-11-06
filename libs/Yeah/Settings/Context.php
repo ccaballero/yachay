@@ -35,27 +35,26 @@ class Yeah_Settings_Context
     }
     
     public function __toString() {
-        $utf = new Yeah_Helpers_Utf2html;
         if (!empty($this->global)) {
             return 'Pagina principal';
         }
         if (!empty($this->area)) {
-            return 'Area: ' . $utf->utf2html($this->area->label);
+            return 'Area: ' . $this->area->label;
         }
         if (!empty($this->subject)) {
-            return 'Materia: ' . $utf->utf2html($this->subject->label);
+            return 'Materia: ' . $this->subject->label;
         }
         if (!empty($this->group)) {
-            return 'Grupo: ' . $utf->utf2html($this->group->label);
+            return 'Grupo: ' . $this->group->label;
         }
         if (!empty($this->team)) {
-            return 'Equipo: ' . $utf->utf2html($this->team->label);
+            return 'Equipo: ' . $this->team->label;
         }
         if (!empty($this->user)) {
-            return 'Usuario: ' . $utf->utf2html($this->user->label);
+            return 'Usuario: ' . $this->user->label;
         }
         if (!empty($this->community)) {
-            return 'Comunidad: ' . $utf->utf2html($this->community->label);
+            return 'Comunidad: ' . $this->community->label;
         }
         return "";
     }

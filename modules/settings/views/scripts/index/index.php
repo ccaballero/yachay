@@ -1,33 +1,14 @@
-<h1>Preferencias de usuario</h1>
+<?php
 
-<p>
-    En esta pagina usted puede configurar algunos aspectos del comportamiento del sistema, como por ejemplo: 
-    su contrase&ntilde;a, el aspecto, las notificaciones, los boletines y otros dependiendo de los modulos que
-    esten instalados.
-</p>
-
-<center>
-    <form method="post" action="" accept-charset="utf-8">
-        <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
-        <table>
-            <tr>
-                <td colspan="2"><b>Cambio de contrase&ntilde;a:</b></td>
-            </tr>
-            <tr>
-                <td>Nueva contrase&ntilde;a:</td>
-                <td><input type="password" name="password1" value="" /></td>
-            </tr>
-            <tr>
-                <td>Repita la contrase&ntilde;a nueva:</td>
-                <td><input type="password" name="password2" value="" /></td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Actualizar" />
-                    <a href="<?= $this->lastPage() ?>">Cancelar</a>
-                </td>
-            </tr>
-        </table>
-    </form>
-</center>
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<p>En esta pagina usted puede configurar algunos aspectos del comportamiento del sistema, como por ejemplo: su contraseña, el aspecto, las notificaciones, los boletines y otros dependiendo de los modulos que esten instalados.</p>';
+echo '<center><form method="post" action="" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';
+echo '<table><tr><td colspan="2"><b>Cambio de contraseña:</b></td>';
+echo '</tr><tr><td>Nueva contraseña:</td>';
+echo '<td><input type="password" name="password1" value="" /></td>';
+echo '</tr><tr><td>Repita la contraseña nueva:</td>';
+echo '<td><input type="password" name="password2" value="" /></td>';
+echo '</tr><tr><td>&nbsp;</td><td>';
+echo '<input type="submit" value="Actualizar" /> <a href="' . $this->lastPage() . '">Cancelar</a>';
+echo '</td></tr></table></form></center>';

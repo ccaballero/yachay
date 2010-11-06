@@ -1,17 +1,15 @@
 <?php
 
-class modules_privileges_models_Privileges extends Zend_Db_Table_Abstract
+class Privileges extends Yeah_Model_Table
 {
     protected $_name            = 'privilege';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_privileges_models_Privileges_Privilege';
-    protected $_dependentTables = array('modules_roles_models_Roles_Privileges',
-                                  );
+    protected $_dependentTables = array('Roles_Privileges', );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Privilegio',
         'module'                => 'Modulo',
-        'privilege'             => 'Privilegio',
+        'privilege'             => 'Función',
     );
 
     // Find uniques indexes
@@ -31,6 +29,6 @@ class modules_privileges_models_Privileges extends Zend_Db_Table_Abstract
 
     // Selects in table
     public function selectAll() {
-        return $this->fetchAll($this->select()->order('module ASC')->order('label ASC'));
+        return $this->fetchAll($this->select()->order('module ASC')->order('privilege ASC'));
     }
 }

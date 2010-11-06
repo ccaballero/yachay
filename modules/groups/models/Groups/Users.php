@@ -1,17 +1,17 @@
 <?php
 
-class modules_groups_models_Groups_Users extends Zend_Db_Table_Abstract
+class Groups_Users extends Yeah_Model_Table
 {
     protected $_name            = 'group_user';
     protected $_referenceMap    = array(
         'Group'                 => array(
             'columns'           => array('group'),
-            'refTableClass'     => 'modules_groups_models_Groups',
+            'refTableClass'     => 'Groups',
             'refColumns'        => array('ident'),
         ),
         'User'                  => array(
             'columns'           => array('user'),
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => array('ident'),
         ),
     );

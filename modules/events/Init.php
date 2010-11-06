@@ -1,6 +1,6 @@
 <?php
 
-class modules_events_Init extends Yeah_Init
+class Events_Init extends Yeah_Init
 {
     public $check = array ('event');
     public $install = 'events';

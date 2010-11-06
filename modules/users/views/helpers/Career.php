@@ -2,8 +2,12 @@
 
 class Users_View_Helper_Career
 {
-    public function career($name, $value = '') {
+    public function career($id, $name, $value = '') {
         $careers = array ('Lic. Informática', 'Ing. de Sistemas');
+
+        if (empty($id)) {
+            $id = $name;
+        }
 
         $options = '';
         foreach ($careers as $career) {
@@ -14,7 +18,7 @@ class Users_View_Helper_Career
             $options .= '<option ' . $selected . ' >' . $career . '</option>'; 
         }
 
-        $select = '<select name="' . $name . '" id="' . $name . '">' .
+        $select = '<select id="' . $id . '" name="' . $name . '">' .
             '<option value="">--------------------</option>' . $options . '</select>';
         return $select;
     }

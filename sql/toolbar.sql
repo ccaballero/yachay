@@ -17,4 +17,4 @@ VALUES
 INSERT INTO `region`
 (`label`,          `module`,           `script`,           `region`)
 VALUES
-('Basica',         'toolbar',          'toolbar.php',      'toolbar');
+('Basica',         'toolbar',          'toolbar',          'toolbar');

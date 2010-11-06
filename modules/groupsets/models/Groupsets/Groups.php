@@ -1,17 +1,17 @@
 <?php
 
-class modules_groupsets_models_Groupsets_Groups extends Zend_Db_Table_Abstract
+class Groupsets_Groups extends Yeah_Model_Table
 {
     protected $_name            = 'groupset_group';
     protected $_referenceMap    = array(
         'Groupset'              => array(
             'columns'           => array('groupset'),
-            'refTableClass'     => 'modules_groupsets_models_Groupsets',
+            'refTableClass'     => 'Groupsets',
             'refColumns'        => array('ident'),
         ),
         'Group'                 => array(
             'columns'           => array('group'),
-            'refTableClass'     => 'modules_groups_models_Groups',
+            'refTableClass'     => 'Groups',
             'refColumns'        => array('ident'),
         ),
     );

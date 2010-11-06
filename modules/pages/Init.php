@@ -1,6 +1,6 @@
 <?php
 
-class modules_pages_Init extends Yeah_Init
+class Pages_Init extends Yeah_Init
 {
     public $routes = array (
         'pages_manager'                          => array('pages/manager',

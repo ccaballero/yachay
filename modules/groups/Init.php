@@ -1,6 +1,6 @@
 <?php
 
-class modules_groups_Init extends Yeah_Init
+class Groups_Init extends Yeah_Init
 {
     public $check = array ('group', 'group_user', 'group_resource');
     public $install = 'groups';

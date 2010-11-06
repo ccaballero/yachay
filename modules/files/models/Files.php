@@ -1,14 +1,14 @@
 <?php
 
-class modules_files_models_Files extends Zend_Db_Table_Abstract
+class Files extends Yeah_Model_Table
 {
     protected $_name            = 'file';
     protected $_primary         = 'resource';
-    protected $_rowClass        = 'modules_files_models_Files_File';
+    protected $_rowClass        = 'Files_File';
     protected $_referenceMap    = array(
         'Resource'              => array(
             'columns'           => array('resource'),
-            'refTableClass'     => 'modules_resources_models_Resources',
+            'refTableClass'     => 'Resources',
             'refColumns'        => array('ident'),
         ),
     );

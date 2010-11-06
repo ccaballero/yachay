@@ -5,15 +5,15 @@ class Pages_IndexController extends Yeah_Action
     public function indexAction() {
         $this->requirePermission('pages', 'list');
 
-        $pages = Yeah_Adapter::getModel('pages');
+        $model_pages = new Pages();
 
-        $this->view->model = $pages;
-        $this->view->pages = $pages->selectAll();
+        $this->view->model_pages = $model_pages;
+        $this->view->pages = $model_pages->selectAll();
 
         history('pages');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('pages', 'manage')) {
-            $breadcrumb['Paginas'] = $this->view->url(array(), 'pages_manager');
+        if ($this->acl('pages', 'manage')) {
+            $breadcrumb['Administrador de paginas'] = $this->view->url(array(), 'pages_manager');
         }
         breadcrumb($breadcrumb);
     }

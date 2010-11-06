@@ -1,6 +1,6 @@
 <?php
 
-class modules_users_models_Users_Empty
+class Users_Empty
 {
     public $label = '';
     public $password = 'alphanum';

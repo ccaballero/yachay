@@ -11,8 +11,8 @@ class Yeah_Validators_UniqueUrl extends Zend_Validate_Abstract
     }
 
     public function isValid($value) {
-        $elements = Yeah_Adapter::getModel($this->_model);
-        $element = $elements->findByUrl($value);
+        $model = new $this->_model();
+        $element = $model->findByUrl($value);
         if (empty($element)) {
             return true;
         } else {

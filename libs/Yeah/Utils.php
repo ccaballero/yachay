@@ -1,7 +1,7 @@
 <?php
 
 function mysql_import($sql) {
-    $DATABASE = new Yeah_Settings_Database;
+    $DATABASE = new Yeah_Settings_Database();
     $conexion = mysql_connect($DATABASE->hostname, $DATABASE->username, $DATABASE->password);
     mysql_select_db($DATABASE->database, $conexion);
 
@@ -36,17 +36,15 @@ function breadcrumb($elements = array()) {
     global $BREADCRUMB;
     global $CONFIG;
 
-    $utf = new Yeah_Helpers_Utf2html;
-    
     $BREADCRUMB->items[] = array(
-                               'link'  => $CONFIG->wwwroot,
-                               'label' => 'Inicio',
-                           );
+        'link'  => $CONFIG->wwwroot,
+        'label' => 'Inicio',
+    );
     
     foreach ($elements as $element => $url) {
         $BREADCRUMB->items[] = array(
             'link' => $url,
-            'label' => $utf->utf2html($element),
+            'label' => $element,
         );
     }
 }

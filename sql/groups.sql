@@ -75,5 +75,5 @@ VALUES
 ('Edicion de un grupo',           '',                 FALSE,         'groups',           'group',       'edit',             '',                      'groups_group_edit'),
 ('Miembros de un grupo',          '',                 FALSE,         'groups',           'assign',      'index',            '',                      'groups_group_assign'),
 ('Agregar miembros a un grupo',   '',                 FALSE,         'groups',           'assign',      'new',              '',                      'groups_group_assign_new'),
-('Importar miembros a grupo',     '',                 FALSE,         'groups',           'assign',      'import',           '',                      'groups_group_assign_import'),
-('Exportar miembros de grupo',    '',                 FALSE,         'groups',           'assign',      'export',           '',                      'groups_group_assign_export');
+('Importar miembros a un grupo',  '',                 FALSE,         'groups',           'assign',      'import',           '',                      'groups_group_assign_import'),
+('Exportar miembros de un grupo', '',                 FALSE,         'groups',           'assign',      'export',           '',                      'groups_group_assign_export');

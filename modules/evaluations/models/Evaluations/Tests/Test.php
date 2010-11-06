@@ -1,6 +1,6 @@
 <?php
 
-class modules_evaluations_models_Evaluations_Tests_Test extends Yeah_Model_Row_Validation
+class Evaluations_Tests_Test extends Yeah_Model_Row_Validation
 {
     protected $_foreignkey = 'evaluation';
 
@@ -19,7 +19,7 @@ class modules_evaluations_models_Evaluations_Tests_Test extends Yeah_Model_Row_V
                 ),
                 array(
                     'validator' => 'UniqueLabelDual',
-                    'options'   => array(array('evaluations', 'Evaluations_Tests')),
+                    'options'   => array('Evaluations_Tests'),
                     'message'   => 'El nombre seleccionado para la calificacion ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -44,7 +44,7 @@ class modules_evaluations_models_Evaluations_Tests_Test extends Yeah_Model_Row_V
                 ),
                 array(
                     'validator' => 'UniqueKeyDual',
-                    'options'   => array(array('evaluations', 'Evaluations_Tests')),
+                    'options'   => array('Evaluations_Tests'),
                     'message'   => 'El nombre seleccionado para la calificacion ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -89,18 +89,18 @@ class modules_evaluations_models_Evaluations_Tests_Test extends Yeah_Model_Row_V
     );
 
     public function getEvaluation() {
-        $evaluations = Yeah_Adapter::getModel('evaluations');
-        return $evaluations->findByIdent($this->evaluation);
+        $model_evaluations = new Evaluations();
+        return $model_evaluations->findByIdent($this->evaluation);
     }
 
-    public function isEmpty() {
+    /*public function isEmpty() {
         $model = Yeah_Adapter::getModel('teams');
         $teams = $model->selectAll($this->ident);
         return count($teams) == 0;
-    }
+    }*/
 
     public function hasValues() {
-        $values = $this->findmodules_evaluations_models_Evaluations_Tests_Values();
+        $values = $this->findEvaluations_Tests_Values();
         return count($values) != 0;
     }
 

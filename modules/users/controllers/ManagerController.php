@@ -8,7 +8,7 @@ class Users_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            if (Yeah_Acl::hasPermission('users', 'lock')) {
+            if ($this->acl('users', 'lock')) {
                 $lock = $request->getParam('lock');
                 $unlock = $request->getParam('unlock');
                 if (!empty($lock)) {
@@ -17,7 +17,7 @@ class Users_ManagerController extends Yeah_Action
                     $this->_forward('unlock');
                 }
             }
-            if (Yeah_Acl::hasPermission('users', 'delete')) {
+            if ($this->acl('users', 'delete')) {
                 $delete = $request->getParam('delete');
                 if (!empty($delete)) {
                     $this->_forward('delete');
@@ -25,33 +25,36 @@ class Users_ManagerController extends Yeah_Action
             }
         }
 
-        $model_users = Yeah_Adapter::getModel('users');
+        $model_users = new Users();
 
         $this->view->model = $model_users;
         $this->view->users = $model_users->selectAll();
 
         history('users/manager');
-        breadcrumb();
+        $breadcrumb = array();
+        if ($this->acl('users', 'list')) {
+            $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
+        }
+        breadcrumb($breadcrumb);
     }
 
     public function newAction() {
         $this->requirePermission('users', 'new');
 
-        $this->view->user = new modules_users_models_Users_Empty;
+        $this->view->user = new Users_Empty();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $users = Yeah_Adapter::getModel('users');
-
-            $user = $users->createRow();
+            $model_users = new Users();
+            $user = $model_users->createRow();
 
             $user->label = $request->getParam('label');
             $user->url = convert($user->label);
             $user->password = $request->getParam('password');
             $user->code = $request->getParam('code');
-            $user->formalname= $request->getParam('formal');
+            $user->formalname = $request->getParam('formal');
             $user->email = $request->getParam('email');
             $user->surname = $request->getParam('surname');
             $user->name = $request->getParam('name');
@@ -66,8 +69,8 @@ class Users_ManagerController extends Yeah_Action
                 global $CONFIG;
                 // role validation,, critical point
                 global $USER;
-                $model = Yeah_Adapter::getModel('roles');
-                $roles = $model->selectByIncludes($USER->role);
+                $model_roles = new Roles();
+                $roles = $model_roles->selectByIncludes($USER->role);
                 $valid_role = false;
                 foreach ($roles as $role) {
                     if ($role->ident == $user->role) {
@@ -119,7 +122,12 @@ class Users_ManagerController extends Yeah_Action
 
         history('users/new');
         $breadcrumb = array();
-        $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_manager');
+        if ($this->acl('users', 'list')) {
+            $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
+        }
+        if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');
+        }
         breadcrumb($breadcrumb);
     }
 
@@ -130,14 +138,14 @@ class Users_ManagerController extends Yeah_Action
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            $users = Yeah_Adapter::getModel('users');
             $check = $request->getParam("check");
 
-            $model = Yeah_Adapter::getModel('roles');
-            $roles = $model->selectByIncludes($USER->role);
+            $model_roles = new Roles();
+            $roles = $model_roles->selectByIncludes($USER->role);
 
             foreach ($check as $value) {
-                $user = $users->findByIdent($value);
+                $model_users = new Users();
+                $user = $model_users->findByIdent($value);
 
                 $valid_role = false;
                 foreach ($roles as $role) {
@@ -167,14 +175,14 @@ class Users_ManagerController extends Yeah_Action
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            $users = Yeah_Adapter::getModel('users');
             $check = $request->getParam("check");
 
-            $model = Yeah_Adapter::getModel('roles');
-            $roles = $model->selectByIncludes($USER->role);
+            $model_roles = new Roles();
+            $roles = $model_roles->selectByIncludes($USER->role);
 
             foreach ($check as $value) {
-                $user = $users->findByIdent($value);
+                $model_users = new Users();
+                $user = $model_users->findByIdent($value);
 
                 $valid_role = false;
                 foreach ($roles as $role) {
@@ -203,14 +211,14 @@ class Users_ManagerController extends Yeah_Action
         $this->requirePermission('users', 'delete');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $users = Yeah_Adapter::getModel('users');
             $check = $request->getParam("check");
 
-            $model = Yeah_Adapter::getModel('roles');
-            $roles = $model->selectByIncludes($USER->role);
+            $model_roles = new Roles();
+            $roles = $model_roles->selectByIncludes($USER->role);
 
             foreach ($check as $value) {
-                $user = $users->findByIdent($value);
+                $model_users = new Users();
+                $user = $model_users->findByIdent($value);
 
                 $valid_role = false;
                 foreach ($roles as $role) {
@@ -240,13 +248,13 @@ class Users_ManagerController extends Yeah_Action
         $this->requirePermission('users', array('new', 'edit'));
 
         $options = array();
-        if (Yeah_Acl::hasPermission('users', 'new')) {
+        if ($this->acl('users', 'new')) {
             $options['CREATE_NOEDIT'] = 'Solo crear usuarios nuevos, e ignorar los restantes.';
         }
-        if (Yeah_Acl::hasPermission('users', 'edit')) {
+        if ($this->acl('users', 'edit')) {
             $options['NOCREATE_EDIT'] = 'Solo actualizar la información de los existentes, no registrar nuevos.';
         }
-        if (Yeah_Acl::hasPermission('users', 'new') && Yeah_Acl::hasPermission('users', 'edit')) {
+        if ($this->acl('users', 'new') && $this->acl('users', 'edit')) {
             $options['CREATE_EDIT'] = 'Crear usuarios, y actualizar la información de los existentes.';
         }
         $this->view->options = $options;
@@ -256,8 +264,8 @@ class Users_ManagerController extends Yeah_Action
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $users = Yeah_Adapter::getModel('users');
-            $roles = Yeah_Adapter::getModel('roles');
+            $model_users = new Users();
+            $model_roles = new Roles();
 
             $selections = $request->getParam('users');
             if (empty($selections)) {
@@ -296,7 +304,7 @@ class Users_ManagerController extends Yeah_Action
                                     $result = array();
 
                                     $result['CODIGO'] = trim($row[$_headers['CODIGO']]);
-                                    $user = $users->findByCode($result['CODIGO']);
+                                    $user = $model_users->findByCode($result['CODIGO']);
                                     if (empty($user)) {
                                         $result['CODIGO_NUE'] = TRUE;
                                     } else {
@@ -312,10 +320,15 @@ class Users_ManagerController extends Yeah_Action
                                     $result['CARRERA'] = isset($_headers['CARRERA']) ? $row[$_headers['CARRERA']] : '';
                                     $result['PASSWORD'] = $type;
 
-                                    $role = $roles->findByIdent($role_default);
+                                    $role = $model_roles->findByIdent($role_default);
+                                    if (empty($role)) {
+                                        $label = 'No definido';
+                                    } else {
+                                        $label = $role->label;
+                                    }
 
-                                    $result['ROL'] = isset($_headers['ROL']) ? $row[$_headers['ROL']] : $role->label;
-                                    $roles_allowed = $roles->selectByIncludes($USER->role);
+                                    $result['ROL'] = isset($_headers['ROL']) ? $row[$_headers['ROL']] : $label;
+                                    $roles_allowed = $model_roles->selectByIncludes($USER->role);
                                     $valid_role = false;
                                     foreach ($roles_allowed as $role_allowed) {
                                         if (strtolower($role_allowed->label) == strtolower($result['ROL'])) {
@@ -326,6 +339,10 @@ class Users_ManagerController extends Yeah_Action
                                     if (!empty($role) && $valid_role) {
                                         $result['ROL_OBJ'] = $role;
                                     }
+
+                                    $result['CHECKED'] = ($type == 'CREATE_NOEDIT') && $result['CODIGO_NUE'];
+                                    $result['CHECKED'] |= ($type == 'NOCREATE_EDIT') && (!$result['CODIGO_NUE']);
+                                    $result['CHECKED'] |= ($type == 'CREATE_EDIT');
 
                                     $results[] = $result;
                                 }
@@ -357,7 +374,7 @@ class Users_ManagerController extends Yeah_Action
                     foreach ($session->import_users as $result) {
                         if (in_array($result['CODIGO'], $selections)) {
                             if ($result['CODIGO_NUE'] && Yeah_Acl::hasPermission('users', 'new')) {
-                                $user = $users->createRow();
+                                $user = $model_users->createRow();
                                 $user->code = $result['CODIGO'];
                                 $user->status = 'active';
                                 $user->tsregister = time();
@@ -366,7 +383,7 @@ class Users_ManagerController extends Yeah_Action
                                 $user->password = md5($CONFIG->key . $password);
                             }
                             if (!$result['CODIGO_NUE'] && Yeah_Acl::hasPermission('users', 'edit')) {
-                                $user = $users->findByCode($result['CODIGO']);
+                                $user = $model_users->findByCode($result['CODIGO']);
                             }
                             if (isset($user)) {
                                 if (isset($result['ROL_OBJ'])) {
@@ -416,7 +433,12 @@ class Users_ManagerController extends Yeah_Action
 
         history('users/import');
         $breadcrumb = array();
-        $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_manager');
+        if ($this->acl('users', 'list')) {
+            $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
+        }
+        if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');
+        }
         breadcrumb($breadcrumb);
     }
 
@@ -430,9 +452,9 @@ class Users_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
 
-        $model = Yeah_Adapter::getModel('users');
-        $users = $model->selectAll();
-        $this->view->model = $model;
+        $model_users = new Users();
+        $users = $model_users->selectAll();
+        $this->view->model_users = $model_users;
 
         if ($request->isPost()) {
             $columns = $request->getParam('columns');
@@ -444,9 +466,9 @@ class Users_ManagerController extends Yeah_Action
 
                     $headers = array();
                     foreach ($columns as $column) {
-                        $headers[] = '"' . $model->_mapping[$column] . '"';
+                        $headers[] = '"' . $model_users->_mapping[$column] . '"';
                     }
-                    $csv .= implode(', ', $headers) . '
+                    $csv .= implode(',', $headers) . '
 ';
                     foreach ($users as $user) {
                         $row = array();
@@ -457,7 +479,7 @@ class Users_ManagerController extends Yeah_Action
                                 $row[] = '"' . $user->$column . '"';
                             }
                         }
-                        $csv .= implode(', ', $row) . '
+                        $csv .= implode(',', $row) . '
 ';
                     }
 
@@ -474,7 +496,12 @@ class Users_ManagerController extends Yeah_Action
 
         history('users/export');
         $breadcrumb = array();
-        $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_manager');
+        if ($this->acl('users', 'list')) {
+            $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
+        }
+        if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');
+        }
         breadcrumb($breadcrumb);
     }
 }

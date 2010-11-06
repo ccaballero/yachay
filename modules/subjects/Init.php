@@ -1,6 +1,6 @@
 <?php
 
-class modules_subjects_Init extends Yeah_Init
+class Subjects_Init extends Yeah_Init
 {
     public $check = array ('subject', 'subject_user', 'subject_resource');
     public $install = 'subjects';

@@ -1,6 +1,6 @@
 <?php
 
-class modules_friends_models_Friends_Friend extends Yeah_Model_Row_Validation
+class Friends_Friend extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'user' => array(
@@ -8,7 +8,7 @@ class modules_friends_models_Friends_Friend extends Yeah_Model_Row_Validation
             'validators' => array(
                 array(
                     'validator' => 'IdentExists',
-                    'options'   => array('users'),
+                    'options'   => array('Users'),
                     'message'   => 'El usuario no es valido',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -19,7 +19,7 @@ class modules_friends_models_Friends_Friend extends Yeah_Model_Row_Validation
             'validators' => array(
                 array(
                     'validator' => 'IdentExists',
-                    'options'   => array('users'),
+                    'options'   => array('Users'),
                     'message'   => 'El usuario contacto no es valido',
                     'namespace' => 'Yeah_Validators',
                 ),

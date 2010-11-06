@@ -1,81 +1,37 @@
-<h1><?= $this->user->getFullName() ?></h1>
+<?php
 
-<p>
-    En esta pagina usted debe establecer la informacion que es solicitada, asegurese de mantenerla siempre 
-    actualizada, para no tener problemas en el uso del sistema.
-</p>
-
-<center>
-    <form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">
-        <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
-        <table>
-            <tr>
-                <td><b>Nombre de usuario (*):</b></td>
-                <td><input type="text" name="label" value="<?= $this->user->label ?>" maxlength="20" /></td>
-            </tr>
-            <tr>
-                <td><b>Correo electronico:</b></td>
-                <td><input type="text" name="email" value="<?= $this->user->email ?>" maxlength="50" /></td>
-            </tr>
-            <tr>
-                <td><b>Apellidos:</b></td>
-                <td><input type="text" name="surname" value="<?= $this->user->surname ?>" maxlength="128" /></td>
-            </tr>
-            <tr>
-                <td><b>Nombres:</b></td>
-                <td><input type="text" name="name" value="<?= $this->user->name ?>" maxlength="128" /></td>
-            </tr>
-            <tr>
-                <td><b>Fecha de nacimiento:</b></td>
-                <td><?= $this->date('birthdate', $this->user->birthdate) ?></td>
-            </tr>
-            <tr>
-                <td><b>Carrera:</b></td>
-                <td><?= $this->career('career', $this->user->career) ?></td>
-            </tr>
-            <tr>
-                <td><b>Telefono:</b></td>
-                <td><input type="text" name="phone" value="<?= $this->user->phone ?>" maxlength="64" /></td>
-            </tr>
-            <tr>
-                <td><b>Celular:</b></td>
-                <td><input type="text" name="cellphone" value="<?= $this->user->cellphone ?>" maxlength="64" /></td>
-            </tr>
-            <tr>
-                <td><b>Avatar:</b></td>
-                <td><?= $this->formFile('file')?></td>
-            </tr>
-            <tr>
-                <td><b>Etiquetas (**):</b></td>
-                <td><input name="tags" value="<?= $this->tags ?>" maxlength="128" /></td>
-            </tr>
-            <tr>
-                <td><b>Pasatiempos:</b></td>
-                <td><input type="text" name="hobbies" value="<?= $this->user->hobbies ?>" maxlength="1024" /></td>
-            </tr>
-            <tr>
-                <td><b>Firma:</b></td>
-                <td><input type="text" name="sign" value="<?= $this->user->sign ?>" maxlength="1024" /></td>
-            </tr>
-            <tr>
-                <td colspan="2"><b>Descripcion personal:</b></td>
-            </tr>
-            <tr>
-                <td colspan="2"><textarea name="description" cols="50" rows="5"><?= $this->user->description ?></textarea></td>
-            </tr>
-            <tr>
-                <td colspan="2">(*) Campos obligatorios.</td>
-            </tr>
-            <tr>
-                <td colspan="2">(**) Las etiquetas deben separarse con comas.</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Actualizar" />
-                    <a href="<?= $this->lastPage() ?>">Cancelar</a>
-                </td>
-            </tr>
-        </table>
-    </form>
-</center>
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<p>En esta pagina usted debe establecer la informacion que es solicitada, asegurese de mantenerla siempre actualizada, para no tener problemas en el uso del sistema.</p>';
+echo '<center><form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';
+echo '<table><tr>';
+echo '<td><b>Nombre de usuario (*):</b></td>';
+echo '<td><input type="text" name="label" value="' . $this->user->label . '" maxlength="20" /></td></tr><tr>';
+echo '<td><b>Correo electronico:</b></td>';
+echo '<td><input type="text" name="email" value="' . $this->user->email . '" maxlength="50" /></td></tr><tr>';
+echo '<td><b>Apellidos:</b></td>';
+echo '<td><input type="text" name="surname" value="' . $this->user->surname . '" maxlength="128" /></td></tr><tr>';
+echo '<td><b>Nombres:</b></td>';
+echo '<td><input type="text" name="name" value="' . $this->user->name . '" maxlength="128" /></td></tr><tr>';
+echo '<td><b>Fecha de nacimiento:</b></td>';
+echo '<td>' . $this->date('birthdate', $this->user->birthdate) . '</td></tr><tr>';
+echo '<td><b>Carrera:</b></td>';
+echo '<td>' . $this->career('career', $this->user->career) . '</td></tr><tr>';
+echo '<td><b>Telefono:</b></td>';
+echo '<td><input type="text" name="phone" value="' . $this->user->phone . '" maxlength="64" /></td></tr><tr>';
+echo '<td><b>Celular:</b></td>';
+echo '<td><input type="text" name="cellphone" value="' . $this->user->cellphone . '" maxlength="64" /></td></tr><tr>';
+echo '<td><b>Avatar:</b></td>';
+echo '<td>' . $this->formFile('file'). '</td></tr><tr>';
+echo '<td><b>Etiquetas (**):</b></td>';
+echo '<td><input name="tags" value="' . $this->tags . '" maxlength="128" /></td></tr><tr>';
+echo '<td><b>Pasatiempos:</b></td>';
+echo '<td><input type="text" name="hobbies" value="' . $this->user->hobbies . '" maxlength="1024" /></td></tr><tr>';
+echo '<td><b>Firma:</b></td>';
+echo '<td><input type="text" name="sign" value="' . $this->user->sign . '" maxlength="1024" /></td></tr><tr>';
+echo '<td colspan="2"><b>Descripcion personal:</b></td></tr><tr>';
+echo '<td colspan="2"><textarea name="description" cols="50" rows="5">' . $this->user->description . '</textarea></td></tr><tr>';
+echo '<td colspan="2">(*) Campos obligatorios.</td></tr><tr>';
+echo '<td colspan="2">(**) Las etiquetas deben separarse con comas.</td></tr><tr><td>&nbsp;</td><td>';
+echo '<input type="submit" value="Actualizar" /> <a href="' . $this->lastPage() . '">Cancelar</a>';
+echo '</td></tr></table></form></center>';

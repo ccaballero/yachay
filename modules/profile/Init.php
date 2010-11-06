@@ -1,6 +1,6 @@
 <?php
 
-class modules_profile_Init extends Yeah_Init
+class Profile_Init extends Yeah_Init
 {
     public $routes = array (
         'profile_view'                           => array('profile',

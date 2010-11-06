@@ -1,17 +1,17 @@
 <?php
 
-class modules_widgets_models_Widgets_Pages extends Zend_Db_Table_Abstract
+class Widgets_Pages extends Yeah_Model_Table
 {
     protected $_name            = 'widget_page';
     protected $_referenceMap    = array(
         'Page'                  => array(
             'columns'           => array('page'),
-            'refTableClass'     => 'modules_pages_models_Pages',
+            'refTableClass'     => 'Pages',
             'refColumns'        => array('ident'),
         ),
         'Widget'                => array(
             'columns'           => array('widget'),
-            'refTableClass'     => 'modules_widgets_models_Widgets',
+            'refTableClass'     => 'Widgets',
             'refColumns'        => array('ident'),
         ),
     );

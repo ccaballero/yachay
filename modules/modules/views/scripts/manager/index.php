@@ -1,79 +1,75 @@
-<h1>Administrador de modulos</h1>
+<?php
 
-<form method="post" action="" accept-charset="utf-8">
-    <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<form method="post" action="" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->currentPage() . '" />';
 
-    <table>
-        <tr>
-        <?php if (Yeah_Acl::hasPermission('modules', 'list')) { ?>
-            <td>[<a href="<?= $this->url(array(), 'modules_list') ?>">Lista</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('modules', 'new')) { ?>
-            <td>[<a href="<?= $this->url(array(), 'modules_new') ?>">Nuevo</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('modules', 'lock')) { ?>
-            <td><input type="submit" name="unlock" value="Activar" /></td>
-            <td><input type="submit" name="lock" value="Desactivar" /></td>
-        <?php } ?>
-        </tr>
-    </table>
+echo '<table><tr>';
+if (Yeah_Acl::hasPermission('modules', 'list')) {
+    echo '<td>[<a href="' . $this->url(array(), 'modules_list') . '">Lista</a>]</td>';
+}
+if (Yeah_Acl::hasPermission('modules', 'new')) {
+    echo '<td>[<a href="' . $this->url(array(), 'modules_new') . '">Nuevo</a>]</td>';
+}
+if (Yeah_Acl::hasPermission('modules', 'lock')) {
+    echo '<td><input type="submit" name="unlock" value="Activar" /></td>';
+    echo '<td><input type="submit" name="lock" value="Desactivar" /></td>';
+}
+echo '</tr></table>';
 
-    <hr />
-<?php if (count($this->modules)) { ?>
-    <center>
-        <table width="100%">
-            <tr>
-                <th>&nbsp;</th>
-                <th><?= $this->utf2html($this->model->_mapping['label']) ?></th>
-                <th><?= $this->utf2html($this->model->_mapping['type']) ?></th>
-                <th>Opciones</th>
-                <th><?= $this->utf2html($this->model->_mapping['tsregister']) ?></th>
-            </tr>
-        <?php foreach ($this->modules as $module) { ?>
-            <tr>
-                <td>
-                <?php if (Yeah_Acl::hasPermission('modules', 'lock')) { ?>
-                    <input type="checkbox" name="check[]" value="<?= $module->ident ?>" />
-                <?php } ?>
-                </td>
-                <td><?= $this->utf2html($module->label) ?></td>
-                <td><?= $this->utf2html($module->type) ?></td>
-                <td>
-                    <center>
-                    <?php if (Yeah_Acl::hasPermission('modules', 'view')) { ?>
-                        <a href="<?= $this->url(array('mod' => $module->url), 'modules_module_view') ?>">Ver</a>
-                    <?php } ?>
-                    <?php if (Yeah_Acl::hasPermission('modules', 'lock')) { ?>
-                        <?php if ($module->status == 'active') { ?>
-                            <a href="<?= $this->url(array('mod' => $module->url), 'modules_module_lock') ?>">Desactivar</a>
-                        <?php } else { ?>
-                            <a href="<?= $this->url(array('mod' => $module->url), 'modules_module_unlock') ?>">Activar</a>
-                        <?php } ?>
-                    <?php } ?>
-                    </center>
-                </td>
-                <td><center><?= $this->timestamp($module->tsregister) ?></center></td>
-            </tr>
-            <?php } ?>
-        </table>
-    </center>
-<?php } else { ?>
-    <p>No existen modulos registrados</p>
-<?php } ?>
-    <hr />
+echo '<hr />';
 
-    <table>
-        <tr>
-        <?php if (Yeah_Acl::hasPermission('modules', 'list')) { ?>
-            <td>[<a href="<?= $this->url(array(), 'modules_list') ?>">Lista</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('modules', 'new')) { ?>
-            <td>[<a href="<?= $this->url(array(), 'modules_new') ?>">Nuevo</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('modules', 'lock')) { ?>
-            <td><input type="submit" name="unlock" value="Activar" /></td>
-            <td><input type="submit" name="lock" value="Desactivar" /></td>
-        <?php } ?>
-        </tr>
-    </table>
-</form>
+if (count($this->modules)) {
+    echo '<center>';
+    echo '<table width="100%"><tr><th>&nbsp;</th>';
+    echo '<th>' . $this->model_modules->_mapping['label'] . '</th>';
+    echo '<th>' . $this->model_modules->_mapping['type'] . '</th>';
+    echo '<th>Opciones</th>';
+    echo '<th>' . $this->model_modules->_mapping['tsregister'] . '</th>';
+    echo '</tr>';
+
+    foreach ($this->modules as $module) {
+        echo '<tr><td>';
+        if (Yeah_Acl::hasPermission('modules', 'lock')) {
+            echo '<input type="checkbox" name="check[]" value="' . $module->ident . '" />';
+        }
+        echo '</td>';
+        echo '<td>' . $module->label . '</td>';
+        echo '<td>' . $module->type . '</td>';
+        echo '<td><center>';
+
+        if (Yeah_Acl::hasPermission('modules', 'view')) {
+            echo '<a href="' . $this->url(array('mod' => $module->url), 'modules_module_view') . '">Ver</a> ';
+        }
+        if (Yeah_Acl::hasPermission('modules', 'lock')) {
+            if ($module->status == 'active') {
+                echo '<a href="' . $this->url(array('mod' => $module->url), 'modules_module_lock') . '">Desactivar</a>';
+            } else {
+                echo '<a href="' . $this->url(array('mod' => $module->url), 'modules_module_unlock') . '">Activar</a>';
+            }
+        }
+
+        echo '</center></td>';
+        echo '<td><center>' . $this->timestamp($module->tsregister) . '</center></td>';
+        echo '</tr>';
+    }
+
+    echo '</table></center>';
+} else {
+    echo '<p>No existen modulos registrados</p>';
+}
+echo '<hr />';
+
+echo '<table><tr>';
+if (Yeah_Acl::hasPermission('modules', 'list')) {
+    echo '<td>[<a href="' . $this->url(array(), 'modules_list') . '">Lista</a>]</td>';
+}
+if (Yeah_Acl::hasPermission('modules', 'new')) {
+    echo '<td>[<a href="' . $this->url(array(), 'modules_new') . '">Nuevo</a>]</td>';
+}
+if (Yeah_Acl::hasPermission('modules', 'lock')) {
+    echo '<td><input type="submit" name="unlock" value="Activar" /></td>';
+    echo '<td><input type="submit" name="lock" value="Desactivar" /></td>';
+}
+echo '</tr></table>';
+echo '</form>';

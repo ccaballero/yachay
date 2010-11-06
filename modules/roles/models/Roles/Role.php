@@ -1,6 +1,6 @@
 <?php
 
-class modules_roles_models_Roles_Role extends Yeah_Model_Row_Validation
+class Roles_Role extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(
@@ -17,7 +17,7 @@ class modules_roles_models_Roles_Role extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabel',
-                    'options'   => array('roles'),
+                    'options'   => array('Roles'),
                     'message'   => 'El nombre seleccionado del rol ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -34,7 +34,7 @@ class modules_roles_models_Roles_Role extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueUrl',
-                    'options'   => array('roles'),
+                    'options'   => array('Roles'),
                     'message'   => 'El identificador del rol ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -50,8 +50,8 @@ class modules_roles_models_Roles_Role extends Yeah_Model_Row_Validation
         if ($this->ident == 1) {
             return false;
         }
-        $model = Yeah_Adapter::getModel('users');
-        $users= $model->selectByRole($this->ident);
+        $model_users = new Users();
+        $users= $model_users->selectByRole($this->ident);
         return count($users) == 0;
     }
 }

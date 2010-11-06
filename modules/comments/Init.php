@@ -1,6 +1,6 @@
 <?php
 
-class modules_comments_Init extends Yeah_Init
+class Comments_Init extends Yeah_Init
 {
     public $check = array ('comment');
     public $install = 'comments';

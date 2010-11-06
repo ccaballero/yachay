@@ -1,6 +1,6 @@
 <?php
 
-class modules_gestions_Init extends Yeah_Init
+class Gestions_Init extends Yeah_Init
 {
     public $check = array ('gestion');
     public $install = 'gestions';

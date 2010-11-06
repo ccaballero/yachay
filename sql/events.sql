@@ -46,4 +46,3 @@ VALUES
 ('Nuevo evento',                  'Nuevo evento',     TRUE,          'events',           'manager',     'new',              '',                      'events_new'),
 ('Visor de eventos',              '',                 FALSE,         'events',           'event',       'view',             '',                      'events_event_view'),
 ('Editor de eventos',             '',                 FALSE,         'events',           'event',       'edit',             '',                      'events_event_edit');
-

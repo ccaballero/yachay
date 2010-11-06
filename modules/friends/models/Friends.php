@@ -1,19 +1,19 @@
 <?php
 
-class modules_friends_models_Friends extends Zend_Db_Table_Abstract
+class Friends extends Yeah_Model_Table
 {
     protected $_name            = 'friend';
-    protected $_rowClass        = 'modules_friends_models_Friends_Friend';
+    protected $_rowClass        = 'Friends_Friend';
     protected $_dependentTables = array();
     protected $_referenceMap    = array(
         'User'                  => array(
             'columns'           => 'user',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
         'Friend'                => array(
             'columns'           => 'friend',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
     );

@@ -4,8 +4,8 @@ global $MENUBAR;
 global $PAGE;
 global $USER;
 
-$pages = Yeah_Adapter::getModel('pages');
-$items = $pages->selectByMenutype('menubar');
+$model_pages = new Pages();
+$items = $model_pages->selectByMenutype('menubar');
 
 foreach ($items as $item) {
     $perms = explode('|', $item->privilege);

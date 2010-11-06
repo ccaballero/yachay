@@ -1,6 +1,6 @@
 <?php
 
-class modules_search_Init extends Yeah_Init
+class Search_Init extends Yeah_Init
 {
     public $check = array ('search');
     public $install = 'search';

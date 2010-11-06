@@ -2,7 +2,7 @@
 
 class Yeah_Adapter
 {
-    public static function getModel($module, $element = '') {
+    /*public static function getModel($module, $element = '') {
         global $DB;
         if (empty($element)) {
             $element = $module;
@@ -12,7 +12,7 @@ class Yeah_Adapter
             $model = new $element(array('db' => $DB));
             return $model;
         }
-    }
+    }*/
 
     public static function check($array = array()) {
         global $DB;

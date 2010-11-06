@@ -1,6 +1,6 @@
 <?php
 
-class modules_frontpage_Init extends Yeah_Init
+class Frontpage_Init extends Yeah_Init
 {
     public $routes = array (
         'frontpage_visitor'                      => array('visitor',

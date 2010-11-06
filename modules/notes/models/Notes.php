@@ -1,14 +1,14 @@
 <?php
 
-class modules_notes_models_Notes extends Zend_Db_Table_Abstract
+class Notes extends Yeah_Model_Table
 {
     protected $_name            = 'note';
     protected $_primary         = 'resource';
-    protected $_rowClass        = 'modules_notes_models_Notes_Note';
+    protected $_rowClass        = 'Notes_Note';
     protected $_referenceMap    = array(
         'Resource'              => array(
             'columns'           => array('resource'),
-            'refTableClass'     => 'modules_resources_models_Resources',
+            'refTableClass'     => 'Resources',
             'refColumns'        => array('ident'),
         ),
     );

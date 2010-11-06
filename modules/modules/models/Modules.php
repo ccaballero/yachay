@@ -1,6 +1,6 @@
 <?php
 
-class modules_modules_models_Modules extends Zend_Db_Table_Abstract
+class Modules extends Yeah_Model_Table
 {
     protected $_name            = 'module';
     protected $_primary         = 'ident';

@@ -1,6 +1,6 @@
 <?php
 
-class modules_areas_models_Areas_Area extends Yeah_Model_Row_Validation
+class Areas_Area extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(
@@ -46,7 +46,7 @@ class modules_areas_models_Areas_Area extends Yeah_Model_Row_Validation
     );
 
     public function isEmpty() {
-        $subjects = $this->findManyToManyRowset('modules_subjects_models_Subjects', 'modules_areas_models_Areas_Subjects');
+        $subjects = $this->findSubjectsViaAreas_Subjects();
         return count($subjects) == 0;
     }
 }

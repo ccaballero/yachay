@@ -1,12 +1,12 @@
 <?php
 
-class modules_resources_models_Resources_Globales extends Zend_Db_Table_Abstract
+class Resources_Globales extends Yeah_Model_Table
 {
     protected $_name            = 'resource_global';
     protected $_referenceMap    = array(
         'Resource'              => array(
             'columns'           => array('resource'),
-            'refTableClass'     => 'modules_resources_models_Resources',
+            'refTableClass'     => 'Resources',
             'refColumns'        => array('ident'),
         ),
     );

@@ -1,10 +1,9 @@
 <?php
 
-class modules_files_models_Files_File extends Yeah_Model_Row_Validation
+class Files_File extends Yeah_Model_Row_Validation
 {
     public $__type = 'file';
     public $__element = 'files';
-    public $__label = 'archivo';
 
     protected $_validationRules = array(
         'size' => array(
@@ -16,7 +15,15 @@ class modules_files_models_Files_File extends Yeah_Model_Row_Validation
     );
 
     public function getResource() {
-        $resources = Yeah_Adapter::getModel('resources');
-        return $resources->findByIdent($this->resource);
+        $model_resources = new Resources();
+        return $model_resources->findByIdent($this->resource);
+    }
+
+    public function getLabel() {
+        if ($this->priority) {
+            return 'aviso';
+        } else {
+            return 'archivo';
+        }
     }
 }

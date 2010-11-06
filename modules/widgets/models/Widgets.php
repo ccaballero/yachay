@@ -1,12 +1,10 @@
 <?php
 
-class modules_widgets_models_Widgets extends Zend_Db_Table_Abstract
+class Widgets extends Yeah_Model_Table
 {
     protected $_name            = 'widget';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_widgets_models_Widgets_Widget';
-    protected $_dependentTables = array('modules_widgets_models_Widgets_Pages',
-                                  );
+    protected $_dependentTables = array('Widgets_Pages', );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Widget',

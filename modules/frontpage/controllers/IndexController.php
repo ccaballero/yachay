@@ -3,7 +3,6 @@
 class IndexController extends Yeah_Action
 {
     public function indexAction() {
-        global $CONFIG;
         global $USER;
 
         if ($USER->role == 1) {
@@ -18,9 +17,10 @@ class IndexController extends Yeah_Action
 
         if ($USER->role == 1) {
             history();
-            $model_resources_globales = Yeah_Adapter::getModel('resources', 'Resources_Globales');
+            $model_resources = new Resources();
+            $model_resources_globales = new Resources_Globales();
+
             $resources_globales = $model_resources_globales->selectAll();
-            $model_resources = Yeah_Adapter::getModel('resources');
 
             $resources = array();
             foreach($resources_globales as $resource_global) {
@@ -55,17 +55,17 @@ class IndexController extends Yeah_Action
         if ($USER->role != 1) {
             history();
 
-            $modules = Yeah_Adapter::getModel('modules');
+            $model_modules = new Modules();
             $icons = array();
 
-            if ($modules->findByLabel('areas')->status == 'active') {
-                if (Yeah_Acl::hasPermission('areas', array('new', 'delete'))) {
+            if ($model_modules->findByLabel('areas')->status == 'active') {
+                if ($this->acl('areas', array('new', 'delete'))) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'areas_manager'),
                         'alt' => 'Gestión de areas',
                         'icon' => 'areas.png',
                     );
-                } else if (Yeah_Acl::hasPermission('areas', 'list')) {
+                } else if ($this->acl('areas', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'areas_list'),
                         'alt' => 'Lista de areas',
@@ -74,8 +74,8 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('communities')->status == 'active') {
-                if (Yeah_Acl::hasPermission('communities', 'list')) {
+            if ($model_modules->findByLabel('communities')->status == 'active') {
+                if ($this->acl('communities', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'communities_list'),
                         'alt' => 'Lista de comunidades',
@@ -84,8 +84,8 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('groupsets')->status == 'active') {
-                if (Yeah_Acl::hasPermission('subjects', 'teach')) {
+            if ($model_modules->findByLabel('groupsets')->status == 'active') {
+                if ($this->acl('subjects', 'teach')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'groupsets_manager'),
                         'alt' => 'Administrador de conjuntos',
@@ -94,8 +94,8 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('friends')->status == 'active') {
-                if (Yeah_Acl::hasPermission('friends', 'contact')) {
+            if ($model_modules->findByLabel('friends')->status == 'active') {
+                if ($this->acl('friends', 'contact')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'friends_friends'),
                         'alt' => 'Lista de contactos',
@@ -104,14 +104,14 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('gestions')->status == 'active') {
-                if (Yeah_Acl::hasPermission('gestions', array('new', 'active', 'delete'))) {
+            if ($model_modules->findByLabel('gestions')->status == 'active') {
+                if ($this->acl('gestions', array('new', 'active', 'delete'))) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'gestions_manager'),
                         'alt' => 'Gestión de gestiones',
                         'icon' => 'gestions.png',
                     );
-                } else if (Yeah_Acl::hasPermission('gestions', 'list')) {
+                } else if ($this->acl('gestions', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'gestions_list'),
                         'alt' => 'Lista de gestiones',
@@ -120,8 +120,8 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('groups')->status == 'active') {
-                if (Yeah_Acl::hasPermission('subjects', array('teach', 'helper', 'study', 'participate'))) {
+            if ($model_modules->findByLabel('groups')->status == 'active') {
+                if ($this->acl('subjects', array('teach', 'helper', 'study', 'participate'))) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'groups_list'),
                         'alt' => 'Lista de grupos',
@@ -130,14 +130,14 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('subjects')->status == 'active') {
-                if (Yeah_Acl::hasPermission('subjects', array('new', 'lock', 'delete'))) {
+            if ($model_modules->findByLabel('subjects')->status == 'active') {
+                if ($this->acl('subjects', array('new', 'lock', 'delete'))) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'subjects_manager'),
                         'alt' => 'Gestión de materias',
                         'icon' => 'subjects.png',
                     );
-                } else if (Yeah_Acl::hasPermission('subjects', 'list')) {
+                } else if ($this->acl('subjects', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'subjects_list'),
                         'alt' => 'Lista de materias',
@@ -146,14 +146,14 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('modules')->status == 'active') {
-                if (Yeah_Acl::hasPermission('modules', array('new', 'lock'))) {
+            if ($model_modules->findByLabel('modules')->status == 'active') {
+                if ($this->acl('modules', array('new', 'lock'))) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'modules_manager'),
                         'alt' => 'Gestión de modulos',
                         'icon' => 'modules.png',
                     );
-                } else if (Yeah_Acl::hasPermission('modules', 'list')) {
+                } else if ($this->acl('modules', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'modules_list'),
                         'alt' => 'Lista de modulos',
@@ -162,14 +162,14 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('pages')->status == 'active') {
-                if (Yeah_Acl::hasPermission('pages', 'manage')) {
+            if ($model_modules->findByLabel('pages')->status == 'active') {
+                if ($this->acl('pages', 'manage')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'pages_manager'),
                         'alt' => 'Gestión de paginas',
                         'icon' => 'pages.png',
                     );
-                } else if (Yeah_Acl::hasPermission('pages', 'list')) {
+                } else if ($this->acl('pages', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'pages_list'),
                         'alt' => 'Lista de paginas',
@@ -178,8 +178,8 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('resources')->status == 'active') {
-                if (Yeah_Acl::hasPermission('resources', 'new')) {
+            if ($model_modules->findByLabel('resources')->status == 'active') {
+                if ($this->acl('resources', 'new')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'resources_list'),
                         'alt' => 'Recursos publicados',
@@ -188,14 +188,14 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('regions')->status == 'active') {
-                if (Yeah_Acl::hasPermission('regions', 'manage')) {
+            if ($model_modules->findByLabel('regions')->status == 'active') {
+                if ($this->acl('regions', 'manage')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'regions_manager'),
                         'alt' => 'Gestión de regiones',
                         'icon' => 'regions.png',
                     );
-                } else if (Yeah_Acl::hasPermission('regions', 'list')) {
+                } else if ($this->acl('regions', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'regions_list'),
                         'alt' => 'Lista de regions',
@@ -204,14 +204,14 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('roles')->status == 'active') {
-                if (Yeah_Acl::hasPermission('roles', array('new', 'assign', 'delete'))) {
+            if ($model_modules->findByLabel('roles')->status == 'active') {
+                if ($this->acl('roles', array('new', 'assign', 'delete'))) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'roles_manager'),
                         'alt' => 'Gestión de roles',
                         'icon' => 'roles.png',
                     );
-                } else if (Yeah_Acl::hasPermission('roles', 'list')) {
+                } else if ($this->acl('roles', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'roles_list'),
                         'alt' => 'Lista de roles',
@@ -220,14 +220,14 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('users')->status == 'active') {
-                if (Yeah_Acl::hasPermission('users', array('new', 'import', 'export', 'lock', 'delete'))) {
+            if ($model_modules->findByLabel('users')->status == 'active') {
+                if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'users_manager'),
                         'alt' => 'Gestión de usuarios',
                         'icon' => 'users.png',
                     );
-                } else if (Yeah_Acl::hasPermission('users', 'list')) {
+                } else if ($this->acl('users', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'users_list'),
                         'alt' => 'Lista de usuarios',
@@ -236,14 +236,14 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            if ($modules->findByLabel('widgets')->status == 'active') {
-                if (Yeah_Acl::hasPermission('widgets', 'manage')) {
+            if ($model_modules->findByLabel('widgets')->status == 'active') {
+                if ($this->acl('widgets', 'manage')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'widgets_manager'),
                         'alt' => 'Gestión de widgets',
                         'icon' => 'widgets.png',
                     );
-                } else if (Yeah_Acl::hasPermission('widgets', 'list')) {
+                } else if ($this->acl('widgets', 'list')) {
                     $icons[] = array(
                         'url' => $this->view->url(array(), 'widgets_list'),
                         'alt' => 'Lista de widgets',
@@ -252,9 +252,9 @@ class IndexController extends Yeah_Action
                 }
             }
 
-            $model_resources_globales = Yeah_Adapter::getModel('resources', 'Resources_Globales');
+            $model_resources = new Resources();
+            $model_resources_globales = new Resources_Globales();
             $resources_globales = $model_resources_globales->selectAll();
-            $model_resources = Yeah_Adapter::getModel('resources');
 
             // Fetch all posts in system!!
             $context = new Yeah_Helpers_Context;
@@ -269,11 +269,11 @@ class IndexController extends Yeah_Action
 
             // areas
             if (count($list_spaces['areas']) <> 0) {
-                $areas_model = Yeah_Adapter::getModel('areas');
+                $model_areas = new Areas();
                 foreach ($list_spaces['areas'] as $area) {
                     @list($element, $ident) = @split('-', $area);
-                    $area = $areas_model->findByIdent($ident);
-                    $_resources = $area->findmodules_resources_models_ResourcesViamodules_areas_models_Areas_Resources();
+                    $area = $model_areas->findByIdent($ident);
+                    $_resources = $area->findResourcesViaAreas_Resources();
                     foreach ($_resources as $resource) {
                         $resources[$resource->tsregister] = $resource;
                     }
@@ -282,11 +282,11 @@ class IndexController extends Yeah_Action
 
             // subjects
             if (count($list_spaces['subjects']) <> 0) {
-                $subjects_model = Yeah_Adapter::getModel('subjects');
+                $model_subjects = new Subjects();
                 foreach ($list_spaces['subjects'] as $subject) {
                     @list($element, $ident) = @split('-', $subject);
-                    $subject = $subjects_model->findByIdent($ident);
-                    $_resources = $subject->findmodules_resources_models_ResourcesViamodules_subjects_models_Subjects_Resources();
+                    $subject = $model_subjects->findByIdent($ident);
+                    $_resources = $subject->findResourcesViaSubjects_Resources();
                     foreach ($_resources as $resource) {
                         $resources[$resource->tsregister] = $resource;
                     }
@@ -295,11 +295,11 @@ class IndexController extends Yeah_Action
 
             // groups
             if (count($list_spaces['groups']) <> 0) {
-                $groups_model = Yeah_Adapter::getModel('groups');
+                $model_groups = new Groups();
                 foreach ($list_spaces['groups'] as $group) {
                     @list($element, $ident) = @split('-', $group);
-                    $group = $groups_model->findByIdent($ident);
-                    $_resources = $group->findmodules_resources_models_ResourcesViamodules_groups_models_Groups_Resources();
+                    $group = $model_groups->findByIdent($ident);
+                    $_resources = $group->findResourcesViaGroups_Resources();
                     foreach ($_resources as $resource) {
                         $resources[$resource->tsregister] = $resource;
                     }
@@ -308,11 +308,11 @@ class IndexController extends Yeah_Action
 
             // teams
             if (count($list_spaces['teams']) <> 0) {
-                $teams_model = Yeah_Adapter::getModel('teams');
+                $model_teams = new Teams();
                 foreach ($list_spaces['teams'] as $team) {
                     @list($element, $ident) = @split('-', $team);
-                    $team = $teams_model->findByIdent($ident);
-                    $_resources = $team->findmodules_resources_models_ResourcesViamodules_teams_models_Teams_Resources();
+                    $team = $model_teams->findByIdent($ident);
+                    $_resources = $team->findResourcesViaTeams_Resources();
                     foreach ($_resources as $resource) {
                         $resources[$resource->tsregister] = $resource;
                     }
@@ -321,11 +321,11 @@ class IndexController extends Yeah_Action
 
             // community
             if (count($list_spaces['communities']) <> 0) {
-                $communities_model = Yeah_Adapter::getModel('communities');
+                $model_communities = new Communities();
                 foreach ($list_spaces['communities'] as $community) {
                     @list($element, $ident) = @split('-', $community);
-                    $community = $communities_model->findByIdent($ident);
-                    $_resources = $community->findmodules_resources_models_ResourcesViamodules_communities_models_Communities_Resources();
+                    $community = $model_communities->findByIdent($ident);
+                    $_resources = $community->findResourcesViaCommunities_Resources();
                     foreach ($_resources as $resource) {
                         $resources[$resource->tsregister] = $resource;
                     }
@@ -334,11 +334,11 @@ class IndexController extends Yeah_Action
 
             // user
             if (count($list_spaces['users']) <> 0) {
-                $users_model = Yeah_Adapter::getModel('users');
+                $model_users = new Users();
                 foreach ($list_spaces['users'] as $user) {
                     @list($element, $ident) = @split('-', $user);
-                    $user = $users_model->findByIdent($ident);
-                    $_resources = $user->findmodules_resources_models_ResourcesViamodules_users_models_Users_Resources();
+                    $user = $model_users->findByIdent($ident);
+                    $_resources = $user->findResourcesViaUsers_Resources();
                     foreach ($_resources as $resource) {
                         $resources[$resource->tsregister] = $resource;
                     }

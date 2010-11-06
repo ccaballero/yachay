@@ -1,6 +1,6 @@
 <?php
 
-class modules_evaluations_models_Parser extends Xcel_Parser
+class Parser extends Xcel_Parser
 {
     public $mode = 'REAL';
 
@@ -8,19 +8,24 @@ class modules_evaluations_models_Parser extends Xcel_Parser
     private $_user;
     private $_evaluation;
 
-    public function modules_evaluations_models_Parser ($evaluation) {
+    public function Parser ($evaluation) {
         $this->_evaluation = $evaluation;
     }
 
-    public function setGroup($group) {    $this->_group = $group; }
-    public function setUser($user) {      $this->_user = $user; }
+    public function setGroup($group) {
+        $this->_group = $group;
+    }
+
+    public function setUser($user) {
+        $this->_user = $user;
+    }
 
     public function isVariableValid($variable) {
         if (empty($variable)) {
             return false;
         }
-        $tests = Yeah_Adapter::getModel('evaluations', 'Evaluations_Tests');
-        $key = $tests->findByKey($this->_evaluation, $variable);
+        $model_evaluations_tests = new Evaluations_Test();
+        $key = $model_evaluations_tests->findByKey($this->_evaluation, $variable);
         return !empty($key);
     }
 
@@ -28,10 +33,10 @@ class modules_evaluations_models_Parser extends Xcel_Parser
         if ($this->mode == 'TEST') {
             return new Xcel_Syn_Value(10);
         } else {
-            $tests = Yeah_Adapter::getModel('evaluations', 'Evaluations_Tests');
-            $test = $tests->findByKey($this->_evaluation, $variable);
-            $califications = Yeah_Adapter::getModel('califications');
-            $value = $califications->getCalification($this->_group, $this->_user, $this->_evaluation, $test);
+            $model_evaluations_tests = new Evaluations_Test();
+            $test = $model_evaluations_tests->findByKey($this->_evaluation, $variable);
+            $model_califications = new Califications();
+            $value = $model_califications->getCalification($this->_group, $this->_user, $this->_evaluation, $test);
             if (empty($value)) {
                 $value = $test->defaultnote;
             }

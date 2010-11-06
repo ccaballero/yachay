@@ -1,16 +1,16 @@
 <?php
 
-class modules_users_models_Users_Visitor
+class Users_Visitor
 {
     public $ident = 0;
     public $role = 1;
     public $_acl = array();
 
-    public function modules_users_models_Users_Visitor() {
-        $roles = Yeah_Adapter::getModel('roles');
-        $visitor = $roles->findByIdent($this->role);
+    public function Users_Visitor() {
+        $model_roles = new Roles();
+        $visitor = $model_roles->findByIdent($this->role);
 
-        $privileges = $visitor->findManyToManyRowset('modules_privileges_models_Privileges', 'modules_roles_models_Roles_Privileges');
+        $privileges = $visitor->findPrivilegesViaRoles_Privileges();
         foreach ($privileges as $privilege) {
             $this->_acl[] = $privilege->module . '_' . $privilege->privilege;
         }

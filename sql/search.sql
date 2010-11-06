@@ -43,5 +43,4 @@ VALUES
 INSERT INTO `privilege`
 (`category`,  `label`,                                                         `module`,           `privilege`,        `delegate`)
 VALUES
-(7,           'Buscar elementos en el sistema',                                'search',           'list',             FALSE);
-*/
+(7,           'Buscar elementos en el sistema',                                'search',           'list',             FALSE);*/

@@ -1,28 +1,24 @@
 <?php
 
-class modules_resources_models_Resources extends Zend_Db_Table_Abstract
+class Resources extends Yeah_Model_Table
 {
     protected $_name            = 'resource';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_resources_models_Resources_Resource';
-    protected $_dependentTables = array('modules_resources_models_Resources_Globales',
-                                        'modules_areas_models_Areas_Resources',
-                                        'modules_subjects_models_Subjects_Resources',
-                                        'modules_groups_models_Groups_Resources',
-                                        'modules_teams_models_Teams_Resources',
-                                        'modules_communities_models_Communities_Resources',
-                                        'modules_users_models_Users_Resources',
-                                        'modules_notes_models_Notes',
-                                        'modules_files_models_Files',
-                                        'modules_events_models_Events',
-                                        'modules_feedback_models_Feedback',
-                                        'modules_comments_models_Comments',
-                                        'modules_tags_models_Tags_Resources',
+    protected $_rowClass        = 'Resources_Resource';
+    protected $_dependentTables = array('Resources_Globales',
+                                        'Areas_Resources',
+                                        'Subjects_Resources',
+                                        'Groups_Resources',
+                                        'Teams_Resources',
+                                        'Communities_Resources',
+                                        'Users_Resources',
+                                        'Notes', 'Files', 'Events', 'Feedback',
+                                        'Comments', 'Tags_Resources',
                                   );
     protected $_referenceMap    = array(
         'Author'                => array(
             'columns'           => 'author',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
     );

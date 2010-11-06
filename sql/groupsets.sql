@@ -43,7 +43,6 @@ INSERT INTO `page`
 (`label`,                         `title`,            `menuable`,    `module`,           `controller`,  `action`,           `privilege`,             `route`)
 VALUES
 ('Administrador de conjuntos',    '',                 FALSE,         'groupsets',        'manager',     'index',            '',                      'groupsets_manager'),
-('Nueva conjunto',                '',                 FALSE,         'groupsets',        'manager',     'new',              'new',                   'groupsets_new'),
-('Vista de un conjunto',          '',                 FALSE,         'groupsets',        'groupset',        'view',             '',                      'groupsets_groupset_view'),
-('Edicion de un conjunto',        '',                 FALSE,         'groupsets',        'groupset',        'edit',             '',                      'groupsets_groupset_edit');
-
+('Nuevo conjunto',                '',                 FALSE,         'groupsets',        'manager',     'new',              'new',                   'groupsets_new'),
+('Vista de un conjunto',          '',                 FALSE,         'groupsets',        'groupset',    'view',             '',                      'groupsets_groupset_view'),
+('Edicion de un conjunto',        '',                 FALSE,         'groupsets',        'groupset',    'edit',             '',                      'groupsets_groupset_edit');

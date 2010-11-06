@@ -5,9 +5,9 @@ class Regions_ManagerController extends Yeah_Action
     public function indexAction() {
         $this->requirePermission('regions', 'manage');
 
-        $pages = Yeah_Adapter::getModel('pages');
-        $regions = Yeah_Adapter::getModel('regions');
-        $regions_pages = Yeah_Adapter::getModel('regions', 'Regions_Pages');
+        $model_pages = new Pages();
+        $model_regions = new Regions();
+        $model_regions_pages = new Regions_Pages();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -15,15 +15,15 @@ class Regions_ManagerController extends Yeah_Action
 
             $config = $request->getParam('regions');
             foreach ($config as $page_ident => $array_regions) {
-                $page = $pages->findByIdent($page_ident);
+                $page = $model_pages->findByIdent($page_ident);
                 if (!empty($page)) {
                     // delete of regions in page
-                    $regions_pages->deleteRegionsInPage($page->ident);
+                    $model_regions_pages->deleteRegionsInPage($page->ident);
                     // set of new configuration
                     foreach ($array_regions as $region_ident) {
-                        $region = $regions->findByIdent($region_ident);
+                        $region = $model_regions->findByIdent($region_ident);
                         if (!empty($region)) {
-                            $region_page = $regions_pages->createRow();
+                            $region_page = $model_regions_pages->createRow();
                             $region_page->page = $page->ident;
                             $region_page->region = $region->ident;
                             $region_page->save();
@@ -32,29 +32,34 @@ class Regions_ManagerController extends Yeah_Action
                 }
             }
 
-            $session->messages->addMessage('Su configuraci&oacute;n de las regiones ha sido almacenada');
+            $session->messages->addMessage('Su configuración de las regiones ha sido almacenada');
         }
 
         $regions_pages = array();
-        foreach ($pages->selectAll() as $page) {
+        foreach ($model_pages->selectAll() as $page) {
             $regions_pages[$page->ident] = array(
-                'search'  => new modules_regions_models_Regions_Empty,
-                'menubar' => new modules_regions_models_Regions_Empty,
-                'toolbar' => new modules_regions_models_Regions_Empty,
-                'footer'  => new modules_regions_models_Regions_Empty,
+                'search'  => new Regions_Empty(),
+                'menubar' => new Regions_Empty(),
+                'toolbar' => new Regions_Empty(),
+                'footer'  => new Regions_Empty(),
             );
-            $region_page = $page->findManyToManyRowset('modules_regions_models_Regions', 'modules_regions_models_Regions_Pages');
+            $region_page = $page->findRegionsViaRegions_Pages();
             foreach ($region_page as $region) {
                 $regions_pages[$page->ident][$region->region] = $region;
             }
         }
 
-        $this->view->model = $pages;
-        $this->view->pages = $pages->selectAll();
-        $this->view->regions = $regions->selectAll();
+        $this->view->model_pages = $model_pages;
+        $this->view->pages = $model_pages->selectAll();
+        $this->view->model_regions = $model_regions;
+        $this->view->regions = $model_regions->selectAll();
         $this->view->regions_pages = $regions_pages;
 
         history('regions/manager');
-        breadcrumb();
+        $breadcrumb = array();
+        if ($this->acl('regions', 'list')) {
+            $breadcrumb['Regiones'] = $this->view->url(array(), 'regions_list');
+        }
+        breadcrumb($breadcrumb);
     }
 }

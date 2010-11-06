@@ -18,29 +18,29 @@
             </tr>
             <tr>
                 <td>Autor del registro:</td>
-                <td><?= $this->utf2html($this->author) ?></td>
+                <td><?= $this->author ?></td>
             </tr>
             <tr>
                 <td>Rol utilizado:</td>
-                <td><?= $this->utf2html($this->user->getRole()->label) ?></td>
+                <td><?= $this->user->getRole()->label ?></td>
             </tr>
             <tr>
                 <td colspan="2"><b>Informacion que fue establecida, pero que puede cambiar:</b></td>
             </tr>
             <tr>
                 <td>Apellido utilizado:</td>
-                <td><?= $this->utf2html($this->none($this->user->surname)) ?></td>
+                <td><?= $this->none($this->user->surname) ?></td>
             </tr>
             <tr>
                 <td>Nombre utilizado:</td>
-                <td><?= $this->utf2html($this->none($this->user->name)) ?></td>
+                <td><?= $this->none($this->user->name) ?></td>
             </tr>
             <tr>
                 <td>Carrera utilizada:</td>
-                <td><?= $this->utf2html($this->none($this->user->career)) ?></td>
+                <td><?= $this->none($this->user->career) ?></td>
             </tr>
             <tr>
-                <td colspan="2"><b>Informacion de acceso:</b></td>
+                <td colspan="2"><b>Informaci&oacute;n de acceso:</b></td>
             </tr>
             <tr>
                 <td>Usuario:</td>

@@ -1,10 +1,9 @@
 <?php
 
-class modules_events_models_Events_Event extends Yeah_Model_Row_Validation
+class Events_Event extends Yeah_Model_Row_Validation
 {
     public $__type = 'event';
     public $__element = 'events';
-    public $__label = 'evento';
 
     protected $_validationRules = array(
         'label' => array(
@@ -36,7 +35,15 @@ class modules_events_models_Events_Event extends Yeah_Model_Row_Validation
     );
 
     public function getResource() {
-        $resources = Yeah_Adapter::getModel('resources');
-        return $resources->findByIdent($this->resource);
+        $model_resources = new Resources();
+        return $model_resources->findByIdent($this->resource);
+    }
+
+    public function getLabel() {
+        if ($this->priority) {
+            return 'aviso';
+        } else {
+            return 'evento';
+        }
     }
 }

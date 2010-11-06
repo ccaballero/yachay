@@ -5,7 +5,6 @@ class Yeah_Helpers_Context
     // Values for format: { html, plain, matrix}
     public function context($name, $format = 'html') {
         global $USER;
-        $_ = new Yeah_Helpers_Utf2html();
 
         // context
         $session = new Zend_Session_Namespace();
@@ -37,31 +36,31 @@ class Yeah_Helpers_Context
         $data['global'][] = 'global';
 
         // set for area context
-        $areas_model = Yeah_Adapter::getModel('areas');
-        $areas_list = $areas_model->selectAll();
-        if (count($areas_list) != 0) {
+        $model_areas = new Areas();
+        $areas = $model_areas->selectAll();
+        if (count($areas) != 0) {
             if ($context_type == 'area') {
                 $default = true;
             } else {
                 $default = false;
             }
             $options[] = '<optgroup label="Areas">';
-            foreach ($areas_list as $area) {
-                $options[] = '<option value="area-' . $area->ident . '" ' . (($default && ($context->{$context_type}->ident == $area->ident)) ? $select : '') . '>' . $_->utf2html($area->label) . '</option>';
+            foreach ($areas as $area) {
+                $options[] = '<option value="area-' . $area->ident . '" ' . (($default && ($context->{$context_type}->ident == $area->ident)) ? $select : '') . '>' . $area->label . '</option>';
                 $data['areas'][] = 'area-' . $area->ident;
             }
             $options[] = '</optiongroup>';
         }
 
         // gestion calculus
-        $gestion_model = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestion_model->findByActive();
+        $model_gestion = new Gestions();
+        $gestion = $model_gestion->findByActive();
 
         if (!empty($gestion)) {
             // set for subject context
-            $subjects_model = Yeah_Adapter::getModel('subjects');
-            $assignement1 = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
-            $subjects1 = $subjects_model->selectAll($gestion->ident);
+            $model_subjects = new Subjects();
+            $assignement1 = new Subjects_Users();
+            $subjects1 = $model_subjects->selectAll($gestion->ident);
             $subjects2 = array();
             foreach ($subjects1 as $subject) {
                 if ($subject->status == 'active' || Yeah_Acl::hasPermission('subjects', 'lock') || Yeah_Acl::hasPermission('subjects', 'moderate')) {
@@ -99,15 +98,15 @@ class Yeah_Helpers_Context
                     $default = false;
                 }
                 foreach ($subjects2 as $subject) {
-                    $options[] = '<option value="subject-' . $subject->ident . '" ' . (($default && ($context->{$context_type}->ident == $subject->ident)) ? $select : '') . '>' . $_->utf2html($subject->label) . '</option>';
+                    $options[] = '<option value="subject-' . $subject->ident . '" ' . (($default && ($context->{$context_type}->ident == $subject->ident)) ? $select : '') . '>' . $subject->label . '</option>';
                     $data['subjects'][] = 'subject-' . $subject->ident;
                 }
                 $options[] = '</optiongroup>';
             }
 
             // set for groupset context
-            $groupsets_model = Yeah_Adapter::getModel('groupsets');
-            $groupsets1 = $groupsets_model->selectByAuthor($USER->ident);
+            $model_groupsets = new Groupsets();
+            $groupsets1 = $model_groupsets->selectByAuthor($USER->ident);
             $groupsets2 = array();
             foreach ($groupsets1 as $groupset) {
                 if ($groupset->gestion == $gestion->ident) {
@@ -117,19 +116,19 @@ class Yeah_Helpers_Context
             if (count($groupsets2) != 0) {
                 $options[] = '<optgroup label="Conjuntos">';
                 foreach ($groupsets2 as $groupset) {
-                    $options[] = '<option value="groupset-' . $groupset->ident . '" ' . '>' . $_->utf2html($groupset->label) . '</option>';
+                    $options[] = '<option value="groupset-' . $groupset->ident . '" ' . '>' . $groupset->label . '</option>';
                     $data['groupsets'][] = 'groupset-' . $groupset->ident;
                 }
                 $options[] = '</optiongroup>';
             }
 
             // set for group context
-            $groups_model = Yeah_Adapter::getModel('groups');
-            $assignement2 = Yeah_Adapter::getModel('groups', 'Groups_Users');
+            $model_groups = new Groups();
+            $assignement2 = new Groups_Users();
             $groups = array();
             foreach ($subjects2 as $subject) {
-                $groups_list = $groups_model->selectAll($subject->ident);
-                foreach ($groups_list as $group) {
+                $list_groups = $model_groups->selectAll($subject->ident);
+                foreach ($list_groups as $group) {
                     if ($group->teacher == $USER->ident) {
                         $groups[] = $group;
                     }
@@ -148,19 +147,19 @@ class Yeah_Helpers_Context
                 $options[] = '<optgroup label="Grupos">';
                 foreach ($groups as $group) {
                     $subject = $group->getSubject();
-                    $options[] = '<option value="group-' . $group->ident . '" ' . (($default && ($context->{$context_type}->ident == $group->ident)) ? $select : '') . '>' . 'Grupo ' . $_->utf2html($group->label) . ' (' . $_->utf2html($subject->label) . ')</option>';
+                    $options[] = '<option value="group-' . $group->ident . '" ' . (($default && ($context->{$context_type}->ident == $group->ident)) ? $select : '') . '>' . 'Grupo ' . $group->label . ' (' . $subject->label . ')</option>';
                     $data['groups'][] = 'group-' . $group->ident;
                 }
                 $options[] = '</optiongroup>';
             }
 
             // set for team context
-            $teams_model = Yeah_Adapter::getModel('teams');
-            $assignement3 = Yeah_Adapter::getModel('teams', 'Teams_Users');
+            $model_teams = new Teams();
+            $assignement3 = new Teams_Users();
             $teams = array();
             foreach ($groups as $group) {
-                $teams_list = $teams_model->selectAll($group->ident);
-                foreach ($teams_list as $team) {
+                $list_teams = $model_teams->selectAll($group->ident);
+                foreach ($list_teams as $team) {
                     if ($group->teacher == $USER->ident) {
                         $teams[] = $team;
                     }
@@ -180,16 +179,16 @@ class Yeah_Helpers_Context
                 foreach ($teams as $team) {
                     $group = $team->getGroup();
                     $subject = $group->getSubject();
-                    $options[] = '<option value="team-' . $team->ident . '" ' . (($default && ($context->{$context_type}->ident == $team->ident)) ? $select : '') . '>' . 'Equipo ' . $_->utf2html($team->label) . ' - Grupo ' . $_->utf2html($group->label) . ' (' . $_->utf2html($subject->label) . ')</option>';
+                    $options[] = '<option value="team-' . $team->ident . '" ' . (($default && ($context->{$context_type}->ident == $team->ident)) ? $select : '') . '>' . 'Equipo ' . $team->label . ' - Grupo ' . $group->label . ' (' . $subject->label . ')</option>';
                     $data['teams'][] = 'team-' . $team->ident;
                 }
                 $options[] = '</optiongroup>';
             }
         }
         // set for community context
-        $commnities_model = Yeah_Adapter::getModel('communities');
-        $assignement4 = Yeah_Adapter::getModel('communities', 'Communities_Users');
-        $communities1 = $commnities_model->selectAll();
+        $model_commnities = new Communities();
+        $assignement4 = new Communities_Users();
+        $communities1 = $model_commnities->selectAll();
         $communities2 = array();
         foreach ($communities1 as $community) {
             $assign = $assignement4->findByCommunityAndUser($community->ident, $USER->ident);
@@ -205,27 +204,27 @@ class Yeah_Helpers_Context
             }
             $options[] = '<optgroup label="Comunidades">';
             foreach ($communities2 as $community) {
-                $options[] = '<option value="community-' . $community->ident . '" ' . (($default && ($context->{$context_type}->ident == $community->ident)) ? $select : '') . '>' . $_->utf2html($community->label) . '</option>';
+                $options[] = '<option value="community-' . $community->ident . '" ' . (($default && ($context->{$context_type}->ident == $community->ident)) ? $select : '') . '>' . $community->label . '</option>';
                 $data['communities'][] = 'community-' . $community->ident;
             }
             $options[] = '</optiongroup>';
         }
 
         // set for user context
-        $users_model = Yeah_Adapter::getModel('users');
-        $friends_model = Yeah_Adapter::getModel('friends');
-        $friends_list = $friends_model->selectFriendsByUser($USER->ident);
-        if (count($friends_list) != 0) {
+        $model_users = new Users();
+        $model_friends = new Friends();
+        $list_friends = $model_friends->selectFriendsByUser($USER->ident);
+        if (count($list_friends) != 0) {
             if ($context_type == 'user') {
                 $default = true;
             } else {
                 $default = false;
             }
             $options[] = '<optgroup label="Contactos">';
-            foreach ($friends_list as $friend) {
-                $user = $users_model->findByIdent($friend->friend);
+            foreach ($list_friends as $friend) {
+                $user = $model_users->findByIdent($friend->friend);
                 if ($user->status == 'active') {
-                    $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context->{$context_type}->ident == $user->ident)) ? $select : '') . '>' . $_->utf2html($user->label) . '</option>';
+                    $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context->{$context_type}->ident == $user->ident)) ? $select : '') . '>' . $user->label . '</option>';
                     $data['users'][] = 'user-' . $user->ident;
                 }
             }

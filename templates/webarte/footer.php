@@ -1,8 +1,6 @@
-<?php
-
-$footer = array();
-foreach($this->footer->items as $item) {
-    $footer[] = "<a href=\"{$item['link']}\">{$item['label']}</a>";
-}
-
-echo '| ' . implode(' | ', $footer) . ' |' . (count($footer) == 0 ? '' : '<br />') . $this->footer->copyright;
+<ul class="menu">
+    <?php foreach ($this->FOOTER->items as $item) { ?>
+    <li><a href="<?= $item['link'] ?>"><?= $item['label'] ?></a></li>
+    <?php } ?>
+</ul>
+<span><?= $this->FOOTER->copyright ?></span>

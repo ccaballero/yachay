@@ -1,7 +1,5 @@
-<?php if ($this->note->priority) { ?>
-	<b>AVISO:</b>
-<?php } else {?>
-	<b>NOTA:</b>
-<?php } ?>
-<br />
-<?= $this->utf2html($this->wrapper($this->note->note)) ?>
+<?php
+
+echo '<b>' . strtoupper($this->note->getLabel()) . '</b>';
+echo '<br />';
+echo $this->wrapper($this->note->note);

@@ -1,6 +1,6 @@
 <?php
 
-class modules_notes_models_Notes_Empty
+class Notes_Empty
 {
     public $note = '';
 }

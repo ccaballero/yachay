@@ -12,8 +12,9 @@ class Settings_IndexController extends Yeah_Action
         if ($url != $USER->url) {
             $this->_redirect($CONFIG->wwwroot);
         }
-        $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByUrl($url);
+
+        $model_users = new Users();
+        $user = $model_users->findByUrl($url);
         $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
 
         context('user', $user);
@@ -36,7 +37,7 @@ class Settings_IndexController extends Yeah_Action
             }
         }
 
-        $this->view->model = $users;
+        $this->view->model_users = $model_users;
         $this->view->user = $user;
 
         history('settings/' . $user->url);

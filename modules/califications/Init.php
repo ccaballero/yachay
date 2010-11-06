@@ -1,6 +1,6 @@
 <?php
 
-class modules_califications_Init extends Yeah_Init
+class Califications_Init extends Yeah_Init
 {
     public $check = array ('calification');
     public $install = 'califications';

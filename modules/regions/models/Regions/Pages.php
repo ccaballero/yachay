@@ -1,17 +1,17 @@
 <?php
 
-class modules_regions_models_Regions_Pages extends Zend_Db_Table_Abstract
+class Regions_Pages extends Yeah_Model_Table
 {
     protected $_name            = 'region_page';
     protected $_referenceMap    = array(
         'Page'                  => array(
             'columns'           => array('page'),
-            'refTableClass'     => 'modules_pages_models_Pages',
+            'refTableClass'     => 'Pages',
             'refColumns'        => array('ident'),
         ),
         'Region'                => array(
             'columns'           => array('region'),
-            'refTableClass'     => 'modules_regions_models_Regions',
+            'refTableClass'     => 'Regions',
             'refColumns'        => array('ident'),
         ),
     );

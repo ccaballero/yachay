@@ -1,6 +1,6 @@
 <?php
 
-class modules_files_Init extends Yeah_Init
+class Files_Init extends Yeah_Init
 {
     public $check = array ('file');
     public $install = 'files';

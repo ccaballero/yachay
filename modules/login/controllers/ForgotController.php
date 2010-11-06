@@ -22,7 +22,7 @@ class Login_ForgotController extends Yeah_Action
                     'presence'   => 'required',
                     'fields'     => 'email',
                     'messages'   => array(
-                        'El correo electronio debe ser valido',
+                        'El correo electrónico debe ser valido',
                     ),
                 ),
             );
@@ -32,14 +32,15 @@ class Login_ForgotController extends Yeah_Action
             $input = new Zend_Filter_Input($filters, $validators, $_POST, $options);
             $session = new Zend_Session_Namespace();
             if ($input->isValid()) {
-                $user = Yeah_Adapter::getModel('users')->findByEmail($input->email);
+                $model_users = new Users();
+                $user = $model_users->findByEmail($input->email);
                 if (!empty($user)) {
                     if ($user->status != 'inactive') {
 	                    // Register in database
-	                    $login = Yeah_Adapter::getModel('login');
-	                    $forgot = $login->selectByUser($user->ident);
+	                    $model_login = new Login();
+	                    $forgot = $model_login->selectByUser($user->ident);
 	                    if (empty($forgot)) {
-	                        $forgot = $login->createRow();
+	                        $forgot = $model_login->createRow();
 	                    }
 	                    $forgot->user = $user->ident;
 	                    $forgot->password = generatecode();
@@ -65,10 +66,10 @@ class Login_ForgotController extends Yeah_Action
 	                         ->setSubject('Petición de cambio de contraseña')
 	                         ->send();
 	
-	                    $session->messages->addMessage('Se envi&oacute; la confirmaci&oacute;n de nueva contrase&ntilde;a al correo ' . $user->email);
+	                    $session->messages->addMessage('Se envió la confirmación de nueva contraseña al correo ' . $user->email);
 	                    $this->_redirect($request->getParam('return'));
                     } else {
-                        $session->messages->addMessage('Usted se encuentra en estado inactivo, no puede solicitar una nueva contrase&ntildea, primero solicite la re-activacion de su cuenta');
+                        $session->messages->addMessage('Usted se encuentra en estado inactivo, no puede solicitar una nueva contraseña, primero solicite la re-activación de su cuenta');
                     }
                 } else {
                     $session->messages->addMessage('El correo no aparece en el registro de usuarios');

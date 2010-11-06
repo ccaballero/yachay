@@ -1,13 +1,11 @@
 <?php
 
-class modules_roles_models_Roles extends Zend_Db_Table_Abstract
+class Roles extends Yeah_Model_Table
 {
     protected $_name            = 'role';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_roles_models_Roles_Role';
-    protected $_dependentTables = array('modules_users_models_Users',
-                                        'modules_roles_models_Roles_Privileges',
-                                  );
+    protected $_rowClass        = 'Roles_Role';
+    protected $_dependentTables = array('Users', 'Roles_Privileges', );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Privilegio',

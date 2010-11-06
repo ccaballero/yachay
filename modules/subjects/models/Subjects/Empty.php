@@ -1,6 +1,6 @@
 <?php
 
-class modules_subjects_models_Subjects_Empty
+class Subjects_Empty
 {
     public $label = '';
     public $moderator = 0;

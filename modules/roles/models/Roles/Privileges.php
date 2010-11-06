@@ -1,17 +1,17 @@
 <?php
 
-class modules_roles_models_Roles_Privileges extends Zend_Db_Table_Abstract
+class Roles_Privileges extends Yeah_Model_Table
 {
     protected $_name            = 'role_privilege';
     protected $_referenceMap    = array(
         'Role'                  => array(
             'columns'           => array('role'),
-            'refTableClass'     => 'modules_roles_models_Roles',
+            'refTableClass'     => 'Roles',
             'refColumns'        => array('ident'),
         ),
         'Privilege'             => array(
             'columns'           => array('privilege'),
-            'refTableClass'     => 'modules_privileges_models_Privileges',
+            'refTableClass'     => 'Privileges',
             'refColumns'        => array('ident'),
         ),
     );

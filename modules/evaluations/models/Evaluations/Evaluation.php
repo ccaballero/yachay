@@ -1,6 +1,6 @@
 <?php
 
-class modules_evaluations_models_Evaluations_Evaluation extends Yeah_Model_Row_Validation
+class Evaluations_Evaluation extends Yeah_Model_Row_Validation
 {
     public $__type = 'evaluation';
     public $__element = 'evaluations';
@@ -21,7 +21,7 @@ class modules_evaluations_models_Evaluations_Evaluation extends Yeah_Model_Row_V
                 ),
                 array(
                     'validator' => 'UniqueLabelDual',
-                    'options'   => array('evaluations'),
+                    'options'   => array('Evaluations'),
                     'message'   => 'El nombre seleccionado para la evaluacion ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -47,8 +47,8 @@ class modules_evaluations_models_Evaluations_Evaluation extends Yeah_Model_Row_V
     );
 
     public function getAuthor() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->author);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->author);
     }
 
     public function getExtended() {
@@ -56,7 +56,7 @@ class modules_evaluations_models_Evaluations_Evaluation extends Yeah_Model_Row_V
     }
 
     public function checkUseful() {
-    	$evaluation_test = $this->findmodules_evaluations_models_Evaluations_Tests();
+    	$evaluation_test = $this->findEvaluations_Tests();
     	if (count($evaluation_test) == 0) {
     		$this->useful = false;
     	} else {

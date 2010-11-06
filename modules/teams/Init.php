@@ -1,6 +1,6 @@
 <?php
 
-class modules_teams_Init extends Yeah_Init
+class Teams_Init extends Yeah_Init
 {
     public $check = array ('team', 'team_user', 'team_resource');
     public $install = 'teams';

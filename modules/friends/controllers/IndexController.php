@@ -7,19 +7,18 @@ class Friends_IndexController extends Yeah_Action
 
         $this->requirePermission('friends', 'contact');
 
-        $friends_model = Yeah_Adapter::getModel('friends');
-        $friends = $friends_model->selectFriendsByUser($USER->ident);
+        $model_users = new Users();
+        $model_friends = new Friends();
+        $friends = $model_friends->selectFriendsByUser($USER->ident);
 
-        $users_model = Yeah_Adapter::getModel('users');
         $request = $this->getRequest();
 
-        $this->view->users = $users_model;
-        $this->view->model = $friends_model;
+        $this->view->model_users = $model_users;
+        $this->view->model_friends = $model_friends;
         $this->view->friends = $friends;
 
         history('friends');
-        $breadcrumb = array();
-        breadcrumb($breadcrumb);
+        breadcrumb();
     }
 
     public function followingsAction() {
@@ -27,19 +26,18 @@ class Friends_IndexController extends Yeah_Action
 
         $this->requirePermission('friends', 'contact');
 
-        $friends_model = Yeah_Adapter::getModel('friends');
-        $followings = $friends_model->selectFollowingsByUser($USER->ident);
+        $model_users = new Users();
+        $model_friends = new Friends();
+        $followings = $model_friends->selectFollowingsByUser($USER->ident);
 
-        $users_model = Yeah_Adapter::getModel('users');
         $request = $this->getRequest();
 
-        $this->view->users = $users_model;
-        $this->view->model = $friends_model;
+        $this->view->model_users = $model_users;
+        $this->view->model_friends = $model_friends;
         $this->view->followings = $followings;
 
         history('friends/followings');
-        $breadcrumb = array();
-        breadcrumb($breadcrumb);
+        breadcrumb();
     }
 
     public function followersAction() {
@@ -47,18 +45,17 @@ class Friends_IndexController extends Yeah_Action
 
         $this->requirePermission('friends', 'contact');
 
-        $friends_model = Yeah_Adapter::getModel('friends');
-        $followers = $friends_model->selectFollowersByUser($USER->ident);
+        $model_users = new Users();
+        $model_friends = new Friends();
+        $followers = $model_friends->selectFollowersByUser($USER->ident);
 
-        $users_model = Yeah_Adapter::getModel('users');
         $request = $this->getRequest();
 
-        $this->view->users = $users_model;
-        $this->view->model = $friends_model;
+        $this->view->model_users = $model_users;
+        $this->view->model_friends = $model_friends;
         $this->view->followers = $followers;
 
         history('friends/followers');
-        $breadcrumb = array();
-        breadcrumb($breadcrumb);
+        breadcrumb();
     }
 }

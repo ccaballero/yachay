@@ -1,6 +1,6 @@
 <?php
 
-class modules_groupsets_models_Groupsets_Empty
+class Groupsets_Empty
 {
     public $label = '';
 }

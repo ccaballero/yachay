@@ -1,6 +1,6 @@
 <?php
 
-class modules_pages_models_Pages_Page extends Yeah_Model_Row_Validation
+class Pages_Page extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'title' => array(

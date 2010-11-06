@@ -11,8 +11,8 @@ class Yeah_Validators_UniqueLabel extends Zend_Validate_Abstract
     }
 
     public function isValid($value) {
-        $elements = Yeah_Adapter::getModel($this->_model);
-        $element = $elements->findByLabel($value);
+        $model = new $this->_model();
+        $element = $model->findByLabel($value);
         if (empty($element)) {
             return true;
         } else {

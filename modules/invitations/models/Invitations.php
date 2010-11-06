@@ -1,21 +1,21 @@
 <?php
 
-class modules_invitations_models_Invitations extends Zend_Db_Table_Abstract
+class Invitations extends Yeah_Model_Table
 {
     protected $_name            = 'invitation';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_invitations_models_Invitations_Invitation';
+    protected $_rowClass        = 'Invitations_Invitation';
     protected $_referenceMap    = array(
         'Author'                => array(
             'columns'           => 'user',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
     );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'author'                => 'Autor',
-        'email'                 => 'Correo electronico',
+        'email'                 => 'Correo electrónico',
         'accepted'              => 'Aceptado',
         'description'           => 'Descripcion',
         'tsregister'            => 'Fecha de registro',

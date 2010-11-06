@@ -1,17 +1,17 @@
 <?php
 
-class modules_tags_models_Tags_Users extends Zend_Db_Table_Abstract
+class Tags_Users extends Yeah_Model_Table
 {
     protected $_name            = 'tag_user';
     protected $_referenceMap    = array(
         'Tag'                   => array(
             'columns'           => array('tag'),
-            'refTableClass'     => 'modules_tags_models_Tags',
+            'refTableClass'     => 'Tags',
             'refColumns'        => array('ident'),
         ),
         'User'                  => array(
             'columns'           => array('user'),
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => array('ident'),
         ),
     );

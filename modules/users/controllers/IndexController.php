@@ -5,19 +5,19 @@ class Users_IndexController extends Yeah_Action
     public function indexAction() {
         $this->requirePermission('users', 'list');
 
-        $users = Yeah_Adapter::getModel('users');
-        $friends = Yeah_Adapter::getModel('friends');
+        $model_users = new Users();
+        $model_friends = new Friends();
 
         $request = $this->getRequest();
         $page = $request->getParam('page', 1);
 
-        $paginator = Zend_Paginator::factory($users->selectByStatus('active'));
+        $paginator = Zend_Paginator::factory($model_users->selectByStatus('active'));
         $paginator->setItemCountPerPage(10);
         $paginator->setCurrentPageNumber($page);
         $paginator->setPageRange(10);
 
-        $this->view->model = $users;
-        $this->view->friends = $friends;
+        $this->view->model_users = $model_users;
+        $this->view->model_friends = $model_friends;
         $this->view->users = $paginator;
         $this->view->route = array (
             'key' => 'users_list',
@@ -26,8 +26,8 @@ class Users_IndexController extends Yeah_Action
 
         history('users');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('users', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_manager');
+        if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');
         }
         breadcrumb($breadcrumb);
     }

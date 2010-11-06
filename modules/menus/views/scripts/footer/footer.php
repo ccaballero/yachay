@@ -4,8 +4,8 @@ global $FOOTER;
 global $PAGE;
 global $USER;
 
-$pages = Yeah_Adapter::getModel('pages');
-$items = $pages->selectByMenutype('footer');
+$model_pages = new Pages();
+$items = $model_pages->selectByMenutype('footer');
 
 foreach ($items as $item) {
     $perms = explode('|', $item->privilege);

@@ -1,56 +1,51 @@
-<h1>Configuraci&oacute;n de paginas</h1>
+<?php
 
-<form method="post" action="" accept-charset="utf-8">
-    <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<form method="post" action="" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->currentPage() . '" />';
 
-    <table>
-        <tr>
-            <?php if (Yeah_Acl::hasPermission('pages', 'list')) { ?>
-                <td>[<a href="<?= $this->url(array(), 'pages_list') ?>">Lista</a>]</td>
-            <?php } ?>
-            <?php if (Yeah_Acl::hasPermission('pages', 'manage')) { ?>
-                <td><input type="submit" value="Actualizar" /></td>
-            <?php } ?>
-        </tr>
-    </table>
+echo '<table><tr>';
+if ($this->acl('pages', 'list')) {
+    echo '<td>[<a href="' . $this->url(array(), 'pages_list')  . '">Lista</a>]</td>';
+}
+if ($this->acl('pages', 'manage')) {
+    echo '<td><input type="submit" value="Actualizar" /></td>';
+}
+echo '</tr></table>';
+echo '<hr />';
 
-    <hr />
-    <?php if (count($this->pages)) { ?>
-        <center>
-            <table width="100%">
-                <tr>
-                    <th><?= $this->utf2html($this->model->_mapping['label']) ?></th>
-                    <th><?= $this->utf2html($this->model->_mapping['module']) ?></th>
-                    <th><?= $this->utf2html($this->model->_mapping['title']) ?></th>
-                    <th><?= $this->utf2html($this->model->_mapping['menutype']) ?></th>
-                    <th><?= $this->utf2html($this->model->_mapping['menuorder']) ?></th>
-                </tr>
-            <?php foreach ($this->pages as $page) { ?>
-                <tr>
-                    <td>
-                        <a target="_BLANK" href="<?= $this->url(array(), $page->route ) ?>"><?= $this->utf2html($page->label) ?></a>
-                    </td>
-                    <td><?= $page->module ?></td>
-                    <td><input type="text" name="pages[<?= $page->ident ?>][title]" value="<?= $this->utf2html($page->title) ?>" /></td>
-                    <td><?= $this->menutype('pages[' . $page->ident . '][menutype]', $page->menutype) ?></td>
-                    <td><center><input type="text" name="pages[<?= $page->ident ?>][menuorder]" size="2" maxlength="2" value="<?= $page->menuorder ?>" /></center></td>
-                </tr>
-            <?php } ?>
-            </table>
-        </center>
-    <?php } else { ?>
-        <p>No existen paginas registradas</p>
-    <?php } ?>
-    <hr />
+if (count($this->pages)) {
+    echo '<center><table width="100%"><tr>';
+    echo '<th>' . $this->model_pages->_mapping['label'] . '</th>';
+    echo '<th>' . $this->model_pages->_mapping['module'] . '</th>';
+    echo '<th>' . $this->model_pages->_mapping['title'] . '</th>';
+    echo '<th>' . $this->model_pages->_mapping['menutype'] . '</th>';
+    echo '<th>' . $this->model_pages->_mapping['menuorder'] . '</th>';
+    echo '</tr>';
 
-    <table>
-        <tr>
-            <?php if (Yeah_Acl::hasPermission('pages', 'list')) { ?>
-                <td>[<a href="<?= $this->url(array(), 'pages_list') ?>">Lista</a>]</td>
-            <?php } ?>
-            <?php if (Yeah_Acl::hasPermission('pages', 'manage')) { ?>
-                <td><input type="submit" value="Actualizar" /></td>
-            <?php } ?>
-        </tr>
-    </table>    
-</form>
+    foreach ($this->pages as $page) {
+        echo '<tr><td>';
+        echo '<a target="_BLANK" href="' . $this->url(array(), $page->route ) . '">' . $page->label . '</a>';
+        echo '</td>';
+        echo '<td>' . $page->module . '</td>';
+        echo '<td><input type="text" name="pages[' . $page->ident . '][title]" value="' . $page->title . '" /></td>';
+        echo '<td>' .$this->menutype('pages[' . $page->ident . '][menutype]', $page->menutype) . '</td>';
+        echo '<td><center><input type="text" name="pages[' . $page->ident . '][menuorder]" size="2" maxlength="2" value="' . $page->menuorder . '" /></center></td>';
+        echo '</tr>';
+    }
+
+    echo '</table></center>';
+} else {
+    echo '<p>No existen paginas registradas</p>';
+}
+
+echo '<hr />';
+echo '<table><tr>';
+if ($this->acl('pages', 'list')) {
+    echo '<td>[<a href="' . $this->url(array(), 'pages_list')  . '">Lista</a>]</td>';
+}
+if ($this->acl('pages', 'manage')) {
+    echo '<td><input type="submit" value="Actualizar" /></td>';
+}
+echo '</tr></table>';
+echo '</form>';

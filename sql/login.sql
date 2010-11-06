@@ -35,5 +35,4 @@ INSERT INTO `page`
 (`label`,                         `title`,            `menuable`,    `module`,           `controller`,  `action`,           `privilege`,             `route`)
 VALUES
 ('Ingresar al sistema',           'Ingresar',         TRUE,          'login',            'index',       'in',               'in',                    'login_in'),
-('Salir del sistema',             'Salir',            TRUE,          'login',            'index',       'out',              'out',                   'login_out'),
 ('Olvide mi contraseña',          'Contraseña',       TRUE,          'login',            'forgot',      'index',            'forgot',                'login_forgot');

@@ -1,6 +1,6 @@
 <?php
 
-class modules_invitations_Init extends Yeah_Init
+class Invitations_Init extends Yeah_Init
 {
     public $check = array ('invitation');
     public $install = 'invitations';

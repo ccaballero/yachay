@@ -4,7 +4,7 @@
 global $CONFIG;
 global $PAGE;
 global $USER;
-global $THEME;
+global $TEMPLATE;
 
 // Database connector
 global $DB;
@@ -36,14 +36,14 @@ class Yeah_Bootstrap
 
         require_once 'Utils.php';
 
+        // Settings for classes autoloading
         require_once 'Zend/Loader/Autoloader.php';
         $loader = Zend_Loader_Autoloader::getInstance();
-        
         $loader->registerNamespace('Zend_');
-        $loader->registerNamespace('File_');
         $loader->registerNamespace('Yeah_');
+        $loader->registerNamespace('File_');
         $loader->registerNamespace('Xcel_');
-        $loader->registerNamespace('modules_');
+        $loader->pushAutoloader(new Yeah_Loader());
 
         // Initialization and recover of the session
         Zend_Session::start();
@@ -51,7 +51,7 @@ class Yeah_Bootstrap
 
         // Set of fundamental element
         global $CONFIG;
-        $CONFIG = new Yeah_Settings_Config;
+        $CONFIG = new Yeah_Settings_Config();
 
         // Set for debugging level
         ini_set('display_startup_errors', $CONFIG->startup_errors);
@@ -59,7 +59,7 @@ class Yeah_Bootstrap
 
         // Set connector database
         global $DB;
-        $DATABASE = new Yeah_Settings_Database;
+        $DATABASE = new Yeah_Settings_Database();
         $DB = Zend_Db::factory(
             $DATABASE->type, 
             array(
@@ -75,28 +75,28 @@ class Yeah_Bootstrap
         if (isset($session->user)) {
             $USER = $session->user;
         } else {
-            $USER = new modules_users_models_Users_Visitor;
+            $USER = new Users_Visitor();
         }
 
         // Set for context information
         if (!isset($session->context)) {
-            $session->context = new Yeah_Settings_Context;
+            $session->context = new Yeah_Settings_Context();
         }
 
         // Set of history of navigation
         if (!isset($session->history)) {
-            $session->history = new Yeah_Settings_History;
+            $session->history = new Yeah_Settings_History();
         }
 
         // Set of theme
-        global $THEME;
-        $themes = Yeah_Adapter::getModel('themes');
-        $theme = $themes->findByLabel($CONFIG->template);
+        global $TEMPLATE;
+        $model_templates = new Templates();
+        $template = $model_templates->findByLabel($CONFIG->template);
 
-        $THEME = json_decode($theme->properties, false);
-        $THEME->name = $CONFIG->template;
-        $THEME->doctype = $theme->doctype;
-        $THEME->htmlbase = $CONFIG->wwwroot . 'templates/' . $THEME->name . '/';
+        $TEMPLATE = json_decode($template->properties, false);
+        $TEMPLATE->name = $CONFIG->template;
+        $TEMPLATE->doctype = $template->doctype;
+        $TEMPLATE->htmlbase = $CONFIG->wwwroot . 'templates/' . $TEMPLATE->name . '/';
 
         // Set for localization
         setlocale(LC_CTYPE, $CONFIG->locale);
@@ -112,32 +112,32 @@ class Yeah_Bootstrap
 
         // Set of web regions
         global $TITLE;
-        $TITLE = new Yeah_Regions_Title;
+        $TITLE = new Yeah_Regions_Title();
         global $ICON;
-        $ICON = new Yeah_Regions_Icon;
+        $ICON = new Yeah_Regions_Icon();
         global $TOOLBAR;
-        $TOOLBAR = new Yeah_Regions_Toolbar;
+        $TOOLBAR = new Yeah_Regions_Toolbar();
         global $SEARCH;
-        $SEARCH = new Yeah_Regions_Search;
+        $SEARCH = new Yeah_Regions_Search();
         global $MENUBAR;
-        $MENUBAR = new Yeah_Regions_Menubar;
+        $MENUBAR = new Yeah_Regions_Menubar();
         global $BREADCRUMB;
-        $BREADCRUMB = new Yeah_Regions_Breadcrumb;
+        $BREADCRUMB = new Yeah_Regions_Breadcrumb();
         global $FOOTER;
-        $FOOTER = new Yeah_Regions_Footer;
+        $FOOTER = new Yeah_Regions_Footer();
         // Set of web widgets
         global $WIDGETS;
         $WIDGETS = array(1=>'',2=>'',3=>'',4=>'');
 
         // Set region for messages
         if (!isset($session->messages)) {
-            $session->messages = new Yeah_Regions_Message;
+            $session->messages = new Yeah_Regions_Message();
         }
     }
 
     public function run() {
         global $CONFIG;
-        global $THEME;
+        global $TEMPLATE;
 
         $front = Zend_Controller_Front::getInstance();
         $front->throwExceptions(true)
@@ -146,12 +146,14 @@ class Yeah_Bootstrap
               ->returnResponse(true);
 
         // Routes join
-        $modules = Yeah_Adapter::getModel('modules')->selectByStatus('active');
+        $model_modules = new Modules();
+        $modules = $model_modules->selectByStatus('active');
         foreach ($modules as $module) {
             $path = $CONFIG->dirroot . 'modules/' . $module->url;
             if (is_dir($path)) {
                 if (file_exists("$path/Init.php")) {
-                    $class = 'modules_' . strtolower($module->url) . '_Init';
+                    include "$path/Init.php";
+                    $class = ucfirst(strtolower($module->url)) . '_Init';
                     $obj = new $class();
                     $obj->setRoutes($front->getRouter());
                     if (!Yeah_Adapter::check($obj->check)) {
@@ -167,7 +169,7 @@ class Yeah_Bootstrap
         Zend_Controller_Action_HelperBroker::addHelper($renderer);
 
         $layoutoptions = array(
-            'layout'     => $THEME->name,
+            'layout'     => $TEMPLATE->name,
             'layoutPath' => $CONFIG->dirroot . 'templates/',
             'viewSuffix' => 'php',
         );

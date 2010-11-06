@@ -11,8 +11,8 @@ class Yeah_Validators_IdentExists extends Zend_Validate_Abstract
     }
 
     public function isValid($ident) {
-        $elements = Yeah_Adapter::getModel($this->_model);
-        $element = $elements->findByIdent($ident);
+        $model = new $this->_model();
+        $element = $model->findByIdent($ident);
         if (empty($element)) {
             return false;
         }

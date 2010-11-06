@@ -1,6 +1,6 @@
 <?php
 
-class modules_invitations_models_Invitations_Invitation extends Yeah_Model_Row_Validation
+class Invitations_Invitation extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'email' => array(
@@ -21,13 +21,13 @@ class modules_invitations_models_Invitations_Invitation extends Yeah_Model_Row_V
                 ),
                 array(
                     'validator' => 'UniqueEmail',
-                    'options'   => array('users'),
+                    'options'   => array('Users'),
                     'message'   => 'El correo electronico seleccionado para el usuario es de un usuario registrado',
                     'namespace' => 'Yeah_Validators',
                 ),
                 array(
                     'validator' => 'UniqueEmail',
-                    'options'   => array('invitations'),
+                    'options'   => array('Invitations'),
                     'message'   => 'El correo electronico seleccionado para el usuario ya posee una invitacion',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -39,7 +39,7 @@ class modules_invitations_models_Invitations_Invitation extends Yeah_Model_Row_V
     );
 
     public function getAuthor() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->author);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->author);
     }
 }

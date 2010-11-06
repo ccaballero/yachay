@@ -1,6 +1,6 @@
 <?php
 
-class modules_groups_models_Groups_Group extends Yeah_Model_Row_Validation
+class Groups_Group extends Yeah_Model_Row_Validation
 {
     protected $_foreignkey = 'subject';
 
@@ -76,28 +76,28 @@ class modules_groups_models_Groups_Group extends Yeah_Model_Row_Validation
     );
 
     public function getSubject() {
-        $subjects = Yeah_Adapter::getModel('subjects');
-        return $subjects->findByIdent($this->subject);
+        $model_subjects = new Subjects();
+        return $model_subjects->findByIdent($this->subject);
     }
 
     public function getAuthor() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->author);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->author);
     }
 
     public function getTeacher() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->teacher);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->teacher);
     }
 
     public function getEvaluation() {
-        $evaluations = Yeah_Adapter::getModel('evaluations');
-        return $evaluations->findByIdent($this->evaluation);
+        $model_evaluations = new Evaluations();
+        return $model_evaluations->findByIdent($this->evaluation);
     }
 
     public function isEmpty() {
-        $model = Yeah_Adapter::getModel('teams');
-        $teams = $model->selectAll($this->ident);
+        $model_teams = new Teams();
+        $teams = $model_teams->selectAll($this->ident);
         return count($teams) == 0;
     }
 

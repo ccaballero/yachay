@@ -1,17 +1,15 @@
 <?php
 
-class modules_evaluations_models_Evaluations extends Zend_Db_Table_Abstract
+class Evaluations extends Yeah_Model_Table
 {
     protected $_name            = 'evaluation';
     protected $_primary         = 'ident';
-    protected $_rowClass        = 'modules_evaluations_models_Evaluations_Evaluation';
-    protected $_dependentTables = array('modules_groups_models_Groups',
-                                        'modules_evaluations_models_Evaluations_Tests',
-                                  );
+    protected $_rowClass        = 'Evaluations_Evaluation';
+    protected $_dependentTables = array('Groups', 'Evaluations_Tests', );
     protected $_referenceMap    = array(
         'Author'                => array(
             'columns'           => 'author',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
     );
@@ -19,7 +17,7 @@ class modules_evaluations_models_Evaluations extends Zend_Db_Table_Abstract
         'ident'                 => 'Codigo',
         'author'                => 'Autor',
         'label'                 => 'Materia',
-        'description'           => 'Descripcion',
+        'description'           => 'Descripción',
         'access'                => 'Accesibilidad',
         'tsregister'            => 'Fecha de registro',
     );

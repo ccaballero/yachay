@@ -1,6 +1,6 @@
 <?php
 
-class modules_groups_models_Groups_Empty
+class Groups_Empty
 {
     public $label = '';
     public $teacher = 0;

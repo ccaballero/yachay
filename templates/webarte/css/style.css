@@ -1,22 +1,68 @@
 * {
-    font-family: Georgia,"Times New Roman",Times,serif;
-    font-style: normal;
-    font-size: 11pt;
-    color: #757575;
+    font-family: arial,Georgia,"Times New Roman",Times,serif;
+    font-size: 98%;
+    color: #666666;
+    margin: 0% 0%;
+    padding: 0% 0%;
+}
+
+h1 {
+    font-size: 2.0em;
+    border-bottom: 2pt solid #6D852A;
+    margin-bottom: 0.3em;
+    color: #6D852A;
+}
+
+h2 {
+    font-size: 1.2em;
+    border-bottom: 1pt solid #6D852A;
+    margin-bottom: 0.2em;
+}
+
+h3 {
+    font-size: 1.0em;
+    font-weight: bold;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+}
+
+a {
+    text-decoration: none;
+    color: #6D852A;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+input, select, option, textarea {
+    font-size: 0.8em;
+}
+
+select, option {
+    padding: 0em 0.4em 0em 0em;
+}
+
+img {
+    border: 0em;
 }
 
 body {
-    margin: 0pt auto;
-    padding: 0pt 2pt;
-    width: 780px;
-    border-left: 2pt solid #444444;
-    border-right: 2pt solid #444444;
+    margin: 0% auto;
+    width: 960px;
+    border-left: 2pt solid #6D852A;
+    border-right: 2pt solid #6D852A;
 }
 
 #header {
-    border-bottom: 2pt solid #444444;
-    height: 60px;
-    background-color: #E3FFF5;
+    border-bottom: 2pt solid #6D852A;
+    height: 5.0em;
+    background-color: #DDE6C5;
+}
+
+#content {
+    min-height: 488px;
 }
 
 #content, #footer {
@@ -24,151 +70,415 @@ body {
     clear: both;
 }
 
+#footer {
+    border-top: 2pt solid #6D852A;
+    height: 3.0em;
+    text-align: center;
+    background-color: #DDE6C5;
+}
+
 #primary {
     padding: 10px 10px 10px 10px;
-    width: 500px;
+    width: 680px;
     float: left;
 }
 
-#widgets {
+#secondary {
     padding: 10px 10px 10px 10px;
     width: 240px;
     float: left;
 }
 
-#footer {
-    border-top: 2pt solid #444444;
-    text-align: center;
-    background-color: #E3FFF5;
+#header>.menu {
+    padding-top: 3.8em;
 }
 
-.menu {
-    padding-top: 40px;
-    padding-left: 5px;
-}
-
-.tools {
+#header>.tools {
     float: right;
-    padding-right: 10px;
 }
 
-h1 {
-    font-size: 15pt;
-    border-bottom: 1pt solid #444444;
-}
-
-h2 {
-    font-size: 12pt;
-    border-bottom: 1pt solid #444444;
-}
-
-h3 {
-    font-size: 11pt;
+#header>.tools .first {
+    padding: 0 1.2em 0.1em 1.2em;
+    background-color: #6D852A;
+    color: #DDE6C5;
     font-weight: bold;
-}
-
-a {
-    text-decoration: none;
-    color: #45ABCD;
-    cursor: pointer;
 }
 
 #header a, #footer a {
     font-weight: bold;
 }
 
-img {
-    border: 0px;
+#primary p {
+    line-height: 1.3em;
+    padding-bottom: 0.8em;
 }
 
-p {
-    text-align: justify;
+#primary ul {
+    padding-left: 1.0em;
+    padding-bottom: 0.8em;
 }
 
-dl, dt, dd, ul, li {
-    margin: 0pt 0pt;
-    padding: 0pt 0pt;
-}
-
-dt {
-    clear: both;
+#primary .bold {
     font-weight: bold;
 }
 
-dt {
-    margin-top: 4pt;
-    margin-bottom: 4pt;
+#header ul.menu, #footer ul.menu {
+    padding: 0px 6px 0px 6px;
+    list-style-type: none;
 }
 
-li {
-    margin-left: 10px;
-}
-
-li {
-    list-style: none;
-}
-
-.text_small {
-    font-size: 9pt;
-}
-
-.align_right {
-    float: right;
-    text-align: right;
-}
-
-.align_left {
-    float: left;
-    text-align: left;
-}
-
-dl.form dt, dl.form dd {
+#header ul.menu>li, #footer ul.menu>li {
+    padding: 0px 3px 0px 3px;
     display: inline;
 }
 
-dl.form dt {
-    float: left;
-}
-
-dl.form dd {
-    padding: 5pt 0pt 5pt 6pt;
-}
-
-.pagination {
-    margin: 5px 0px 5px 0px;
-    text-align: center;
-}
-
-.clear {
+#secondary .widget {
+    margin-bottom: 1.0em;
+    width: 100%;
     clear: both;
-    height: 25px;
 }
 
-.avatar {
-    float: left;
-    width: 55px;
-}
-
-.details {
-    float: left;
-    width: 435px;
-    background-color: #E3FFF5;
-    padding: 3px 5px;
-}
-
-.label {
+#secondary .widget dt {
     font-weight: bold;
-    position: relative;
-    top: -15px;
-    left: 320px;
-    width: 120px;
-    text-align: center;
-    color: #45ABCD;
-    background-color: #E3FFF5;
-    border-bottom: 1pt dashed #45ABCD;
 }
 
-.user {
+#secondary .widget li {
+    list-style: none;
+}
+
+#secondary form label {
+    width: 4.0em;
+    float: left;
+    text-align: right;
+    margin-right: 0.5em;
+    font-weight: bold;
+}
+
+#secondary form p {
+    padding-bottom: 0.2em;
+}
+
+#secondary form .submit {
+    margin-left: 4.5em;
+}
+
+#secondary .right {
+    float: right;
+}
+
+#primary .center, #secondary .center {
+    text-align: center;
+}
+
+#secondary .left {
+    float: left;
+}
+
+#secondary .small {
+    font-size: 0.8em;
+}
+
+#secondary .clear {
+    clear: both;
+}
+
+#secondary .widget img {
+    border: 2px solid #6D852A;
+    padding: 1px;
+    margin: 0px 2px 0px 2px;
+}
+
+#secondary .widget a img {
+    width: 50px;
+    height: 50px;
+}
+
+#primary #messages {
+    width: 100%;
+    margin-bottom: 1.0em;
+}
+
+#primary #messages .message {
+    display: block;
+    border: 1px dashed #6D852A;
+    background-color: #DDE6C5;
+    padding: 0em 0.5em 0em 0.5em;
+    margin-bottom: 0.3em;
+}
+
+#primary #messages .message a {
+    font-weight: bold;
+}
+
+#primary #breadcrumb {
+    margin-left: 1.0em;
+    margin-bottom: 1.0em;
+}
+
+#primary #main dt {
+    padding-left: 0.1em;
+    text-transform: capitalize;
+}
+
+#primary #main dd {
+    padding-left: 1.0em;
+}
+
+#primary #main a {
+    font-weight: bold;
+}
+
+#primary #main table {
+    width: 100%;
+    border: 2px solid #6D852A;
+    padding: 0px;
+}
+
+#primary #main th {
+    background-color: #6D852A;
+    color: #DDE6C5;
+}
+
+#primary #main tr.odd {
+    background-color: #DDE6C5;
+}
+
+#primary #main tr td {
+    padding-left: 0.1em;
+}
+
+#primary form label {
+    width: 15.0em;
+    float: left;
+    margin-right: 0.5em;
+    font-weight: bold;
+    text-align: right;
+}
+
+#primary form p {
+    padding-bottom: 0.2em;
+}
+
+#primary p .mark {
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 2px solid #DDE6C5;
+    padding: 0em 0.3em;
+    -margin: 0em 0.3em;
+}
+
+#primary form .form {
+    font-size: 0.8em;
+}
+
+#primary form input[type='text'], #primary form input[type='password'], #primary form textarea {
+    width: 25.0em;
+}
+
+#primary form table input[type='text'] {
+    width: 9.0em;
+}
+
+#primary form table input[type='text'].number {
+    width: 3.0em;
+}
+
+#primary form textarea {
+    height: 6.0em;
+}
+
+#primary form .submit {
+    margin-left: 15.5em;
+}
+
+#primary form input[type='text'].login, #primary form input[type='password'].login {
+    width: 12.0em;
+}
+
+#primary h1 {
     position: relative;
+}
+
+#primary h1 strong.task {
+    position: absolute;
+    bottom: 0.1em;
+    right: 0.2em;
+}
+
+#primary .pagination {
+    padding: 0em 0.5em;
+    text-align: center;
+}
+#primary .pagination a, #primary .pagination span {
+    border: 1px dashed #DDE6C5;
+    padding: 0em 0.4em;
+    margin: 0em 0.1em;
+}
+
+#primary .pagination span {
+    font-weight: bold;
+    background-color: #DDE6C5;
+}
+
+#primary #resource {
+    margin: 0.4em 0em;
+    position: relative;
+    clear: both;
+}
+
+#primary #resource .label {
+    position: absolute;
+    float: right;
+    top: 0em;
+    right: 0em;
+    background-color: #DDE6C5;
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 0.1em 0.5em 0.2em 0.5em;
+    text-transform: uppercase;
+}
+
+#primary #resource .recipient {
+    position: absolute;
+    top: 0em;
+    left: 0.5em;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    z-index: 1;
+}
+
+#primary #resource .avatar {
+    position: absolute;
+    padding: 1.2em 0.5em 0em 0.4em;
+}
+
+#primary #resource .message {
+    border: 1px solid #6D852A;
+    padding: 1.2em 0.5em 0.8em 60px;
+    min-height: 50px;
+}
+
+#primary #resource .addon {
+    position: absolute;
+    left: 60px;
+    bottom: 0.2em;
+    font-size: 0.8em;
+}
+
+#primary #resource .addon .viewall {
+    font-size: 1.1em;
+    padding-left: 0.5em;
+}
+
+#primary #resource .timestamp {
+    position: absolute;
+    bottom: 0em;
+    right: 0em;
+    background-color: #DDE6C5;
+    font-size: 0.8em;
+    padding: 0.1em 0.5em 0.2em 0.5em;
+}
+
+#primary #block {
+    margin-top: 0.3em;
+}
+
+#primary .clear {
+    margin-bottom: 0.3em;
+    clear: both;
+}
+
+#primary #block .box {
+    position: relative;
+    border: 2px solid #6D852A;
+    display: inline;
+    float: left;
+    width: 200px;
+    margin: 0.2em 0.2em;
+    padding-top: 1.6em;
+    padding-bottom: 1.0em;
+    padding-left: 110px;
+    padding-right: 1.0em;
+    min-height: 8.5em;
+}
+
+#primary #block .box p {
+    padding-bottom: 0.1em;
+    text-align: left;
+}
+
+#primary #block .box .photo {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+}
+
+#primary #block .box .title {
+    position: absolute;
+    top: 5px;
+    font-weight: bold;
+}
+
+#primary #block .box .tools {
+    position: absolute;
+    left: 5px;
+    top: 110px;
+}
+
+#primary #block .import {
+    position: relative;
+    border: 2px solid #6D852A;
+    display: inline;
+    float: left;
+    width: 325px;
+    margin: 0.2em 0.2em;
+}
+
+#primary #block .import p {
+    font-size: 0.8em;
+    line-height: 1.0em;
+    text-align: left;
+}
+
+#primary #block .import .title {
+    font-weight: bold;
+    background-color: #6D852A;
+    color: #DDE6C5;
+    display: block;
+    padding: 0.2em 0.1em 0.2em 1.6em;
+    margin-bottom: 0.1em;
+}
+
+#primary #block .import label {
+    width: 9.0em;
+    float: left;
+    margin-right: 0.5em;
+    font-weight: bold;
+    text-align: right;
+}
+
+#primary #block .import input[type='checkbox'] {
+    position: absolute;
+    left: 0.1em;
+    top: 0.1em;
+}
+
+#primary #block .import .result {
+    position: absolute;
+    right: 0.2em;
+    top: 1.3em;
+}
+
+#primary #user {
+    position: relative;
+    padding-left: 210px;
+    min-height: 220px;
+}
+
+#primary #user .photo {
+    position: absolute;
     top: 0px;
+    left: 0px;
+    width: 200px;
 }

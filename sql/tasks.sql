@@ -58,4 +58,3 @@ VALUES
 ('Nueva tarea',                   'Nueva tarea',      TRUE,          'tasks',            'manager',     'new',              '',                      'tasks_new'),
 ('Visor de tareas',               '',                 FALSE,         'tasks',            'task',        'view',             '',                      'tasks_task_view'),
 ('Editor de tareas',              '',                 FALSE,         'tasks',            'task',        'edit',             '',                      'tasks_task_edit');
-

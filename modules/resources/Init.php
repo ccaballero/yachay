@@ -1,6 +1,6 @@
 <?php
 
-class modules_resources_Init extends Yeah_Init
+class Resources_Init extends Yeah_Init
 {
     public $routes = array (
         'resources_list'                         => array('resources',

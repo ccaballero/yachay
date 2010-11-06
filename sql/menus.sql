@@ -17,8 +17,8 @@ VALUES
 INSERT INTO `region`
 (`label`,          `module`,           `script`,           `region`)
 VALUES
-('Basica',         'menus',            'menubar.php',      'menubar'),
-('Basica',         'menus',            'footer.php',       'footer');
+('Basica',         'menus',            'menubar',          'menubar'),
+('Basica',         'menus',            'footer',           'footer');
 
 /*====================================================================================================================*/
 /* Registro de widgets para el modulo                                                                                 */

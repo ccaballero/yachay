@@ -1,31 +1,31 @@
 <?php
 
-class modules_resources_models_Resources_Resource extends Yeah_Model_Row_Validation
+class Resources_Resource extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array();
 
     public function getAuthor() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->author);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->author);
     }
 
     public function getExtended() {
-        $model_notes = Yeah_Adapter::getModel('notes');
+        $model_notes = new Notes();
         $note = $model_notes->findByResource($this->ident);
         if (!empty($note)) {
             return $note;
         }
-        $model_files = Yeah_Adapter::getModel('files');
+        $model_files = new Files();
         $file = $model_files->findByResource($this->ident);
         if (!empty($file)) {
             return $file;
         }
-        $model_events = Yeah_Adapter::getModel('events');
+        $model_events = new Events();
         $event = $model_events->findByResource($this->ident);
         if (!empty($event)) {
             return $event;
         }
-        $model_feedback = Yeah_Adapter::getModel('feedback');
+        $model_feedback = new Feedback();
         $entry = $model_feedback->findByResource($this->ident);
         if (!empty($entry)) {
             return $entry;
@@ -43,60 +43,60 @@ class modules_resources_models_Resources_Resource extends Yeah_Model_Row_Validat
 
         switch ($element) {
             case 'global':
-                $global_resource_model = Yeah_Adapter::getModel('resources', 'Resources_Globales');
-                $global_resource = $global_resource_model->createRow();
+                $model_global_resource = new Resources_Globales();
+                $global_resource = $model_global_resource->createRow();
                 $global_resource->resource = $this->ident;
                 $global_resource->save();
                 break;
             case 'area':
-                $areas_resource_model = Yeah_Adapter::getModel('areas', 'Areas_Resources');
-                $area_resource = $areas_resource_model->createRow();
+                $model_areas_resource = new Areas_Resources();
+                $area_resource = $model_areas_resource->createRow();
                 $area_resource->resource = $this->ident;
                 $area_resource->area = $ident;
                 $area_resource->save();
                 break;
             case 'subject':
-                $subjects_resource_model = Yeah_Adapter::getModel('subjects', 'Subjects_Resources');
-                $subject_resource = $subjects_resource_model->createRow();
+                $model_subjects_resource = new Subjects_Resources();
+                $subject_resource = $model_subjects_resource->createRow();
                 $subject_resource->resource = $this->ident;
                 $subject_resource->subject = $ident;
                 $subject_resource->save();
                 break;
             case 'groupset':
-                $groupsets_model = Yeah_Adapter::getModel('groupsets');
-                $groupset = $groupsets_model->findByIdent($ident);
-                $groups = $groupset->findmodules_groups_models_GroupsViamodules_groupsets_models_Groupsets_Groups();
-                $groups_resource_model = Yeah_Adapter::getModel('groups', 'Groups_Resources');
+                $model_groupsets = new Groupsets();
+                $model_groups_resource = new Groups_Resources();
+                $groupset = $model_groupsets->findByIdent($ident);
+                $groups = $groupset->findGroupsViaGroupsets_Groups();
                 foreach ($groups as $group) {
-                    $group_resource = $groups_resource_model->createRow();
+                    $group_resource = $model_groups_resource->createRow();
                     $group_resource->resource = $this->ident;
                     $group_resource->group = $group->ident;
                     $group_resource->save();
                 }
                 break;
             case 'group':
-                $groups_resource_model = Yeah_Adapter::getModel('groups', 'Groups_Resources');
-                $group_resource = $groups_resource_model->createRow();
+                $model_groups_resource = new Groups_Resources();
+                $group_resource = $model_groups_resource->createRow();
                 $group_resource->resource = $this->ident;
                 $group_resource->group = $ident;
                 $group_resource->save();
                 break;
             case 'team':
-                $teams_resource_model = Yeah_Adapter::getModel('teams', 'Teams_Resources');
-                $team_resource = $teams_resource_model->createRow();
+                $model_teams_resource = new Teams_Resources();
+                $team_resource = $model_teams_resource->createRow();
                 $team_resource->resource = $this->ident;
                 $team_resource->team = $ident;
                 $team_resource->save();
                 break;
             case 'community':
-                $communities_resource_model = Yeah_Adapter::getModel('communities', 'Communities_Resources');
-                $community_resource = $communities_resource_model->createRow();
+                $model_communities_resource = new Communities_Resources();
+                $community_resource = $model_communities_resource->createRow();
                 $community_resource->resource = $this->ident;
                 $community_resource->community = $ident;
                 $community_resource->save();
             case 'user':
-                $users_resource_model = Yeah_Adapter::getModel('users', 'Users_Resources');
-                $user_resource = $users_resource_model->createRow();
+                $model_users_resource = new Users_Resources();
+                $user_resource = $model_users_resource->createRow();
                 $user_resource->resource = $this->ident;
                 $user_resource->user = $ident;
                 $user_resource->save();

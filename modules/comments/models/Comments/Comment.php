@@ -1,6 +1,6 @@
 <?php
 
-class modules_comments_models_Comments_Comment extends Yeah_Model_Row_Validation
+class Comments_Comment extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'comment' => array(
@@ -9,13 +9,13 @@ class modules_comments_models_Comments_Comment extends Yeah_Model_Row_Validation
     );
 
     public function getResource() {
-        $resources = Yeah_Adapter::getModel('resources');
-        return $resources->findByIdent($this->resource);
+        $model_resources = new Resources();
+        return $model_resources->findByIdent($this->resource);
     }
 
     public function getAuthor() {
-        $users = Yeah_Adapter::getModel('users');
-        return $users->findByIdent($this->author);
+        $model_users = new Users();
+        return $model_users->findByIdent($this->author);
     }
 
     public function amAuthor() {

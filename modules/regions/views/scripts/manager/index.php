@@ -1,54 +1,43 @@
-<h1>Configuraci&oacute;n de regiones por pagina</h1>
+<?php
 
-<form method="post" action="" accept-charset="utf-8">
-    <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<form method="post" action="" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->currentPage() . '" />';
 
-    <table>
-        <tr>
-            <?php if (Yeah_Acl::hasPermission('regions', 'list')) { ?>
-                <td>[<a href="<?= $this->url(array(), 'regions_list') ?>">Lista</a>]</td>
-            <?php } ?>
-            <?php if (Yeah_Acl::hasPermission('regions', 'manage')) { ?>
-                <td><input type="submit" value="Actualizar" /></td>
-            <?php } ?>
-        </tr>
-    </table>
+echo '<table><tr>';
+if ($this->acl('regions', 'list')) {
+    echo '<td>[<a href="' . $this->url(array(), 'regions_list') . '">Lista</a>]</td>';
+}
+if ($this->acl('regions', 'manage')) {
+    echo '<td><input type="submit" value="Actualizar" /></td>';
+}
+echo '</tr></table>';
+echo '<hr />';
 
-    <hr />
-<?php if (count($this->pages)) { ?>
-    <center>
-        <table width="100%">
-            <tr>
-                <th>Pagina</th>
-                <th>Region de busqueda</th>
-                <th>Barra de menus</th>
-                <th>Barra de tareas</th>
-                <th>Barra inferior</th>
-            </tr>
-	    <?php foreach ($this->pages as $page) { ?>
-            <tr>
-                <td><?= $this->utf2html($page->label) ?></td>
-                <td><center><?= $this->search('regions[' . $page->ident . '][search]', $this->regions_pages[$page->ident]['search']) ?></center></td>
-                <td><center><?= $this->menubar('regions[' . $page->ident . '][menubar]', $this->regions_pages[$page->ident]['menubar']) ?></center></td>
-                <td><center><?= $this->toolbar('regions[' . $page->ident . '][toolbar]', $this->regions_pages[$page->ident]['toolbar']) ?></center></td>
-                <td><center><?= $this->footer('regions[' . $page->ident . '][footer]', $this->regions_pages[$page->ident]['footer']) ?></center></td>
-            </tr>
-        <?php } ?>
-        </table>
-    </center>
-<?php } else { ?>
-    <p>No existen paginas registradas</p>
-<?php } ?>
-    <hr />
+if (count($this->pages)) {
+    echo '<center><table width="100%"><tr><th>Pagina</th><th>Busqueda</th><th>Menus</th><th>Tareas</th><th>Inferior</th></tr>';
+    foreach ($this->pages as $page) {
+        echo '<tr>';
+        echo '<td>' . $page->label . '</td>';
+        echo '<td><center>' . $this->search('regions[' . $page->ident . '][search]', $this->regions_pages[$page->ident]['search']) . '</center></td>';
+        echo '<td><center>' . $this->menubar('regions[' . $page->ident . '][menubar]', $this->regions_pages[$page->ident]['menubar']) . '</center></td>';
+        echo '<td><center>' . $this->toolbar('regions[' . $page->ident . '][toolbar]', $this->regions_pages[$page->ident]['toolbar']) . '</center></td>';
+        echo '<td><center>' . $this->footer('regions[' . $page->ident . '][footer]', $this->regions_pages[$page->ident]['footer']) . '</center></td>';
+        echo '</tr>';
+    }
+    echo '</table></center>';
+} else {
+    echo '<p>No existen paginas registradas</p>';
+}
 
-    <table>
-        <tr>
-            <?php if (Yeah_Acl::hasPermission('regions', 'list')) { ?>
-                <td>[<a href="<?= $this->url(array(), 'regions_list') ?>">Lista</a>]</td>
-            <?php } ?>
-            <?php if (Yeah_Acl::hasPermission('regions', 'manage')) { ?>
-                <td><input type="submit" value="Actualizar" /></td>
-            <?php } ?>
-        </tr>
-    </table>
-</form>
+echo '<hr />';
+echo '<table><tr>';
+if ($this->acl('regions', 'list')) {
+    echo '<td>[<a href="' . $this->url(array(), 'regions_list') . '">Lista</a>]</td>';
+}
+if ($this->acl('regions', 'manage')) {
+    echo '<td><input type="submit" value="Actualizar" /></td>';
+}
+echo '</tr></table>';
+
+echo '</form>';

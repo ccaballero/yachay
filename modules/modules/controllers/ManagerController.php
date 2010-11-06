@@ -8,7 +8,7 @@ class Modules_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            if (Yeah_Acl::hasPermission('modules', 'lock')) {
+            if ($this->acl('modules', 'lock')) {
                 $lock = $request->getParam('lock');
                 $unlock = $request->getParam('unlock');
                 if (!empty($lock)) {
@@ -19,13 +19,17 @@ class Modules_ManagerController extends Yeah_Action
             }
         }
 
-        $modules = Yeah_Adapter::getModel('modules');
+        $model_modules = new Modules();
 
-        $this->view->model = $modules;
-        $this->view->modules = $modules->selectAll();
+        $this->view->model_modules = $model_modules;
+        $this->view->modules = $model_modules->selectAll();
 
         history('modules/manager');
-        breadcrumb();
+        $breadcrumb = array();
+        if ($this->acl('modules', 'list')) {
+            $breadcrumb['Modulos'] = $this->view->url(array(), 'modules_list');
+        }
+        breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -56,7 +60,7 @@ class Modules_ManagerController extends Yeah_Action
                     mysql_import($CONFIG->dirroot . 'sql/' . $module . '.sql');
                 }
                 $session = new Zend_Session_Namespace();
-                $session->messages->addMessage("El modulo ha sido a&ntilde;adido");
+                $session->messages->addMessage("El modulo ha sido añadido");
                 unlink($filename);
             }
             $this->_redirect($this->view->currentPage());
@@ -64,7 +68,9 @@ class Modules_ManagerController extends Yeah_Action
 
         history('modules/new');
         $breadcrumb = array();
-        $breadcrumb['Modulos'] = $this->view->url(array(), 'modules_manager');
+        if ($this->acl('modules', array('new', 'lock'))) {
+            $breadcrumb['Administrador de modulos'] = $this->view->url(array(), 'modules_manager');
+        }
         breadcrumb($breadcrumb);
     }
 
@@ -73,10 +79,10 @@ class Modules_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $modules = Yeah_Adapter::getModel('modules');
+            $model_modules = new Modules();
             $check = $request->getParam("check");
             foreach ($check as $value) {
-                $module = $modules->findByIdent($value);
+                $module = $model_modules->findByIdent($value);
                 $module->status = 'inactive';
                 $module->save();
             }
@@ -93,10 +99,10 @@ class Modules_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $modules = Yeah_Adapter::getModel('modules');
+            $model_modules = new Modules();
             $check = $request->getParam("check");
             foreach ($check as $value) {
-                $module = $modules->findByIdent($value);
+                $module = $model_modules->findByIdent($value);
                 $module->status = 'active';
                 $module->save();
             }

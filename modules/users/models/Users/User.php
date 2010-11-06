@@ -1,6 +1,6 @@
 <?php
 
-class modules_users_models_Users_User extends Yeah_Model_Row_Validation
+class Users_User extends Yeah_Model_Row_Validation
 {
     protected $_validationRules = array(
         'role' => array(
@@ -8,7 +8,7 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
             'validators' => array(
                 array(
                     'validator' => 'IdentExists',
-                    'options'   => array('roles'),
+                    'options'   => array('Roles'),
                     'message'   => 'El rol seleccionado no es valido',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -29,7 +29,7 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueCode',
-                    'options'   => array('users'),
+                    'options'   => array('Users'),
                     'message'   => 'El codigo seleccionado para el usuario ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -49,7 +49,7 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabel',
-                    'options'   => array('users'),
+                    'options'   => array('Users'),
                     'message'   => 'El nombre seleccionado para el usuario ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -66,7 +66,7 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueUrl',
-                    'options'   => array('users'),
+                    'options'   => array('Users'),
                     'message'   => 'El identificador de usuario ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -88,7 +88,7 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueEmail',
-                    'options'   => array('users'),
+                    'options'   => array('Users'),
                     'message'   => 'El correo electronico seleccionado para el usuario ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -158,9 +158,9 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
 
     public function hasPermission($module, $privilege) {
         if (count($this->_acl) == 0) {
-            $roles = Yeah_Adapter::getModel('roles');
-            $role = $roles->findByIdent($this->role);
-            $privileges = $role->findManyToManyRowset('modules_privileges_models_Privileges', 'modules_roles_models_Roles_Privileges');
+            $model_roles = new Roles();
+            $role = $model_roles->findByIdent($this->role);
+            $privileges = $role->findPrivilegesViaRoles_Privileges();
 
             foreach ($privileges as $priv) {
                 $this->_acl[] = $priv->module . '_' . $priv->privilege;
@@ -170,9 +170,9 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
     }
 
     public function hasFewerPrivileges($user) {
-        $roles = Yeah_Adapter::getModel('roles');
+        $model_roles = new Roles();
 
-        $roles_allowed = $roles->selectByIncludes($this->role);
+        $roles_allowed = $model_roles->selectByIncludes($this->role);
         foreach ($roles_allowed as $role_allowed) {
             if ($role_allowed->ident == $user->role) {
                 return true;
@@ -189,8 +189,8 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
     }
 
     public function getRole() {
-        $roles = Yeah_Adapter::getModel('roles');
-        return $roles->findByIdent($this->role);
+        $model_roles = new Roles();
+        return $model_roles->findByIdent($this->role);
     }
 
     public function needFillProfile() {
@@ -222,6 +222,6 @@ class modules_users_models_Users_User extends Yeah_Model_Row_Validation
     }
 
     public function getTags() {
-        return $this->findmodules_tags_models_TagsViamodules_tags_models_Tags_Users();
+        return $this->findTagsViaTags_Users();
     }
 }

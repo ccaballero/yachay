@@ -5,15 +5,15 @@ class Modules_IndexController extends Yeah_Action
     public function indexAction() {
         $this->requirePermission('modules', 'list');
 
-        $modules = Yeah_Adapter::getModel('modules');
+        $model_modules = new Modules();
 
-        $this->view->model = $modules;
-        $this->view->modules = $modules->selectAll();
+        $this->view->model_modules = $model_modules;
+        $this->view->modules = $model_modules->selectAll();
 
         history('modules');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('modules', array('new', 'lock'))) {
-            $breadcrumb['Modulos'] = $this->view->url(array(), 'modules_manager');
+        if ($this->acl('modules', array('new', 'lock'))) {
+            $breadcrumb['Administrador de modulos'] = $this->view->url(array(), 'modules_manager');
         }
         breadcrumb($breadcrumb);
     }

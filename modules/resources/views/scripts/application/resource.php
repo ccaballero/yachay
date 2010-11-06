@@ -1,23 +1,15 @@
 <?php
 
-if (Yeah_Acl::hasPermission('resources', 'view')) {
+if ($this->acl('resources', 'view')) {
     echo '<h2>Publicaciones</h2>';
     if (count($this->resources)) {
         echo '<center>';
         echo $this->paginator($this->resources, $this->route);
         echo '<table width="100%">';
         foreach ($this->resources as $resource) {
-            echo '<tr><td rowspan="3" valign="top" width="50px">';
-            if (Yeah_Acl::hasPermission('users', 'view')) {
-                echo '<a href="' . $this->url(array('user' => $resource->getAuthor()->url), 'users_user_view') . '">' .
-                     '<img src="' . $this->config->wwwroot . 'media/users/thumbnail_small/' . $resource->getAuthor()->getAvatar() . '" alt="" />' .
-                     '</a>';
-            } else {
-                echo '<img src="' . $this->config->wwwroot . 'media/users/thumbnail_small/' . $resource->getAuthor()->getAvatar() . '" alt="" />';
-            }
-            echo '</td><td>';
+            echo '<tr><td>';
 
-            if (Yeah_Acl::hasPermission('users', 'view')) {
+            if ($this->acl('users', 'view')) {
                 echo '<b><a href="' . $this->url(array('user' => $resource->getAuthor()->url), 'users_user_view') . '">' . $resource->getAuthor()->getFullName() . '</a></b>';
             } else {
                 echo '<b>' . $resource->getAuthor()->getFullName() . '</b>';
@@ -30,7 +22,7 @@ if (Yeah_Acl::hasPermission('resources', 'view')) {
             echo '</td></tr><tr><td>';
 
             echo 'Comentarios (' . $resource->comments . ') | Valoración (' . $resource->ratings . '/' . $resource->raters . ') | [<a href="' . $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_view') . '">Ver mas</a>]';
-            if (Yeah_Acl::hasPermission('resources', 'drop')) {
+            if ($this->acl('resources', 'drop')) {
                 echo '[<a href="' . $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_drop') . '">Eliminar</a>]';
             }
             echo '</td><td align="right">';

@@ -1,6 +1,6 @@
 <?php
 
-class modules_communities_models_Communities_Empty
+class Communities_Empty
 {
     public $label = '';
     public $mode = 'open';

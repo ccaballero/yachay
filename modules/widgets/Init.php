@@ -1,6 +1,6 @@
 <?php
 
-class modules_widgets_Init extends Yeah_Init
+class Widgets_Init extends Yeah_Init
 {
     public $routes = array (
         'widgets_manager'                        => array('widgets/manager',

@@ -1,17 +1,17 @@
 <?php
 
-class modules_teams_models_Teams_Users extends Zend_Db_Table_Abstract
+class Teams_Users extends Yeah_Model_Table
 {
     protected $_name            = 'team_user';
     protected $_referenceMap    = array(
         'Team'                  => array(
             'columns'           => array('team'),
-            'refTableClass'     => 'modules_teams_models_Teams',
+            'refTableClass'     => 'Teams',
             'refColumns'        => array('ident'),
         ),
         'User'                  => array(
             'columns'           => array('user'),
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => array('ident'),
         ),
     );
