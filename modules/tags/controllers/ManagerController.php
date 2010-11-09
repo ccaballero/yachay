@@ -6,7 +6,7 @@ class Tags_ManagerController extends Yeah_Action
         $this->requirePermission('tags', 'list');
         $this->requirePermission('tags', 'delete');
 
-        $model_tags = Yeah_Adapter::getModel('tags');
+        $model_tags = new Tags();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -16,11 +16,15 @@ class Tags_ManagerController extends Yeah_Action
             }
         }
 
-        $this->view->model = $model_tags;
+        $this->view->model_tags = $model_tags;
         $this->view->tags = $model_tags->selectAll();
 
         history('tags/manager');
-        breadcrumb();
+        $breadcrumb = array();
+        if ($this->acl('tags', 'list')) {
+            $breadcrumb['Etiquetas'] = $this->view->url(array(), 'tags_list');
+        }
+        breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {
@@ -28,10 +32,11 @@ class Tags_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_tags = Yeah_Adapter::getModel('tags');
-            $model_tags_resources = Yeah_Adapter::getModel('tags', 'Tags_Resources');
-            $model_tags_communities = Yeah_Adapter::getModel('tags', 'Tags_Communities');
-            $model_tags_users = Yeah_Adapter::getModel('tags', 'Tags_Users');
+
+            $model_tags = new Tags();
+            $model_tags_resources = new Tags_Resources();
+            $model_tags_communities = new Tags_Communities();
+            $model_tags_users = new Tags_Users();
 
             $check = $request->getParam("check");
 

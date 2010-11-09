@@ -18,6 +18,7 @@
             <th>&nbsp;</th>
             <th><?= $this->model->_mapping['label'] ?></th>
             <th><?= $this->model->_mapping['formalname'] ?></th>
+            <th><?= $this->model->_mapping['status'] ?></th>
             <th>Opciones</th>
             <th><?= $this->model->_mapping['tsregister'] ?></th>
         </tr>
@@ -27,6 +28,13 @@
             <td><?= $user->label ?></td>
             <td><?= $user->getFullName() ?></td>
             <td class="center">
+            <?php if ($user->status == 'active') { ?>
+                <img src="<?= $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario activo" />
+            <?php } else { ?>
+                <img src="<?= $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario inactivo" />
+            <?php } ?>
+            </td>
+            <td class="options">
             <?php if ($this->acl('users', 'view')) { ?>
                 <a href="<?= $this->url(array('user' => $user->url), 'users_user_view') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
             <?php } ?>
@@ -42,7 +50,7 @@
                     <?php } ?>
                 <?php } ?>
                 <?php if ($this->acl('users', 'delete')) { ?>
-                    <a href="<?= $this->url(array('user' => $user->url), 'users_user_delete') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Eliminar" title="Eliminar" /></a>
+                    <a href="<?= $this->url(array('user' => $user->url), 'users_user_delete') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
                 <?php } ?>
             <?php } ?>
             </td>

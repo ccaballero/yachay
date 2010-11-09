@@ -26,7 +26,7 @@ class Resources extends Yeah_Model_Table
         'ident'                 => 'Codigo',
         'author'                => 'Autor',
         'comments'              => 'Comentarios',
-        'ratings'               => 'Valoracion',
+        'ratings'               => 'Valoración',
         'raters'                => 'Votantes',
         'tsregister'            => 'Fecha de registro',
     );

@@ -16,7 +16,7 @@
     <?php foreach ($this->roles as $key => $role) { ?>
         <tr class="<?= $key % 2 == 0 ? 'even' : 'odd' ?>">
             <td><?= $role->label ?></td>
-            <td class="center">
+            <td class="options">
             <?php if ($this->acl('roles', 'view')) { ?>
                 <a href="<?= $this->url(array('role' => $role->url), 'roles_role_view') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
             <?php } ?>
@@ -24,7 +24,7 @@
                 <a href="<?= $this->url(array('role' => $role->url), 'roles_role_edit') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
             <?php } ?>
             <?php if ($this->acl('roles', 'delete') && $role->isEmpty()) { ?>
-                <a href="<?= $this->url(array('role' => $role->url), 'roles_role_delete') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Eliminar" title="Eliminar" /></a>
+                <a href="<?= $this->url(array('role' => $role->url), 'roles_role_delete') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
             <?php } ?>
             </td>
             <td class="center"><?= $this->timestamp($role->tsregister) ?></td>

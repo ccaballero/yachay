@@ -21,9 +21,9 @@ if ($this->step == 1) {
     }
 
     echo '<tr><td><b>Rol:</b></td>';
-    echo '<td>' . $this->role('role') . '</td></tr>';
+    echo '<td>' . $this->role('role', 'role') . '</td></tr>';
     echo '<tr><td><b>Generador de contraseña:</b></td>';
-    echo '<td>' . $this->password('password') . '</td>';
+    echo '<td>' . $this->password('password', 'password') . '</td>';
     echo '</tr><tr><td colspan="2">(*) Campos obligatorios.</td></tr><tr><td>&nbsp;</td><td><input type="submit" value="Importar usuarios" /> ';
     echo '<a href="' . $this->lastPage() . '">Cancelar</a>';
     echo '</td></tr></table></form>';
@@ -34,7 +34,7 @@ if ($this->step == 1) {
     echo '<a href="' . $this->url(array(), 'users_import') . '">Subir nuevamente</a> ';
     echo '<input type="submit" value="Importar usuarios" /><hr />';
     echo '<p><b>Modalidad: </b>' . $this->options[$this->type] . '<br />';
-    echo '<b>Generador de contraseña: </b>' . $this->password(NULL, $this->password);
+    echo '<b>Generador de contraseña: </b>' . $this->password(NULL, NULL, $this->password);
     echo '</p><table width="100%">';
 
     foreach ($this->results as $results) {

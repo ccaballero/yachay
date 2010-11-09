@@ -1,86 +1,79 @@
-<h1>Administrador de gestiones</h1>
+<?php
 
-<form method="post" action="" accept-charset="utf-8">
-    <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<form method="post" action="" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->currentPage() . '" />';
 
-    <table>
-        <tr>
-        <?php if (Yeah_Acl::hasPermission('gestions', 'list')) { ?>
-            <td>[<a href="<?= $this->url(array(), 'gestions_list') ?>">Lista</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('gestions', 'new')) { ?>
-            <td>[<a href="<?= $this->url(array(), 'gestions_new') ?>">Nuevo</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('gestions', 'active')) { ?>
-            <td><input type="submit" value="Actualizar" /></td>
-        <?php } ?>
-        </tr>
-    </table>
+echo '<table><tr>';
+if ($this->acl('gestions', 'list')) {
+    echo '<td>[<a href="' . $this->url(array(), 'gestions_list') . '">Lista</a>]</td>';
+}
+if ($this->acl('gestions', 'new')) {
+    echo '<td>[<a href="' . $this->url(array(), 'gestions_new') . '">Nuevo</a>]</td>';
+}
+if ($this->acl('gestions', 'active')) {
+    echo '<td><input type="submit" value="Actualizar" /></td>';
+}
+echo '</tr></table>';
+echo '<hr />';
 
-    <hr />
-<?php if (count($this->gestions)) { ?>
-    <center>
-        <table width="100%">
-            <tr>
-                <th>&nbsp;</th>
-                <th><?= $this->utf2html($this->model->_mapping['label']) ?></th>
-                <th><?= $this->utf2html($this->model->_mapping['status']) ?></th>
-                <th>Opciones</th>
-                <th><?= $this->utf2html($this->model->_mapping['tsregister']) ?></th>
-            </tr>
-        <?php foreach ($this->gestions as $gestion) { ?>
-            <tr>
-                <td>
-                <?php if (Yeah_Acl::hasPermission('gestions', 'active')) { ?>
-                <?php if ($gestion->status == 'active') { ?>
-                    <input type="radio" checked="checked" name="radio" value="<?= $gestion->ident ?>" />
-                <?php } else { ?>
-                    <input type="radio" name="radio" value="<?= $gestion->ident ?>" />
-                <?php } ?>
-                <?php } ?>
-                </td>
-                <td><?= $this->utf2html($gestion->label) ?></td>
-                <td><?= $this->status($gestion->status) ?></td>
-                <td>
-                    <center>
-                    <?php if (Yeah_Acl::hasPermission('gestions', 'view')) { ?>
-                        <a href="<?= $this->url(array('gestion' => $gestion->url), 'gestions_gestion_view') ?>">Ver</a>
-                    <?php } ?>
-                    <?php if (Yeah_Acl::hasPermission('gestions', 'delete')) { ?>
-                        <?php if ($gestion->status == 'inactive') { ?>
-                        <?php if ($gestion->isEmpty()) { ?>
-                        <a href="<?= $this->url(array('gestion' => $gestion->url), 'gestions_gestion_delete') ?>">Eliminar</a>
-                        <?php } ?>
-                        <?php } ?>
-                    <?php } ?>
-                    <?php if (Yeah_Acl::hasPermission('gestions', 'active')) { ?>
-                        <?php if ($gestion->status == 'inactive') { ?>
-                        <a href="<?= $this->url(array('gestion' => $gestion->url), 'gestions_gestion_active') ?>">Activar</a>
-                        <?php } ?>
-                    <?php } ?>
-                    </center>
-                </td>
-                <td><center><?= $this->timestamp($gestion->tsregister) ?></center></td>
-            </tr>
-        <?php } ?>
-        </table>
-    </center>
-<?php } else { ?>
-    <p>No existen gestiones registradas</p>
-<?php } ?>
-    <hr />
+if (count($this->gestions)) {
+    echo '<center><table width="100%"><tr><th>&nbsp;</th>';
+    echo '<th>' . $this->model_gestions->_mapping['label'] . '</th>';
+    echo '<th>' . $this->model_gestions->_mapping['status'] . '</th>';
+    echo '<th>Opciones</th>';
+    echo '<th>' . $this->model_gestions->_mapping['tsregister'] . '</th>';
+    echo '</tr>';
 
-    <table>
-        <tr>
-        <?php if (Yeah_Acl::hasPermission('gestions', 'list')) { ?>
-            <td>[<a href="<?= $this->url(array(), 'gestions_list') ?>">Lista</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('gestions', 'new')) { ?>
-            <td>[<a href="<?= $this->url(array(), 'gestions_new') ?>">Nuevo</a>]</td>
-        <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('gestions', 'active')) { ?>
-            <td><input type="submit" value="Actualizar" /></td>
-        <?php } ?>
-        </tr>
-    </table>
-</form>
+    foreach ($this->gestions as $gestion) {
+        echo '<tr><td>';
+        if ($this->acl('gestions', 'active')) {
+            if ($gestion->status == 'active') {
+                echo '<input type="radio" checked="checked" name="radio" value="' . $gestion->ident . '" />';
+            } else {
+                echo '<input type="radio" name="radio" value="' . $gestion->ident . '" />';
+            }
+        }
+
+        echo '</td><td>' . $gestion->label . '</td>';
+        echo '<td>' . $this->status($gestion->status) . '</td><td>';
+
+        echo '<center>';
+        if ($this->acl('gestions', 'view')) {
+            echo '<a href="' . $this->url(array('gestion' => $gestion->url), 'gestions_gestion_view') . '">Ver</a> ';
+        }
+        if ($this->acl('gestions', 'delete')) {
+            if ($gestion->status == 'inactive') {
+                if ($gestion->isEmpty()) {
+                    echo '<a href="' . $this->url(array('gestion' => $gestion->url), 'gestions_gestion_delete') . '">Eliminar</a> ';
+                }
+            }
+        }
+        if ($this->acl('gestions', 'active')) {
+            if ($gestion->status == 'inactive') {
+                echo '<a href="' . $this->url(array('gestion' => $gestion->url), 'gestions_gestion_active') . '">Activar</a>';
+            }
+        }
+        echo '</center>';
+
+        echo '</td><td><center>' . $this->timestamp($gestion->tsregister) . '</center></td></tr>';
+    }
+
+    echo '</table></center>';
+} else {
+    echo '<p>No existen gestiones registradas</p>';
+}
+
+echo '<hr />';
+echo '<table><tr>';
+if ($this->acl('gestions', 'list')) {
+    echo '<td>[<a href="' . $this->url(array(), 'gestions_list') . '">Lista</a>]</td>';
+}
+if ($this->acl('gestions', 'new')) {
+    echo '<td>[<a href="' . $this->url(array(), 'gestions_new') . '">Nuevo</a>]</td>';
+}
+if ($this->acl('gestions', 'active')) {
+    echo '<td><input type="submit" value="Actualizar" /></td>';
+}
+echo '</tr></table>';
+echo '</form>';

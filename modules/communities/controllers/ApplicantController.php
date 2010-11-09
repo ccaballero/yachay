@@ -6,14 +6,14 @@ class Communities_ApplicantController extends Yeah_Action
         $this->requirePermission('communities', 'enter');
 
         $request = $this->getRequest();
-        $communities_model = Yeah_Adapter::getModel('communities');
-        $users_model = Yeah_Adapter::getModel('users');
+        $model_communities = new Communities();
+        $model_users = new Users();
 
-        $community_url = $request->getParam('community');
-        $user_url = $request->getParam('user');
+        $url_community = $request->getParam('community');
+        $url_user = $request->getParam('user');
 
-        $community = $communities_model->findByUrl($community_url);
-        $user = $users_model->findByUrl($user_url);
+        $community = $model_communities->findByUrl($url_community);
+        $user = $model_users->findByUrl($url_user);
 
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
@@ -21,8 +21,8 @@ class Communities_ApplicantController extends Yeah_Action
 
         $session = new Zend_Session_Namespace();
 
-        $communities_users_model = Yeah_Adapter::getModel('communities', 'Communities_Users');
-        $row = $communities_users_model->createRow();
+        $model_communities_users = new Communities_Users();
+        $row = $model_communities_users->createRow();
         $row->community = $community->ident;
         $row->user = $user->ident;
         $row->type = 'member';
@@ -30,8 +30,8 @@ class Communities_ApplicantController extends Yeah_Action
         $row->tsregister = time();
         $row->save();
 
-        $communities_petitions_model = Yeah_Adapter::getModel('communities', 'Communities_Petitions');
-        $row = $communities_petitions_model->findByCommunityAndUser($community->ident, $user->ident);
+        $model_communities_petitions = new Communities_Petitions();
+        $row = $model_communities_petitions->findByCommunityAndUser($community->ident, $user->ident);
         $row->delete();
 
         $community->members = $community->members + 1;
@@ -47,14 +47,14 @@ class Communities_ApplicantController extends Yeah_Action
         $this->requirePermission('communities', 'enter');
 
         $request = $this->getRequest();
-        $communities_model = Yeah_Adapter::getModel('communities');
-        $users_model = Yeah_Adapter::getModel('users');
+        $model_communities = new Communities();
+        $model_users = new Users();
 
-        $community_url = $request->getParam('community');
-        $user_url = $request->getParam('user');
+        $url_community = $request->getParam('community');
+        $url_user = $request->getParam('user');
 
-        $community = $communities_model->findByUrl($community_url);
-        $user = $users_model->findByUrl($user_url);
+        $community = $model_communities->findByUrl($url_community);
+        $user = $model_users->findByUrl($url_user);
 
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
@@ -62,8 +62,8 @@ class Communities_ApplicantController extends Yeah_Action
 
         $session = new Zend_Session_Namespace();
 
-        $communities_petitions_model = Yeah_Adapter::getModel('communities', 'Communities_Petitions');
-        $row = $communities_petitions_model->findByCommunityAndUser($community->ident, $user->ident);
+        $model_communities_petitions = new Communities_Petitions();
+        $row = $model_communities_petitions->findByCommunityAndUser($community->ident, $user->ident);
         $row->delete();
 
         $community->petitions = $community->petitions - 1;

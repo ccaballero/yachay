@@ -10,18 +10,18 @@ class Notes_ManagerController extends Yeah_Action
         $this->requirePermission('resources', array('new', 'view'));
         $request = $this->getRequest();
 
-        $note = new modules_notes_models_Notes_Empty();
-        
-        $notes_model = Yeah_Adapter::getModel('notes');
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $valorations_model = Yeah_Adapter::getModel('valorations');
-        $tags_model = Yeah_Adapter::getModel('tags');
-        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
+        $note = new Notes_Empty();
+
+        $model_notes = new Notes();
+        $model_resources = new Resources();
+        $model_valorations = new Valorations();
+        $model_tags = new Tags();
+        $model_tags_resources = new Tags_Resources();
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $note = $notes_model->createRow();
+            $note = $model_notes->createRow();
             $note->note = $request->getParam('message');
             $publish = $request->getParam('publish');
             $tags = $request->getParam('tags');
@@ -37,7 +37,7 @@ class Notes_ManagerController extends Yeah_Action
 
             if (in_array($publish, $spaces_valids)) {
                 if ($note->isValid()) {
-                    $resource = $resources_model->createRow();
+                    $resource = $model_resources->createRow();
                     $resource->author = $USER->ident;
                     $resource->recipient = $publish;
                     $resource->tsregister = time();
@@ -47,32 +47,39 @@ class Notes_ManagerController extends Yeah_Action
                     $note->save();
 
                     $resource->saveContext($request);
-                    $valorations_model->addActivity(1);
+                    $model_valorations->addActivity(1);
 
                     // TAG REGISTER
                     $tags = explode(',', $tags);
+                    $saved_tags = array();
+
                     foreach ($tags as $tagLabel) {
                         $tagLabel = trim(strtolower($tagLabel));
-                        $tag = $tags_model->findByLabel($tagLabel);
-                        if ($tag == NULL) {
-                            $tag = $tags_model->createRow();
-                            $tag->label = $tagLabel;
-                            $tag->url = convert($tag->label);
-                            $tag->weight = 1;
-                            if ($tag->isValid()) {
-                                $tag->tsregister = time();
+
+                        if (!in_array($tagLabel, $saved_tags)) {
+                            $tag = $model_tags->findByLabel($tagLabel);
+                            if ($tag == NULL) {
+                                $tag = $model_tags->createRow();
+                                $tag->label = $tagLabel;
+                                $tag->url = convert($tag->label);
+                                $tag->weight = 1;
+                                if ($tag->isValid()) {
+                                    $tag->tsregister = time();
+                                    $tag->save();
+                                }
+                            } else {
+                                $tag->weight = $tag->weight + 1;
                                 $tag->save();
                             }
-                        } else {
-                            $tag->weight = $tag->weight + 1;
-                            $tag->save();
-                        }
 
-                        if ($tag->ident <> 0) {
-                            $assign = $tags_resources_model->createRow();
-                            $assign->tag = $tag->ident;
-                            $assign->resource = $resource->ident;
-                            $assign->save();
+                            if ($tag->ident <> 0) {
+                                $assign = $model_tags_resources->createRow();
+                                $assign->tag = $tag->ident;
+                                $assign->resource = $resource->ident;
+                                $assign->save();
+                            }
+
+                            $saved_tags[] = $tagLabel;
                         }
                     }
 

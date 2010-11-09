@@ -17,7 +17,7 @@ class Tags_Tag extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabel',
-                    'options'   => array('tags'),
+                    'options'   => array('Tags'),
                     'message'   => 'El nombre seleccionado para la etiqueta ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -34,7 +34,7 @@ class Tags_Tag extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueUrl',
-                    'options'   => array('tags'),
+                    'options'   => array('Tags'),
                     'message'   => 'El identificador de etiqueta ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),

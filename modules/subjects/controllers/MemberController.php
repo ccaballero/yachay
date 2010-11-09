@@ -6,22 +6,24 @@ class Subjects_MemberController extends Yeah_Action
         $this->requirePermission('subjects', 'moderate');
 
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
+
+        $gestions = new Gestions();
         $gestion = $gestions->findByActive();
 
-        $users_model = Yeah_Adapter::getModel('users');
-        $subjects_model = Yeah_Adapter::getModel('subjects');
-        $user_url = $request->getParam('user');
-        $subject_url = $request->getParam('subject');
+        $model_users = new Users();
+        $model_subjects = new Subjects();
 
-        $user = $users_model->findByUrl($user_url);
-        $subject = $subjects_model->findByUrl($gestion->ident, $subject_url);
+        $url_user = $request->getParam('user');
+        $url_subject = $request->getParam('subject');
+
+        $user = $model_users->findByUrl($url_user);
+        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
-        $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
-        $assign = $assignement->findBySubjectAndUser($subject->ident, $user->ident);
+        $model_subjects_users = new Subjects_Users();
+        $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $user->ident);
         $assign->status = 'inactive';
         $assign->save();
 
@@ -35,22 +37,22 @@ class Subjects_MemberController extends Yeah_Action
         $this->requirePermission('subjects', 'moderate');
 
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
+        $gestions = new Gestions();
         $gestion = $gestions->findByActive();
 
-        $users_model = Yeah_Adapter::getModel('users');
-        $subjects_model = Yeah_Adapter::getModel('subjects');
-        $user_url = $request->getParam('user');
-        $subject_url = $request->getParam('subject');
+        $model_users = new Users();
+        $model_subjects = new Subjects();
+        $url_user = $request->getParam('user');
+        $url_subject = $request->getParam('subject');
 
-        $user = $users_model->findByUrl($user_url);
-        $subject = $subjects_model->findByUrl($gestion->ident, $subject_url);
+        $user = $model_users->findByUrl($url_user);
+        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
-        $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
-        $assign = $assignement->findBySubjectAndUser($subject->ident, $user->ident);
+        $model_subjects_users = new Subjects_Users();
+        $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $user->ident);
         $assign->status = 'active';
         $assign->save();
 
@@ -64,22 +66,22 @@ class Subjects_MemberController extends Yeah_Action
         $this->requirePermission('subjects', 'moderate');
 
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
+        $gestions = new Gestions();
         $gestion = $gestions->findByActive();
 
-        $users_model = Yeah_Adapter::getModel('users');
-        $subjects_model = Yeah_Adapter::getModel('subjects');
-        $user_url = $request->getParam('user');
-        $subject_url = $request->getParam('subject');
+        $model_users = new Users();
+        $model_subjects = new Subjects();
+        $url_user = $request->getParam('user');
+        $url_subject = $request->getParam('subject');
 
-        $user = $users_model->findByUrl($user_url);
-        $subject = $subjects_model->findByUrl($gestion->ident, $subject_url);
+        $user = $model_users->findByUrl($url_user);
+        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
         
-        $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
-        $assign = $assignement->findBySubjectAndUser($subject->ident, $user->ident);
+        $model_subjects_users = new Subjects_Users();
+        $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $user->ident);
         $assign->delete();
 
         $session = new Zend_Session_Namespace();

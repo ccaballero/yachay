@@ -8,18 +8,23 @@ class Gestions_GestionController extends Yeah_Action
         global $USER;
 
         $this->requirePermission('gestions', 'view');
-
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByUrl($request->getParam('gestion'));
+
+        $url = $request->getParam('gestion');
+
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByUrl($url);
 
         $this->requireExistence($gestion, 'gestion', 'gestions_gestion_view', 'gestions_list');
 
-        $subjects1 = Yeah_Adapter::getModel('subjects')->selectByStatus($gestion->ident, 'active');
-        $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
+        $model_subjects = new Subjects();
+        $model_subjects_users = new Subjects_Users();
+
+        $subjects1 = $model_subjects->selectByStatus($gestion->ident, 'active');
         $subjects2 = array();
+
         foreach ($subjects1 as $subject) {
-            if ($subject->status == 'active' || Yeah_Acl::hasPermission('subjects', 'lock')) {
+            if ($subject->status == 'active' || $this->acl('subjects', 'lock')) {
                 switch ($subject->visibility) {
                     case 'public':
                         $subjects2[] = $subject;
@@ -31,10 +36,10 @@ class Gestions_GestionController extends Yeah_Action
                         break;
                     case 'private':
                         if ($USER->role != 1) {
-                            if (Yeah_Acl::hasPermission('subjects', 'edit')) {
+                            if ($this->acl('subjects', 'edit')) {
                                 $subjects2[] = $subject;
                             } else {
-                                $assign = $assignement->findBySubjectAndUser($subject->ident, $USER->ident);
+                                $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $USER->ident);
                                 if (!empty($assign)) {
                                     $subjects2[] = $subject;
                                 }
@@ -45,16 +50,17 @@ class Gestions_GestionController extends Yeah_Action
             }
         }
 
-        $this->view->model = $gestions;
+        $this->view->model_gestions = $model_gestions;
         $this->view->gestion = $gestion;
         $this->view->subjects = $subjects2;
 
         history('gestions/' . $gestion->url);
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('gestions', array('new', 'active', 'delete'))) {
-            $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_manager');
-        } else if (Yeah_Acl::hasPermission('gestions', 'list')) {
+        if ($this->acl('gestions', 'list')) {
             $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_list');
+        }
+        if ($this->acl('gestions', array('new', 'active', 'delete'))) {
+            $breadcrumb['Administrador de gestiones'] = $this->view->url(array(), 'gestions_manager');
         }
         breadcrumb($breadcrumb);
     }
@@ -64,8 +70,9 @@ class Gestions_GestionController extends Yeah_Action
         $request = $this->getRequest();
 
         $url = $request->getParam('gestion');
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByUrl($url);
+
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByUrl($url);
 
         $this->requireExistence($gestion, 'gestion', 'gestions_gestion_view', 'gestions_list');
 
@@ -86,14 +93,15 @@ class Gestions_GestionController extends Yeah_Action
         $request = $this->getRequest();
 
         $url = $request->getParam('gestion');
-        $gestions = Yeah_Adapter::getModel('gestions');
+        $model_gestions = new Gestions();
+
         // Active the selected gestion
-        $gestion = $gestions->findByUrl($url);
+        $gestion = $model_gestions->findByUrl($url);
 
         $this->requireExistence($gestion, 'gestion', 'gestions_gestion_view', 'gestions_list');
 
         // clear all gestions
-        $gestions->desactiveAll();
+        $model_gestions->desactiveAll();
         $gestion->status = 'active';
         $gestion->save();
 

@@ -5,10 +5,10 @@ class Tags_IndexController extends Yeah_Action
     public function indexAction() {
         $this->requirePermission('tags', 'list');
 
-        $tags_model = Yeah_Adapter::getModel('tags');
-        $tags = $tags_model->selectAll();
+        $model_tags = new Tags();
+        $tags = $model_tags->selectAll();
 
-        $max = $tags_model->findMaxWeight();
+        $max = $model_tags->findMaxWeight();
         $ratio = $max / 10.0;
 
         $_tags = array();
@@ -20,13 +20,13 @@ class Tags_IndexController extends Yeah_Action
         }
         shuffle($_tags);
 
-        $this->view->model = $tags_model;
+        $this->view->model_tags = $model_tags;
         $this->view->tags = $_tags;
 
         history('tags');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('tags', 'delete')) {
-            $breadcrumb['Etiquetas'] = $this->view->url(array(), 'tags_manager');
+        if ($this->acl('tags', 'delete')) {
+            $breadcrumb['Administrador de etiquetas'] = $this->view->url(array(), 'tags_manager');
         }
         breadcrumb($breadcrumb);
     }

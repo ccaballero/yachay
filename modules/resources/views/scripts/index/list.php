@@ -1,6 +1,4 @@
-<?php global $CONFIG; ?>
-
-<h1>Recursos registrados</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <table>
     <tr>
@@ -9,11 +7,11 @@
         <td>&nbsp;|&nbsp;</td>
     <?php } ?>
         <td>[<a href="<?= $this->url(array(), 'resources_list') ?>">Todas</a>]</td>
-        <td>[<a href="<?= $this->url(array('filter' => 'notes'),       'resources_filtered') ?>">Notas</a>]</td>
-        <td>[<a href="<?= $this->url(array('filter' => 'files'),       'resources_filtered') ?>">Archivos</a>]</td>
-        <td>[<a href="<?= $this->url(array('filter' => 'events'),      'resources_filtered') ?>">Eventos</a>]</td>
-        <td>[<a href="<?= $this->url(array('filter' => 'feedback'),    'resources_filtered') ?>">Sugerencias</a>]</td>
-    <?php if (Yeah_Acl::hasPermission('subjects', 'teach')) { ?>
+        <td>[<a href="<?= $this->url(array('filter' => 'notes'), 'resources_filtered') ?>">Notas</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'files'), 'resources_filtered') ?>">Archivos</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'events'), 'resources_filtered') ?>">Eventos</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'feedback'), 'resources_filtered') ?>">Sugerencias</a>]</td>
+    <?php if ($this->acl('subjects', 'teach')) { ?>
         <td>[<a href="<?= $this->url(array('filter' => 'evaluations'), 'resources_filtered') ?>">Evaluaciones</a>]</td>
     <?php } ?>
     </tr>
@@ -24,8 +22,7 @@
     <table width="100%">
     <?php foreach ($this->resources as $resource) { ?>
         <tr>
-            <td rowspan="3" valign="top" width="50px"><img src="<?= $CONFIG->wwwroot . 'media/users/thumbnail_small/' . $resource->getAuthor()->getAvatar() ?>" alt="" /></td>
-            <td><?= $this->utf2html($resource->getAuthor()->getFullName()) ?></td>
+            <td><?= $resource->getAuthor()->getFullName() ?></td>
             <td align="right"><?= $this->timestamp($resource->tsregister) ?></td>
         </tr>
         <tr>
@@ -65,11 +62,11 @@
         <td>&nbsp;|&nbsp;</td>
     <?php } ?>
         <td>[<a href="<?= $this->url(array(), 'resources_list') ?>">Todas</a>]</td>
-        <td>[<a href="<?= $this->url(array('filter' => 'notes'),       'resources_filtered') ?>">Notas</a>]</td>
-        <td>[<a href="<?= $this->url(array('filter' => 'files'),       'resources_filtered') ?>">Archivos</a>]</td>
-        <td>[<a href="<?= $this->url(array('filter' => 'events'),      'resources_filtered') ?>">Eventos</a>]</td>
-        <td>[<a href="<?= $this->url(array('filter' => 'feedback'),    'resources_filtered') ?>">Sugerencias</a>]</td>
-    <?php if (Yeah_Acl::hasPermission('subjects', 'teach')) { ?>
+        <td>[<a href="<?= $this->url(array('filter' => 'notes'), 'resources_filtered') ?>">Notas</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'files'), 'resources_filtered') ?>">Archivos</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'events'), 'resources_filtered') ?>">Eventos</a>]</td>
+        <td>[<a href="<?= $this->url(array('filter' => 'feedback'), 'resources_filtered') ?>">Sugerencias</a>]</td>
+    <?php if ($this->acl('subjects', 'teach')) { ?>
         <td>[<a href="<?= $this->url(array('filter' => 'evaluations'), 'resources_filtered') ?>">Evaluaciones</a>]</td>
     <?php } ?>
     </tr>

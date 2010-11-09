@@ -8,13 +8,13 @@ class Communities_CommunityController extends Yeah_Action
         $this->requirePermission('communities', 'view');
 
         $request = $this->getRequest();
-        $model_communities = Yeah_Adapter::getModel('communities');
+        $model_communities = new Communities();
         $community = $model_communities->findByUrl($request->getParam('community'));
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
 
         context('community', $community);
 
-        $resources = $community->findmodules_resources_models_ResourcesViamodules_communities_models_Communities_Resources($community->select()->order('tsregister DESC'));
+        $resources = $community->findResourcesViaCommunities_Resources($community->select()->order('tsregister DESC'));
 
         // PAGINATOR
         $page = $request->getParam('page', 1);
@@ -36,21 +36,22 @@ class Communities_CommunityController extends Yeah_Action
 
         history('communities/' . $community->url);
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('communities', array('enter'))) {
-            $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_manager');
-        } else if (Yeah_Acl::hasPermission('communities', 'list')) {
+        if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
+        }
+        if ($this->acl('communities', 'enter')) {
+            $breadcrumb['Administrador de comunidades'] = $this->view->url(array(), 'communities_manager');
         }
         breadcrumb($breadcrumb);
     }
 
     public function editAction() {
         $this->requirePermission('communities', 'enter');
-
         $request = $this->getRequest();
-        $model_communities = Yeah_Adapter::getModel('communities');
-        $model_tags = Yeah_Adapter::getModel('tags');
-        $model_tags_communities = Yeah_Adapter::getModel('tags', 'Tags_Communities');
+
+        $model_communities = new Communities();
+        $model_tags = new Tags();
+        $model_tags_communities = new Tags_Communities();
 
         $community = $model_communities->findByUrl($request->getParam('community'));
         $this->requireExistence($community, 'community', 'communities_community_view', 'community_list');
@@ -58,7 +59,7 @@ class Communities_CommunityController extends Yeah_Action
         context('community', $community);
 
         $_tags = array();
-        $tags = $community->findmodules_tags_models_TagsViamodules_tags_models_Tags_Communities();
+        $tags = $community->findTagsViaTags_Communities();
         foreach ($tags as $tag) {
             $_tags[] = $tag->label;
         }
@@ -173,20 +174,30 @@ class Communities_CommunityController extends Yeah_Action
                 }
                 $community->save();
 
+                // TAG REGISTER
                 $newTags = explode(',', $newTags);
                 $oldTags = $_tags;
+                $saved_tags = array();
 
-                for ($i = 0; $i < count($newTags); $i++) {
+                // removing duplicates tags
+                foreach ($newTags as $new_tag) {
+                    $new_tag = trim(strtolower($new_tag));
+                    if (!in_array($new_tag, $saved_tags)) {
+                        $saved_tags[] = $new_tag;
+                    }
+                }
+
+                for ($i = 0; $i < count($saved_tags); $i++) {
                     for ($j = 0; $j < count($oldTags); $j++) {
-                        if (isset($newTags[$i]) && isset($oldTags[$j])) {
-                            if (trim(strtolower($newTags[$i])) == $oldTags[$j]) {
-                                $newTags[$i] = NULL;
+                        if (isset($saved_tags[$i]) && isset($oldTags[$j])) {
+                            if ($saved_tags[$i] == $oldTags[$j]) {
+                                $saved_tags[$i] = NULL;
                                 $oldTags[$j] = NULL;
                             }
                         }
                     }
                 }
-                foreach ($newTags as $tagLabel) {
+                foreach ($saved_tags as $tagLabel) {
                     if ($tagLabel <> NULL) {
                         $tagLabel = trim(strtolower($tagLabel));
                         $tag = $model_tags->findByLabel($tagLabel);
@@ -237,18 +248,19 @@ class Communities_CommunityController extends Yeah_Action
             }
         }
 
-        $this->view->model = $model_communities;
+        $this->view->model_communities = $model_communities;
         $this->view->community = $community;
         $this->view->tags = implode(', ', $_tags);
 
         history('community/' . $community->url . '/edit');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('communities', array('enter'))) {
-            $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_manager');
-        } else if (Yeah_Acl::hasPermission('communities', 'list')) {
+        if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
         }
-        if (Yeah_Acl::hasPermission('communities', 'view')) {
+        if ($this->acl('communities', array('enter'))) {
+            $breadcrumb['Administrador de comunidades'] = $this->view->url(array(), 'communities_manager');
+        }
+        if ($this->acl('communities', 'view')) {
             $breadcrumb[$community->label] = $this->view->url(array('community' => $community->url), 'communities_community_view');
         }
         breadcrumb($breadcrumb);
@@ -258,12 +270,12 @@ class Communities_CommunityController extends Yeah_Action
         $this->requirePermission('communities', 'enter');
         $request = $this->getRequest();
 
-        $url = $request->getParam('community');
-        $model_communities = Yeah_Adapter::getModel('communities');
-        $model_communities_users = Yeah_Adapter::getModel('communities', 'Communities_Users');
-        $model_communities_petitions = Yeah_Adapter::getModel('communities', 'Communities_Petitions');
-        $model_tags_communities = Yeah_Adapter::getModel('tags', 'Tags_Communities');
+        $model_communities = new Communities();
+        $model_communities_users = new Communities_Users();
+        $model_communities_petitions = new Communities_Petitions();
+        $model_tags_communities = new Tags_Communities();
 
+        $url = $request->getParam('community');
         $community = $model_communities->findByUrl($url);
 
         $session = new Zend_Session_Namespace();
@@ -274,7 +286,7 @@ class Communities_CommunityController extends Yeah_Action
                 $model_communities_petitions->deleteAplicantsInCommunity($community->ident);
             }
 
-            $tags = $community->findmodules_tags_models_TagsViamodules_tags_models_Tags_Communities();
+            $tags = $community->findTagsViaTags_Communities();
             foreach ($tags as $tag) {
                 $tag->weight = $tag->weight - 1;
                 $tag->save();

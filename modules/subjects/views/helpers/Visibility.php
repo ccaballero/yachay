@@ -2,15 +2,19 @@
 
 class Subjects_View_Helper_Visibility
 {
-    public function visibility($name, $value = '') {
+    public function visibility($id, $name, $value = '') {
         $visibilities = array (
-            'public'   => 'Visible a cualquier persona',
-            'register' => 'Visible solo a usuarios registrados',
-            'private'  => 'Visible solo a usuarios asignados a la materia',
+            'public'   => 'Cualquier persona',
+            'register' => 'Usuarios registrados',
+            'private'  => 'Usuarios asignados a la materia',
         );
         
         if ($name == null) {
             return $visibilities[$value];
+        } else {
+            if (empty($id)) {
+                $id = $name;
+            }
         }
 
         $options = '';
@@ -22,7 +26,7 @@ class Subjects_View_Helper_Visibility
             $options .= '<option value="' . $key . '"' . $selected . ' >' . $message . '</option>'; 
         }
 
-        $select = '<select name="' . $name . '" id="' . $name . '">' .
+        $select = '<select id="' . $id . '" name="' . $name . '" id="' . $name . '">' .
             '<option value="">--------------------</option>' . $options . '</select>';
         return $select;
     }

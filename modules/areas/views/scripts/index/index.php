@@ -1,22 +1,22 @@
-<h1>Lista de areas</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <?php if (count($this->areas)) { ?>
     <ul>
     <?php foreach ($this->areas as $area) { ?>
         <li>
-            <?php if (Yeah_Acl::hasPermission('areas', 'view')) { ?>
+            <?php if ($this->acl('areas', 'view')) { ?>
             <a href="<?= $this->url(array('area' => $area->url), 'areas_area_view') ?>">
-                <b><?= $this->utf2html($area->label) ?></b>
+                <b><?= $area->label ?></b>
             </a>
             <?php } else { ?>
-                <b><?= $this->utf2html($area->label) ?></b>
+                <b><?= $area->label ?></b>
             <?php } ?>
             &nbsp;
-            <?php if (Yeah_Acl::hasPermission('areas', 'edit')) { ?>
+            <?php if ($this->acl('areas', 'edit')) { ?>
                 <b><i>[<a href="<?= $this->url(array('area' => $area->url), 'areas_area_edit') ?>">Editar</a>]</i></b>
             <?php } ?>
             <br />
-            <i><?= $this->utf2html($area->description) ?></i>
+            <i><?= $area->description ?></i>
         </li>
     <?php } ?>
     </ul>

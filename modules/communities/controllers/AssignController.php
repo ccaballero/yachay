@@ -4,9 +4,10 @@ class Communities_AssignController extends Yeah_Action
 {
     public function indexAction() {
         $this->requirePermission('communities', 'view');
-
         $request = $this->getRequest();
-        $model_communities = Yeah_Adapter::getModel('communities');
+
+        $model_communities = new Communities();
+
         $url = $request->getParam('community');
         $community = $model_communities->findByUrl($url);
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
@@ -38,22 +39,23 @@ class Communities_AssignController extends Yeah_Action
 
         context('community', $community);
 
-        $moderators = $community->findmodules_users_models_UsersViamodules_communities_models_Communities_Users($community->select()->where('type = ?', 'moderator'));
-        $members = $community->findmodules_users_models_UsersViamodules_communities_models_Communities_Users($community->select()->where('type = ?', 'member'));
+        $moderators = $community->findUsersViaCommunities_Users($community->select()->where('type = ?', 'moderator'));
+        $members = $community->findUsersViaCommunities_Users($community->select()->where('type = ?', 'member'));
 
-        $this->view->model = $model_communities;
+        $this->view->model_communities = $model_communities;
         $this->view->community = $community;
         $this->view->moderators = $moderators;
         $this->view->members = $members;
 
         history('communities/' . $community->url . '/assign');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('communities', array('enter'))) {
-            $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_manager');
-        } else if (Yeah_Acl::hasPermission('communities', 'list')) {
+        if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
         }
-        if (Yeah_Acl::hasPermission('communities', 'view')) {
+        if ($this->acl('communities', 'enter')) {
+            $breadcrumb['Administrador de comunidades'] = $this->view->url(array(), 'communities_manager');
+        }
+        if ($this->acl('communities', 'view')) {
             $breadcrumb[$community->label] = $this->view->url(array('community' => $community->url), 'communities_community_view');
         }
         breadcrumb($breadcrumb);
@@ -64,14 +66,16 @@ class Communities_AssignController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_communities = Yeah_Adapter::getModel('communities');
+            $model_communities = new Communities();
+
             $url = $request->getParam('community');
             $community = $model_communities->findByUrl($url);
+
             $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
             $this->requireCommunityModerator($community);
 
-            $model_users = Yeah_Adapter::getModel('users');
-            $assignement = Yeah_Adapter::getModel('communities', 'Communities_Users');
+            $model_users = new Users();
+            $model_communities_users = new Communities_Users();
 
             $members = $request->getParam("members");
             $count = 0;
@@ -79,7 +83,7 @@ class Communities_AssignController extends Yeah_Action
             foreach ($members as $member) {
                 $user = $model_users->findByIdent($member);
                 if (!empty($user) && $community->author <> $user->ident && $USER->ident <> $user->ident) {
-                    $assign = $assignement->findByCommunityAndUser($community->ident, $user->ident);
+                    $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
                     $assign->status = 'inactive';
                     $assign->save();
                     $count++;
@@ -97,14 +101,16 @@ class Communities_AssignController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_communities = Yeah_Adapter::getModel('communities');
+            $model_communities = new Communities();
+
             $url = $request->getParam('community');
             $community = $model_communities->findByUrl($url);
+
             $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
             $this->requireCommunityModerator($community);
 
-            $model_users = Yeah_Adapter::getModel('users');
-            $assignement = Yeah_Adapter::getModel('communities', 'Communities_Users');
+            $model_users = new Users();
+            $model_communities_users = new Communities_Users();
 
             $members = $request->getParam("members");
             $count = 0;
@@ -112,7 +118,7 @@ class Communities_AssignController extends Yeah_Action
             foreach ($members as $member) {
                 $user = $model_users->findByIdent($member);
                 if (!empty($user) && $community->author <> $user->ident && $USER->ident <> $user->ident) {
-                    $assign = $assignement->findByCommunityAndUser($community->ident, $user->ident);
+                    $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
                     $assign->status = 'active';
                     $assign->save();
                     $count++;
@@ -130,14 +136,16 @@ class Communities_AssignController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_communities = Yeah_Adapter::getModel('communities');
+            $model_communities = new Communities();
+
             $url = $request->getParam('community');
             $community = $model_communities->findByUrl($url);
+
             $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
             $this->requireCommunityModerator($community);
 
-            $model_users = Yeah_Adapter::getModel('users');
-            $assignement = Yeah_Adapter::getModel('communities', 'Communities_Users');
+            $model_users = new Users();
+            $model_communities_users = new Communities_Users();
 
             $members = $request->getParam("members");
             $count = 0;
@@ -145,7 +153,7 @@ class Communities_AssignController extends Yeah_Action
             foreach ($members as $member) {
                 $user = $model_users->findByIdent($member);
                 if (!empty($user) && $community->author <> $user->ident && $USER->ident <> $user->ident) {
-                    $assign = $assignement->findByCommunityAndUser($community->ident, $user->ident);
+                    $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
                     $assign->delete();
                     $count++;
                 }
@@ -165,14 +173,16 @@ class Communities_AssignController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_communities = Yeah_Adapter::getModel('communities');
+            $model_communities = new Communities();
+
             $url = $request->getParam('community');
             $community = $model_communities->findByUrl($url);
+
             $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
             $this->requireCommunityModerator($community);
 
-            $model_users = Yeah_Adapter::getModel('users');
-            $assignement = Yeah_Adapter::getModel('communities', 'Communities_Users');
+            $model_users = new Users();
+            $model_communities_users = new Communities_Users();
 
             $members = $request->getParam("members");
             $count = 0;
@@ -180,7 +190,7 @@ class Communities_AssignController extends Yeah_Action
             foreach ($members as $member) {
                 $user = $model_users->findByIdent($member);
                 if (!empty($user) && $community->author <> $user->ident && $USER->ident <> $user->ident) {
-                    $assign = $assignement->findByCommunityAndUser($community->ident, $user->ident);
+                    $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
                     $assign->type = 'moderator';
                     $assign->save();
                     $count++;
@@ -198,14 +208,16 @@ class Communities_AssignController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_communities = Yeah_Adapter::getModel('communities');
+            $model_communities = new Communities();
+
             $url = $request->getParam('community');
             $community = $model_communities->findByUrl($url);
+
             $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
             $this->requireCommunityModerator($community);
 
-            $model_users = Yeah_Adapter::getModel('users');
-            $assignement = Yeah_Adapter::getModel('communities', 'Communities_Users');
+            $model_users = new Users();
+            $model_communities_users = new Communities_Users();
 
             $members = $request->getParam("members");
             $count = 0;
@@ -213,7 +225,7 @@ class Communities_AssignController extends Yeah_Action
             foreach ($members as $member) {
                 $user = $model_users->findByIdent($member);
                 if (!empty($user) && $community->author <> $user->ident && $USER->ident <> $user->ident) {
-                    $assign = $assignement->findByCommunityAndUser($community->ident, $user->ident);
+                    $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
                     $assign->type = 'member';
                     $assign->save();
                     $count++;
@@ -232,18 +244,20 @@ class Communities_AssignController extends Yeah_Action
         $this->requirePermission('communities', 'enter');
         $request = $this->getRequest();
 
+        $model_communities = new Communities();
+
         $url = $request->getParam('community');
-        $communities_model = Yeah_Adapter::getModel('communities');
-        $community = $communities_model->findByUrl($url);
+        $community = $model_communities->findByUrl($url);
 
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
 
         if ($community->mode == 'open') {
-            $communities_users_model = Yeah_Adapter::getModel('communities', 'Communities_Users');
-            $assignement = $communities_users_model->findByCommunityAndUser($community->ident, $USER->ident);
+            $model_communities_users = new Communities_Users();
+            $assignement = $model_communities_users->findByCommunityAndUser($community->ident, $USER->ident);
+
             $session = new Zend_Session_Namespace();
             if ($assignement == NULL) {
-                $row = $communities_users_model->createRow();
+                $row = $model_communities_users->createRow();
                 $row->community = $community->ident;
                 $row->user = $USER->ident;
                 $row->type = 'member';
@@ -258,11 +272,12 @@ class Communities_AssignController extends Yeah_Action
             }
         }
         if ($community->mode == 'close') {
-            $communities_petitions_model = Yeah_Adapter::getModel('communities', 'Communities_Petitions');
-            $assignement = $communities_petitions_model->findByCommunityAndUser($community->ident, $USER->ident);
+            $model_communities_petitions = new Communities_Petitions();
+            $assignement = $model_communities_petitions->findByCommunityAndUser($community->ident, $USER->ident);
+
             $session = new Zend_Session_Namespace();
             if ($assignement == NULL) {
-                $row = $communities_petitions_model->createRow();
+                $row = $model_communities_petitions->createRow();
                 $row->community = $community->ident;
                 $row->user = $USER->ident;
                 $row->tsregister = time();
@@ -284,14 +299,16 @@ class Communities_AssignController extends Yeah_Action
         $this->requirePermission('communities', 'enter');
         $request = $this->getRequest();
 
+        $model_communities = new Communities();
+
         $url = $request->getParam('community');
-        $communities_model = Yeah_Adapter::getModel('communities');
-        $community = $communities_model->findByUrl($url);
+        $community = $model_communities->findByUrl($url);
 
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
 
-        $communities_users_model = Yeah_Adapter::getModel('communities', 'Communities_Users');
-        $assignement = $communities_users_model->findByCommunityAndUser($community->ident, $USER->ident);
+        $model_communities_users = new Communities_Users();
+        $assignement = $model_communities_users->findByCommunityAndUser($community->ident, $USER->ident);
+
         $session = new Zend_Session_Namespace();
         if ($assignement <> NULL) {
             $assignement->delete();

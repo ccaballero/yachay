@@ -6,23 +6,23 @@ class Areas_AreaController extends Yeah_Action
         global $USER;
 
         $this->requirePermission('areas', 'view');
-
         $request = $this->getRequest();
-        $areas = Yeah_Adapter::getModel('areas');
-        $area = $areas->findByUrl($request->getParam('area'));
+
+        $model_areas = new Areas();
+        $area = $model_areas->findByUrl($request->getParam('area'));
         $this->requireExistence($area, 'area', 'areas_area_view', 'areas_list');
 
         context('area', $area);
 
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByActive();
 
-        $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
-        $subjects1 = $area->findmodules_subjects_models_SubjectsViamodules_areas_models_Areas_Subjects();
+        $model_subjects_users = new Subjects_Users();
+        $subjects1 = $area->findSubjectsViaAreas_Subjects();
         $subjects2 = array();
         foreach ($subjects1 as $subject) {
             if ($subject->gestion == $gestion->ident) {
-                if ($subject->status == 'active' || Yeah_Acl::hasPermission('subjects', 'lock')) {
+                if ($subject->status == 'active' || $this->acl('subjects', 'lock')) {
                     switch ($subject->visibility) {
                         case 'public':
                             $subjects2[] = $subject;
@@ -34,10 +34,10 @@ class Areas_AreaController extends Yeah_Action
                             break;
                         case 'private':
                             if ($USER->role != 1) {
-                                if (Yeah_Acl::hasPermission('subjects', 'edit')) {
+                                if ($this->acl('subjects', 'edit')) {
                                     $subjects2[] = $subject;
                                 } else {
-                                    $assign = $assignement->findBySubjectAndUser($subject->ident, $USER->ident);
+                                    $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $USER->ident);
                                     if (!empty($assign)) {
                                         $subjects2[] = $subject;
                                     }
@@ -49,7 +49,7 @@ class Areas_AreaController extends Yeah_Action
             }
         }
 
-        $resources = $area->findmodules_resources_models_ResourcesViamodules_areas_models_Areas_Resources($area->select()->order('tsregister DESC'));
+        $resources = $area->findResourcesViaAreas_Resources($area->select()->order('tsregister DESC'));
 
         // PAGINATOR
         $page = $request->getParam('page', 1);
@@ -66,16 +66,17 @@ class Areas_AreaController extends Yeah_Action
             ),
         );
 
-        $this->view->model = $areas;
+        $this->view->model_areas = $model_areas;
         $this->view->area = $area;
         $this->view->subjects = $subjects2;
 
         history('areas/' . $area->url);
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('areas', array('new', 'delete'))) {
-            $breadcrumb['Areas'] = $this->view->url(array(), 'areas_manager');
-        } else if (Yeah_Acl::hasPermission('areas', 'list')) {
+        if ($this->acl('areas', 'list')) {
             $breadcrumb['Areas'] = $this->view->url(array(), 'areas_list');
+        }
+        if ($this->acl('areas', array('new', 'delete'))) {
+            $breadcrumb['Administrador de areas'] = $this->view->url(array(), 'areas_manager');
         }
         breadcrumb($breadcrumb);
     }
@@ -84,8 +85,8 @@ class Areas_AreaController extends Yeah_Action
         $this->requirePermission('areas', 'edit');
 
         $request = $this->getRequest();
-        $areas = Yeah_Adapter::getModel('areas');
-        $area = $areas->findByUrl($request->getParam('area'));
+        $model_areas = new Areas();
+        $area = $model_areas->findByUrl($request->getParam('area'));
         $this->requireExistence($area, 'area', 'areas_area_view', 'areas_list');
 
         context('area', $area);
@@ -110,17 +111,18 @@ class Areas_AreaController extends Yeah_Action
             }
         }
 
-        $this->view->model = $areas;
+        $this->view->model_areas = $model_areas;
         $this->view->area = $area;
 
         history('areas/' . $area->url . '/edit');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('areas', array('new', 'delete'))) {
-            $breadcrumb['Areas'] = $this->view->url(array(), 'areas_manager');
-        } else if (Yeah_Acl::hasPermission('areas', 'list')) {
+        if ($this->acl('areas', 'list')) {
             $breadcrumb['Areas'] = $this->view->url(array(), 'areas_list');
         }
-        if (Yeah_Acl::hasPermission('areas', 'view')) {
+        if ($this->acl('areas', array('new', 'delete'))) {
+            $breadcrumb['Administrador de areas'] = $this->view->url(array(), 'areas_manager');
+        }
+        if ($this->acl('areas', 'view')) {
             $breadcrumb[$area->label] = $this->view->url(array('area' => $area->url), 'areas_area_view');
         }
         breadcrumb($breadcrumb);
@@ -129,10 +131,10 @@ class Areas_AreaController extends Yeah_Action
     public function deleteAction() {
         $this->requirePermission('areas', 'delete');
         $request = $this->getRequest();
-
         $url = $request->getParam('area');
-        $areas = Yeah_Adapter::getModel('areas');
-        $area = $areas->findByUrl($url);
+
+        $model_areas = new Areas();
+        $area = $model_areas->findByUrl($url);
 
         $session = new Zend_Session_Namespace();
         if (!empty($area) && $area->isEmpty()) {

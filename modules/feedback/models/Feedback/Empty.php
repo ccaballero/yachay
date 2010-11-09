@@ -1,6 +1,6 @@
 <?php
 
-class modules_feedback_models_Feedback_Empty
+class Feedback_Empty
 {
     public $description = '';
 }

@@ -8,7 +8,7 @@ class Subjects_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            if (Yeah_Acl::hasPermission('subjects', 'lock')) {
+            if ($this->acl('subjects', 'lock')) {
                 $lock = $request->getParam('lock');
                 $unlock = $request->getParam('unlock');
                 if (!empty($lock)) {
@@ -17,7 +17,7 @@ class Subjects_ManagerController extends Yeah_Action
                     $this->_forward('unlock');
                 }
             }
-            if (Yeah_Acl::hasPermission('subjects', 'delete')) {
+            if ($this->acl('subjects', 'delete')) {
                 $delete = $request->getParam('delete');
                 if (!empty($delete)) {
                     $this->_forward('delete');
@@ -25,21 +25,26 @@ class Subjects_ManagerController extends Yeah_Action
             }
         }
 
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_subjects = new Subjects();
+        $model_gestions = new Gestions();
 
-        $this->view->model = $subjects;
+        $gestion = $model_gestions->findByActive();
+
+        $this->view->model_subjects = $model_subjects;
         $this->view->gestion = $gestion;
 
         if (!empty($gestion)) {
-            $this->view->subjects = $subjects->selectAll($gestion->ident);
+            $this->view->subjects = $model_subjects->selectAll($gestion->ident);
         } else {
             $this->view->subjects = array();
         }
 
         history('subjects/manager');
-        breadcrumb();
+        $breadcrumb = array();
+        if ($this->acl('subjects', 'list')) {
+            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
+        }
+        breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -47,18 +52,18 @@ class Subjects_ManagerController extends Yeah_Action
 
         $this->requirePermission('subjects', 'new');
 
-        $areas = Yeah_Adapter::getModel('areas');
-        $this->view->areas = $areas->selectAll();
+        $model_areas = new Areas();
+        $this->view->areas = $model_areas->selectAll();
         $this->view->checks = array();
 
-        $this->view->subject = new modules_subjects_models_Subjects_Empty;
+        $this->view->subject = new Subjects_Empty();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $subjects = Yeah_Adapter::getModel('subjects');
-            $subject = $subjects->createRow();
+            $model_subjects = new Subjects();
+            $subject = $model_subjects->createRow();
             $subject->label = $request->getParam('label');
             $subject->url = convert($subject->label);
             $subject->moderator = $request->getParam('moderator');
@@ -71,8 +76,8 @@ class Subjects_ManagerController extends Yeah_Action
                 $checks = array();
             }
 
-            $gestions = Yeah_Adapter::getModel('gestions');
-            $gestion = $gestions->findByActive();
+            $model_gestions = new Gestions();
+            $gestion = $model_gestions->findByActive();
             $subject->gestion = $gestion->ident;
 
             if ($subject->isValid()) {
@@ -80,9 +85,9 @@ class Subjects_ManagerController extends Yeah_Action
                 $subject->tsregister = time();
                 $subject->save();
 
-                $assignement = Yeah_Adapter::getModel('areas', 'Areas_Subjects');
+                $model_areas_subjects = new Areas_Subjects();
                 foreach ($checks as $area) {
-                    $assign = $assignement->createRow();
+                    $assign = $model_areas_subjects->createRow();
                     $assign->area = $area;
                     $assign->subject = $subject->ident;
                     $assign->save();
@@ -103,7 +108,12 @@ class Subjects_ManagerController extends Yeah_Action
 
         history('subjects/new');
         $breadcrumb = array();
-        $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
+        if ($this->acl('subjects', 'list')) {
+            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
+        }
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
+        }
         breadcrumb($breadcrumb);
     }
 
@@ -112,11 +122,11 @@ class Subjects_ManagerController extends Yeah_Action
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            $subjects = Yeah_Adapter::getModel('subjects');
+            $model_subjects = new Subjects();
             $check = $request->getParam("check");
 
             foreach ($check as $value) {
-                $subject = $subjects->findByIdent($value);
+                $subject = $model_subjects->findByIdent($value);
                 $subject->status = 'inactive';
                 $subject->save();
             }
@@ -133,11 +143,11 @@ class Subjects_ManagerController extends Yeah_Action
         $request = $this->getRequest();
 
         if ($request->isPost()) {
-            $subjects = Yeah_Adapter::getModel('subjects');
+            $model_subjects = new Subjects();
             $check = $request->getParam("check");
 
             foreach ($check as $value) {
-                $subject = $subjects->findByIdent($value);
+                $subject = $model_subjects->findByIdent($value);
                 $subject->status = 'active';
                 $subject->save();
             }
@@ -153,12 +163,12 @@ class Subjects_ManagerController extends Yeah_Action
         $this->requirePermission('subjects', 'delete');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $subjects = Yeah_Adapter::getModel('subjects');
+            $model_subjects = new Subjects();
             $check = $request->getParam("check");
 
             $count = 0;
             foreach ($check as $value) {
-                $subject = $subjects->findByIdent($value);
+                $subject = $model_subjects->findByIdent($value);
                 if ($subject->isEmpty()) {
                     $subject->delete();
                     $count++;
@@ -179,13 +189,13 @@ class Subjects_ManagerController extends Yeah_Action
         $this->requirePermission('subjects', array('new', 'edit'));
 
         $options = array();
-        if (Yeah_Acl::hasPermission('subjects', 'new')) {
+        if ($this->acl('subjects', 'new')) {
             $options['CREATE_NOEDIT'] = 'Solo crear materias nuevas, e ignorar las restantes.';
         }
-        if (Yeah_Acl::hasPermission('subjects', 'edit')) {
+        if ($this->acl('subjects', 'edit')) {
             $options['NOCREATE_EDIT'] = 'Solo actualizar la información de las existentes, no registrar nuevas.';
         }
-        if (Yeah_Acl::hasPermission('subjects', 'new') && Yeah_Acl::hasPermission('subjects', 'edit')) {
+        if ($this->acl('subjects', 'new') && $this->acl('subjects', 'edit')) {
             $options['CREATE_EDIT'] = 'Crear materias, y actualizar la información de las existentes.';
         }
         $this->view->options = $options;
@@ -195,12 +205,12 @@ class Subjects_ManagerController extends Yeah_Action
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $subjects = Yeah_Adapter::getModel('subjects');
-            $users = Yeah_Adapter::getModel('users');
-            $me = $users->findByIdent($USER->ident);
+            $model_subjects = new Subjects();
+            $model_users = new Users();
+            $me = $model_users->findByIdent($USER->ident);
 
-            $gestions = Yeah_Adapter::getModel('gestions');
-            $gestion = $gestions->findByActive();
+            $model_gestions = new Gestions();
+            $gestion = $model_gestions->findByActive();
 
             $selections = $request->getParam('subjects');
             if (empty($selections)) {
@@ -236,7 +246,7 @@ class Subjects_ManagerController extends Yeah_Action
                                     $result = array();
 
                                     $result['CODIGO'] = trim($row[$_headers['CODIGO']]);
-                                    $subject = $subjects->findByCode($gestion->ident, $result['CODIGO']);
+                                    $subject = $model_subjects->findByCode($gestion->ident, $result['CODIGO']);
                                     if (empty($subject)) {
                                         $result['CODIGO_NUE'] = TRUE;
                                     } else {
@@ -249,7 +259,7 @@ class Subjects_ManagerController extends Yeah_Action
                                     $result['DESCRIPCION'] = isset($_headers['DESCRIPCION']) ? $row[$_headers['DESCRIPCION']] : '';
 
                                     $result['MODERADOR'] = isset($_headers['MODERADOR']) ? $row[$_headers['MODERADOR']] : $USER->label;
-                                    $moderator = $users->findByLabel($result['MODERADOR']);
+                                    $moderator = $model_users->findByLabel($result['MODERADOR']);
                                     if (!empty($moderator)) {
                                         if ($moderator->hasPermission('subjects', 'moderate')) {
                                             $result['MODERADOR_OBJ'] = $moderator;
@@ -259,6 +269,10 @@ class Subjects_ManagerController extends Yeah_Action
                                     } else {
                                         $result['MODERADOR_MES'] = 'El usuario no existe';
                                     }
+
+                                    $result['CHECKED'] = ($type == 'CREATE_NOEDIT') && $result['CODIGO_NUE'];
+                                    $result['CHECKED'] |= ($type == 'NOCREATE_EDIT') && (!$result['CODIGO_NUE']);
+                                    $result['CHECKED'] |= ($type == 'CREATE_EDIT');
 
                                     $results[] = $result;
                                 }
@@ -289,16 +303,16 @@ class Subjects_ManagerController extends Yeah_Action
                     $count_edit = 0;
                     foreach ($session->import_subjects as $result) {
                         if (in_array($result['CODIGO'], $selections)) {
-                            if ($result['CODIGO_NUE'] && Yeah_Acl::hasPermission('subjects', 'new')) {
-                                $subject = $subjects->createRow();
+                            if ($result['CODIGO_NUE'] && $this->acl('subjects', 'new')) {
+                                $subject = $model_subjects->createRow();
                                 $subject->gestion = $gestion->ident;
                                 $subject->code = $result['CODIGO'];
                                 $subject->status = 'inactive';
                                 $subject->author = $USER->ident;
                                 $subject->tsregister = time();
                             }
-                            if (!$result['CODIGO_NUE'] && Yeah_Acl::hasPermission('subjects', 'edit')) {
-                                $subject = $subjects->findByCode($gestion->ident, $result['CODIGO']);
+                            if (!$result['CODIGO_NUE'] && $this->acl('subjects', 'edit')) {
+                                $subject = $model_subjects->findByCode($gestion->ident, $result['CODIGO']);
                             }
                             if (isset($subject)) {
                                 $subject->label = $result['MATERIA'];
@@ -329,22 +343,27 @@ class Subjects_ManagerController extends Yeah_Action
 
         history('subjects/import');
         $breadcrumb = array();
-        $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
+        if ($this->acl('subjects', 'list')) {
+            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
+        }
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
+        }
         breadcrumb($breadcrumb);
     }
 
     public function exportAction() {
         $this->requirePermission('subjects', 'export');
-        $this->requirePermission('subjects', array('list'));
-        $this->requirePermission('subjects', array('view'));
+        $this->requirePermission('subjects', 'list');
+        $this->requirePermission('subjects', 'view');
 
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByActive();
 
-        $model = Yeah_Adapter::getModel('subjects');
-        $subjects = $model->selectAll($gestion->ident);
-        $this->view->model = $model;
+        $model_subjects = new Subjects();
+        $subjects = $model_subjects->selectAll($gestion->ident);
+        $this->view->model_subjects = $model_subjects;
 
         if ($request->isPost()) {
             $columns = $request->getParam('columns');
@@ -356,9 +375,9 @@ class Subjects_ManagerController extends Yeah_Action
 
                     $headers = array();
                     foreach ($columns as $column) {
-                        $headers[] = '"' . $model->_mapping[$column] . '"';
+                        $headers[] = '"' . $model_subjects->_mapping[$column] . '"';
                     }
-                    $csv .= implode(', ', $headers) . '
+                    $csv .= implode(',', $headers) . '
 ';
                     foreach ($subjects as $subject) {
                         $row = array();
@@ -369,7 +388,7 @@ class Subjects_ManagerController extends Yeah_Action
                                 $row[] = '"' . $subject->$column . '"';
                             }
                         }
-                        $csv .= implode(', ', $row) . '
+                        $csv .= implode(',', $row) . '
 ';
                     }
 
@@ -386,7 +405,12 @@ class Subjects_ManagerController extends Yeah_Action
 
         history('subjects/export');
         $breadcrumb = array();
-        $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
+        if ($this->acl('subjects', 'list')) {
+            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
+        }
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
+        }
         breadcrumb($breadcrumb);
     }
 }

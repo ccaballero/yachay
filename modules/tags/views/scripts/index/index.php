@@ -1,4 +1,4 @@
-<h1>Nube de etiquetas</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <?php if (count($this->tags) <> 0) { ?>
     <?php foreach ($this->tags as $tag) { ?>

@@ -1,4 +1,4 @@
-<h1>Editar Evento</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <center>
     <form method="post" action="" accept-charset="utf-8">
@@ -6,18 +6,18 @@
         <table>
 	        <tr>
                 <td><b>Nombre (*):</b></td>
-                <td><input type="text" name="name" value="<?= $this->utf2html($this->event->label) ?>"/></td>
+                <td><input type="text" name="name" value="<?= $this->event->label ?>"/></td>
             </tr>
             <tr>
                 <td><b>Lugar :</b></td>
-                <td><input type="text" name="place" value="<?= $this->utf2html($this->event->place) ?>"/></td>
+                <td><input type="text" name="place" value="<?= $this->event->place ?>"/></td>
             </tr>
             <tr>
                 <td><b>Fecha (*):</b></td>
                 <td><?= $this->time('event', $this->event->event) ?></td>
             </tr>
             <tr>
-                <td><b>Duraci&oacute;n :</b></td>
+                <td><b>Duración :</b></td>
                 <td>
                 	<?= $this->interval('duration', 'interval', $this->event->duration) ?>
                 </td>

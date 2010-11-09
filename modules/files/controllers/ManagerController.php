@@ -11,13 +11,13 @@ class Files_ManagerController extends Yeah_Action
         $this->requirePermission('resources', array('new', 'view'));
         $request = $this->getRequest();
 
-        $file = new modules_files_models_Files_Empty();
+        $file = new Files_Empty();
         
-        $files_model = Yeah_Adapter::getModel('files');
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $valorations_model = Yeah_Adapter::getModel('valorations');
-        $tags_model = Yeah_Adapter::getModel('tags');
-        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
+        $model_files = new Files();
+        $model_resources = new Resources();
+        $model_valorations = new Valorations();
+        $model_tags = new Tags();
+        $model_tags_resources = new Tags_Resources();
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -37,14 +37,14 @@ class Files_ManagerController extends Yeah_Action
                     $filename = $upload->getFileName('file');
                     $extension = strtolower(substr($filename, -3));
 
-                    $file = $files_model->createRow();
+                    $file = $model_files->createRow();
                     $file->filename = basename($filename);
                     $file->mime = mime_content_type($filename);
                     $file->size = filesize($filename);
                     $file->description = $request->getParam('description');
 
                     if ($file->isValid()) {
-                        $resource = $resources_model->createRow();
+                        $resource = $model_resources->createRow();
                         $resource->author = $USER->ident;
                         $resource->recipient = $request->getParam('publish');
                         $resource->tsregister = time();
@@ -56,32 +56,39 @@ class Files_ManagerController extends Yeah_Action
                         rename($CONFIG->dirroot . 'media/upload/' . $file->filename, $CONFIG->dirroot . 'media/files/' . $file->resource);
 
                         $resource->saveContext($request);
-                        $valorations_model->addActivity(2);
+                        $model_valorations->addActivity(2);
 
                         // TAG REGISTER
                         $tags = explode(',', $tags);
+                        $saved_tags = array();
+
                         foreach ($tags as $tagLabel) {
                             $tagLabel = trim(strtolower($tagLabel));
-                            $tag = $tags_model->findByLabel($tagLabel);
-                            if ($tag == NULL) {
-                                $tag = $tags_model->createRow();
-                                $tag->label = $tagLabel;
-                                $tag->url = convert($tag->label);
-                                $tag->weight = 1;
-                                if ($tag->isValid()) {
-                                    $tag->tsregister = time();
+
+                            if (!in_array($tagLabel, $saved_tags)) {
+                                $tag = $model_tags->findByLabel($tagLabel);
+                                if ($tag == NULL) {
+                                    $tag = $model_tags->createRow();
+                                    $tag->label = $tagLabel;
+                                    $tag->url = convert($tag->label);
+                                    $tag->weight = 1;
+                                    if ($tag->isValid()) {
+                                        $tag->tsregister = time();
+                                        $tag->save();
+                                    }
+                                } else {
+                                    $tag->weight = $tag->weight + 1;
                                     $tag->save();
                                 }
-                            } else {
-                                $tag->weight = $tag->weight + 1;
-                                $tag->save();
-                            }
 
-                            if ($tag->ident <> 0) {
-                                $assign = $tags_resources_model->createRow();
-                                $assign->tag = $tag->ident;
-                                $assign->resource = $resource->ident;
-                                $assign->save();
+                                if ($tag->ident <> 0) {
+                                    $assign = $model_tags_resources->createRow();
+                                    $assign->tag = $tag->ident;
+                                    $assign->resource = $resource->ident;
+                                    $assign->save();
+                                }
+
+                                $saved_tags[] = $tagLabel;
                             }
                         }
 

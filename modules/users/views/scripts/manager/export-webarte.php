@@ -7,12 +7,12 @@
     <p><label>Atributos que desea exportar: </label>&nbsp;</p>
     <p><label>&nbsp;</label><span><input type="checkbox" checked="checked" name="columns[]" value="code" /></span> <span class="form"><?= $this->model_users->_mapping['code'] ?></span></p>
     <p><label>&nbsp;</label><span><input type="checkbox" checked="checked" name="columns[]" value="formalname" /></span> <span class="form"><?= $this->model_users->_mapping['formalname'] ?></span></p>
-    <p><label>&nbsp;</label><span><input type="checkbox" name="columns[]" value="role" /></span> <span class="form"><?= $this->model_users->_mapping['role'] ?></span></p>
+    <p><label>&nbsp;</label><span><input type="checkbox" checked="checked" name="columns[]" value="role" /></span> <span class="form"><?= $this->model_users->_mapping['role'] ?></span></p>
     <p><label>&nbsp;</label><span><input type="checkbox" checked="checked" name="columns[]" value="label" /></span> <span class="form"><?= $this->model_users->_mapping['label'] ?></span></p>
-    <p><label>&nbsp;</label><span><input type="checkbox" name="columns[]" value="email" /></span> <span class="form"><?= $this->model_users->_mapping['email'] ?></span></p>
+    <p><label>&nbsp;</label><span><input type="checkbox" checked="checked" name="columns[]" value="email" /></span> <span class="form"><?= $this->model_users->_mapping['email'] ?></span></p>
     <p><label>&nbsp;</label><span><input type="checkbox" checked="checked" name="columns[]" value="surname" /></span> <span class="form"><?= $this->model_users->_mapping['surname'] ?></span></p>
     <p><label>&nbsp;</label><span><input type="checkbox" checked="checked" name="columns[]" value="name" /></span> <span class="form"><?= $this->model_users->_mapping['name'] ?></span></p>
-    <p><label>&nbsp;</label><span><input type="checkbox" name="columns[]" value="career" /></span> <span class="form"><?= $this->model_users->_mapping['career'] ?></span></p>
+    <p><label>&nbsp;</label><span><input type="checkbox" checked="checked" name="columns[]" value="career" /></span> <span class="form"><?= $this->model_users->_mapping['career'] ?></span></p>
     <p>(*) Campos obligatorios.</p>
     <p class="submit"><input type="submit" value="Exportar usuarios" /><input type="button" value="Cancelar" onclick="location.href='<?= $this->lastPage() ?>'" /></p>
 </form>

@@ -1,4 +1,4 @@
-<h1>Editar Archivo</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <center>
     <form method="post" action="" accept-charset="utf-8">
@@ -32,4 +32,3 @@
         </table>
     </form>
 </center>
-

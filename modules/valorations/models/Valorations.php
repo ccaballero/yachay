@@ -1,11 +1,11 @@
 <?php
 
-class modules_valorations_models_Valorations
+class Valorations
 {
     public function addActivity($score) {
         global $USER;
 
-        $model_users = Yeah_Adapter::getModel('users');
+        $model_users = new Users();
         $user = $model_users->findByIdent($USER->ident);
 
         $user->activity = $user->activity + $score;
@@ -20,8 +20,8 @@ class modules_valorations_models_Valorations
             $ident = $user;
         }
 
-        $model_users = Yeah_Adapter::getModel('users');
-        $user = $model_users->findByIdent($ident);
+        $model_users = new Users();
+        $user = $model_users->findByIdent($USER->ident);
 
         $user->activity = $user->activity - $score;
         $user->save();
@@ -30,7 +30,7 @@ class modules_valorations_models_Valorations
     public function addSociability($contact, $score1, $score2) {
         global $USER;
 
-        $model_users = Yeah_Adapter::getModel('users');
+        $model_users = new Users();
         $user = $model_users->findByIdent($USER->ident);
 
         $user->sociability = $user->sociability + $score1;
@@ -43,20 +43,20 @@ class modules_valorations_models_Valorations
     public function decreaseSociability($contact, $score1, $score2) {
         global $USER;
 
-        $model_users = Yeah_Adapter::getModel('users');
+        $model_users = new Users();
         $user = $model_users->findByIdent($USER->ident);
 
         $user->sociability = $user->sociability - $score1;
         $user->save();
 
-        $contact->sociability = $contact->sociability + $score2;
+        $contact->sociability = $contact->sociability - $score2;
         $contact->save();
     }
 
     public function addParticipation($score) {
         global $USER;
 
-        $model_users = Yeah_Adapter::getModel('users');
+        $model_users = new Users();
         $user = $model_users->findByIdent($USER->ident);
 
         $user->participation = $user->participation + $score;
@@ -71,7 +71,7 @@ class modules_valorations_models_Valorations
             $ident = $user;
         }
 
-        $model_users = Yeah_Adapter::getModel('users');
+        $model_users = new Users();
         $user = $model_users->findByIdent($ident);
 
         $user->participation = $user->participation - $score;
@@ -80,7 +80,7 @@ class modules_valorations_models_Valorations
 
     public function addPopularity($user) {
         if (!empty($user)) {
-            $model_users = Yeah_Adapter::getModel('users');
+            $model_users = new Users();
             $user = $model_users->findByIdent($user);
 
             $user->popularity = $user->popularity + 1;
@@ -90,7 +90,7 @@ class modules_valorations_models_Valorations
 
     public function decreasePopularity($user) {
         if (!empty($user)) {
-            $model_users = Yeah_Adapter::getModel('users');
+            $model_users = new Users();
             $user = $model_users->findByIdent($user);
 
             $user->popularity = $user->popularity - 1;

@@ -15,4 +15,9 @@ class Areas_Subjects extends Yeah_Model_Table
             'refColumns'        => array('ident'),
         ),
     );
+
+    public function cleanSubjects($subject) {
+        global $DB;
+        $DB->delete('area_subject', 'subject = ' . $subject);
+    }
 }

@@ -1,4 +1,4 @@
-<h1>Editar sugerencia</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <center>
     <form method="post" action="" accept-charset="utf-8">

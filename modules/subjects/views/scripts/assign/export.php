@@ -1,4 +1,4 @@
-<h1>Exportar miembros</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <center>
     <form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">

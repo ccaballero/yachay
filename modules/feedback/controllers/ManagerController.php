@@ -7,7 +7,7 @@ class Feedback_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            if (Yeah_Acl::hasPermission('feedback', 'resolv')) {
+            if ($this->acl('feedback', 'resolv')) {
                 $resolv = $request->getParam('resolv');
                 $unresolv = $request->getParam('unresolv');
                 if (!empty($resolv)) {
@@ -16,7 +16,7 @@ class Feedback_ManagerController extends Yeah_Action
                     $this->_forward('unresolv');
                 }
             }
-            if (Yeah_Acl::hasPermission('feedback', 'mark')) {
+            if ($this->acl('feedback', 'mark')) {
                 $mark = $request->getParam('mark');
                 $unmark = $request->getParam('unmark');
                 if (!empty($mark)) {
@@ -25,7 +25,7 @@ class Feedback_ManagerController extends Yeah_Action
                     $this->_forward('unmark');
                 }
             }
-            if (Yeah_Acl::hasPermission('feedback', 'delete')) {
+            if ($this->acl('feedback', 'delete')) {
                 $delete = $request->getParam('delete');
                 if (!empty($delete)) {
                     $this->_forward('delete');
@@ -33,9 +33,9 @@ class Feedback_ManagerController extends Yeah_Action
             }
         }
 
-        $model_feedback = Yeah_Adapter::getModel('feedback');
+        $model_feedback = new Feedback();
 
-        $this->view->model = $model_feedback;
+        $this->view->model_feedback = $model_feedback;
         $this->view->feedback = $model_feedback->selectAll();
 
         history('feedback/manager');
@@ -50,22 +50,22 @@ class Feedback_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
 
-        $entry = new modules_feedback_models_Feedback_Empty();
+        $entry = new Feedback_Empty();
 
-        $feedback_model = Yeah_Adapter::getModel('feedback');
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $tags_model = Yeah_Adapter::getModel('tags');
-        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
+        $model_feedback = new Feedback();
+        $model_resources = new Resources();
+        $model_tags = new Tags();
+        $model_tags_resources = new Tags_Resources();
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $entry = $feedback_model->createRow();
+            $entry = $model_feedback->createRow();
             $entry->description = $request->getParam('description');
             $tags = $request->getParam('tags');
 
             if ($entry->isValid()) {
-                $resource = $resources_model->createRow();
+                $resource = $model_resources->createRow();
                 $resource->author = $USER->ident;
                 $resource->recipient = 'feedback';
                 $resource->tsregister = time();
@@ -76,28 +76,35 @@ class Feedback_ManagerController extends Yeah_Action
 
                 // TAG REGISTER
                 $tags = explode(',', $tags);
+                $saved_tags = array();
+
                 foreach ($tags as $tagLabel) {
                     $tagLabel = trim(strtolower($tagLabel));
-                    $tag = $tags_model->findByLabel($tagLabel);
-                    if ($tag == NULL) {
-                        $tag = $tags_model->createRow();
-                        $tag->label = $tagLabel;
-                        $tag->url = convert($tag->label);
-                        $tag->weight = 1;
-                        if ($tag->isValid()) {
-                            $tag->tsregister = time();
+
+                    if (!in_array($tagLabel, $saved_tags)) {
+                        $tag = $model_tags->findByLabel($tagLabel);
+                        if ($tag == NULL) {
+                            $tag = $model_tags->createRow();
+                            $tag->label = $tagLabel;
+                            $tag->url = convert($tag->label);
+                            $tag->weight = 1;
+                            if ($tag->isValid()) {
+                                $tag->tsregister = time();
+                                $tag->save();
+                            }
+                        } else {
+                            $tag->weight = $tag->weight + 1;
                             $tag->save();
                         }
-                    } else {
-                        $tag->weight = $tag->weight + 1;
-                        $tag->save();
-                    }
 
-                    if ($tag->ident <> 0) {
-                        $assign = $tags_resources_model->createRow();
-                        $assign->tag = $tag->ident;
-                        $assign->resource = $resource->ident;
-                        $assign->save();
+                        if ($tag->ident <> 0) {
+                            $assign = $model_tags_resources->createRow();
+                            $assign->tag = $tag->ident;
+                            $assign->resource = $resource->ident;
+                            $assign->save();
+                        }
+
+                        $saved_tags[] = $tagLabel;
                     }
                 }
 
@@ -124,7 +131,7 @@ class Feedback_ManagerController extends Yeah_Action
         $this->requirePermission('feedback', 'mark');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_feedback = Yeah_Adapter::getModel('feedback');
+            $model_feedback = new Feedback();
 
             $check = $request->getParam("check");
 
@@ -147,7 +154,7 @@ class Feedback_ManagerController extends Yeah_Action
         $this->requirePermission('feedback', 'mark');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_feedback = Yeah_Adapter::getModel('feedback');
+            $model_feedback = new Feedback();
 
             $check = $request->getParam("check");
 
@@ -170,7 +177,7 @@ class Feedback_ManagerController extends Yeah_Action
         $this->requirePermission('feedback', 'resolv');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_feedback = Yeah_Adapter::getModel('feedback');
+            $model_feedback = new Feedback();
 
             $check = $request->getParam("check");
 
@@ -193,7 +200,7 @@ class Feedback_ManagerController extends Yeah_Action
         $this->requirePermission('feedback', 'resolv');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_feedback = Yeah_Adapter::getModel('feedback');
+            $model_feedback = new Feedback();
 
             $check = $request->getParam("check");
 
@@ -216,9 +223,9 @@ class Feedback_ManagerController extends Yeah_Action
         $this->requirePermission('feedback', 'delete');
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_resources = Yeah_Adapter::getModel('resources');
-            $model_feedback = Yeah_Adapter::getModel('feedback');
-            $model_tags_resources = Yeah_Adapter::getModel('tags', 'Tags_Resources');
+            $model_resources = new Resources();
+            $model_feedback = new Feedback();
+            $model_tags_resources = new Tags_Resources();
 
             $check = $request->getParam("check");
 
@@ -226,7 +233,7 @@ class Feedback_ManagerController extends Yeah_Action
                 $resource = $model_resources->findByIdent($value);
                 $entry = $model_feedback->findByResource($value);
 
-                $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+                $tags = $resource->findTagsViaTags_Resources();
                 foreach ($tags as $tag) {
                     $tag->weight = $tag->weight - 1;
                     $tag->save();

@@ -13,8 +13,8 @@ class Yeah_Validators_HasPrivilege extends Zend_Validate_Abstract
     }
 
     public function isValid($ident) {
-        $users = Yeah_Adapter::getModel('users');
-        $user = $users->findByIdent($ident);
+        $model_users = new Users();
+        $user = $model_users->findByIdent($ident);
         if ($user->hasPermission($this->_module, $this->_privilege)) {
             return true;
         }

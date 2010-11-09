@@ -1,4 +1,4 @@
-<h1>Nueva area</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <center>
     <form method="post" action="" accept-charset="utf-8">
@@ -7,11 +7,11 @@
             <tr>
                 <td><b>Area (*):</b></td>
                 <td>
-                    <input type="text" name="label" size="15" maxlength="64" value="<?= $this->utf2html($this->area->label) ?>" />
+                    <input type="text" name="label" size="15" maxlength="64" value="<?= $this->area->label ?>" />
                 </td>
             </tr>
             <tr>
-                <td colspan="2"><b>Descripci&oacute;n :</b></td>
+                <td colspan="2"><b>Descripción :</b></td>
             </tr>
             <tr>
                 <td colspan="2">

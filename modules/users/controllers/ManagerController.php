@@ -98,10 +98,11 @@ class Users_ManagerController extends Yeah_Action
                         $view->password   = $password;
 
                         $content = $view->render('mail.php');
-                        $mail = new Zend_Mail();
+                        $mail = new Zend_Mail('UTF-8');
                         $mail->setBodyHtml($content)
+                             ->setFrom($CONFIG->email_direction, $CONFIG->email_name)
                              ->addTo($user->email, $user->getFullName())
-                             ->setSubject('Notificación de registro de usuario')
+                             ->setSubject('Notificacion de registro de usuario')
                              ->send();
                     }
 
@@ -409,11 +410,12 @@ class Users_ManagerController extends Yeah_Action
                                         $view->author     = $USER->label;
                                         $view->password   = $password;
                                         $content = $view->render('mail.php');
-                                        $mail = new Zend_Mail();
+                                        $mail = new Zend_Mail('UTF-8');
                                         $mail->setBodyHtml($content)
-                                        ->addTo($user->email, $user->getFullName())
-                                        ->setSubject('Notificación de registro de usuario')
-                                        ->send(); // FIXME agregar opcion smtp al gestor de correos
+                                             ->setFrom($CONFIG->email_direction, $CONFIG->email_name)
+                                             ->addTo($user->email, $user->getFullName())
+                                             ->setSubject('Notificacion de registro de usuario')
+                                             ->send(); // FIXME agregar opcion smtp al gestor de correos
                                     }
                                     if ($result['CODIGO_NUE']) {
                                         $count_new++;

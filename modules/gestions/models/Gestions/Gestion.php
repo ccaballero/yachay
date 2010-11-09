@@ -17,7 +17,7 @@ class Gestions_Gestion extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabel',
-                    'options'   => array('gestions'),
+                    'options'   => array('Gestions'),
                     'message'   => 'El nombre seleccionado de la gestion ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -34,7 +34,7 @@ class Gestions_Gestion extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueUrl',
-                    'options'   => array('gestions'),
+                    'options'   => array('Gestions'),
                     'message'   => 'El identificador de gestion ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),

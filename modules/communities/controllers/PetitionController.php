@@ -4,9 +4,10 @@ class Communities_PetitionController extends Yeah_Action
 {
     public function indexAction() {
         $this->requirePermission('communities', 'enter');
-
         $request = $this->getRequest();
-        $model_communities = Yeah_Adapter::getModel('communities');
+
+        $model_communities = new Communities();
+
         $url = $request->getParam('community');
         $community = $model_communities->findByUrl($url);
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
@@ -25,21 +26,21 @@ class Communities_PetitionController extends Yeah_Action
 
         context('community', $community);
 
-        $model_communities_petition = Yeah_Adapter::getModel('communities', 'Communities_Petitions');
-        $applicants = $community->findmodules_users_models_UsersViamodules_communities_models_Communities_Petitions($community->select()->order('tsregister ASC'));
+        $applicants = $community->findUsersViaCommunities_Petitions($community->select()->order('tsregister ASC'));
 
-        $this->view->model = $model_communities;
+        $this->view->model_communities = $model_communities;
         $this->view->community = $community;
         $this->view->applicants = $applicants;
 
         history('communities/' . $community->url . '/petition');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('communities', array('enter'))) {
-            $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_manager');
-        } else if (Yeah_Acl::hasPermission('communities', 'list')) {
+        if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
         }
-        if (Yeah_Acl::hasPermission('communities', 'view')) {
+        if ($this->acl('communities', 'enter')) {
+            $breadcrumb['Administrador de comunidades'] = $this->view->url(array(), 'communities_manager');
+        }
+        if ($this->acl('communities', 'view')) {
             $breadcrumb[$community->label] = $this->view->url(array('community' => $community->url), 'communities_community_view');
         }
         breadcrumb($breadcrumb);
@@ -47,16 +48,18 @@ class Communities_PetitionController extends Yeah_Action
 
     public function acceptAction() {
         $request = $this->getRequest();
+
         if ($request->isPost()) {
-            $model_communities = Yeah_Adapter::getModel('communities');
+            $model_communities = new Communities();
+
             $url = $request->getParam('community');
             $community = $model_communities->findByUrl($url);
             $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
             $this->requireCommunityModerator($community);
 
-            $model_users = Yeah_Adapter::getModel('users');
-            $model_communities_users = Yeah_Adapter::getModel('communities', 'Communities_Users');
-            $model_communities_petitions = Yeah_Adapter::getModel('communities', 'Communities_Petitions');
+            $model_users = new Users();
+            $model_communities_users = new Communities_Users();
+            $model_communities_petitions = new Communities_Petitions();
 
             $applicants = $request->getParam("applicants");
             $count = 0;
@@ -90,15 +93,17 @@ class Communities_PetitionController extends Yeah_Action
 
     public function declineAction() {
         $request = $this->getRequest();
+
         if ($request->isPost()) {
-            $model_communities = Yeah_Adapter::getModel('communities');
+            $model_communities = new Communities();
+
             $url = $request->getParam('community');
             $community = $model_communities->findByUrl($url);
             $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
             $this->requireCommunityModerator($community);
 
-            $model_users = Yeah_Adapter::getModel('users');
-            $model_communities_petitions = Yeah_Adapter::getModel('communities', 'Communities_Petitions');
+            $model_users = new Users();
+            $model_communities_petitions = new Communities_Petitions();
 
             $applicants = $request->getParam("applicants");
             $count = 0;

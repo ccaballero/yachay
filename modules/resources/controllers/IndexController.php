@@ -6,11 +6,11 @@ class Resources_IndexController extends Yeah_Action
         global $USER;
         $this->requirePermission('resources', 'new');
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $resources = $resources_model->selectByAuthor($USER->ident);
+        $model_resources = new Resources();
+        $resources = $model_resources->selectByAuthor($USER->ident);
 
-        $evaluations_model = Yeah_Adapter::getModel('evaluations');
-        $evaluations = $evaluations_model->selectByAuthor($USER->ident);
+        $model_evaluations = new Evaluations();
+        $evaluations = $model_evaluations->selectByAuthor($USER->ident);
         
         $list = array();
 
@@ -37,8 +37,8 @@ class Resources_IndexController extends Yeah_Action
         $filter = $request->getParam('filter');
 
         $list = array();
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $resources = $resources_model->selectByAuthor($USER->ident);
+        $model_resources = new Resources();
+        $resources = $model_resources->selectByAuthor($USER->ident);
 
         switch ($filter) {
             case 'notes':
@@ -78,8 +78,8 @@ class Resources_IndexController extends Yeah_Action
                 $this->view->newroute = 'feedback_new';
                 break;
             case 'evaluations':
-                $evaluations_model = Yeah_Adapter::getModel('evaluations');
-                $evaluations = $evaluations_model->selectByAuthor($USER->ident);
+                $model_evaluations = new Evaluations();
+                $evaluations = $model_evaluations->selectByAuthor($USER->ident);
                 foreach ($evaluations as $evaluation) {
                     $list[$evaluation->tsregister] = $evaluation;
                 }

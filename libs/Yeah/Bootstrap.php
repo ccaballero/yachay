@@ -43,15 +43,16 @@ class Yeah_Bootstrap
         $loader->registerNamespace('Yeah_');
         $loader->registerNamespace('File_');
         $loader->registerNamespace('Xcel_');
+
+        // Set of fundamental element
+        global $CONFIG;
+        $CONFIG = new Yeah_Settings_Config();
+
         $loader->pushAutoloader(new Yeah_Loader());
 
         // Initialization and recover of the session
         Zend_Session::start();
         $session = new Zend_Session_Namespace();
-
-        // Set of fundamental element
-        global $CONFIG;
-        $CONFIG = new Yeah_Settings_Config();
 
         // Set for debugging level
         ini_set('display_startup_errors', $CONFIG->startup_errors);

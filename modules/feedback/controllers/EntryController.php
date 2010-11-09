@@ -7,16 +7,16 @@ class Feedback_EntryController extends Yeah_Action
         $this->requirePermission('feedback', 'list');
         $request = $this->getRequest();
 
-        $entry_url = $request->getParam('entry');
-        $feedback_model = Yeah_Adapter::getModel('feedback');
-        $entry = $feedback_model->findByResource($entry_url);
+        $url_entry = $request->getParam('entry');
+        $model_feedback = new Feedback();
+        $entry = $model_feedback->findByResource($url_entry);
         $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $resource = $resources_model->findByIdent($entry->resource);
+        $model_resources = new Resources();
+        $resource = $model_resources->findByIdent($entry->resource);
         $this->requireContext($resource);
 
-        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        $tags = $resource->findTagsViaTags_Resources();
 
         $this->view->resource = $resource;
         $this->view->entry = $entry;
@@ -24,7 +24,7 @@ class Feedback_EntryController extends Yeah_Action
 
         history('feedback/' . $resource->ident);
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('resources', 'new')) {
+        if ($this->acl('resources', 'new')) {
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
             $breadcrumb['Sugerencias'] = $this->view->url(array('filter' => 'feedback'), 'resources_filtered');
         }
@@ -36,21 +36,20 @@ class Feedback_EntryController extends Yeah_Action
         $this->requirePermission('feedback', 'list');
         $request = $this->getRequest();
 
-        $entry_ident = $request->getParam('entry');
+        $model_resources = new Resources();
+        $model_feedback = new Feedback();
+        $model_tags = new Tags();
+        $model_tags_resources = new Tags_Resources();
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $feedback_model = Yeah_Adapter::getModel('feedback');
-        $tags_model = Yeah_Adapter::getModel('tags');
-        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
-
-        $resource = $resources_model->findByIdent($entry_ident);
-        $entry = $feedback_model->findByResource($entry_ident);
+        $url_entry = $request->getParam('entry');
+        $resource = $model_resources->findByIdent($url_entry);
+        $entry = $model_feedback->findByResource($url_entry);
 
         $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
         $this->requireResourceAuthor($resource);
 
         $_tags = array();
-        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {
             $_tags[] = $tag->label;
         }
@@ -65,23 +64,32 @@ class Feedback_EntryController extends Yeah_Action
 
                 $newTags = explode(',', $newTags);
                 $oldTags = $_tags;
+                $saved_tags = array();
 
-                for ($i = 0; $i < count($newTags); $i++) {
+                // removing duplicates tags
+                foreach ($newTags as $new_tag) {
+                    $new_tag = trim(strtolower($new_tag));
+                    if (!in_array($new_tag, $saved_tags)) {
+                        $saved_tags[] = $new_tag;
+                    }
+                }
+
+                for ($i = 0; $i < count($saved_tags); $i++) {
                     for ($j = 0; $j < count($oldTags); $j++) {
-                        if (isset($newTags[$i]) && isset($oldTags[$j])) {
-                            if (trim(strtolower($newTags[$i])) == $oldTags[$j]) {
-                                $newTags[$i] = NULL;
+                        if (isset($saved_tags[$i]) && isset($oldTags[$j])) {
+                            if ($saved_tags[$i] == $oldTags[$j]) {
+                                $saved_tags[$i] = NULL;
                                 $oldTags[$j] = NULL;
                             }
                         }
                     }
                 }
-                foreach ($newTags as $tagLabel) {
+                foreach ($saved_tags as $tagLabel) {
                     if ($tagLabel <> NULL) {
                         $tagLabel = trim(strtolower($tagLabel));
-                        $tag = $tags_model->findByLabel($tagLabel);
+                        $tag = $model_tags->findByLabel($tagLabel);
                         if ($tag == NULL) {
-                            $tag = $tags_model->createRow();
+                            $tag = $model_tags->createRow();
                             $tag->label = $tagLabel;
                             $tag->url = convert($tag->label);
                             $tag->weight = 1;
@@ -95,7 +103,7 @@ class Feedback_EntryController extends Yeah_Action
                         }
 
                         if ($tag->ident <> 0) {
-                            $assign = $tags_resources_model->createRow();
+                            $assign = $model_tags_resources->createRow();
                             $assign->tag = $tag->ident;
                             $assign->resource = $resource->ident;
                             $assign->save();
@@ -104,11 +112,11 @@ class Feedback_EntryController extends Yeah_Action
                 }
                 foreach ($oldTags as $tagLabel) {
                     if ($tagLabel <> NULL) {
-                        $tag = $tags_model->findByLabel($tagLabel);
+                        $tag = $model_tags->findByLabel($tagLabel);
                         $tag->weight = $tag->weight - 1;
                         $tag->save();
 
-                        $assign = $tags_resources_model->findByTagAndResource($tag->ident, $resource->ident);
+                        $assign = $model_tags_resources->findByTagAndResource($tag->ident, $resource->ident);
                         $assign->delete();
 
                         if ($tag->weight == 0) {
@@ -142,10 +150,9 @@ class Feedback_EntryController extends Yeah_Action
         $this->requirePermission('feedback', 'mark');
         $request = $this->getRequest();
 
-        $entry_ident = $request->getParam('entry');
-
-        $feedback_model = Yeah_Adapter::getModel('feedback');
-        $entry = $feedback_model->findByResource($entry_ident);
+        $url_entry = $request->getParam('entry');
+        $model_feedback = new Feedback();
+        $entry = $model_feedback->findByResource($url_entry);
 
         $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
 
@@ -161,10 +168,9 @@ class Feedback_EntryController extends Yeah_Action
         $this->requirePermission('feedback', 'mark');
         $request = $this->getRequest();
 
-        $entry_ident = $request->getParam('entry');
-
-        $feedback_model = Yeah_Adapter::getModel('feedback');
-        $entry = $feedback_model->findByResource($entry_ident);
+        $url_entry = $request->getParam('entry');
+        $model_feedback = new Feedback();
+        $entry = $model_feedback->findByResource($url_entry);
 
         $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
 
@@ -180,10 +186,9 @@ class Feedback_EntryController extends Yeah_Action
         $this->requirePermission('feedback', 'mark');
         $request = $this->getRequest();
 
-        $entry_ident = $request->getParam('entry');
-
-        $feedback_model = Yeah_Adapter::getModel('feedback');
-        $entry = $feedback_model->findByResource($entry_ident);
+        $url_entry = $request->getParam('entry');
+        $model_feedback = new Feedback();
+        $entry = $model_feedback->findByResource($url_entry);
 
         $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
 
@@ -191,7 +196,7 @@ class Feedback_EntryController extends Yeah_Action
         $entry->save();
 
         $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La sugerencia ha sido desmarcada como favorita");
+        $session->messages->addMessage("La sugerencia ha sido marcada como resuelta");
         $this->_redirect($this->view->currentPage());
     }
 
@@ -199,10 +204,9 @@ class Feedback_EntryController extends Yeah_Action
         $this->requirePermission('feedback', 'mark');
         $request = $this->getRequest();
 
-        $entry_ident = $request->getParam('entry');
-
-        $feedback_model = Yeah_Adapter::getModel('feedback');
-        $entry = $feedback_model->findByResource($entry_ident);
+        $url_entry = $request->getParam('entry');
+        $model_feedback = new Feedback();
+        $entry = $model_feedback->findByResource($url_entry);
 
         $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
 
@@ -210,7 +214,7 @@ class Feedback_EntryController extends Yeah_Action
         $entry->save();
 
         $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La sugerencia ha sido desmarcada como favorita");
+        $session->messages->addMessage("La sugerencia ha sido desmarcada como resuelta");
         $this->_redirect($this->view->currentPage());
     }
 
@@ -219,24 +223,24 @@ class Feedback_EntryController extends Yeah_Action
         $this->requirePermission('feedback', 'list');
         $request = $this->getRequest();
 
-        $entry_ident = $request->getParam('entry');
+        $url_entry = $request->getParam('entry');
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $feedback_model = Yeah_Adapter::getModel('feedback');
-        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
+        $model_resources = new Resources();
+        $model_feedback = new Feedback();
+        $model_tags_resources = new Tags_Resources();
 
-        $resource = $resources_model->findByIdent($entry_ident);
-        $entry = $feedback_model->findByResource($entry_ident);
+        $resource = $model_resources->findByIdent($url_entry);
+        $entry = $model_feedback->findByResource($url_entry);
 
         $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
         $this->requireResourceAuthor($resource);
 
-        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {
             $tag->weight = $tag->weight - 1;
             $tag->save();
 
-            $assign = $tags_resources_model->findByTagAndResource($tag->ident, $resource->ident);
+            $assign = $model_tags_resources->findByTagAndResource($tag->ident, $resource->ident);
             $assign->delete();
 
             if ($tag->weight == 0) {
@@ -257,23 +261,23 @@ class Feedback_EntryController extends Yeah_Action
         $this->requirePermission('feedback', 'delete');
         $request = $this->getRequest();
 
-        $entry_ident = $request->getParam('entry');
+        $url_entry = $request->getParam('entry');
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $feedback_model = Yeah_Adapter::getModel('feedback');
-        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
+        $model_resources = new Resources();
+        $model_feedback = new Feedback();
+        $model_tags_resources = new Tags_Resources();
 
-        $resource = $resources_model->findByIdent($entry_ident);
-        $entry = $feedback_model->findByResource($entry_ident);
+        $resource = $model_resources->findByIdent($url_entry);
+        $entry = $model_feedback->findByResource($url_entry);
 
         $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
 
-        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {
             $tag->weight = $tag->weight - 1;
             $tag->save();
 
-            $assign = $tags_resources_model->findByTagAndResource($tag->ident, $resource->ident);
+            $assign = $model_tags_resources->findByTagAndResource($tag->ident, $resource->ident);
             $assign->delete();
 
             if ($tag->weight == 0) {

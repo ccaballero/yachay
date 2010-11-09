@@ -1,14 +1,14 @@
 <?php
 
-class modules_feedback_models_Feedback extends Zend_Db_Table_Abstract
+class Feedback extends Yeah_Model_Table
 {
     protected $_name            = 'feedback';
     protected $_primary         = 'resource';
-    protected $_rowClass        = 'modules_feedback_models_Feedback_Entry';
+    protected $_rowClass        = 'Feedback_Entry';
     protected $_referenceMap    = array(
         'Resource'              => array(
             'columns'           => array('resource'),
-            'refTableClass'     => 'modules_resources_models_Resources',
+            'refTableClass'     => 'Resources',
             'refColumns'        => array('ident'),
         ),
     );

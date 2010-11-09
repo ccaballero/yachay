@@ -1,14 +1,14 @@
-<h1>Administrador de etiquetas</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
 
     <table>
         <tr>
-        <?php if (Yeah_Acl::hasPermission('tags', 'list')) { ?>
+        <?php if ($this->acl('tags', 'list')) { ?>
             <td>[<a href="<?= $this->url(array(), 'tags_list') ?>">Lista</a>]</td>
         <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('tags', 'delete')) { ?>
+        <?php if ($this->acl('tags', 'delete')) { ?>
             <td><input type="submit" name="delete" value="Eliminar" /></td>
         <?php } ?>
         </tr>
@@ -19,10 +19,10 @@
     <table width="100%">
         <tr>
             <th>&nbsp;</th>
-            <th><?= $this->model->_mapping['label'] ?></th>
-            <th><?= $this->model->_mapping['weight'] ?></th>
+            <th><?= $this->model_tags->_mapping['label'] ?></th>
+            <th><?= $this->model_tags->_mapping['weight'] ?></th>
             <th>Opciones</th>
-            <th><?= $this->model->_mapping['tsregister'] ?></th>
+            <th><?= $this->model_tags->_mapping['tsregister'] ?></th>
         </tr>
     <?php foreach ($this->tags as $tag) { ?>
         <tr>
@@ -31,10 +31,10 @@
             <td><center><?= $tag->weight ?></center></td>
             <td>
                 <center>
-                <?php if (Yeah_Acl::hasPermission('tags', 'list')) { ?>
+                <?php if ($this->acl('tags', 'list')) { ?>
                     <a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>">Ver</a>
                 <?php } ?>
-                <?php if (Yeah_Acl::hasPermission('tags', 'delete')) { ?>
+                <?php if ($this->acl('tags', 'delete')) { ?>
                     <a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_delete') ?>">Eliminar</a>
                 <?php } ?>
                 </center>
@@ -50,10 +50,10 @@
 
     <table>
         <tr>
-        <?php if (Yeah_Acl::hasPermission('tags', 'list')) { ?>
+        <?php if ($this->acl('tags', 'list')) { ?>
             <td>[<a href="<?= $this->url(array(), 'tags_list') ?>">Lista</a>]</td>
         <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('tags', 'delete')) { ?>
+        <?php if ($this->acl('tags', 'delete')) { ?>
             <td><input type="submit" name="delete" value="Eliminar" /></td>
         <?php } ?>
         </tr>

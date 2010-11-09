@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS `template`;
 CREATE TABLE `template` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `label`             varchar(64)                                                 NOT NULL,
+    `parent`            varchar(64)                                                 NOT NULL DEFAULT '',
     `description`       text                                                        NOT NULL DEFAULT '',
     `doctype`           varchar(32)                                                 NOT NULL,
     `properties`        text                                                        NOT NULL,

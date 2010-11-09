@@ -1,4 +1,4 @@
-<h1>Importar miembros</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <?php if ($this->step == 1) { ?>
 
@@ -37,7 +37,7 @@
     <p>Por favor, revise la información siguiente, si la presentación no es correcta, por favor corrija su fichero y vuelva a subirlo:</p>
 
     <form method="post" action="" accept-charset="utf-8">
-        <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_import') ?>">Subir nuevamente</a>
+        <a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>">Subir nuevamente</a>
         <input type="submit" value="Importar usuarios" />
         <hr />
 
@@ -78,7 +78,7 @@
         </table>
 
         <hr />
-        <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign_import') ?>">Subir nuevamente</a>
+        <a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>">Subir nuevamente</a>
         <input type="submit" value="Importar usuarios" />
     </form>
 

@@ -7,39 +7,55 @@ class Subjects_IndexController extends Yeah_Action
 
         $this->requirePermission('subjects', 'list');
 
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $gestion = $gestions->findByActive();
+        $model_gestions = new Gestions();
+        $model_subjects = new Subjects();
 
-        $this->view->model = $subjects;
+        $gestion = $model_gestions->findByActive();
+
+        $this->view->model_subjects = $model_subjects;
         $this->view->gestion = $gestion;
 
         $subjects2 = array();
+        $assign = array();
 
         if (!empty($gestion)) {
-            $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
-            $subjects1 = $subjects->selectAll($gestion->ident);
+            $model_subjects_users = new Subjects_Users();
+            $subjects1 = $model_subjects->selectAll($gestion->ident);
+
             foreach ($subjects1 as $subject) {
-                if ($subject->status == 'active' || Yeah_Acl::hasPermission('subjects', 'lock') || Yeah_Acl::hasPermission('subjects', 'moderate')) {
+                $subject_user = $model_subjects_users->findBySubjectAndUser($subject->ident, $USER->ident);
+                $type = '';
+                if (!empty($subject_user)) {
+                    $type = $subject_user->type;
+                }
+                if ($subject->moderator == $USER->ident) {
+                    $type = 'moderator';
+                }
+
+                if ($subject->status == 'active' || $this->acl('subjects', 'lock') || $this->acl('subjects', 'moderate')) {
                     switch ($subject->visibility) {
                         case 'public':
                             $subjects2[] = $subject;
+                            $assign[$subject->url] = $type;
                             break;
                         case 'register':
                             if ($USER->role != 1) {
                                 $subjects2[] = $subject;
+                                $assign[$subject->url] = $type;
                             }
                             break;
                         case 'private':
                             if ($USER->role != 1) {
-                                if (Yeah_Acl::hasPermission('subjects', 'edit')) {
+                                if ($this->acl('subjects', 'edit')) {
                                     $subjects2[] = $subject;
+                                    $assign[$subject->url] = $type;
                                 } else if ($subject->moderator == $USER->ident) {
                                     $subjects2[] = $subject;
+                                    $assign[$subject->url] = $type;
                                 } else {
-                                    $assign = $assignement->findBySubjectAndUser($subject->ident, $USER->ident);
-                                    if (!empty($assign)) {
+                                    if (!empty($subject_user)) {
                                         $subjects2[] = $subject;
+                                        $assign[$subject->url] = $type;
                                     }
                                 }
                             }
@@ -47,14 +63,15 @@ class Subjects_IndexController extends Yeah_Action
                     }
                 }
             }
-            $this->view->assignement = $assignement;
         }
+
         $this->view->subjects = $subjects2;
+        $this->view->assign = $assign;
 
         history('subjects');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
         }
         breadcrumb($breadcrumb);
     }

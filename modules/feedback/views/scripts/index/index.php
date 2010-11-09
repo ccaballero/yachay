@@ -1,6 +1,6 @@
-<h1>Lista de sugerencias</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
-<?php if (Yeah_Acl::hasPermission('resources', 'new')) { ?>
+<?php if ($this->acl('resources', 'new')) { ?>
     [<a href="<?= $this->url(array(), 'feedback_new') ?>">Crear nueva sugerencia</a>]
 <?php } ?>
 

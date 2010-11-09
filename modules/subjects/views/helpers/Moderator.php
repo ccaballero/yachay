@@ -2,11 +2,15 @@
 
 class Subjects_View_Helper_Moderator
 {
-    public function moderator($name, $value = 0) {
+    public function moderator($id, $name, $value = 0) {
         global $USER;
 
-        $model = Yeah_Adapter::getModel('users');
-        $users = $model->selectByStatus('active');
+        $model_users = new Users();
+        $users = $model_users->selectByStatus('active');
+
+        if (empty($id)) {
+            $id = $name;
+        }
 
         $options = array();
         $options[] = '<option value="' . $value . '">-------------------</option>';
@@ -20,6 +24,6 @@ class Subjects_View_Helper_Moderator
             }
         }
 
-        return '<select name="'. $name . '">' . implode('', $options) . '</select>';
+        return '<select id="' . $id . '" name="'. $name . '">' . implode('', $options) . '</select>';
     }
 }

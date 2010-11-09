@@ -10,7 +10,7 @@ class Subjects_Subject extends Yeah_Model_Row_Validation
             'validators' => array(
                 array(
                     'validator' => 'IdentExists',
-                    'options'   => array('users'),
+                    'options'   => array('Users'),
                     'message'   => 'El usuario designado para ser moderador no es valido',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -41,7 +41,7 @@ class Subjects_Subject extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueCodeDual',
-                    'options'   => array('subjects'),
+                    'options'   => array('Subjects'),
                     'message'   => 'El codigo seleccionado para la materia ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -61,7 +61,7 @@ class Subjects_Subject extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabelDual',
-                    'options'   => array('subjects'),
+                    'options'   => array('Subjects'),
                     'message'   => 'El nombre seleccionado para la materia ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -78,7 +78,7 @@ class Subjects_Subject extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueUrlDual',
-                    'options'   => array('subjects'),
+                    'options'   => array('Subjects'),
                     'message'   => 'El identificador de la materia ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -104,7 +104,7 @@ class Subjects_Subject extends Yeah_Model_Row_Validation
     );
 
     public function getGestion() {
-        $model_gestions = new Gestion();
+        $model_gestions = new Gestions();
         return $model_gestions->findByIdent($this->gestion);
     }
 

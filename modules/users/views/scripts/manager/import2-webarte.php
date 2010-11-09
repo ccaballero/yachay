@@ -29,10 +29,12 @@
         ?>
 
         <div class="import">
-            <input type="checkbox" name="users[]" <?= ($results['CHECKED'] && isset($results['ROL_OBJ'])) ? 'checked="checked" ' : ' ' ?> value="<?= $results['CODIGO'] ?>" />
+            <input type="checkbox" name="users[]" <?= ($results['CHECKED'] && isset($results['ROL_OBJ'])) ? 'checked="checked" ' : '' ?>value="<?= $results['CODIGO'] ?>" />
             <div class="result">
             <?php if (!$result) { ?>
                 <img src="<?= $this->TEMPLATE->htmlbase . 'images/error.png' ?>" alt="<?= $message ?>" title="<?= $message ?>" />
+            <?php } else if (!isset($results['ROL_OBJ'])) { ?>
+                <img src="<?= $this->TEMPLATE->htmlbase . 'images/error.png' ?>" alt="No se ha definido un rol" title="No se ha definido un rol" />
             <?php } ?>
             <?php if ($type == 'new') { ?>
                 <img src="<?= $this->TEMPLATE->htmlbase . 'images/user_add.png' ?>" alt="Nuevo usuario" title="Nuevo usuario" />
@@ -42,7 +44,13 @@
             </div>
             <p><span class="title"><?= $results['NOMBRE COMPLETO'] ?></span></p>
             <p><label>Codigo: </label><?= $results['CODIGO'] ?></p>
-            <p><label>Rol: </label><a href="<?= $this->url(array('role' => $results['ROL_OBJ']->url), 'roles_role_view') ?>" target="_ROLES_VIEW"><?= $results['ROL'] ?></a></p>
+            <p><label>Rol: </label>
+            <?php if (isset($results['ROL_OBJ'])) { ?>
+                <a href="<?= $this->url(array('role' => $results['ROL_OBJ']->url), 'roles_role_view') ?>" target="_ROLES_VIEW"><?= $results['ROL'] ?></a>
+            <?php } else { ?>
+                <?= $results['ROL'] ?>
+            <?php } ?>
+            </p>
         <?php if (isset($results['USUARIO_OBJ'])) { ?>
             <p><label>Usuario: </label><a href="<?= $this->url(array('user' => $results['USUARIO_OBJ']->url), 'users_user_view') ?>" target="_USERS_VIEW"><?= $results['USUARIO'] ?></a></p>
         <?php } else { ?>

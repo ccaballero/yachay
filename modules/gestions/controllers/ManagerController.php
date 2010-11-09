@@ -6,13 +6,13 @@ class Gestions_ManagerController extends Yeah_Action
         $this->requirePermission('gestions', 'list');
         $this->requirePermission('gestions', array('new', 'active', 'delete'));
 
-        $gestions = Yeah_Adapter::getModel('gestions');
+        $model_gestions = new Gestions();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            if (Yeah_Acl::hasPermission('gestions', 'active')) {
+            if ($this->acl('gestions', 'active')) {
                 $gestion_ident = $request->getParam('radio');
-                $gestion = $gestions->findByIdent($gestion_ident);
+                $gestion = $model_gestions->findByIdent($gestion_ident);
                 if ($gestion->status == 'inactive') {
                     // clear all gestions
                     $gestions->desactiveAll();
@@ -25,24 +25,28 @@ class Gestions_ManagerController extends Yeah_Action
             }
         }
 
-        $this->view->model = $gestions;
-        $this->view->gestions = $gestions->selectAll();
+        $this->view->model_gestions = $model_gestions;
+        $this->view->gestions = $model_gestions->selectAll();
 
         history('gestions/manager');
-        breadcrumb();
+        $breadcrumb = array();
+        if ($this->acl('gestions', 'list')) {
+            $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_list');
+        }
+        breadcrumb($breadcrumb);
     }
 
     public function newAction() {
         $this->requirePermission('gestions', 'new');
 
-        $this->view->gestion = new modules_gestions_models_Gestions_Empty;
+        $this->view->gestion = new Gestions_Empty();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $gestions = Yeah_Adapter::getModel('gestions');
-            $gestion = $gestions->createRow();
+            $model_gestions = new Gestions();
+            $gestion = $model_gestions->createRow();
             $gestion->label = $request->getParam('label');
             $gestion->url = convert($gestion->label);
 
@@ -62,7 +66,12 @@ class Gestions_ManagerController extends Yeah_Action
 
         history('gestions/new');
         $breadcrumb = array();
-        $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_manager');
+        if ($this->acl('gestions', 'list')) {
+            $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_list');
+        }
+        if ($this->acl('gestions', array('new', 'active', 'delete'))) {
+            $breadcrumb['Administrador de gestiones'] = $this->view->url(array(), 'gestions_manager');
+        }
         breadcrumb($breadcrumb);
     }
 }

@@ -1,4 +1,4 @@
-<h1>Nueva comunidad</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <center>
     <form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">
@@ -23,7 +23,7 @@
                 <td><input name="tags" value="" maxlength="128" /></td>
             </tr>
             <tr>
-                <td colspan="2"><b>Descripci&oacute;n :</b></td>
+                <td colspan="2"><b>Descripción :</b></td>
             </tr>
             <tr>
                 <td colspan="2">

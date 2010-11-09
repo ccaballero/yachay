@@ -1,225 +1,192 @@
-<h1>Miembros: <?= $this->utf2html($this->subject->label) ?></h1>
-<i><b>Gestion: </b><?= $this->utf2html($this->subject->getGestion()->label) ?></i>
+<?php
 
-<form method="post" action="" accept-charset="utf-8">
-    <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
-    <table>
-        <tr>
-        <?php if ($this->subject->amModerator()) { ?>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') ?>">Agregar</a>]</td>
-            <td><input type="submit" value="Habilitar" name="unlock" /></td>
-            <td><input type="submit" value="Deshabilitar" name="lock" /></td>
-            <td><input type="submit" value="Retirar" name="delete" /></td>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>">Importar</a>]</td>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') ?>">Exportar</a>]</td>
-        <?php } ?>
-        </tr>
-    </table>
-    <hr />
+echo '<h1>Miembros: ' . $this->subject->label . '</h1>';
+echo '<i><b>Gestion: </b>' . $this->subject->getGestion()->label . '</i>';
 
-    <h2>Docentes</h2>
-<?php if (count($this->teachers) != 0) { ?>
-    <?php foreach ($this->teachers as $teacher) { ?>
-        <?php $assign = $this->subject->getAssignement($teacher); ?>
-        <table width="100%">
-            <tr>
-                <td rowspan="2" width="18px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    <input type="checkbox" name="members[]" value="<?= $teacher->ident ?>" />
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $teacher->getAvatar() ?>" /></td>
-                <td>
-                <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
-                    <a href="<?= $this->url(array('user' => $teacher->url), 'users_user_view') ?>"><?= $teacher->label ?></a>
-                <?php } else { ?>
-                    <?= $teacher->label ?>
-                <?php } ?>
-                </td>
-                <td colspan="2"><?= $this->utf2html($teacher->getFullName()) ?></td>
-            </tr>
-            <tr>
-                <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td width="80px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    <?= $this->enable($assign->status) ?>
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-                <td width="350px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_unlock') ?>">Habilitar</a>]
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_lock') ?>">Deshabilitar</a>]
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_delete') ?>">Retirar</a>]
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-            </tr>
-        </table>
-    <?php } ?>
-<?php } else { ?>
-    <p>No se han registrado docentes para esta materia.</p>
-<?php } ?>
-    <hr />
-    <h2>Auxiliares</h2>
-<?php if (count($this->auxiliars) != 0) { ?>
-    <?php foreach ($this->auxiliars as $auxiliar) { ?>
-        <?php $assign = $this->subject->getAssignement($auxiliar); ?>
-        <table width="100%">
-            <tr>
-                <td rowspan="2" width="18px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    <input type="checkbox" name="members[]" value="<?= $auxiliar->ident ?>" />
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $auxiliar->getAvatar() ?>" /></td>
-                <td>
-                <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
-                    <a href="<?= $this->url(array('user' => $auxiliar->url), 'users_user_view') ?>"><?= $auxiliar->label ?></a>
-                <?php } else { ?>
-                    <?= $auxiliar->label ?>
-                <?php } ?>
-                </td>
-                <td colspan="2"><?= $this->utf2html($auxiliar->getFullName()) ?></td>
-            </tr>
-            <tr>
-                <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td width="80px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    <?= $this->enable($assign->status) ?>
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-                <td width="350px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_unlock') ?>">Habilitar</a>]
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_lock') ?>">Deshabilitar</a>]
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_delete') ?>">Retirar</a>]
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-            </tr>
-        </table>
-    <?php } ?>
-<?php } else { ?>
-    <p>No se han registrado auxiliares para esta materia.</p>
-<?php } ?>
-    <hr />
-    <h2>Estudiantes</h2>
-<?php if (count($this->students) != 0) { ?>
-    <?php foreach ($this->students as $student) { ?>
-        <?php $assign = $this->subject->getAssignement($student); ?>
-        <table width="100%">
-            <tr>
-                <td rowspan="2" width="18px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    <input type="checkbox" name="members[]" value="<?= $student->ident ?>" />
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $student->getAvatar() ?>" /></td>
-                <td>
-                <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
-                    <a href="<?= $this->url(array('user' => $student->url), 'users_user_view') ?>"><?= $student->label ?></a>
-                <?php } else { ?>
-                    <?= $student->label ?>
-                <?php } ?>
-                </td>
-                <td colspan="2"><?= $this->utf2html($student->getFullName()) ?></td>
-            </tr>
-            <tr>
-                <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td width="80px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    <?= $this->enable($assign->status) ?>
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-                <td width="350px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_unlock') ?>">Habilitar</a>]
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_lock') ?>">Deshabilitar</a>]
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_delete') ?>">Retirar</a>]
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-            </tr>
-        </table>
-    <?php } ?>
-<?php } else { ?>
-    <p>No se han registrado estudiantes para esta materia.</p>
-<?php } ?>
-    <hr />
-    <h2>Invitados</h2>
-<?php if (count($this->guests) != 0) { ?>
-    <?php foreach ($this->guests as $guest) { ?>
-        <?php $assign = $this->subject->getAssignement($guest); ?>
-        <table width="100%">
-            <tr>
-                <td rowspan="2" width="18px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    <input type="checkbox" name="members[]" value="<?= $guest->ident ?>" />
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $guest->getAvatar() ?>" /></td>
-                <td>
-                <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
-                    <a href="<?= $this->url(array('user' => $guest->url), 'users_user_view') ?>"><?= $guest->label ?></a>
-                <?php } else { ?>
-                    <?= $guest->label ?>
-                <?php } ?>
-                </td>
-                <td colspan="2"><?= $this->utf2html($guest->getFullName()) ?></td>
-            </tr>
-            <tr>
-                <td>Miembro desde: <?= $this->timestamp($assign->tsregister) ?></td>
-                <td width="80px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    <?= $this->enable($assign->status) ?>
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-                <td width="350px">
-                <?php if ($this->subject->amModerator()) { ?>
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_unlock') ?>">Habilitar</a>]
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_lock') ?>">Deshabilitar</a>]
-                    [<a href="<?= $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_delete') ?>">Retirar</a>]
-                <?php } else { ?>
-                    &nbsp;
-                <?php } ?>
-                </td>
-            </tr>
-        </table>
-    <?php } ?>
-<?php } else { ?>
-    <p>No se han registrado visitantes para esta materia.</p>
-<?php } ?>
+echo '<form method="post" action="" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->currentPage() . '" />';
 
-    <hr />
-    <table>
-        <tr>
-        <?php if ($this->subject->amModerator()) { ?>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') ?>">Agregar</a>]</td>
-            <td><input type="submit" value="Habilitar" name="unlock" /></td>
-            <td><input type="submit" value="Deshabilitar" name="lock" /></td>
-            <td><input type="submit" value="Retirar" name="delete" /></td>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>">Importar</a>]</td>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') ?>">Exportar</a>]</td>
-        <?php } ?>
-        </tr>
-    </table>
-</form>
+echo '<table><tr>';
+if ($this->subject->amModerator()) {
+    echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') . '">Agregar</a>]</td>';
+    echo '<td><input type="submit" value="Habilitar" name="unlock" /></td><td><input type="submit" value="Deshabilitar" name="lock" /></td><td><input type="submit" value="Retirar" name="delete" /></td>';
+    echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') . '">Importar</a>]</td>';
+    echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') . '">Exportar</a>]</td>';
+}
+echo '</tr></table><hr />';
+
+echo '<h2>Docentes</h2>';
+if (count($this->teachers) != 0) {
+    echo '<table width="100%">';
+
+    foreach ($this->teachers as $teacher) {
+        $assign = $this->subject->getAssignement($teacher);
+        echo '<tr><td rowspan="2" width="18px">';
+        if ($this->subject->amModerator()) {
+            echo '<input type="checkbox" name="members[]" value="' . $teacher->ident . '" />';
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td><td>';
+        if ($this->acl('users', 'view')) {
+            echo '<a href="' . $this->url(array('user' => $teacher->url), 'users_user_view') . '">' . $teacher->label . '</a>';
+        } else {
+            echo $teacher->label;
+        }
+        echo '</td><td colspan="2">' . $teacher->getFullName() . '</td></tr><tr>';
+        echo '<td>Miembro desde: ' . $this->timestamp($assign->tsregister) . '</td>';
+        echo '<td width="80px">';
+        if ($this->subject->amModerator()) {
+            echo $this->enable($assign->status);
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td><td width="40%">';
+        if ($this->subject->amModerator()) {
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_unlock') . '">Habilitar</a>]';
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_lock') . '">Deshabilitar</a>]';
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_delete') . '">Retirar</a>]';
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td></tr>';
+    }
+    echo '</table>';
+} else {
+    echo '<p>No se han registrado docentes para esta materia.</p>';
+}
+echo '<hr />';
+
+echo '<h2>Auxiliares</h2>';
+if (count($this->auxiliars) != 0) {
+    echo '<table width="100%">';
+    foreach ($this->auxiliars as $auxiliar) {
+        $assign = $this->subject->getAssignement($auxiliar);
+        echo '<tr><td rowspan="2" width="18px">';
+        if ($this->subject->amModerator()) {
+            echo '<input type="checkbox" name="members[]" value="' . $auxiliar->ident . '" />';
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td><td>';
+        if ($this->acl('users', 'view')) {
+            echo '<a href="' . $this->url(array('user' => $auxiliar->url), 'users_user_view') . '">' . $auxiliar->label . '</a>';
+        } else {
+            echo $auxiliar->label;
+        }
+        echo '</td><td colspan="2">' . $auxiliar->getFullName() . '</td></tr><tr>';
+        echo '<td>Miembro desde: ' . $this->timestamp($assign->tsregister) . '</td>';
+        echo '<td width="80px">';
+        if ($this->subject->amModerator()) {
+            echo $this->enable($assign->status);
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td><td width="40%">';
+        if ($this->subject->amModerator()) {
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_unlock') . '">Habilitar</a>]';
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_lock') . '">Deshabilitar</a>]';
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_delete') . '">Retirar</a>]';
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td></tr>';
+    }
+    echo '</table>';
+} else {
+    echo '<p>No se han registrado auxiliares para esta materia.</p>';
+}
+echo '<hr />';
+
+echo '<h2>Estudiantes</h2>';
+if (count($this->students) != 0) {
+    echo '<table width="100%">';
+    foreach ($this->students as $student) {
+        $assign = $this->subject->getAssignement($student);
+        echo '<tr><td rowspan="2" width="18px">';
+        if ($this->subject->amModerator()) {
+            echo '<input type="checkbox" name="members[]" value="' . $student->ident . '" />';
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td><td>';
+        if ($this->acl('users', 'view')) {
+            echo '<a href="' . $this->url(array('user' => $student->url), 'users_user_view') . '">' . $student->label . '</a>';
+        } else {
+            echo $student->label;
+        }
+        echo '</td><td colspan="2">' . $student->getFullName() . '</td></tr><tr>';
+        echo '<td>Miembro desde: ' . $this->timestamp($assign->tsregister) . '</td>';
+        echo '<td width="80px">';
+        if ($this->subject->amModerator()) {
+            echo $this->enable($assign->status);
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td><td width="40%">';
+        if ($this->subject->amModerator()) {
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_unlock') . '">Habilitar</a>]';
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_lock') . '">Deshabilitar</a>]';
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_delete') . '">Retirar</a>]';
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td></tr>';
+    }
+    echo '</table>';
+} else {
+    echo '<p>No se han registrado estudiantes para esta materia.</p>';
+}
+echo '<hr />';
+
+echo '<h2>Invitados</h2>';
+if (count($this->guests) != 0) {
+    echo '<table width="100%">';
+    foreach ($this->guests as $guest) {
+        $assign = $this->subject->getAssignement($guest);
+        echo '<tr><td rowspan="2" width="18px">';
+        if ($this->subject->amModerator()) {
+            echo '<input type="checkbox" name="members[]" value="' . $guest->ident . '" />';
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td><td>';
+        if ($this->acl('users', 'view')) {
+            echo '<a href="' . $this->url(array('user' => $guest->url), 'users_user_view') . '">' . $guest->label . '</a>';
+        } else {
+            echo $guest->label;
+        }
+        echo '</td><td colspan="2">' . $guest->getFullName() . '</td></tr><tr>';
+        echo '<td>Miembro desde: ' . $this->timestamp($assign->tsregister) . '</td>';
+        echo '<td width="80px">';
+        if ($this->subject->amModerator()) {
+            echo $this->enable($assign->status);
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td><td width="40%">';
+        if ($this->subject->amModerator()) {
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_unlock') . '">Habilitar</a>]';
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_lock') . '">Deshabilitar</a>]';
+            echo '[<a href="' . $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_delete') . '">Retirar</a>]';
+        } else {
+            echo '&nbsp;';
+        }
+        echo '</td></tr>';
+    }
+    echo '</table>';
+} else {
+    echo '<p>No se han registrado visitantes para esta materia.</p>';
+}
+
+echo '<table><tr>';
+if ($this->subject->amModerator()) {
+    echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') . '">Agregar</a>]</td>';
+    echo '<td><input type="submit" value="Habilitar" name="unlock" /></td><td><input type="submit" value="Deshabilitar" name="lock" /></td><td><input type="submit" value="Retirar" name="delete" /></td>';
+    echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') . '">Importar</a>]</td>';
+    echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') . '">Exportar</a>]</td>';
+}
+echo '</tr></table>';
+echo '<hr />';
+
+echo '</form>';

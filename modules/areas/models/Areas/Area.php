@@ -17,7 +17,7 @@ class Areas_Area extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabel',
-                    'options'   => array('areas'),
+                    'options'   => array('Areas'),
                     'message'   => 'El nombre seleccionado del area ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -34,7 +34,7 @@ class Areas_Area extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueUrl',
-                    'options'   => array('areas'),
+                    'options'   => array('Areas'),
                     'message'   => 'El identificador de area ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),

@@ -1,8 +1,8 @@
-<h1>Comunidad: <?= $this->utf2html($this->community->label) ?>
+<h1>Comunidad: <?= $this->community->label ?>
     <?php if ($this->community->amAuthor()) { ?>
         <b><i>[<a href="<?= $this->url(array('community' => $this->community->url), 'communities_community_edit') ?>">Editar</a>]</i></b>
     <?php } ?>
-    <?php if (Yeah_Acl::hasPermission('communities', 'enter')) { ?>
+    <?php if ($this->acl('communities', 'enter')) { ?>
         <?php if (!$this->community->amModerator() && !$this->community->amMember()) { ?>
             [<a href="<?= $this->url(array('community' => $this->community->url), 'communities_community_join') ?>">Unirse</a>]
         <?php } else if (!$this->community->amAuthor()) { ?>
@@ -13,10 +13,9 @@
 
 <table width="100%">
     <tr valign="top">
-        <td rowspan="8" width="200px"><img src="<?= $this->media . 'thumbnail_large/' . $this->community->getAvatar() ?>" /></td>
-        <td><b>Descripci&oacute;n: </b></td>
+        <td><b>Descripción: </b></td>
     </tr>
-    <tr><td><?= $this->utf2html($this->community->description) ?></td></tr>
+    <tr><td><?= $this->community->description ?></td></tr>
     <tr valign="top"><td><b>Modalidad: </b><?= $this->mode(NULL, $this->community->mode) ?></td></tr>
     <tr valign="top">
         <td colspan="2">
@@ -31,7 +30,7 @@
     <tr valign="top">
         <td>
             <b>Autor: </b>
-            <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
+            <?php if ($this->acl('users', 'view')) { ?>
                 <a href="<?= $this->url(array('user' => $this->community->getAuthor()->url), 'users_user_view') ?>"><?= $this->community->getAuthor()->getFullName() ?></a>
             <?php } else { ?>
                 <?= $this->community->getAuthor()->getFullName() ?>
@@ -41,7 +40,7 @@
     <tr valign="top">
         <td>
             <b>Miembros: </b><?= $this->community->members ?>
-            <?php if (Yeah_Acl::hasPermission('communities', 'enter')) { ?>
+            <?php if ($this->acl('communities', 'enter')) { ?>
             <i><a href="<?= $this->url(array('community' => $this->community->url), 'communities_community_assign') ?>">[Ver miembros]</a></i>
             <?php } ?>
         </td>
@@ -56,8 +55,6 @@
         </td>
     </tr>
 <?php } ?>
-    <tr><td>&nbsp;</td></tr>
-    <tr><td>&nbsp;</td></tr>
 </table>
 
-<?= $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config)) ?>
+<?= $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, )) ?>

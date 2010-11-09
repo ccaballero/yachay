@@ -17,6 +17,7 @@
         <?php } ?>
             <th><?= $this->model_modules->_mapping['label'] ?></th>
             <th><?= $this->model_modules->_mapping['type'] ?></th>
+            <th><?= $this->model_modules->_mapping['status'] ?></th>
             <th>Opciones</th>
             <th><?= $this->model_modules->_mapping['tsregister'] ?></th>
         </tr>
@@ -28,6 +29,13 @@
             <td><?= $module->label ?></td>
             <td><?= $module->type ?></td>
             <td class="center">
+            <?php if ($module->status == 'active') { ?>
+                <img src="<?= $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Modulo activo" title="Modulo activo" />
+            <?php } else { ?>
+                <img src="<?= $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Modulo inactivo" title="Modulo inactivo" />
+            <?php } ?>
+            </td>
+            <td class="options">
             <?php if ($this->acl('modules', 'view')) { ?>
                 <a href="<?= $this->url(array('mod' => $module->url), 'modules_module_view') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
             <?php } ?>

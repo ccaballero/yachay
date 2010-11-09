@@ -17,7 +17,7 @@ class Communities_Community extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabel',
-                    'options'   => array('communities'),
+                    'options'   => array('Communities'),
                     'message'   => 'El nombre seleccionado para la comunidad ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -34,7 +34,7 @@ class Communities_Community extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueUrl',
-                    'options'   => array('communities'),
+                    'options'   => array('Communities'),
                     'message'   => 'El identificador de comunidad ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),

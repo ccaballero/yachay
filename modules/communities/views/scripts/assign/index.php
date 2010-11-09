@@ -1,6 +1,4 @@
-<?php global $USER; ?>
-
-<h1>Miembros: <?= $this->utf2html($this->community->label) ?></h1>
+<h1>Miembros: <?= $this->community->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
@@ -26,15 +24,14 @@
         <table width="100%">
             <tr>
                 <td rowspan="2" width="18px">
-                <?php if ($this->community->amModerator() && $moderator->ident <> $this->community->author && $moderator->ident <> $USER->ident) { ?>
+                <?php if ($this->community->amModerator() && $moderator->ident <> $this->community->author && $moderator->ident <> $this->USER->ident) { ?>
                     <input type="checkbox" name="members[]" value="<?= $moderator->ident ?>" />
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $moderator->getAvatar() ?>" /></td>
                 <td>
-                <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
+                <?php if ($this->acl('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $moderator->url), 'users_user_view') ?>"><?= $moderator->label ?></a>
                 <?php } else { ?>
                     <?= $moderator->label ?>
@@ -48,7 +45,7 @@
                     <?= $this->enable($assign->status) ?>
                 </td>
                 <td width="350px">
-                <?php if ($this->community->amModerator() && $this->community->author <> $moderator->ident && $moderator->ident <> $USER->ident) { ?>
+                <?php if ($this->community->amModerator() && $this->community->author <> $moderator->ident && $moderator->ident <> $this->USER->ident) { ?>
                     [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_lock') ?>">Deshabilitar</a>]
                     [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_delete') ?>">Retirar</a>]
@@ -71,16 +68,15 @@
             <tr>
                 <td rowspan="2" width="18px">
                 <?php if ($this->community->amModerator()) { ?>
-                    <?php if ($member->ident <> $this->community->author && $member->ident <> $USER->ident ) { ?>
+                    <?php if ($member->ident <> $this->community->author && $member->ident <> $this->USER->ident ) { ?>
                     <input type="checkbox" name="members[]" value="<?= $member->ident ?>" />
                     <?php } ?>
                 <?php } else { ?>
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $member->getAvatar() ?>" /></td>
                 <td>
-                <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
+                <?php if ($this->acl('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $member->url), 'users_user_view') ?>"><?= $member->label ?></a>
                 <?php } else { ?>
                     <?= $member->label ?>
@@ -94,7 +90,7 @@
                     <?= $this->enable($assign->status) ?>
                 </td>
                 <td width="350px">
-                <?php if ($this->community->amModerator() && $this->community->author <> $member->ident && $member->ident <> $USER->ident) { ?>
+                <?php if ($this->community->amModerator() && $this->community->author <> $member->ident && $member->ident <> $this->USER->ident) { ?>
                     [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_unlock') ?>">Habilitar</a>]
                     [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_lock') ?>">Deshabilitar</a>]
                     [<a href="<?= $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_delete') ?>">Retirar</a>]

@@ -1,7 +1,7 @@
 <p>
     Estimado usuario, propietario del correo <?= $this->user->email ?>, usted ha sido agregado como usuario en la pagina
     <?= $this->servername ?>, red social para tematicas academicas, si usted no esta involucrado con este servidor en ninguna
-    forma, es probable que se haya cometido un error, para lo cual solo debe ignorar ese correo, en este momento.
+    forma, es probable que se haya cometido un error, para lo cual solo debe ignorar este correo, en este momento.
 </p>
 <br />
 <p>

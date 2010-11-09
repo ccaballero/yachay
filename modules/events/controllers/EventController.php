@@ -6,16 +6,16 @@ class Events_EventController extends Yeah_Action
         $this->requirePermission('resources', 'view');
         $request = $this->getRequest();
 
-        $event_url = $request->getParam('event');
-        $events_model = Yeah_Adapter::getModel('events');
-        $event = $events_model->findByResource($event_url);
+        $url_event = $request->getParam('event');
+        $model_events = new Events();
+        $event = $model_events->findByResource($url_event);
         $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $resource = $resources_model->findByIdent($event->resource);
+        $model_resources = new Resources();
+        $resource = $model_resources->findByIdent($event->resource);
         $this->requireContext($resource);
 
-        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        $tags = $resource->findTagsViaTags_Resources();
 
         $this->view->resource = $resource;
         $this->view->event = $event;
@@ -23,7 +23,7 @@ class Events_EventController extends Yeah_Action
 
         history('events/' . $resource->ident);
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('resources', 'new')) {
+        if ($this->acl('resources', 'new')) {
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
             $breadcrumb['Eventos'] = $this->view->url(array('filter' => 'events'), 'resources_filtered');
         }
@@ -34,21 +34,20 @@ class Events_EventController extends Yeah_Action
         $this->requirePermission('resources', 'edit');
         $request = $this->getRequest();
 
-        $event_ident = $request->getParam('event');
+        $model_resources = new Resources();
+        $model_events = new Events();
+        $model_tags = new Tags();
+        $model_tags_resources = new Tags_Resources();
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $events_model = Yeah_Adapter::getModel('events');
-        $tags_model = Yeah_Adapter::getModel('tags');
-        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
-
-        $resource = $resources_model->findByIdent($event_ident);
-        $event = $events_model->findByResource($event_ident);
+        $url_event = $request->getParam('event');
+        $resource = $model_resources->findByIdent($url_event);
+        $event = $model_events->findByResource($url_event);
 
         $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
         $this->requireResourceAuthor($resource);
 
         $_tags = array();
-        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {
             $_tags[] = $tag->label;
         }
@@ -79,23 +78,32 @@ class Events_EventController extends Yeah_Action
 
                 $newTags = explode(',', $newTags);
                 $oldTags = $_tags;
+                $saved_tags = array();
 
-                for ($i = 0; $i < count($newTags); $i++) {
+                // removing duplicates tags
+                foreach ($newTags as $new_tag) {
+                    $new_tag = trim(strtolower($new_tag));
+                    if (!in_array($new_tag, $saved_tags)) {
+                        $saved_tags[] = $new_tag;
+                    }
+                }
+
+                for ($i = 0; $i < count($saved_tags); $i++) {
                     for ($j = 0; $j < count($oldTags); $j++) {
-                        if (isset($newTags[$i]) && isset($oldTags[$j])) {
-                            if (trim(strtolower($newTags[$i])) == $oldTags[$j]) {
-                                $newTags[$i] = NULL;
+                        if (isset($saved_tags[$i]) && isset($oldTags[$j])) {
+                            if ($saved_tags[$i] == $oldTags[$j]) {
+                                $saved_tags[$i] = NULL;
                                 $oldTags[$j] = NULL;
                             }
                         }
                     }
                 }
-                foreach ($newTags as $tagLabel) {
+                foreach ($saved_tags as $tagLabel) {
                     if ($tagLabel <> NULL) {
                         $tagLabel = trim(strtolower($tagLabel));
-                        $tag = $tags_model->findByLabel($tagLabel);
+                        $tag = $model_tags->findByLabel($tagLabel);
                         if ($tag == NULL) {
-                            $tag = $tags_model->createRow();
+                            $tag = $model_tags->createRow();
                             $tag->label = $tagLabel;
                             $tag->url = convert($tag->label);
                             $tag->weight = 1;
@@ -109,7 +117,7 @@ class Events_EventController extends Yeah_Action
                         }
 
                         if ($tag->ident <> 0) {
-                            $assign = $tags_resources_model->createRow();
+                            $assign = $model_tags_resources->createRow();
                             $assign->tag = $tag->ident;
                             $assign->resource = $resource->ident;
                             $assign->save();
@@ -118,11 +126,11 @@ class Events_EventController extends Yeah_Action
                 }
                 foreach ($oldTags as $tagLabel) {
                     if ($tagLabel <> NULL) {
-                        $tag = $tags_model->findByLabel($tagLabel);
+                        $tag = $model_tags->findByLabel($tagLabel);
                         $tag->weight = $tag->weight - 1;
                         $tag->save();
 
-                        $assign = $tags_resources_model->findByTagAndResource($tag->ident, $resource->ident);
+                        $assign = $model_tags_resources->findByTagAndResource($tag->ident, $resource->ident);
                         $assign->delete();
 
                         if ($tag->weight == 0) {
@@ -155,25 +163,24 @@ class Events_EventController extends Yeah_Action
         $this->requirePermission('resources', 'delete');
         $request = $this->getRequest();
 
-        $event_ident = $request->getParam('event');
+        $model_resources = new Resources();
+        $model_events = new Events();
+        $model_valorations = new Valorations();
+        $model_tags_resources = new Tags_Resources();
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $events_model = Yeah_Adapter::getModel('events');
-        $valorations_model = Yeah_Adapter::getModel('valorations');
-        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
-
-        $resource = $resources_model->findByIdent($event_ident);
-        $event = $events_model->findByResource($event_ident);
+        $url_event = $request->getParam('event');
+        $resource = $model_resources->findByIdent($url_event);
+        $event = $model_events->findByResource($url_event);
 
         $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
         $this->requireResourceAuthor($resource);
 
-        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {
             $tag->weight = $tag->weight - 1;
             $tag->save();
 
-            $assign = $tags_resources_model->findByTagAndResource($tag->ident, $resource->ident);
+            $assign = $model_tags_resources->findByTagAndResource($tag->ident, $resource->ident);
             $assign->delete();
 
             if ($tag->weight == 0) {
@@ -183,7 +190,7 @@ class Events_EventController extends Yeah_Action
 
         $event->delete();
         $resource->delete();
-        $valorations_model->decreaseActivity(4);
+        $model_valorations->decreaseActivity(4);
 
         $session = new Zend_Session_Namespace();
         $session->messages->addMessage("El evento ha sido eliminado");
@@ -195,24 +202,23 @@ class Events_EventController extends Yeah_Action
         $this->requirePermission('resources', 'drop');
         $request = $this->getRequest();
 
-        $event_ident = $request->getParam('event');
+        $model_resources = new Resources();
+        $model_events = new Events();
+        $model_valorations = new Valorations();
+        $model_tags_resources = new Tags_Resources();
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $events_model = Yeah_Adapter::getModel('events');
-        $valorations_model = Yeah_Adapter::getModel('valorations');
-        $tags_resources_model = Yeah_Adapter::getModel('tags', 'Tags_Resources');
-
-        $resource = $resources_model->findByIdent($event_ident);
-        $event = $events_model->findByResource($event_ident);
+        $url_event = $request->getParam('event');
+        $resource = $model_resources->findByIdent($url_event);
+        $event = $model_events->findByResource($url_event);
 
         $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
 
-        $tags = $resource->findmodules_tags_models_TagsViamodules_tags_models_Tags_Resources();
+        $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {
             $tag->weight = $tag->weight - 1;
             $tag->save();
 
-            $assign = $tags_resources_model->findByTagAndResource($tag->ident, $resource->ident);
+            $assign = $model_tags_resources->findByTagAndResource($tag->ident, $resource->ident);
             $assign->delete();
 
             if ($tag->weight == 0) {
@@ -222,7 +228,7 @@ class Events_EventController extends Yeah_Action
 
         $event->delete();
         $resource->delete();
-        $valorations_model->decreaseActivity(4, $resource->author);
+        $model_valorations->decreaseActivity(4, $resource->author);
 
         $session = new Zend_Session_Namespace();
         $session->messages->addMessage("El evento ha sido eliminado");

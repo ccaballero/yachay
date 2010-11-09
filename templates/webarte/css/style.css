@@ -37,7 +37,8 @@ a:hover {
 }
 
 input, select, option, textarea {
-    font-size: 0.8em;
+    font-size: 0.9em;
+    padding: 0em 0.3em;
 }
 
 select, option {
@@ -217,7 +218,6 @@ body {
 
 #primary #main dt {
     padding-left: 0.1em;
-    text-transform: capitalize;
 }
 
 #primary #main dd {
@@ -247,6 +247,10 @@ body {
     padding-left: 0.1em;
 }
 
+#primary #main .options {
+    padding-left: 1.1em;
+}
+
 #primary form label {
     width: 15.0em;
     float: left;
@@ -259,12 +263,11 @@ body {
     padding-bottom: 0.2em;
 }
 
-#primary p .mark {
+#primary .mark {
     font-weight: bold;
     text-transform: uppercase;
     border: 2px solid #DDE6C5;
     padding: 0em 0.3em;
-    -margin: 0em 0.3em;
 }
 
 #primary form .form {
@@ -272,7 +275,7 @@ body {
 }
 
 #primary form input[type='text'], #primary form input[type='password'], #primary form textarea {
-    width: 25.0em;
+    width: 22.0em;
 }
 
 #primary form table input[type='text'] {
@@ -295,11 +298,11 @@ body {
     width: 12.0em;
 }
 
-#primary h1 {
+#primary h1, #primary h2 {
     position: relative;
 }
 
-#primary h1 strong.task {
+#primary h1 strong.task, #primary h2 strong.task {
     position: absolute;
     bottom: 0.1em;
     right: 0.2em;
@@ -433,6 +436,7 @@ body {
     float: left;
     width: 325px;
     margin: 0.2em 0.2em;
+    min-height: 7.0em;
 }
 
 #primary #block .import p {
@@ -446,12 +450,12 @@ body {
     background-color: #6D852A;
     color: #DDE6C5;
     display: block;
-    padding: 0.2em 0.1em 0.2em 1.6em;
+    padding: 0.2em 0.1em 0.4em 1.8em;
     margin-bottom: 0.1em;
 }
 
 #primary #block .import label {
-    width: 9.0em;
+    width: 11.0em;
     float: left;
     margin-right: 0.5em;
     font-weight: bold;
@@ -466,8 +470,8 @@ body {
 
 #primary #block .import .result {
     position: absolute;
-    right: 0.2em;
-    top: 1.3em;
+    right: 0.1em;
+    top: 1.5em;
 }
 
 #primary #user {
@@ -481,4 +485,8 @@ body {
     top: 0px;
     left: 0px;
     width: 200px;
+}
+
+#primary #main ul li {
+    list-style-type: circle;
 }

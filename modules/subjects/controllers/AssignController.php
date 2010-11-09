@@ -7,7 +7,7 @@ class Subjects_AssignController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            if (Yeah_Acl::hasPermission('subjects', 'moderate')) {
+            if ($this->acl('subjects', 'moderate')) {
                 $lock = $request->getParam('lock');
                 $unlock = $request->getParam('unlock');
                 if (!empty($lock)) {
@@ -22,22 +22,22 @@ class Subjects_AssignController extends Yeah_Action
             }
         }
 
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByActive();
 
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $urlsubject = $request->getParam('subject');
-        $subject = $subjects->findByUrl($gestion->ident, $urlsubject);
+        $model_subjects = new Subjects();
+        $url_subject = $request->getParam('subject');
+        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         context('subject', $subject);
 
-        $teachers = $subject->findmodules_users_models_UsersViamodules_subjects_models_Subjects_Users($subject->select()->where('type = ?', 'teacher'));
-        $auxiliars = $subject->findmodules_users_models_UsersViamodules_subjects_models_Subjects_Users($subject->select()->where('type = ?', 'auxiliar'));
-        $students = $subject->findmodules_users_models_UsersViamodules_subjects_models_Subjects_Users($subject->select()->where('type = ?', 'student'));
-        $guests = $subject->findmodules_users_models_UsersViamodules_subjects_models_Subjects_Users($subject->select()->where('type = ?', 'guest'));
+        $teachers = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'teacher'));
+        $auxiliars = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'auxiliar'));
+        $students = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'student'));
+        $guests = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'guest'));
 
-        $this->view->model = $subjects;
+        $this->view->model_subjects = $model_subjects;
         $this->view->subject = $subject;
         $this->view->teachers = $teachers;
         $this->view->auxiliars = $auxiliars;
@@ -46,12 +46,13 @@ class Subjects_AssignController extends Yeah_Action
 
         history('subjects/' . $subject->url . '/assign');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
-        } else if (Yeah_Acl::hasPermission('subjects', 'list')) {
+        if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
         }
-        if (Yeah_Acl::hasPermission('subjects', 'view')) {
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
+        }
+        if ($this->acl('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
         }
         breadcrumb($breadcrumb);
@@ -62,23 +63,27 @@ class Subjects_AssignController extends Yeah_Action
         $this->requirePermission('subjects', 'moderate');
 
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
 
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $urlsubject = $request->getParam('subject');
-        $subject = $subjects->findByUrl($gestion->ident, $urlsubject);
+        $model_gestions = new Gestions();
+        $model_subjects = new Subjects();
+
+        $gestion = $model_gestions->findByActive();
+        $url_subject = $request->getParam('subject');
+        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
         context('subject', $subject);
 
-        $model = Yeah_Adapter::getModel('users');
-        $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
-        $users = $model->selectByStatus('active');
+        $model_users = new Users();
+        $model_subjects_users = new Subjects_Users();
+
+        $users = $model_users->selectByStatus('active');
+
         $filtered = array();
         foreach ($users as $user) {
-            $assign = $assignement->findBySubjectAndUser($subject->ident, $user->ident);
+            $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $user->ident);
             if (empty($assign)) {
                 if ($user->hasPermission('subjects', 'teach') || $user->hasPermission('subjects', 'helper') || $user->hasPermission('subjects', 'study') || $user->hasPermission('subjects', 'participate')) {
                     $filtered[] = $user;
@@ -92,10 +97,10 @@ class Subjects_AssignController extends Yeah_Action
             $types = array('teacher', 'auxiliar', 'student', 'guest');
 
             foreach ($users as $ident_user => $type_assign) {
-                $user = $model->findByIdent($ident_user);
+                $user = $model_users->findByIdent($ident_user);
                 if (!empty($user)) {
                     if (in_array($type_assign, $types)) {
-                        $assign = $assignement->createRow();
+                        $assign = $model_subjects_users->createRow();
                         $assign->subject = $subject->ident;
                         $assign->user = $user->ident;
                         $assign->type = strtolower($type_assign);
@@ -110,19 +115,20 @@ class Subjects_AssignController extends Yeah_Action
             $this->_redirect($request->getParam('return'));
         }
 
-        $this->view->model = $model;
+        $this->view->model_users = $model_users;
         $this->view->gestion = $gestion;
         $this->view->subject = $subject;
         $this->view->users = $filtered;
 
         history('subjects/' . $subject->url . '/assign/new');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
-        } else if (Yeah_Acl::hasPermission('subjects', 'list')) {
+        if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
         }
-        if (Yeah_Acl::hasPermission('subjects', 'view')) {
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
+        }
+        if ($this->acl('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             $breadcrumb['Miembros'] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_assign');
         }
@@ -134,23 +140,24 @@ class Subjects_AssignController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $gestions = Yeah_Adapter::getModel('gestions');
-            $gestion = $gestions->findByActive();
+            $model_users = new Users();
+            $model_gestions = new Gestions();
 
-            $users_model = Yeah_Adapter::getModel('users');
-            $subjects_model = Yeah_Adapter::getModel('subjects');
+            $gestion = $model_gestions->findByActive();
+
+            $model_subjects_model = new Subjects();
             $subject_url = $request->getParam('subject');
-            $subject = $subjects_model->findByUrl($gestion->ident, $subject_url);
+            $subject = $model_subjects_model->findByUrl($gestion->ident, $subject_url);
             $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
             $this->requireModerator($subject);
 
-            $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
+            $model_subjects_users = new Subjects_Users();
             $members = $request->getParam("members");
 
             foreach ($members as $member) {
-                $user = $users_model->findByIdent($member);
+                $user = $model_users->findByIdent($member);
                 if (!empty($user)) {
-                    $assign = $assignement->findBySubjectAndUser($subject->ident, $user->ident);
+                    $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $user->ident);
                     $assign->status = 'inactive';
                     $assign->save();
                 }
@@ -168,23 +175,23 @@ class Subjects_AssignController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $gestions = Yeah_Adapter::getModel('gestions');
-            $gestion = $gestions->findByActive();
+            $model_gestions = new Gestions();
+            $gestion = $model_gestions->findByActive();
 
-            $users_model = Yeah_Adapter::getModel('users');
-            $subjects_model = Yeah_Adapter::getModel('subjects');
+            $model_users = new Users();
+            $model_subjects_model = new Subjects();
             $subject_url = $request->getParam('subject');
-            $subject = $subjects_model->findByUrl($gestion->ident, $subject_url);
+            $subject = $model_subjects_model->findByUrl($gestion->ident, $subject_url);
             $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
             $this->requireModerator($subject);
 
-            $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
+            $model_subjects_users = new Subjects_Users();
             $members = $request->getParam("members");
 
             foreach ($members as $member) {
-                $user = $users_model->findByIdent($member);
+                $user = $model_users->findByIdent($member);
                 if (!empty($user)) {
-                    $assign = $assignement->findBySubjectAndUser($subject->ident, $user->ident);
+                    $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $user->ident);
                     $assign->status = 'active';
                     $assign->save();
                 }
@@ -202,23 +209,23 @@ class Subjects_AssignController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $gestions = Yeah_Adapter::getModel('gestions');
-            $gestion = $gestions->findByActive();
+            $model_gestions = new Gestions();
+            $gestion = $model_gestions->findByActive();
 
-            $users_model = Yeah_Adapter::getModel('users');
-            $subjects_model = Yeah_Adapter::getModel('subjects');
+            $model_users = new Users();
+            $model_subjects_model = new Subjects();
             $subject_url = $request->getParam('subject');
-            $subject = $subjects_model->findByUrl($gestion->ident, $subject_url);
+            $subject = $model_subjects_model->findByUrl($gestion->ident, $subject_url);
             $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
             $this->requireModerator($subject);
 
-            $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
+            $model_subjects_users = new Subjects_Users();
             $members = $request->getParam("members");
 
             foreach ($members as $member) {
-                $user = $users_model->findByIdent($member);
+                $user = $model_users->findByIdent($member);
                 if (!empty($user)) {
-                    $assign = $assignement->findBySubjectAndUser($subject->ident, $user->ident);
+                    $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $user->ident);
                     $assign->delete();
                 }
             }
@@ -235,14 +242,15 @@ class Subjects_AssignController extends Yeah_Action
 
         $this->requirePermission('subjects', 'moderate');
 
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_subjects = new Subjects();
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByActive();
 
         $request = $this->getRequest();
 
-        $subjects_model = Yeah_Adapter::getModel('subjects');
-        $subject_url = $request->getParam('subject');
-        $subject = $subjects_model->findByUrl($gestion->ident, $subject_url);
+        $url_subject = $request->getParam('subject');
+        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
@@ -252,7 +260,7 @@ class Subjects_AssignController extends Yeah_Action
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
-            $users_model = Yeah_Adapter::getModel('users');
+            $model_users = new Users();
 
             $types = array(
                 'docente'    => array('teach', 'teacher'),
@@ -310,7 +318,7 @@ class Subjects_AssignController extends Yeah_Action
                                     $result = array();
 
                                     $user_info = trim($row[$_headers[$key]]);
-                                    $user = $users_model->{$method}($user_info);
+                                    $user = $model_users->{$method}($user_info);
 
                                     if (!empty($user)) {
                                         $result['CODIGO'] = $user->code;
@@ -348,7 +356,6 @@ class Subjects_AssignController extends Yeah_Action
                                 if (!$csv->hasColumn($_headers['CODIGO'])) {
                                     $session->messages->addMessage('La columna CODIGO no fue encontrada');
                                     $this->_redirect($this->view->currentPage());
-
                                 }
                                 if (!$csv->hasColumn($_headers['USUARIO'])) {
                                     $session->messages->addMessage('La columna USUARIO no fue encontrada');
@@ -361,16 +368,16 @@ class Subjects_AssignController extends Yeah_Action
                 }
             } else {
                 if (isset($session->assign_users)) {
-                    $assignement = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
+                    $model_subjects_users = new Subjects_Users();
                     $count_new = 0;
                     $count_over = 0;
                     foreach ($session->assign_users as $result) {
                         if (in_array($result['CODIGO'], $selections)) {
                             $user = $result['USUARIO_OBJ'];
                             if ($user->hasPermission('subjects', $result['ACL'])) {
-                                $assign = $assignement->findBySubjectAndUser($subject->ident, $user->ident);
+                                $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $user->ident);
                                 if (empty($assign)) {
-                                    $assign = $assignement->createRow();
+                                    $assign = $model_subjects_users->createRow();
                                     $assign->subject = $subject->ident;
                                     $assign->user = $user->ident;
                                     $assign->type = $result['TYPE'];
@@ -393,12 +400,13 @@ class Subjects_AssignController extends Yeah_Action
 
         history('subjects/' . $subject->url . '/assign/import');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
-        } else if (Yeah_Acl::hasPermission('subjects', 'list')) {
+        if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
         }
-        if (Yeah_Acl::hasPermission('subjects', 'view')) {
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
+        }
+        if ($this->acl('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             $breadcrumb['Miembros'] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_assign');
         }
@@ -407,15 +415,16 @@ class Subjects_AssignController extends Yeah_Action
 
     public function exportAction() {
         $this->requirePermission('subjects', 'moderate');
-
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
 
-        $users_model = Yeah_Adapter::getModel('users');
-        $subjects_model = Yeah_Adapter::getModel('subjects');
+        $model_users = new Users();
+        $model_subjects = new Subjects();
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByActive();
+
         $subject_url = $request->getParam('subject');
-        $subject = $subjects_model->findByUrl($gestion->ident, $subject_url);
+        $subject = $model_subjects->findByUrl($gestion->ident, $subject_url);
+
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
@@ -428,31 +437,31 @@ class Subjects_AssignController extends Yeah_Action
                     $csv = '';
 
                     $headers = array('"Codigo"', '"Nombre Completo"', '"Usuario"', '"Cargo"');
-                    $csv .= implode(', ', $headers) . '
+                    $csv .= implode(',', $headers) . '
 ';
-                    $teachers = $subject->findmodules_users_models_UsersViamodules_subjects_models_Subjects_Users($subject->select()->where('type = ?', 'teacher'));
-                    $auxiliars = $subject->findmodules_users_models_UsersViamodules_subjects_models_Subjects_Users($subject->select()->where('type = ?', 'auxiliar'));
-                    $students = $subject->findmodules_users_models_UsersViamodules_subjects_models_Subjects_Users($subject->select()->where('type = ?', 'student'));
-                    $guests = $subject->findmodules_users_models_UsersViamodules_subjects_models_Subjects_Users($subject->select()->where('type = ?', 'guest'));
+                    $teachers = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'teacher'));
+                    $auxiliars = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'auxiliar'));
+                    $students = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'student'));
+                    $guests = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'guest'));
 
                     foreach ($teachers as $teacher) {
                         $row = array('"' . $teacher->code . '"', '"' . $teacher->formalname . '"', '"' . $teacher->label . '"', '"Docente"');
-                        $csv .= implode(', ', $row) . '
+                        $csv .= implode(',', $row) . '
 ';
                     }
                     foreach ($auxiliars as $auxiliar) {
                         $row = array('"' . $auxiliar->code . '"', '"' . $auxiliar->formalname . '"', '"' . $auxiliar->label . '"', '"Auxiliar"');
-                        $csv .= implode(', ', $row) . '
+                        $csv .= implode(',', $row) . '
 ';
                     }
                     foreach ($students as $student) {
                         $row = array('"' . $student->code . '"', '"' . $student->formalname . '"', '"' . $student->label . '"', '"Estudiante"');
-                        $csv .= implode(', ', $row) . '
+                        $csv .= implode(',', $row) . '
 ';
                     }
                     foreach ($guests as $guest) {
                         $row = array('"' . $guest->code . '"', '"' . $guest->formalname . '"', '"' . $guest->label . '"', '"Invitado"');
-                        $csv .= implode(', ', $row) . '
+                        $csv .= implode(',', $row) . '
 ';
                     }
 
@@ -469,12 +478,13 @@ class Subjects_AssignController extends Yeah_Action
 
         history('subjects/' . $subject->url . '/assign/export');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
-        } else if (Yeah_Acl::hasPermission('subjects', 'list')) {
+        if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
         }
-        if (Yeah_Acl::hasPermission('subjects', 'view')) {
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
+        }
+        if ($this->acl('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             $breadcrumb['Miembros'] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_assign');
         }

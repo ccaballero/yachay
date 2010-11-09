@@ -1,12 +1,12 @@
-<h1>Peticiones: <?= $this->utf2html($this->community->label) ?></h1>
+<h1>Peticiones: <?= $this->community->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
     <table>
         <tr>
         <?php if ($this->community->amModerator()) { ?>
-            <td><input type="submit" value="Aceptar Petici&oacute;n" name="accept" /></td>
-            <td><input type="submit" value="Denegar Petici&oacute;n" name="decline" /></td>
+            <td><input type="submit" value="Aceptar Petición" name="accept" /></td>
+            <td><input type="submit" value="Denegar Petición" name="decline" /></td>
         <?php } ?>
         </tr>
     </table>
@@ -24,15 +24,14 @@
                     &nbsp;
                 <?php } ?>
                 </td>
-                <td rowspan="2" width="50px"><img src="<?= $this->media . '../users/thumbnail_small/' . $applicant->getAvatar() ?>" /></td>
                 <td>
-                <?php if (Yeah_Acl::hasPermission('users', 'view')) { ?>
+                <?php if ($this->acl('users', 'view')) { ?>
                     <a href="<?= $this->url(array('user' => $applicant->url), 'users_user_view') ?>"><?= $applicant->label ?></a>
                 <?php } else { ?>
                     <?= $applicant->label ?>
                 <?php } ?>
                 </td>
-                <td colspan="2"><?= $this->utf2html($applicant->getFullName()) ?></td>
+                <td colspan="2"><?= $applicant->getFullName() ?></td>
             </tr>
             <tr>
                 <td>Fecha de solicitud: <?= $this->timestamp($assign->tsregister) ?></td>
@@ -48,15 +47,15 @@
         </table>
     <?php } ?>
 <?php } else { ?>
-    <p>No existe ninguna petici&oacute;n de ingreso en esta comunidad.</p>
+    <p>No existe ninguna petición de ingreso en esta comunidad.</p>
 <?php } ?>
 
     <hr />
     <table>
         <tr>
         <?php if ($this->community->amModerator()) { ?>
-            <td><input type="submit" value="Aceptar Petici&oacute;n" name="accept" /></td>
-            <td><input type="submit" value="Denegar Petici&oacute;n" name="decline" /></td>
+            <td><input type="submit" value="Aceptar Petición" name="accept" /></td>
+            <td><input type="submit" value="Denegar Petición" name="decline" /></td>
         <?php } ?>
         </tr>
     </table>

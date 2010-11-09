@@ -16,14 +16,17 @@ class Communities_ManagerController extends Yeah_Action
             }
         }
 
-        $model_communities = Yeah_Adapter::getModel('communities');
+        $model_communities = new Communities();
         $communities = $model_communities->selectByAuthor($USER->ident);
 
-        $this->view->model = $model_communities;
+        $this->view->model_communities = $model_communities;
         $this->view->communities = $communities;
 
         history('communities/manager');
-        breadcrumb();
+        if ($this->acl('communities', 'list')) {
+            $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
+        }
+        breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -32,16 +35,16 @@ class Communities_ManagerController extends Yeah_Action
 
         $this->requirePermission('communities', 'enter');
 
-        $this->view->community = new modules_communities_models_Communities_Empty;
+        $this->view->community = new Communities_Empty();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $model_communities = Yeah_Adapter::getModel('communities');
-            $model_communities_users = Yeah_Adapter::getModel('communities', 'Communities_Users');
-            $model_tags = Yeah_Adapter::getModel('tags');
-            $model_tags_communities = Yeah_Adapter::getModel('tags', 'Tags_Communities');
+            $model_communities = new Communities();
+            $model_tags = new Tags();
+            $model_communities_users = new Communities_Users();
+            $model_tags_communities = new Tags_Communities();
 
             $community = $model_communities->createRow();
 
@@ -68,28 +71,35 @@ class Communities_ManagerController extends Yeah_Action
 
                 // TAG REGISTER
                 $tags = explode(',', $tags);
+                $saved_tags = array();
+
                 foreach ($tags as $tagLabel) {
                     $tagLabel = trim(strtolower($tagLabel));
-                    $tag = $model_tags->findByLabel($tagLabel);
-                    if ($tag == NULL) {
-                        $tag = $model_tags->createRow();
-                        $tag->label = $tagLabel;
-                        $tag->url = convert($tag->label);
-                        $tag->weight = 1;
-                        if ($tag->isValid()) {
-                            $tag->tsregister = time();
+
+                    if (!in_array($tagLabel, $saved_tags)) {
+                        $tag = $model_tags->findByLabel($tagLabel);
+                        if ($tag == NULL) {
+                            $tag = $model_tags->createRow();
+                            $tag->label = $tagLabel;
+                            $tag->url = convert($tag->label);
+                            $tag->weight = 1;
+                            if ($tag->isValid()) {
+                                $tag->tsregister = time();
+                                $tag->save();
+                            }
+                        } else {
+                            $tag->weight = $tag->weight + 1;
                             $tag->save();
                         }
-                    } else {
-                        $tag->weight = $tag->weight + 1;
-                        $tag->save();
-                    }
 
-                    if ($tag->ident <> 0) {
-                        $assign = $model_tags_communities->createRow();
-                        $assign->tag = $tag->ident;
-                        $assign->community = $community->ident;
-                        $assign->save();
+                        if ($tag->ident <> 0) {
+                            $assign = $model_tags_communities->createRow();
+                            $assign->tag = $tag->ident;
+                            $assign->community = $community->ident;
+                            $assign->save();
+                        }
+
+                        $saved_tags[] = $tagLabel;
                     }
                 }
 
@@ -201,7 +211,12 @@ class Communities_ManagerController extends Yeah_Action
 
         history('communities/new');
         $breadcrumb = array();
-        $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_manager');
+        if ($this->acl('communities', 'list')) {
+            $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
+        }
+        if ($this->acl('communities', 'enter')) {
+            $breadcrumb['Administrador de comunidades'] = $this->view->url(array(), 'communities_manager');
+        }
         breadcrumb($breadcrumb);
     }
 
@@ -210,10 +225,10 @@ class Communities_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $model_communities = Yeah_Adapter::getModel('communities');
-            $model_communities_users = Yeah_Adapter::getModel('communities', 'Communities_Users');
-            $model_communities_petitions = Yeah_Adapter::getModel('communities', 'Communities_Petitions');
-            $model_tags_communities = Yeah_Adapter::getModel('tags', 'Tags_Communities');
+            $model_communities = new Communities();
+            $model_communities_users = new Communities_Users();
+            $model_communities_petitions = new Communities_Petitions();
+            $model_tags_communities = new Tags_Communities();
 
             $check = $request->getParam("check");
 
@@ -226,7 +241,7 @@ class Communities_ManagerController extends Yeah_Action
                         $model_communities_petitions->deleteAplicantsInCommunity($community->ident);
                     }
 
-                    $tags = $community->findmodules_tags_models_TagsViamodules_tags_models_Tags_Communities();
+                    $tags = $community->findTagsViaTags_Communities();
                     foreach ($tags as $tag) {
                         $tag->weight = $tag->weight - 1;
                         $tag->save();

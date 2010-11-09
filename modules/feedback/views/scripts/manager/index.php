@@ -1,4 +1,4 @@
-<h1>Administrador de sugerencias</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
@@ -19,9 +19,9 @@
     <table width="100%">
         <tr>
             <th>&nbsp;</th>
-            <th><?= $this->model->_mapping['description'] ?></th>
+            <th><?= $this->model_feedback->_mapping['description'] ?></th>
             <th>Opciones</th>
-            <th><?= $this->model->_mapping['tsregister'] ?></th>
+            <th><?= $this->model_feedback->_mapping['tsregister'] ?></th>
         </tr>
     <?php foreach ($this->feedback as $entry) { ?>
         <tr>

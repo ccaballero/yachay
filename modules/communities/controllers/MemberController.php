@@ -6,14 +6,14 @@ class Communities_MemberController extends Yeah_Action
         $this->requirePermission('communities', 'enter');
 
         $request = $this->getRequest();
-        $communities_model = Yeah_Adapter::getModel('communities');
-        $users_model = Yeah_Adapter::getModel('users');
+        $model_communities = new Communities();
+        $users_model = new Users();
 
-        $community_url = $request->getParam('community');
-        $user_url = $request->getParam('user');
+        $url_community = $request->getParam('community');
+        $url_user = $request->getParam('user');
 
-        $community = $communities_model->findByUrl($community_url);
-        $user = $users_model->findByUrl($user_url);
+        $community = $model_communities->findByUrl($url_community);
+        $user = $users_model->findByUrl($url_user);
 
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
@@ -24,8 +24,8 @@ class Communities_MemberController extends Yeah_Action
         if ($community->author == $user->ident) {
             $session->messages->addMessage('El usuario ' . $user->label . ' no puede ser deshabilitado de la comunidad');
         } else {
-            $assignement = Yeah_Adapter::getModel('communities', 'Communities_Users');
-            $assign = $assignement->findByCommunityAndUser($community->ident, $user->ident);
+            $model_communities_users = new Communities_Users();
+            $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
             $assign->status = 'inactive';
             $assign->save();
 
@@ -38,14 +38,14 @@ class Communities_MemberController extends Yeah_Action
         $this->requirePermission('communities', 'enter');
 
         $request = $this->getRequest();
-        $communities_model = Yeah_Adapter::getModel('communities');
-        $users_model = Yeah_Adapter::getModel('users');
+        $model_communities = new Communities();
+        $users_model = new Users();
 
-        $community_url = $request->getParam('community');
-        $user_url = $request->getParam('user');
+        $url_community = $request->getParam('community');
+        $url_user = $request->getParam('user');
 
-        $community = $communities_model->findByUrl($community_url);
-        $user = $users_model->findByUrl($user_url);
+        $community = $model_communities->findByUrl($url_community);
+        $user = $users_model->findByUrl($url_user);
 
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
@@ -56,8 +56,8 @@ class Communities_MemberController extends Yeah_Action
         if ($community->author == $user->ident) {
             $session->messages->addMessage('El usuario ' . $user->label . ' no puede ser habilitado de la comunidad');
         } else {
-            $assignement = Yeah_Adapter::getModel('communities', 'Communities_Users');
-            $assign = $assignement->findByCommunityAndUser($community->ident, $user->ident);
+            $model_communities_users = new Communities_Users();
+            $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
             $assign->status = 'active';
             $assign->save();
 
@@ -70,14 +70,14 @@ class Communities_MemberController extends Yeah_Action
         $this->requirePermission('communities', 'enter');
 
         $request = $this->getRequest();
-        $communities_model = Yeah_Adapter::getModel('communities');
-        $users_model = Yeah_Adapter::getModel('users');
+        $model_communities = new Communities();
+        $users_model = new Users();
 
-        $community_url = $request->getParam('community');
-        $user_url = $request->getParam('user');
+        $url_community = $request->getParam('community');
+        $url_user = $request->getParam('user');
 
-        $community = $communities_model->findByUrl($community_url);
-        $user = $users_model->findByUrl($user_url);
+        $community = $model_communities->findByUrl($url_community);
+        $user = $users_model->findByUrl($url_user);
 
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
@@ -88,8 +88,8 @@ class Communities_MemberController extends Yeah_Action
         if ($community->author == $user->ident) {
             $session->messages->addMessage('El usuario ' . $user->label . ' no puede ser retirado de la comunidad');
         } else {
-            $assignement = Yeah_Adapter::getModel('communities', 'Communities_Users');
-            $assign = $assignement->findByCommunityAndUser($community->ident, $user->ident);
+            $model_communities_users = new Communities_Users();
+            $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
             $assign->delete();
 
             $community->members = $community->members - 1;

@@ -32,5 +32,5 @@ cat ratings.sql >> todo.sql
 cat valorations.sql >> todo.sql
 cat tags.sql >> todo.sql
 cat feedback.sql >> todo.sql
-cat themes.sql >> todo.sql
+cat templates.sql >> todo.sql
 cat _extra.sql >> todo.sql

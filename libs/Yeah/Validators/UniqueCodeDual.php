@@ -13,8 +13,8 @@ class Yeah_Validators_UniqueCodeDual extends Zend_Validate_Abstract
     }
 
     public function isValid($value) {
-        $elements = Yeah_Adapter::getModel($this->_model);
-        $element = $elements->findByCode($this->_foreign, $value);
+        $model = new $this->_model();
+        $element = $model->findByCode($this->_foreign, $value);
         if (empty($element)) {
             return true;
         } else {

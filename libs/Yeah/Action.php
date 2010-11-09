@@ -203,7 +203,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
 
         // Regions settings
         global $TITLE;
-        $TITLE->title = "Sistema de administraci&oacute;n de Cursos y Notas";
+        $TITLE->title = "Sistema de administración de Cursos y Notas";
 
         global $ICON;
         $ICON->icon = $CONFIG->media_base . "favicon.ico";

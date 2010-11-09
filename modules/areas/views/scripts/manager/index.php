@@ -1,14 +1,14 @@
-<h1>Administrador de areas</h1>
+<h1><?= $this->PAGE->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
 
     <table>
         <tr>
-        <?php if (Yeah_Acl::hasPermission('areas', 'list')) { ?>
+        <?php if ($this->acl('areas', 'list')) { ?>
             <td>[<a href="<?= $this->url(array(), 'areas_list') ?>">Lista</a>]</td>
         <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('areas', 'new')) { ?>
+        <?php if ($this->acl('areas', 'new')) { ?>
             <td>[<a href="<?= $this->url(array(), 'areas_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         </tr>
@@ -19,22 +19,22 @@
     <center>
         <table width="100%">
             <tr>
-                <th><?= $this->utf2html($this->model->_mapping['label']) ?></th>
+                <th><?= $this->model_areas->_mapping['label'] ?></th>
                 <th>Opciones</th>
-                <th><?= $this->utf2html($this->model->_mapping['tsregister']) ?></th>
+                <th><?= $this->model_areas->_mapping['tsregister'] ?></th>
             </tr>
         <?php foreach ($this->areas as $area) { ?>
             <tr>
-                <td><?= $this->utf2html($area->label) ?></td>
+                <td><?= $area->label ?></td>
                 <td>
                     <center>
-                    <?php if (Yeah_Acl::hasPermission('areas', 'view')) { ?>
+                    <?php if ($this->acl('areas', 'view')) { ?>
                         <a href="<?= $this->url(array('area' => $area->url), 'areas_area_view') ?>">Ver</a>
                     <?php } ?>
-                    <?php if (Yeah_Acl::hasPermission('areas', 'edit')) { ?>
+                    <?php if ($this->acl('areas', 'edit')) { ?>
                         <a href="<?= $this->url(array('area' => $area->url), 'areas_area_edit') ?>">Editar</a>
                     <?php } ?>
-                    <?php if (Yeah_Acl::hasPermission('areas', 'delete')) { ?>
+                    <?php if ($this->acl('areas', 'delete')) { ?>
                         <?php if ($area->isEmpty()) { ?>
                         <a href="<?= $this->url(array('area' => $area->url), 'areas_area_delete') ?>">Eliminar</a>
                         <?php } ?>
@@ -53,10 +53,10 @@
 
     <table>
         <tr>
-        <?php if (Yeah_Acl::hasPermission('areas', 'list')) { ?>
+        <?php if ($this->acl('areas', 'list')) { ?>
             <td>[<a href="<?= $this->url(array(), 'areas_list') ?>">Lista</a>]</td>
         <?php } ?>
-        <?php if (Yeah_Acl::hasPermission('areas', 'new')) { ?>
+        <?php if ($this->acl('areas', 'new')) { ?>
             <td>[<a href="<?= $this->url(array(), 'areas_new') ?>">Nuevo</a>]</td>
         <?php } ?>
         </tr>

@@ -10,44 +10,44 @@ class Comments_CommentController extends Yeah_Action
 
         $request = $this->getRequest();
 
-        $resource_url = $request->getParam('resource');
-        $resource_type = $request->getParam('type');
-        $resource_comment = $request->getParam('comment');
+        $url_resource = $request->getParam('resource');
+        $type_resource = $request->getParam('type');
+        $comment_resource = $request->getParam('comment');
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $valorations_model = Yeah_Adapter::getModel('valorations');
-        $resource = $resources_model->findByIdent($resource_url);
+        $model_resources = new Resources();
+        $model_valorations = new Valorations();
+        $resource = $model_resources->findByIdent($url_resource);
 
-        switch ($resource_type) {
+        switch ($type_resource) {
             case 'note':
-                $notes_model = Yeah_Adapter::getModel('notes');
-                $note = $notes_model->findByResource($resource_url);
+                $model_notes = new Notes();
+                $note = $model_notes->findByResource($url_resource);
                 $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
                 break;
             case 'file':
-                $files_model = Yeah_Adapter::getModel('files');
-                $file = $files_model->findByResource($resource_url);
+                $model_files = new Files();
+                $file = $model_files->findByResource($url_resource);
                 $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
                 break;
             case 'event':
-                $events_model = Yeah_Adapter::getModel('events');
-                $event = $events_model->findByResource($resource_url);
+                $model_events = new Events();
+                $event = $model_events->findByResource($url_resource);
                 $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
                 break;
             case 'feedback':
-                $feedback_model = Yeah_Adapter::getModel('feedback');
-                $entry = $feedback_model->findByResource($resource_url);
+                $model_feedback = new Feedback();
+                $entry = $model_feedback->findByResource($url_resource);
                 $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
         }
 
         $this->requireContext($resource);
         $session = new Zend_Session_Namespace();
 
-        $comments_model = Yeah_Adapter::getModel('comments');
+        $comments_model = new Comments();
         $comment = $comments_model->createRow();
         $comment->resource = $resource->ident;
         $comment->author = $USER->ident;
-        $comment->comment = $resource_comment;
+        $comment->comment = $comment_resource;
         $comment->tsregister = time();
 
         if ($comment->isValid()) {
@@ -56,7 +56,7 @@ class Comments_CommentController extends Yeah_Action
             $resource->comments = $resource->comments + 1;
             $resource->save();
 
-            $valorations_model->addParticipation(2);
+            $model_valorations->addParticipation(2);
         }
 
         $session->messages->addMessage('Tu comentario ha sido publicado');
@@ -71,40 +71,40 @@ class Comments_CommentController extends Yeah_Action
 
         $request = $this->getRequest();
 
-        $resource_url = $request->getParam('resource');
-        $resource_type = $request->getParam('type');
-        $comment_ident = $request->getParam('comment');
+        $url_resource = $request->getParam('resource');
+        $type_resource = $request->getParam('type');
+        $comment_resource = $request->getParam('comment');
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $valorations_model = Yeah_Adapter::getModel('valorations');
-        $resource = $resources_model->findByIdent($resource_url);
+        $model_resources = new Resources();
+        $model_valorations = new Valorations();
+        $resource = $model_resources->findByIdent($url_resource);
 
-        switch ($resource_type) {
+        switch ($type_resource) {
             case 'note':
-                $notes_model = Yeah_Adapter::getModel('notes');
-                $note = $notes_model->findByResource($resource_url);
+                $model_notes = new Notes();
+                $note = $model_notes->findByResource($url_resource);
                 $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
                 break;
             case 'file':
-                $files_model = Yeah_Adapter::getModel('files');
-                $file = $files_model->findByResource($resource_url);
+                $model_files = new Files();
+                $file = $model_files->findByResource($url_resource);
                 $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
                 break;
             case 'event':
-                $events_model = Yeah_Adapter::getModel('events');
-                $event = $events_model->findByResource($resource_url);
+                $model_events = new Events();
+                $event = $model_events->findByResource($url_resource);
                 $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
                 break;
             case 'feedback':
-                $feedback_model = Yeah_Adapter::getModel('feedback');
-                $entry = $feedback_model->findByResource($resource_url);
+                $model_feedback = new Feedback();
+                $entry = $model_feedback->findByResource($url_resource);
                 $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
         }
 
         $this->requireContext($resource);
 
-        $comments_model = Yeah_Adapter::getModel('comments');
-        $comment = $comments_model->findByIdent($comment_ident);
+        $comments_model = new Comments();
+        $comment = $comments_model->findByIdent($comment_resource);
 
         $session = new Zend_Session_Namespace();
         if (!empty($comment) && $comment->author == $USER->ident) {
@@ -113,7 +113,7 @@ class Comments_CommentController extends Yeah_Action
             $resource->comments = $resource->comments - 1;
             $resource->save();
 
-            $valorations_model->decreaseParticipation(2);
+            $model_valorations->decreaseParticipation(2);
             $session->messages->addMessage('Tu comentario ha sido removido');
         }
 
@@ -124,11 +124,11 @@ class Comments_CommentController extends Yeah_Action
         $this->requirePermission('comments', 'drop');
         $request = $this->getRequest();
 
-        $comment_ident = $request->getParam('comment');
-        $comments_model = Yeah_Adapter::getModel('comments');
-        $comment = $comments_model->findByIdent($comment_ident);
+        $comment_resource = $request->getParam('comment');
+        $comments_model = new Comments();
+        $comment = $comments_model->findByIdent($comment_resource);
 
-        $valorations_model = Yeah_Adapter::getModel('valorations');
+        $model_valorations = new Valorations();
 
         $session = new Zend_Session_Namespace();
         if (!empty($comment)) {
@@ -138,7 +138,7 @@ class Comments_CommentController extends Yeah_Action
             $resource->comments = $resource->comments - 1;
             $resource->save();
             
-            $valorations_model->decreaseParticipation(2, $comment->author);
+            $model_valorations->decreaseParticipation(2, $comment->author);
             $session->messages->addMessage('El comentario ha sido removido');
         }
 

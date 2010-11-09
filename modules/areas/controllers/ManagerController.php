@@ -6,26 +6,30 @@ class Areas_ManagerController extends Yeah_Action
         $this->requirePermission('areas', 'list');
         $this->requirePermission('areas', array('new', 'delete'));
 
-        $areas = Yeah_Adapter::getModel('areas');
+        $model_areas = new Areas();
 
-        $this->view->model = $areas;
-        $this->view->areas = $areas->selectAll();
+        $this->view->model_areas = $model_areas;
+        $this->view->areas = $model_areas->selectAll();
 
         history('areas/manager');
-        breadcrumb();
+        $breadcrumb = array();
+        if ($this->acl('areas', 'list')) {
+            $breadcrumb['Areas'] = $this->view->url(array(), 'areas_list');
+        }
+        breadcrumb($breadcrumb);
     }
 
     public function newAction() {
         $this->requirePermission('areas', 'new');
 
-        $this->view->area = new modules_areas_models_Areas_Empty;
+        $this->view->area = new Areas_Empty();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $areas = Yeah_Adapter::getModel('areas');
-            $area = $areas->createRow();
+            $model_areas = new Areas();
+            $area = $model_areas->createRow();
             $area->label = $request->getParam('label');
             $area->url = convert($area->label);
             $area->description = $request->getParam('description');
@@ -47,7 +51,12 @@ class Areas_ManagerController extends Yeah_Action
 
         history('areas/new');
         $breadcrumb = array();
-        $breadcrumb['Areas'] = $this->view->url(array(), 'areas_manager');
+        if ($this->acl('areas', 'list')) {
+            $breadcrumb['Areas'] = $this->view->url(array(), 'areas_list');
+        }
+        if ($this->acl('areas', array('new', 'delete'))) {
+            $breadcrumb['Administrador de areas'] = $this->view->url(array(), 'areas_manager');
+        }
         breadcrumb($breadcrumb);
     }
 }
