@@ -10,32 +10,33 @@ class Ratings_RatingController extends Yeah_Action
 
         $request = $this->getRequest();
 
-        $resource_url = $request->getParam('resource');
-        $resource_type = $request->getParam('type');
+        $url_resource = $request->getParam('resource');
+        $type_resource = $request->getParam('type');
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $valorations_model = Yeah_Adapter::getModel('valorations');
-        $resource = $resources_model->findByIdent($resource_url);
+        $model_resources = new Resources();
+        $model_valorations = new Valorations();
 
-        switch ($resource_type) {
+        $resource = $model_resources->findByIdent($url_resource);
+
+        switch ($type_resource) {
             case 'note':
-                $notes_model = Yeah_Adapter::getModel('notes');
-                $note = $notes_model->findByResource($resource_url);
+                $model_notes = new Notes();
+                $note = $model_notes->findByResource($url_resource);
                 $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
                 break;
             case 'file':
-                $files_model = Yeah_Adapter::getModel('files');
-                $file = $files_model->findByResource($resource_url);
+                $model_files = new Files();
+                $file = $model_files->findByResource($url_resource);
                 $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
                 break;
             case 'event':
-                $events_model = Yeah_Adapter::getModel('events');
-                $event = $events_model->findByResource($resource_url);
+                $model_events = new Events();
+                $event = $model_events->findByResource($url_resource);
                 $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
                 break;
             case 'entry':
-                $feedback_model = Yeah_Adapter::getModel('feedback');
-                $entry = $feedback_model->findByResource($resource_url);
+                $model_feedback = new Feedback();
+                $entry = $model_feedback->findByResource($url_resource);
                 $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
                 break;
         }
@@ -43,11 +44,11 @@ class Ratings_RatingController extends Yeah_Action
         $this->requireContext($resource);
         $session = new Zend_Session_Namespace();
 
-        $ratings_model = Yeah_Adapter::getModel('ratings');
-        $rating_exists = $ratings_model->findByResourceAndAuthor($resource->ident, $USER->ident);
+        $model_ratings = new Ratings();
+        $exists_rating = $model_ratings->findByResourceAndAuthor($resource->ident, $USER->ident);
 
-        if (empty($rating_exists)) {
-            $rating = $ratings_model->createRow();
+        if (empty($exists_rating)) {
+            $rating = $model_ratings->createRow();
             $rating->resource = $resource->ident;
             $rating->author = $USER->ident;
             $rating->rating = true;
@@ -57,19 +58,19 @@ class Ratings_RatingController extends Yeah_Action
             $resource->raters = $resource->raters + 1;
             $resource->save();
 
-            $valorations_model->addPopularity($resource->author);
+            $model_valorations->addPopularity($resource->author);
             $session->messages->addMessage('Tu has valorado el recurso positivamente');
         } else {
-            if ($rating_exists->rating) {
+            if ($exists_rating->rating) {
                 $session->messages->addMessage('Tu ya has valorado este recurso');
             } else {
-                $rating_exists->delete();
+                $exists_rating->delete();
 
                 $resource->ratings = $resource->ratings + 1;
                 $resource->raters = $resource->raters - 1;
                 $resource->save();
 
-                $valorations_model->decreasePopularity($resource->author);
+                $model_valorations->decreasePopularity($resource->author);
                 $session->messages->addMessage('Tu has cancelado tu valoración del recurso');
             }
         }
@@ -85,32 +86,32 @@ class Ratings_RatingController extends Yeah_Action
 
         $request = $this->getRequest();
 
-        $resource_url = $request->getParam('resource');
-        $resource_type = $request->getParam('type');
+        $url_resource = $request->getParam('resource');
+        $type_resource = $request->getParam('type');
 
-        $resources_model = Yeah_Adapter::getModel('resources');
-        $valorations_model = Yeah_Adapter::getModel('valorations');
-        $resource = $resources_model->findByIdent($resource_url);
+        $model_resources = new Resources();
+        $model_valorations = new Valorations();
+        $resource = $model_resources->findByIdent($url_resource);
 
-        switch ($resource_type) {
+        switch ($type_resource) {
             case 'note':
-                $notes_model = Yeah_Adapter::getModel('notes');
-                $note = $notes_model->findByResource($resource_url);
+                $model_notes = new Notes();
+                $note = $model_notes->findByResource($url_resource);
                 $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
                 break;
             case 'file':
-                $files_model = Yeah_Adapter::getModel('files');
-                $file = $files_model->findByResource($resource_url);
+                $model_files = new Files();
+                $file = $model_files->findByResource($url_resource);
                 $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
                 break;
             case 'event':
-                $events_model = Yeah_Adapter::getModel('events');
-                $event = $events_model->findByResource($resource_url);
+                $model_events = new Events();
+                $event = $model_events->findByResource($url_resource);
                 $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
                 break;
             case 'entry':
-                $feedback_model = Yeah_Adapter::getModel('feedback');
-                $entry = $feedback_model->findByResource($resource_url);
+                $model_feedback = new Feedback();
+                $entry = $model_feedback->findByResource($url_resource);
                 $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
                 break;
         }
@@ -118,11 +119,11 @@ class Ratings_RatingController extends Yeah_Action
         $this->requireContext($resource);
         $session = new Zend_Session_Namespace();
 
-        $ratings_model = Yeah_Adapter::getModel('ratings');
-        $rating_exists = $ratings_model->findByResourceAndAuthor($resource->ident, $USER->ident);
+        $model_ratings = new Ratings();
+        $exists_rating = $model_ratings->findByResourceAndAuthor($resource->ident, $USER->ident);
 
-        if (empty($rating_exists)) {
-            $rating = $ratings_model->createRow();
+        if (empty($exists_rating)) {
+            $rating = $model_ratings->createRow();
             $rating->resource = $resource->ident;
             $rating->author = $USER->ident;
             $rating->rating = false;
@@ -132,19 +133,19 @@ class Ratings_RatingController extends Yeah_Action
             $resource->raters = $resource->raters + 1;
             $resource->save();
 
-            $valorations_model->addPopularity($resource->author);
+            $model_valorations->addPopularity($resource->author);
             $session->messages->addMessage('Tu has valorado el recurso negativamente');
         } else {
-            if (!$rating_exists->rating) {
+            if (!$exists_rating->rating) {
                 $session->messages->addMessage('Tu ya has valorado este recurso');
             } else {
-                $rating_exists->delete();
+                $exists_rating->delete();
 
                 $resource->ratings = $resource->ratings - 1;
                 $resource->raters = $resource->raters - 1;
                 $resource->save();
 
-                $valorations_model->decreasePopularity($resource->author);
+                $model_valorations->decreasePopularity($resource->author);
                 $session->messages->addMessage('Tu has cancelado tu valoración del recurso');
             }
         }

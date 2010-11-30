@@ -1,17 +1,17 @@
 <?php
 
-class modules_ratings_models_Ratings extends Zend_Db_Table_Abstract
+class Ratings extends Yeah_Model_Table
 {
     protected $_name            = 'rating';
     protected $_referenceMap    = array(
         'Resource'              => array(
             'columns'           => 'resource',
-            'refTableClass'     => 'modules_resources_models_Resources',
+            'refTableClass'     => 'Resources',
             'refColumns'        => 'ident',
         ),
         'Author'                => array(
             'columns'           => 'author',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
     );

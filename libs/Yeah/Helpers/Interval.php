@@ -28,7 +28,7 @@ class Yeah_Helpers_Interval
         $duration = '<input type="text" name="' . $name1 . '" size="3" maxlength="5" value="' . $ds . '" />';
 
         $interval = array (
-        	'minute' => 'Minutos',
+            'minute' => 'Minutos',
             'hour' => 'Horas',
             'day' => 'Dias',
             'week' => 'Semanas',

@@ -6,7 +6,7 @@
     </p>
 <?php } ?>
 
-<?php if (count($this->subjects) > 0) { ?>
+<?php if (count($this->subjects)) { ?>
     <dl>
     <?php foreach ($this->subjects as $subject) { ?>
         <dt>

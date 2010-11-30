@@ -7,26 +7,26 @@ class Groups_IndexController extends Yeah_Action
 
         $this->requirePermission('subjects', array('teach', 'helper', 'study', 'participate'));
 
-        $gestions_model = Yeah_Adapter::getModel('gestions');
-        $current_gestion = $gestions_model->findByActive();
+        $model_gestions = new Gestions();
+        $active_gestion = $model_gestions->findByActive();
 
-        $users_model = Yeah_Adapter::getModel('users');
-        $user = $users_model->findByIdent($USER->ident);
+        $model_users = new Users();
+        $user = $model_users->findByIdent($USER->ident);
 
-        $groups_model = Yeah_Adapter::getModel('groups');
-        $assignement = Yeah_Adapter::getModel('groups', 'Groups_Users');
+        $model_groups = new Groups();
+        $model_groups_users = new Groups_Users();
 
-        $groups_in_teach = $groups_model->listGroupsWithTeacher($USER->ident);
-        $groups_in_helper = $user->findmodules_groups_models_GroupsViamodules_groups_models_Groups_Users($user->select()->where('type = ?', 'auxiliar'));
-        $groups_in_study = $user->findmodules_groups_models_GroupsViamodules_groups_models_Groups_Users($user->select()->where('type = ?', 'student'));
-        $groups_in_participate = $user->findmodules_groups_models_GroupsViamodules_groups_models_Groups_Users($user->select()->where('type = ?', 'guest'));
+        $groups_in_teach = $model_groups->listGroupsWithTeacher($USER->ident);
+        $groups_in_helper = $user->findGroupsViaGroups_Users($user->select()->where('type = ?', 'auxiliar'));
+        $groups_in_study = $user->findGroupsViaGroups_Users($user->select()->where('type = ?', 'student'));
+        $groups_in_participate = $user->findGroupsViaGroups_Users($user->select()->where('type = ?', 'guest'));
 
         $subjects = array();
         $groups = array();
         foreach ($groups_in_teach as $group) {
             $subject = $group->getSubject();
             $gestion = $subject->getGestion();
-            if ($gestion->ident == $current_gestion->ident) {
+            if ($gestion->ident == $active_gestion->ident) {
                 $subjects[$subject->ident] = $subject;
                 $groups[$subject->ident][] = $group;
             }
@@ -34,7 +34,7 @@ class Groups_IndexController extends Yeah_Action
         foreach ($groups_in_helper as $group) {
             $subject = $group->getSubject();
             $gestion = $subject->getGestion();
-            if ($gestion->ident == $current_gestion->ident) {
+            if ($gestion->ident == $active_gestion->ident) {
                 $subjects[$subject->ident] = $subject;
                 $groups[$subject->ident][] = $group;
             }
@@ -42,7 +42,7 @@ class Groups_IndexController extends Yeah_Action
         foreach ($groups_in_study as $group) {
             $subject = $group->getSubject();
             $gestion = $subject->getGestion();
-            if ($gestion->ident == $current_gestion->ident) {
+            if ($gestion->ident == $active_gestion->ident) {
                 $subjects[$subject->ident] = $subject;
                 $groups[$subject->ident][] = $group;
             }
@@ -50,16 +50,16 @@ class Groups_IndexController extends Yeah_Action
         foreach ($groups_in_participate as $group) {
             $subject = $group->getSubject();
             $gestion = $subject->getGestion();
-            if ($gestion->ident == $current_gestion->ident) {
+            if ($gestion->ident == $active_gestion->ident) {
                 $subjects[$subject->ident] = $subject;
                 $groups[$subject->ident][] = $group;
             }
         }
 
-        $this->view->gestion = $current_gestion;
+        $this->view->gestion = $active_gestion;
         $this->view->subjects = $subjects;
         $this->view->groups = $groups;
-        $this->view->assignement = $assignement;
+        $this->view->model_groups_users = $model_groups_users;
 
         history('groups');
         breadcrumb();

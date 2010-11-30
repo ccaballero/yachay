@@ -252,7 +252,7 @@ body {
 }
 
 #primary form label {
-    width: 15.0em;
+    width: 17.0em;
     float: left;
     margin-right: 0.5em;
     font-weight: bold;
@@ -429,7 +429,7 @@ body {
     top: 110px;
 }
 
-#primary #block .import {
+#primary #block .import, #primary #block .member {
     position: relative;
     border: 2px solid #6D852A;
     display: inline;
@@ -439,13 +439,13 @@ body {
     min-height: 7.0em;
 }
 
-#primary #block .import p {
+#primary #block .import p, #primary #block .member p {
     font-size: 0.8em;
     line-height: 1.0em;
     text-align: left;
 }
 
-#primary #block .import .title {
+#primary #block .import .title, #primary #block .member .title {
     font-weight: bold;
     background-color: #6D852A;
     color: #DDE6C5;
@@ -462,16 +462,30 @@ body {
     text-align: right;
 }
 
-#primary #block .import input[type='checkbox'] {
+#primary #block .import input[type='checkbox'], #primary #block .member input[type='checkbox'] {
     position: absolute;
     left: 0.1em;
     top: 0.1em;
+    z-index: 1;
 }
 
 #primary #block .import .result {
     position: absolute;
     right: 0.1em;
     top: 1.5em;
+}
+
+#primary #block .member {
+    width: 215px;
+}
+
+#primary #block .member .photo {
+    float: left;
+    margin: 3px 5px;
+}
+
+#primary #block .member .body {
+    float: left;
 }
 
 #primary #user {

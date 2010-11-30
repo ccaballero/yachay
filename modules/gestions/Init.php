@@ -8,9 +8,9 @@ class Gestions_Init extends Yeah_Init
     public $routes = array (
         'gestions_gestion_subject'               => array('gestions/:gestion/:subject',
                                                     array(
-                                                        'module'     => 'gestions',
-                                                        'controller' => 'gestion',
-                                                        'action'     => 'subject',
+                                                        'module'     => 'subjects',
+                                                        'controller' => 'subject',
+                                                        'action'     => 'view',
                                                     )),
         'gestions_gestion_active'                => array('gestions/:gestion/active',
                                                     array(

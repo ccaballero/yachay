@@ -2,13 +2,12 @@
 
 class Groups_View_Helper_Teacher
 {
-    public function teacher($name, $value = 0, $subject) {
+    public function teacher($name, $value, $subject) {
         global $USER;
 
-        $model = Yeah_Adapter::getModel('users');
-        $users = $model->selectByStatus('active');
+        $model_users = new Users();
 
-        $teachers = $subject->findmodules_users_models_UsersViamodules_subjects_models_Subjects_Users($subject->select()->where('type = ?', 'teacher'));
+        $teachers = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'teacher'));
 
         $options = array();
         $options[] = '<option value="' . $value . '">-------------------</option>';

@@ -10,7 +10,7 @@ class Groups_Group extends Yeah_Model_Row_Validation
             'validators' => array(
                 array(
                     'validator' => 'IdentExists',
-                    'options'   => array('users'),
+                    'options'   => array('Users'),
                     'message'   => 'El usuario designado para ser docente no es valido',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -27,7 +27,7 @@ class Groups_Group extends Yeah_Model_Row_Validation
             'validators' => array(
                 array(
                     'validator' => 'IdentExists',
-                    'options'   => array('evaluations'),
+                    'options'   => array('Evaluations'),
                     'message'   => 'El criterio de evaluacion designado para el grupo no es valido',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -47,7 +47,7 @@ class Groups_Group extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabelDual',
-                    'options'   => array('groups'),
+                    'options'   => array('Groups'),
                     'message'   => 'El nombre seleccionado para el grupo ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -64,7 +64,7 @@ class Groups_Group extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueUrlDual',
-                    'options'   => array('groups'),
+                    'options'   => array('Groups'),
                     'message'   => 'El identificador de grupo ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),

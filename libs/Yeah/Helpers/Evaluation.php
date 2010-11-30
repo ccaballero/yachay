@@ -4,9 +4,10 @@ class Yeah_Helpers_Evaluation
 {
     public function evaluation($name, $value = 0) {
         global $USER;
-        $evaluations = Yeah_Adapter::getModel('evaluations');
-        $owner = $evaluations->selectByAuthor($USER->ident);
-        $public = $evaluations->selectByAccess('public');
+
+        $model_evaluations = new Evaluations();
+        $owner = $model_evaluations->selectByAuthor($USER->ident);
+        $public = $model_evaluations->selectByAccess('public');
 
         $options = array();
         $options[] = '<option value="' . $value . '">-------------------</option>';

@@ -28,8 +28,8 @@ class Groups_View_Helper_Assignement
             }
         }
 
-        $assignement1 = Yeah_Adapter::getModel('subjects', 'Subjects_Users');
-        $assignement2 = Yeah_Adapter::getModel('groups', 'Groups_Users');
+        $assignement1 = new Subjects_Users();
+        $assignement2 = new Groups_Users();
 
         $options = '';
         if (isset($user)) {
@@ -44,7 +44,7 @@ class Groups_View_Helper_Assignement
                 if (!empty($assign1)) {
                     $assign2 = $assignement2->findByGroupAndUser($group->ident, $user->ident);
                     if (empty($assign2)) {
-                        $groups = $user->findmodules_groups_models_GroupsViamodules_groups_models_Groups_Users();
+                        $groups = $user->findGroupsViaGroups_Users();
                         if (count($groups) == 0) {
                             $options .= '<option value="student">Estudiante</option>';
                         }

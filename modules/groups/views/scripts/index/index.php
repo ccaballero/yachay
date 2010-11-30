@@ -1,44 +1,43 @@
-<h1>Lista de grupos</h1>
+<?php
 
-<?php if (!empty($this->gestion)) { ?>
-<i><b>Gestion: </b><?= $this->utf2html($this->gestion->label) ?></i>
-<?php } ?>
+echo '<h1>' . $this->PAGE->label . '</h1>';
 
-<?php if (count($this->subjects)) { ?>
-    <ul>
-    <?php foreach ($this->subjects as $subject) { ?>
-        <li>
-            <?php if (Yeah_Acl::hasPermission('subjects', 'view')) { ?>
-            <a href="<?= $this->url(array('subject' => $subject->url), 'subjects_subject_view') ?>">
-                <b><?= $this->utf2html($subject->label) ?></b>
-            </a>
-            <?php } else { ?>
-                <b><?= $this->utf2html($subject->label) ?></b>
-            <?php } ?>
-            &nbsp;
-            <?php if (Yeah_Acl::hasPermission('subjects', 'edit')) { ?>
-                <b><i>[<a href="<?= $this->url(array('subject' => $subject->url), 'subjects_subject_edit') ?>">Editar</a>]</i></b>
-            <?php } ?>
-            <br />
-            <i><?= $this->utf2html($subject->description) ?></i>
-            <ul>
-                <?php foreach ($this->groups[$subject->ident] as $group) { ?>
-                <li>
-                    <a href="<?= $this->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view') ?>">Grupo <?= $group->label ?></a>
-                    <?php 
-                    global $USER;
-                    $assign = $this->assignement->findByGroupAndUser($group->ident, $USER->ident); ?>
-                    <?php if (!empty($assign)) { ?>
-                        [<?= $this->typeAssign($assign->type) ?>]
-                    <?php } else { ?>
-                        [<?= $this->typeAssign('teacher') ?>]
-                    <?php } ?>
-                </li>
-                <?php } ?>
-            </ul>
-        </li>
-    <?php } ?>
-    </ul>
-<?php } else { ?>
-<p>No existen asignaciones suyas en ninguna materia.</p>
-<?php } ?>
+if (!empty($this->gestion)) {
+    echo '<i><b>Gestion: </b>' . $this->gestion->label . '</i>';
+}
+
+if (count($this->subjects)) {
+    echo '<ul>';
+    foreach ($this->subjects as $subject) {
+        echo '<li>';
+        if ($this->acl('subjects', 'view')) {
+            echo '<a href="' . $this->url(array('subject' => $subject->url), 'subjects_subject_view') . '"><b>' . $subject->label . '</b></a>';
+        } else {
+            echo '<b>' . $subject->label . '</b>';
+        }
+        echo '&nbsp;';
+        if ($this->acl('subjects', 'edit')) {
+            echo '<b><i>[<a href="' . $this->url(array('subject' => $subject->url), 'subjects_subject_edit') . '">Editar</a>]</i></b>';
+        }
+        echo '<br />';
+        echo '<i>' . $subject->description . '</i>';
+        echo '<ul>';
+        foreach ($this->groups[$subject->ident] as $group) {
+            echo '<li>';
+            echo '<a href="' . $this->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view') . '">Grupo ' . $group->label . '</a>';
+            global $USER;
+            $assign = $this->model_groups_users->findByGroupAndUser($group->ident, $USER->ident);
+            if (!empty($assign)) {
+                echo '[' . $this->typeAssign($assign->type) . ']';
+            } else {
+                echo '[' . $this->typeAssign('teacher') . ']';
+            }
+            echo '</li>';
+        }
+        echo '</ul>';
+        echo '</li>';
+    }
+    echo '</ul>';
+} else {
+    echo '<p>No existen asignaciones suyas en ninguna materia.</p>';
+}

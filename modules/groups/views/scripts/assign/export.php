@@ -1,28 +1,30 @@
-<h1>Exportar miembros</h1>
+<?php
 
-<center>
-    <form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">
-        <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
-        <table>
-            <tr>
-                <td><b>Formato de archivo (*):</b></td>
-                <td>
-                    <select name="extension">
-                        <option>--------------------------</option>
-                        <option value="csv">.csv (Archivo separado por comas)</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">(*) Campos obligatorios.</td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Exportar miembros" />
-                    <a href="<?= $this->lastPage() ?>">Cancelar</a>
-                </td>
-            </tr>
-        </table>
-    </form>
-</center>
+echo '<h1>Exportar miembros</h1>';
+
+echo '<center>';
+echo '<form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';
+echo '<table>';
+echo '<tr>';
+echo '<td><b>Formato de archivo (*):</b></td>';
+echo '<td>';
+echo '<select name="extension">';
+echo '<option>--------------------------</option>';
+echo '<option value="csv">.csv (Archivo separado por comas)</option>';
+echo '</select>';
+echo '</td>';
+echo '</tr>';
+echo '<tr>';
+echo '<td colspan="2">(*) Campos obligatorios.</td>';
+echo '</tr>';
+echo '<tr>';
+echo '<td>&nbsp;</td>';
+echo '<td>';
+echo '<input type="submit" value="Exportar miembros" /> ';
+echo '<a href="' . $this->lastPage() . '">Cancelar</a>';
+echo '</td>';
+echo '</tr>';
+echo '</table>';
+echo '</form>';
+echo '</center>';

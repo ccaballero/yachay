@@ -19,8 +19,8 @@ class Subjects_SubjectController extends Yeah_Action
             $gestion = $model_gestions->findByActive();
             $historial = false;
         } else {
-            $historial = true;
             $gestion = $model_gestions->findByUrl($url_gestion);
+            $historial = true;
         }
 
         $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);

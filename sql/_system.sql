@@ -23,7 +23,6 @@ CREATE TABLE `page` (
     `menuorder`         int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`ident`),
     UNIQUE INDEX (`label`),
-    UNIQUE INDEX (`module`, `controller`, `action`),
     UNIQUE INDEX (`route`)
 ) DEFAULT CHARACTER SET UTF8;
 

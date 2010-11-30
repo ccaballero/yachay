@@ -17,7 +17,7 @@ class Templates_Template extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabel',
-                    'options'   => array('themes'),
+                    'options'   => array('Templates'),
                     'message'   => 'El nombre seleccionado para el tema ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),

@@ -33,7 +33,7 @@ VALUES
 ('Administrador de gestiones',    'Gestiones',        TRUE,          'gestions',         'manager',     'index',            'new|active|delete',     'gestions_manager'),
 ('Nueva gestion',                 'Nueva gestion',    TRUE,          'gestions',         'manager',     'new',              'new',                   'gestions_new'),
 ('Vista de un gestion',           '',                 FALSE,         'gestions',         'gestion',     'view',             '',                      'gestions_gestion_view'),
-('Vista de materia en gestion',   '',                 FALSE,         'gestions',         'gestion',     'subject',          '',                      'gestions_gestion_subject');
+('Vista de materia en gestion',   '',                 FALSE,         'subjects',         'subject',     'view',             '',                      'gestions_gestion_subject');
 
 /*====================================================================================================================*/
 /* Registro de privilegios para el modulo                                                                             */

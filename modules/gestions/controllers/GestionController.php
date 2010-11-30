@@ -110,9 +110,4 @@ class Gestions_GestionController extends Yeah_Action
 
         $this->_redirect($this->view->currentPage());
     }
-
-    public function subjectAction() {
-        $this->_ignorePostDispatch = true;
-        $this->_forward('view', 'subject', 'subjects');
-    }
 }

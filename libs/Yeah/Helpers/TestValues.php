@@ -3,7 +3,7 @@
 class Yeah_Helpers_TestValues
 {
     public function testValues($name, $value, $test, $hasformula) {
-        $test_values = $test->findmodules_evaluations_models_Evaluations_Tests_Values();
+        $test_values = $test->findEvaluations_Tests_Values();
 
         $options = array();
         $options[] = '<option value="">-------------------</option>';

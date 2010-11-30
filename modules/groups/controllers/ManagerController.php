@@ -7,12 +7,14 @@ class Groups_ManagerController extends Yeah_Action
         $this->requirePermission('subjects', 'moderate');
 
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
 
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $urlsubject = $request->getParam('subject');
-        $subject = $subjects->findByUrl($gestion->ident, $urlsubject);
+        $model_gestions = new Gestions();
+        $active_gestion = $model_gestions->findByActive();
+
+        $url_subject = $request->getParam('subject');
+        $model_subjects = new Subjects();
+        $subject = $model_subjects->findByUrl($active_gestion->ident, $url_subject);
+
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
@@ -30,20 +32,22 @@ class Groups_ManagerController extends Yeah_Action
             }
         }
 
-        $groups = Yeah_Adapter::getModel('groups');
-        $this->view->model = $groups;
-        $this->view->gestion = $gestion;
+        $model_groups = new Groups();
+
+        $this->view->model_groups = $model_groups;
+        $this->view->gestion = $active_gestion;
         $this->view->subject = $subject;
-        $this->view->groups = $groups->selectAll($subject->ident);
+        $this->view->groups = $model_groups->selectAll($subject->ident);
 
         history('subjects/' . $subject->url . '/groups/manager');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
-        } else if (Yeah_Acl::hasPermission('subjects', 'list')) {
+        if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
         }
-        if (Yeah_Acl::hasPermission('subjects', 'view')) {
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
+        }
+        if ($this->acl('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
         }
         breadcrumb($breadcrumb);
@@ -56,23 +60,24 @@ class Groups_ManagerController extends Yeah_Action
         $this->requirePermission('subjects', 'moderate');
 
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_gestions = new Gestions();
+        $active_gestion = $model_gestions->findByActive();
 
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $urlsubject = $request->getParam('subject');
-        $subject = $subjects->findByUrl($gestion->ident, $urlsubject);
+        $model_subjects = new Subjects();
+        $url_subject = $request->getParam('subject');
+        $subject = $model_subjects->findByUrl($active_gestion->ident, $url_subject);
+
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
         $this->view->subject = $subject;
-        $this->view->group = new modules_groups_models_Groups_Empty;
+        $this->view->group = new Groups_Empty();
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $groups = Yeah_Adapter::getModel('groups');
-            $group = $groups->createRow();
+            $model_groups = new Groups();
+            $group = $model_groups->createRow();
             $group->label = $request->getParam('label');
             $group->url = convert($group->label);
             $group->teacher = $request->getParam('teacher');
@@ -100,12 +105,13 @@ class Groups_ManagerController extends Yeah_Action
 
         history('subjects/' . $subject->url . '/groups/new');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
-        } else if (Yeah_Acl::hasPermission('subjects', 'list')) {
+        if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
         }
-        if (Yeah_Acl::hasPermission('subjects', 'view')) {
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
+        }
+        if ($this->acl('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');
         }
@@ -117,21 +123,21 @@ class Groups_ManagerController extends Yeah_Action
         $this->requirePermission('subjects', 'moderate');
 
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_gestions = new Gestions();
+        $active_gestion = $model_gestions->findByActive();
 
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $urlsubject = $request->getParam('subject');
-        $subject = $subjects->findByUrl($gestion->ident, $urlsubject);
+        $model_subjects = new Subjects();
+        $url_subject = $request->getParam('subject');
+        $subject = $model_subjects->findByUrl($active_gestion->ident, $url_subject);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
         if ($request->isPost()) {
-            $groups = Yeah_Adapter::getModel('groups');
+            $model_groups = new Groups();
             $check = $request->getParam("check");
 
             foreach ($check as $value) {
-                $group = $groups->findByIdent($value);
+                $group = $model_groups->findByIdent($value);
                 $group->status = 'inactive';
                 $group->save();
             }
@@ -148,21 +154,21 @@ class Groups_ManagerController extends Yeah_Action
         $this->requirePermission('subjects', 'moderate');
 
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_gestions = new Gestions();
+        $active_gestion = $model_gestions->findByActive();
 
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $urlsubject = $request->getParam('subject');
-        $subject = $subjects->findByUrl($gestion->ident, $urlsubject);
+        $model_subjects = new Subjects();
+        $url_subject = $request->getParam('subject');
+        $subject = $model_subjects->findByUrl($active_gestion->ident, $url_subject);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
         if ($request->isPost()) {
-            $groups = Yeah_Adapter::getModel('groups');
+            $model_groups = new Groups();
             $check = $request->getParam("check");
 
             foreach ($check as $value) {
-                $group = $groups->findByIdent($value);
+                $group = $model_groups->findByIdent($value);
                 $group->status = 'active';
                 $group->save();
             }
@@ -179,22 +185,22 @@ class Groups_ManagerController extends Yeah_Action
         $this->requirePermission('subjects', 'moderate');
 
         $request = $this->getRequest();
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_gestions = new Gestions();
+        $active_gestion = $model_gestions->findByActive();
 
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $urlsubject = $request->getParam('subject');
-        $subject = $subjects->findByUrl($gestion->ident, $urlsubject);
+        $model_subjects = new Subjects();
+        $url_subject = $request->getParam('subject');
+        $subject = $model_subjects->findByUrl($active_gestion->ident, $url_subject);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
         if ($request->isPost()) {
-            $groups = Yeah_Adapter::getModel('groups');
+            $model_groups = new Groups();
             $check = $request->getParam("check");
 
             $count = 0;
             foreach ($check as $value) {
-                $group = $groups->findByIdent($value);
+                $group = $model_groups->findByIdent($value);
                 if ($group->isEmpty()) {
                     $group->delete();
                     $count++;
