@@ -291,7 +291,7 @@ body {
 }
 
 #primary form .submit {
-    margin-left: 15.5em;
+    margin-left: 17.0em;
 }
 
 #primary form input[type='text'].login, #primary form input[type='password'].login {
@@ -503,4 +503,14 @@ body {
 
 #primary #main ul li {
     list-style-type: circle;
+}
+
+#primary #list .box {
+    float: left;
+    display: inline;
+    border: 2px solid #6D852A;
+    margin: 0 0.5em 0 0;
+    padding: 0.2em 0 0 0.2em;
+    width: 74px;
+    height: 53px;
 }

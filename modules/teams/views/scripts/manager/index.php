@@ -1,67 +1,70 @@
-<h1>Administrador de equipos</h1>
-<b>Grupo: </b><i><?= $this->utf2html($this->group->label) ?></i>
-<br />
-<b>Materia: </b><i><?= $this->utf2html($this->subject->label) ?></i>
+<?php
 
-<form method="post" action="" accept-charset="utf-8">
-    <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
-    <table>
-        <tr>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_new') ?>">Nuevo</a>]</td>
-            <td><input type="submit" value="Activar" name="unlock" /></td>
-            <td><input type="submit" value="Desactivar" name="lock" /></td>
-            <td><input type="submit" value="Eliminar" name="delete" /></td>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_assign') ?>">Asignaci&oacute;n</a>]</td>
-        </tr>
-    </table>
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<b>Grupo: </b><i>' . $this->group->label . '</i>';
+echo '<br />';
+echo '<b>Materia: </b><i>' . $this->subject->label . '</i>';
 
-    <hr />
-<?php if (count($this->teams)) { ?>
-    <center>
-        <table width="100%">
-            <tr>
-                <th>&nbsp;</th>
-                <th><?= $this->utf2html($this->model->_mapping['label']) ?></th>
-                <th><?= $this->utf2html($this->model->_mapping['status']) ?></th>
-                <th>Opciones</th>
-                <th><?= $this->utf2html($this->model->_mapping['tsregister']) ?></th>
-            </tr>
-        <?php foreach ($this->teams as $team) { ?>
-            <tr>
-                <td>
-                    <input type="checkbox" name="check[]" value="<?= $team->ident ?>" />
-                </td>
-                <td><?= $this->utf2html($team->label) ?></td>
-                <td><?= $this->status($team->status) ?></td>
-                <td>
-                    <center>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_view') ?>">Ver</a>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_edit') ?>">Editar</a>
-                <?php if ($team->status == 'inactive') { ?>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_unlock') ?>">Activar</a>
-                <?php } else { ?>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_lock') ?>">Desactivar</a>
-                <?php } ?>
-                    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_delete') ?>">Eliminar</a>
-                    </center>
-                </td>
-                <td><center><?= $this->timestamp($team->tsregister) ?></center></td>
-            </tr>
-        <?php } ?>
-        </table>
-    </center>
-<?php } else { ?>
-    <p>No existen equipos registrados en el grupo</p>
-<?php } ?>
-    <hr />
+echo '<form method="post" action="" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->currentPage() . '" />';
+echo '<table>';
+echo '<tr>';
+echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_new') . '">Nuevo</a>]</td>';
+echo '<td><input type="submit" value="Activar" name="unlock" /></td>';
+echo '<td><input type="submit" value="Desactivar" name="lock" /></td>';
+echo '<td><input type="submit" value="Eliminar" name="delete" /></td>';
+echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_assign') . '">Asignación</a>]</td>';
+echo '</tr>';
+echo '</table>';
 
-    <table>
-        <tr>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_new') ?>">Nuevo</a>]</td>
-            <td><input type="submit" value="Activar" name="unlock" /></td>
-            <td><input type="submit" value="Desactivar" name="lock" /></td>
-            <td><input type="submit" value="Eliminar" name="delete" /></td>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_assign') ?>">Asignaci&oacute;n</a>]</td>
-        </tr>
-    </table>
-</form>
+echo '<hr />';
+if (count($this->teams)) {
+    echo '<center>';
+    echo '<table width="100%">';
+    echo '<tr>';
+    echo '<th>&nbsp;</th>';
+    echo '<th>' . $this->model_teams->_mapping['label'] . '</th>';
+    echo '<th>' . $this->model_teams->_mapping['status'] . '</th>';
+    echo '<th>Opciones</th>';
+    echo '<th>' . $this->model_teams->_mapping['tsregister'] . '</th>';
+    echo '</tr>';
+
+    foreach ($this->teams as $team) {
+        echo '<tr>';
+        echo '<td>';
+        echo '<input type="checkbox" name="check[]" value="' . $team->ident . '" />';
+        echo '</td>';
+        echo '<td>' . $team->label . '</td>';
+        echo '<td>' . $this->status($team->status) . '</td>';
+        echo '<td>';
+        echo '<center>';
+        echo '<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_view') . '">Ver</a> ';
+        echo '<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_edit') . '">Editar</a> ';
+        if ($team->status == 'inactive') {
+            echo '<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_unlock') . '">Activar</a> ';
+        } else {
+            echo '<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_lock') . '">Desactivar</a> ';
+        }
+        echo '<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $team->url), 'teams_team_delete') . '">Eliminar</a>';
+        echo '</center>';
+        echo '</td>';
+        echo '<td><center>' . $this->timestamp($team->tsregister) . '</center></td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+    echo '</center>';
+} else {
+    echo '<p>No existen equipos registrados en el grupo</p>';
+}
+echo '<hr />';
+
+echo '<table>';
+echo '<tr>';
+echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_new') . '">Nuevo</a>]</td>';
+echo '<td><input type="submit" value="Activar" name="unlock" /></td>';
+echo '<td><input type="submit" value="Desactivar" name="lock" /></td>';
+echo '<td><input type="submit" value="Eliminar" name="delete" /></td>';
+echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_assign') . '">Asignación</a>]</td>';
+echo '</tr>';
+echo '</table>';
+echo '</form>';

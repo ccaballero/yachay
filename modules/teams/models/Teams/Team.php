@@ -19,7 +19,7 @@ class Teams_Team extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabelDual',
-                    'options'   => array('teams'),
+                    'options'   => array('Teams'),
                     'message'   => 'El nombre seleccionado para el equipo ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),
@@ -36,7 +36,7 @@ class Teams_Team extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueUrlDual',
-                    'options'   => array('teams'),
+                    'options'   => array('Teams'),
                     'message'   => 'El identificador de equipo ya esta siendo usado',
                     'namespace' => 'Yeah_Validators',
                 ),

@@ -61,7 +61,7 @@ INSERT INTO `page`
 (`label`,                         `title`,            `menuable`,    `module`,           `controller`,  `action`,           `privilege`,   `route`)
 VALUES
 ('Administrador de equipos',      '',                 FALSE,         'teams',            'manager',     'index',            '',            'teams_manager'),
-('Crear equipos',                 '',                 FALSE,         'teams',            'manager',     'new',              '',            'teams_new'),
+('Nuevo equipo',                  '',                 FALSE,         'teams',            'manager',     'new',              '',            'teams_new'),
 ('Vista de un equipo',            '',                 FALSE,         'teams',            'team',        'view',             '',            'teams_team_view'),
 ('Edicion de un equipo',          '',                 FALSE,         'teams',            'team',        'edit',             '',            'teams_team_edit'),
 ('Asignacion de miembros a equipos', '',              FALSE,         'teams',            'assign',      'index',            '',            'teams_assign');

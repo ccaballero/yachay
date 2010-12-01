@@ -6,31 +6,31 @@ class Teams_MemberController extends Yeah_Action
         $this->requirePermission('subjects', 'view');
         $request = $this->getRequest();
 
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByActive();
 
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $urlsubject = $request->getParam('subject');
-        $subject = $subjects->findByUrl($gestion->ident, $urlsubject);
+        $model_subjects = new Subjects();
+        $url_subject = $request->getParam('subject');
+        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
-        $groups = Yeah_Adapter::getModel('groups');
-        $urlgroup = $request->getParam('group');
-        $group = $groups->findByUrl($subject->ident, $urlgroup);
+        $model_groups = new Groups();
+        $url_group = $request->getParam('group');
+        $group = $model_groups->findByUrl($subject->ident, $url_group);
         $this->requireExistenceGroup($group, $subject);
 
-        $teams = Yeah_Adapter::getModel('teams');
-        $urlteam = $request->getParam('team');
-        $team = $teams->findByUrl($group->ident, $urlteam);
+        $model_teams = new Teams();
+        $url_team = $request->getParam('team');
+        $team = $model_teams->findByUrl($group->ident, $url_team);
         $this->requireExistenceTeam($team, $group, $subject);
         $this->requireMemberTeam($team);
 
-        $users = Yeah_Adapter::getModel('users');
-        $urluser = $request->getParam('user');
-        $user = $users->findByUrl($urluser);
+        $model_users = new Users();
+        $url_user = $request->getParam('user');
+        $user = $model_users->findByUrl($url_user);
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
 
-        $assignement = Yeah_Adapter::getModel('teams', 'Teams_Users');
+        $assignement = new Teams_Users();
         $assign = $assignement->findByTeamAndUser($team->ident, $user->ident);
         $assign->delete();
 

@@ -4,8 +4,9 @@ class Teams_View_Helper_Teams
 {
     public function teams($name, $value = 0, $group, $member) {
         global $USER;
-        $model = Yeah_Adapter::getModel('teams');
-        $teams = $model->selectByStatus($group->ident, 'active');
+
+        $model_teams = new Teams();
+        $teams = $model_teams->selectByStatus($group->ident, 'active');
 
         $options = array();
         $options[] = '<option value="' . $value . '">-------------------</option>';

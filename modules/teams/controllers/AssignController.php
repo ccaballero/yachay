@@ -6,32 +6,33 @@ class Teams_AssignController extends Yeah_Action
         $this->requirePermission('subjects', 'view');
         $request = $this->getRequest();
 
-        $gestions = Yeah_Adapter::getModel('gestions');
-        $gestion = $gestions->findByActive();
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByActive();
 
-        $subjects = Yeah_Adapter::getModel('subjects');
-        $urlsubject = $request->getParam('subject');
-        $subject = $subjects->findByUrl($gestion->ident, $urlsubject);
+        $model_subjects = new Subjects();
+        $url_subject = $request->getParam('subject');
+        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
-        $groups = Yeah_Adapter::getModel('groups');
-        $urlgroup = $request->getParam('group');
-        $group = $groups->findByUrl($subject->ident, $urlgroup);
+        $model_groups = new Groups();
+        $url_group = $request->getParam('group');
+        $group = $model_groups->findByUrl($subject->ident, $url_group);
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
-        $teams = Yeah_Adapter::getModel('teams');
-        $listteams = $teams->selectAll($group->ident);
+        $model_teams = new Teams();
+        $list_teams = $model_teams->selectAll($group->ident);
 
-        $assignement1 = Yeah_Adapter::getModel('groups', 'Groups_Users');
-        $assignement2 = Yeah_Adapter::getModel('teams', 'Teams_Users');
-        $group_members1 = $group->findmodules_users_models_UsersViamodules_groups_models_Groups_Users();
+        $assignement1 = new Groups_Users();
+        $assignement2 = new Teams_Users();
+
+        $group_members1 = $group->findUsersViaGroups_Users();
         $group_members2 = array();
         foreach ($group_members1 as $member) {
             $assign = $group->getAssignement($member);
             if ($assign->type != 'auxiliar') {
                 $flag = true;
-                foreach ($listteams as $team) {
+                foreach ($list_teams as $team) {
                     $assign = $assignement2->findByTeamAndUser($team->ident, $member->ident);
                     if (!empty($assign)) {
                         $flag &= false;
@@ -48,15 +49,19 @@ class Teams_AssignController extends Yeah_Action
 
             $selects = $request->getParam('team');
             foreach ($selects as $member_ident => $team_ident) {
-                // FIXME
-                $assign = $assignement2->createRow();
-                $assign->team = $team_ident;
-                $assign->user = $member_ident;
-                $assign->tsregister = time();
-                $assign->save();
+                $member_ident = intval($member_ident);
+                $team_ident = intval($team_ident);
+                if ($team_ident <> 0 && $member_ident <> 0) {
+                    // FIXME
+                    $assign = $assignement2->createRow();
+                    $assign->team = $team_ident;
+                    $assign->user = $member_ident;
+                    $assign->tsregister = time();
+                    $assign->save();
+                }
             }
             
-            $session->messages->addMessage('La asignacion de equipos ha sido almacenada');
+            $session->messages->addMessage('La asignación de equipos ha sido almacenada');
             $this->_redirect($request->getParam('return'));
         }
 
@@ -66,12 +71,13 @@ class Teams_AssignController extends Yeah_Action
 
         history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/assign');
         $breadcrumb = array();
-        if (Yeah_Acl::hasPermission('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
-            $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
-        } else if (Yeah_Acl::hasPermission('subjects', 'list')) {
+        if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
         }
-        if (Yeah_Acl::hasPermission('subjects', 'view')) {
+        if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
+            $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
+        }
+        if ($this->acl('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             if ($subject->amModerator()) {
                 $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');

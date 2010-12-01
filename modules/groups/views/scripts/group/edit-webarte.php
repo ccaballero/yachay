@@ -1,4 +1,4 @@
- <h1>Editar grupo</h1>
+ <h1><?= $this->PAGE->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />

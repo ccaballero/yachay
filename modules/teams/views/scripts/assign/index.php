@@ -1,42 +1,44 @@
-<h1>Asignacion de miembros a equipo</h1>
+<?php
 
-<form method="post" action="" accept-charset="utf-8">
-    <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
+echo '<h1>' . $this->PAGE->label . '</h1>';
 
-    <table>
-        <tr>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_manager') ?>">Administrador</a>]</td>
-            <td><input type="submit" value="Actualizar" /></td>
-        </tr>
-    </table>
+echo '<form method="post" action="" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';
 
-    <hr />
-<?php if (count($this->members)) { ?>
-    <center>
-        <table width="100%">
-            <tr>
-                <th>Usuario</th>
-                <th>Nombre Completo</th>
-                <th>Equipo</th>
-            </tr>
-        <?php foreach ($this->members as $member) { ?>
-            <tr>
-                <td><?= $this->utf2html($member->label) ?></td>
-                <td><?= $this->utf2html($member->getFullName()) ?></td>
-                <td><center><?= $this->teams('team', 0, $this->group, $member->ident) ?></center></td>
-            </tr>
-        <?php } ?>
-        </table>
-    </center>
-<?php } else { ?>
-    <p>No existen usuarios sin asignaci&oacute;n de equipo.</p>
-<?php } ?>
-    <hr />
+echo '<table>';
+echo '<tr>';
+echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_manager') . '">Administrador</a>]</td>';
+echo '<td><input type="submit" value="Actualizar" /></td>';
+echo '</tr>';
+echo '</table>';
 
-    <table>
-        <tr>
-            <td>[<a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_manager') ?>">Administrador</a>]</td>
-            <td><input type="submit" value="Actualizar" /></td>
-        </tr>
-    </table>
-</form>
+echo '<hr />';
+if (count($this->members)) {
+    echo '<center>';
+    echo '<table width="100%">';
+    echo '<tr>';
+    echo '<th>Usuario</th>';
+    echo '<th>Nombre Completo</th>';
+    echo '<th>Equipo</th>';
+    echo '</tr>';
+    foreach ($this->members as $member) {
+        echo '<tr>';
+        echo '<td>' . $member->label . '</td>';
+        echo '<td>' . $member->getFullName() . '</td>';
+        echo '<td><center>' . $this->teams('team', 0, $this->group, $member->ident) . '</center></td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+    echo '</center>';
+} else {
+    echo '<p>No existen usuarios sin asignación de equipo.</p>';
+}
+echo '<hr />';
+
+echo '<table>';
+echo '<tr>';
+echo '<td>[<a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'teams_manager') . '">Administrador</a>]</td>';
+echo '<td><input type="submit" value="Actualizar" /></td>';
+echo '</tr>';
+echo '</table>';
+echo '</form>';

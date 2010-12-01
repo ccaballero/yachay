@@ -78,11 +78,5 @@ class Teams_Init extends Yeah_Init
                                                         'controller' => 'manager',
                                                         'action'     => 'delete',
                                                     )),
-        'teams_list'                             => array('subjects/:subject/groups/:group/teams',
-                                                    array(
-                                                        'module'     => 'teams',
-                                                        'controller' => 'index',
-                                                        'action'     => 'index',
-                                                    )),
     );
 }

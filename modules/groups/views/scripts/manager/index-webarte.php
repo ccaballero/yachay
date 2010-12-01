@@ -26,10 +26,8 @@
         </tr>
     <?php foreach ($this->groups as $key => $group) { ?>
         <tr class="<?= $key % 2 == 0 ? 'even' : 'odd' ?>">
-            <td>
-                <input type="checkbox" name="check[]" value="<?= $group->ident ?>" />
-            </td>
-            <td class="center"><?= $group->label ?></td>
+            <td><input type="checkbox" name="check[]" value="<?= $group->ident ?>" /></td>
+            <td><?= $group->label ?></td>
             <td class="center">
             <?php if ($group->status == 'active') { ?>
                 <img src="<?= $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Grupo activo" title="Grupo activo" />
@@ -37,7 +35,7 @@
                 <img src="<?= $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Grupo inactivo" title="Grupo inactivo" />
             <?php } ?>
             </td>
-            <td class="center">
+            <td class="options">
                 <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $group->url), 'groups_group_view') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
                 <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $group->url), 'groups_group_edit') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
             <?php if ($group->status == 'inactive') { ?>
