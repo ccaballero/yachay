@@ -4,9 +4,9 @@
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
 
-    <div><?php if ($this->subject->amModerator()) { ?>
-<input type="button" name="new" value="Agregar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') ?>'" /><input type="submit" name="unlock" value="Habilitar" /><input type="submit" name="lock" value="Deshabilitar" /><input type="submit" name="delete" value="Retirar" /><input type="button" name="import" value="Importar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>'" /><input type="button" name="export" value="Exportar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') ?>'" />
-    <?php } ?></div>
+    <div>
+<?php if ($this->subject->amModerator()) { ?><input type="button" name="new" value="Agregar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') ?>'" /><input type="submit" name="unlock" value="Habilitar" /><input type="submit" name="lock" value="Deshabilitar" /><input type="submit" name="delete" value="Retirar" /><input type="button" name="import" value="Importar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>'" /><input type="button" name="export" value="Exportar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') ?>'" /><?php } ?>
+    </div>
 
 <div id="block">
     <h2>Docentes</h2>
@@ -170,7 +170,7 @@
     <div class="clear"></div>
 </div>
 
-    <div><?php if ($this->subject->amModerator()) { ?>
-<input type="button" name="new" value="Agregar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') ?>'" /><input type="submit" name="unlock" value="Habilitar" /><input type="submit" name="lock" value="Deshabilitar" /><input type="submit" name="delete" value="Retirar" /><input type="button" name="import" value="Importar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>'" /><input type="button" name="export" value="Exportar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') ?>'" />
-    <?php } ?></div>
+    <div>
+<?php if ($this->subject->amModerator()) { ?><input type="button" name="new" value="Agregar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_new') ?>'" /><input type="submit" name="unlock" value="Habilitar" /><input type="submit" name="lock" value="Deshabilitar" /><input type="submit" name="delete" value="Retirar" /><input type="button" name="import" value="Importar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_import') ?>'" /><input type="button" name="export" value="Exportar" onclick="location.href='<?= $this->url(array('subject' => $this->subject->url), 'subjects_subject_assign_export') ?>'" /><?php } ?>
+    </div>
 </form>

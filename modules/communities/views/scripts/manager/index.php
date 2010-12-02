@@ -1,56 +1,58 @@
-<h1><?= $this->PAGE->label ?></h1>
+<?php
 
-<form method="post" action="" accept-charset="utf-8">
-    <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
+echo '<h1>' . $this->PAGE->label . '</h1>';
 
-    <table>
-        <tr>
-            <td>[<a href="<?= $this->url(array(), 'communities_list') ?>">Lista</a>]</td>
-            <td>[<a href="<?= $this->url(array(), 'communities_new') ?>">Nuevo</a>]</td>
-            <td><input type="submit" name="delete" value="Eliminar" /></td>
-        </tr>
-    </table>
+echo '<form method="post" action="" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->currentPage() . '" />';
 
-    <hr />
-<?php if (count($this->communities)) { ?>
-    <center>
-        <table width="100%">
-            <tr>
-            	<th>&nbsp;</th>
-                <th><?= $this->model_communities->_mapping['label'] ?></th>
-                <th><?= $this->model_communities->_mapping['mode'] ?></th>
-                <th><?= $this->model_communities->_mapping['members'] ?></th>
-                <th>Opciones</th>
-                <th><?= $this->model_communities->_mapping['tsregister'] ?></th>
-            </tr>
-        <?php foreach ($this->communities as $community) { ?>
-            <tr>
-            	<td><input type="checkbox" name="check[]" value="<?= $community->ident ?>" /></td>
-                <td><?= $community->label ?></td>
-                <td><center><?= $this->mode(NULL, $community->mode) ?></center></td>
-                <td><center><?= $community->members ?></center></td>
-                <td>
-                    <center>
-                        <a href="<?= $this->url(array('community' => $community->url), 'communities_community_view') ?>">Ver</a>
-                        <a href="<?= $this->url(array('community' => $community->url), 'communities_community_edit') ?>">Editar</a>
-                        <a href="<?= $this->url(array('community' => $community->url), 'communities_community_delete') ?>">Eliminar</a>
-                    </center>
-                </td>
-                <td><center><?= $this->timestamp($community->tsregister) ?></center></td>
-            </tr>
-        <?php } ?>
-        </table>
-    </center>
-<?php } else { ?>
-    <p>No existen comunidades registradas</p>
-<?php } ?>
-    <hr />
+echo '<table>';
+echo '<tr>';
+echo '<td>[<a href="' . $this->url(array(), 'communities_list') . '">Lista</a>]</td>';
+echo '<td>[<a href="' . $this->url(array(), 'communities_new') . '">Nuevo</a>]</td>';
+echo '<td><input type="submit" name="delete" value="Eliminar" /></td>';
+echo '</tr>';
+echo '</table>';
 
-    <table>
-        <tr>
-            <td>[<a href="<?= $this->url(array(), 'communities_list') ?>">Lista</a>]</td>
-            <td>[<a href="<?= $this->url(array(), 'communities_new') ?>">Nuevo</a>]</td>
-            <td><input type="submit" name="delete" value="Eliminar" /></td>
-        </tr>
-    </table>
-</form>
+echo '<hr />';
+if (count($this->communities)) {
+echo '<center>';
+echo '<table width="100%">';
+echo '<tr>';
+echo '<th>&nbsp;</th>';
+echo '<th>' . $this->model_communities->_mapping['label'] . '</th>';
+echo '<th>' . $this->model_communities->_mapping['mode'] . '</th>';
+echo '<th>' . $this->model_communities->_mapping['members'] . '</th>';
+echo '<th>Opciones</th>';
+echo '<th>' . $this->model_communities->_mapping['tsregister'] . '</th>';
+echo '</tr>';
+foreach ($this->communities as $community) {
+echo '<tr>';
+echo '<td><input type="checkbox" name="check[]" value="' . $community->ident . '" /></td>';
+echo '<td>' . $community->label . '</td>';
+echo '<td><center>' . $this->mode(NULL, $community->mode) . '</center></td>';
+echo '<td><center>' . $community->members . '</center></td>';
+echo '<td>';
+echo '<center>';
+echo '<a href="' . $this->url(array('community' => $community->url), 'communities_community_view') . '">Ver</a> ';
+echo '<a href="' . $this->url(array('community' => $community->url), 'communities_community_edit') . '">Editar</a> ';
+echo '<a href="' . $this->url(array('community' => $community->url), 'communities_community_delete') . '">Eliminar</a>';
+echo '</center>';
+echo '</td>';
+echo '<td><center>' . $this->timestamp($community->tsregister) . '</center></td>';
+echo '</tr>';
+}
+echo '</table>';
+echo '</center>';
+} else {
+echo '<p>No existen comunidades registradas</p>';
+}
+echo '<hr />';
+
+echo '<table>';
+echo '<tr>';
+echo '<td>[<a href="' . $this->url(array(), 'communities_list') . '">Lista</a>]</td>';
+echo '<td>[<a href="' . $this->url(array(), 'communities_new') . '">Nuevo</a>]</td>';
+echo '<td><input type="submit" name="delete" value="Eliminar" /></td>';
+echo '</tr>';
+echo '</table>';
+echo '</form>';

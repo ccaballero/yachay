@@ -1,4 +1,5 @@
 <h1><?= $this->PAGE->label ?></h1>
+
 <?php if (count($this->users)) { ?>
     <?= $this->paginator($this->users, $this->route) ?>
     <div id="block">
