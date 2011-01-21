@@ -39,7 +39,7 @@ if ($this->event->duration == 0) {
 echo '</td></tr>';
 echo '</table>';
 echo '<br />';
-echo str_replace(" ", "&nbsp;", str_replace("\n", "<br/>", $this->escape($this->event->message)));
+echo str_replace("\n", "<br/>", $this->escape($this->event->message));
 
 if ($this->acl('comments', 'view')) {
     echo '<h2>Comentarios</h2>';

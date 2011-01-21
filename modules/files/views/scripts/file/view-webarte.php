@@ -31,7 +31,7 @@
     <p><span class="bold">Fecha: </span><?= $this->timestamp($this->resource->tsregister) ?></p>
 </div>
 
-<p class="message"><?= str_replace(" ", "&nbsp;", str_replace("\n", "<br/>", $this->escape($this->file->description))) ?></p>
+<p class="message"><?= str_replace("\n", "<br/>", $this->escape($this->file->description)) ?></p>
 
 <p class="center">
 <?= $this->mime($this->file->mime) ?>&nbsp;

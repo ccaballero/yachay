@@ -2,7 +2,7 @@
 
 echo '<b>' . strtoupper($this->event->getLabel()) . '</b>';
 echo '<br />';
-echo str_replace(" ", "&nbsp;", str_replace("\n", "<br/>", $this->escape($this->event->label)));
+echo str_replace("\n", "<br/>", $this->escape($this->event->label));
 echo '<br />';
 
 if ($this->event->duration == 0) {

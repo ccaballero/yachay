@@ -10,5 +10,5 @@
     <p><label for="community_description">Descripción: </label><textarea id="community_description" name="description" cols="50" rows="5"><?= $this->community->description ?></textarea></p>
     <p>(*) Campos obligatorios.</p>
     <p>(**) Las etiquetas deben separarse con comas.</p>
-    <p class="submit"><input type="submit" value="Crear comunidad" /><input type="button" value="Cancelar" onclick="location.href='<?= $this->lastPage() ?>'" /></p>
+    <p class="submit"><input type="submit" value="Editar comunidad" /><input type="button" value="Cancelar" onclick="location.href='<?= $this->lastPage() ?>'" /></p>
 </form>

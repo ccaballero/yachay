@@ -39,7 +39,7 @@
 <?php } ?>
 </p>
 
-<p class="message"><?= str_replace(" ", "&nbsp;", str_replace("\n", "<br/>", $this->escape($this->event->message))) ?></p>
+<p class="message"><?= str_replace("\n", "<br/>", $this->escape($this->event->message)) ?></p>
 
 <?php if ($this->acl('comments', 'view')) { ?>
     <h2>Comentarios</h2>

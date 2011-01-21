@@ -31,7 +31,7 @@ echo '</td></tr>';
 echo '<tr valign="top"><td><b>Fecha: </b><i>' . $this->timestamp($this->resource->tsregister) . '</i></td></tr>';
 echo '</table>';
 
-echo '<p>' . str_replace(" ", "&nbsp;", str_replace("\n", "<br/>", $this->escape($this->file->description))) . '</p>';
+echo '<p>' . str_replace("\n", "<br/>", $this->escape($this->file->description)) . '</p>';
 echo '<center>' . $this->mime($this->file->mime) . '&nbsp;<a href="' . $this->url(array('file' => $this->file->resource), 'files_file_download') . '">' . $this->file->filename . '</a>&nbsp;' . $this->size($this->file->size) . '</center>';
 
 if ($this->acl('comments', 'view')) {

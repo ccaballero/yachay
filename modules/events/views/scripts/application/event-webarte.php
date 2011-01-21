@@ -1,7 +1,7 @@
 <p><?= $this->event->label ?></p>
 
 <?php if (!empty($this->event->message)) { ?>
-    <p><?= str_replace(" ", "&nbsp;", str_replace("\n", "<br/>", $this->escape($this->event->message))) ?></p>
+    <p><?= str_replace("\n", "<br/>", $this->escape($this->event->message)) ?></p>
 <?php } ?>
 
 <p>
