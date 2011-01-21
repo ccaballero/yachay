@@ -11,6 +11,7 @@ class Notes_ManagerController extends Yeah_Action
         $request = $this->getRequest();
 
         $note = new Notes_Empty();
+        $tags = '';
 
         $model_notes = new Notes();
         $model_resources = new Resources();
@@ -35,7 +36,9 @@ class Notes_ManagerController extends Yeah_Action
             $context = new Yeah_Helpers_Context();
             $spaces_valids = $context->context(NULL, 'plain');
 
-            if (in_array($publish, $spaces_valids)) {
+            if (empty($publish)) {
+                $session->messages->addMessage('Usted debe seleccionar un espacio de publicación');
+            } else if (in_array($publish, $spaces_valids)) {
                 if ($note->isValid()) {
                     $resource = $model_resources->createRow();
                     $resource->author = $USER->ident;
@@ -92,11 +95,12 @@ class Notes_ManagerController extends Yeah_Action
                     }
                 }
             } else {
-                $session->messages->addMessage("Usted no tiene privilegios para publicar en ese espacio");
+                $session->messages->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
         }
 
         $this->view->note = $note;
+        $this->view->tags = $tags;
 
         history('notes/new');
         $breadcrumb = array();

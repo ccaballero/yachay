@@ -27,11 +27,6 @@ class Yeah_Helpers_Context
             'users' => array(),
         );
 
-        // set for global context
-        if ($context_type == 'global') {
-            $default = $select;
-        }
-
         $options[] = '<option value="global" ' . $default . '>Pagina principal</option>';
         $data['global'][] = 'global';
 
@@ -234,7 +229,7 @@ class Yeah_Helpers_Context
         // OK, all ready!
         switch ($format) {
             case 'html':
-                $select = '<select name="' . $name . '" id="' . $name . '">' . implode('', $options) . '</select>';
+                $select = '<select name="' . $name . '" id="' . $name . '"><option value="">----------</option>' . implode('', $options) . '</select>';
                 return $select;
             case 'matrix':
                 return $data;

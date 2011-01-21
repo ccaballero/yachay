@@ -31,7 +31,7 @@ class Yeah_Helpers_Recipient
                     $subject = $group->getSubject();
                     $return[] = '<a href="' . $url->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view') . '">'. "Grupo: {$group->label}" . '</a>';
                 }
-                return implode(', ', $return);
+                return '(' . implode(', ', $return) . ')';
             case 'group':
                 $model_groups = new Groups();
                 $group = $model_groups->findByIdent($ident);
@@ -42,7 +42,7 @@ class Yeah_Helpers_Recipient
                 $team = $model_teams->findByIdent($ident);
                 $group = $team->getGroup();
                 $subject = $group->getSubject();
-                return '<a href="' . $url->url(array('subject' => $subject->url, 'group' => $group->url, 'team' => $team->url), 'teams_team_view') . '">' ."Equipo $team->label - Grupo {$group->label} ({$subject->label})" . '</a>';
+                return '<a href="' . $url->url(array('subject' => $subject->url, 'group' => $group->url, 'team' => $team->url), 'teams_team_view') . '">' ."Equipo $team->label ({$subject->label})" . '</a>';
             case 'community':
                 $model_communities = new Communities();
                 $community = $model_communities->findByIdent($ident);

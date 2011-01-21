@@ -17,7 +17,7 @@ class Groupsets_Groupset extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'UniqueLabel',
-                    'options'   => array('groupsets'),
+                    'options'   => array('Groupsets'),
                     'message'   => 'El nombre seleccionado para el conjunto ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',
                 ),

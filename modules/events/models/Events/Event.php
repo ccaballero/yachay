@@ -24,7 +24,7 @@ class Events_Event extends Yeah_Model_Row_Validation
             'filters' => array('StringTrim'),
         ),
         'message' => array(
-            'filters' => array('StringTrim', 'StripNewlines', 'StripTags'),
+            'filters' => array('StringTrim'),
         ),
         'event' => array(
             'filters' => array('Int'),

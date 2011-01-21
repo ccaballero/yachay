@@ -12,6 +12,9 @@ class Files_File extends Yeah_Model_Row_Validation
         'mime' => array(
             'filters' => array('StringTrim', 'StripTags'),
         ),
+        'description' => array(
+            'filters' => array('StringTrim'),
+        ),
     );
 
     public function getResource() {

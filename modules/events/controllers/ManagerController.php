@@ -11,6 +11,7 @@ class Events_ManagerController extends Yeah_Action
         $request = $this->getRequest();
 
         $event = new Events_Empty();
+        $tags = '';
         
         $model_events = new Events();
         $model_resources = new Resources();
@@ -44,8 +45,12 @@ class Events_ManagerController extends Yeah_Action
             $context = new Yeah_Helpers_Context();
             $spaces_valids = $context->context(NULL, 'plain');
 
-            if (in_array($publish, $spaces_valids)) {
-                if ($event->isValid()) {
+            if (empty($publish)) {
+                $session->messages->addMessage('Usted debe seleccionar un espacio de publicación');
+            } else if (in_array($publish, $spaces_valids)) {
+                if ($event->event == 0) {
+                    $session->messages->addMessage('El evento no describe una fecha correcta');
+                } else if ($event->isValid()) {
                     $resource = $model_resources->createRow();
                     $resource->author = $USER->ident;
                     $resource->recipient = $request->getParam('publish');
@@ -101,11 +106,12 @@ class Events_ManagerController extends Yeah_Action
                     }
                 }
             } else {
-                $session->messages->addMessage("Usted no tiene privilegios para publicar en ese espacio");
+                $session->messages->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
         }
 
         $this->view->event = $event;
+        $this->view->tags = $tags;
 
         history('events/new');
         $breadcrumb = array();

@@ -12,6 +12,7 @@ class Files_ManagerController extends Yeah_Action
         $request = $this->getRequest();
 
         $file = new Files_Empty();
+        $tags = '';
         
         $model_files = new Files();
         $model_resources = new Resources();
@@ -32,7 +33,9 @@ class Files_ManagerController extends Yeah_Action
             $context = new Yeah_Helpers_Context();
             $spaces_valids = $context->context(NULL, 'plain');
 
-            if (in_array($publish, $spaces_valids)) {
+            if (empty($publish)) {
+                $session->messages->addMessage('Usted debe seleccionar un espacio de publicación');
+            } else if (in_array($publish, $spaces_valids)) {
                 if ($upload->receive()) {
                     $filename = $upload->getFileName('file');
                     $extension = strtolower(substr($filename, -3));
@@ -102,11 +105,12 @@ class Files_ManagerController extends Yeah_Action
                     }
                 }
             } else {
-                $session->messages->addMessage("Usted no tiene privilegios para publicar en ese espacio");
+                $session->messages->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
         }
 
         $this->view->file = $file;
+        $this->view->tags = $tags;
 
         history('files/new');
         $breadcrumb = array();

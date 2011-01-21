@@ -8,8 +8,8 @@ class Groupsets_GroupsetController extends Yeah_Action
         $this->requirePermission('subjects', 'teach');
 
         $request = $this->getRequest();
-        $groupsets = Yeah_Adapter::getModel('groupsets');
-        $groupset = $groupsets->findByIdent($request->getParam('groupset'));
+        $model_groupsets = new Groupsets();
+        $groupset = $model_groupsets->findByIdent($request->getParam('groupset'));
         $this->requireExistence($groupset, 'groupset', 'groupsets_groupset_view', 'groupsets_manager');
 
         if ($groupset->author != $USER->ident) {
@@ -17,14 +17,14 @@ class Groupsets_GroupsetController extends Yeah_Action
             return;
         }
 
-        $gestions_model = Yeah_Adapter::getModel('gestions');
-        $current_gestion = $gestions_model->findByActive();
+        $model_gestions = new Gestions();
+        $current_gestion = $model_gestions->findByActive();
 
-        $users_model = Yeah_Adapter::getModel('users');
-        $user = $users_model->findByIdent($USER->ident);
+        $model_users = new Users();
+        $user = $model_users->findByIdent($USER->ident);
 
-        $groups_model = Yeah_Adapter::getModel('groups');
-        $groups_in_teach = $groups_model->listGroupsWithTeacher($USER->ident);
+        $model_groups = new Groups();
+        $groups_in_teach = $model_groups->listGroupsWithTeacher($USER->ident);
 
         $subjects = array();
         $groups = array();
@@ -37,10 +37,10 @@ class Groupsets_GroupsetController extends Yeah_Action
             }
         }
 
-        $assignement = Yeah_Adapter::getModel('groupsets', 'Groupsets_Groups');
-        $groupset_groups = $groupset->findmodules_groups_models_GroupsViamodules_groupsets_models_Groupsets_Groups();
+        $assignement = new Groupsets_Groups();
+        $groupset_groups = $groupset->findGroupsViaGroupsets_Groups();
 
-        $this->view->model = $groupsets;
+        $this->view->model_groupsets = $model_groupsets;
         $this->view->groupset = $groupset;
         $this->view->groupset_groups = $groupset_groups;
         $this->view->subjects = $subjects;
@@ -58,8 +58,8 @@ class Groupsets_GroupsetController extends Yeah_Action
         $this->requirePermission('subjects', 'teach');
 
         $request = $this->getRequest();
-        $groupsets = Yeah_Adapter::getModel('groupsets');
-        $groupset = $groupsets->findByIdent($request->getParam('groupset'));
+        $model_groupsets = new Groupsets();
+        $groupset = $model_groupsets->findByIdent($request->getParam('groupset'));
         $this->requireExistence($groupset, 'groupset', 'groupsets_groupset_view', 'groupsets_manager');
 
         if ($groupset->author != $USER->ident) {
@@ -69,14 +69,14 @@ class Groupsets_GroupsetController extends Yeah_Action
 
         $this->view->groupset = $groupset;
 
-        $gestions_model = Yeah_Adapter::getModel('gestions');
-        $current_gestion = $gestions_model->findByActive();
+        $model_gestions = new Gestions();
+        $current_gestion = $model_gestions->findByActive();
 
-        $users_model = Yeah_Adapter::getModel('users');
-        $user = $users_model->findByIdent($USER->ident);
+        $model_users = new Users();
+        $user = $model_users->findByIdent($USER->ident);
 
-        $groups_model = Yeah_Adapter::getModel('groups');
-        $groups_in_teach = $groups_model->listGroupsWithTeacher($USER->ident);
+        $model_groups = new Groups();
+        $groups_in_teach = $model_groups->listGroupsWithTeacher($USER->ident);
 
         $subjects = array();
         $groups = array();
@@ -93,8 +93,8 @@ class Groupsets_GroupsetController extends Yeah_Action
         $this->view->subjects = $subjects;
         $this->view->groups = $groups;
 
-        $assignement = Yeah_Adapter::getModel('groupsets', 'Groupsets_Groups');
-        $groupset_groups = $groupset->findmodules_groups_models_GroupsViamodules_groupsets_models_Groupsets_Groups();
+        $assignement = new Groupsets_Groups();
+        $groupset_groups = $groupset->findGroupsViaGroupsets_Groups();
         $array1 = array();
         foreach ($groupset_groups as $groupset_group) {
             $array1[] = $groupset_group->ident;
@@ -119,7 +119,7 @@ class Groupsets_GroupsetController extends Yeah_Action
                 // FIXME Llevar a modelo las modificaciones de base de datos
                 global $DB;
                 $DB->delete('groupset_group', 'groupset = ' . $groupset->ident);
-                $assignement = Yeah_Adapter::getModel('groupsets', 'Groupsets_Groups');
+                $assignement = new Groupsets_Groups();
                 foreach ($checks as $group) {
                     $assign = $assignement->createRow();
                     $assign->groupset = $groupset->ident;
@@ -153,8 +153,8 @@ class Groupsets_GroupsetController extends Yeah_Action
         $this->requirePermission('subjects', 'teach');
 
         $request = $this->getRequest();
-        $groupsets = Yeah_Adapter::getModel('groupsets');
-        $groupset = $groupsets->findByIdent($request->getParam('groupset'));
+        $model_groupsets = new Groupsets();
+        $groupset = $model_groupsets->findByIdent($request->getParam('groupset'));
         $this->requireExistence($groupset, 'groupset', 'groupsets_groupset_view', 'groupsets_manager');
 
         if ($groupset->author != $USER->ident) {

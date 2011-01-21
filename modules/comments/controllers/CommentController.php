@@ -57,9 +57,13 @@ class Comments_CommentController extends Yeah_Action
             $resource->save();
 
             $model_valorations->addParticipation(2);
+            $session->messages->addMessage('Tu comentario ha sido publicado');
+        } else {
+            foreach ($comment->getMessages() as $message) {
+                $session->messages->addMessage($message);
+            }
         }
 
-        $session->messages->addMessage('Tu comentario ha sido publicado');
         $this->_redirect($this->view->currentPage());
     }
 

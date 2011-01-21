@@ -1,68 +1,51 @@
-<?php if ($this->note->priority) { ?>
-    <h1>Aviso
-<?php if ($this->resource->amAuthor()) { ?>
-	[<i><a href="<?= $this->url(array('note' => $this->resource->ident), 'notes_note_edit') ?>">Editar</a></i>]
-<?php } ?>
-    </h1>
-<?php } else {?>
-    <h1>Nota
-<?php if ($this->resource->amAuthor()) { ?>
-    [<i><a href="<?= $this->url(array('note' => $this->resource->ident), 'notes_note_edit') ?>">Editar</a></i>]
-<?php } ?>
-    </h1>
-<?php } ?>
+<?php
 
-<table width="100%">
-    <tr>
-        <td valign="top">
-            <b>Autor: </b>
-            <i>
-            <?php if ($this->acl('users', 'view')) { ?>
-                <a href="<?= $this->url(array('user' => $this->resource->getAuthor()->url), 'users_user_view') ?>"><?= $this->resource->getAuthor()->label ?></a>
-            <?php } else { ?>
-                <?= $this->resource->getAuthor()->label ?>
-            <?php } ?>
-            </i>
-        </td>
-    </tr>
-    <tr valign="top">
-        <td>
-            <b>Publicado en: </b><i><?= $this->recipient($this->resource->recipient) ?></i>
-        </td>
-    </tr>
-    <tr valign="top">
-        <td>
-            <b>Etiquetas: </b>
-        <?php foreach ($this->tags as $tag) { ?>
-            <a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><i><?= $tag->label ?></i></a>&nbsp;
-        <?php } ?>
-        </td>
-    </tr>
-    <tr valign="top">
-        <td>
-            <b>Valoración: </b>
-        <?php if ($this->acl('ratings', 'new')) { ?>
-            <a href="<?= $this->url(array('resource' => $this->resource->ident), 'notes_note_rating_down') ?>"><b>&laquo;</b></a>
-        <?php } ?>
-                <i><?= $this->resource->ratings ?> / <?= $this->resource->raters ?></i>
-        <?php if ($this->acl('ratings', 'new')) { ?>
-            <a href="<?= $this->url(array('resource' => $this->resource->ident), 'notes_note_rating_up') ?>"><b>&raquo;</b></a>
-        <?php } ?>
-        </td>
-    </tr>
-    <tr valign="top">
-        <td>
-            <b>Fecha: </b><i><?= $this->timestamp($this->resource->tsregister) ?></i>
-        </td>
-    </tr>
-</table>
+if ($this->note->priority) {
+    echo '<h1>Aviso ';
+    if ($this->resource->amAuthor()) {
+	echo '[<i><a href="' . $this->url(array('note' => $this->resource->ident), 'notes_note_edit') . '">Editar</a></i>]';
+    }
+    echo '</h1>';
+} else {
+    echo '<h1>Nota ';
+    if ($this->resource->amAuthor()) {
+        echo '[<i><a href="' . $this->url(array('note' => $this->resource->ident), 'notes_note_edit') . '">Editar</a></i>]';
+    }
+    echo '</h1>';
+}
 
-<p><?= $this->note->note ?></p>
+echo '<table><tr><td valign="top"><b>Autor: </b><i>';
+if ($this->acl('users', 'view')) {
+    echo '<a href="' . $this->url(array('user' => $this->resource->getAuthor()->url), 'users_user_view') . '">' . $this->resource->getAuthor()->label . '</a>';
+} else {
+    echo $this->resource->getAuthor()->label;
+}
+echo '</i></td></tr>';
+echo '<tr valign="top"><td><b>Publicado en: </b><i>' . $this->recipient($this->resource->recipient) . '</i></td></tr>';
+echo '<tr valign="top"><td><b>Etiquetas: </b>';
 
-<?php if ($this->acl('comments', 'view')) { ?>
-    <h2>Comentarios</h2>
-    <?= $this->partial('comments.php', array('resource' => $this->resource, 'route' => 'notes_note_comment')) ?>
-    <?php if ($this->acl('comments', 'new')) { ?>
-    <?= $this->partial('comment/post.php', array('resource' => $this->resource, 'route' => 'notes_note_comment')) ?>
-    <?php } ?>
-<?php } ?>
+foreach ($this->tags as $tag) {
+    echo '<a href="' . $this->url(array('tag' => $tag->url), 'tags_tag_view') . '"><i>' . $tag->label . '</i></a>&nbsp;';
+}
+echo '</td></tr>';
+echo '<tr valign="top"><td><b>Valoración: </b>';
+if ($this->acl('ratings', 'new')) {
+    echo '<a href="' . $this->url(array('resource' => $this->resource->ident), 'notes_note_rating_down') . '"><b>&laquo;</b></a>';
+}
+echo '<i>' . $this->resource->ratings . ' / ' . $this->resource->raters . '</i>';
+if ($this->acl('ratings', 'new')) {
+    echo '<a href="' . $this->url(array('resource' => $this->resource->ident), 'notes_note_rating_up') . '"><b>&raquo;</b></a>';
+}
+echo '</td></tr>';
+echo '<tr valign="top"><td><b>Fecha: </b><i>' . $this->timestamp($this->resource->tsregister) . '</i></td></tr>';
+echo '</table>';
+
+echo '<p>' . str_replace(" ", "&nbsp;", str_replace("\n", "<br/>", $this->escape($this->note->note))) . '</p>';
+
+if ($this->acl('comments', 'view')) {
+    echo '<h2>Comentarios</h2>';
+    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'notes_note_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, ));
+    if ($this->acl('comments', 'new')) {
+        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'notes_note_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, ));
+    }
+}

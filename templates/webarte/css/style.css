@@ -36,6 +36,12 @@ a:hover {
     text-decoration: underline;
 }
 
+a:focus {
+    color: #6D852A;
+    background-color: #DDE6C5;
+    border: 0px solid #FFFFFF;
+}
+
 input, select, option, textarea {
     font-size: 0.9em;
     padding: 0em 0.3em;
@@ -306,6 +312,7 @@ body {
     position: absolute;
     bottom: 0.1em;
     right: 0.2em;
+    font-size: 0.7em;
 }
 
 #primary .pagination {
@@ -323,13 +330,13 @@ body {
     background-color: #DDE6C5;
 }
 
-#primary #resource {
+#primary .resource {
     margin: 0.4em 0em;
     position: relative;
     clear: both;
 }
 
-#primary #resource .label {
+#primary .resource .label {
     position: absolute;
     float: right;
     top: 0em;
@@ -341,7 +348,7 @@ body {
     text-transform: uppercase;
 }
 
-#primary #resource .recipient {
+#primary .resource .recipient {
     position: absolute;
     top: 0em;
     left: 0.5em;
@@ -351,30 +358,46 @@ body {
     z-index: 1;
 }
 
-#primary #resource .avatar {
+#primary .resource .avatar {
     position: absolute;
     padding: 1.2em 0.5em 0em 0.4em;
 }
 
-#primary #resource .message {
+#primary .resource .message {
     border: 1px solid #6D852A;
     padding: 1.2em 0.5em 0.8em 60px;
     min-height: 50px;
 }
 
-#primary #resource .addon {
+#primary .resource .message p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-right: 1.0em;
+}
+
+#primary .resource .message textarea {
+    margin-bottom: 1.0em;
+    width: 530px;
+    height: 4.0em;
+}
+
+#primary .resource .addon {
     position: absolute;
     left: 60px;
     bottom: 0.2em;
     font-size: 0.8em;
 }
 
-#primary #resource .addon .viewall {
+#primary .resource .addon .viewall {
     font-size: 1.1em;
     padding-left: 0.5em;
 }
 
-#primary #resource .timestamp {
+#primary .resource .addon input[type="submit"] {
+    margin-bottom: 0.3em;
+}
+
+#primary .resource .timestamp {
     position: absolute;
     bottom: 0em;
     right: 0em;
@@ -494,11 +517,30 @@ body {
     min-height: 220px;
 }
 
-#primary #user .photo {
+#primary #user-resource {
+    position: relative;
+    padding-left: 110px;
+    min-height: 120px;
+}
+
+#primary #user .photo, #primary #user-resource .photo {
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 200px;
+}
+
+#primary #user-resource p {
+    line-height: 1.25em;
+}
+
+#primary .message {
+    padding: 0.75em;
+    border: 2px dotted #DDE6C5;
+    margin-bottom: 1.0em;
+}
+
+#primary .center {
+    margin: 0pt auto;
 }
 
 #primary #main ul li {

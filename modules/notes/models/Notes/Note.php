@@ -7,7 +7,13 @@ class Notes_Note extends Yeah_Model_Row_Validation
 
     protected $_validationRules = array(
         'note' => array(
-            'filters' => array('StringTrim', 'StripNewlines', 'StripTags'),
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array(
+                    'validator' => 'NotEmpty',
+                    'message'   => 'El mensaje en su nota no puede estar vacio',
+                ),
+            ),
         ),
     );
 

@@ -1,5 +1,9 @@
 <p><?= $this->event->label ?></p>
 
+<?php if (!empty($this->event->message)) { ?>
+    <p><?= str_replace(" ", "&nbsp;", str_replace("\n", "<br/>", $this->escape($this->event->message))) ?></p>
+<?php } ?>
+
 <p>
 <?php if ($this->event->duration == 0) { ?>
     A partir del: <?= $this->timestamp($this->event->event) ?>

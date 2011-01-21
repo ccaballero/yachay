@@ -15,12 +15,12 @@ class Groupsets_ManagerController extends Yeah_Action
             }
         }
 
-        $groupsets = Yeah_Adapter::getModel('groupsets');
+        $model_groupsets = new Groupsets();
 
-        $gestions_model = Yeah_Adapter::getModel('gestions');
-        $current_gestion = $gestions_model->findByActive();
+        $model_gestions = new Gestions();
+        $current_gestion = $model_gestions->findByActive();
 
-        $array = $groupsets->selectByAuthor($USER->ident);
+        $array = $model_groupsets->selectByAuthor($USER->ident);
         $array1 = array();
         foreach ($array as $element) {
             if ($element->gestion == $current_gestion->ident) {
@@ -28,7 +28,7 @@ class Groupsets_ManagerController extends Yeah_Action
             } 
         }
 
-        $this->view->model = $groupsets;
+        $this->view->model_groupsets = $model_groupsets;
         $this->view->groupsets = $array1;
 
         history('groupsets/manager');
@@ -40,16 +40,16 @@ class Groupsets_ManagerController extends Yeah_Action
 
         $this->requirePermission('subjects', 'teach');
 
-        $this->view->groupset = new modules_groupsets_models_Groupsets_Empty;
+        $this->view->groupset = new Groupsets_Empty();
 
-        $gestions_model = Yeah_Adapter::getModel('gestions');
-        $current_gestion = $gestions_model->findByActive();
+        $model_gestions = new Gestions();
+        $current_gestion = $model_gestions->findByActive();
 
-        $users_model = Yeah_Adapter::getModel('users');
-        $user = $users_model->findByIdent($USER->ident);
+        $model_users = new Users();
+        $user = $model_users->findByIdent($USER->ident);
 
-        $groups_model = Yeah_Adapter::getModel('groups');
-        $groups_in_teach = $groups_model->listGroupsWithTeacher($USER->ident);
+        $model_groups = new Groups();
+        $groups_in_teach = $model_groups->listGroupsWithTeacher($USER->ident);
 
         $subjects = array();
         $groups = array();
@@ -72,8 +72,8 @@ class Groupsets_ManagerController extends Yeah_Action
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $groupsets = Yeah_Adapter::getModel('groupsets');
-            $groupset = $groupsets->createRow();
+            $model_groupsets = new Groupsets();
+            $groupset = $model_groupsets->createRow();
             $groupset->label = $request->getParam('label');
             $groupset->author = $USER->ident;
             $groupset->gestion = $current_gestion->ident;
@@ -87,7 +87,7 @@ class Groupsets_ManagerController extends Yeah_Action
                 $groupset->tsregister = time();
                 $groupset->save();
 
-                $assignement = Yeah_Adapter::getModel('groupsets', 'Groupsets_Groups');
+                $assignement = new Groupsets_Groups();
                 foreach ($checks as $group) {
                     $assign = $assignement->createRow();
                     $assign->groupset = $groupset->ident;
@@ -116,15 +116,17 @@ class Groupsets_ManagerController extends Yeah_Action
 
     public function deleteAction() {
         global $USER;
+
         $this->requirePermission('subjects', 'teach');
+
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $groupsets = Yeah_Adapter::getModel('groupsets');
+            $model_groupsets = new Groupsets();
             $check = $request->getParam("check");
 
             $count = 0;
             foreach ($check as $value) {
-                $groupset = $groupsets->findByIdent($value);
+                $groupset = $model_groupsets->findByIdent($value);
                 if (!empty($groupset)) {
                     if ($groupset->author == $USER->ident) {
                         $groupset->delete();

@@ -9,7 +9,7 @@
     </div>
 
 <?php if (count($this->areas)) { ?>
-    <table width="100%">
+    <table>
         <tr>
             <th><?= $this->model_areas->_mapping['label'] ?></th>
             <th>Opciones</th>

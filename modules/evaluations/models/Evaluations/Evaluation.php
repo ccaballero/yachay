@@ -6,6 +6,9 @@ class Evaluations_Evaluation extends Yeah_Model_Row_Validation
     public $__element = 'evaluations';
     protected $_foreignkey = 'author';
 
+    public $recipient = null;
+    public $resource = null;
+
     protected $_validationRules = array(
         'label' => array(
             'filters' => array('StringTrim'),
@@ -52,7 +55,12 @@ class Evaluations_Evaluation extends Yeah_Model_Row_Validation
     }
 
     public function getExtended() {
+        $this->resource = $this->ident;
         return $this;
+    }
+
+    public function getLabel() {
+        return 'Criterio de Evaluación';
     }
 
     public function checkUseful() {

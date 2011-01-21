@@ -9,16 +9,10 @@ class Resources_IndexController extends Yeah_Action
         $model_resources = new Resources();
         $resources = $model_resources->selectByAuthor($USER->ident);
 
-        $model_evaluations = new Evaluations();
-        $evaluations = $model_evaluations->selectByAuthor($USER->ident);
-        
         $list = array();
 
         foreach ($resources as $resource) {
             $list[$resource->tsregister] = $resource;
-        }
-        foreach ($evaluations as $evaluation) {
-            $list[$evaluation->tsregister] = $evaluation;
         }
 
         ksort($list);
@@ -90,7 +84,9 @@ class Resources_IndexController extends Yeah_Action
         ksort($list);
         $list = array_reverse($list);
         $this->view->resources = $list;
-        $this->render('list');
+
+        $template = new Yeah_Helpers_Template();
+        $this->render($template->template('resources', 'list', 'index/', false));
 
         history('resources');
         $breadcrumb = array();

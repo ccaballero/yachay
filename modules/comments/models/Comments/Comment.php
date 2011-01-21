@@ -5,6 +5,12 @@ class Comments_Comment extends Yeah_Model_Row_Validation
     protected $_validationRules = array(
         'comment' => array(
             'filters' => array('StringTrim', 'StripNewlines', 'StripTags'),
+            'validators' => array(
+                array(
+                    'validator' => 'NotEmpty',
+                    'message'   => 'Su comentario no puede estar vacio',
+                ),
+            ),
         ),
     );
 
