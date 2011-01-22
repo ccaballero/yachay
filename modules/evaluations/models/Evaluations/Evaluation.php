@@ -66,11 +66,11 @@ class Evaluations_Evaluation extends Yeah_Model_Row_Validation
     public function checkUseful() {
     	$evaluation_test = $this->findEvaluations_Tests();
     	if (count($evaluation_test) == 0) {
-    		$this->useful = false;
+            $this->useful = false;
     	} else {
-    		$this->useful = true;
+            $this->useful = true;
     	}
-		$this->save();
+        $this->save();
     }
 
     public function amAuthor() {

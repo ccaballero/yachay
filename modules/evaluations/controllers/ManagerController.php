@@ -7,14 +7,15 @@ class Evaluations_ManagerController extends Yeah_Action
 
         $this->requirePermission('resources', 'new');
 
-        $this->view->evaluation = new modules_evaluations_models_Evaluations_Empty;
+        $this->view->evaluation = new Evaluations_Empty();
 
         $request = $this->getRequest();
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $evaluations_model = Yeah_Adapter::getModel('evaluations');
-            $evaluation = $evaluations_model->createRow();
+            $model_evaluations = new Evaluations();
+
+            $evaluation = $model_evaluations->createRow();
             $evaluation->label = $request->getParam('label');
             $evaluation->access = $request->getParam('access');
             $evaluation->description = $request->getParam('description');

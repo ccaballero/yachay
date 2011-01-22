@@ -1,6 +1,6 @@
 <?php
 
-class Parser extends Xcel_Parser
+class Evaluations_Parser extends Xcel_Parser
 {
     public $mode = 'REAL';
 
@@ -8,7 +8,7 @@ class Parser extends Xcel_Parser
     private $_user;
     private $_evaluation;
 
-    public function Parser ($evaluation) {
+    public function Evaluations_Parser ($evaluation) {
         $this->_evaluation = $evaluation;
     }
 

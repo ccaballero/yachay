@@ -1,5 +1,5 @@
-<b>CRITERIO DE EVALUACION:</b>
-<br />
-<?= $this->evaluation->label ?>
-<br />
-<?= $this->wrapper($this->evaluation->description) ?>
+<?php
+
+echo '<b>' . strtoupper($this->evaluation->getLabel()) . '</b><br />';
+echo $this->evaluation->label . '<br />';
+echo $this->evaluation->description;

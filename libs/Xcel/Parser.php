@@ -9,7 +9,7 @@ abstract class Xcel_Parser
         return $value;
     }
 
-    private function generateTree($expression = '', $type) {
+    private function generateTree($expression, $type) {
         $tree = new Xcel_Syn_Tree();
         $set = new Xcel_Syn_Set();
 

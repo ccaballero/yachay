@@ -281,7 +281,7 @@ body {
 }
 
 #primary form input[type='text'], #primary form input[type='password'], #primary form textarea {
-    width: 22.0em;
+    width: 25.0em;
 }
 
 #primary form table input[type='text'] {
@@ -293,7 +293,7 @@ body {
 }
 
 #primary form textarea {
-    height: 6.0em;
+    height: 10.0em;
 }
 
 #primary form .submit {
@@ -304,11 +304,11 @@ body {
     width: 12.0em;
 }
 
-#primary h1, #primary h2 {
+#primary h1, #primary h2, #primary h3 {
     position: relative;
 }
 
-#primary h1 strong.task, #primary h2 strong.task {
+#primary h1 strong.task, #primary h2 strong.task, #primary h3 strong.task {
     position: absolute;
     bottom: 0.1em;
     right: 0.2em;

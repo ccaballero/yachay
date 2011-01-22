@@ -33,13 +33,8 @@ class Evaluations_Tests_Values_Value extends Yeah_Model_Row_Validation
                     'message'   => 'El valor de la nota no puede estar vacio', 
                 ),
                 array(
-                    'validator' => 'StringLength',
-                    'options'   => array(1, 4),
-                    'message'   => 'El valor de la nota debe tener entre 1 y 4 caracteres',
-                ),
-                array(
                     'validator' => 'Between',
-                    'options'   => array(0, 99),
+                    'options'   => array(0, 100),
                     'message'   => 'El valor de la nota no es valida',
                 ),
                 array(

@@ -2,7 +2,6 @@
 
 class Evaluations_TestController extends Yeah_Action
 {
-    
     // FIXME Agregar restricciones de historial, sea lo que eso haya significado en ese momento
     public function valueAction() {
         global $USER;
@@ -10,27 +9,33 @@ class Evaluations_TestController extends Yeah_Action
         $this->requirePermission('subjects', 'teach');
         $request = $this->getRequest();
 
-        $evaluations_model = Yeah_Adapter::getModel('evaluations');
-        $evaluation = $evaluations_model->findByIdent($request->getParam('evaluation'));
+        $url_evaluation = $request->getParam('evaluation');
+        $url_test_evaluation = $request->getParam('test');
+        $url_test_value_evaluation = $request->getParam('value');
+
+        $model_evaluations = new Evaluations();
+        $evaluation = $model_evaluations->findByIdent($url_evaluation);
+
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $USER->ident) {
             $this->_redirect($CONFIG->wwwroot);
         }
 
-        $tests_model = Yeah_Adapter::getModel('evaluations', 'Evaluations_Tests');
-        $test = $tests_model->findByIdent($request->getParam('test'));
-        if (empty($test)) {
+        $model_evaluations_tests = new Evaluations_Tests();
+        $test_evaluation = $model_evaluations_tests->findByIdent($url_test_evaluation);
+
+        if (empty($test_evaluation)) {
             $this->_redirect($CONFIG->wwwroot);
         }
 
-        $values_model = Yeah_Adapter::getModel('evaluations', 'Evaluations_Tests_Values');
-        $value = $values_model->findByIdent($request->getParam('value'));
+        $model_evaluations_tests_values = new Evaluations_Tests_Values();
+        $value_test_evaluation = $model_evaluations_tests_values->findByIdent($url_test_value_evaluation);
 
         $session = new Zend_Session_Namespace();
-        if (!empty($value)) {
-		    $value->delete();
-		    $session->messages->addMessage("La calificacion ha sido eliminada");
+        if (!empty($value_test_evaluation)) {
+            $value_test_evaluation->delete();
+            $session->messages->addMessage("La calificacion ha sido eliminada");
         }
 
         $this->_redirect($this->view->currentPage());
@@ -43,57 +48,62 @@ class Evaluations_TestController extends Yeah_Action
         $this->requirePermission('subjects', 'teach');
         $request = $this->getRequest();
 
-        $evaluations_model = Yeah_Adapter::getModel('evaluations');
-        $evaluation = $evaluations_model->findByIdent($request->getParam('evaluation'));
+        $url_evaluation = $request->getParam('evaluation');
+        $url_test_evaluation = $request->getParam('test');
+
+        $model_evaluations = new Evaluations();
+        $evaluation = $model_evaluations->findByIdent($url_evaluation);
+
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $USER->ident) {
             $this->_redirect($CONFIG->wwwroot);
         }
 
-        $tests_model = Yeah_Adapter::getModel('evaluations', 'Evaluations_Tests');
-        $test = $tests_model->findByIdent($request->getParam('test'));
-        if (empty($test)) {
+        $model_evaluations_tests = new Evaluations_Tests();
+        $test_evaluation = $model_evaluations_tests->findByIdent($url_test_evaluation);
+        if (empty($test_evaluation)) {
             $this->_redirect($CONFIG->wwwroot);
         }
 
-        $empty = new modules_evaluations_models_Evaluations_Tests_Values_Empty();
-        $this->view->value = $empty;
+        $empty_test_value_evaluation = new Evaluations_Tests_Values_Empty();
+        $this->view->test_value_evaluation = $empty_test_value_evaluation;
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $values_model = Yeah_Adapter::getModel('evaluations', 'Evaluations_Tests_Values');
-            $value = $values_model->createRow();
-            $value->label = $request->getParam('label');
-            $value->value = $request->getParam('value');
-            $value->evaluation = $evaluation->ident;
-            $value->test = $test->ident;
+            $model_evaluations_tests_values = new Evaluations_Tests_Values();
+            $test_value_evaluation = $model_evaluations_tests_values->createRow();
+            $test_value_evaluation->label = $request->getParam('label');
+            $test_value_evaluation->value = $request->getParam('value');
+            $test_value_evaluation->evaluation = $evaluation->ident;
+            $test_value_evaluation->test = $test_evaluation->ident;
 
-            if ($value->isValid()) {
-                if ($test->minimumnote <= $value->value && $value->value <=  $test->maximumnote) {
-                    $value->save();
+            if ($test_value_evaluation->isValid()) {
+                if ($test_evaluation->minimumnote <= $test_value_evaluation->value && $test_value_evaluation->value <=  $test_evaluation->maximumnote) {
+                    $test_value_evaluation->save();
                     $session->messages->addMessage("Se ha agregado un nuevo valor cualitativo");
                 } else {
                     $session->messages->addMessage("El valor de la nota no esta dentro del rango");
-                    $this->view->value = $value;
+                    $this->view->test_value_evaluation = $test_value_evaluation;
                 }
             } else {
-                foreach ($value->getMessages() as $message) {
+                foreach ($test_value_evaluation->getMessages() as $message) {
                     $session->messages->addMessage($message);
                 }
-                $this->view->value = $value;
+                $this->view->test_value_evaluation = $test_value_evaluation;
             }
         }
 
-        $values = $test->findmodules_evaluations_models_Evaluations_Tests_Values($test->select()->order('value ASC'));
+        $test_values_evaluation = $test_evaluation->findEvaluations_Tests_Values($test_evaluation->select()->order('value ASC'));
 
-        $this->view->model = $tests_model;
+        $this->view->model_evaluations = $model_evaluations;
+        $this->view->model_evaluations_tests = $model_evaluations_tests;
         $this->view->evaluation = $evaluation;
-        $this->view->test = $test;
-        $this->view->values = $values;
+        $this->view->test_evaluation = $test_evaluation;
+        $this->view->test_values_evaluation = $test_values_evaluation;
 
-        history('evaluations/' . $evaluation->ident . '/' . $test->ident);
+        history('evaluations/' . $evaluation->ident . '/' . $test_evaluation->ident);
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');
@@ -108,58 +118,61 @@ class Evaluations_TestController extends Yeah_Action
         $this->requirePermission('subjects', 'teach');
         $request = $this->getRequest();
 
-        $evaluations_model = Yeah_Adapter::getModel('evaluations');
-        $evaluation = $evaluations_model->findByIdent($request->getParam('evaluation'));
+        $url_evaluation = $request->getParam('evaluation');
+
+        $model_evaluations = new Evaluations();
+        $evaluation = $model_evaluations->findByIdent($url_evaluation);
+
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $USER->ident) {
             $this->_redirect($CONFIG->wwwroot);
         }
 
-        $empty = new modules_evaluations_models_Evaluations_Tests_Empty();
-        $this->view->test = $empty;
+        $empty_test_evaluation = new Evaluations_Tests_Empty();
+        $this->view->test_evaluation = $empty_test_evaluation;
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $test_model = Yeah_Adapter::getModel('evaluations', 'Evaluations_Tests');
-            $test = $test_model->createRow();
-            $test->label = $request->getParam('label');
-            $test->key = $request->getParam('key');
-            $test->minimumnote = $request->getParam('minimum');
-            $test->defaultnote = $request->getParam('default');
-            $test->maximumnote = $request->getParam('maximum');
-            $test->formula = $request->getParam('formula');
-            $test->order = $request->getParam('order');
-            $test->evaluation = $evaluation->ident;
+            $model_evaluations_tests = new Evaluations_Tests();
+            $test_evaluation = $model_evaluations_tests->createRow();
+            $test_evaluation->label = $request->getParam('label');
+            $test_evaluation->key = $request->getParam('key');
+            $test_evaluation->minimumnote = $request->getParam('minimum');
+            $test_evaluation->defaultnote = $request->getParam('default');
+            $test_evaluation->maximumnote = $request->getParam('maximum');
+            $test_evaluation->formula = $request->getParam('formula');
+            $test_evaluation->order = $request->getParam('order');
+            $test_evaluation->evaluation = $evaluation->ident;
 
-            if ($test->isValid()) {
-                if ($test->minimumnote <= $test->defaultnote && $test->defaultnote <=  $test->maximumnote) {
-                    $parser = new modules_evaluations_models_Parser($evaluation->ident);
+            if ($test_evaluation->isValid()) {
+                if ($test_evaluation->minimumnote <= $test_evaluation->defaultnote && $test_evaluation->defaultnote <=  $test_evaluation->maximumnote) {
+                    $parser = new Evaluations_Parser($evaluation->ident);
                     $parser->mode = 'TEST';
-                    $value = $parser->parse($test->formula);
-                    if (!empty($value)) {
-                        $test->save();
+                    $parsing_result = $parser->parse($test_evaluation->formula);
+                    if (!empty($parsing_result)) {
+                        $test_evaluation->save();
                         $evaluation->checkUseful();
-                        $session->messages->addMessage("Se ha agregado una nueva calificaci&oacute;n");
+                        $session->messages->addMessage("Se ha agregado una nueva calificación");
                     }
                 } else {
                     $session->messages->addMessage("Los rangos de notas no son adecuados");
-                    $this->view->test = $test;
+                    $this->view->test_evaluation = $test_evaluation;
                 }
             } else {
-                foreach ($test->getMessages() as $message) {
+                foreach ($test_evaluation->getMessages() as $message) {
                     $session->messages->addMessage($message);
                 }
-                $this->view->test = $test;
+                $this->view->test_evaluation = $test_evaluation;
             }
         }
 
-        $evaluation_test = $evaluation->findmodules_evaluations_models_Evaluations_Tests($evaluation->select()->order('order ASC'));
+        $tests_evaluation = $evaluation->findEvaluations_Tests($evaluation->select()->order('order ASC'));
 
-        $this->view->model = $evaluations_model;
+        $this->view->model_evaluations = $model_evaluations;
         $this->view->evaluation = $evaluation;
-        $this->view->tests = $evaluation_test;
+        $this->view->tests_evaluation = $tests_evaluation;
 
         history('evaluations/' . $evaluation->ident . '/add');
         $breadcrumb = array();
@@ -176,28 +189,30 @@ class Evaluations_TestController extends Yeah_Action
         $this->requirePermission('subjects', 'teach');
         $request = $this->getRequest();
 
-        $evaluations_model = Yeah_Adapter::getModel('evaluations');
-        $evaluation_url = $request->getParam('evaluation');
-        $evaluation = $evaluations_model->findByIdent($evaluation_url);
+        $url_evaluation = $request->getParam('evaluation');
+        $url_test_evaluation = $request->getParam('test');
+
+        $model_evaluations = new Evaluations();
+        $evaluation = $model_evaluations->findByIdent($url_evaluation);
+
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $USER->ident) {
             $this->_redirect($CONFIG->wwwroot);
         }
 
-        $evaluations_test_model = Yeah_Adapter::getModel('evaluations', 'Evaluations_Tests');
-        $evaluation_test_url = $request->getParam('test');
-        $evaluation_test = $evaluations_test_model->findByIdent($evaluation_test_url);
+        $model_evaluations_tests = new Evaluations_Tests();
+        $test_evaluation = $model_evaluations_tests->findByIdent($url_test_evaluation);
 
         $session = new Zend_Session_Namespace();
-        if (!empty($evaluation_test)) {
-        	if ($evaluation->author == $USER->ident) {
-		        $evaluation_test->delete();
-		        $evaluation->checkUseful();
-		        $session->messages->addMessage("La calificacion ha sido eliminada");
-        	} else {
-	            $session->messages->addMessage("Usted no puede eliminar la calificacion");
-        	}
+        if (!empty($test_evaluation)) {
+            if ($evaluation->author == $USER->ident) {
+                $test_evaluation->delete();
+                $evaluation->checkUseful();
+                $session->messages->addMessage("La calificacion ha sido eliminada");
+            } else {
+                $session->messages->addMessage("Usted no puede eliminar la calificacion");
+            }
         }
 
         $this->_redirect($this->view->currentPage());

@@ -26,4 +26,3 @@ class Evaluations_View_Helper_Accesibility
         return $select;
     }
 }
-

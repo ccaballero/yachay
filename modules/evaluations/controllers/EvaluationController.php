@@ -8,16 +8,17 @@ class Evaluations_EvaluationController extends Yeah_Action
         $this->requirePermission('subjects', 'teach');
         $request = $this->getRequest();
 
-        $evaluations_model = Yeah_Adapter::getModel('evaluations');
-        $evaluation = $evaluations_model->findByIdent($request->getParam('evaluation'));
+        $model_evaluations = new Evaluations();
+        $evaluation = $model_evaluations->findByIdent($request->getParam('evaluation'));
+
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
-        $evaluation_test = $evaluation->findmodules_evaluations_models_Evaluations_Tests($evaluation->select()->order('order ASC'));
-        $groups = $evaluation->findDependentRowset('modules_groups_models_Groups');
+        $tests_evaluation = $evaluation->findEvaluations_Tests($evaluation->select()->order('order ASC'));
+        $groups = $evaluation->findGroups();
 
-        $this->view->model = $evaluations_model;
+        $this->view->model_evaluations = $model_evaluations;
         $this->view->evaluation = $evaluation;
-        $this->view->tests = $evaluation_test;
+        $this->view->tests_evaluation = $tests_evaluation;
         $this->view->groups = $groups;
 
         history('evaluations/' . $evaluation->ident);
@@ -33,11 +34,12 @@ class Evaluations_EvaluationController extends Yeah_Action
         global $USER;
 
         $this->requirePermission('subjects', 'teach');
-        $request = $this->getRequest();
-        $evaluation_url = $request->getParam('evaluation');
 
-        $evaluations_model = Yeah_Adapter::getModel('evaluations');
-        $evaluation = $evaluations_model->findByIdent($evaluation_url);
+        $request = $this->getRequest();
+        $url_evaluation = $request->getParam('evaluation');
+
+        $model_evaluations = new Evaluations();
+        $evaluation = $model_evaluations->findByIdent($url_evaluation);
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $USER->ident) {
@@ -66,11 +68,11 @@ class Evaluations_EvaluationController extends Yeah_Action
             $this->view->evaluation = $evaluation;
         }
 
-        $evaluation_test = $evaluation->findmodules_evaluations_models_Evaluations_Tests($evaluation->select()->order('order ASC'));
+        $tests_evaluation = $evaluation->findEvaluations_Tests($evaluation->select()->order('order ASC'));
 
-        $this->view->model = $evaluations_model;
+        $this->view->model = $model_evaluations;
         $this->view->evaluation = $evaluation;
-        $this->view->tests = $evaluation_test;
+        $this->view->tests_evaluations = $tests_evaluation;
 
         history('evaluations/' . $evaluation->ident . '/edit');
         $breadcrumb = array();
