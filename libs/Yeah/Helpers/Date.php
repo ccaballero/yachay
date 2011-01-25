@@ -41,7 +41,8 @@ class Yeah_Helpers_Date
 
         // generacion del año
         $year = '<select name="' . $name . '-year" id="' . $name . '-year"><option value="-1">Año:</option>';
-        for ($k = 2009; $k >= 1900; $k--) {
+        $current_year = date("Y");
+        for ($k = $current_year + 10; $k >= $current_year - 70; $k--) {
             $selected = '';
             if ($Year == $k) {
                 $selected = 'selected="selected" ';

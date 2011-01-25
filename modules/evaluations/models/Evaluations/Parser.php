@@ -24,7 +24,7 @@ class Evaluations_Parser extends Xcel_Parser
         if (empty($variable)) {
             return false;
         }
-        $model_evaluations_tests = new Evaluations_Test();
+        $model_evaluations_tests = new Evaluations_Tests();
         $key = $model_evaluations_tests->findByKey($this->_evaluation, $variable);
         return !empty($key);
     }
@@ -33,7 +33,7 @@ class Evaluations_Parser extends Xcel_Parser
         if ($this->mode == 'TEST') {
             return new Xcel_Syn_Value(10);
         } else {
-            $model_evaluations_tests = new Evaluations_Test();
+            $model_evaluations_tests = new Evaluations_Tests();
             $test = $model_evaluations_tests->findByKey($this->_evaluation, $variable);
             $model_califications = new Califications();
             $value = $model_califications->getCalification($this->_group, $this->_user, $this->_evaluation, $test);

@@ -16,7 +16,7 @@
     </div>
 
 <?php if (count($this->groups)) { ?>
-    <table width="100%">
+    <table>
         <tr>
             <th>&nbsp;</th>
             <th><?= $this->model_groups->_mapping['label'] ?></th>

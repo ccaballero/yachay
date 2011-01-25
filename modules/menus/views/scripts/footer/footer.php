@@ -3,6 +3,7 @@
 global $FOOTER;
 global $PAGE;
 global $USER;
+global $CONFIG;
 
 $model_pages = new Pages();
 $items = $model_pages->selectByMenutype('footer');
@@ -22,4 +23,4 @@ foreach ($items as $item) {
     }
 }
 
-$FOOTER->copyright = 'Yeah!';
+$FOOTER->copyright = date("Y") . ' &copy; ' . $CONFIG->site . ' ' . $CONFIG->version;

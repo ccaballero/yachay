@@ -556,3 +556,9 @@ body {
     width: 74px;
     height: 53px;
 }
+
+#primary #califications input[type="text"] {
+    margin: 0em 0em;
+    padding: 0em 0em;
+    width: 2.0em;
+}

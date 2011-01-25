@@ -492,7 +492,7 @@ VALUES
 (1,            'Promedio',       'PP',  3,       0,             1,              100,          '(1P + 2P) / 2'),
 (1,            'Examen Final',   'EF',  4,       0,             1,              100,          null),
 (1,            '2da Instancia',  '2I',  5,       0,             1,              51,           null),
-(1,            'Observaciones',  'Obs', 6,       0,             1,              100,          'PROXIMO(MAXIMO(PP, EF, 2I), 0, 100)');
+(1,            'Observaciones',  'Obs', 6,       0,             1,              100,          'PROXIMO(MAXIMO(PP, EF, 2I) - 1, 100, 0)');
 
 INSERT INTO `evaluation_test_value`
 (`evaluation`, `test`, `label`,         `value`)

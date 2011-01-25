@@ -14,6 +14,7 @@ class Yeah_Settings_Config
 
     public $key = '';
     public $site= '';
+    public $version = '';
 
     public $email_direction = '';
     public $email_name = '';

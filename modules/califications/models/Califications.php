@@ -1,28 +1,28 @@
 <?php
 
-class modules_califications_models_Califications extends Zend_Db_Table_Abstract
+class Califications extends Yeah_Model_Table
 {
     protected $_name            = 'calification';
     protected $_dependentTables = array();
     protected $_referenceMap    = array(
         'User'                  => array(
             'columns'           => 'user',
-            'refTableClass'     => 'modules_users_models_Users',
+            'refTableClass'     => 'Users',
             'refColumns'        => 'ident',
         ),
         'Group'                 => array(
             'columns'           => 'group',
-            'refTableClass'     => 'modules_groups_models_Groups',
+            'refTableClass'     => 'Groups',
             'refColumns'        => 'ident',
         ),
         'Evaluation'            => array(
             'columns'           => 'evaluation',
-            'refTableClass'     => 'modules_evaluations_models_Evaluations',
+            'refTableClass'     => 'Evaluations',
             'refColumns'        => 'ident',
         ),
         'Test'                  => array(
             'columns'           => 'evaluation_test',
-            'refTableClass'     => 'modules_evaluations_models_Evaluation_Tests',
+            'refTableClass'     => 'Evaluation_Tests',
             'refColumns'        => 'ident',
         ),
     );
@@ -40,7 +40,7 @@ class modules_califications_models_Califications extends Zend_Db_Table_Abstract
                 return $row->calification;
             }
         } else {
-            $parser = new modules_evaluations_models_Parser($evaluation);
+            $parser = new Evaluations_Parser($evaluation);
             $parser->setGroup($group);
             $parser->setUser($user);
             $value = $parser->parse($test->formula);
