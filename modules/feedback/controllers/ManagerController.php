@@ -39,7 +39,12 @@ class Feedback_ManagerController extends Yeah_Action
         $this->view->feedback = $model_feedback->selectAll();
 
         history('feedback/manager');
-        breadcrumb();
+        $breadcrumb = array();
+        $breadcrumb['Sugerencias'] = $this->view->url(array(), 'feedback_list');
+        if ($this->acl('feedback', array('resolv', 'mark', 'delete'))) {
+            $breadcrumb['Administrador de sugerencias'] = $this->view->url(array(), 'feedback_manager');
+        }
+        breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -51,6 +56,7 @@ class Feedback_ManagerController extends Yeah_Action
         $request = $this->getRequest();
 
         $entry = new Feedback_Empty();
+        $tags = '';
 
         $model_feedback = new Feedback();
         $model_resources = new Resources();
@@ -119,6 +125,7 @@ class Feedback_ManagerController extends Yeah_Action
         }
 
         $this->view->entry = $entry;
+        $this->view->tags = $tags;
 
         history('feedback/new');
         $breadcrumb = array();

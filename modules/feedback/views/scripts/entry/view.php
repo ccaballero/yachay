@@ -1,55 +1,53 @@
-<h1>Sugerencia 
-<?php if ($this->resource->amAuthor()) { ?>
-    [<i><a href="<?= $this->url(array('entry' => $this->resource->ident), 'feedback_entry_edit') ?>">Editar</a></i>]
-<?php } ?>
-</h1>
+<?php
 
-<table width="100%">
-    <tr>
-        <td valign="top">
-            <b>Autor: </b>
-            <i>
-            <?php if ($this->acl('users', 'view')) { ?>
-                <a href="<?= $this->url(array('user' => $this->resource->getAuthor()->url), 'users_user_view') ?>"><?= $this->resource->getAuthor()->label ?></a>
-            <?php } else { ?>
-                <?= $this->resource->getAuthor()->label ?>
-            <?php } ?>
-            </i>
-        </td>
-    </tr>
-    <tr valign="top">
-        <td>
-            <b>Etiquetas: </b>
-        <?php foreach ($this->tags as $tag) { ?>
-            <a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><i><?= $tag->label ?></i></a>&nbsp;
-        <?php } ?>
-        </td>
-    </tr>
-    <tr valign="top">
-        <td>
-            <b>Valoración: </b>
-        <?php if ($this->acl('ratings', 'new')) { ?>
-            <a href="<?= $this->url(array('resource' => $this->resource->ident), 'feedback_entry_rating_down') ?>"><b>&laquo;</b></a>
-        <?php } ?>
-                <i><?= $this->resource->ratings ?> / <?= $this->resource->raters ?></i>
-        <?php if ($this->acl('ratings', 'new')) { ?>
-            <a href="<?= $this->url(array('resource' => $this->resource->ident), 'feedback_entry_rating_up') ?>"><b>&raquo;</b></a>
-        <?php } ?>
-        </td>
-    </tr>
-    <tr valign="top">
-        <td>
-            <b>Fecha: </b><i><?= $this->timestamp($this->resource->tsregister) ?></i>
-        </td>
-    </tr>
-</table>
+echo '<h1>Sugerencia';
+if ($this->resource->amAuthor()) {
+    echo '[<i><a href="' . $this->url(array('entry' => $this->resource->ident), 'feedback_entry_edit') . '">Editar</a></i>]';
+}
+echo '</h1>';
 
-<p><?= $this->entry->description ?></p>
+echo '<table width="100%">';
+echo '<tr>';
+echo '<td valign="top">';
+echo '<b>Autor: </b>';
+echo '<i>';
+if ($this->acl('users', 'view')) {
+    echo '<a href="' . $this->url(array('user' => $this->resource->getAuthor()->url), 'users_user_view') . '">' . $this->resource->getAuthor()->label . '</a>';
+} else {
+    echo $this->resource->getAuthor()->label;
+}
+echo '</i>';
+echo '</td>';
+echo '</tr>';
+echo '<tr valign="top">';
+echo '<td>';
+echo '<b>Etiquetas: </b>';
+foreach ($this->tags as $tag) {
+    echo '<a href="' . $this->url(array('tag' => $tag->url), 'tags_tag_view') . '"><i>' . $tag->label . '</i></a>&nbsp;';
+}
+echo '</td>';
+echo '</tr>';
+echo '<tr valign="top">';
+echo '<td>';
+echo '<b>Valoración: </b>';
+if ($this->acl('ratings', 'new')) {
+    echo '<a href="' . $this->url(array('resource' => $this->resource->ident), 'feedback_entry_rating_down') . '"><b>&laquo;</b></a>';
+}
+echo '<i>' . $this->resource->ratings . ' / ' . $this->resource->raters . '</i>';
+if ($this->acl('ratings', 'new')) {
+    echo '<a href="' . $this->url(array('resource' => $this->resource->ident), 'feedback_entry_rating_up') . '"><b>&raquo;</b></a>';
+}
+echo '</td>';
+echo '</tr>';
+echo '<tr valign="top"><td><b>Fecha: </b><i>' . $this->timestamp($this->resource->tsregister) . '</i></td></tr>';
+echo '</table>';
 
-<?php if ($this->acl('comments', 'view')) { ?>
-    <h2>Comentarios</h2>
-    <?= $this->partial('comments.php', array('resource' => $this->resource, 'route' => 'feedback_entry_comment')) ?>
-    <?php if ($this->acl('comments', 'new')) { ?>
-    <?= $this->partial('comment/post.php', array('resource' => $this->resource, 'route' => 'feedback_entry_comment')) ?>
-    <?php } ?>
-<?php } ?>
+echo '<p>' . str_replace("\n", "<br/>", $this->escape($this->entry->description)) . '</p>';
+
+if ($this->acl('comments', 'view')) {
+    echo '<h2>Comentarios</h2>';
+    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'notes_note_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, ));
+    if ($this->acl('comments', 'new')) {
+        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'notes_note_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, ));
+    }
+}
