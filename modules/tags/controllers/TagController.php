@@ -37,6 +37,7 @@ class Tags_TagController extends Yeah_Action
         $paginator->setPageRange(10);
 
         $this->view->tag = $tag;
+        $this->view->model_friends = new Friends();
         $this->view->resources = $paginator;
         $this->view->communities = $tag->findCommunitiesViaTags_Communities($tag->select()->order('tsregister DESC'));
         $this->view->users = $tag->findUsersViaTags_Users($tag->select()->order('tsregister DESC'));

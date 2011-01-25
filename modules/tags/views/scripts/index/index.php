@@ -1,11 +1,12 @@
-<h1><?= $this->PAGE->label ?></h1>
+<?php
 
-<?php if (count($this->tags) <> 0) { ?>
-    <?php foreach ($this->tags as $tag) { ?>
-        <a href="<?= $this->url(array('tag' => $tag['tag']->url), 'tags_tag_view') ?>">
-            <font size="<?= $tag['scale'] <= 3 ? 1 : $tag['scale'] - 3 ?>"><?= $tag['tag']->label ?></font>
-        </a>&nbsp;
-    <?php } ?>
-<?php } else { ?>
-    <p>No se encontraron etiquetas</p>
-<?php } ?>
+echo '<h1>' . $this->PAGE->label . '</h1>';
+if (count($this->tags) <> 0) {
+    foreach ($this->tags as $tag) {
+        echo '<a href="' . $this->url(array('tag' => $tag['tag']->url), 'tags_tag_view') . '">';
+        echo '<font size="' . $tag['scale'] <= 3 ? 1 : $tag['scale'] - 3 . '">' . $tag['tag']->label . '</font>';
+        echo '</a>&nbsp;';
+    }
+} else {
+    echo '<p>No se encontraron etiquetas</p>';
+}

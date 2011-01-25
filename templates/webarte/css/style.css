@@ -562,3 +562,25 @@ body {
     padding: 0em 0em;
     width: 2.0em;
 }
+
+#primary #tagcloud {
+    line-height: 2.8em;
+}
+
+#primary #tagcloud .tag {
+    border: 3px solid #6D852A;
+    background-color: #DDE6C5;
+    padding: 0em 0.2em;
+    margin: 0em 0.25em;
+}
+
+#primary .tag-10 { font-size: 250%; }
+#primary .tag-9  { font-size: 220%; }
+#primary .tag-8  { font-size: 180%; }
+#primary .tag-7  { font-size: 150%; }
+#primary .tag-6  { font-size: 135%; }
+#primary .tag-5  { font-size: 110%; }
+#primary .tag-4  { font-size: 90%; }
+#primary .tag-3  { font-size: 75%; }
+#primary .tag-2  { font-size: 60%; }
+#primary .tag-1  { font-size: 50%; }
