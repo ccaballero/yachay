@@ -1,21 +1,19 @@
 * {
     font-family: arial,Georgia,"Times New Roman",Times,serif;
     font-size: 98%;
-    color: #666666;
     margin: 0% 0%;
     padding: 0% 0%;
 }
 
 h1 {
     font-size: 2.0em;
-    border-bottom: 2pt solid #6D852A;
+    border-bottom: 3pt solid;
     margin-bottom: 0.3em;
-    color: #6D852A;
 }
 
 h2 {
     font-size: 1.2em;
-    border-bottom: 1pt solid #6D852A;
+    border-bottom: 2pt solid;
     margin-bottom: 0.2em;
 }
 
@@ -28,7 +26,6 @@ h3 {
 
 a {
     text-decoration: none;
-    color: #6D852A;
     cursor: pointer;
 }
 
@@ -37,18 +34,11 @@ a:hover {
 }
 
 a:focus {
-    color: #6D852A;
-    background-color: #DDE6C5;
-    border: 0px solid #FFFFFF;
+    outline: none;
 }
 
 input, select, option, textarea {
     font-size: 0.9em;
-    padding: 0em 0.3em;
-}
-
-select, option {
-    padding: 0em 0.4em 0em 0em;
 }
 
 img {
@@ -58,14 +48,13 @@ img {
 body {
     margin: 0% auto;
     width: 960px;
-    border-left: 2pt solid #6D852A;
-    border-right: 2pt solid #6D852A;
+    border-left: 2pt solid;
+    border-right: 2pt solid;
 }
 
 #header {
-    border-bottom: 2pt solid #6D852A;
+    border-bottom: 2pt solid;
     height: 5.0em;
-    background-color: #DDE6C5;
 }
 
 #content {
@@ -78,10 +67,9 @@ body {
 }
 
 #footer {
-    border-top: 2pt solid #6D852A;
+    border-top: 2pt solid;
     height: 3.0em;
     text-align: center;
-    background-color: #DDE6C5;
 }
 
 #primary {
@@ -104,14 +92,8 @@ body {
     float: right;
 }
 
-#header>.tools .first {
-    padding: 0 1.2em 0.1em 1.2em;
-    background-color: #6D852A;
-    color: #DDE6C5;
-    font-weight: bold;
-}
-
-#header a, #footer a {
+#header a, #footer a, #header>.tools .first {
+    padding: 0.3em 0.5em;
     font-weight: bold;
 }
 
@@ -130,12 +112,11 @@ body {
 }
 
 #header ul.menu, #footer ul.menu {
-    padding: 0px 6px 0px 6px;
     list-style-type: none;
 }
 
 #header ul.menu>li, #footer ul.menu>li {
-    padding: 0px 3px 0px 3px;
+    padding: 0px 0px;
     display: inline;
 }
 
@@ -190,7 +171,7 @@ body {
 }
 
 #secondary .widget img {
-    border: 2px solid #6D852A;
+    border: 2px solid;
     padding: 1px;
     margin: 0px 2px 0px 2px;
 }
@@ -207,8 +188,7 @@ body {
 
 #primary #messages .message {
     display: block;
-    border: 1px dashed #6D852A;
-    background-color: #DDE6C5;
+    border: 1px dashed;
     padding: 0em 0.5em 0em 0.5em;
     margin-bottom: 0.3em;
 }
@@ -236,17 +216,12 @@ body {
 
 #primary #main table {
     width: 100%;
-    border: 2px solid #6D852A;
+    border: 2px solid;
     padding: 0px;
 }
 
 #primary #main th {
-    background-color: #6D852A;
-    color: #DDE6C5;
-}
-
-#primary #main tr.odd {
-    background-color: #DDE6C5;
+    padding: 0.1em 0.1em;
 }
 
 #primary #main tr td {
@@ -269,11 +244,15 @@ body {
     padding-bottom: 0.2em;
 }
 
-#primary .mark {
+#primary .mark, #primary .tag {
     font-weight: bold;
     text-transform: uppercase;
-    border: 2px solid #DDE6C5;
-    padding: 0em 0.3em;
+    padding: 0.12em 0.36em;
+    margin-right: 0.45em;
+}
+
+#primary .tag {
+    border: 1px solid;
 }
 
 #primary form .form {
@@ -293,7 +272,8 @@ body {
 }
 
 #primary form textarea {
-    height: 10.0em;
+    width: 34.5em;
+    height: 16.0em;
 }
 
 #primary form .submit {
@@ -320,14 +300,14 @@ body {
     text-align: center;
 }
 #primary .pagination a, #primary .pagination span {
-    border: 1px dashed #DDE6C5;
+    border: 1px dashed;
     padding: 0em 0.4em;
     margin: 0em 0.1em;
 }
 
 #primary .pagination span {
     font-weight: bold;
-    background-color: #DDE6C5;
+    border-style: solid;
 }
 
 #primary .resource {
@@ -341,7 +321,6 @@ body {
     float: right;
     top: 0em;
     right: 0em;
-    background-color: #DDE6C5;
     font-size: 0.8em;
     font-weight: bold;
     padding: 0.1em 0.5em 0.2em 0.5em;
@@ -350,7 +329,7 @@ body {
 
 #primary .resource .recipient {
     position: absolute;
-    top: 0em;
+    top: 0.18em;
     left: 0.5em;
     font-size: 0.8em;
     font-weight: bold;
@@ -364,7 +343,7 @@ body {
 }
 
 #primary .resource .message {
-    border: 1px solid #6D852A;
+    border: 1px solid;
     padding: 1.2em 0.5em 0.8em 60px;
     min-height: 50px;
 }
@@ -401,7 +380,6 @@ body {
     position: absolute;
     bottom: 0em;
     right: 0em;
-    background-color: #DDE6C5;
     font-size: 0.8em;
     padding: 0.1em 0.5em 0.2em 0.5em;
 }
@@ -417,7 +395,7 @@ body {
 
 #primary #block .box {
     position: relative;
-    border: 2px solid #6D852A;
+    border: 2px solid;
     display: inline;
     float: left;
     width: 200px;
@@ -454,7 +432,7 @@ body {
 
 #primary #block .import, #primary #block .member {
     position: relative;
-    border: 2px solid #6D852A;
+    border: 2px solid;
     display: inline;
     float: left;
     width: 325px;
@@ -470,8 +448,6 @@ body {
 
 #primary #block .import .title, #primary #block .member .title {
     font-weight: bold;
-    background-color: #6D852A;
-    color: #DDE6C5;
     display: block;
     padding: 0.2em 0.1em 0.4em 1.8em;
     margin-bottom: 0.1em;
@@ -535,7 +511,7 @@ body {
 
 #primary .message {
     padding: 0.75em;
-    border: 2px dotted #DDE6C5;
+    border: 2px dotted;
     margin-bottom: 1.0em;
 }
 
@@ -550,7 +526,7 @@ body {
 #primary #list .box {
     float: left;
     display: inline;
-    border: 2px solid #6D852A;
+    border: 2px solid;
     margin: 0 0.5em 0 0;
     padding: 0.2em 0 0 0.2em;
     width: 74px;
@@ -568,8 +544,7 @@ body {
 }
 
 #primary #tagcloud .tag {
-    border: 3px solid #6D852A;
-    background-color: #DDE6C5;
+    border: 3px solid;
     padding: 0em 0.2em;
     margin: 0em 0.25em;
 }

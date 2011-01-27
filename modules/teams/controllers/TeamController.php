@@ -118,6 +118,9 @@ class Teams_TeamController extends Yeah_Action
             }
         }
 
+        $this->view->gestion = $gestion;
+        $this->view->subject = $subject;
+        $this->view->group = $group;
         $this->view->team = $team;
         
         history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/' . $team->url . '/edit');

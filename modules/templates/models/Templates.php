@@ -11,7 +11,7 @@ class Templates extends Yeah_Model_Table
         'label'                 => 'Tema',
         'description'           => 'Descripción',
         'doctype'               => 'Tipo de HTML',
-        'properties'            => 'Propiedades',
+        'css_properties'        => 'Propiedades',
     );
 
     // Find uniques indexes

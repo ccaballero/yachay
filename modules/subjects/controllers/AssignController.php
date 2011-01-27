@@ -245,6 +245,7 @@ class Subjects_AssignController extends Yeah_Action
         $model_subjects = new Subjects();
         $model_gestions = new Gestions();
         $gestion = $model_gestions->findByActive();
+        $this->view->gestion = $gestion;
 
         $request = $this->getRequest();
 
@@ -421,9 +422,11 @@ class Subjects_AssignController extends Yeah_Action
         $model_subjects = new Subjects();
         $model_gestions = new Gestions();
         $gestion = $model_gestions->findByActive();
+        $this->view->gestion = $gestion;
 
         $subject_url = $request->getParam('subject');
         $subject = $model_subjects->findByUrl($gestion->ident, $subject_url);
+        $this->view->subject = $subject;
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);

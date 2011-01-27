@@ -29,7 +29,7 @@ class Settings_IndexController extends Yeah_Action
                 $user->password = md5($CONFIG->key . $password1);
                 $user->save();
 
-                $session->messages->addMessage("Tu has cambiado tus preferencias correctamente");
+                $session->messages->addMessage('Tu has cambiado tus preferencias correctamente');
                 $session->url = $user->url;
                 $this->_redirect($request->getParam('return'));
             } else {

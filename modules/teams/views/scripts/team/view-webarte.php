@@ -12,6 +12,7 @@
 </h1>
 
 <p>
+    <span class="mark">Dictada por:</span> <?= $this->group->getTeacher()->getFullName() ?><br />
     <span class="mark">Grupo:</span> <?= $this->group->label ?><br />
     <span class="mark">Materia:</span> <?= $this->subject->label ?><br />
     <span class="mark">Gestion:</span> <?= $this->gestion->label ?>

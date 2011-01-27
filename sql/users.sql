@@ -29,7 +29,7 @@ CREATE TABLE `user` (
     `sociability`       int unsigned                                                NOT NULL DEFAULT 0,
     `popularity`        int unsigned                                                NOT NULL DEFAULT 0,
     `knowledge`         int unsigned                                                NOT NULL DEFAULT 0,
-    `theme`             varchar(64)                                                 NOT NULL DEFAULT 'minimal',
+    `template`          varchar(64)                                                 NOT NULL DEFAULT 'minimal',
     `tsregister`        int unsigned                                                NOT NULL,
     `tslastlogin`       int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`ident`),

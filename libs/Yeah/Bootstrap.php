@@ -92,12 +92,15 @@ class Yeah_Bootstrap
         // Set of theme
         global $TEMPLATE;
         $model_templates = new Templates();
-        $template = $model_templates->findByLabel($CONFIG->template);
+        $template = $model_templates->findByLabel($USER->template);
 
-        $TEMPLATE = json_decode($template->properties, false);
-        $TEMPLATE->name = $CONFIG->template;
+        $TEMPLATE = new StdClass();
+        $TEMPLATE->label = $template->label;
+        $TEMPLATE->parent = $template->parent;
         $TEMPLATE->doctype = $template->doctype;
-        $TEMPLATE->htmlbase = $CONFIG->wwwroot . 'templates/' . $TEMPLATE->name . '/';
+        $TEMPLATE->description = $template->description;
+        $TEMPLATE->css_properties = $template->css_properties;
+        $TEMPLATE->htmlbase = $CONFIG->wwwroot . 'templates/' . $TEMPLATE->label . '/';
 
         // Set for localization
         setlocale(LC_CTYPE, $CONFIG->locale);
@@ -170,7 +173,7 @@ class Yeah_Bootstrap
         Zend_Controller_Action_HelperBroker::addHelper($renderer);
 
         $layoutoptions = array(
-            'layout'     => $TEMPLATE->name,
+            'layout'     => $TEMPLATE->label,
             'layoutPath' => $CONFIG->dirroot . 'templates/',
             'viewSuffix' => 'php',
         );

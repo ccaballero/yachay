@@ -4,7 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <meta http-equiv="Content-Language" content="es-BO" />
-        <?= $this->headLink()->appendStylesheet($this->TEMPLATE->htmlbase . 'css/style.css'); ?>
+        <link href="<?= $this->TEMPLATE->htmlbase . 'css/style.css' ?>" media="screen" rel="stylesheet" type="text/css" />
+        <link href="<?= $this->CONFIG->wwwroot . 'templates/css/properties.css' ?>" media="screen" rel="stylesheet" type="text/css" />
         <link rel="icon" type="image/x-icon" href="<?= $this->CONFIG->media_base ?>favicon.ico" />
         <title><?= $this->TITLE->toString() ?></title>
     </head>

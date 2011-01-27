@@ -516,6 +516,9 @@ class Groups_AssignController extends Yeah_Action
 
         context('group', $group);
 
+        $this->view->subject = $subject;
+        $this->view->group = $group;
+
         if ($request->isPost()) {
             $extension = $request->getParam('extension');
             switch ($extension) {

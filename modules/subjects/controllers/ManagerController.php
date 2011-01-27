@@ -56,6 +56,10 @@ class Subjects_ManagerController extends Yeah_Action
         $this->view->areas = $model_areas->selectAll();
         $this->view->checks = array();
 
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByActive();
+        $this->view->gestion = $gestion;
+
         $this->view->subject = new Subjects_Empty();
 
         $request = $this->getRequest();
@@ -76,8 +80,6 @@ class Subjects_ManagerController extends Yeah_Action
                 $checks = array();
             }
 
-            $model_gestions = new Gestions();
-            $gestion = $model_gestions->findByActive();
             $subject->gestion = $gestion->ident;
 
             if ($subject->isValid()) {
@@ -188,6 +190,10 @@ class Subjects_ManagerController extends Yeah_Action
         $this->requirePermission('subjects', 'import');
         $this->requirePermission('subjects', array('new', 'edit'));
 
+        $model_gestions = new Gestions();
+        $gestion = $model_gestions->findByActive();
+        $this->view->gestion = $gestion;
+
         $options = array();
         if ($this->acl('subjects', 'new')) {
             $options['CREATE_NOEDIT'] = 'Solo crear materias nuevas, e ignorar las restantes.';
@@ -208,9 +214,6 @@ class Subjects_ManagerController extends Yeah_Action
             $model_subjects = new Subjects();
             $model_users = new Users();
             $me = $model_users->findByIdent($USER->ident);
-
-            $model_gestions = new Gestions();
-            $gestion = $model_gestions->findByActive();
 
             $selections = $request->getParam('subjects');
             if (empty($selections)) {

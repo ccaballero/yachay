@@ -1,4 +1,4 @@
-<h1>Grupo: <?= $this->group->label ?>
+<h1>Grupo <?= $this->group->label ?>
 <strong class="task">
 <?php if ($this->group->status == 'active') { ?>
     <img src="<?= $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Grupo activo" title="Grupo activo" />

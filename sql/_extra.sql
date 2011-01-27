@@ -188,7 +188,7 @@ VALUES
 (103, 3), (104, 3), (105, 3), (106, 3), (107, 3),
 (103, 4), (104, 4), (105, 4), (106, 4), (107, 4),
 /*====================================================================================================================*/
-/* Inserciones extra para el modulo THEMES                                                                            */
+/* Inserciones extra para el modulo TEMPLATES                                                                         */
 /*====================================================================================================================*/
 (108, 1), (109, 1),
 (108, 2), (109, 2),
@@ -213,8 +213,8 @@ UPDATE `page` SET `menutype` = 'footer', `menuorder` = 6 WHERE `ident` = 11;
 UPDATE `page` SET `menutype` = 'footer', `menuorder` = 2 WHERE `ident` = 13;
 UPDATE `page` SET `menutype` = 'footer', `menuorder` = 7 WHERE `ident` = 80;
 UPDATE `page` SET `menutype` = 'footer', `menuorder` = 1 WHERE `ident` = 100;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 8 WHERE `ident` = 103;
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 9 WHERE `ident` = 108;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 9 WHERE `ident` = 103;
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 8 WHERE `ident` = 108;
 /*====================================================================================================================*/
 /*====================================================================================================================*/
 
@@ -245,6 +245,8 @@ VALUES
 ( 66, 1, 3),
 ( 72, 1, 3),
 ( 74, 1, 3),
+( 76, 1, 3),
+( 77, 1, 3),
 ( 78, 1, 3),
 ( 80, 1, 3),
 ( 81, 1, 3),
@@ -271,6 +273,8 @@ VALUES
 ( 66, 4, 1),
 ( 72, 4, 1),
 ( 74, 4, 1),
+( 76, 4, 1),
+( 77, 4, 1),
 ( 78, 4, 1),
 ( 80, 4, 1),
 ( 81, 4, 1),
@@ -470,8 +474,8 @@ VALUES
 ( 5,68), ( 5,69),
 ( 4,68), ( 4,69),
 ( 3,68), ( 3,69),
-( 2,68), ( 2,69),
-( 1,68);
+( 2,68), ( 2,69);
+
 
 INSERT INTO `user`
 (`role`, `label`,       `url`,         `password`,                                             `tsregister`,     `status`,   `surname`,          `name`)
@@ -501,7 +505,7 @@ VALUES
 (1,            6,      'Aprobado',      100);
 
 INSERT INTO `template`
-(`label`,     `description`,                                                                                      `doctype`,          `properties`,  `tsregister`)
+(`label`,     `description`,                                                                                      `doctype`,          `tsregister`,       `css_properties`)
 VALUES
-('minimal',   'Plantilla basica diseñada especialmente para navegadores antiguos o de compatibilidades dudosas',  'XHTML_BASIC1',     '{}',          UNIX_TIMESTAMP()),
-('webarte',   'Plantilla simple que utiliza hoja de estilos y no javascript',                                     'XHTML1_STRICT',    '{}',          UNIX_TIMESTAMP());
+('minimal',   'Plantilla basica diseñada especialmente para navegadores antiguos o de compatibilidades dudosas',  'XHTML_BASIC1',     UNIX_TIMESTAMP(),   '{}'),
+('webarte',   'Plantilla simple que utiliza hoja de estilos y no javascript',                                     'XHTML1_STRICT',    UNIX_TIMESTAMP(),   '{"color1":"#6D852A","color2":"#DDE6C5","color3":"#666666","color4":"#FFFFFF"}');

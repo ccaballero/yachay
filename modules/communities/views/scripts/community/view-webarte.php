@@ -16,7 +16,7 @@
 <?php if ($this->acl('communities', 'enter')) { ?>
     <a href="<?= $this->url(array('community' => $this->community->url), 'communities_community_assign') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/group_go.png' ?>" alt="Ver miembros" title="Ver miembros" /></a>
 <?php } ?>
-<?php if ($this->community->amModerator()) { ?>
+<?php if ($this->community->amModerator() && $this->community->mode == 'close') { ?>
     <a href="<?= $this->url(array('community' => $this->community->url), 'communities_community_petition') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/group_key.png' ?>" alt="Ver peticiones" title="Ver peticiones" /></a>
 <?php } ?>
 </strong>
@@ -54,7 +54,7 @@
     <p>
         <img src="<?= $this->TEMPLATE->htmlbase . 'images/tag.png' ?>" alt="Etiquetas" title="Etiquetas" />
     <?php foreach ($tags as $tag) { ?>
-        <span class="mark"><a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><?= $tag->label ?></a></span>
+        <span class="tag"><a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><?= $tag->label ?></a></span>
     <?php } ?>
     </p>
 <?php } ?>

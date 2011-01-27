@@ -13,6 +13,7 @@
 <?php } ?>
 </strong>
 </h1>
+<?php if (!empty($this->gestion)) { ?><p><span class="mark">Gestion: </span><?= $this->gestion->label ?></p><?php } ?>
 
 <p><?= $this->subject->description ?></p>
 

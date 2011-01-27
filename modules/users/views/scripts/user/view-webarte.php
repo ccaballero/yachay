@@ -31,7 +31,7 @@
     <p>
         <img src="<?= $this->TEMPLATE->htmlbase . 'images/tag.png' ?>" alt="Etiquetas" title="Etiquetas" />
     <?php foreach ($tags as $tag) { ?>
-        <span class="mark"><a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><?= $tag->label ?></a></span>
+        <span class="tag"><a href="<?= $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><?= $tag->label ?></a></span>
     <?php } ?>
     </p>
 <?php } ?>

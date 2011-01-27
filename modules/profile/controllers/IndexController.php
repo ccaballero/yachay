@@ -228,7 +228,7 @@ class Profile_IndexController extends Yeah_Action
                     }
                 }
 
-                $session->messages->addMessage("Tu has modificado tu perfil correctamente");
+                $session->messages->addMessage('Tu has modificado tu perfil correctamente');
                 $session->url = $user->url;
                 $this->_redirect($request->getParam('return'));
             } else {

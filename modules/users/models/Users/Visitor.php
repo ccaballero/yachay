@@ -6,6 +6,8 @@ class Users_Visitor
     public $role = 1;
     public $_acl = array();
 
+    public $template = '';
+
     public function Users_Visitor() {
         $model_roles = new Roles();
         $visitor = $model_roles->findByIdent($this->role);
@@ -14,6 +16,9 @@ class Users_Visitor
         foreach ($privileges as $privilege) {
             $this->_acl[] = $privilege->module . '_' . $privilege->privilege;
         }
+
+        global $CONFIG;
+        $this->template = $CONFIG->template;
     }
 
     public function hasPermission($module, $privilege) {

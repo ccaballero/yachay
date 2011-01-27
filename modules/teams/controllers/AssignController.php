@@ -65,6 +65,7 @@ class Teams_AssignController extends Yeah_Action
             $this->_redirect($request->getParam('return'));
         }
 
+        $this->view->gestion = $gestion;
         $this->view->subject = $subject;
         $this->view->group = $group;
         $this->view->members = $group_members2;

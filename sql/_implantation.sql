@@ -482,3 +482,8 @@ VALUES
 (2, 3);
 
 UPDATE `user` SET `password` = md5(CONCAT('KQ01805XG4GLTZHIFX19K0GR3G0K537F','asdf'));
+UPDATE `user` SET `template` = 'webarte';
+
+INSERT INTO `template_user`(`template`, `user`, `css_properties`) VALUES (2, 1, '{"color1":"#FFFFFF","color2":"#252525","color3":"#FFFFFF","color4":"#000000"}');
+INSERT INTO `template_user`(`template`, `user`, `css_properties`) VALUES (2, 2, '{"color1":"#3B5998","color2":"#627AAD","color3":"#333333","color4":"#FFFFFF"}');
+INSERT INTO `template_user`(`template`, `user`, `css_properties`) VALUES (2, 3, '{"color1":"#AABBCC","color2":"#123123","color3":"#AC3467","color4":"#FFFFFF"}');

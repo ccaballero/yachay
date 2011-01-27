@@ -83,6 +83,8 @@ class Teams_ManagerController extends Yeah_Action
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
+        $this->view->gestion = $gestion;
+        $this->view->subject = $subject;
         $this->view->group = $group;
         $this->view->team = new Teams_Empty();
 

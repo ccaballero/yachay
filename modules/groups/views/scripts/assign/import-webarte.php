@@ -1,4 +1,10 @@
-<h1><?= $this->PAGE->label ?></h1>
+<h1>Importar miembros: Grupo <?= $this->group->label ?></h1>
+<p>
+    <span class="mark">Dictada por:</span> <?= $this->group->getTeacher()->getFullName() ?><br />
+    <span class="mark">Método de evaluación:</span> <?= $this->group->getEvaluation()->label ?><br />
+    <span class="mark">Materia:</span> <?= $this->subject->label ?><br />
+    <span class="mark">Gestion:</span> <?= $this->subject->getGestion()->label ?>
+</p>
 
 <?php
 if ($this->step == 1) {

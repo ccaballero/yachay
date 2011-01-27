@@ -76,7 +76,7 @@ class Subjects_SubjectController extends Yeah_Action
         $paginator->setPageRange(10);
 
         $this->view->historial = $historial;
-        $this->view->gestion = $gestion->url;
+        $this->view->gestion = $gestion;
         $this->view->areas = $list_areas;
         $this->view->subject = $subject;
         $this->view->groups = $list_groups;

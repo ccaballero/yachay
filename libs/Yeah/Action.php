@@ -260,9 +260,9 @@ abstract class Yeah_Action extends Zend_Controller_Action
             $widget_page = $model_widgets_pages->getPosition($PAGE->ident, $widget->ident);
             $position = $widget_page->position;
 
-            $script = "{$CONFIG->dirroot}modules/{$widget->module}/views/scripts/widgets/{$widget->script}-{$TEMPLATE->name}.php";
+            $script = "{$CONFIG->dirroot}modules/{$widget->module}/views/scripts/widgets/{$widget->script}-{$TEMPLATE->label}.php";
             if (file_exists($script)) {
-                $to_render = "{$widget->script}-{$TEMPLATE->name}.php";
+                $to_render = "{$widget->script}-{$TEMPLATE->label}.php";
             } else {
                 $to_render = "{$widget->script}.php";
             }
@@ -301,9 +301,9 @@ abstract class Yeah_Action extends Zend_Controller_Action
         $this->view->FOOTER = $FOOTER;
 
         // rendering customized theme
-        $script = $this->view->getScriptPath($PAGE->controller) . '/' . $PAGE->action . '-' . $TEMPLATE->name . '.php';
+        $script = $this->view->getScriptPath($PAGE->controller) . '/' . $PAGE->action . '-' . $TEMPLATE->label . '.php';
         if (file_exists($script)) {
-            $this->render($PAGE->action . '-' . $TEMPLATE->name);
+            $this->render($PAGE->action . '-' . $TEMPLATE->label);
         }
     }
 }

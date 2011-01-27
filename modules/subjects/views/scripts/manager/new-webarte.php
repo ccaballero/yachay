@@ -1,4 +1,5 @@
 <h1><?= $this->PAGE->label ?></h1>
+<?php if (!empty($this->gestion)) { ?><p><span class="mark">Gestion: </span><?= $this->gestion->label ?></p><?php } ?>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />

@@ -1,6 +1,11 @@
 <h1><?= $this->evaluation->label ?>
 <strong class="task">
-<?php if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) { ?>
+<?php if ($this->evaluation->useful) { ?>
+    <img src="<?= $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Evaluación usable" title="Evaluación usable" />
+<?php } else { ?>
+    <img src="<?= $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Evaluación inconclusa" title="Evaluación inconclusa" />
+<?php } ?>
+<?php if ($this->evaluation->author == $this->USER->ident) { ?>
     <a href="<?= $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_edit') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
 <?php } ?>
 </strong>
@@ -9,10 +14,9 @@
 <p>
     <span class="mark">Creada por:</span> <?= $this->evaluation->getAuthor()->getFullName() ?><br />
     <span class="mark">Accesibilidad:</span> <?= $this->access($this->evaluation->access) ?><br />
-    <span class="mark">Usable:</span> <?= $this->boolean($this->evaluation->useful) ?><br />
 </p>
 
-<p><?= $this->evaluation->description ?></p>
+<p class="message"><?= $this->evaluation->description ?></p>
 
 <h2>Calificaciones previstas
 <strong class="task">

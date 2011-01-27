@@ -1,0 +1,122 @@
+#header, #footer {
+    background-color: #3B5998;
+}
+
+#header, #content h1, #content h2 {
+    border-bottom-color: #3B5998;
+}
+
+#footer {
+    border-top-color: #3B5998;
+}
+
+body {
+    border-left-color: #3B5998;
+    border-right-color: #3B5998;
+}
+
+#content h1, #content h2 {
+    color: #3B5998;
+}
+
+#header *, #footer * {
+    color: #FFFFFF;
+}
+
+#header > .tools .first {
+    background-color: #627AAD;
+    color: #FFFFFF;
+}
+
+#header a:focus, #footer a:focus {
+    background-color: #627AAD;
+}
+
+#content a:focus img {
+    background-color: #627AAD;
+}
+
+#primary #messages .message {
+    background-color: #FEFECC;
+    border-color: #999900;
+}
+
+#content * {
+    color: #333333;
+}
+
+#content #primary a {
+    color: #3B5998;
+}
+
+#content #primary a:focus, #content #secondary a:focus {
+    background-color: #627AAD;
+    color: #FFFFFF;
+}
+
+#primary .resource .message {
+    border-color: #E2E2E2;
+}
+
+#primary .resource .label {
+    background-color: #627AAD;
+    color: #FFFFFF;
+}
+
+#primary .resource .timestamp {
+    background-color: #E2E2E2;
+}
+
+#secondary .widget img {
+    border-color: #E2E2E2;
+}
+
+#primary #main table {
+    border-color: #E2E2E2;
+}
+
+#primary #main th {
+    background-color: #3B5998;
+    color: #FFFFFF;
+}
+
+#primary #main tr.odd {
+    background-color: #E2E2E2;
+}
+
+#primary #main tr.even {
+    background-color: #FFFFFF;
+}
+
+#primary .mark {
+    background-color: #627AAD;
+    color: #FFFFFF;
+}
+
+#primary .tag {
+    border-color: #3B5998;
+    background-color: #E2E2E2;
+}
+
+#primary .pagination span {
+    background-color: #3B5998;
+    color: #FFFFFF;
+    border-color: #3B5998;
+}
+
+#primary #block .box {
+    border-color: #E2E2E2;
+}
+
+#primary #block .import, #primary #block .member {
+    border-color: #E2E2E2;
+}
+
+#primary #block .import .title, #primary #block .member .title {
+    background-color: #627AAD;
+    color: #FFFFFF;
+}
+
+#primary .message {
+    border-color: #E2E2E2;
+}

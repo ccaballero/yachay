@@ -1,5 +1,4 @@
 <h1>Miembros: Grupo <?= $this->group->label ?></h1>
-
 <p>
     <span class="mark">Dictada por:</span> <?= $this->group->getTeacher()->getFullName() ?><br />
     <span class="mark">Método de evaluación:</span> <?= $this->group->getEvaluation()->label ?><br />
