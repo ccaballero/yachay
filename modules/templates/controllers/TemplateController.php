@@ -44,6 +44,13 @@ class Templates_TemplateController extends Yeah_Action
 
         $this->view->template = $template;
 
+        $user_template = $model_templates_users->findByTemplateAndUser($template->ident, $USER->ident);
+        if (empty($user_template)) {
+            $user_template = $template;
+        }
+
+        $this->view->properties = json_decode($user_template->css_properties, true);
+
         history('templates/view/' . $template->label);
         $breadcrumb = array();
         $breadcrumb['Temas'] = $this->view->url(array(), 'templates_list');

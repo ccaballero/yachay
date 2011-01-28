@@ -1,122 +1,126 @@
+body {
+    background-color: <% background %>
+}
+
 #header, #footer {
-    background-color: #3B5998;
+    background-color: <% background-headers %>;
 }
 
 #header, #content h1, #content h2 {
-    border-bottom-color: #3B5998;
+    border-bottom-color: <% background-headers %>;
 }
 
 #footer {
-    border-top-color: #3B5998;
+    border-top-color: <% background-headers %>;
 }
 
 body {
-    border-left-color: #3B5998;
-    border-right-color: #3B5998;
+    border-left-color: <% background-headers %>;
+    border-right-color: <% background-headers %>;
 }
 
 #content h1, #content h2 {
-    color: #3B5998;
+    color: <% background-headers %>;
 }
 
 #header *, #footer * {
-    color: #FFFFFF;
+    color: <% color-headers %>;
 }
 
 #header > .tools .first {
-    background-color: #627AAD;
-    color: #FFFFFF;
+    background-color: <% background-headers2 %>;
+    color: <% color-headers %>;
 }
 
 #header a:focus, #footer a:focus {
-    background-color: #627AAD;
+    background-color: <% background-headers2 %>;
 }
 
 #content a:focus img {
-    background-color: #627AAD;
+    background-color: <% background-headers2 %>;
 }
 
 #primary #messages .message {
-    background-color: #FEFECC;
-    border-color: #999900;
+    background-color: <% background-messages %>;
+    border-color: <% color-borders %>;
 }
 
 #content * {
-    color: #333333;
+    color: <% color-letters %>;
 }
 
 #content #primary a {
-    color: #3B5998;
+    color: <% background-headers %>;
 }
 
 #content #primary a:focus, #content #secondary a:focus {
-    background-color: #627AAD;
-    color: #FFFFFF;
+    background-color: <% background-headers2 %>;
+    color: <% color-headers %>;
 }
 
 #primary .resource .message {
-    border-color: #E2E2E2;
+    border-color: <% color-borders %>;
 }
 
 #primary .resource .label {
-    background-color: #627AAD;
-    color: #FFFFFF;
+    background-color: <% background-headers2 %>;
+    color: <% color-headers %>;
 }
 
 #primary .resource .timestamp {
-    background-color: #E2E2E2;
+    background-color: <% color-borders %>;
 }
 
 #secondary .widget img {
-    border-color: #E2E2E2;
+    border-color: <% color-borders %>;
 }
 
 #primary #main table {
-    border-color: #E2E2E2;
+    border-color: <% color-borders %>;
 }
 
 #primary #main th {
-    background-color: #3B5998;
-    color: #FFFFFF;
+    background-color: <% background-headers %>;
+    color: <% color-headers %>;
 }
 
 #primary #main tr.odd {
-    background-color: #E2E2E2;
+    background-color: <% color-borders %>;
 }
 
 #primary #main tr.even {
-    background-color: #FFFFFF;
+    background-color: <% color-headers %>;
 }
 
 #primary .mark {
-    background-color: #627AAD;
-    color: #FFFFFF;
+    background-color: <% background-headers2 %>;
+    color: <% color-headers %>;
 }
 
 #primary .tag {
-    border-color: #3B5998;
-    background-color: #E2E2E2;
+    border-color: <% background-headers %>;
+    background-color: <% color-borders %>;
 }
 
 #primary .pagination span {
-    background-color: #3B5998;
-    color: #FFFFFF;
-    border-color: #3B5998;
+    background-color: <% background-headers %>;
+    color: <% color-headers %>;
+    border-color: <% background-headers %>;
 }
 
 #primary #block .box {
-    border-color: #E2E2E2;
+    border-color: <% color-borders %>;
 }
 
 #primary #block .import, #primary #block .member {
-    border-color: #E2E2E2;
+    border-color: <% color-borders %>;
 }
 
 #primary #block .import .title, #primary #block .member .title {
-    background-color: #627AAD;
-    color: #FFFFFF;
+    background-color: <% background-headers2 %>;
+    color: <% color-headers %>;
 }
 
 #primary .message {
-    border-color: #E2E2E2;
+    border-color: <% color-borders %>;
 }

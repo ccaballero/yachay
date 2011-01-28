@@ -508,4 +508,4 @@ INSERT INTO `template`
 (`label`,     `description`,                                                                                      `doctype`,          `tsregister`,       `css_properties`)
 VALUES
 ('minimal',   'Plantilla basica diseñada especialmente para navegadores antiguos o de compatibilidades dudosas',  'XHTML_BASIC1',     UNIX_TIMESTAMP(),   '{}'),
-('webarte',   'Plantilla simple que utiliza hoja de estilos y no javascript',                                     'XHTML1_STRICT',    UNIX_TIMESTAMP(),   '{"color1":"#6D852A","color2":"#DDE6C5","color3":"#666666","color4":"#FFFFFF"}');
+('webarte',   'Plantilla simple que utiliza hoja de estilos y no javascript',                                     'XHTML1_STRICT',    UNIX_TIMESTAMP(),   '{"background":"#FFFFFF", "background-headers":"#3B5998","background-headers2":"#627AAD","background-messages":"#FEFFDD","color-headers":"#FFFFFF","color-borders":"#E2E2E2","color-letters":"#333333"}');
