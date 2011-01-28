@@ -14,6 +14,7 @@ cat users.sql >> todo.sql
 cat profile.sql >> todo.sql
 cat settings.sql >> todo.sql
 cat friends.sql >> todo.sql
+cat invitations.sql >> todo.sql
 cat gestions.sql >> todo.sql
 cat subjects.sql >> todo.sql
 cat areas.sql >> todo.sql

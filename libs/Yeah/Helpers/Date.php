@@ -9,7 +9,7 @@ class Yeah_Helpers_Date
         list($Year, $Month, $Day) = @split('[/.-]', $value);
 
         // generacion del dia
-        $day = '<select name="' . $name . '-day" id="' . $name . '-day"><option value="-1">Día:</option>';
+        $day = '<select name="' . $name . '-day" id="' . $name . '-day"><option value="-1">Día: </option>';
         for ($i = 1; $i <= 31; $i++) {
             $selected = '';
             if ($Day == $i) {
@@ -25,7 +25,7 @@ class Yeah_Helpers_Date
 
         // generacion del mes
         $months = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
-        $month = '<select name="' . $name . '-month" id="' . $name . '-month"><option value="-1">Mes:</option>';
+        $month = '<select name="' . $name . '-month" id="' . $name . '-month"><option value="-1">Mes: </option>';
         for ($j = 1; $j <= count($months); $j++) {
             $selected = '';
             if ($Month == $j) {
@@ -40,7 +40,7 @@ class Yeah_Helpers_Date
         $month .= '</select>';
 
         // generacion del año
-        $year = '<select name="' . $name . '-year" id="' . $name . '-year"><option value="-1">Año:</option>';
+        $year = '<select name="' . $name . '-year" id="' . $name . '-year"><option value="-1">Año: </option>';
         $current_year = date("Y");
         for ($k = $current_year + 10; $k >= $current_year - 70; $k--) {
             $selected = '';

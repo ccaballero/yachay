@@ -33,7 +33,7 @@ class Invitations_Invitation extends Yeah_Model_Row_Validation
                 ),
             ),
         ),
-        'description' => array(
+        'message' => array(
             'filters' => array('StringTrim', 'StripNewlines', 'StripTags'),
         ),
     );
@@ -41,5 +41,10 @@ class Invitations_Invitation extends Yeah_Model_Row_Validation
     public function getAuthor() {
         $model_users = new Users();
         return $model_users->findByIdent($this->author);
+    }
+
+    public function amAuthor() {
+        global $USER;
+        return ($USER->ident == $this->author);
     }
 }

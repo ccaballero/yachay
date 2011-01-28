@@ -26,6 +26,10 @@
             <a class="right small" href="<?= $this->url(array(), 'groupsets_new') ?>">Crear</a>
         </li>
     <?php } ?>
+        <li>
+            <a href="<?= $this->url(array(), 'invitations_manager') ?>">Invitaciones</a>
+            <a class="right small" href="<?= $this->url(array(), 'invitations_new') ?>">Crear</a>
+        </li>
         <li class="center"><a href="<?= $this->url(array(), 'resources_list') ?>">Ver todos</a></li>
     </ul>
 <?php }?>

@@ -56,6 +56,9 @@ SELECT 'settings';
 SELECT 'friends';
 \. friends.sql
 
+SELECT 'invitations';
+\. invitations.sql
+
 /*====================================================================================================================*/
 
 SELECT 'gestions';

@@ -289,7 +289,7 @@ class Feedback_EntryController extends Yeah_Action
         $resource->delete();
 
         $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La sugerencia ha sido eliminada");
+        $session->messages->addMessage('La sugerencia ha sido eliminada');
         $this->_redirect($this->view->currentPage());
     }
 }

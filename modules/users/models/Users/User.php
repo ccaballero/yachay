@@ -28,7 +28,7 @@ class Users_User extends Yeah_Model_Row_Validation
                     'message'   => 'El codigo de usuario debe contener unicamente caracteres y numeros',
                 ),
                 array(
-                    'validator' => 'UniqueCode',
+                    'validator' => 'UniqueCodeOrNull',
                     'options'   => array('Users'),
                     'message'   => 'El codigo seleccionado para el usuario ya existe o no puede utilizarse',
                     'namespace' => 'Yeah_Validators',

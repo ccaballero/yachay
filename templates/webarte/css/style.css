@@ -70,6 +70,7 @@ body {
     border-top: 2pt solid;
     height: 3.0em;
     text-align: center;
+    padding-top: 0.1em;
 }
 
 #primary {
@@ -282,6 +283,10 @@ body {
 
 #primary form input[type='text'].login, #primary form input[type='password'].login {
     width: 12.0em;
+}
+
+#primary form input[type='button'], #primary form input[type='submit'] {
+    padding: 0em 0.25em;
 }
 
 #primary h1, #primary h2, #primary h3 {

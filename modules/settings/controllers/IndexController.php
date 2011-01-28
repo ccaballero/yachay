@@ -25,7 +25,7 @@ class Settings_IndexController extends Yeah_Action
             $password1 = $request->getParam('password1');
             $password2 = $request->getParam('password2');
 
-            if ($password1 == $password2) {
+            if (!empty($password1) && !empty($password2) && $password1 == $password2) {
                 $user->password = md5($CONFIG->key . $password1);
                 $user->save();
 
@@ -33,7 +33,7 @@ class Settings_IndexController extends Yeah_Action
                 $session->url = $user->url;
                 $this->_redirect($request->getParam('return'));
             } else {
-                $session->messages->addMessage('Las entradas son diferentes');
+                $session->messages->addMessage('Las entradas no son validas, recuerde que deben ser iguales y no estar vacias');
             }
         }
 

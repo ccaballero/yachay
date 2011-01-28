@@ -32,6 +32,8 @@ class Login_ForgotController extends Yeah_Action
             $input = new Zend_Filter_Input($filters, $validators, $_POST, $options);
             $session = new Zend_Session_Namespace();
             if ($input->isValid()) {
+                $code = generatecode();
+
                 $model_users = new Users();
                 $user = $model_users->findByEmail($input->email);
                 if (!empty($user)) {
@@ -43,7 +45,7 @@ class Login_ForgotController extends Yeah_Action
 	                        $forgot = $model_login->createRow();
 	                    }
 	                    $forgot->user = $user->ident;
-	                    $forgot->password = generatecode();
+	                    $forgot->password = md5($CONFIG->key . $code);
 	                    $forgot->tsregister = time();
 	                    $forgot->tstimeout = 86400; // 24 horas
 	                    $forgot->save();
@@ -54,7 +56,7 @@ class Login_ForgotController extends Yeah_Action
 	                    $view->setScriptPath($CONFIG->dirroot . 'modules/login/views/scripts/forgot/');
 	
 	                    $view->servername = $CONFIG->wwwroot;
-	                    $view->code       = $forgot->password;
+	                    $view->code       = $code;
 	                    $view->petition   = $forgot->tsregister;
 	                    $view->expiration = $forgot->tsregister + $forgot->tstimeout;
 	

@@ -124,3 +124,7 @@ body {
 #primary .message {
     border-color: <% color-borders %>;
 }
+
+#content input {
+    color: #000000;
+}

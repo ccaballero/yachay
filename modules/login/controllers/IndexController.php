@@ -58,7 +58,7 @@ class Login_IndexController extends Yeah_Action
                     if (!empty($user)) {
                         $forgot = $model_login->selectByUser($user->ident);
                         if (!empty($forgot)) {
-                            if ($input->password == $forgot->password) {
+                            if (md5($CONFIG->key . $input->password) == $forgot->password) {
                                 $now = time();
                                 $expiration = $forgot->tsregister + $forgot->tstimeout;
                                 $forgot->delete();

@@ -16,16 +16,18 @@
                 <td>Fecha de registro:</td>
                 <td><?= $this->timestamp($this->user->tsregister) ?></td>
             </tr>
+        <?php if (!empty($this->author)) { ?>
             <tr>
                 <td>Autor del registro:</td>
                 <td><?= $this->author ?></td>
             </tr>
+        <?php } ?>
             <tr>
                 <td>Rol utilizado:</td>
                 <td><?= $this->user->getRole()->label ?></td>
             </tr>
             <tr>
-                <td colspan="2"><b>Informacion que fue establecida, pero que puede cambiar:</b></td>
+                <td colspan="2"><b>Informaci&oacute;n que fue establecida, pero que puede cambiar:</b></td>
             </tr>
             <tr>
                 <td>Apellido utilizado:</td>

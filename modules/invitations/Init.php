@@ -12,11 +12,11 @@ class Invitations_Init extends Yeah_Init
                                                         'controller' => 'invitation',
                                                         'action'     => 'delete',
                                                     )),
-        'invitations_invitation_view'            => array('invitations/:invitation',
+       'invitations_invitation_proceed'          => array('invitations/:code',
                                                     array(
                                                         'module'     => 'invitations',
                                                         'controller' => 'invitation',
-                                                        'action'     => 'view',
+                                                        'action'     => 'proceed',
                                                     )),
         'invitations_manager'                    => array('invitations/manager',
                                                     array(
@@ -29,18 +29,6 @@ class Invitations_Init extends Yeah_Init
                                                         'module'     => 'invitations',
                                                         'controller' => 'manager',
                                                         'action'     => 'new',
-                                                    )),
-        'invitations_delete'                     => array('invitations/delete',
-                                                    array(
-                                                        'module'     => 'invitations',
-                                                        'controller' => 'manager',
-                                                        'action'     => 'delete',
-                                                    )),
-        'invitations_list'                       => array('invitations',
-                                                    array(
-                                                        'module'     => 'invitations',
-                                                        'controller' => 'index',
-                                                        'action'     => 'index',
                                                     )),
     );
 }

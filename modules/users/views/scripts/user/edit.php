@@ -6,9 +6,9 @@ echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';
 
 echo '<table><tr><td><b>Nombre de usuario (*):</b></td>';
 echo '<td><input type="text" name="label" value="' . $this->user->label . '" maxlength="20" /></td>';
-echo '</tr><tr><td><b>Codigo SISS (*):</b></td>';
+echo '</tr><tr><td><b>Codigo SISS :</b></td>';
 echo '<td><input type="text" name="code" value="' . $this->user->code . '" maxlength="9" /></td>';
-echo '</tr><tr><td><b>Nombre Formal (*):</b></td>';
+echo '</tr><tr><td><b>Nombre Formal :</b></td>';
 echo '<td><input type="text" name="formal" value="' . $this->user->formalname . '" maxlength="128" /></td></tr>';
 
 if ($this->USER->ident <> $this->user->ident) {

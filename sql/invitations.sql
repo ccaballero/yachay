@@ -6,15 +6,16 @@
 DROP TABLE IF EXISTS `invitation`;
 CREATE TABLE `invitation` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
+    `code`              varchar(128)                                                NOT NULL,
     `author`            int unsigned                                                NOT NULL,
     `email`             varchar(64)                                                 NOT NULL,
     `accepted`          boolean                                                     NOT NULL DEFAULT FALSE,
-    `description`       text                                                        NOT NULL DEFAULT '',
-    `tsregister`        timestamp                                                   NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (`ident`, `author`),
-    UNIQUE INDEX (`ident`),
+    `message`           text                                                        NOT NULL DEFAULT '',
+    `tsregister`        int unsigned                                                NOT NULL,
+    PRIMARY KEY (`ident`),
     INDEX (`author`),
     FOREIGN KEY (`author`)        REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    UNIQUE INDEX (`code`),
     UNIQUE INDEX (`email`)
 ) DEFAULT CHARACTER SET UTF8;
 
@@ -32,18 +33,14 @@ VALUES
 INSERT INTO `page`
 (`label`,                         `title`,            `menuable`,    `module`,           `controller`,  `action`,           `privilege`,             `route`)
 VALUES
-('Lista de invitaciones',         'Invitaciones',     TRUE,          'invitations',      'index',       'index',            'list',                  'invitations_list'),
-('Administrador de invitaciones', 'Invitaciones',     TRUE,          'invitations',      'manager',     'index',            'new|delete',            'invitations_manager'),
-('Nueva invitacion de acceso',    'Nueva Invitacion', TRUE,          'invitations',      'manager',     'new',              'new',                   'invitations_new'),
-('Vista de una invitacion',       '',                 FALSE,         'invitations',      'invitation',  'view',             '',                      'invitations_invitation_view');
+('Administrador de invitaciones', 'Invitaciones',     TRUE,          'invitations',      'manager',     'index',            'invite',                'invitations_manager'),
+('Nueva invitacion de acceso',    'Nueva Invitacion', TRUE,          'invitations',      'manager',     'new',              'invite',                'invitations_new'),
+('Registro de usuario',           '',                 FALSE,         'invitations',      'invitation',  'proceed',          '',                      'invitations_invitation_proceed');
 
 /*====================================================================================================================*/
 /* Registro de privilegios para el modulo                                                                             */
-/*====================================================================================================================*
+/*====================================================================================================================*/
 INSERT INTO `privilege`
-(`category`,  `label`,                                                         `module`,           `privilege`,        `delegate`)
+(`label`,                                                         `module`,           `privilege`)
 VALUES
-(2,           'Listar invitaciones pendientes',                                'invitations',      'list',             TRUE),
-(2,           'Crear invitacion de acceso',                                    'invitations',      'new',              TRUE),
-(2,           'Ver invitacion pendiente',                                      'invitations',      'view',             TRUE),
-(2,           'Cancelar invitacion pendiente',                                 'invitations',      'delete',           TRUE);*/
+('Enviar invitaciones',                                           'invitations',      'invite');

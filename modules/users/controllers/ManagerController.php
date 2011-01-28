@@ -110,7 +110,7 @@ class Users_ManagerController extends Yeah_Action
                     $session->url = $user->url;
                     $this->_redirect($request->getParam('return'));
                 } else {
-                    $session->messages->addMessage("No tiene permisos para establecer ese rol en ese usuario");
+                    $session->messages->addMessage('No tiene permisos para establecer ese rol en ese usuario');
                 }
             } else {
                 foreach ($user->getMessages() as $message) {

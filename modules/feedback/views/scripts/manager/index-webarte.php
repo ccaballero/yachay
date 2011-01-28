@@ -14,7 +14,7 @@
         <tr>
             <th>&nbsp;</th>
             <th><?= $this->model_feedback->_mapping['description'] ?></th>
-            <th>&nbsp;</th>
+            <th>Estado</th>
             <th>Opciones</th>
             <th><?= $this->model_feedback->_mapping['tsregister'] ?></th>
         </tr>

@@ -14,16 +14,21 @@ class Invitations extends Yeah_Model_Table
     );
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
+        'code'                  => 'Identificador',
         'author'                => 'Autor',
         'email'                 => 'Correo electrónico',
         'accepted'              => 'Aceptado',
-        'description'           => 'Descripcion',
+        'message'               => 'Mensaje',
         'tsregister'            => 'Fecha de registro',
     );
 
     // Find uniques indexes
     public function findByIdent($ident) {
         return $this->fetchRow($this->getAdapter()->quoteInto('ident = ?', $ident));
+    }
+
+    public function findByCode($code) {
+        return $this->fetchRow($this->getAdapter()->quoteInto('code = ?', $code));
     }
 
     public function findByEmail($email) {

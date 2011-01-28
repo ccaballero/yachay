@@ -16,6 +16,7 @@ DROP TABLE IF EXISTS `login_forgot`;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `user_resource`;
 DROP TABLE IF EXISTS `friend`;
+DROP TABLE IF EXISTS `invitation`;
 DROP TABLE IF EXISTS `gestion`;
 DROP TABLE IF EXISTS `subject`;
 DROP TABLE IF EXISTS `subject_user`;

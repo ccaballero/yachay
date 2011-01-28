@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `role`              int unsigned                                                NOT NULL,
-    `code`              varchar(16)                                                 NULL DEFAULT '',
+    `code`              varchar(16)                                                 NOT NULL DEFAULT '',
     `label`             varchar(64)                                                 NOT NULL,
     `url`               varchar(128)                                                NOT NULL,
     `password`          varchar(64)                                                 NOT NULL,
@@ -35,7 +35,6 @@ CREATE TABLE `user` (
     PRIMARY KEY (`ident`),
     INDEX (`role`),
     FOREIGN KEY (`role`)          REFERENCES `role`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    UNIQUE INDEX (`code`),
     UNIQUE INDEX (`label`),
     UNIQUE INDEX (`url`),
     UNIQUE INDEX (`email`)

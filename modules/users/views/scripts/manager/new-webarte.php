@@ -5,8 +5,8 @@
 
     <p><label for="user_label">Nombre de usuario (*): </label><input id="user_label" name="label" type="text" value="<?= $this->user->label ?>" maxlength="20" /></p>
     <p><label for="user_password">Generador de contraseña: </label><?= $this->password('user_password', 'password', $this->user->password) ?></p>
-    <p><label for="user_code">Codigo SISS (*): </label><input id="user_code" name="code" type="text" value="<?= $this->user->code ?>" maxlength="9" /></p>
-    <p><label for="user_formalname">Nombre Formal (*): </label><input id="user_formalname" name="formal" type="text" value="<?= $this->user->formalname ?>" maxlength="128" /></p>
+    <p><label for="user_code">Codigo SISS: </label><input id="user_code" name="code" type="text" value="<?= $this->user->code ?>" maxlength="9" /></p>
+    <p><label for="user_formalname">Nombre Formal: </label><input id="user_formalname" name="formal" type="text" value="<?= $this->user->formalname ?>" maxlength="128" /></p>
     <p><label for="user_role">Rol (*): </label><?= $this->role('user_role', 'role', $this->user->role) ?></p>
     <p><label for="user_email">Correo electrónico: </label><input id="user_email" name="email" type="text" value="<?= $this->user->email ?>" maxlength="50" /></p>
     <p><label for="user_surname">Apellidos: </label><input id="user_surname" name="surname" type="text" value="<?= $this->user->surname ?>" maxlength="128" /></p>
