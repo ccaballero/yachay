@@ -3,6 +3,7 @@
 class Templates_ManagerController extends Yeah_Action
 {
     public function cssAction() {
+        global $CONFIG;
         global $TEMPLATE;
         global $USER;
 
@@ -19,11 +20,14 @@ class Templates_ManagerController extends Yeah_Action
 
         $properties = json_decode($json_properties, true);
 
-        $css = file_get_contents($TEMPLATE->htmlbase . 'css/properties.css');
+        $view = new Zend_View();
+        $view->setScriptPath($CONFIG->dirroot . 'modules/templates/views/scripts/manager/');
 
         foreach ($properties as $property => $value) {
-            $css = str_replace('<% ' . $property . ' %>', $value, $css);
+            $view->{$property} = $value;
         }
+
+        $css = $view->render($this->view->template('templates', 'css', 'manager/', TRUE));
 
         header("HTTP/1.1 200 OK"); //mandamos código de OK
         header("Status: 200 OK"); //sirve para corregir un bug de IE (fuente: php.net)

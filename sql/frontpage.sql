@@ -18,7 +18,10 @@ INSERT INTO `page`
 (`label`,                         `title`,            `menuable`,    `module`,           `controller`,  `action`,      `route`)
 VALUES
 ('Pagina inicial',                'Inicio',           TRUE,          'frontpage',        'index',       'visitor',     'frontpage_visitor'),
-('Pagina de usuario',             '',                 FALSE,         'frontpage',        'index',       'user',        'frontpage_user');
+('Pagina de usuario',             '',                 FALSE,         'frontpage',        'index',       'user',        'frontpage_user'),
+('Licencia de uso',               '',                 FALSE,         'frontpage',        'static',      'licence',     'frontpage_licence'),
+('Condiciones de uso',            '',                 FALSE,         'frontpage',        'static',      'terms',       'frontpage_terms'),
+('Politica de privacidad',        '',                 FALSE,         'frontpage',        'static',      'privacy',     'frontpage_privacy');
 
 /*====================================================================================================================*/
 /* Registro de widgets para el modulo                                                                                 */

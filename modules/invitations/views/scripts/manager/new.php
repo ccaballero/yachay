@@ -1,10 +1,12 @@
-<h1><?= $this->PAGE->label ?></h1>
+<?php
 
-<form method="post" action="" accept-charset="utf-8">
-    <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<center><form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';
 
-    <p><label for="invitation_email">Correo electronico (*): </label><input id="invitation_email" name="email" type="text" value="<?= $this->invitation->email ?>" size="20" maxlength="20" /></p>
-    <p><label for="invitation_message">Mensaje: </label><textarea id="invitation_message" name="message" cols="50" rows="5"><?= $this->invitation->message ?></textarea></p>
-    <p>(*) Campos obligatorios.</p>
-    <p class="submit"><input type="submit" value="Crear invitación" /><input type="button" value="Cancelar" onclick="location.href='<?= $this->lastPage() ?>'" /></p>
-</form>
+echo '<table>';
+echo '<tr><td><b>Correo electronico (*):</b></td><td><input type="text" name="email" value="' . $this->invitation->email . '" size="20" maxlength="64" /></td></tr>';
+echo '<tr><td><b>Mensaje: </b></td><td><textarea name="message" cols="50" rows="5">' . $this->invitation->message . '</textarea></td></tr>';
+echo '<tr><td colspan="2">(*) Campos obligatorios.</td></tr><tr>';
+echo '<td>&nbsp;</td><td><input type="submit" value="Crear invitación" /> <a href="' . $this->lastPage() . '">Cancelar</a>';
+echo '</td></tr></table></form></center>';

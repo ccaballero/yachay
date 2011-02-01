@@ -1,40 +1,35 @@
-<h1><?= $this->PAGE->label ?></h1>
+<?php
 
-<form method="post" action="" accept-charset="utf-8">
-    <input type="hidden" name="return" value="<?= $this->currentPage() ?>" />
+echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<form method="post" action="" accept-charset="utf-8">';
+echo '<input type="hidden" name="return" value="' . $this->currentPage() . '" />';
 
-    <div><input type="button" name="new" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'invitations_new') ?>'" /></div>
+echo '<table><tr>';
+if (Yeah_Acl::hasPermission('invitations', 'new')) {
+    echo '<td>[<a href="' . $this->url(array(), 'invitations_new') . '">Nuevo</a>]</td>';
+}
+echo '</tr></table>';
+echo '<hr />';
 
-<?php if (count($this->invitations)) { ?>
-    <table>
-        <tr>
-            <th><?= $this->model_invitations->_mapping['email'] ?></th>
-            <th>Estado</th>
-            <th>Opciones</th>
-            <th><?= $this->model_invitations->_mapping['tsregister'] ?></th>
-        </tr>
-    <?php foreach ($this->invitations as $key => $invitation) { ?>
-        <tr class="<?= $key % 2 == 0 ? 'even' : 'odd' ?>">
-            <td><?= $invitation->email ?></td>
-            <td class="center">
-            <?php if ($invitation->accepted) { ?>
-                <img src="<?= $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Invitación aceptada" title="Invitación aceptada" />
-            <?php } else { ?>
-                <img src="<?= $this->TEMPLATE->htmlbase . 'images/email.png' ?>" alt="Invitación pendiente" title="Invitación pendiente" />
-            <?php } ?>
-            </td>
-            <td class="options">
-                <?php if (!$invitation->accepted) { ?>
-                    <a href="<?= $this->url(array('invitation' => $invitation->ident), 'invitations_invitation_delete') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Revocar invitación" title="Revocar invitación" /></a>
-                <?php } ?>
-            </td>
-            <td class="center"><?= $this->timestamp($invitation->tsregister) ?></td>
-        </tr>
-    <?php } ?>
-    </table>
-<?php } else { ?>
-    <p>No enviaste ninguna invitación aún</p>
-<?php } ?>
+if (count($this->invitations)) {
+    echo '<table><tr><th>' . $this->model_invitations->_mapping['email'] . '</th><th>Opciones</th><th>' . $this->model_invitations->_mapping['tsregister'] . '</th></tr>';
+    foreach ($this->invitations as $invitation) {
+        echo '<tr><td>' . $invitation->email . '</td><td><center>';
+        if (!$invitation->accepted) {
+            echo '[<a href="' . $this->url(array('invitation' => $invitation->ident), 'invitations_invitation_delete') . '">Revocar</a>]';
+        }
+        echo '</center></td>';
+        echo '<td><center>' . $this->timestamp($invitation->tsregister) . '</center></td></tr>';
+    }
+    echo '</table>';
+} else {
+    echo '<p>No enviaste ninguna invitación aún</p>';
+}
 
-    <div><input type="button" name="new" value="Nuevo" onclick="location.href='<?= $this->url(array(), 'invitations_new') ?>'" /></div>
-</form>
+echo '<hr />';
+echo '<table><tr>';
+if (Yeah_Acl::hasPermission('invitations', 'new')) {
+    echo '<td>[<a href="' . $this->url(array(), 'invitations_new') . '">Nuevo</a>]</td>';
+}
+echo '</tr></table>';
+echo '</form>';

@@ -54,7 +54,7 @@ body {
 
 #header {
     border-bottom: 2pt solid;
-    height: 5.0em;
+    height: 7.0em;
 }
 
 #content {
@@ -86,7 +86,7 @@ body {
 }
 
 #header>.menu {
-    padding-top: 3.8em;
+    padding-top: 5.8em;
 }
 
 #header>.tools {
