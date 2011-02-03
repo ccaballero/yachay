@@ -13,4 +13,3 @@ if (count($list_spaces)) {
     }
     echo '</table>';
 }
-

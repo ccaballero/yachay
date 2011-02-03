@@ -25,6 +25,7 @@ class Yeah_Helpers_Context
             'teams' => array(),
             'communities' => array(),
             'users' => array(),
+            'me' => array(),
         );
 
         $options[] = '<option value="global" ' . $default . '>Pagina principal</option>';
@@ -225,6 +226,19 @@ class Yeah_Helpers_Context
             }
             $options[] = '</optiongroup>';
         }
+
+        // set for personal context
+        if ($context_type == 'user') {
+            $default = true;
+        } else {
+            $default = false;
+        }
+        $options[] = '<optgroup label="Personal">';
+
+        $user = $USER;
+        $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context->{$context_type}->ident == $user->ident)) ? $select : '') . '>' . $user->label . '</option>';
+        $data['me'][] = 'user-' . $user->ident;
+        $options[] = '</optiongroup>';
 
         // OK, all ready!
         switch ($format) {

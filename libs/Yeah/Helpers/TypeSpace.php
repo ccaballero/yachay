@@ -20,6 +20,8 @@ class Yeah_Helpers_TypeSpace
                 return 'Comunidades';
             case 'users':
                 return 'Contactos';
+            case 'me':
+                return 'Personal';
         }
     }
 }
