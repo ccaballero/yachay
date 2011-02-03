@@ -228,17 +228,19 @@ class Yeah_Helpers_Context
         }
 
         // set for personal context
-        if ($context_type == 'user') {
-            $default = true;
-        } else {
-            $default = false;
-        }
-        $options[] = '<optgroup label="Personal">';
+        if ($USER->ident <> 0) {
+            if ($context_type == 'user') {
+                $default = true;
+            } else {
+                $default = false;
+            }
+            $options[] = '<optgroup label="Personal">';
 
-        $user = $USER;
-        $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context->{$context_type}->ident == $user->ident)) ? $select : '') . '>' . $user->label . '</option>';
-        $data['me'][] = 'user-' . $user->ident;
-        $options[] = '</optiongroup>';
+            $user = $USER;
+            $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context->{$context_type}->ident == $user->ident)) ? $select : '') . '>' . $user->label . '</option>';
+            $data['me'][] = 'user-' . $user->ident;
+            $options[] = '</optiongroup>';
+        }
 
         // OK, all ready!
         switch ($format) {
