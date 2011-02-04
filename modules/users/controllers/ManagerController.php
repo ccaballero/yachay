@@ -319,7 +319,7 @@ class Users_ManagerController extends Yeah_Action
                                     $result['APELLIDOS'] = isset($_headers['APELLIDOS']) ? $row[$_headers['APELLIDOS']] : '';
                                     $result['NOMBRES'] = isset($_headers['NOMBRES']) ? $row[$_headers['NOMBRES']] : '';
                                     $result['CARRERA'] = isset($_headers['CARRERA']) ? $row[$_headers['CARRERA']] : '';
-                                    $result['PASSWORD'] = $type;
+                                    $result['PASSWORD'] = $password;
 
                                     $role = $model_roles->findByIdent($role_default);
                                     if (empty($role)) {

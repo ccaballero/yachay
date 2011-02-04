@@ -12,8 +12,8 @@ class Areas_Area extends Yeah_Model_Row_Validation
                 ),
                 array(
                     'validator' => 'StringLength',
-                    'options'   => array(1, 15),
-                    'message'   => 'El nombre del area debe tener entre 1 y 15 caracteres',
+                    'options'   => array(1, 64),
+                    'message'   => 'El nombre del area debe tener entre 1 y 64 caracteres',
                 ),
                 array(
                     'validator' => 'UniqueLabel',

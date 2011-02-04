@@ -126,6 +126,6 @@ body {
     border-color: <?= $this->color_borders ?>;
 }
 
-#content input, #content option, #content select {
+#content input, #content option, #content select, #content textarea {
     color: #000000;
 }
