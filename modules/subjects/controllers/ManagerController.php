@@ -54,7 +54,11 @@ class Subjects_ManagerController extends Yeah_Action
 
         $model_areas = new Areas();
         $this->view->areas = $model_areas->selectAll();
-        $this->view->checks = array();
+        $this->view->checks_areas = array();
+
+        $model_careers = new Careers();
+        $this->view->careers = $model_careers->selectAll();
+        $this->view->checks_careers = array();
 
         $model_gestions = new Gestions();
         $gestion = $model_gestions->findByActive();
@@ -75,9 +79,14 @@ class Subjects_ManagerController extends Yeah_Action
             $subject->visibility = $request->getParam('visibility');
             $subject->description = $request->getParam('description');
 
-            $checks = $request->getParam('areas');
-            if (empty($checks)) {
-                $checks = array();
+            $checks_areas = $request->getParam('areas');
+            if (empty($checks_areas)) {
+                $checks_areas = array();
+            }
+
+            $checks_careers = $request->getParam('careers');
+            if (empty($checks_careers)) {
+                $checks_careers = array();
             }
 
             $subject->gestion = $gestion->ident;
@@ -88,9 +97,17 @@ class Subjects_ManagerController extends Yeah_Action
                 $subject->save();
 
                 $model_areas_subjects = new Areas_Subjects();
-                foreach ($checks as $area) {
+                foreach ($checks_areas as $area) {
                     $assign = $model_areas_subjects->createRow();
                     $assign->area = $area;
+                    $assign->subject = $subject->ident;
+                    $assign->save();
+                }
+
+                $model_careers_subjects = new Careers_Subjects();
+                foreach ($chekcs_careers as $career) {
+                    $assign = $model_careers_subjects->createRow();
+                    $assign->career = $career;
                     $assign->subject = $subject->ident;
                     $assign->save();
                 }
@@ -105,7 +122,8 @@ class Subjects_ManagerController extends Yeah_Action
             }
 
             $this->view->subject = $subject;
-            $this->view->checks = $checks;
+            $this->view->checks_areas = $checks_areas;
+            $this->view->checks_careers = $checks_careers;
         }
 
         history('subjects/new');

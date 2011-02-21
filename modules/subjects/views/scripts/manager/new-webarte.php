@@ -13,8 +13,16 @@
 <?php foreach ($this->areas as $area) { ?>
     <p>
         <label>&nbsp;</label>
-        <input type="checkbox" <?= in_array($area->ident, $this->checks) ? 'checked="checked" ' : '' ?>name="areas[]" value="<?= $area->ident ?>" />
+        <input type="checkbox" <?= in_array($area->ident, $this->checks_areas) ? 'checked="checked" ' : '' ?>name="areas[]" value="<?= $area->ident ?>" />
         <span class="form"><?= $area->label ?></span>
+    </p>
+<?php } ?>
+    <p><label>Carreras a las que pertenece:</label>&nbsp;</p>
+<?php foreach ($this->careers as $career) { ?>
+    <p>
+        <label>&nbsp;</label>
+        <input type="checkbox" <?= in_array($career->ident, $this->checks_careers) ? 'checked="checked" ' : '' ?>name="careers[]" value="<?= $career->ident ?>" />
+        <span class="form"><?= $career->label ?></span>
     </p>
 <?php } ?>
     <p>(*) Campos obligatorios.</p>

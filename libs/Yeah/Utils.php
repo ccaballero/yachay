@@ -106,6 +106,7 @@ function context ($type,  $value = null) {
     case 'global':
         $context->global = 1;
         $context->area = 0;
+        $context->career = 0;
         $context->subject = 0;
         $context->group = 0;
         $context->team = 0;
@@ -115,6 +116,17 @@ function context ($type,  $value = null) {
     case 'area':
         $context->global = 0;
         $context->area = $value;
+        $context->career = 0;
+        $context->subject = 0;
+        $context->group = 0;
+        $context->team = 0;
+        $context->user = 0;
+        $context->community = 0;
+        break;
+    case 'career':
+        $context->global = 0;
+        $context->area = 0;
+        $context->career = $value;
         $context->subject = 0;
         $context->group = 0;
         $context->team = 0;
@@ -124,6 +136,7 @@ function context ($type,  $value = null) {
     case 'subject':
         $context->global = 0;
         $context->area = 0;
+        $context->career = 0;
         $context->subject = $value;
         $context->group = 0;
         $context->team = 0;
@@ -133,6 +146,7 @@ function context ($type,  $value = null) {
     case 'group':
         $context->global = 0;
         $context->area = 0;
+        $context->career = 0;
         $context->subject = 0;
         $context->group = $value;
         $context->team = 0;
@@ -142,6 +156,7 @@ function context ($type,  $value = null) {
     case 'team':
         $context->global = 0;
         $context->area = 0;
+        $context->career = 0;
         $context->subject = 0;
         $context->group = 0;
         $context->team = $value;
@@ -151,6 +166,7 @@ function context ($type,  $value = null) {
     case 'user':
         $context->global = 0;
         $context->area = 0;
+        $context->career = 0;
         $context->subject = 0;
         $context->group = 0;
         $context->team = 0;
@@ -160,6 +176,7 @@ function context ($type,  $value = null) {
     case 'community':
         $context->global = 0;
         $context->area = 0;
+        $context->career = 0;
         $context->subject = 0;
         $context->group = 0;
         $context->team = 0;

@@ -4,6 +4,7 @@ class Yeah_Settings_Context
 {
     public $global;
     public $area;
+    public $career;
     public $subject;
     public $group;
     public $team;
@@ -16,6 +17,9 @@ class Yeah_Settings_Context
         }
         if (!empty($this->area)) {
             return 'area';
+        }
+        if (!empty($this->career)) {
+            return 'career';
         }
         if (!empty($this->subject)) {
             return 'subject';
@@ -40,6 +44,9 @@ class Yeah_Settings_Context
         }
         if (!empty($this->area)) {
             return 'Area: ' . $this->area->label;
+        }
+        if (!empty($this->career)) {
+            return 'Carrera: ' . $this->career->label;
         }
         if (!empty($this->subject)) {
             return 'Materia: ' . $this->subject->label;

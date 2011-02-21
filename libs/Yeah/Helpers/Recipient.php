@@ -15,6 +15,10 @@ class Yeah_Helpers_Recipient
                 $model_areas = new Areas();
                 $area = $model_areas->findByIdent($ident);
                 return '<a href="' . $url->url(array('area' => $area->url), 'areas_area_view') . '">' . $area->label . '</a>';
+            case 'career':
+                $model_careers = new Careers();
+                $career = $model_careers->findByIdent($ident);
+                return '<a href="' . $url->url(array('career' => $career->url), 'careers_career_view') . '">' . $career->label . '</a>';
             case 'subject':
                 $model_subjects = new Subjects();
                 $subject = $model_subjects->findByIdent($ident);

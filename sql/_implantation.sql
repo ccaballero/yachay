@@ -130,6 +130,28 @@ VALUES
 ( 4,11, 2),
 ( 4,12, 2);
 
+INSERT INTO `career`
+(`label`,                    `url`,                        `description`,                                           `tsregister`)
+VALUES
+('Informatica',              'informatica',                'Carrera de informatica',                                UNIX_TIMESTAMP()),
+('Ingenieria de sistemas',   'ingenieria-de-sistemas',     'Carrera de ingenieria de sistemas',                     UNIX_TIMESTAMP());
+
+INSERT INTO `career_subject`
+(`career`, `subject`, `gestion`)
+VALUES
+(1,  1, 1), (2,  1, 1),
+(1,  2, 1), (2,  2, 1),
+(1,  3, 1), (2,  3, 1),
+(1,  4, 1), (2,  4, 1),
+(1,  5, 1), (2,  5, 1),
+(1,  6, 1), (2,  6, 1),
+(1,  7, 2), (2,  7, 2),
+(1,  8, 2), (2,  8, 2),
+(1,  9, 2), (2,  9, 2),
+(1, 10, 2), (2, 10, 2),
+(1, 11, 2), (2, 11, 2),
+(1, 12, 2), (2, 12, 2);
+
 INSERT INTO `subject_user`
 (`subject`, `user`, `type`,     `status`,   `tsregister`)
 VALUES

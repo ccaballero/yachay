@@ -55,6 +55,13 @@ class Resources_Resource extends Yeah_Model_Row_Validation
                 $area_resource->area = $ident;
                 $area_resource->save();
                 break;
+            case 'career':
+                $model_careers_resource = new Careers_Resources();
+                $career_resource = $model_careers_resource->createRow();
+                $career_resource->resource = $this->ident;
+                $career_resource->career = $ident;
+                $career_resource->save();
+                break;
             case 'subject':
                 $model_subjects_resource = new Subjects_Resources();
                 $subject_resource = $model_subjects_resource->createRow();

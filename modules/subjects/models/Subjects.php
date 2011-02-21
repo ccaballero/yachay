@@ -6,6 +6,7 @@ class Subjects extends Yeah_Model_Table
     protected $_primary         = 'ident';
     protected $_rowClass        = 'Subjects_Subject';
     protected $_dependentTables = array('Areas_Subjects',
+                                        'Careers_Subjects',
                                         'Subjects_Users',
                                         'Subjects_Resources',
                                         'Groups',

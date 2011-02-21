@@ -8,6 +8,8 @@ class Yeah_Helpers_TypeSpace
                 return 'General';
             case 'areas':
                 return 'Áreas';
+            case 'careers':
+                return 'Carreras';
             case 'subjects':
                 return 'Materias';
             case 'groupsets':

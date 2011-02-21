@@ -74,6 +74,22 @@ class IndexController extends Yeah_Action
                 }
             }
 
+            if ($model_modules->findByLabel('careers')->status == 'active') {
+                if ($this->acl('careers', array('new', 'delete'))) {
+                    $icons[] = array(
+                        'url' => $this->view->url(array(), 'careers_manager'),
+                        'alt' => 'Gestión de carreras',
+                        'icon' => 'careers.png',
+                    );
+                } else if ($this->acl('careers', 'list')) {
+                    $icons[] = array(
+                        'url' => $this->view->url(array(), 'careers_list'),
+                        'alt' => 'Lista de carreras',
+                        'icon' => 'careers.png',
+                    );
+                }
+            }
+
             if ($model_modules->findByLabel('communities')->status == 'active') {
                 if ($this->acl('communities', 'list')) {
                     $icons[] = array(
@@ -274,6 +290,19 @@ class IndexController extends Yeah_Action
                     @list($element, $ident) = @split('-', $area);
                     $area = $model_areas->findByIdent($ident);
                     $_resources = $area->findResourcesViaAreas_Resources();
+                    foreach ($_resources as $resource) {
+                        $resources[$resource->tsregister] = $resource;
+                    }
+                }
+            }
+
+            // careers
+            if (count($list_spaces['careers']) <> 0) {
+                $model_careers = new Careers();
+                foreach ($list_spaces['careers'] as $career) {
+                    @list($element, $ident) = @split('-', $career);
+                    $career = $model_careers->findByIdent($ident);
+                    $_resources = $career->findResourcesViaCareers_Resources();
                     foreach ($_resources as $resource) {
                         $resources[$resource->tsregister] = $resource;
                     }

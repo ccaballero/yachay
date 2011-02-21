@@ -19,6 +19,7 @@ class Yeah_Helpers_Context
         $data = array(
             'global' => array(),
             'areas' => array(),
+            'careers' => array(),
             'subjects' => array(),
             'groupsets' => array(),
             'groups' => array(),
@@ -44,6 +45,23 @@ class Yeah_Helpers_Context
             foreach ($areas as $area) {
                 $options[] = '<option value="area-' . $area->ident . '" ' . (($default && ($context->{$context_type}->ident == $area->ident)) ? $select : '') . '>' . $area->label . '</option>';
                 $data['areas'][] = 'area-' . $area->ident;
+            }
+            $options[] = '</optiongroup>';
+        }
+
+        // set for career context
+        $model_careers = new Careers();
+        $careers = $model_careers->selectAll();
+        if (count($careers) != 0) {
+            if ($context_type == 'career') {
+                $default = true;
+            } else {
+                $default = false;
+            }
+            $options[] = '<optgroup label="Carreras">';
+            foreach ($careers as $career) {
+                $options[] = '<option value="career-' . $career->ident . '" ' . (($default && ($context->{$context_type}->ident == $career->ident)) ? $select : '') . '>' . $career->label . '</option>';
+                $data['careers'][] = 'career-' . $career->ident;
             }
             $options[] = '</optiongroup>';
         }

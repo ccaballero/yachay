@@ -18,7 +18,14 @@ echo '</td></tr><tr><td colspan="2"><b>Areas a las que pertenece :</b></td></tr>
 
 foreach ($this->areas as $area) {
     echo '<tr><td>' . $area->label . '</td>';
-    echo '<td><input type="checkbox" name="areas[]" ' . (in_array($area->ident, $this->checks) ? 'checked="checked" ' : '') . 'value="' . $area->ident . '" /></td></tr>';
+    echo '<td><input type="checkbox" name="areas[]" ' . (in_array($area->ident, $this->checks_areas) ? 'checked="checked" ' : '') . 'value="' . $area->ident . '" /></td></tr>';
+}
+
+echo '</td></tr><tr><td colspan="2"><b>Carreras a las que pertenece :</b></td></tr>';
+
+foreach ($this->careers as $career) {
+    echo '<tr><td>' . $career->label . '</td>';
+    echo '<td><input type="checkbox" name="careers[]" ' . (in_array($career->ident, $this->checks_careers) ? 'checked="checked" ' : '') . 'value="' . $career->ident . '" /></td></tr>';
 }
 
 echo '<tr><td colspan="2">(*) Campos obligatorios.</td></tr><tr><td>&nbsp;</td><td>';

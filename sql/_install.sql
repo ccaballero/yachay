@@ -70,6 +70,9 @@ SELECT 'subjects';
 SELECT 'areas';
 \. areas.sql
 
+SELECT 'careers';
+\. careers.sql
+
 SELECT 'groups';
 \. groups.sql
 
