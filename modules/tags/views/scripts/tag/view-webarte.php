@@ -89,7 +89,7 @@
                     <?= $this->partial($this->template('valorations', 'valoration'), array('type' => 'popularity', 'value' => $user->popularity, 'TEMPLATE' => $this->TEMPLATE)) ?>
                 </p>
                 <p><span class="bold">Cargo: </span><?= $user->getRole()->label ?></p>
-                <p><span class="bold">Carrera: </span><?= $this->none($user->career) ?></p>
+                <p><span class="bold">Carrera: </span><?= $this->none($user->getCareer()->label) ?></p>
                 <?php $tags = $user->getTags() ?>
                 <?php if (count($tags)) { ?>
                 <p>

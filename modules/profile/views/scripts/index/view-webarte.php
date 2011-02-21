@@ -26,7 +26,7 @@
     <p><span class="bold">Nombres: </span><?= $this->user->name ?></p>
     <p><span class="bold">Fecha de nacimiento: </span><?= $this->none($this->user->birthdate) ?></p>
     <p><span class="bold">Cargo: </span><?= $this->user->getRole()->label ?></p>
-    <p><span class="bold">Carrera: </span><?= $this->none($this->user->career) ?></p>
+    <p><span class="bold">Carrera: </span><?= $this->none($this->user->getCareer()->label) ?></p>
     <p><span class="bold">Telefono: </span><?= $this->none($this->user->phone) ?></p>
     <p><span class="bold">Celular: </span><?= $this->none($this->user->cellphone) ?></p>
     <p><span class="bold">Miembro desde: </span><?= $this->timestamp($this->user->tsregister) ?></p>

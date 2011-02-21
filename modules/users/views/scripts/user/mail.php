@@ -39,7 +39,7 @@
             </tr>
             <tr>
                 <td>Carrera utilizada:</td>
-                <td><?= $this->none($this->user->career) ?></td>
+                <td><?= $this->none($this->user->getCareer()->label) ?></td>
             </tr>
             <tr>
                 <td colspan="2"><b>Informaci&oacute;n de acceso:</b></td>

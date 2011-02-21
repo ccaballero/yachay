@@ -2,8 +2,9 @@
 
 class Users_View_Helper_Career
 {
-    public function career($id, $name, $value = '') {
-        $careers = array ('Lic. Informática', 'Ing. de Sistemas');
+    public function career($id, $name, $value = 0) {
+        $model_careers = new Careers();
+        $careers = $model_careers->selectAll();
 
         if (empty($id)) {
             $id = $name;
@@ -12,15 +13,14 @@ class Users_View_Helper_Career
         $options = '';
         foreach ($careers as $career) {
             $selected = '';
-            if ($career == $value) {
+            if ($career->ident == $value) {
                 $selected = 'selected="selected" ';
             }
-            $options .= '<option ' . $selected . ' >' . $career . '</option>'; 
+            $options .= '<option ' . $selected . ' value="' . $career->ident . '">' . $career->label . '</option>';
         }
 
         $select = '<select id="' . $id . '" name="' . $name . '">' .
-            '<option value="">--------------------</option>' . $options . '</select>';
+            '<option value="0">--------------------</option>' . $options . '</select>';
         return $select;
     }
 }
-

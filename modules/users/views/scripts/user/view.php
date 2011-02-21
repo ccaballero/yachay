@@ -19,7 +19,7 @@ echo '<table width="100%"><tr valign="top"><td rowspan="9" width="200px">';
 echo '<img src="' . $this->media . 'users/thumbnail_large/' . $this->user->getAvatar() . '" alt="" title="" /></td>';
 echo '<td colspan="4"><b>Nombre Completo: </b>' . $this->user->getFullName() . '</td></tr><tr valign="top">';
 echo '<td colspan="2"><b>Cargo: </b>' . $this->user->getRole()->label . '</td>';
-echo '<td colspan="2"><b>Carrera: </b>' . $this->none($this->user->career) . '</td></tr>';
+echo '<td colspan="2"><b>Carrera: </b>' . $this->none($this->user->getCareer()->label) . '</td></tr>';
 echo '<tr valign="top"><td colspan="4"><b>Etiquetas: </b>';
 
 foreach ($this->user->getTags() as $tag) {

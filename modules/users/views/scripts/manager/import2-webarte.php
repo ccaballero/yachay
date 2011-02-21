@@ -59,7 +59,13 @@
             <p><label>Correo electrónico: </label><?= $this->none($results['CORREO ELECTRONICO']) ?></p>
             <p><label>Apellidos: </label><?= $this->none($results['APELLIDOS']) ?></p>
             <p><label>Nombres: </label><?= $this->none($results['NOMBRES']) ?></p>
-            <p><label>Carrera: </label><?= $this->none($results['CARRERA']) ?></p>
+            <p><label>Carrera: </label>
+            <?php if (!empty($results['CARRERA'])) { ?>
+                <a href="<?= $this->url(array('career' => $results['CARRERA']->url), 'careers_career_view') ?>" target="_CAREERS_VIEW"><?= $results['CARRERA']->label ?></a>
+            <?php } else { ?>
+                <?= $this->none($results['CARRERA']) ?>
+            <?php } ?>
+            </p>
         </div>
     <?php } ?>
     </div>

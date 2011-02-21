@@ -38,7 +38,7 @@ if (count($this->users)) {
         echo '<td valign="top"><b>Nombre Completo: </b>' . $user->getFullName() . '</td>';
         echo '</tr><tr>';
         echo '<td><b>Cargo: </b>' . $user->getRole()->label . '</td>';
-        echo '<td><b>Carrera: </b>' . $this->none($user->career) . '</td>';
+        echo '<td><b>Carrera: </b>' . $this->none($user->getCareer()->label) . '</td>';
         echo '</tr><tr><td colspan="2"><b>Etiquetas: </b>';
 
         foreach ($user->getTags() as $tag) {

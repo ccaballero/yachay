@@ -23,7 +23,7 @@
     <div class="photo"><img src="<?= $this->media . 'users/thumbnail_large/' . $this->user->getAvatar() ?>" alt="" title="" /></div>
     <p><span class="bold">Nombre Completo: </span><?= $this->user->getFullName() ?></p>
     <p><span class="bold">Cargo: </span><?= $this->user->getRole()->label ?></p>
-    <p><span class="bold">Carrera: </span><?= $this->none($this->user->career) ?></p>
+    <p><span class="bold">Carrera: </span><?= $this->none($this->user->getCareer()->label) ?></p>
     <p><span class="bold">Descripción personal: </span><?= $this->none($this->user->description) ?></p>
     <p><span class="bold">Pasatiempos: </span><?= $this->none($this->user->hobbies) ?></p>
     <?php $tags = $this->user->getTags() ?>

@@ -131,10 +131,10 @@ VALUES
 ( 4,12, 2);
 
 INSERT INTO `career`
-(`label`,                    `url`,                        `description`,                                           `tsregister`)
+(`label`,                         `url`,                             `description`,                                           `tsregister`)
 VALUES
-('Informatica',              'informatica',                'Carrera de informatica',                                UNIX_TIMESTAMP()),
-('Ingenieria de sistemas',   'ingenieria-de-sistemas',     'Carrera de ingenieria de sistemas',                     UNIX_TIMESTAMP());
+('Licenciatura en informatica',   'licenciatura-en-informatica',     'Carrera de informatica',                                UNIX_TIMESTAMP()),
+('Ingenieria de sistemas',        'ingenieria-de-sistemas',          'Carrera de ingenieria de sistemas',                     UNIX_TIMESTAMP());
 
 INSERT INTO `career_subject`
 (`career`, `subject`, `gestion`)

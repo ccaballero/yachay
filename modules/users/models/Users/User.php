@@ -193,6 +193,12 @@ class Users_User extends Yeah_Model_Row_Validation
         return $model_roles->findByIdent($this->role);
     }
 
+    public function getCareer() {
+        $model_careers = new Careers();
+        $career = $model_careers->findByIdent($this->career);
+        return !empty($career) ? $career : new Careers_Empty();
+    }
+
     public function needFillProfile() {
         if (empty($this->email) || empty($this->surname) || empty($this->name)) {
             return true;

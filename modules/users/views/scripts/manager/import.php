@@ -35,7 +35,7 @@ if ($this->step == 1) {
     echo '<input type="submit" value="Importar usuarios" /><hr />';
     echo '<p><b>Modalidad: </b>' . $this->options[$this->type] . '<br />';
     echo '<b>Generador de contraseña: </b>' . $this->password(NULL, NULL, $this->password);
-    echo '</p><table width="100%">';
+    echo '</p><table width="100%" border=1>';
 
     foreach ($this->results as $results) {
         echo '<tr><td rowspan="5" valign="top" width="18px">';
@@ -70,12 +70,25 @@ if ($this->step == 1) {
             echo '<b>[FALLO]</b>';
         }
 
-        echo '</tr><tr><td width="30%">';
+        echo '</tr>';
+        echo '<tr><td colspan="2"><b>Carrera: </b>';
+
+        if (!empty($results['CARRERA'])) {
+            echo $results['CARRERA']->label;
+            echo '</td><td align="right">';
+            echo '<a href="' . $this->url(array('career' => $results['CARRERA']->url), 'careers_career_view') . '" target="_BLANK">Ver Carrera</a>&nbsp;<b>[OK]</b>';
+        } else {
+            echo $this->none();
+            echo '</td><td align="right">';
+            //<?= $this->none($results['CARRERA'])
+        }
+
+        echo '</td></tr>';
+        echo '<tr><td width="30%">';
         echo '<b>Usuario: </b>' . $results['USUARIO'] . '</td><td>';
         echo '<b>Correo electrónico: </b>' . $this->none($results['CORREO ELECTRONICO']) . '</td><td>&nbsp;</td></tr><tr><td width="30%">';
         echo '<b>Apellidos: </b>' . $this->none($results['APELLIDOS']) . '</td><td>';
-        echo '<b>Nombres: </b>' . $this->none($results['NOMBRES']) . '</td><td>&nbsp;</td></tr><tr>';
-        echo '<td colspan="3"><b>Carrera: </b>' . $this->none($results['CARRERA']) . '</td></tr>';
+        echo '<b>Nombres: </b>' . $this->none($results['NOMBRES']) . '</td><td>&nbsp;</td></tr>';
     }
 
     echo '</table><hr />';

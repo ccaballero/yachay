@@ -267,6 +267,7 @@ class Users_ManagerController extends Yeah_Action
 
             $model_users = new Users();
             $model_roles = new Roles();
+            $model_careers = new Careers();
 
             $selections = $request->getParam('users');
             if (empty($selections)) {
@@ -318,7 +319,7 @@ class Users_ManagerController extends Yeah_Action
                                     $result['CORREO ELECTRONICO'] = isset($_headers['CORREO ELECTRONICO']) ? $row[$_headers['CORREO ELECTRONICO']] : '';
                                     $result['APELLIDOS'] = isset($_headers['APELLIDOS']) ? $row[$_headers['APELLIDOS']] : '';
                                     $result['NOMBRES'] = isset($_headers['NOMBRES']) ? $row[$_headers['NOMBRES']] : '';
-                                    $result['CARRERA'] = isset($_headers['CARRERA']) ? $row[$_headers['CARRERA']] : '';
+                                    $result['CARRERA'] = isset($_headers['CARRERA']) ? $model_careers->findByLabel($row[$_headers['CARRERA']]) : NULL;
                                     $result['PASSWORD'] = $password;
 
                                     $role = $model_roles->findByIdent($role_default);
@@ -396,7 +397,7 @@ class Users_ManagerController extends Yeah_Action
                                 $user->email = $result['CORREO ELECTRONICO'];
                                 $user->surname = $result['APELLIDOS'];
                                 $user->name = $result['NOMBRES'];
-                                $user->career = $result['CARRERA'];
+                                $user->career = empty($result['CARRERA']) ? 0 : $result['CARRERA']->ident;
 
                                 if ($user->isValid()) {
                                     $user->save();
@@ -477,6 +478,8 @@ class Users_ManagerController extends Yeah_Action
                         foreach ($columns as $column) {
                             if ($column == 'role') {
                                 $row[] = '"' . $user->getRole()->label . '"';
+                            } else if ($column == 'career') {
+                                $row[] = '"' . $user->getCareer()->label . '"';
                             } else {
                                 $row[] = '"' . $user->$column . '"';
                             }

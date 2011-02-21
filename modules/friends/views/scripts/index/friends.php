@@ -32,7 +32,7 @@ if (count($this->friends)) {
         echo '</td>';
         echo '<td valign="top"><b>Nombre Completo: </b>' . $user->getFullName() . '</td></tr>';
         echo '<tr><td><b>Cargo: </b>' . $user->getRole()->label . '</td>';
-        echo '<td><b>Carrera: </b>' . $this->none($user->career) . '</td></tr>';
+        echo '<td><b>Carrera: </b>' . $this->none($user->getCareer()->label) . '</td></tr>';
         echo '<tr><td colspan="2"><b>Etiquetas: </b>';
 
         $tags = $user->getTags();
