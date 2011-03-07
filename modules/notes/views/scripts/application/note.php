@@ -2,4 +2,4 @@
 
 echo '<b>' . strtoupper($this->note->getLabel()) . '</b>';
 echo '<br />';
-echo str_replace("\n", "<br/>", $this->escape($this->note->note));
+echo $this->specialEscape($this->escape($this->note->note));

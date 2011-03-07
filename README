@@ -11,7 +11,7 @@ Yeah version 0.1
 
 == Dependencies ==
     PHP 5.3 or higher.
-    Apache Web Server (with mod_rewrite).
+    Apache Web Server (with mod_rewrite and gd).
     Zend Framework 1.8.3 or higher.
     MySQL 5.0 or higher.
 

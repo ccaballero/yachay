@@ -10,6 +10,8 @@
 <?php } ?>
 <?php if ($this->group->amTeacher()) { ?>
     <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_manager') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/coins.png' ?>" alt="Calificaciones" title="Calificaciones" /></a>
+<?php } else if ($this->group->amMember()) { ?>
+    <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_calification') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/coins.png' ?>" alt="Calificaciones" title="Calificaciones" /></a>
 <?php } ?>
 <?php if ($this->subject->amModerator()) { ?>
     <a href="<?= $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_edit') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>

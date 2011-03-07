@@ -80,6 +80,7 @@ class Subjects_SubjectController extends Yeah_Action
         $this->view->areas = $list_areas;
         $this->view->subject = $subject;
         $this->view->groups = $list_groups;
+        $this->view->model_groups_users = new Groups_Users();
         $this->view->resources = $paginator;
         $this->view->route = array (
             'key' => 'subjects_subject_view',

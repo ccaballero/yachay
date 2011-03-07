@@ -34,7 +34,7 @@ CREATE TABLE `subject_user` (
     `subject`           int unsigned                                                NOT NULL,
     `user`              int unsigned                                                NOT NULL,
     `type`              enum('teacher', 'auxiliar', 'student', 'guest')             NOT NULL,
-    `status`            enum('active', 'inactive')                                  NOT NULL DEFAULT 'inactive',
+    `status`            enum('active', 'inactive')                                  NOT NULL DEFAULT 'active',
     `tsregister`        int unsigned                                                NOT NULL,
     PRIMARY KEY (`subject`, `user`),
     INDEX (`subject`),

@@ -31,6 +31,6 @@ class Areas extends Yeah_Model_Table
 
     // Selects in table
     public function selectAll() {
-        return $this->fetchAll($this->select());
+        return $this->fetchAll($this->select()->order('label ASC'));
     }
 }

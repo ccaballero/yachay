@@ -42,7 +42,7 @@ echo '</tr>';
 echo '<tr valign="top"><td><b>Fecha: </b><i>' . $this->timestamp($this->resource->tsregister) . '</i></td></tr>';
 echo '</table>';
 
-echo '<p>' . str_replace("\n", "<br/>", $this->escape($this->entry->description)) . '</p>';
+echo '<p>' . $this->specialEscape($this->escape($this->entry->description)) . '</p>';
 
 if ($this->acl('comments', 'view')) {
     echo '<h2>Comentarios</h2>';

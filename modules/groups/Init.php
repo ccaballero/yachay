@@ -6,6 +6,12 @@ class Groups_Init extends Yeah_Init
     public $install = 'groups';
 
     public $routes = array (
+        'groups_group_calification'              => array('subjects/:subject/groups/:group/calification',
+                                                    array(
+                                                        'module'     => 'groups',
+                                                        'controller' => 'group',
+                                                        'action'     => 'calification',
+                                                    )),
         'groups_group_edit'                      => array('subjects/:subject/groups/:group/edit',
                                                     array(
                                                         'module'     => 'groups',

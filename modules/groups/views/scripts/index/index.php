@@ -25,8 +25,7 @@ if (count($this->subjects)) {
         foreach ($this->groups[$subject->ident] as $group) {
             echo '<li>';
             echo '<a href="' . $this->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view') . '">Grupo ' . $group->label . '</a>';
-            global $USER;
-            $assign = $this->model_groups_users->findByGroupAndUser($group->ident, $USER->ident);
+            $assign = $this->model_groups_users->findByGroupAndUser($group->ident, $this->USER->ident);
             if (!empty($assign)) {
                 echo '[' . $this->typeAssign($assign->type) . ']';
             } else {

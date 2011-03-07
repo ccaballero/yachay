@@ -60,7 +60,7 @@ class Modules_ManagerController extends Yeah_Action
                     mysql_import($CONFIG->dirroot . 'sql/' . $module . '.sql');
                 }
                 $session = new Zend_Session_Namespace();
-                $session->messages->addMessage("El modulo ha sido añadido");
+                $session->messages->addMessage('El modulo ha sido añadido');
                 unlink($filename);
             }
             $this->_redirect($this->view->currentPage());

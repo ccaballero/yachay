@@ -10,7 +10,5 @@ if (empty($config->key)) {
 	echo "<b>KEY: </b>";
 	echo generatecode('alphanum', NULL, 32);
 } else {
-	echo "<p>El key de la aplicacion, esta configurado:</p>";
-	echo "<b>KEY: </b>";
-	echo $config->key;
+	echo "<p>El key de la aplicacion, esta configurado.</p>";
 }

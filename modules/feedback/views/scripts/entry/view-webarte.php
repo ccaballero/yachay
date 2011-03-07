@@ -30,7 +30,7 @@
     <p><span class="bold">Fecha: </span><?= $this->timestamp($this->resource->tsregister) ?></p>
 </div>
 
-<p class="message"><?= str_replace("\n", "<br/>", $this->escape($this->entry->description)) ?></p>
+<p class="message"><?= $this->specialEscape($this->escape($this->entry->description)) ?></p>
 
 <?php if ($this->acl('comments', 'view')) { ?>
     <h2>Comentarios</h2>

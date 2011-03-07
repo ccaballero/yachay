@@ -25,9 +25,7 @@
                 <?php foreach ($this->groups[$subject->ident] as $group) { ?>
                 <li>
                     <a href="<?= $this->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view') ?>">Grupo <?= $group->label ?></a>
-                    <?php
-                    global $USER;
-                    $assign = $this->model_groups_users->findByGroupAndUser($group->ident, $USER->ident); ?>
+                    <?php $assign = $this->model_groups_users->findByGroupAndUser($group->ident, $this->USER->ident); ?>
                     <?php if (!empty($assign)) { ?>
                         <span class="mark"><?= $this->typeAssign($assign->type) ?></span>
                     <?php } else { ?>

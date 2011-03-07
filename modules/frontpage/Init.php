@@ -3,18 +3,24 @@
 class Frontpage_Init extends Yeah_Init
 {
     public $routes = array (
-        'frontpage_visitor'                      => array('visitor',
-                                                    array(
-                                                        'module'     => 'frontpage',
-                                                        'controller' => 'index',
-                                                        'action'     => 'visitor',
-                                                    )),
+        'frontpage_visitor'                     => array('visitor',
+                                                   array(
+                                                       'module'     => 'frontpage',
+                                                       'controller' => 'index',
+                                                       'action'     => 'visitor',
+                                                   )),
         'frontpage_user'                        => array('user',
-                                                    array(
-                                                        'module'     => 'frontpage',
-                                                        'controller' => 'index',
-                                                        'action'     => 'user',
-                                                    )),
+                                                   array(
+                                                       'module'     => 'frontpage',
+                                                       'controller' => 'index',
+                                                       'action'     => 'user',
+                                                   )),
+        'frontpage_space_selector'              => array('filter_spaces',
+                                                   array(
+                                                       'module'      => 'frontpage',
+                                                       'controller'  => 'index',
+                                                       'action'      => 'spaces',
+                                                   )),
         'frontpage_licence'                     => array('licence',
                                                    array(
                                                        'module'      => 'frontpage',

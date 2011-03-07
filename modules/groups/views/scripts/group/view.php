@@ -24,6 +24,8 @@ if ($this->group->amTeacher() || $this->group->amMember()) {
 }
 if ($this->group->amTeacher()) {
     echo '[<i><a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'califications_manager') . '">Calificaciones</a></i>]';
+} else if ($this->group->amMember()) {
+    echo '[<i><a href="' . $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_calification') . '">Calificaciones</a></i>]';
 }
 
 echo '<h2>Equipos registrados';

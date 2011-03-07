@@ -10,7 +10,7 @@
                     <a href="<?= $this->url(array('template' => $template->label), 'templates_template_view') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/wrench.png' ?>" alt="Configurar" title="Configurar" /></a>
                 <?php } ?>
             <?php } else { ?>
-                <a href="<?= $this->url(array('template' => $template->label), 'templates_template_switch') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/paintcan.png' ?>" alt="User" title="Usar" /></a>
+                <a href="<?= $this->url(array('template' => $template->label), 'templates_template_switch') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/paintcan.png' ?>" alt="Usar" title="Usar" /></a>
             <?php } ?>
         </strong>
     </h2>

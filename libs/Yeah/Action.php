@@ -201,6 +201,8 @@ abstract class Yeah_Action extends Zend_Controller_Action
         $LOG->info('----------------------------------------------------------------------------------------
 ' . $info);
 
+        $session = new Zend_Session_Namespace();
+
         // Regions settings
         global $TITLE;
         $TITLE->title = "Sistema de administración de Cursos y Notas";
@@ -214,6 +216,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
         $this->view->PAGE = $PAGE;
         $this->view->TEMPLATE = $TEMPLATE;
         $this->view->USER = $USER;
+        $this->view->SESSION = $session;
     }
 
     public function postDispatch() {
@@ -256,6 +259,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
             $view->PAGE = $PAGE;
             $view->TEMPLATE = $TEMPLATE;
             $view->USER = $USER;
+            $view->SESSION = $session;
 
             $widget_page = $model_widgets_pages->getPosition($PAGE->ident, $widget->ident);
             $position = $widget_page->position;

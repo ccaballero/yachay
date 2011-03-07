@@ -41,7 +41,12 @@ if (!$this->historial) {
     if (count($this->groups)) {
         echo '<ul>';
         foreach ($this->groups as $group) {
-            echo '<li><i><a href="' .  $this->url(array('subject' => $this->subject->url, 'group' => $group->url), 'groups_group_view') . '">Grupo ' .  $group->label . '</a> [' .  $group->getTeacher()->getFullName() . ']</i></li>';
+            echo '<li><i><a href="' .  $this->url(array('subject' => $this->subject->url, 'group' => $group->url), 'groups_group_view') . '">Grupo ' .  $group->label . '</a> [' .  $group->getTeacher()->getFullName() . ']</i>';
+            $assign = $this->model_groups_users->findByGroupAndUser($group->ident, $this->USER->ident);
+            if (!empty($assign)) {
+                echo '[' . $this->typeAssign($assign->type) . ']';
+            }
+            echo '</li>';
         }
         echo '</ul>';
     } else {

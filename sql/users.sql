@@ -30,6 +30,7 @@ CREATE TABLE `user` (
     `popularity`        int unsigned                                                NOT NULL DEFAULT 0,
     `knowledge`         int unsigned                                                NOT NULL DEFAULT 0,
     `template`          varchar(64)                                                 NOT NULL DEFAULT 'webarte',
+    `spaces`            text                                                        NULL,
     `tsregister`        int unsigned                                                NOT NULL,
     `tslastlogin`       int unsigned                                                NOT NULL DEFAULT 0,
     PRIMARY KEY (`ident`),
