@@ -23,6 +23,8 @@ class Templates_ManagerController extends Yeah_Action
         $view = new Zend_View();
         $view->setScriptPath($CONFIG->dirroot . 'modules/templates/views/scripts/manager/');
 
+        $view->config = $CONFIG;
+
         foreach ($properties as $property => $value) {
             $view->{$property} = $value;
         }

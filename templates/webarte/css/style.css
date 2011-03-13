@@ -68,9 +68,10 @@ body {
 
 #footer {
     border-top: 2pt solid;
-    height: 3.3em;
+    height: 5.0em;
     text-align: center;
     padding-top: 0.1em;
+    margin-bottom: 1.0em;
 }
 
 #primary {
@@ -96,6 +97,13 @@ body {
 #header a, #footer a, #header>.tools .first {
     padding: 0.3em 0.5em;
     font-weight: bold;
+}
+
+#header>.tools .first {
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    margin-left: 1.0em;
+    margin-right: 1.0em;
 }
 
 #primary p {

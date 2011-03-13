@@ -10,6 +10,11 @@ body {
     border-bottom-color: <?= $this->background_headers ?>;
 }
 
+#header {
+    background-image: url('<?= $this->config->wwwroot ?>media/yachay.png');
+    background-repeat: no-repeat;
+}
+
 #footer {
     border-top-color: <?= $this->background_headers ?>;
 }
@@ -23,7 +28,7 @@ body {
     color: <?= $this->background_headers ?>;
 }
 
-#header *, #footer * {
+#header, #footer, #header a, #footer a {
     color: <?= $this->color_headers ?>;
 }
 
