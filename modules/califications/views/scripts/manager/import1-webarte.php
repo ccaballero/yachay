@@ -8,7 +8,7 @@
 <form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
 
-    <p><label for="file">Archivo (.zip) (2 MiB max.) (*): </label><?= $this->formFile('file') ?></p>
+    <p><label for="file">Archivo (.csv) (2 MiB max.) (*): </label><?= $this->formFile('file') ?></p>
     <?php $first = true; ?>
 <?php foreach ($this->options as $key => $option) { ?>
     <p><label>&nbsp;</label><span><input type="radio" <?= $first ? 'checked="checked" ':'' ?>name="type" value="<?= $key ?>" /></span> <span class="form"><?= $option ?></span></p>

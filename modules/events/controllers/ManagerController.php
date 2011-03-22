@@ -53,7 +53,7 @@ class Events_ManagerController extends Yeah_Action
                 } else if ($event->isValid()) {
                     $resource = $model_resources->createRow();
                     $resource->author = $USER->ident;
-                    $resource->recipient = $request->getParam('publish');
+                    $resource->recipient = $publish;
                     $resource->tsregister = time();
                     $resource->save();
 
@@ -98,7 +98,7 @@ class Events_ManagerController extends Yeah_Action
                     }
 
                     $session->messages->addMessage('El evento ha sido creado');
-                    $session->url = $note->resource;
+                    $session->url = $event->resource;
                     $this->_redirect($request->getParam('return'));
                 } else {
                     foreach ($event->getMessages() as $message) {

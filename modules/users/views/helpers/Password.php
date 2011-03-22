@@ -4,6 +4,7 @@ class Users_View_Helper_Password
 {
     public function password($id, $name, $value = '') {
         $generators = array (
+            '' => '----------',
             'alphanum' => 'Aleatoria',
             '.code.'   => '.[Codigo].',
             '.edoc.'   => '.[Codigo Invertido].',

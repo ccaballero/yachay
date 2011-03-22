@@ -18,7 +18,7 @@ if ($this->acl('resources', 'view')) {
 
             echo '<td colspan="2">';
             $extended = $resource->getExtended();
-            echo $this->partial($extended->__type . '.php', array($extended->__type => $extended));
+            echo $this->partial($extended->__type . '.php', array($extended->__type => $extended, 'CONFIG' => $this->CONFIG));
             echo '</td></tr><tr><td>';
 
             echo 'Comentarios (' . $resource->comments . ') | Valoración (' . $resource->ratings . '/' . $resource->raters . ') | [<a href="' . $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_view') . '">Ver mas</a>]';

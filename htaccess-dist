@@ -5,5 +5,9 @@ RewriteEngine on
 # Si se utiliza con userdir cambiar al directorio correspondiente
 RewriteBase /
 
+RedirectMatch 301 /index.html /index.php
+RedirectMatch 301 /index.py /index.php
+RedirectMatch 301 /index.asp /index.php
+
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteRule ^(.*)$ index.php/$1

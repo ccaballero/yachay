@@ -12,7 +12,7 @@ class Resources extends Yeah_Model_Table
                                         'Teams_Resources',
                                         'Communities_Resources',
                                         'Users_Resources',
-                                        'Notes', 'Files', 'Events', 'Feedback',
+                                        'Notes', 'Files', 'Events', 'Videos', 'Feedback',
                                         'Comments', 'Tags_Resources',
                                   );
     protected $_referenceMap    = array(

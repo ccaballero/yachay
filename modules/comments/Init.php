@@ -33,6 +33,13 @@ class Comments_Init extends Yeah_Init
                                                         'action'     => 'delete',
                                                         'type'       => 'event',
                                                     )),
+        'videos_video_comment_delete'            => array('videos/:resource/comments/:comment/delete',
+                                                    array(
+                                                        'module'     => 'comments',
+                                                        'controller' => 'comment',
+                                                        'action'     => 'delete',
+                                                        'type'       => 'video',
+                                                    )),
         'feedback_entry_comment_delete'          => array('feedback/:resource/comments/:comment/delete',
                                                     array(
                                                         'module'     => 'comments',
@@ -60,6 +67,13 @@ class Comments_Init extends Yeah_Init
                                                         'controller' => 'comment',
                                                         'action'     => 'new',
                                                         'type'       => 'event',
+                                                    )),
+        'videos_video_comment'                   => array('videos/:resource/comment',
+                                                    array(
+                                                        'module'     => 'comments',
+                                                        'controller' => 'comment',
+                                                        'action'     => 'new',
+                                                        'type'       => 'video',
                                                     )),
         'feedback_entry_comment'                 => array('feedback/:resource/comment',
                                                     array(

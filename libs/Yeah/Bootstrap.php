@@ -4,7 +4,10 @@
 global $CONFIG;
 global $PAGE;
 global $USER;
+
+// Template elements
 global $TEMPLATE;
+global $PALETTE;
 
 // Database connector
 global $DB;
@@ -101,6 +104,14 @@ class Yeah_Bootstrap
         $TEMPLATE->description = $template->description;
         $TEMPLATE->css_properties = $template->css_properties;
         $TEMPLATE->htmlbase = $CONFIG->wwwroot . 'templates/' . $TEMPLATE->label . '/';
+
+        global $PALETTE;
+        $model_templates_users = new Templates_Users();
+        $template_user = $model_templates_users->findByTemplateAndUser($template->ident, $USER->ident);
+        if (empty($template_user)) {
+            $template_user = $template;
+        }
+        $PALETTE = json_decode($template_user->css_properties, true);
 
         // Set for localization
         setlocale(LC_CTYPE, $CONFIG->locale);

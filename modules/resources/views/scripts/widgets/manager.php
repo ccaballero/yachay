@@ -7,6 +7,10 @@ if (Yeah_Acl::hasPermission('resources', 'new')) {
     echo '<td align="right"><small>[<a href="' . $this->url(array(), 'files_new') . '">Crear</a>]</small></td></tr>';
     echo '<tr><td>[<a href="' . $this->url(array('filter' => 'events'), 'resources_filtered') . '">Eventos</a>]</td>';
     echo '<td align="right"><small>[<a href="' . $this->url(array(), 'events_new') . '">Crear</a>]</small></td></tr>';
+    if (Yeah_Acl::hasPermission('videos', 'upload')) {
+        echo '<tr><td>[<a href="' . $this->url(array('filter' => 'videos'), 'resources_filtered') . '">Videos</a>]</td>';
+        echo '<td align="right"><small>[<a href="' . $this->url(array(), 'videos_new') . '">Crear</a>]</small></td></tr>';
+    }
     echo '<tr><td>[<a href="' . $this->url(array('filter' => 'feedback'), 'resources_filtered') . '">Sugerencias</a>]</td>';
     echo '<td align="right"><small>[<a href="' . $this->url(array(), 'feedback_new') . '">Crear</a>]</small></td></tr>';
     if (Yeah_Acl::hasPermission('subjects', 'teach')) {

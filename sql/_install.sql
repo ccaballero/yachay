@@ -99,6 +99,9 @@ SELECT 'files';
 SELECT 'events';
 \. events.sql
 
+SELECT 'videos';
+\. videos.sql
+
 /*====================================================================================================================*/
 
 SELECT 'evaluations';

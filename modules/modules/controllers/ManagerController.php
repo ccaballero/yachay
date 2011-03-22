@@ -38,6 +38,8 @@ class Modules_ManagerController extends Yeah_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $session = new Zend_Session_Namespace();
+
             $upload = new Zend_File_Transfer_Adapter_Http();
             $upload->setDestination($CONFIG->dirroot . 'media/upload');
             $upload->addValidator('Size', false, 2097152)
@@ -59,9 +61,10 @@ class Modules_ManagerController extends Yeah_Action
                 if (rename($oldsql, $newsql)) {
                     mysql_import($CONFIG->dirroot . 'sql/' . $module . '.sql');
                 }
-                $session = new Zend_Session_Namespace();
                 $session->messages->addMessage('El modulo ha sido añadido');
                 unlink($filename);
+            } else {
+                $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
             }
             $this->_redirect($this->view->currentPage());
         }

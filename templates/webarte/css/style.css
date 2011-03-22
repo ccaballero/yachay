@@ -358,7 +358,7 @@ body {
 
 #primary .resource .message {
     border: 1px solid;
-    padding: 1.2em 0.5em 0.8em 60px;
+    padding: 1.2em 0.5em 1.2em 60px;
     min-height: 50px;
 }
 
@@ -383,7 +383,6 @@ body {
 
 #primary .resource .addon .viewall {
     font-size: 1.1em;
-    padding-left: 0.5em;
 }
 
 #primary .resource .addon input[type="submit"] {
@@ -573,3 +572,7 @@ body {
 #primary .tag-3  { font-size: 75%; }
 #primary .tag-2  { font-size: 60%; }
 #primary .tag-1  { font-size: 50%; }
+
+#primary #main object {
+    margin: 0.8em 0em 1.2em 0.45em;
+}

@@ -12,6 +12,12 @@
             <a href="<?= $this->url(array('filter' => 'events'), 'resources_filtered') ?>">Eventos</a>
             <a class="right small" href="<?= $this->url(array(), 'events_new') ?>">Crear</a>
         </li>
+    <?php if (Yeah_Acl::hasPermission('videos', 'upload')) { ?>
+        <li>
+            <a href="<?= $this->url(array('filter' => 'videos'), 'resources_filtered') ?>">Videos</a>
+            <a class="right small" href="<?= $this->url(array(), 'videos_new') ?>">Crear</a>
+        </li>
+    <?php } ?>
         <li>
             <a href="<?= $this->url(array('filter' => 'feedback'), 'resources_filtered') ?>">Sugerencias</a>
             <a class="right small" href="<?= $this->url(array(), 'feedback_new') ?>">Crear</a>

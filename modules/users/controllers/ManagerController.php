@@ -269,6 +269,12 @@ class Users_ManagerController extends Yeah_Action
             $model_roles = new Roles();
             $model_careers = new Careers();
 
+            $password = $request->getParam('password');
+            if ($password == '') {
+                $session->messages->addMessage('Debe establecer un generador de contraseña');
+                $this->_redirect($this->view->currentPage());
+            }
+
             $selections = $request->getParam('users');
             if (empty($selections)) {
                 $upload = new Zend_File_Transfer_Adapter_Http();
@@ -282,7 +288,6 @@ class Users_ManagerController extends Yeah_Action
 
                     $type = $request->getParam('type');
                     $role_default = $request->getParam('role');
-                    $password = $request->getParam('password');
 
                     switch ($extension) {
                         case 'csv':
@@ -368,6 +373,8 @@ class Users_ManagerController extends Yeah_Action
                         break;
                     }
                     unlink($filename);
+                } else {
+                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
             } else {
                 if (isset($session->import_users)) {

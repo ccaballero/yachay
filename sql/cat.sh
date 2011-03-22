@@ -26,6 +26,7 @@ cat resources.sql >> todo.sql
 cat notes.sql >> todo.sql
 cat files.sql >> todo.sql
 cat events.sql >> todo.sql
+cat videos.sql >> todo.sql
 cat evaluations.sql >> todo.sql
 cat califications.sql >> todo.sql
 cat comments.sql >> todo.sql

@@ -4,7 +4,7 @@
     <input type="hidden" name="return" value="<?= $this->lastPage() ?>" />
 
     <p><label for="file_publish">Publicar en (*): </label><?= $this->context('publish') ?></p>
-    <p><label for="file_file">Archivo (.zip) (2 MiB max.) (*): </label><?= $this->formFile('file') ?></p>
+    <p><label for="file_file">Archivo (2 MiB max.) (*): </label><?= $this->formFile('file') ?></p>
     <p><label for="file_message">Descripción: </label><textarea id="file_message" name="description" cols="50" rows="5"><?= $this->file->description ?></textarea></p>
     <p><label for="file_tags">Etiquetas (**): </label><input name="tags" value="<?= $this->tags ?>" maxlength="128" /></p>
     <p>(*) Campos obligatorios.</p>

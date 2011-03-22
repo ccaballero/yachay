@@ -62,6 +62,15 @@ class Resources_IndexController extends Yeah_Action
                 }
                 $this->view->newroute = 'events_new';
                 break;
+            case 'videos':
+                foreach ($resources as $resource) {
+                    $extended = $resource->getExtended();
+                    if ($extended->__type == 'video') {
+                        $list[$resource->tsregister] = $resource;
+                    }
+                }
+                $this->view->newroute = 'videos_new';
+                break;
             case 'feedback':
                 foreach ($resources as $resource) {
                     $extended = $resource->getExtended();

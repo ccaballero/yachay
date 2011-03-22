@@ -16,7 +16,7 @@ echo '<td><b>Modalidad (*):</b></td>';
 echo '<td>' . $this->mode('mode', $this->community->mode) . '</td>';
 echo '</tr>';
 echo '<tr>';
-echo '<td><b>Avatar:</b></td>';
+echo '<td><b>Avatar (jpg, png, gif):</b></td>';
 echo '<td>' . $this->formFile('file'). '</td>';
 echo '</tr>';
 echo '<tr>';

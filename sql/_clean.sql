@@ -41,6 +41,7 @@ DROP TABLE IF EXISTS `resource_global`;
 DROP TABLE IF EXISTS `note`;
 DROP TABLE IF EXISTS `file`;
 DROP TABLE IF EXISTS `event`;
+DROP TABLE IF EXISTS `video`;
 DROP TABLE IF EXISTS `evaluation`;
 DROP TABLE IF EXISTS `evaluation_test`;
 DROP TABLE IF EXISTS `evaluation_test_value`;

@@ -23,7 +23,7 @@ class Files_ManagerController extends Yeah_Action
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
 
-            $upload = new Zend_File_Transfer_Adapter_Http(); 
+            $upload = new Zend_File_Transfer_Adapter_Http();
             $upload->setDestination($CONFIG->dirroot . 'media/upload');
             $upload->addValidator('Size', false, 2097152);
              
@@ -49,7 +49,7 @@ class Files_ManagerController extends Yeah_Action
                     if ($file->isValid()) {
                         $resource = $model_resources->createRow();
                         $resource->author = $USER->ident;
-                        $resource->recipient = $request->getParam('publish');
+                        $resource->recipient = $publish;
                         $resource->tsregister = time();
                         $resource->save();
 
@@ -99,10 +99,12 @@ class Files_ManagerController extends Yeah_Action
                         $session->url = $file->resource;
                         $this->_redirect($request->getParam('return'));
                     } else {
-                        foreach ($note->getMessages() as $message) {
+                        foreach ($file->getMessages() as $message) {
                             $session->messages->addMessage($message);
                         }
                     }
+                } else {
+                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
             } else {
                 $session->messages->addMessage('Usted no tiene privilegios para publicar en ese espacio');

@@ -12,7 +12,7 @@
     <p><label for="profile_career">Carrera: </label><?= $this->career('profile_career', 'career', $this->user->career) ?></p>
     <p><label for="profile_phone">Telefono: </label><input id="profile_phone" name="phone" type="text" value="<?= $this->user->phone ?>" maxlength="64" /></p>
     <p><label for="profile_cellphone">Celular: </label><input id="profile_cellphone" name="cellphone" type="text" value="<?= $this->user->cellphone ?>" maxlength="64" /></p>
-    <p><label for="profile_photo">Avatar: </label><?= $this->formFile('file') ?></p>
+    <p><label for="profile_photo">Avatar (jpg, png, gif): </label><?= $this->formFile('file') ?></p>
     <p><label for="profile_tags">Etiquetas (**): </label><input id="profile_tags" name="tags" type="text" value="<?= $this->tags ?>" maxlength="128" /></p>
     <p><label for="profile_hobbies">Pasatiempos: </label><input id="profile_hobbies" name="hobbies" type="text" value="<?= $this->user->hobbies ?>" maxlength="1024" /></p>
     <p><label for="profile_sign">Firma: </label><input id="profile_sign" name="sign" type="text" value="<?= $this->user->sign ?>" maxlength="1024" /></p>

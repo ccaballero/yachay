@@ -317,6 +317,8 @@ class Subjects_ManagerController extends Yeah_Action
                         break;
                     }
                     unlink($filename);
+                } else {
+                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
             } else {
                 if (isset($session->import_subjects)) {

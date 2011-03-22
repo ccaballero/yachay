@@ -27,6 +27,13 @@ class Ratings_Init extends Yeah_Init
                                                         'action'     => 'up',
                                                         'type'       => 'event',
                                                     )),
+        'videos_video_rating_up'                 => array('videos/:resource/rating/up',
+                                                    array(
+                                                        'module'     => 'ratings',
+                                                        'controller' => 'rating',
+                                                        'action'     => 'up',
+                                                        'type'       => 'video',
+                                                    )),
         'feedback_entry_rating_up'               => array('feedback/:resource/rating/up',
                                                     array(
                                                         'module'     => 'ratings',
@@ -54,6 +61,13 @@ class Ratings_Init extends Yeah_Init
                                                         'controller' => 'rating',
                                                         'action'     => 'down',
                                                         'type'       => 'event',
+                                                    )),
+        'videos_video_rating_down'               => array('videos/:resource/rating/down',
+                                                    array(
+                                                        'module'     => 'ratings',
+                                                        'controller' => 'rating',
+                                                        'action'     => 'down',
+                                                        'type'       => 'video',
                                                     )),
         'feedback_entry_rating_down'             => array('feedback/:resource/rating/down',
                                                     array(

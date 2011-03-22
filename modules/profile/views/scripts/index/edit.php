@@ -21,7 +21,7 @@ echo '<td><b>Telefono:</b></td>';
 echo '<td><input type="text" name="phone" value="' . $this->user->phone . '" maxlength="64" /></td></tr><tr>';
 echo '<td><b>Celular:</b></td>';
 echo '<td><input type="text" name="cellphone" value="' . $this->user->cellphone . '" maxlength="64" /></td></tr><tr>';
-echo '<td><b>Avatar:</b></td>';
+echo '<td><b>Avatar (jpg, png, gif):</b></td>';
 echo '<td>' . $this->formFile('file'). '</td></tr><tr>';
 echo '<td><b>Etiquetas (**):</b></td>';
 echo '<td><input name="tags" value="' . $this->tags . '" maxlength="128" /></td></tr><tr>';

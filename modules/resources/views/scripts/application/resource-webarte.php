@@ -19,7 +19,7 @@
                 <?php } ?>
                 </div>
                 <div class="message">
-                    <?= $this->partial($this->template($extended->__element, $extended->__type), array($extended->__type => $extended, 'TEMPLATE' => $this->TEMPLATE)) ?>
+                    <?= $this->partial($this->template($extended->__element, $extended->__type), array($extended->__type => $extended, 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE)) ?>
                 </div>
                 <span class="addon">
             <?php if (isset($resource->comments)) { ?>

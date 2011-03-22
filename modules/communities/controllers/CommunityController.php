@@ -83,6 +83,7 @@ class Communities_CommunityController extends Yeah_Action
                     $filename = $upload->getFileName('file');
                     $extension = strtolower(substr($filename, -3));
                     switch ($extension) {
+                        case 'jpeg':
                         case 'jpg':
                             $uploaded = imagecreatefromjpeg($filename);
                             break;
@@ -171,6 +172,8 @@ class Communities_CommunityController extends Yeah_Action
 
                     unlink($filename);
                     $community->avatar = true;
+                } else {
+                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
                 $community->save();
 

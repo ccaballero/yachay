@@ -54,6 +54,7 @@ class Files_FileController extends Yeah_Action
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
+
             $file->description = $request->getParam('description');
             $newTags = $request->getParam('tags');
 
@@ -159,6 +160,9 @@ class Files_FileController extends Yeah_Action
         $resource = $model_resources->findByIdent($file->resource);
         $this->requireContext($resource);
 
+        $file->downloads = $file->downloads + 1;
+        $file->save();
+
         header("HTTP/1.1 200 OK"); //mandamos codigo de OK
         header("Status: 200 OK"); //sirve para corregir un bug de IE (fuente: php.net)
         header('Content-Type: ' . $file->mime);
@@ -208,7 +212,7 @@ class Files_FileController extends Yeah_Action
         $model_valorations->decreaseActivity(2);
 
         $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El archivo ha sido eliminado");
+        $session->messages->addMessage('El archivo ha sido eliminado');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -250,7 +254,7 @@ class Files_FileController extends Yeah_Action
         $model_valorations->decreaseActivity(2, $resource->author);
 
         $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El archivo ha sido eliminado");
+        $session->messages->addMessage('El archivo ha sido eliminado');
         $this->_redirect($this->view->currentPage());
     }
 }
