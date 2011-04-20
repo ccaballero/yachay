@@ -16,6 +16,9 @@ class Feedback_EntryController extends Yeah_Action
         $resource = $model_resources->findByIdent($entry->resource);
         $this->requireContext($resource);
 
+        $resource->viewers = $resource->viewers + 1;
+        $resource->save();
+
         $tags = $resource->findTagsViaTags_Resources();
 
         $this->view->resource = $resource;

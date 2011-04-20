@@ -4,11 +4,11 @@
     <a href="<?= $this->url(array('file' => $this->resource->ident), 'files_file_edit') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
 <?php } ?>
 <?php if ($this->acl('ratings', 'new')) { ?>
-    <a href="<?= $this->url(array('resource' => $this->resource->ident), 'notes_note_rating_down') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/arrow_down.png' ?>" alt="Valoración negativa" title="Valoración negativa" /></a>
+    <a href="<?= $this->url(array('resource' => $this->resource->ident), 'files_file_rating_down') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/arrow_down.png' ?>" alt="Valoración negativa" title="Valoración negativa" /></a>
 <?php } ?>
     <?= $this->resource->ratings ?> / <?= $this->resource->raters ?>
 <?php if ($this->acl('ratings', 'new')) { ?>
-    <a href="<?= $this->url(array('resource' => $this->resource->ident), 'notes_note_rating_up') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/arrow_up.png' ?>" alt="Valoración positiva" title="Valoración positiva" /></a>
+    <a href="<?= $this->url(array('resource' => $this->resource->ident), 'files_file_rating_up') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/arrow_up.png' ?>" alt="Valoración positiva" title="Valoración positiva" /></a>
 <?php } ?>
 </strong>
 </h1>

@@ -5,8 +5,10 @@ echo '<table>';
 echo '<tr>';
 echo '<td>[<a href="' . $this->url(array(), 'resources_list') . '">Todas</a>]</td>';
 echo '<td>[<a href="' . $this->url(array('filter' => 'notes'), 'resources_filtered') . '">Notas</a>]</td>';
+echo '<td>[<a href="' . $this->url(array('filter' => 'links'), 'resources_filtered') . '">Enlaces</a>]</td>';
 echo '<td>[<a href="' . $this->url(array('filter' => 'files'), 'resources_filtered') . '">Archivos</a>]</td>';
 echo '<td>[<a href="' . $this->url(array('filter' => 'events'), 'resources_filtered') . '">Eventos</a>]</td>';
+echo '<td>[<a href="' . $this->url(array('filter' => 'photos'), 'resources_filtered') . '">Fotografias</a>]</td>';
 echo '<td>[<a href="' . $this->url(array('filter' => 'videos'), 'resources_filtered') . '">Videos</a>]</td>';
 echo '<td>[<a href="' . $this->url(array('filter' => 'feedback'), 'resources_filtered') . '">Sugerencias</a>]</td>';
 if ($this->acl('subjects', 'teach')) {
@@ -50,8 +52,10 @@ echo '<table>';
 echo '<tr>';
 echo '<td>[<a href="' . $this->url(array(), 'resources_list') . '">Todas</a>]</td>';
 echo '<td>[<a href="' . $this->url(array('filter' => 'notes'), 'resources_filtered') . '">Notas</a>]</td>';
+echo '<td>[<a href="' . $this->url(array('filter' => 'links'), 'resources_filtered') . '">Enlaces</a>]</td>';
 echo '<td>[<a href="' . $this->url(array('filter' => 'files'), 'resources_filtered') . '">Archivos</a>]</td>';
 echo '<td>[<a href="' . $this->url(array('filter' => 'events'), 'resources_filtered') . '">Eventos</a>]</td>';
+echo '<td>[<a href="' . $this->url(array('filter' => 'photos'), 'resources_filtered') . '">Fotografias</a>]</td>';
 echo '<td>[<a href="' . $this->url(array('filter' => 'videos'), 'resources_filtered') . '">Videos</a>]</td>';
 echo '<td>[<a href="' . $this->url(array('filter' => 'feedback'), 'resources_filtered') . '">Sugerencias</a>]</td>';
 if ($this->acl('subjects', 'teach')) {

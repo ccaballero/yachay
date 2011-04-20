@@ -1,12 +1,17 @@
 <?php
 
 if (Yeah_Acl::hasPermission('resources', 'new')) {
-    echo '<table width="100%"><tr><td>[<a href="' . $this->url(array('filter' => 'notes'), 'resources_filtered') . '">Notas</a>]</td>';
+    echo '<table width="100%"><tr>';
+    echo '<td>[<a href="' . $this->url(array('filter' => 'notes'), 'resources_filtered') . '">Notas</a>]</td>';
     echo '<td align="right"><small>[<a href="' . $this->url(array(), 'notes_new') . '">Crear</a>]</small></td></tr>';
+    echo '<td>[<a href="' . $this->url(array('filter' => 'links'), 'resources_filtered') . '">Enlaces</a>]</td>';
+    echo '<td align="right"><small>[<a href="' . $this->url(array(), 'links_new') . '">Crear</a>]</small></td></tr>';
     echo '<tr><td>[<a href="' . $this->url(array('filter' => 'files'), 'resources_filtered') . '">Archivos</a>]</td>';
     echo '<td align="right"><small>[<a href="' . $this->url(array(), 'files_new') . '">Crear</a>]</small></td></tr>';
     echo '<tr><td>[<a href="' . $this->url(array('filter' => 'events'), 'resources_filtered') . '">Eventos</a>]</td>';
     echo '<td align="right"><small>[<a href="' . $this->url(array(), 'events_new') . '">Crear</a>]</small></td></tr>';
+    echo '<tr><td>[<a href="' . $this->url(array('filter' => 'photos'), 'resources_filtered') . '">Fotografias</a>]</td>';
+    echo '<td align="right"><small>[<a href="' . $this->url(array(), 'photos_new') . '">Crear</a>]</small></td></tr>';
     if (Yeah_Acl::hasPermission('videos', 'upload')) {
         echo '<tr><td>[<a href="' . $this->url(array('filter' => 'videos'), 'resources_filtered') . '">Videos</a>]</td>';
         echo '<td align="right"><small>[<a href="' . $this->url(array(), 'videos_new') . '">Crear</a>]</small></td></tr>';

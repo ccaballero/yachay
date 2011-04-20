@@ -21,7 +21,12 @@ if ($this->acl('resources', 'view')) {
             echo $this->partial($extended->__type . '.php', array($extended->__type => $extended, 'CONFIG' => $this->CONFIG));
             echo '</td></tr><tr><td>';
 
-            echo 'Comentarios (' . $resource->comments . ') | Valoración (' . $resource->ratings . '/' . $resource->raters . ') | [<a href="' . $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_view') . '">Ver mas</a>]';
+            if (isset($resource->viewers)) {
+                echo 'Visitas (' . $resource->viewers . ') | ';
+            }
+            echo 'Comentarios (' . $resource->comments . ') | ';
+            echo 'Valoración (' . $resource->ratings . '/' . $resource->raters . ') | ';
+            echo '[<a href="' . $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_view') . '">Ver mas</a>]';
             if ($this->acl('resources', 'drop')) {
                 echo '[<a href="' . $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_drop') . '">Eliminar</a>]';
             }

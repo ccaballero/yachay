@@ -19,7 +19,7 @@ INSERT INTO `page`
 VALUES
 ('Pagina inicial',                'Inicio',           TRUE,          'frontpage',        'index',       'visitor',     'frontpage_visitor'),
 ('Pagina de usuario',             '',                 FALSE,         'frontpage',        'index',       'user',        'frontpage_user'),
-('Licencia de uso',               '',                 FALSE,         'frontpage',        'static',      'licence',     'frontpage_licence'),
+('Colabora',                      '',                 FALSE,         'frontpage',        'static',      'development', 'frontpage_development'),
 ('Condiciones de uso',            '',                 FALSE,         'frontpage',        'static',      'terms',       'frontpage_terms'),
 ('Politica de privacidad',        '',                 FALSE,         'frontpage',        'static',      'privacy',     'frontpage_privacy');
 

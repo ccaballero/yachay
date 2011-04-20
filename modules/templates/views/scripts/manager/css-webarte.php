@@ -134,3 +134,19 @@ body {
 #content input, #content option, #content select, #content textarea {
     color: #000000;
 }
+
+#primary .tabs.top {
+    border-bottom-color: <?= $this->color_borders ?>;
+}
+
+#primary .tabs.bottom {
+    border-top-color: <?= $this->color_borders ?>;
+}
+
+#primary .tabs a {
+    border-color: <?= $this->color_borders ?>;
+}
+
+#primary .tabs a.active {
+    background-color: <?= $this->color_borders ?>;
+}

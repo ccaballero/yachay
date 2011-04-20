@@ -17,7 +17,9 @@ class Resources_IndexController extends Yeah_Action
 
         ksort($list);
         $list = array_reverse($list);
+
         $this->view->resources = $list;
+        $this->view->active = 'all';
 
         history('resources');
         breadcrumb();
@@ -44,6 +46,15 @@ class Resources_IndexController extends Yeah_Action
                 }
                 $this->view->newroute = 'notes_new';
                 break;
+            case 'links':
+                foreach ($resources as $resource) {
+                    $extended = $resource->getExtended();
+                    if ($extended->__type == 'link') {
+                        $list[$resource->tsregister] = $resource;
+                    }
+                }
+                $this->view->newroute = 'links_new';
+                break;
             case 'files':
                 foreach ($resources as $resource) {
                     $extended = $resource->getExtended();
@@ -61,6 +72,15 @@ class Resources_IndexController extends Yeah_Action
                     }
                 }
                 $this->view->newroute = 'events_new';
+                break;
+            case 'photos':
+                foreach ($resources as $resource) {
+                    $extended = $resource->getExtended();
+                    if ($extended->__type == 'photo') {
+                        $list[$resource->tsregister] = $resource;
+                    }
+                }
+                $this->view->newroute = 'photos_new';
                 break;
             case 'videos':
                 foreach ($resources as $resource) {
@@ -92,7 +112,9 @@ class Resources_IndexController extends Yeah_Action
 
         ksort($list);
         $list = array_reverse($list);
+
         $this->view->resources = $list;
+        $this->view->active = $filter;
 
         $template = new Yeah_Helpers_Template();
         $this->render($template->template('resources', 'list', 'index/', false));

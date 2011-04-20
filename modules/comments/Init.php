@@ -19,6 +19,13 @@ class Comments_Init extends Yeah_Init
                                                         'action'     => 'delete',
                                                         'type'       => 'note',
                                                     )),
+        'links_link_comment_delete'              => array('links/:resource/comments/:comment/delete',
+                                                    array(
+                                                        'module'     => 'comments',
+                                                        'controller' => 'comment',
+                                                        'action'     => 'delete',
+                                                        'type'       => 'link',
+                                                    )),
         'files_file_comment_delete'              => array('files/:resource/comments/:comment/delete',
                                                     array(
                                                         'module'     => 'comments',
@@ -32,6 +39,13 @@ class Comments_Init extends Yeah_Init
                                                         'controller' => 'comment',
                                                         'action'     => 'delete',
                                                         'type'       => 'event',
+                                                    )),
+        'photos_photo_comment_delete'            => array('photos/:resource/comments/:comment/delete',
+                                                    array(
+                                                        'module'     => 'comments',
+                                                        'controller' => 'comment',
+                                                        'action'     => 'delete',
+                                                        'type'       => 'photo',
                                                     )),
         'videos_video_comment_delete'            => array('videos/:resource/comments/:comment/delete',
                                                     array(
@@ -54,6 +68,13 @@ class Comments_Init extends Yeah_Init
                                                         'action'     => 'new',
                                                         'type'       => 'note',
                                                     )),
+        'links_link_comment'                     => array('links/:resource/comment',
+                                                    array(
+                                                        'module'     => 'comments',
+                                                        'controller' => 'comment',
+                                                        'action'     => 'new',
+                                                        'type'       => 'link',
+                                                    )),
         'files_file_comment'                     => array('files/:resource/comment',
                                                     array(
                                                         'module'     => 'comments',
@@ -67,6 +88,13 @@ class Comments_Init extends Yeah_Init
                                                         'controller' => 'comment',
                                                         'action'     => 'new',
                                                         'type'       => 'event',
+                                                    )),
+        'photos_photo_comment'                   => array('photos/:resource/comment',
+                                                    array(
+                                                        'module'     => 'comments',
+                                                        'controller' => 'comment',
+                                                        'action'     => 'new',
+                                                        'type'       => 'photo',
                                                     )),
         'videos_video_comment'                   => array('videos/:resource/comment',
                                                     array(

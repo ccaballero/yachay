@@ -93,11 +93,17 @@ SELECT 'resources';
 SELECT 'notes';
 \. notes.sql
 
+SELECT 'links';
+\. links.sql
+
 SELECT 'files';
 \. files.sql
 
 SELECT 'events';
 \. events.sql
+
+SELECT 'photos';
+\. photos.sql
 
 SELECT 'videos';
 \. videos.sql

@@ -2,7 +2,7 @@
 <h2>Publicaciones</h2>
     <?php if (count($this->resources)) { ?>
         <?php if ($this->paginator) { ?>
-            <?= $this->paginator($this->resources, $this->route) ?>
+        <?= $this->paginator($this->resources, $this->route) ?>
         <?php } ?>
         <div id="resources">
         <?php foreach ($this->resources as $resource) { ?>
@@ -22,6 +22,10 @@
                     <?= $this->partial($this->template($extended->__element, $extended->__type), array($extended->__type => $extended, 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE)) ?>
                 </div>
                 <span class="addon">
+            <?php if (isset($resource->viewers)) { ?>
+                    <img src="<?= $this->TEMPLATE->htmlbase . 'images/eye.png' ?>" alt="Visitado" title="Visitas" />
+                    <span>(<?= $resource->viewers ?>)</span>
+            <?php } ?>
             <?php if (isset($resource->comments)) { ?>
                     <img src="<?= $this->TEMPLATE->htmlbase . 'images/comment.png' ?>" alt="Comentarios" title="Comentarios" />
                     <span>(<?= $resource->comments ?>)</span>
@@ -51,7 +55,7 @@
         <?php } ?>
         </div>
         <?php if ($this->paginator) { ?>
-            <?= $this->paginator($this->resources, $this->route) ?>
+        <?= $this->paginator($this->resources, $this->route) ?>
         <?php } ?>
     <?php } else { ?>
         <p>No se registraron recursos aún.</p>

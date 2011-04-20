@@ -15,6 +15,9 @@ class Notes_NoteController extends Yeah_Action
         $resource = $model_resources->findByIdent($note->resource);
         $this->requireContext($resource);
 
+        $resource->viewers = $resource->viewers + 1;
+        $resource->save();
+
         $tags = $resource->findTagsViaTags_Resources();
 
         $this->view->resource = $resource;

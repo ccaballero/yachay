@@ -21,11 +21,11 @@ class Frontpage_Init extends Yeah_Init
                                                        'controller'  => 'index',
                                                        'action'      => 'spaces',
                                                    )),
-        'frontpage_licence'                     => array('licence',
+        'frontpage_development'                 => array('development',
                                                    array(
                                                        'module'      => 'frontpage',
                                                        'controller'  => 'static',
-                                                       'action'      => 'licence',
+                                                       'action'      => 'development',
                                                    )),
         'frontpage_terms'                       => array('terms',
                                                    array(

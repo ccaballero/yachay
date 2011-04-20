@@ -81,94 +81,12 @@ class Communities_CommunityController extends Yeah_Action
                        ->addValidator('Extension', false, array('jpg', 'png', 'gif'));
                 if ($upload->receive()) {
                     $filename = $upload->getFileName('file');
-                    $extension = strtolower(substr($filename, -3));
-                    switch ($extension) {
-                        case 'jpeg':
-                        case 'jpg':
-                            $uploaded = imagecreatefromjpeg($filename);
-                            break;
-                        case 'png':
-                            $uploaded = imagecreatefrompng($filename);
-                            break;
-                        case 'gif':
-                            $uploaded = imagecreatefromgif($filename);
-                            break;
-                    }
 
-                    $width = imagesx($uploaded);
-                    $height = imagesy($uploaded);
+                    $thumbnail = new Yeah_Helpers_Thumbnail();
 
-                    // creo y redimensiono la imagen grande
-                    $maxwidth = 200;
-                    $maxheight = 200;
-                    $newwidth = $maxwidth + 1;
-                    $newheight = $maxheight + 1;
-
-                    while ($newwidth > $maxwidth && $newheight > $maxheight) {
-                        $ratio = $width / $height;
-                        if ($ratio == 1) {
-                            $newwidth = $maxwidth;
-                            $newheigth = $maxwidth;
-                        } else if ($ratio > 1) {
-                            $newwidth = $maxwidth;
-                            $newheight = $maxwidth / $ratio;
-                        } else if ($ratio < 1) {
-                            $newwidth = $maxheight * $ratio;
-                            $newheight = $maxheight;
-                        }
-                    }
-
-                    $thumb = imagecreatetruecolor($newwidth, $newheight);
-                    imagecopyresized($thumb, $uploaded, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                    imagejpeg($thumb, $CONFIG->dirroot . 'media/communities/thumbnail_large/' . $community->ident . '.jpg', 100);
-
-                    // creo y redimensiono la imagen mediana
-                    $maxwidth = 100;
-                    $maxheight = 100;
-                    $newwidth = $maxwidth + 1;
-                    $newheight = $maxheight + 1;
-
-                    while ($newwidth > $maxwidth && $newheight > $maxheight) {
-                        $ratio = $width / $height;
-                        if ($ratio == 1) {
-                            $newwidth = $maxwidth;
-                            $newheigth = $maxwidth;
-                        } else if ($ratio > 1) {
-                            $newwidth = $maxwidth;
-                            $newheight = $maxwidth / $ratio;
-                        } else if ($ratio < 1) {
-                            $newwidth = $maxheight * $ratio;
-                            $newheight = $maxheight;
-                        }
-                    }
-
-                    $thumb = imagecreatetruecolor($newwidth, $newheight);
-                    imagecopyresized($thumb, $uploaded, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                    imagejpeg($thumb, $CONFIG->dirroot . 'media/communities/thumbnail_medium/' . $community->ident . '.jpg', 100);
-
-                    // creo y redimensiono la imagen pequeña
-                    $maxwidth = 50;
-                    $maxheight = 50;
-                    $newwidth = $maxwidth + 1;
-                    $newheight = $maxheight + 1;
-
-                    while ($newwidth > $maxwidth && $newheight > $maxheight) {
-                        $ratio = $width / $height;
-                        if ($ratio == 1) {
-                            $newwidth = $maxwidth;
-                            $newheigth = $maxwidth;
-                        } else if ($ratio > 1) {
-                            $newwidth = $maxwidth;
-                            $newheight = $maxwidth / $ratio;
-                        } else if ($ratio < 1) {
-                            $newwidth = $maxheight * $ratio;
-                            $newheight = $maxheight;
-                        }
-                    }
-
-                    $thumb = imagecreatetruecolor($newwidth, $newheight);
-                    imagecopyresized($thumb, $uploaded, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                    imagejpeg($thumb, $CONFIG->dirroot . 'media/communities/thumbnail_small/' . $community->ident . '.jpg', 100);
+                    $thumbnail->thumbnail($filename, $CONFIG->dirroot . 'media/communities/thumbnail_large/' . $community->ident . '.jpg', 200, 200);
+                    $thumbnail->thumbnail($filename, $CONFIG->dirroot . 'media/communities/thumbnail_medium/' . $community->ident . '.jpg', 100, 100);
+                    $thumbnail->thumbnail($filename, $CONFIG->dirroot . 'media/communities/thumbnail_small/' . $community->ident . '.jpg', 50, 50);
 
                     unlink($filename);
                     $community->avatar = true;

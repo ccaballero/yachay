@@ -14,10 +14,7 @@ hgignore-dist
 .gitignore
 .project
 .htaccess
-media/upload/
-media/users/thumbnail_large/
-media/users/thumbnail_medium/
-media/users/thumbnail_small/
+info.php
 libs/Yeah/Settings/Database.php
 libs/Yeah/Settings/Config.php
 libs/Zend1.8.3

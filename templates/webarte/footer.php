@@ -5,9 +5,9 @@
 </ul>
 
 <ul class="menu">
-    <li><a href="<?= $this->url(array(), 'frontpage_licence') ?>">Licencia</a></li>
-    <li><a href="<?= $this->url(array(), 'frontpage_terms') ?>">Terminos</a></li>
-    <li><a href="<?= $this->url(array(), 'frontpage_privacy') ?>">Privacidad</a></li>
+    <li><a href="<?= $this->url(array(), 'frontpage_development') ?>">&nbsp;</a></li>
+    <li><a href="<?= $this->url(array(), 'frontpage_terms') ?>">&nbsp;</a></li>
+    <li><a href="<?= $this->url(array(), 'frontpage_privacy') ?>">&nbsp;</a></li>
 </ul>
 
 <span><?= $this->FOOTER->copyright ?></span>

@@ -15,21 +15,37 @@ class Resources_Resource extends Yeah_Model_Row_Validation
         if (!empty($note)) {
             return $note;
         }
+
+        $model_links = new Links();
+        $link = $model_links->findByResource($this->ident);
+        if (!empty($link)) {
+            return $link;
+        }
+
         $model_files = new Files();
         $file = $model_files->findByResource($this->ident);
         if (!empty($file)) {
             return $file;
         }
+
         $model_events = new Events();
         $event = $model_events->findByResource($this->ident);
         if (!empty($event)) {
             return $event;
         }
+
+        $model_photos = new Photos();
+        $photo = $model_photos->findByResource($this->ident);
+        if (!empty($photo)) {
+            return $photo;
+        }
+
         $model_videos = new Videos();
         $video = $model_videos->findByResource($this->ident);
         if (!empty($video)) {
             return $video;
         }
+
         $model_feedback = new Feedback();
         $entry = $model_feedback->findByResource($this->ident);
         if (!empty($entry)) {

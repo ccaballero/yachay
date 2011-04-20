@@ -269,14 +269,14 @@ class Users_ManagerController extends Yeah_Action
             $model_roles = new Roles();
             $model_careers = new Careers();
 
-            $password = $request->getParam('password');
-            if ($password == '') {
-                $session->messages->addMessage('Debe establecer un generador de contraseña');
-                $this->_redirect($this->view->currentPage());
-            }
-
             $selections = $request->getParam('users');
             if (empty($selections)) {
+                $password = $request->getParam('password');
+                if ($password == '') {
+                    $session->messages->addMessage('Debe establecer un generador de contraseña');
+                    $this->_redirect($this->view->currentPage());
+                }
+
                 $upload = new Zend_File_Transfer_Adapter_Http();
                 $upload->setDestination($CONFIG->dirroot . 'media/upload');
                 $upload->addValidator('Size', false, 2097152)

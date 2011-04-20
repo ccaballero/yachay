@@ -15,6 +15,9 @@ class Files_FileController extends Yeah_Action
         $resource = $model_resources->findByIdent($file->resource);
         $this->requireContext($resource);
 
+        $resource->viewers = $resource->viewers + 1;
+        $resource->save();
+
         $tags = $resource->findTagsViaTags_Resources();
 
         $this->view->resource = $resource;
@@ -124,7 +127,7 @@ class Files_FileController extends Yeah_Action
                     }
                 }
 
-                $session->messages->addMessage('La descripcion se modifico correctamente');
+                $session->messages->addMessage('La descripción se modifico correctamente');
                 $session->url = $file->resource;
                 $this->_redirect($this->view->url(array('file' => $file->resource), 'files_file_view'));
             } else {

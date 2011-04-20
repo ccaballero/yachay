@@ -40,11 +40,13 @@ echo 'data="' . $this->CONFIG->wwwroot . 'media/videos/flvplayer.swf" width="600
 echo '<param name="movie" value="' . $this->CONFIG->wwwroot . 'media/videos/flvplayer.swf" />';
 echo '<param name="allowFullScreen" value="true" />';
 echo '<param name="FlashVars" value="flv=' . $this->CONFIG->wwwroot . 'media/videos/' . $this->video->resource;
-echo '&showstop=1&showvolume=1&showtime=1&showfullscreen=1&buffermessage=Cargando...' . '" />';
+echo '&showstop=1&showvolume=1&showtime=1&showfullscreen=1&buffermessage=...' . '" />';
 echo '</object>';
 echo '</center>';
 
-echo '<p>' . $this->specialEscape($this->escape($this->video->description)) . '</p>';
+if (!empty($this->video->description)) {
+    echo '<p>' . $this->specialEscape($this->escape($this->video->description)) . '</p>';
+}
 
 if ($this->acl('comments', 'view')) {
     echo '<h2>Comentarios</h2>';

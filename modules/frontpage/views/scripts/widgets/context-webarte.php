@@ -20,7 +20,7 @@
     <?php } ?>
     </dl>
     <?php if ($this->USER->role <> 1) { ?>
-        <p><input type="submit" value="Filtrar espacios" /></p>
+        <p class="center top_space"><input type="submit" value="Filtrar espacios" /></p>
     <?php } ?>
 <?php } ?>
 

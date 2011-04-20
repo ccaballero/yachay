@@ -10,7 +10,6 @@ CREATE TABLE `video` (
     `proportion`        varchar(8)                                                  NOT NULL DEFAULT '1:1',
     `size`              int unsigned                                                NOT NULL,
     `filename`          varchar(64)                                                 NOT NULL,
-    `viewers`           int unsigned                                                NOT NULL DEFAULT 0,
     `priority`          boolean                                                     NOT NULL DEFAULT FALSE,
     PRIMARY KEY (`resource`),
     INDEX (`resource`),
