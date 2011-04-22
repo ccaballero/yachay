@@ -4,5 +4,5 @@
 
 <p class="center">
     <img src="<?= $this->TEMPLATE->htmlbase . 'images/link.png' ?>" alt="" title="" />
-    <a href="<?= $this->link->link ?>"><?= $this->link->link ?></a>
+    <a target="_BLANK" href="<?= $this->link->link ?>"><?= $this->link->link ?></a>
 </p>

@@ -35,7 +35,7 @@
     <p class="message"><?= $this->specialEscape($this->escape($this->link->description)) ?></p>
 <?php } ?>
 
-<p class="center"><a href="<?= $this->link->link ?>"><?= $this->link->link ?></a></p>
+<p class="center"><a target="_BLANK" href="<?= $this->link->link ?>"><?= $this->link->link ?></a></p>
 
 <?php if ($this->acl('comments', 'view')) { ?>
     <h2>Comentarios</h2>

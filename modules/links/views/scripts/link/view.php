@@ -32,7 +32,7 @@ echo '<tr valign="top"><td><b>Fecha: </b><i>' . $this->timestamp($this->resource
 echo '</table>';
 
 echo '<p>' . $this->specialEscape($this->escape($this->link->description)) . '</p>';
-echo '<center><a href="' . $this->link->link . '">' . $this->link->link . '</a></center>';
+echo '<center><a target="_BLANK" href="' . $this->link->link . '">' . $this->link->link . '</a></center>';
 
 if ($this->acl('comments', 'view')) {
     echo '<h2>Comentarios</h2>';

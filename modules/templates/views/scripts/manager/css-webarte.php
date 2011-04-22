@@ -67,6 +67,10 @@ body {
     border-color: <?= $this->color_borders ?>;
 }
 
+#primary .resource .message a {
+    border-color: <?= $this->color_borders ?>;
+}
+
 #primary .resource .label {
     background-color: <?= $this->background_headers2 ?>;
     color: <?= $this->color_headers ?>;

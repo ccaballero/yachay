@@ -15,7 +15,9 @@
                 <img src="<?= $this->CONFIG->wwwroot . 'media/users/thumbnail_small/' . $author->getAvatar() ?>" alt="<?= $author->getFullName() ?>" title="<?= $author->getFullName() ?>" />
             <?php } ?>
             </div>
-            <div class="message"><p><?= $comment->comment ?></p></div>
+            <div class="message">
+                <p><?= $this->specialEscape($this->escape($comment->comment)) ?></p>
+            </div>
             <span class="addon">
                 <span class="viewall">
             <?php if ($comment->amAuthor()) { ?>

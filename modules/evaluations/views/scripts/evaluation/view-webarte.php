@@ -16,7 +16,9 @@
     <span class="mark">Accesibilidad:</span> <?= $this->access($this->evaluation->access) ?><br />
 </p>
 
-<p class="message"><?= $this->evaluation->description ?></p>
+<?php if (!empty($this->evaluation->description)) { ?>
+    <p class="message"><?= $this->evaluation->description ?></p>
+<?php } ?>
 
 <h2>Calificaciones previstas
 <strong class="task">
