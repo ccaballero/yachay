@@ -2,7 +2,8 @@
 
 class Yeah_Helpers_Time
 {
-    public function time($name, $value = '0-0-0-0-0') {
+    // modes: { 'BEFORE', 'AFTER', 'BOTH'}
+    public function time($name, $value = '0-0-0-0-0', $mode = 'BOTH') {
         if (empty($value)) {
             $value = '0-0-0-0-0';
         }
@@ -43,9 +44,25 @@ class Yeah_Helpers_Time
         $month .= '</select>';
 
         // generacion del año
-        $year = '<select name="' . $name . '-year" id="' . $name . '-year"><option value="-1">A&ntilde;o:</option>';
+        $year = '<select name="' . $name . '-year" id="' . $name . '-year"><option value="-1">Año: </option>';
         $current_year = date("Y");
-        for ($k = $current_year + 10; $k >= $current_year - 70; $k--) {
+
+        switch ($mode) {
+            case 'BEFORE':
+                $start_year = $current_year - 100;
+                $end_year = $current_year;
+                break;
+            case 'AFTER':
+                $start_year = $current_year;
+                $end_year = $current_year + 20;
+                break;
+            case 'BOTH':
+                $start_year = $current_year - 100;
+                $end_year = $current_year + 20;
+                break;
+        }
+
+        for ($k = $end_year; $k >= $start_year; $k--) {
             $selected = '';
             if ($Year == $k) {
                 $selected = 'selected="selected" ';

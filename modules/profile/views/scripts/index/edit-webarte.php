@@ -8,7 +8,7 @@
     <p><label for="profile_email">Correo electronico: </label><input id="profile_email" name="email" type="text" value="<?= $this->user->email ?>" maxlength="50" /></p>
     <p><label for="profile_surname">Apellidos: </label><input id="profile_surname" name="surname" type="text" value="<?= $this->user->surname ?>" maxlength="128" /></p>
     <p><label for="profile_name">Nombres: </label><input id="profile_name" name="name" type="text" value="<?= $this->user->name ?>" maxlength="128" /></p>
-    <p><label for="profile_date">Fecha de nacimiento: </label><?= $this->date('birthdate', $this->user->birthdate) ?></p>
+    <p><label for="profile_date">Fecha de nacimiento: </label><?= $this->date('birthdate', $this->user->birthdate, 'BEFORE') ?></p>
     <p><label for="profile_career">Carrera: </label><?= $this->career('profile_career', 'career', $this->user->career) ?></p>
     <p><label for="profile_phone">Telefono: </label><input id="profile_phone" name="phone" type="text" value="<?= $this->user->phone ?>" maxlength="64" /></p>
     <p><label for="profile_cellphone">Celular: </label><input id="profile_cellphone" name="cellphone" type="text" value="<?= $this->user->cellphone ?>" maxlength="64" /></p>

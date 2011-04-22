@@ -11,7 +11,7 @@
     <p><label for="user_email">Correo electrónico: </label><input id="user_email" name="email" type="text" value="<?= $this->user->email ?>" maxlength="50" /></p>
     <p><label for="user_surname">Apellidos: </label><input id="user_surname" name="surname" type="text" value="<?= $this->user->surname ?>" maxlength="128" /></p>
     <p><label for="user_name">Nombres: </label><input id="user_name" name="name" type="text" value="<?= $this->user->name ?>" maxlength="128" /></p>
-    <p><label for="user_date">Fecha de nacimiento: </label><?= $this->date('birthdate', $this->user->birthdate) ?></p>
+    <p><label for="user_date">Fecha de nacimiento: </label><?= $this->date('birthdate', $this->user->birthdate, 'BEFORE') ?></p>
     <p><label for="user_career">Carrera: </label><?= $this->career('user_career', 'career', $this->user->career) ?></p>
     <p><label for="user_phone">Telefono: </label><input id="user_phone" name="phone" type="text" value="<?= $this->user->phone ?>" maxlength="64" /></p>
     <p><label for="user_cellphone">Celular: </label><input id="user_cellphone" name="cellphone" type="text" value="<?= $this->user->cellphone ?>" maxlength="64" /></p>

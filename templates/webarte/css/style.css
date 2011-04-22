@@ -472,12 +472,19 @@ body {
     position: absolute;
     top: 5px;
     font-weight: bold;
+    height: 1.1em;
+    overflow: hidden;
 }
 
 #primary #block .box .tools {
     position: absolute;
     left: 5px;
     top: 110px;
+}
+
+#primary #block .box .description {
+    max-height: 5.3em;
+    overflow: hidden;
 }
 
 #primary #block .import, #primary #block .member {

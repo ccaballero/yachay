@@ -36,7 +36,7 @@
 <?php } ?>
 
 <p class="center">
-    <img src="<?= $this->CONFIG->wwwroot ?>media/photos/<?= $this->photo->resource ?>" alt="" title="" />
+    <img src="<?= $this->CONFIG->wwwroot ?>media/photos/<?= $this->photo->resource ?>" alt="" title="" width="680" />
     <?= $this->photo->filename ?>&nbsp;
     <?= $this->size($this->photo->size) ?>
 </p>

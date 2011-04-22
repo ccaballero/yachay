@@ -29,7 +29,7 @@
             <img src="<?= $this->TEMPLATE->htmlbase . 'images/key.png' ?>" alt="Comunidad privada" title="Comunidad privada" />
         <?php } ?>
     </div>
-    <p><span class="bold">Descripción: </span><?= $community->description ?></p>
+    <p class="description"><span class="bold">Descripción: </span><?= $community->description ?></p>
     <p><span class="bold">Miembros: </span><?= $community->members ?></p>
     <?php $tags = $community->getTags() ?>
     <?php if (count($tags)) { ?>

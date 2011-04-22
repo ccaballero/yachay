@@ -14,6 +14,6 @@ echo '<td><input type="text" name="surname" value="' . $this->user->surname . '"
 echo '</tr><tr><td><b>Nombres:</b></td>';
 echo '<td><input type="text" name="name" value="' . $this->user->name . '" maxlength="128" /></td>';
 echo '</tr><tr><td><b>Fecha de nacimiento:</b></td>';
-echo '<td>' . $this->date('birthdate', $this->user->birthdate) . '</td>';
+echo '<td>' . $this->date('birthdate', $this->user->birthdate, 'BEFORE') . '</td>';
 echo '</tr><tr><td colspan="2">(*) Campos obligatorios.</td></tr><tr><td>&nbsp;</td><td><input type="submit" value="Registrar usuario" />';
 echo '</td></tr></table></form></center>';

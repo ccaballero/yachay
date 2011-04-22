@@ -20,7 +20,7 @@ echo '<td><input type="text" name="surname" value="' . $this->user->surname . '"
 echo '</tr><tr><td><b>Nombres:</b></td>';
 echo '<td><input type="text" name="name" value="' . $this->user->name . '" maxlength="128" /></td>';
 echo '</tr><tr><td><b>Fecha de nacimiento:</b></td>';
-echo '<td>' . $this->date('birthdate', $this->user->birthdate) . '</td>';
+echo '<td>' . $this->date('birthdate', $this->user->birthdate, 'BEFORE') . '</td>';
 echo '</tr><tr><td><b>Carrera:</b></td>';
 echo '<td>' . $this->career('career', $this->user->career) . '</td>';
 echo '</tr><tr><td><b>Telefono:</b></td>';
