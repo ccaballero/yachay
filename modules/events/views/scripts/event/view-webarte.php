@@ -39,7 +39,9 @@
 <?php } ?>
 </p>
 
-<p class="message"><?= $this->specialEscape($this->escape($this->event->message)) ?></p>
+<?php if (!empty($this->event->message)) { ?>
+    <p class="message"><?= $this->specialEscape($this->escape($this->event->message)) ?></p>
+<?php } ?>
 
 <?php if ($this->acl('comments', 'view')) { ?>
     <h2>Comentarios</h2>

@@ -49,18 +49,6 @@ function breadcrumb($elements = array()) {
     }
 }
 
-/*function convert($label) {
-    $a = 'ÁÀÄÂáàäâÉÈËÊéèëêÍÌÏÎíìïîÓÒÖÔóòöôÚÙÜÛúùüûÑñ ';
-    $b = 'aaaaaaaaeeeeeeeeiiiiiiiioooooooouuuuuuuunn_';
-    $label = strtolower($label);
-    $label = strtr($label, utf8_decode($a), $b);
-
-    $translit = @iconv('UTF-8', 'ASCII//TRANSLIT', $label);
-    $search = array('/[^a-z0-9]/', '/--+/', '/^-+/', '/-+$/');
-    $replace = array('-', '-', '', '');
-    return preg_replace($search, $replace, strtolower($translit));
-}*/
-
 function normalize($string) {
     $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕ';
     $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr';

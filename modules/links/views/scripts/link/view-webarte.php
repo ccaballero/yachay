@@ -31,7 +31,10 @@
     <p><span class="bold">Fecha: </span><?= $this->timestamp($this->resource->tsregister) ?></p>
 </div>
 
-<p class="message"><?= $this->specialEscape($this->escape($this->link->description)) ?></p>
+<?php if (!empty($this->link->description)) { ?>
+    <p class="message"><?= $this->specialEscape($this->escape($this->link->description)) ?></p>
+<?php } ?>
+
 <p class="center"><a href="<?= $this->link->link ?>"><?= $this->link->link ?></a></p>
 
 <?php if ($this->acl('comments', 'view')) { ?>

@@ -42,7 +42,6 @@ class Feedback_EntryController extends Yeah_Action
         $model_resources = new Resources();
         $model_feedback = new Feedback();
         $model_tags = new Tags();
-        $model_tags_resources = new Tags_Resources();
 
         $url_entry = $request->getParam('entry');
         $resource = $model_resources->findByIdent($url_entry);
@@ -60,77 +59,16 @@ class Feedback_EntryController extends Yeah_Action
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
             $entry->description = $request->getParam('description');
-            $newTags = $request->getParam('tags');
 
             if ($entry->isValid()) {
+                // re-tagging
+                $model_tags->tagging_resource($_tags, $request->getParam('tags'), $resource);
+
                 $entry->save();
-
-                $newTags = explode(',', $newTags);
-                $oldTags = $_tags;
-                $saved_tags = array();
-
-                // removing duplicates tags
-                foreach ($newTags as $new_tag) {
-                    $new_tag = trim(strtolower($new_tag));
-                    if (!in_array($new_tag, $saved_tags)) {
-                        $saved_tags[] = $new_tag;
-                    }
-                }
-
-                for ($i = 0; $i < count($saved_tags); $i++) {
-                    for ($j = 0; $j < count($oldTags); $j++) {
-                        if (isset($saved_tags[$i]) && isset($oldTags[$j])) {
-                            if ($saved_tags[$i] == $oldTags[$j]) {
-                                $saved_tags[$i] = NULL;
-                                $oldTags[$j] = NULL;
-                            }
-                        }
-                    }
-                }
-                foreach ($saved_tags as $tagLabel) {
-                    if ($tagLabel <> NULL) {
-                        $tagLabel = trim(strtolower($tagLabel));
-                        $tag = $model_tags->findByLabel($tagLabel);
-                        if ($tag == NULL) {
-                            $tag = $model_tags->createRow();
-                            $tag->label = $tagLabel;
-                            $tag->url = convert($tag->label);
-                            $tag->weight = 1;
-                            if ($tag->isValid()) {
-                                $tag->tsregister = time();
-                                $tag->save();
-                            }
-                        } else {
-                            $tag->weight = $tag->weight + 1;
-                            $tag->save();
-                        }
-
-                        if ($tag->ident <> 0) {
-                            $assign = $model_tags_resources->createRow();
-                            $assign->tag = $tag->ident;
-                            $assign->resource = $resource->ident;
-                            $assign->save();
-                        }
-                    }
-                }
-                foreach ($oldTags as $tagLabel) {
-                    if ($tagLabel <> NULL) {
-                        $tag = $model_tags->findByLabel($tagLabel);
-                        $tag->weight = $tag->weight - 1;
-                        $tag->save();
-
-                        $assign = $model_tags_resources->findByTagAndResource($tag->ident, $resource->ident);
-                        $assign->delete();
-
-                        if ($tag->weight == 0) {
-                            $tag->delete();
-                        }
-                    }
-                }
+                $session->url = $entry->resource;
 
                 $session->messages->addMessage('La sugerencia se modifico correctamente');
-                $session->url = $entry->resource;
-                $this->_redirect($request->getParam('return'));
+                $this->_redirect($this->view->url(array('entry' => $entry->resource), 'feedback_entry_view'));
             } else {
                 foreach ($entry->getMessages() as $message) {
                     $session->messages->addMessage($message);

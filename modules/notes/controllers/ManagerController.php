@@ -17,7 +17,6 @@ class Notes_ManagerController extends Yeah_Action
         $model_resources = new Resources();
         $model_valorations = new Valorations();
         $model_tags = new Tags();
-        $model_tags_resources = new Tags_Resources();
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace();
@@ -52,42 +51,12 @@ class Notes_ManagerController extends Yeah_Action
                     $resource->saveContext($request);
                     $model_valorations->addActivity(1);
 
-                    // TAG REGISTER
-                    $tags = explode(',', $tags);
-                    $saved_tags = array();
+                    // tagging
+                    $model_tags->tagging_resource(array(), $tags, $resource);
 
-                    foreach ($tags as $tagLabel) {
-                        $tagLabel = trim(strtolower($tagLabel));
-
-                        if (!in_array($tagLabel, $saved_tags)) {
-                            $tag = $model_tags->findByLabel($tagLabel);
-                            if ($tag == NULL) {
-                                $tag = $model_tags->createRow();
-                                $tag->label = $tagLabel;
-                                $tag->url = convert($tag->label);
-                                $tag->weight = 1;
-                                if ($tag->isValid()) {
-                                    $tag->tsregister = time();
-                                    $tag->save();
-                                }
-                            } else {
-                                $tag->weight = $tag->weight + 1;
-                                $tag->save();
-                            }
-
-                            if ($tag->ident <> 0) {
-                                $assign = $model_tags_resources->createRow();
-                                $assign->tag = $tag->ident;
-                                $assign->resource = $resource->ident;
-                                $assign->save();
-                            }
-
-                            $saved_tags[] = $tagLabel;
-                        }
-                    }
+                    $session->url = $note->resource;
 
                     $session->messages->addMessage('La nota ha sido creada');
-                    $session->url = $note->resource;
                     $this->_redirect($request->getParam('return'));
                 } else {
                     foreach ($note->getMessages() as $message) {

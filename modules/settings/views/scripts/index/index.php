@@ -1,7 +1,7 @@
 <?php
 
 echo '<h1>' . $this->PAGE->label . '</h1>';
-echo '<p>En esta pagina usted puede configurar algunos aspectos del comportamiento del sistema, como por ejemplo: su contraseña, el aspecto, las notificaciones, los boletines y otros dependiendo de los modulos que esten instalados.</p>';
+echo '<p>En esta pagina usted puede configurar algunos aspectos del comportamiento del sistema, como por ejemplo: su contraseña, las notificaciones, los boletines y otros dependiendo de los modulos que esten instalados.</p>';
 echo '<center><form method="post" action="" accept-charset="utf-8">';
 echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';
 echo '<table><tr><td colspan="2"><b>Cambio de contraseña:</b></td>';

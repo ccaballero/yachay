@@ -31,7 +31,9 @@
     <p><span class="bold">Fecha: </span><?= $this->timestamp($this->resource->tsregister) ?></p>
 </div>
 
-<p class="message"><?= $this->specialEscape($this->escape($this->file->description)) ?></p>
+<?php if (!empty($this->file->description)) { ?>
+    <p class="message"><?= $this->specialEscape($this->escape($this->file->description)) ?></p>
+<?php } ?>
 
 <p class="center">
 <?= $this->mime($this->file->mime) ?>&nbsp;

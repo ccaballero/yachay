@@ -44,7 +44,6 @@ class Communities_ManagerController extends Yeah_Action
             $model_communities = new Communities();
             $model_tags = new Tags();
             $model_communities_users = new Communities_Users();
-            $model_tags_communities = new Tags_Communities();
 
             $community = $model_communities->createRow();
 
@@ -52,8 +51,6 @@ class Communities_ManagerController extends Yeah_Action
             $community->url = convert($community->label);
             $community->mode = $request->getParam('mode');
             $community->description = $request->getParam('description');
-
-            $tags = $request->getParam('tags');
 
             if ($community->isValid()) {
                 $community->author = $USER->ident;
@@ -69,40 +66,6 @@ class Communities_ManagerController extends Yeah_Action
                 $assignement->tsregister = time();
                 $assignement->save();
 
-                // TAG REGISTER
-                $tags = explode(',', $tags);
-                $saved_tags = array();
-
-                foreach ($tags as $tagLabel) {
-                    $tagLabel = trim(strtolower($tagLabel));
-
-                    if (!in_array($tagLabel, $saved_tags)) {
-                        $tag = $model_tags->findByLabel($tagLabel);
-                        if ($tag == NULL) {
-                            $tag = $model_tags->createRow();
-                            $tag->label = $tagLabel;
-                            $tag->url = convert($tag->label);
-                            $tag->weight = 1;
-                            if ($tag->isValid()) {
-                                $tag->tsregister = time();
-                                $tag->save();
-                            }
-                        } else {
-                            $tag->weight = $tag->weight + 1;
-                            $tag->save();
-                        }
-
-                        if ($tag->ident <> 0) {
-                            $assign = $model_tags_communities->createRow();
-                            $assign->tag = $tag->ident;
-                            $assign->community = $community->ident;
-                            $assign->save();
-                        }
-
-                        $saved_tags[] = $tagLabel;
-                    }
-                }
-
                 // config of avatar
                 $upload = new Zend_File_Transfer_Adapter_Http();
                 $upload->setDestination($CONFIG->dirroot . 'media/upload');
@@ -110,98 +73,25 @@ class Communities_ManagerController extends Yeah_Action
                        ->addValidator('Extension', false, array('jpg', 'png', 'gif'));
                 if ($upload->receive()) {
                     $filename = $upload->getFileName('file');
-                    $extension = strtolower(substr($filename, -3));
-                    switch ($extension) {
-                        case 'jpeg':
-                        case 'jpg':
-                            $uploaded = imagecreatefromjpeg($filename);
-                            break;
-                        case 'png':
-                            $uploaded = imagecreatefrompng($filename);
-                            break;
-                        case 'gif':
-                            $uploaded = imagecreatefromgif($filename);
-                            break;
-                    }
 
-                    $width = imagesx($uploaded);
-                    $height = imagesy($uploaded);
+                    $thumbnail = new Yeah_Helpers_Thumbnail();
 
-                    // creo y redimensiono la imagen grande
-                    $maxwidth = 200;
-                    $maxheight = 200;
-                    $newwidth = $maxwidth;
-                    $newheight = $maxheight;
-
-                    $ratio = $width / $height;
-                    if ($ratio == 1) {
-                        $newwidth = $maxwidth;
-                        $newheigth = $maxwidth;
-                    } else if ($ratio > 1) {
-                        $newwidth = $maxwidth;
-                        $newheight = $maxwidth / $ratio;
-                    } else if ($ratio < 1) {
-                        $newwidth = $maxheight * $ratio;
-                        $newheight = $maxheight;
-                    }
-
-                    $thumb = imagecreatetruecolor($newwidth, $newheight);
-                    imagecopyresized($thumb, $uploaded, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                    imagejpeg($thumb, $CONFIG->dirroot . 'media/communities/thumbnail_large/' . $community->ident . '.jpg', 100);
-
-                    // creo y redimensiono la imagen mediana
-                    $maxwidth = 100;
-                    $maxheight = 100;
-                    $newwidth = $maxwidth;
-                    $newheight = $maxheight;
-
-                    $ratio = $width / $height;
-                    if ($ratio == 1) {
-                        $newwidth = $maxwidth;
-                        $newheigth = $maxwidth;
-                    } else if ($ratio > 1) {
-                        $newwidth = $maxwidth;
-                        $newheight = $maxwidth / $ratio;
-                    } else if ($ratio < 1) {
-                        $newwidth = $maxheight * $ratio;
-                        $newheight = $maxheight;
-                    }
-
-                    $thumb = imagecreatetruecolor($newwidth, $newheight);
-                    imagecopyresized($thumb, $uploaded, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                    imagejpeg($thumb, $CONFIG->dirroot . 'media/communities/thumbnail_medium/' . $community->ident . '.jpg', 100);
-
-                    // creo y redimensiono la imagen pequeña
-                    $maxwidth = 50;
-                    $maxheight = 50;
-                    $newwidth = $maxwidth;
-                    $newheight = $maxheight;
-
-                    $ratio = $width / $height;
-                    if ($ratio == 1) {
-                        $newwidth = $maxwidth;
-                        $newheigth = $maxwidth;
-                    } else if ($ratio > 1) {
-                        $newwidth = $maxwidth;
-                        $newheight = $maxwidth / $ratio;
-                    } else if ($ratio < 1) {
-                        $newwidth = $maxheight * $ratio;
-                        $newheight = $maxheight;
-                    }
-
-                    $thumb = imagecreatetruecolor($newwidth, $newheight);
-                    imagecopyresized($thumb, $uploaded, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-                    imagejpeg($thumb, $CONFIG->dirroot . 'media/communities/thumbnail_small/' . $community->ident . '.jpg', 100);
+                    $thumbnail->thumbnail($filename, $CONFIG->dirroot . 'media/communities/thumbnail_large/' . $community->ident . '.jpg', 200, 200);
+                    $thumbnail->thumbnail($filename, $CONFIG->dirroot . 'media/communities/thumbnail_medium/' . $community->ident . '.jpg', 100, 100);
+                    $thumbnail->thumbnail($filename, $CONFIG->dirroot . 'media/communities/thumbnail_small/' . $community->ident . '.jpg', 50, 50);
 
                     unlink($filename);
                     $community->avatar = true;
-                    $community->save();
-                } else {
-                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
+                    
                 }
 
-                $session->messages->addMessage("La comunidad {$community->label} se ha creado correctamente");
+                // tagging
+                $model_tags->tagging_community(array(), $request->getParam('tags'), $community);
+
+                $community->save();
                 $session->url = $community->url;
+
+                $session->messages->addMessage("La comunidad {$community->label} se ha creado correctamente");
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($community->getMessages() as $message) {

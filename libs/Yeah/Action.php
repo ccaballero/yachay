@@ -142,7 +142,7 @@ abstract class Yeah_Action extends Zend_Controller_Action
         $context = new Yeah_Helpers_Context();
         $spaces_valids = $context->context(NULL, 'plain');
         if (!in_array($resource->recipient, $spaces_valids)) {
-            $session->messages->addMessage('Usted debe ser parte de ese espacio para realizar esa accion');
+            $session->messages->addMessage('Usted debe ser parte de ese espacio para realizar esa acción');
             $this->_redirect($this->view->url(array(), 'frontpage_user'));
         }
     }

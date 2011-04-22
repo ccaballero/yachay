@@ -46,6 +46,7 @@
 <?php if (!empty($this->video->description)) { ?>
     <p class="message"><?= $this->specialEscape($this->escape($this->video->description)) ?></p>
 <?php } ?>
+
 <?php if ($this->acl('comments', 'view')) { ?>
     <h2>Comentarios</h2>
     <?= $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'videos_video_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, )) ?>

@@ -32,7 +32,7 @@
 </div>
 
 <?php if (!empty($this->photo->description)) { ?>
-<p class="message"><?= $this->specialEscape($this->escape($this->photo->description)) ?></p>
+    <p class="message"><?= $this->specialEscape($this->escape($this->photo->description)) ?></p>
 <?php } ?>
 
 <p class="center">

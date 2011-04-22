@@ -46,12 +46,13 @@ class Communities_CommunityController extends Yeah_Action
     }
 
     public function editAction() {
+        global $CONFIG;
+
         $this->requirePermission('communities', 'enter');
         $request = $this->getRequest();
 
         $model_communities = new Communities();
         $model_tags = new Tags();
-        $model_tags_communities = new Tags_Communities();
 
         $community = $model_communities->findByUrl($request->getParam('community'));
         $this->requireExistence($community, 'community', 'communities_community_view', 'community_list');
@@ -70,7 +71,6 @@ class Communities_CommunityController extends Yeah_Action
             $community->label = $request->getParam('label');
             $community->url = convert($community->label);
             $community->mode = $request->getParam('mode');
-            $newTags = $request->getParam('tags');
             $community->description = $request->getParam('description');
 
             if ($community->isValid()) {
@@ -90,80 +90,18 @@ class Communities_CommunityController extends Yeah_Action
 
                     unlink($filename);
                     $community->avatar = true;
-                } else {
-                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
+
+                // re-tagging
+                $model_tags->tagging_community($_tags, $request->getParam('tags'), $community);
+
                 $community->save();
-
-                // TAG REGISTER
-                $newTags = explode(',', $newTags);
-                $oldTags = $_tags;
-                $saved_tags = array();
-
-                // removing duplicates tags
-                foreach ($newTags as $new_tag) {
-                    $new_tag = trim(strtolower($new_tag));
-                    if (!in_array($new_tag, $saved_tags)) {
-                        $saved_tags[] = $new_tag;
-                    }
-                }
-
-                for ($i = 0; $i < count($saved_tags); $i++) {
-                    for ($j = 0; $j < count($oldTags); $j++) {
-                        if (isset($saved_tags[$i]) && isset($oldTags[$j])) {
-                            if ($saved_tags[$i] == $oldTags[$j]) {
-                                $saved_tags[$i] = NULL;
-                                $oldTags[$j] = NULL;
-                            }
-                        }
-                    }
-                }
-                foreach ($saved_tags as $tagLabel) {
-                    if ($tagLabel <> NULL) {
-                        $tagLabel = trim(strtolower($tagLabel));
-                        $tag = $model_tags->findByLabel($tagLabel);
-                        if ($tag == NULL) {
-                            $tag = $model_tags->createRow();
-                            $tag->label = $tagLabel;
-                            $tag->url = convert($tag->label);
-                            $tag->weight = 1;
-                            if ($tag->isValid()) {
-                                $tag->tsregister = time();
-                                $tag->save();
-                            }
-                        } else {
-                            $tag->weight = $tag->weight + 1;
-                            $tag->save();
-                        }
-
-                        if ($tag->ident <> 0) {
-                            $assign = $model_tags_communities->createRow();
-                            $assign->tag = $tag->ident;
-                            $assign->community = $community->ident;
-                            $assign->save();
-                        }
-                    }
-                }
-                foreach ($oldTags as $tagLabel) {
-                    if ($tagLabel <> NULL) {
-                        $tag = $model_tags->findByLabel($tagLabel);
-                        $tag->weight = $tag->weight - 1;
-                        $tag->save();
-
-                        $assign = $model_tags_communities->findByTagAndCommunity($tag->ident, $community->ident);
-                        $assign->delete();
-
-                        if ($tag->weight == 0) {
-                            $tag->delete();
-                        }
-                    }
-                }
+                $session->url = $community->url;
 
                 $session->messages->addMessage("La comunidad {$community->label} se ha actualizado correctamente");
-                $session->url = $community->url;
                 $this->_redirect($request->getParam('return'));
             } else {
-                foreach ($area->getMessages() as $message) {
+                foreach ($community->getMessages() as $message) {
                     $session->messages->addMessage($message);
                 }
             }

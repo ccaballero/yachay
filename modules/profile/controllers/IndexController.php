@@ -37,7 +37,6 @@ class Profile_IndexController extends Yeah_Action
 
         $model_users = new Users();
         $model_tags = new Tags();
-        $model_tags_users = new Tags_Users();
 
         $user = $model_users->findByUrl($USER->url);
         $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
@@ -62,7 +61,6 @@ class Profile_IndexController extends Yeah_Action
             $user->career = $request->getParam('career');
             $user->phone = $request->getParam('phone');
             $user->cellphone = $request->getParam('cellphone');
-            $newTags = $request->getParam('tags');
             $user->hobbies = $request->getParam('hobbies');
             $user->sign = $request->getParam('sign');
             $user->description = $request->getParam('description');
@@ -84,76 +82,13 @@ class Profile_IndexController extends Yeah_Action
 
                     unlink($filename);
                     $user->avatar = true;
-                } else {
-                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
+
+                // re-tagging
+                $model_tags->tagging_user($_tags, $request->getParam('tags'), $user);
 
                 $user->save();
                 $session->user = $user;
-
-                // TAG REGISTER
-                $newTags = explode(',', $newTags);
-                $oldTags = $_tags;
-                $saved_tags = array();
-
-                // removing duplicates tags
-                foreach ($newTags as $new_tag) {
-                    $new_tag = trim(strtolower($new_tag));
-                    if (!in_array($new_tag, $saved_tags)) {
-                        $saved_tags[] = $new_tag;
-                    }
-                }
-
-                for ($i = 0; $i < count($saved_tags); $i++) {
-                    for ($j = 0; $j < count($oldTags); $j++) {
-                        if (isset($saved_tags[$i]) && isset($oldTags[$j])) {
-                            if ($saved_tags[$i] == $oldTags[$j]) {
-                                $saved_tags[$i] = NULL;
-                                $oldTags[$j] = NULL;
-                            }
-                        }
-                    }
-                }
-                foreach ($saved_tags as $tagLabel) {
-                    if ($tagLabel <> NULL) {
-                        $tagLabel = trim(strtolower($tagLabel));
-                        $tag = $model_tags->findByLabel($tagLabel);
-                        if ($tag == NULL) {
-                            $tag = $model_tags->createRow();
-                            $tag->label = $tagLabel;
-                            $tag->url = convert($tag->label);
-                            $tag->weight = 1;
-                            if ($tag->isValid()) {
-                                $tag->tsregister = time();
-                                $tag->save();
-                            }
-                        } else {
-                            $tag->weight = $tag->weight + 1;
-                            $tag->save();
-                        }
-
-                        if ($tag->ident <> 0) {
-                            $assign = $model_tags_users->createRow();
-                            $assign->tag = $tag->ident;
-                            $assign->user = $user->ident;
-                            $assign->save();
-                        }
-                    }
-                }
-                foreach ($oldTags as $tagLabel) {
-                    if ($tagLabel <> NULL) {
-                        $tag = $model_tags->findByLabel($tagLabel);
-                        $tag->weight = $tag->weight - 1;
-                        $tag->save();
-
-                        $assign = $model_tags_users->findByTagAndUser($tag->ident, $user->ident);
-                        $assign->delete();
-
-                        if ($tag->weight == 0) {
-                            $tag->delete();
-                        }
-                    }
-                }
 
                 $session->messages->addMessage('Tu has modificado tu perfil correctamente');
                 $session->url = $user->url;
