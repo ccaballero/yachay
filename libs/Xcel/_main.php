@@ -34,7 +34,7 @@ if (!isset($argv[1])) {
 }
 
 global $CONFIG;
-$CONFIG->dirroot = '/home/ubuntu/public_html/';
+$CONFIG->dirroot = '/home/carlos/Yeah/';
 
 $expression = $argv[1];
 $parser = new Xcel_Alone_Parser();

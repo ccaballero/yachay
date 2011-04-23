@@ -41,4 +41,30 @@ class Evaluations_ManagerController extends Yeah_Action
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');
         breadcrumb($breadcrumb);
     }
+
+    public function sandboxAction() {
+        $request = $this->getRequest();
+
+        $formula = '';
+        $result = '--';
+
+        if ($request->isPost()) {
+            $formula = $request->getParam('formula');
+
+            if (!empty($result)) {
+                $parser = new Evaluations_Sandbox_Parser();
+                $value = $parser->parse($formula);
+                $result = $value->extract();
+            }
+        }
+
+        $this->view->formula = $formula;
+        $this->view->result = $result;
+
+        history('evaluations/new');
+        $breadcrumb = array();
+        $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
+        $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');
+        breadcrumb($breadcrumb);
+    }
 }

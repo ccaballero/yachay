@@ -9,7 +9,7 @@ class Xcel_Syn_Function
             return TRUE;
         }
         return FALSE;
-	}
+    }
 
     public static function fetchFunction($function) {
         $function = ucfirst(strtolower(trim($function)));

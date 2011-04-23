@@ -251,6 +251,7 @@ body {
 
 #primary #main dt {
     padding-left: 0.1em;
+    font-weight: bold;
 }
 
 #primary #main dd {

@@ -8,6 +8,7 @@
 <?php if ($this->evaluation->author == $this->USER->ident) { ?>
     <a href="<?= $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_edit') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
 <?php } ?>
+<a href="<?= $this->url(array(), 'evaluations_sandbox') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/bug.png' ?>" alt="Test de formulas" title="Test de formulas" /></a>
 </strong>
 </h1>
 

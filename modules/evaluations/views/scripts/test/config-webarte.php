@@ -1,10 +1,27 @@
-<h1><?= $this->evaluation->label ?> - <?= $this->test_evaluation->label ?></h1>
+<h1><?= $this->evaluation->label ?>
+<strong class="task">
+<?php if ($this->evaluation->useful) { ?>
+    <img src="<?= $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Evaluación usable" title="Evaluación usable" />
+<?php } else { ?>
+    <img src="<?= $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Evaluación inconclusa" title="Evaluación inconclusa" />
+<?php } ?>
+</strong>
+</h1>
+
+<p>
+    <span class="mark">Creada por:</span> <?= $this->evaluation->getAuthor()->getFullName() ?><br />
+    <span class="mark">Accesibilidad:</span> <?= $this->access($this->evaluation->access) ?><br />
+</p>
+
+<h2><span class="mark"><?= $this->test_evaluation->key ?></span><?= $this->test_evaluation->label ?></h2>
 
 <p>
     <?php if ($this->test_evaluation->formula) { ?><span class="bold">Formula de calculo: </span><?= $this->test_evaluation->formula ?><br /><?php } ?>
     <span class="bold">Nota minima: </span><?= $this->test_evaluation->minimumnote ?><br />
     <span class="bold">Nota por omision: </span><?= $this->test_evaluation->defaultnote ?><br />
-    <span class="bold">Nota maxima: </span><?= $this->test_evaluation->maximumnote ?>
+    <span class="bold">Nota maxima: </span><?= $this->test_evaluation->maximumnote ?><br />
+    <span class="bold">Formula: </span><?= $this->none($this->test_evaluation->formula) ?><br />
+    <span class="bold">Precedencia: </span><?= $this->test_evaluation->order ?>
 </p>
 
 <h2>Valores cualitativos</h2>
@@ -20,7 +37,7 @@
         <tr class="<?= $key % 2 == 0 ? 'even' : 'odd' ?>">
             <td><?= $value->label ?></td>
             <td><?= $value->value ?></td>
-            <td>
+            <td class="center">
             <?php if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) { ?>
                 <a href="<?= $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $this->test_evaluation->ident, 'value' => $value->ident), 'evaluations_evaluation_test_value_delete') ?>"><img src="<?= $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
             <?php } ?>

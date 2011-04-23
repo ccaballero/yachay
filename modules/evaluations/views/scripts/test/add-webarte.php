@@ -1,4 +1,17 @@
-<h1><?= $this->evaluation->label ?></h1>
+<h1><?= $this->evaluation->label ?>
+<strong class="task">
+<?php if ($this->evaluation->useful) { ?>
+    <img src="<?= $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Evaluación usable" title="Evaluación usable" />
+<?php } else { ?>
+    <img src="<?= $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Evaluación inconclusa" title="Evaluación inconclusa" />
+<?php } ?>
+</strong>
+</h1>
+
+<p>
+    <span class="mark">Creada por:</span> <?= $this->evaluation->getAuthor()->getFullName() ?><br />
+    <span class="mark">Accesibilidad:</span> <?= $this->access($this->evaluation->access) ?><br />
+</p>
 
 <h2>Calificaciones previstas
 <strong class="task">
@@ -23,7 +36,9 @@
             <?php if ($test->formula) { ?><span class="bold">Formula de calculo: </span><?= $test->formula ?><br /><?php } ?>
             <span class="bold">Nota minima: </span><?= $test->minimumnote ?><br />
             <span class="bold">Nota por omision: </span><?= $test->defaultnote ?><br />
-            <span class="bold">Nota maxima: </span><?= $test->maximumnote ?>
+            <span class="bold">Nota maxima: </span><?= $test->maximumnote ?><br />
+            <span class="bold">Formula: </span><?= $this->none($test->formula) ?><br />
+            <span class="bold">Precedencia: </span><?= $test->order ?>
         </p>
     <?php } ?>
 <?php } else { ?>
@@ -40,8 +55,9 @@
     <p><label for="evaluation_test_minimum">Nota minima: </label><input type="text" name="minimum" size="15" maxlength="3" value="<?= $this->test_evaluation->minimumnote ?>" /></p>
     <p><label for="evaluation_test_default">Nota por omision: </label><input type="text" name="default" size="15" maxlength="3" value="<?= $this->test_evaluation->defaultnote?>" /></p>
     <p><label for="evaluation_test_maximum">Nota maxima: </label><input type="text" name="maximum" size="15" maxlength="3" value="<?= $this->test_evaluation->maximumnote ?>" /></p>
-    <p><label for="evaluation_test_formula">Formula de calculo: </label><input type="text" name="formula" size="15" maxlength="512" value="<?= $this->test_evaluation->formula ?>" /></p>
+    <p><label for="evaluation_test_formula">Formula de calculo (**): </label><input type="text" name="formula" size="15" maxlength="512" value="<?= $this->test_evaluation->formula ?>" /></p>
     <p><label for="evaluation_test_order">Orden de precedencia: </label><input type="text" name="order" size="15" maxlength="3" value="<?= $this->test_evaluation->order ?>" /></p>
     <p>(*) Campos obligatorios.</p>
+    <p>(**) Si no se establece, se considera una entrada.</p>
     <p class="submit"><input type="submit" value="Agregar calificación" /><input type="button" value="Volver a la evaluación" onclick="location.href='<?= $this->lastPage() ?>'" /></p>
 </form>

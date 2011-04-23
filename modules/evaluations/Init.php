@@ -48,6 +48,12 @@ class Evaluations_Init extends Yeah_Init
                                                         'controller' => 'evaluation',
                                                         'action'     => 'view',
                                                     )),
+       'evaluations_sandbox'                     => array('evaluations/sandbox',
+                                                    array(
+                                                        'module'     => 'evaluations',
+                                                        'controller' => 'manager',
+                                                        'action'     => 'sandbox',
+                                                    )),
         'evaluations_new'                        => array('evaluations/new',
                                                     array(
                                                         'module'     => 'evaluations',

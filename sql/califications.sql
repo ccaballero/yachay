@@ -9,7 +9,7 @@ CREATE TABLE `calification` (
     `group`             int unsigned                                                NOT NULL,
     `evaluation`        int unsigned                                                NOT NULL,
     `test`              int unsigned                                                NOT NULL,
-    `calification`      int unsigned                                                NOT NULL DEFAULT 0,
+    `calification`      decimal(2, 2)                                               NOT NULL DEFAULT 0,
     PRIMARY KEY (`user`, `group`, `evaluation`, `test`),
     INDEX (`user`, `group`),
     FOREIGN KEY (`user`, `group`) REFERENCES `group_user`(`user`, `group`) ON UPDATE CASCADE ON DELETE RESTRICT,

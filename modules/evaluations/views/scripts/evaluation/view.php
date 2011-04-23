@@ -4,6 +4,7 @@ echo '<h1>Evaluación: ' . $this->evaluation->label;
 if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) {
     echo '[<i><a href="' . $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_edit') . '">Editar</a></i>]';
 }
+echo '[<i><a href="' . $this->url(array(), 'evaluations_sandbox') . '">Formulas</a></i>]';
 echo '</h1>';
 
 echo '<b>Creada por: <i>' . $this->evaluation->getAuthor()->getFullName() . '</i></b><br />';
