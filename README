@@ -33,4 +33,3 @@ Yeah version 0.1
      8. Edit the Database.php file.
      9. Create an empty file called yeah.log and put write permissions (chmod ugo+w).
     10. Create a symbolic link from libs/Zend1.10.7 to libs/Zend (ln -s libs/Zend1.10.7 libs/Zend).
-

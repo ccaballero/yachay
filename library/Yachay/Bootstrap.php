@@ -1,0 +1,198 @@
+<?php
+
+// Basic elements
+global $CONFIG;
+global $PAGE;
+global $USER;
+
+// Template elements
+global $TEMPLATE;
+global $PALETTE;
+
+// Database connector
+global $DB;
+
+// Logger element
+global $LOG;
+
+// Regions definition
+global $TITLE;
+global $ICON;
+global $BANNER;
+global $TOOLBAR;
+global $SEARCH;
+global $MENUBAR;
+global $CONTENT;
+global $BREADCRUMB;
+global $WIDGETS;
+global $FOOTER;
+
+class Yachay_Bootstrap
+{
+    public function initialize() {
+        error_reporting(E_ALL | E_STRICT);
+        ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . 'libs' . PATH_SEPARATOR . 'modules');
+
+        // PHP's settings for encoding
+        mb_internal_encoding('UTF-8');
+        mb_http_output('UTF-8');
+
+        require_once 'Utils.php';
+
+        // Settings for classes autoloading
+        require_once 'Zend/Loader/Autoloader.php';
+        $loader = Zend_Loader_Autoloader::getInstance();
+        $loader->registerNamespace('Zend_');
+        $loader->registerNamespace('Yachay_');
+        $loader->registerNamespace('File_');
+        $loader->registerNamespace('Xcel_');
+
+        // Set of fundamental element
+        global $CONFIG;
+        $CONFIG = new Yachay_Settings_Config();
+
+        $loader->pushAutoloader(new Yachay_Loader());
+
+        // Initialization and recover of the session
+        Zend_Session::start();
+        $session = new Zend_Session_Namespace();
+
+        // Set for debugging level
+        ini_set('display_startup_errors', $CONFIG->startup_errors);
+        ini_set('display_errors', $CONFIG->display_errors);
+
+        // Set connector database
+        global $DB;
+        $DATABASE = new Yachay_Settings_Database();
+        $DB = Zend_Db::factory(
+            $DATABASE->type, 
+            array(
+                'host'     => $DATABASE->hostname,
+                'username' => $DATABASE->username,
+                'password' => $DATABASE->password,
+                'dbname'   => $DATABASE->database,
+            )
+        );
+
+        // Set for user information, if exists
+        global $USER;
+        if (isset($session->user)) {
+            $USER = $session->user;
+        } else {
+            $USER = new Users_Visitor();
+        }
+
+        // Set for context information
+        if (!isset($session->context)) {
+            $session->context = new Yachay_Settings_Context();
+        }
+
+        // Set of history of navigation
+        if (!isset($session->history)) {
+            $session->history = new Yachay_Settings_History();
+        }
+
+        // Set of theme
+        global $TEMPLATE;
+        $model_templates = new Templates();
+        $template = $model_templates->findByLabel($USER->template);
+
+        $TEMPLATE = new StdClass();
+        $TEMPLATE->label = $template->label;
+        $TEMPLATE->parent = $template->parent;
+        $TEMPLATE->doctype = $template->doctype;
+        $TEMPLATE->description = $template->description;
+        $TEMPLATE->css_properties = $template->css_properties;
+        $TEMPLATE->htmlbase = $CONFIG->wwwroot . 'templates/' . $TEMPLATE->label . '/';
+
+        global $PALETTE;
+        $model_templates_users = new Templates_Users();
+        $template_user = $model_templates_users->findByTemplateAndUser($template->ident, $USER->ident);
+        if (empty($template_user)) {
+            $template_user = $template;
+        }
+        $PALETTE = json_decode($template_user->css_properties, true);
+
+        // Set for localization
+        setlocale(LC_CTYPE, $CONFIG->locale);
+        Zend_Locale::setDefault($CONFIG->locale);
+        
+        // Setting logging system
+        date_default_timezone_set($CONFIG->time_zone);
+        
+        // Set of web regions
+        global $TITLE;
+        $TITLE = new Yachay_Regions_Title();
+        global $ICON;
+        $ICON = new Yachay_Regions_Icon();
+        global $TOOLBAR;
+        $TOOLBAR = new Yachay_Regions_Toolbar();
+        global $SEARCH;
+        $SEARCH = new Yachay_Regions_Search();
+        global $MENUBAR;
+        $MENUBAR = new Yachay_Regions_Menubar();
+        global $BREADCRUMB;
+        $BREADCRUMB = new Yachay_Regions_Breadcrumb();
+        global $FOOTER;
+        $FOOTER = new Yachay_Regions_Footer();
+        // Set of web widgets
+        global $WIDGETS;
+        $WIDGETS = array(1=>'',2=>'',3=>'',4=>'');
+
+        // Set region for messages
+        if (!isset($session->messages)) {
+            $session->messages = new Yachay_Regions_Message();
+        }
+    }
+
+    public function run() {
+        global $CONFIG;
+        global $TEMPLATE;
+
+        $front = Zend_Controller_Front::getInstance();
+        $front->throwExceptions(true)
+              ->addModuleDirectory(APPLICATION_PATH . '/modules/')
+              ->setDefaultModule('frontpage')
+              ->returnResponse(true);
+
+        // Routes join
+        $model_modules = new Modules();
+        $modules = $model_modules->selectByStatus('active');
+        foreach ($modules as $module) {
+            $path = APPLICATION_PATH . '/modules/' . $module->url;
+            if (is_dir($path)) {
+                if (file_exists("$path/Init.php")) {
+                    include "$path/Init.php";
+                    $class = ucfirst(strtolower($module->url)) . '_Init';
+                    $obj = new $class();
+                    $obj->setRoutes($front->getRouter());
+                    if (!Yachay_Adapter::check($obj->check)) {
+                        Yachay_Adapter::install($obj->install);
+                    }
+                }
+            }
+        }
+
+        // Change the suffix of phtml to php
+        $renderer = new Zend_Controller_Action_Helper_ViewRenderer();
+        $renderer->setViewSuffix('php');
+        Zend_Controller_Action_HelperBroker::addHelper($renderer);
+
+        $layoutoptions = array(
+            'layout'     => $TEMPLATE->label,
+            'layoutPath' => APPLICATION_PATH . '/layouts/',
+            'viewSuffix' => 'php',
+        );
+
+        include_once APPLICATION_PATH . '/library/Yachay/Action.php';
+        Zend_Layout::startMvc($layoutoptions);
+
+        try {
+            $response = $front->dispatch();
+            $response->sendResponse();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            die();
+        }
+    }
+}
