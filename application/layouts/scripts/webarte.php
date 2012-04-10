@@ -6,8 +6,8 @@
         <meta http-equiv="Content-Language" content="es-BO" />
         <link href="<?php echo $this->TEMPLATE->htmlbase . 'css/style.css' ?>" media="screen" rel="stylesheet" type="text/css" />
         <link href="<?php echo $this->CONFIG->wwwroot . 'templates/css/properties.css' ?>" media="screen" rel="stylesheet" type="text/css" />
-        <link rel="icon" type="image/x-icon" href="<?php echo $this->CONFIG->media_base ?>favicon.jpg" />
-        <title><?php echo $this->TITLE->toString() ?></title>
+        <link rel="icon" type="image/x-icon" href="<?php echo $this->CONFIG->media_base ?>favicon.ico" />
+        <title><?php echo $this->TITLE->toString(); ?></title>
     </head>
     <body>
         <div id="header">

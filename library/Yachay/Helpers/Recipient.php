@@ -3,7 +3,6 @@
 class Yachay_Helpers_Recipient
 {
     public function recipient($recipient) {
-        global $CONFIG;
         @list($element, $ident) = @split('-', $recipient);
 
         $url = new Zend_View_Helper_Url();

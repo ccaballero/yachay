@@ -1,21 +1,5 @@
 <?php
 
-function mysql_import($sql) {
-    $DATABASE = new Yachay_Settings_Database();
-    $conexion = mysql_connect($DATABASE->hostname, $DATABASE->username, $DATABASE->password);
-    mysql_select_db($DATABASE->database, $conexion);
-
-    $f = fopen($sql, "r");
-    $sqlFile = fread($f, filesize($sql));
-    $sqlArray = explode(';', $sqlFile);
-
-    foreach ($sqlArray as $stmt) {
-        if (strlen($stmt) > 3) {
-            $result = mysql_query($stmt, $conexion);
-        }
-    }
-}
-
 function print_params($array = array()) {
     $ret = '';
     foreach ($array as $key => $value) {

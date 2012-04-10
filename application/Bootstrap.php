@@ -7,21 +7,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         global $CONFIG;
         $CONFIG = new Yachay_Settings_Config();
-    }
-    
-    protected function _initDb() {
-        // Set connector database
-        global $DB;
-        $DATABASE = new Yachay_Settings_Database();
-        $DB = Zend_Db::factory(
-            $DATABASE->type, 
-            array(
-                'host'     => $DATABASE->hostname,
-                'username' => $DATABASE->username,
-                'password' => $DATABASE->password,
-                'dbname'   => $DATABASE->database,
-            )
-        );
+
+        $config = new Zend_Config($this->getOptions());
+        Zend_Registry::set('config', $config);
+        return $config;
     }
 
     protected function _initAutoload() {
@@ -35,6 +24,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initRouter() {
         $this->bootstrap('autoload');
         $this->bootstrap('frontController');
+        $this->bootstrap('db');
 
         $ctrl = Zend_Controller_Front::getInstance();
         $router = $ctrl->getRouter();
@@ -50,9 +40,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                     $class = ucfirst(strtolower($module->url)) . '_Init';
                     $obj = new $class();
                     $obj->setRoutes($router);
-                    if (!Yachay_Adapter::check($obj->check)) {
-                        Yachay_Adapter::install($obj->install);
-                    }
                 }
             }
         }
@@ -62,6 +49,19 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initSession() {
         Zend_Session::start();
+    }
+    
+    protected function _initLocale() {
+        global $CONFIG;
+        
+        // Set for localization
+        setlocale(LC_CTYPE, $CONFIG->locale);
+        Zend_Locale::setDefault($CONFIG->locale);
+    }
+    
+    protected function _initTimezone() {
+        global $CONFIG;
+        date_default_timezone_set($CONFIG->time_zone);
     }
     
     protected function _initUser() {
@@ -166,5 +166,22 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $view = new Zend_View();
         return $view;
+    }
+    
+    protected function _initLayout() {
+        $this->bootstrap('template');
+        
+        global $TEMPLATE;
+        
+        $options = $this->getOptions();
+        $options = $options['resources']['layout'];
+
+        $layout = Zend_Layout::startMVC(array(
+            'layoutPath' => APPLICATION_PATH . '/layouts/scripts/',
+            'layout' => $TEMPLATE->label,
+            'viewSuffix' => 'php',
+        ));
+        
+        return $layout;
     }
 }

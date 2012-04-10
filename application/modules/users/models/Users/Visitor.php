@@ -17,8 +17,8 @@ class Users_Visitor
             $this->_acl[] = $privilege->module . '_' . $privilege->privilege;
         }
 
-        global $CONFIG;
-        $this->template = $CONFIG->template;
+        $config = Zend_Registry::get('config');
+        $this->template = $config->resources->layout->layout;
     }
 
     public function hasPermission($module, $privilege) {

@@ -117,8 +117,8 @@ class Groupsets_GroupsetController extends Yachay_Action
                 $groupset->save();
 
                 // FIXME Llevar a modelo las modificaciones de base de datos
-                global $DB;
-                $DB->delete('groupset_group', 'groupset = ' . $groupset->ident);
+                $db = Zend_Db_Table::getDefaultAdapter();
+                $db->delete('groupset_group', 'groupset = ' . $groupset->ident);
                 $assignement = new Groupsets_Groups();
                 foreach ($checks as $group) {
                     $assign = $assignement->createRow();

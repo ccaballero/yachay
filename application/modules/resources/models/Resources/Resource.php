@@ -133,15 +133,14 @@ class Resources_Resource extends Yachay_Models_Row_Validation
     }
 
     public function delete() {
-        // FIXME ??
-        global $DB;
-        $DB->delete('resource_global', '`resource` = ' . $this->ident);
-        $DB->delete('area_resource', '`resource` = ' . $this->ident);
-        $DB->delete('subject_resource', '`resource` = ' . $this->ident);
-        $DB->delete('group_resource', '`resource` = ' . $this->ident);
-        $DB->delete('team_resource', '`resource` = ' . $this->ident);
-        $DB->delete('community_resource', '`resource` = ' . $this->ident);
-        $DB->delete('user_resource', '`resource` = ' . $this->ident);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->delete('resource_global', '`resource` = ' . $this->ident);
+        $db->delete('area_resource', '`resource` = ' . $this->ident);
+        $db->delete('subject_resource', '`resource` = ' . $this->ident);
+        $db->delete('group_resource', '`resource` = ' . $this->ident);
+        $db->delete('team_resource', '`resource` = ' . $this->ident);
+        $db->delete('community_resource', '`resource` = ' . $this->ident);
+        $db->delete('user_resource', '`resource` = ' . $this->ident);
         parent::delete();
     }
 }

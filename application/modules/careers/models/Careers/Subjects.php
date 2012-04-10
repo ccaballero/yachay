@@ -17,7 +17,7 @@ class Careers_Subjects extends Yachay_Models_Table
     );
 
     public function cleanSubjects($subject) {
-        global $DB;
-        $DB->delete('career_subject', 'subject = ' . $subject);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->delete('career_subject', 'subject = ' . $subject);
     }
 }

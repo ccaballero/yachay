@@ -17,9 +17,9 @@ class Groupsets_Groups extends Yachay_Models_Table
     );
 
     public function selectByGroupset($groupset) {
-        global $DB;
-        $select = $DB->select()->from('groupset_group')->where('groupset = ?' , $groupset);
-        $result = $DB->fetchAll($select);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select = $db->select()->from('groupset_group')->where('groupset = ?' , $groupset);
+        $result = $db->fetchAll($select);
         return $result;
     }
 }

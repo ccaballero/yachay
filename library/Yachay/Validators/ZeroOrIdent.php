@@ -14,8 +14,8 @@ class Yachay_Validators_ZeroOrIdent extends Zend_Validate_Abstract
         if ($ident == 0) {
             return true;
         }
-        $elements = Yachay_Adapter::getModel($this->_model);
-        $element = $elements->findByIdent($ident);
+        $model = new $this->_model();
+        $element = $model->findByIdent($ident);
         if (empty($element)) {
             return false;
         }

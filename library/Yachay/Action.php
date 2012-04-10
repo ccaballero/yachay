@@ -195,7 +195,8 @@ abstract class Yachay_Action extends Zend_Controller_Action
 
         // Regions settings
         global $TITLE;
-        $TITLE->title = $CONFIG->title;
+        $config = Zend_Registry::get('config');
+        $TITLE->title = $config->yachay->properties->title;
 
         global $ICON;
         $ICON->icon = $CONFIG->media_base . "favicon.ico";

@@ -58,7 +58,7 @@ class Modules_ManagerController extends Yachay_Action
                 $oldsql = "./modules/$module/$module.sql";
                 $newsql = "./sql/$module.sql";
                 if (rename($oldsql, $newsql)) {
-                    mysql_import(APPLICATION_PATH . '/../data/sql/' . $module . '.sql');
+                    //mysql_import(APPLICATION_PATH . '/../data/sql/' . $module . '.sql');
                 }
                 $session->messages->addMessage('El modulo ha sido añadido');
                 unlink($filename);

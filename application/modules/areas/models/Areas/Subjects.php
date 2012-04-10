@@ -17,7 +17,7 @@ class Areas_Subjects extends Yachay_Models_Table
     );
 
     public function cleanSubjects($subject) {
-        global $DB;
-        $DB->delete('area_subject', 'subject = ' . $subject);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->delete('area_subject', 'subject = ' . $subject);
     }
 }

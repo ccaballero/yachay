@@ -86,32 +86,6 @@ class Photos_PhotoController extends Yachay_Action
         breadcrumb($breadcrumb);
     }
 
-    /*public function downloadAction() {
-        global $CONFIG;
-
-        $this->requirePermission('resources', 'view');
-        $request = $this->getRequest();
-
-        $url_photo = $request->getParam('photo');
-        $model_photos = new Photos();
-        $photo = $model_photos->findByResource($url_photo);
-        $this->requireExistence($photo, 'photo', 'photos_photo_view', 'frontpage_user');
-
-        $model_resources = new Resources();
-        $resource = $model_resources->findByIdent($photo->resource);
-        $this->requireContext($resource);
-
-        header("HTTP/1.1 200 OK"); //mandamos codigo de OK
-        header("Status: 200 OK"); //sirve para corregir un bug de IE (fuente: php.net)
-        //header('Content-Type: ' . $file->mime);
-        //header('Content-Disposition: attachment; filename="' . $file->filename . '";');
-        header('Content-Length: '. $photo->size . '; ');
-        ob_clean();
-        flush();
-        readfile(APPLICATION_PATH . '/../public/media/photos/' . $photo->resource);
-        exit;
-    }*/
-
     public function deleteAction() {
         $this->requirePermission('resources', 'delete');
         $request = $this->getRequest();

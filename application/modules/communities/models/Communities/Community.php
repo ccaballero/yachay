@@ -78,17 +78,17 @@ class Communities_Community extends Yachay_Models_Row_Validation
     }
 
     public function delete() {
-        // FIXME ??
-        global $DB;
-        $DB->delete('community_petition', 'community = ' . $this->ident);
-        $DB->delete('community_user', 'community = ' . $this->ident);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->delete('community_petition', 'community = ' . $this->ident);
+        $db->delete('community_user', 'community = ' . $this->ident);
         parent::delete();
     }
 
     public function getAssignement($user) {
-        global $DB;
-        $select = $DB->select()->from('community_user')->where('community = ?' , $this->ident)->where('user = ?', $user->ident);
-        $result = $DB->fetchRow($select);
+        $db = Zend_Db_Table::getDefaultAdapter();
+
+        $select = $db->select()->from('community_user')->where('community = ?' , $this->ident)->where('user = ?', $user->ident);
+        $result = $db->fetchRow($select);
 
         $obj = new stdClass;
         $obj->type = $result['type'];
@@ -99,9 +99,10 @@ class Communities_Community extends Yachay_Models_Row_Validation
     }
 
     public function getPetition($user) {
-        global $DB;
-        $select = $DB->select()->from('community_petition')->where('community = ?' , $this->ident)->where('user = ?', $user->ident);
-        $result = $DB->fetchRow($select);
+        $db = Zend_Db_Table::getDefaultAdapter();
+
+        $select = $db->select()->from('community_petition')->where('community = ?' , $this->ident)->where('user = ?', $user->ident);
+        $result = $db->fetchRow($select);
 
         $obj = new stdClass;
         $obj->tsregister =  $result['tsregister'];

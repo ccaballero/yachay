@@ -125,17 +125,16 @@ class Subjects_Subject extends Yachay_Models_Row_Validation
     }
 
     public function delete() {
-        // FIXME ??
-        global $DB;
-        $DB->delete('area_subject', 'subject = ' . $this->ident);
-        $DB->delete('subject_user', 'subject = ' . $this->ident);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->delete('area_subject', 'subject = ' . $this->ident);
+        $db->delete('subject_user', 'subject = ' . $this->ident);
         parent::delete();
     }
 
     public function getAssignement($user) {
-        global $DB;
-        $select = $DB->select()->from('subject_user')->where('subject = ?' , $this->ident)->where('user = ?', $user->ident);
-        $result = $DB->fetchRow($select);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select = $db->select()->from('subject_user')->where('subject = ?' , $this->ident)->where('user = ?', $user->ident);
+        $result = $db->fetchRow($select);
         
         $obj = new stdClass;
         $obj->type = $result['type'];
@@ -151,10 +150,11 @@ class Subjects_Subject extends Yachay_Models_Row_Validation
     }
 
     public function amMember() {
-        global $DB;
         global $USER;
-        $select = $DB->select()->from('subject_user')->where('subject = ?' , $this->ident)->where('user = ?', $USER->ident);
-        $result = $DB->fetchRow($select);
+
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select = $db->select()->from('subject_user')->where('subject = ?' , $this->ident)->where('user = ?', $USER->ident);
+        $result = $db->fetchRow($select);
         return ($result <> NULL);
     }
 }

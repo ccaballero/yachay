@@ -58,16 +58,15 @@ class Teams_Team extends Yachay_Models_Row_Validation
     }
 
     public function delete() {
-        // FIXME ??
-        global $DB;
-        $DB->delete('team_user', 'team = ' . $this->ident);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->delete('team_user', 'team = ' . $this->ident);
         parent::delete();
     }
 
     public function getAssignement($user) {
-        global $DB;
-        $select = $DB->select()->from('team_user')->where('team = ?' , $this->ident)->where('user = ?', $user->ident);
-        $result = $DB->fetchRow($select);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select = $db->select()->from('team_user')->where('team = ?' , $this->ident)->where('user = ?', $user->ident);
+        $result = $db->fetchRow($select);
         
         $obj = new stdClass;
         $obj->type = $result['type'];

@@ -93,22 +93,15 @@ class Evaluations_Tests_Test extends Yachay_Models_Row_Validation
         return $model_evaluations->findByIdent($this->evaluation);
     }
 
-    /*public function isEmpty() {
-        $model = Yachay_Adapter::getModel('teams');
-        $teams = $model->selectAll($this->ident);
-        return count($teams) == 0;
-    }*/
-
     public function hasValues() {
         $values = $this->findEvaluations_Tests_Values();
         return count($values) != 0;
     }
 
     public function delete() {
-        // FIXME ??
-        global $DB;
-        $DB->delete('groupset_group', '`group` = ' . $this->ident);
-        $DB->delete('group_user', '`group` = ' . $this->ident);
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $db->delete('groupset_group', '`group` = ' . $this->ident);
+        $db->delete('group_user', '`group` = ' . $this->ident);
         parent::delete();
     }
 }
