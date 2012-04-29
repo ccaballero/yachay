@@ -3,5 +3,5 @@
 <?php } ?>
 
 <p class="center">
-    <img src="<?php echo $this->CONFIG->wwwroot ?>media/photos/<?php echo $this->photo->resource ?>.thumb" alt="" title="" />
+    <img src="<?php echo $this->config->resources->frontController->baseUrl ?>/media/photos/<?php echo $this->photo->resource ?>.thumb" alt="" title="" />
 </p>

@@ -32,12 +32,12 @@ echo '<tr valign="top"><td><b>Fecha: </b><i>' . $this->timestamp($this->resource
 echo '</table>';
 
 echo '<p>' . $this->specialEscape($this->escape($this->photo->description)) . '</p>';
-echo '<center><img src="' . $this->CONFIG->wwwroot . 'media/photos/' . $this->photo->resource . '" alt="" title="" /></center>';
+echo '<center><img src="' . $this->config->resources->frontController->baseUrl . '/media/photos/' . $this->photo->resource . '" alt="" title="" /></center>';
 
 if ($this->acl('comments', 'view')) {
     echo '<h2>Comentarios</h2>';
-    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'photos_photo_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, ));
+    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'photos_photo_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, ));
     if ($this->acl('comments', 'new')) {
-        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'photos_photo_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, 'USER' => $this->USER));
+        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'photos_photo_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, 'USER' => $this->USER));
     }
 }

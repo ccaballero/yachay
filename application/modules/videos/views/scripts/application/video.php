@@ -10,10 +10,10 @@ echo '<br />';
 
 echo '<center>';
 echo '<object class="playerpreview" type="application/x-shockwave-flash" ';
-echo 'data="' . $this->CONFIG->wwwroot . 'media/videos/flvplayer.swf" width="600" height="' . intval(600 / $proportion) . '">';
-echo '<param name="movie" value="' . $this->CONFIG->wwwroot . 'media/videos/flvplayer.swf" />';
+echo 'data="' . $this->config->resources->frontController->baseUrl . '/media/videos/flvplayer.swf" width="600" height="' . intval(600 / $proportion) . '">';
+echo '<param name="movie" value="' . $this->config->resources->frontController->baseUrl . '/media/videos/flvplayer.swf" />';
 echo '<param name="allowFullScreen" value="true" />';
-echo '<param name="FlashVars" value="flv=' . $this->CONFIG->wwwroot . 'media/videos/' . $this->video->resource;
+echo '<param name="FlashVars" value="flv=' . $this->config->resources->frontController->baseUrl . '/media/videos/' . $this->video->resource;
 echo '&showstop=1&showvolume=1&showtime=1&showfullscreen=1&buffermessage=...' . '" />';
 echo '</object>';
 echo '</center>';

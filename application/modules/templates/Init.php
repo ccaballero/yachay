@@ -18,7 +18,7 @@ class Templates_Init extends Yachay_Init
                                                         'controller' => 'template',
                                                         'action'     => 'view',
                                                     )),
-        'templates_css'                          => array('templates/css/properties.css',
+        'templates_css'                          => array('templates/css/properties',
                                                     array(
                                                         'module'     => 'templates',
                                                         'controller' => 'manager',

@@ -9,19 +9,19 @@ function print_params($array = array()) {
 }
 
 function history($url_page = '') {
-    global $CONFIG;
+    $config = Zend_Registry::get('config');
 
     $session = new Zend_Session_Namespace();
     $history = $session->history;
-    $history->addUrl($CONFIG->wwwroot . $url_page);
+    $history->addUrl($config->resources->frontController->baseUrl . '/' . $url_page);
 }
 
 function breadcrumb($elements = array()) {
     global $BREADCRUMB;
-    global $CONFIG;
+    $config = Zend_Registry::get('config');
 
     $BREADCRUMB->items[] = array(
-        'link'  => $CONFIG->wwwroot,
+        'link'  => $config->resources->frontController->baseUrl,
         'label' => 'Inicio',
     );
     

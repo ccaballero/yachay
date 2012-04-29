@@ -3,7 +3,7 @@
 class Yachay_Helpers_Mime
 {
     public function mime($value) {
-        global $CONFIG;
+        $config = Zend_Registry::get('config');
 
         $return = 'unknown.png';
         $mimes = array (
@@ -22,14 +22,14 @@ class Yachay_Helpers_Mime
             'image/gif' => 'image-x-generic.png',
             'text/x-sql' => 'text-x-sql.png',
             'text/plain' => 'text-plain.png'
-            );
+        );
         foreach ($mimes as $key => $mime) {
             if ($key == $value) {
-                $image = '<img src = "' . $CONFIG->wwwroot . 'media/mimetypes/' . $mime . '" />';
+                $image = '<img src = "' . $config->resources->frontController->baseUrl . '/media/mimetypes/' . $mime . '" />';
                 return $image;
             }
         }
 
-        return $image = '<img src = "' . $CONFIG->wwwroot . 'media/mimetypes/' . $return . '" />';
+        return $image = '<img src = "' . $config->resources->frontController->baseUrl . '/media/mimetypes/' . $return . '" />';
     }
 }

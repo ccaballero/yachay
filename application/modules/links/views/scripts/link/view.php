@@ -36,8 +36,8 @@ echo '<center><a target="_BLANK" href="' . $this->link->link . '">' . $this->lin
 
 if ($this->acl('comments', 'view')) {
     echo '<h2>Comentarios</h2>';
-    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'links_link_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, ));
+    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'links_link_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, ));
     if ($this->acl('comments', 'new')) {
-        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'links_link_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, 'USER' => $this->USER));
+        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'links_link_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, 'USER' => $this->USER));
     }
 }

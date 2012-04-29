@@ -2,17 +2,6 @@
 
 abstract class Yachay_Action extends Zend_Controller_Action
 {
-    protected function _redirect($url, array $options = array()) {
-        global $CONFIG;
-        global $USER;
-
-        if ($USER->role == 1) {
-            parent::_redirect($this->view->url(array(), 'frontpage_visitor'));
-        }
-
-        parent::_redirect($url);
-    }
-
     public function acl($module, $privilege) {
         return Yachay_Acl::hasPermission($module, $privilege);
     }
@@ -24,7 +13,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
         if (!is_array($privilege)) {
             if (!$USER->hasPermission($module, $privilege)) {
                 $session->messages->addMessage('Usted no tiene permisos suficientes');
-                $this->_redirect($CONFIG->wwwroot);
+                $this->_redirect($this->view->url(array(), 'frontpage'));
             }
         } else {
             $flag = false;
@@ -33,7 +22,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
             }
             if (!$flag) {
                 $session->messages->addMessage('Usted no tiene permisos suficientes');
-                $this->_redirect($CONFIG->wwwroot);
+                $this->_redirect($this->view->url(array(), 'frontpage'));
             }
         }
     }
@@ -147,13 +136,18 @@ abstract class Yachay_Action extends Zend_Controller_Action
         }
     }
 
+    public function init() {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this->_redirector->setPrependBase(false);
+    }
+    
     public function preDispatch() {
         global $CONFIG;
-        //$this->getRequest()->setBaseUrl($CONFIG->wwwroot);
+
+        $config = Zend_Registry::get('config');
 
         // settings for the page
         $route = $this->getFrontController()->getRouter()->getCurrentRouteName();
-
         if ($route == 'default') {
             return;
         }
@@ -203,6 +197,8 @@ abstract class Yachay_Action extends Zend_Controller_Action
 
         global $USER;
 
+        $this->view->config = $config;
+        
         $this->view->CONFIG = $CONFIG;
         $this->view->PAGE = $PAGE;
         $this->view->TEMPLATE = $TEMPLATE;
@@ -245,7 +241,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
             $view = new Zend_View();
             $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
             $view->setScriptPath(APPLICATION_PATH . '/modules/' . $widget->module . '/views/scripts/widgets/');
-
+            
             $view->CONFIG = $CONFIG;
             $view->PAGE = $PAGE;
             $view->TEMPLATE = $TEMPLATE;
@@ -277,7 +273,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
         if (!empty($user)) {
             $user->lastLogin();
             if ($user->needFillProfile()) {
-                $message = "Se recomienda que ingrese su nombre, apellido y correo electrónico. <a href=\"{$CONFIG->wwwroot}profile/edit/\">Editar</a>";
+                $message = 'Se recomienda que ingrese su nombre, apellido y correo electrónico. <a href="' . $this->view->url(array(), 'profile_edit') . '">Editar</a>';
                 if (!in_array($message, $session->messages->getMessages())) {
                     $session->messages->addMessage($message);
                 }

@@ -1,7 +1,6 @@
 <?php 
 
 global $MENUBAR;
-global $PAGE;
 global $USER;
 
 $model_pages = new Pages();
@@ -19,9 +18,9 @@ foreach ($items as $item) {
     }
 
     if ($bool) {
-	    $MENUBAR->items[] = array (
-	        'link'  => $this->moduleToUrl($item->module, $item->controller, $item->action),
-	        'label' => ucfirst($item->title),
-	    );
+        $MENUBAR->items[] = array (
+            'link'  => $this->moduleToUrl($item->module, $item->controller, $item->action),
+            'label' => ucfirst($item->title),
+        );
     }
 }

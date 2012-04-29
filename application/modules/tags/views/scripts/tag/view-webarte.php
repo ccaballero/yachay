@@ -15,9 +15,9 @@
                 </div>
                 <div class="photo">
                     <?php if ($this->acl('communities', 'view')) { ?>
-                        <a href="<?php echo $this->url(array('community' => $community->url), 'communities_community_view') ?>"><img src="<?php echo $this->CONFIG->wwwroot . 'media/communities/thumbnail_medium/' . $community->getAvatar() ?>" alt="<?php echo $community->label ?>" title="<?php echo $community->label ?>" /></a>
+                        <a href="<?php echo $this->url(array('community' => $community->url), 'communities_community_view') ?>"><img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/communities/thumbnail_medium/' . $community->getAvatar() ?>" alt="<?php echo $community->label ?>" title="<?php echo $community->label ?>" /></a>
                     <?php } else { ?>
-                        <img src="<?php echo $this->CONFIG->wwwroot . 'media/communities/thumbnail_medium/' . $community->getAvatar() ?>" alt="<?php echo $community->label ?>" title="<?php echo $community->label ?>" />
+                        <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/communities/thumbnail_medium/' . $community->getAvatar() ?>" alt="<?php echo $community->label ?>" title="<?php echo $community->label ?>" />
                     <?php } ?>
                 </div>
                 <div class="tools">
@@ -63,9 +63,9 @@
                 </div>
                 <div class="photo">
                     <?php if ($this->acl('users', 'view')) { ?>
-                        <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_view') ?>"><img src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_medium/' . $user->getAvatar() ?>" alt="<?php echo $user->getFullName() ?>" title="<?php echo $user->getFullName() ?>" /></a>
+                        <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_view') ?>"><img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $user->getAvatar() ?>" alt="<?php echo $user->getFullName() ?>" title="<?php echo $user->getFullName() ?>" /></a>
                     <?php } else { ?>
-                        <img src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_medium/' . $user->getAvatar() ?>" alt="<?php echo $user->getFullName() ?>" title="<?php echo $user->getFullName() ?>" />
+                        <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $user->getAvatar() ?>" alt="<?php echo $user->getFullName() ?>" title="<?php echo $user->getFullName() ?>" />
                     <?php } ?>
                 </div>
                 <div class="tools">
@@ -106,4 +106,4 @@
 </div>
 <?php } ?>
 
-<?php echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, 'paginator' => true,)) ?>
+<?php echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, 'paginator' => true,)) ?>

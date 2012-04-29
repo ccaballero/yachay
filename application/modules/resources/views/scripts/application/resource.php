@@ -18,7 +18,7 @@ if ($this->acl('resources', 'view')) {
 
             echo '<td colspan="2">';
             $extended = $resource->getExtended();
-            echo $this->partial($extended->__type . '.php', array($extended->__type => $extended, 'CONFIG' => $this->CONFIG));
+            echo $this->partial($extended->__type . '.php', array($extended->__type => $extended, 'config' => $this->config));
             echo '</td></tr><tr><td>';
 
             if (isset($resource->viewers)) {

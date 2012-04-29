@@ -19,14 +19,14 @@ class Evaluations_TestController extends Yachay_Action
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $USER->ident) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect('/', array('prependBase' => true));
         }
 
         $model_evaluations_tests = new Evaluations_Tests();
         $test_evaluation = $model_evaluations_tests->findByIdent($url_test_evaluation);
 
         if (empty($test_evaluation)) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect('/', array('prependBase' => true));
         }
 
         $model_evaluations_tests_values = new Evaluations_Tests_Values();
@@ -57,13 +57,13 @@ class Evaluations_TestController extends Yachay_Action
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $USER->ident) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect('/', array('prependBase' => true));
         }
 
         $model_evaluations_tests = new Evaluations_Tests();
         $test_evaluation = $model_evaluations_tests->findByIdent($url_test_evaluation);
         if (empty($test_evaluation)) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect('/', array('prependBase' => true));
         }
 
         $empty_test_value_evaluation = new Evaluations_Tests_Values_Empty();
@@ -126,7 +126,7 @@ class Evaluations_TestController extends Yachay_Action
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $USER->ident) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect('/', array('prependBase' => true));
         }
 
         $empty_test_evaluation = new Evaluations_Tests_Empty();
@@ -198,7 +198,7 @@ class Evaluations_TestController extends Yachay_Action
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $USER->ident) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect('/', array('prependBase' => true));
         }
 
         $model_evaluations_tests = new Evaluations_Tests();

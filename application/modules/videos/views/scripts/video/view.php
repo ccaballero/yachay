@@ -36,10 +36,10 @@ $proportion = $w / $h;
 
 echo '<center>';
 echo '<object class="playerpreview" type="application/x-shockwave-flash" ';
-echo 'data="' . $this->CONFIG->wwwroot . 'media/videos/flvplayer.swf" width="600" height="' . intval(600 / $proportion) . '">';
-echo '<param name="movie" value="' . $this->CONFIG->wwwroot . 'media/videos/flvplayer.swf" />';
+echo 'data="' . $this->config->resources->frontController->baseUrl . '/media/videos/flvplayer.swf" width="600" height="' . intval(600 / $proportion) . '">';
+echo '<param name="movie" value="' . $this->config->resources->frontController->baseUrl . '/media/videos/flvplayer.swf" />';
 echo '<param name="allowFullScreen" value="true" />';
-echo '<param name="FlashVars" value="flv=' . $this->CONFIG->wwwroot . 'media/videos/' . $this->video->resource;
+echo '<param name="FlashVars" value="flv=' . $this->config->resources->frontController->baseUrl . '/media/videos/' . $this->video->resource;
 echo '&showstop=1&showvolume=1&showtime=1&showfullscreen=1&buffermessage=...' . '" />';
 echo '</object>';
 echo '</center>';
@@ -50,8 +50,8 @@ if (!empty($this->video->description)) {
 
 if ($this->acl('comments', 'view')) {
     echo '<h2>Comentarios</h2>';
-    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'videos_video_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, ));
+    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'videos_video_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, ));
     if ($this->acl('comments', 'new')) {
-        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'videos_video_comment', 'CONFIG' => $this->CONFIG, 'TEMPLATE' => $this->TEMPLATE, 'USER' => $this->USER));
+        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'videos_video_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, 'USER' => $this->USER));
     }
 }
