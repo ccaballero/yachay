@@ -10,9 +10,9 @@
             <span class="label"><?php echo $author->getFullName() ?></span>
             <div class="avatar">
             <?php if ($this->acl('users', 'view')) { ?>
-                <a href="<?php echo $this->url(array('user' => $author->url), 'users_user_view') ?>"><img src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_small/' . $author->getAvatar() ?>" alt="<?php echo $author->getFullName() ?>" title="<?php echo $author->getFullName() ?>" /></a>
+                <a href="<?php echo $this->url(array('user' => $author->url), 'users_user_view') ?>"><img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $author->getAvatar() ?>" alt="<?php echo $author->getFullName() ?>" title="<?php echo $author->getFullName() ?>" /></a>
             <?php } else { ?>
-                <img src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_small/' . $author->getAvatar() ?>" alt="<?php echo $author->getFullName() ?>" title="<?php echo $author->getFullName() ?>" />
+                <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $author->getAvatar() ?>" alt="<?php echo $author->getFullName() ?>" title="<?php echo $author->getFullName() ?>" />
             <?php } ?>
             </div>
             <div class="message">

@@ -32,10 +32,8 @@ class Communities_ManagerController extends Yachay_Action
 
     public function newAction() {
         global $USER;
-        global $CONFIG;
 
         $this->requirePermission('communities', 'enter');
-
         $this->view->community = new Communities_Empty();
 
         $request = $this->getRequest();

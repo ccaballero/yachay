@@ -3,7 +3,6 @@
 class Templates_ManagerController extends Yachay_Action
 {
     public function cssAction() {
-        global $CONFIG;
         global $TEMPLATE;
         global $USER;
 
@@ -23,7 +22,7 @@ class Templates_ManagerController extends Yachay_Action
         $view = new Zend_View();
         $view->setScriptPath(APPLICATION_PATH . '/modules/templates/views/scripts/manager/');
 
-        $view->config = $CONFIG;
+        $view->config = Zend_Registry::get('config');
 
         foreach ($properties as $property => $value) {
             $view->{$property} = $value;

@@ -11,7 +11,7 @@ body {
 }
 
 #header {
-    background-image: url('<?php echo $this->config->wwwroot ?>media/yachay.png');
+    background-image: url('<?php echo $this->config->resources->frontController->baseUrl ?>/media/yachay.png');
     background-repeat: no-repeat;
     background-position: 10px 75%;
 }

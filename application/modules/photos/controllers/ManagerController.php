@@ -5,7 +5,6 @@ class Photos_ManagerController extends Yachay_Action
     public $_ignoreContextDefault = true;
 
     public function newAction() {
-        global $CONFIG;
         global $USER;
 
         $this->requirePermission('resources', array('new', 'view'));
@@ -37,7 +36,6 @@ class Photos_ManagerController extends Yachay_Action
             } else if (in_array($publish, $spaces_valids)) {
                 if ($upload->receive()) {
                     $filename = $upload->getFileName('photo');
-                    $extension = strtolower(substr($filename, -3));
 
                     $photo = $model_photos->createRow();
                     $photo->filename = basename($filename);

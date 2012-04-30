@@ -24,19 +24,23 @@ class Yachay_Settings_History
     }
 
     public function lastUrl() {
+        $config = Zend_Registry::get('config');
+
         if ($this->_count > 1) {
             return $this->_items[($this->_count - 2) % $this->_limit];
+        } else {
+            return $config->resources->frontController->baseUrl;
         }
-        global $CONFIG;
-        return $CONFIG->wwwroot;
     }
 
     public function currentUrl() {
+        $config = Zend_Registry::get('config');
+
         if ($this->_count > 0) {
             return $this->_items[($this->_count - 1) % $this->_limit];
+        } else {
+            return $config->resources->frontController->baseUrl;
         }
-        global $CONFIG;
-        return $CONFIG->wwwroot;
     }
 
     public function toString() {

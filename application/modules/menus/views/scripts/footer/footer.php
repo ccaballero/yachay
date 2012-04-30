@@ -1,10 +1,9 @@
 <?php
 
 global $FOOTER;
-global $PAGE;
 global $USER;
-global $CONFIG;
 
+$config = Zend_Registry::get('config');
 $model_pages = new Pages();
 $items = $model_pages->selectByMenutype('footer');
 
@@ -23,4 +22,4 @@ foreach ($items as $item) {
     }
 }
 
-$FOOTER->copyright = date("Y") . ' &copy; ' . $CONFIG->site . ' ' . $CONFIG->version;
+$FOOTER->copyright = date("Y") . ' yachay ' . $config->yachay->properties->version;

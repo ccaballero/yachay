@@ -4,13 +4,13 @@ class Settings_IndexController extends Yachay_Action
 {
     public function indexAction() {
         global $USER;
-        global $CONFIG;
 
+        $config = Zend_Registry::get('config');
         $request = $this->getRequest();
 
         $url = $request->getParam('user');
         if ($url != $USER->url) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect($this->view->url(array(), 'frontpage'));
         }
 
         $model_users = new Users();
@@ -26,7 +26,7 @@ class Settings_IndexController extends Yachay_Action
             $password2 = $request->getParam('password2');
 
             if (!empty($password1) && !empty($password2) && $password1 == $password2) {
-                $user->password = md5($CONFIG->key . $password1);
+                $user->password = md5($config->yachay->properties->key . $password1);
                 $user->save();
 
                 $session->messages->addMessage('Tu has cambiado tus preferencias correctamente');

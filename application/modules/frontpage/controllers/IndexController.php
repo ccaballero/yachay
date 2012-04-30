@@ -206,7 +206,6 @@ class IndexController extends Yachay_Action
     }
 
     public function spacesAction () {
-        global $CONFIG;
         global $USER;
 
         $request = $this->getRequest();

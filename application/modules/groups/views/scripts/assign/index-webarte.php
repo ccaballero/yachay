@@ -24,9 +24,9 @@
         <?php } ?>
             <p><span class="title"><?php echo $auxiliar->getFullName() ?></span></p>
         <?php if ($this->acl('users', 'view')) { ?>
-            <a href="<?php echo $this->url(array('user' => $auxiliar->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_small/' . $auxiliar->getAvatar() ?>" alt="<?php echo $auxiliar->getFullName() ?>" title="<?php echo $auxiliar->getFullName() ?>" /></a>
+            <a href="<?php echo $this->url(array('user' => $auxiliar->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $auxiliar->getAvatar() ?>" alt="<?php echo $auxiliar->getFullName() ?>" title="<?php echo $auxiliar->getFullName() ?>" /></a>
         <?php } else { ?>
-            <img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_medium/' . $auxiliar->getAvatar() ?>" alt="<?php echo $auxiliar->getFullName() ?>" title="<?php echo $auxiliar->getFullName() ?>" />
+            <img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $auxiliar->getAvatar() ?>" alt="<?php echo $auxiliar->getFullName() ?>" title="<?php echo $auxiliar->getFullName() ?>" />
         <?php } ?>
             <div class="body">
             <?php if ($this->group->amTeacher()) { ?>
@@ -64,9 +64,9 @@
         <?php } ?>
             <p><span class="title"><?php echo $student->getFullName() ?></span></p>
         <?php if ($this->acl('users', 'view')) { ?>
-            <a href="<?php echo $this->url(array('user' => $student->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_small/' . $student->getAvatar() ?>" alt="<?php echo $student->getFullName() ?>" title="<?php echo $student->getFullName() ?>" /></a>
+            <a href="<?php echo $this->url(array('user' => $student->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $student->getAvatar() ?>" alt="<?php echo $student->getFullName() ?>" title="<?php echo $student->getFullName() ?>" /></a>
         <?php } else { ?>
-            <img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_medium/' . $student->getAvatar() ?>" alt="<?php echo $student->getFullName() ?>" title="<?php echo $student->getFullName() ?>" />
+            <img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $student->getAvatar() ?>" alt="<?php echo $student->getFullName() ?>" title="<?php echo $student->getFullName() ?>" />
         <?php } ?>
             <div class="body">
             <?php if ($this->group->amTeacher()) { ?>
@@ -104,9 +104,9 @@
         <?php } ?>
             <p><span class="title"><?php echo $guest->getFullName() ?></span></p>
         <?php if ($this->acl('users', 'view')) { ?>
-            <a href="<?php echo $this->url(array('user' => $guest->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_small/' . $guest->getAvatar() ?>" alt="<?php echo $guest->getFullName() ?>" title="<?php echo $guest->getFullName() ?>" /></a>
+            <a href="<?php echo $this->url(array('user' => $guest->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $guest->getAvatar() ?>" alt="<?php echo $guest->getFullName() ?>" title="<?php echo $guest->getFullName() ?>" /></a>
         <?php } else { ?>
-            <img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_medium/' . $guest->getAvatar() ?>" alt="<?php echo $guest->getFullName() ?>" title="<?php echo $guest->getFullName() ?>" />
+            <img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $guest->getAvatar() ?>" alt="<?php echo $guest->getFullName() ?>" title="<?php echo $guest->getFullName() ?>" />
         <?php } ?>
             <div class="body">
             <?php if ($this->group->amTeacher()) { ?>

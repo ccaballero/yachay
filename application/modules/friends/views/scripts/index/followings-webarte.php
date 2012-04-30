@@ -20,9 +20,9 @@
             </div>
             <div class="photo">
                 <?php if ($this->acl('users', 'view')) { ?>
-                    <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_view') ?>"><img src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_medium/' . $user->getAvatar() ?>" alt="<?php echo $user->getFullName() ?>" title="<?php echo $user->getFullName() ?>" /></a>
+                    <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_view') ?>"><img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $user->getAvatar() ?>" alt="<?php echo $user->getFullName() ?>" title="<?php echo $user->getFullName() ?>" /></a>
                 <?php } else { ?>
-                    <img src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_medium/' . $user->getAvatar() ?>" alt="<?php echo $user->getFullName() ?>" title="<?php echo $user->getFullName() ?>" />
+                    <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $user->getAvatar() ?>" alt="<?php echo $user->getFullName() ?>" title="<?php echo $user->getFullName() ?>" />
                 <?php } ?>
             </div>
             <div class="tools">

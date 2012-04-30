@@ -1,5 +1,5 @@
 <?php if ($this->USER->role <> 1) { ?>
-<form method="post" action="<?php echo $this->CONFIG->wwwroot ?>filter_spaces" accept-charset="utf-8">
+<form method="post" action="<?php echo $this->config->resources->frontController->baseUrl ?>/filter_spaces" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?php echo $this->currentPage() ?>" />
 <?php } ?>
 

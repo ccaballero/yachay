@@ -66,7 +66,8 @@ class Users_ManagerController extends Yachay_Action
             $user->role = $request->getParam('role');
 
             if ($user->isValid()) {
-                global $CONFIG;
+                $config = Zend_Registry::get('config');
+
                 // role validation,, critical point
                 global $USER;
                 $model_roles = new Roles();
@@ -81,7 +82,7 @@ class Users_ManagerController extends Yachay_Action
                 if ($valid_role) {
                     // Password generation
                     $password = generatecode($user->password, $user->code);
-                    $user->password = md5($CONFIG->key . $password);
+                    $user->password = md5($config->yachay->properties->key . $password);
 
                     $user->tsregister = time();
                     $user->save();
@@ -93,14 +94,14 @@ class Users_ManagerController extends Yachay_Action
                         $view->setScriptPath(APPLICATION_PATH . '/modules/users/views/scripts/user/');
 
                         $view->user       = $user;
-                        $view->servername = $CONFIG->wwwroot;
+                        $view->servername = $config->yachay->properties->servername;
                         $view->author     = $USER->label;
                         $view->password   = $password;
 
                         $content = $view->render('mail.php');
                         $mail = new Zend_Mail('UTF-8');
                         $mail->setBodyHtml($content)
-                             ->setFrom($CONFIG->email_direction, $CONFIG->email_name)
+                             ->setFrom($config->yachay->properties->email_direction, $config->yachay->properties->email_name)
                              ->addTo($user->email, $user->getFullName())
                              ->setSubject('Notificacion de registro de usuario')
                              ->send();
@@ -242,8 +243,9 @@ class Users_ManagerController extends Yachay_Action
     }
 
     public function importAction() {
-        global $CONFIG;
         global $USER;
+        
+        $config = Zend_Registry::get('config');
 
         $this->requirePermission('users', 'import');
         $this->requirePermission('users', array('new', 'edit'));
@@ -389,7 +391,7 @@ class Users_ManagerController extends Yachay_Action
                                 $user->tsregister = time();
                                 // Password generation
                                 $password = generatecode($result['PASSWORD'], $result['CODIGO']);
-                                $user->password = md5($CONFIG->key . $password);
+                                $user->password = md5($config->yachay->properties->key . $password);
                             }
                             if (!$result['CODIGO_NUE'] && Yachay_Acl::hasPermission('users', 'edit')) {
                                 $user = $model_users->findByCode($result['CODIGO']);
@@ -414,13 +416,13 @@ class Users_ManagerController extends Yachay_Action
                                         $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
                                         $view->setScriptPath(APPLICATION_PATH . '/modules/users/views/scripts/user/');
                                         $view->user       = $user;
-                                        $view->servername = $CONFIG->wwwroot;
+                                        $view->servername = $config->yachay->properties->servername;
                                         $view->author     = $USER->label;
                                         $view->password   = $password;
                                         $content = $view->render('mail.php');
                                         $mail = new Zend_Mail('UTF-8');
                                         $mail->setBodyHtml($content)
-                                             ->setFrom($CONFIG->email_direction, $CONFIG->email_name)
+                                             ->setFrom($config->yachay->properties->email_direction, $config->yachay->properties->email_name)
                                              ->addTo($user->email, $user->getFullName())
                                              ->setSubject('Notificacion de registro de usuario')
                                              ->send(); // FIXME agregar opcion smtp al gestor de correos

@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Language" content="es-BO" />
         <link href="<?php echo $this->TEMPLATE->htmlbase . 'css/style.css' ?>" media="screen" rel="stylesheet" type="text/css" />
         <link href="<?php echo $this->config->resources->frontController->baseUrl . '/templates/css/properties' ?>" media="screen" rel="stylesheet" type="text/css" />
-        <link rel="icon" type="image/x-icon" href="<?php echo $this->CONFIG->media_base ?>favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="<?php echo $this->config->resources->frontController->baseUrl ?>/media/favicon.ico" />
         <title><?php echo $this->TITLE->toString(); ?></title>
     </head>
     <body>

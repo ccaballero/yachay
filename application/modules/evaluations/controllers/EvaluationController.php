@@ -30,7 +30,6 @@ class Evaluations_EvaluationController extends Yachay_Action
 
     // FIXME Agregar restricciones de historial
     public function editAction() {
-        global $CONFIG;
         global $USER;
 
         $this->requirePermission('subjects', 'teach');
@@ -43,7 +42,7 @@ class Evaluations_EvaluationController extends Yachay_Action
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $USER->ident) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect($this->view->url(array(), 'frontpage'));
         }
 
         if ($request->isPost()) {

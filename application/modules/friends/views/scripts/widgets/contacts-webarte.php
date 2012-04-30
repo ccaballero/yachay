@@ -24,7 +24,7 @@ $count_followers = count($followers);
         <li class="left">
             <?php $user = $model_users->findByIdent($friend->friend); ?>
             <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_view'); ?>">
-                <img src="<?php echo $this->CONFIG->media_base . 'users/thumbnail_medium/' . $user->getAvatar() ?>" title="<?php echo $user->getFullName() ?>" alt="<?php echo $user->getFullName() ?>" />
+                <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $user->getAvatar() ?>" title="<?php echo $user->getFullName() ?>" alt="<?php echo $user->getFullName() ?>" />
             </a>
             <?php $count++; ?>
         </li>
@@ -45,7 +45,7 @@ $count_followers = count($followers);
         <li class="left">
             <?php $user = $model_users->findByIdent($following->friend); ?>
             <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_view'); ?>">
-                <img src="<?php echo $this->CONFIG->media_base . 'users/thumbnail_medium/' . $user->getAvatar() ?>" title="<?php echo $user->getFullName() ?>" alt="<?php echo $user->getFullName() ?>" />
+                <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $user->getAvatar() ?>" title="<?php echo $user->getFullName() ?>" alt="<?php echo $user->getFullName() ?>" />
             </a>
             <?php $count++; ?>
         </li>
@@ -66,7 +66,7 @@ $count_followers = count($followers);
         <li class="left">
             <?php $user = $model_users->findByIdent($follower->user); ?>
             <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_view'); ?>">
-                <img src="<?php echo $this->CONFIG->media_base . 'users/thumbnail_medium/' . $user->getAvatar() ?>" title="<?php echo $user->getFullName() ?>" alt="<?php echo $user->getFullName() ?>" />
+                <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $user->getAvatar() ?>" title="<?php echo $user->getFullName() ?>" alt="<?php echo $user->getFullName() ?>" />
             </a>
            <?php $count++; ?>
         </li>

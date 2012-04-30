@@ -4,13 +4,10 @@ class Profile_IndexController extends Yachay_Action
 {
     public function viewAction() {
         global $USER;
-        global $CONFIG;
 
         if ($USER->role == 1) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect($this->view->url(array(), 'frontpage'));
         }
-
-        $request = $this->getRequest();
 
         $model_users = new Users();
         $user = $model_users->findByUrl($USER->url);
@@ -27,10 +24,9 @@ class Profile_IndexController extends Yachay_Action
 
     public function editAction() {
         global $USER;
-        global $CONFIG;
 
         if ($USER->role == 1) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect($this->view->url(array(), 'frontpage'));
         }
 
         $request = $this->getRequest();

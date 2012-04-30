@@ -3,7 +3,7 @@
 class Frontpage_Init extends Yachay_Init
 {
     public $routes = array (
-        'frontpage'                             => array(
+        'frontpage'                             => array('',
                                                    array(
                                                        'module'     => 'frontpage',
                                                        'controller' => 'index',

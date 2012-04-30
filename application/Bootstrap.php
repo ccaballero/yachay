@@ -5,9 +5,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initConfig() {
         require_once APPLICATION_PATH . '/../library/Yachay/Utils.php';
 
-        global $CONFIG;
-        $CONFIG = new Yachay_Settings_Config();
-
         $config = new Zend_Config($this->getOptions());
         Zend_Registry::set('config', $config);
         return $config;
@@ -52,16 +49,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     protected function _initLocale() {
-        global $CONFIG;
-        
+        $this->bootstrap('config');
+        $config = Zend_Registry::get('config');
         // Set for localization
-        setlocale(LC_CTYPE, $CONFIG->locale);
-        Zend_Locale::setDefault($CONFIG->locale);
+        setlocale(LC_CTYPE, $config->yachay->properties->locale);
+        Zend_Locale::setDefault($config->yachay->properties->locale);
     }
     
     protected function _initTimezone() {
-        global $CONFIG;
-        date_default_timezone_set($CONFIG->time_zone);
+        $this->bootstrap('config');
+        $config = Zend_Registry::get('config');
+        date_default_timezone_set($config->yachay->properties->timezone);
     }
     
     protected function _initUser() {
@@ -105,7 +103,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Set of theme
         global $TEMPLATE;
         global $USER;
-        global $CONFIG;
+        
+        $config = Zend_Registry::get('config');
 
         $model_templates = new Templates();
         $template = $model_templates->findByLabel($USER->template);
@@ -116,7 +115,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $TEMPLATE->doctype = $template->doctype;
         $TEMPLATE->description = $template->description;
         $TEMPLATE->css_properties = $template->css_properties;
-        $TEMPLATE->htmlbase = $CONFIG->wwwroot . 'templates/' . $TEMPLATE->label . '/';
+        $TEMPLATE->htmlbase = $config->resources->frontController->baseUrl . '/templates/' . $TEMPLATE->label . '/';
 
         global $PALETTE;
         $model_templates_users = new Templates_Users();

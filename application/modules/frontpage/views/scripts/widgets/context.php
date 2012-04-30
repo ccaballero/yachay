@@ -1,7 +1,7 @@
 <?php
 
 if ($this->USER->role <> 1) {
-    echo '<form method="post" action="' . $this->CONFIG->wwwroot . 'filter_spaces" accept-charset="utf-8"><input type="hidden" name="return" value="' . $this->currentPage() . '" />';
+    echo '<form method="post" action="' . $this->config->resources->frontController->baseUrl . '/filter_spaces" accept-charset="utf-8"><input type="hidden" name="return" value="' . $this->currentPage() . '" />';
 }
 
 $list_spaces = $this->context(NULL, 'matrix');

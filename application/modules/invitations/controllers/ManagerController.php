@@ -16,7 +16,8 @@ class Invitations_ManagerController extends Yachay_Action
 
     public function newAction() {
         global $USER;
-        global $CONFIG;
+
+        $config = Zend_Registry::get('config');
 
         $this->requirePermission('invitations', 'invite');
 
@@ -32,7 +33,7 @@ class Invitations_ManagerController extends Yachay_Action
             $code_valid = false;
             while (!$code_valid) {
                 $code = generatecode('alphanum', NULL, 64);
-                $existent_invitation = $model_invitations->findByCode(md5($CONFIG->key . $code));
+                $existent_invitation = $model_invitations->findByCode(md5($config->yachay->properties->key . $code));
                 if (empty($existent_invitation)) {
                     $code_valid = true;
                 }
@@ -43,7 +44,7 @@ class Invitations_ManagerController extends Yachay_Action
             $invitation->message = $request->getParam('message');
 
             if ($invitation->isValid()) {
-                $invitation->code = md5($CONFIG->key . $code);
+                $invitation->code = md5($config->yachay->properties->key . $code);
                 $invitation->tsregister = time();
                 $invitation->save();
 
@@ -55,15 +56,15 @@ class Invitations_ManagerController extends Yachay_Action
                 $view->url = $this->view->url(array('code' => $code), 'invitations_invitation_proceed');
                 $view->message = $invitation->message;
                 $view->user = $USER;
-                $view->site = $CONFIG->site;
+                $view->site = $config->yachay->propertied->servername;
 
                 $content = $view->render('mail.php');
 
                 $mail = new Zend_Mail('UTF-8');
                 $mail->setBodyHtml($content)
-                     ->setFrom($CONFIG->email_direction, $CONFIG->email_name)
+                     ->setFrom($config->yachay->properties->email_direction, $config->yachay->properties->email_name)
                      ->addTo($invitation->email)
-                     ->setSubject($USER->label . ' te ha invitado a ' . $CONFIG->site)
+                     ->setSubject($USER->label . ' te ha invitado a ' . $config->yachay->properties->servername)
                      ->send();
 
                 $session->messages->addMessage('La invitación ha sido enviada al correo electronico');

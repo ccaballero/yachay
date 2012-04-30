@@ -3,11 +3,12 @@
 class Login_IndexController extends Yachay_Action
 {
     public function inAction() {
-        global $CONFIG;
         global $USER;
+        
+        $config = Zend_Registry::get('config');
 
         if ($USER->role != 1) {
-            $this->_redirect($CONFIG->wwwroot);
+            $this->_redirect($this->view->url(array(), 'frontpage'));
         }
 
         $request = $this->getRequest();
@@ -42,7 +43,7 @@ class Login_IndexController extends Yachay_Action
             $session = new Zend_Session_Namespace();
             if ($input->isValid()) {
                 $model_users = new Users();
-                $user = $model_users->findByLogin($input->username, md5($CONFIG->key . $input->password));
+                $user = $model_users->findByLogin($input->username, md5($config->yachay->properties->key . $input->password));
                 if (!empty($user)) {
                     if ($user->status == 'active') {
                         $session->user = $user;
@@ -58,14 +59,14 @@ class Login_IndexController extends Yachay_Action
                     if (!empty($user)) {
                         $forgot = $model_login->selectByUser($user->ident);
                         if (!empty($forgot)) {
-                            if (md5($CONFIG->key . $input->password) == $forgot->password) {
+                            if (md5($config->yachay->properties->key . $input->password) == $forgot->password) {
                                 $now = time();
                                 $expiration = $forgot->tsregister + $forgot->tstimeout;
                                 $forgot->delete();
                                 if ($now < $expiration) {
                                     $session->messages->addMessage('Le recomiendamos que establezca su nueva contraseña');
                                     $session->user = $user;
-                                    $this->_redirect($CONFIG->wwwroot);
+                                    $this->_redirect($this->view->url(array(), 'frontpage'));
                                 }
                             }
                         }
@@ -87,8 +88,6 @@ class Login_IndexController extends Yachay_Action
     }
 
     public function outAction() {
-        global $CONFIG;
-
         $session = new Zend_Session_Namespace();
         $user = $session->user;
         if (!empty($user)) {

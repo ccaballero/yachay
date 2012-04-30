@@ -19,9 +19,9 @@
             <?php } ?>
                 <p><span class="title"><?php echo $moderator->getFullName() ?></span></p>
             <?php if ($this->acl('users', 'view')) { ?>
-                <a href="<?php echo $this->url(array('user' => $moderator->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_small/' . $moderator->getAvatar() ?>" alt="<?php echo $moderator->getFullName() ?>" title="<?php echo $moderator->getFullName() ?>" /></a>
+                <a href="<?php echo $this->url(array('user' => $moderator->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $moderator->getAvatar() ?>" alt="<?php echo $moderator->getFullName() ?>" title="<?php echo $moderator->getFullName() ?>" /></a>
             <?php } else { ?>
-                <img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_medium/' . $moderator->getAvatar() ?>" alt="<?php echo $moderator->getFullName() ?>" title="<?php echo $moderator->getFullName() ?>" />
+                <img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $moderator->getAvatar() ?>" alt="<?php echo $moderator->getFullName() ?>" title="<?php echo $moderator->getFullName() ?>" />
             <?php } ?>
             <div class="body">
             <?php if ($assign->status == 'active') { ?>
@@ -57,9 +57,9 @@
         <?php } ?>
             <p><span class="title"><?php echo $member->getFullName() ?></span></p>
         <?php if ($this->acl('users', 'view')) { ?>
-            <a href="<?php echo $this->url(array('user' => $member->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_small/' . $member->getAvatar() ?>" alt="<?php echo $member->getFullName() ?>" title="<?php echo $member->getFullName() ?>" /></a>
+            <a href="<?php echo $this->url(array('user' => $member->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $member->getAvatar() ?>" alt="<?php echo $member->getFullName() ?>" title="<?php echo $member->getFullName() ?>" /></a>
         <?php } else { ?>
-            <img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_small/' . $member->getAvatar() ?>" alt="<?php echo $member->getFullName() ?>" title="<?php echo $member->getFullName() ?>" />
+            <img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $member->getAvatar() ?>" alt="<?php echo $member->getFullName() ?>" title="<?php echo $member->getFullName() ?>" />
         <?php } ?>
             <div class="body">
             <?php if ($assign->status == 'active') { ?>

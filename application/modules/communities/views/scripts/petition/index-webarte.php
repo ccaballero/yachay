@@ -17,9 +17,9 @@
             <?php } ?>
                 <p><span class="title"><?php echo $applicant->getFullName() ?></span></p>
             <?php if ($this->acl('users', 'view')) { ?>
-                <a href="<?php echo $this->url(array('user' => $applicant->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_small/' . $applicant->getAvatar() ?>" alt="<?php echo $applicant->getFullName() ?>" title="<?php echo $applicant->getFullName() ?>" /></a>
+                <a href="<?php echo $this->url(array('user' => $applicant->url), 'users_user_view') ?>"><img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $applicant->getAvatar() ?>" alt="<?php echo $applicant->getFullName() ?>" title="<?php echo $applicant->getFullName() ?>" /></a>
             <?php } else { ?>
-                <img class="photo" src="<?php echo $this->CONFIG->wwwroot . 'media/users/thumbnail_medium/' . $applicant->getAvatar() ?>" alt="<?php echo $applicant->getFullName() ?>" title="<?php echo $applicant->getFullName() ?>" />
+                <img class="photo" src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $applicant->getAvatar() ?>" alt="<?php echo $applicant->getFullName() ?>" title="<?php echo $applicant->getFullName() ?>" />
             <?php } ?>
             <div class="body">
             <?php if ($this->community->amModerator()) { ?>

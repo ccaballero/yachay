@@ -9,9 +9,9 @@
     </div>
     <div class="photo">
         <?php if ($this->acl('communities', 'view')) { ?>
-            <a href="<?php echo $this->url(array('community' => $community->url), 'communities_community_view') ?>"><img src="<?php echo $this->CONFIG->wwwroot . 'media/communities/thumbnail_medium/' . $community->getAvatar() ?>" alt="<?php echo $community->label ?>" title="<?php echo $community->label ?>" /></a>
+            <a href="<?php echo $this->url(array('community' => $community->url), 'communities_community_view') ?>"><img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/communities/thumbnail_medium/' . $community->getAvatar() ?>" alt="<?php echo $community->label ?>" title="<?php echo $community->label ?>" /></a>
         <?php } else { ?>
-            <img src="<?php echo $this->CONFIG->wwwroot . 'media/communities/thumbnail_medium/' . $community->getAvatar() ?>" alt="<?php echo $community->label ?>" title="<?php echo $community->label ?>" />
+            <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/communities/thumbnail_medium/' . $community->getAvatar() ?>" alt="<?php echo $community->label ?>" title="<?php echo $community->label ?>" />
         <?php } ?>
     </div>
     <div class="tools">

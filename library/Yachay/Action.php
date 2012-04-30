@@ -7,7 +7,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
     }
 
     public function requirePermission($module, $privilege) {
-        global $CONFIG;
         global $USER;
         $session = new Zend_Session_Namespace();
         if (!is_array($privilege)) {
@@ -79,7 +78,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
     }
 
     public function requireModerator($subject) {
-        global $USER;
         $session = new Zend_session_Namespace();
         if (!$subject->amModerator()) {
             $session->messages->addMessage('Usted debe ser el moderador asignado en la materia');
@@ -88,7 +86,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
     }
 
     public function requireTeacher($group) {
-        global $USER;
         $session = new Zend_session_Namespace();
         if (!$group->amTeacher()) {
             $subject = $group->getSubject();
@@ -98,7 +95,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
     }
     
     public function requireMemberTeam($team) {
-        global $USER;
         $session = new Zend_session_Namespace();
         if (!$team->amMemberTeam()) {
             $group = $team->getGroup();
@@ -109,7 +105,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
     }
 
     public function requireCommunityModerator($community) {
-        global $USER;
         $session = new Zend_session_Namespace();
         if (!$community->amModerator()) {
             $session->messages->addMessage('Usted debe ser un moderador de esa comunidad');
@@ -118,7 +113,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
     }
 
     public function requireResourceAuthor($resource) {
-        global $USER;
         $session = new Zend_session_Namespace();
         if (!$resource->amAuthor()) {
             $session->messages->addMessage('Usted debe ser el autor de este recurso');
@@ -142,8 +136,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
     }
     
     public function preDispatch() {
-        global $CONFIG;
-
         $config = Zend_Registry::get('config');
 
         // settings for the page
@@ -166,10 +158,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
             return;
         }
 
-        // add the media directory for module
-        $CONFIG->media_base = $CONFIG->wwwroot . 'media/';
-        $this->view->media  = $CONFIG->media_base;
-
         // set context by default
         if (!isset($this->_ignoreContextDefault)) {
             context('global');
@@ -189,17 +177,15 @@ abstract class Yachay_Action extends Zend_Controller_Action
 
         // Regions settings
         global $TITLE;
-        $config = Zend_Registry::get('config');
         $TITLE->title = $config->yachay->properties->title;
 
         global $ICON;
-        $ICON->icon = $CONFIG->media_base . "favicon.ico";
+        $ICON->icon = $config->resources->frontController->baseUrl . '/media/favicon.ico';
 
         global $USER;
 
         $this->view->config = $config;
         
-        $this->view->CONFIG = $CONFIG;
         $this->view->PAGE = $PAGE;
         $this->view->TEMPLATE = $TEMPLATE;
         $this->view->USER = $USER;
@@ -207,7 +193,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
     }
 
     public function postDispatch() {
-        global $CONFIG;
         global $PAGE;
         global $TEMPLATE;
         global $USER;
@@ -242,7 +227,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
             $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
             $view->setScriptPath(APPLICATION_PATH . '/modules/' . $widget->module . '/views/scripts/widgets/');
             
-            $view->CONFIG = $CONFIG;
+            $view->config = Zend_Registry::get('config');
             $view->PAGE = $PAGE;
             $view->TEMPLATE = $TEMPLATE;
             $view->USER = $USER;
