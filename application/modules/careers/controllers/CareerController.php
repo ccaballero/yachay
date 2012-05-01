@@ -12,7 +12,7 @@ class Careers_CareerController extends Yachay_Action
         $career = $model_careers->findByUrl($request->getParam('career'));
         $this->requireExistence($career, 'career', 'careers_career_view', 'careers_list');
 
-        context('career', $career);
+        $this->context('career', $career);
 
         $model_gestions = new Gestions();
         $gestion = $model_gestions->findByActive();
@@ -89,7 +89,7 @@ class Careers_CareerController extends Yachay_Action
         $career = $model_careers->findByUrl($request->getParam('career'));
         $this->requireExistence($career, 'career', 'careers_career_view', 'careers_list');
 
-        context('career', $career);
+        $this->context('career', $career);
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace('yachay');

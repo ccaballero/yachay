@@ -6,10 +6,9 @@ class Yachay_Helpers_Context
     public function context($name, $format = 'html') {
         global $USER;
 
-        // context
         $session = new Zend_Session_Namespace('yachay');
-        $context = $session->context;
-        $context_type = $context->getElement();
+        $context_type = $session->context_type;
+        $context_id = $session->context_id;
 
         $default = '';
         $select = 'selected="selected"';
@@ -32,7 +31,7 @@ class Yachay_Helpers_Context
         $options[] = '<option value="global" ' . $default . '>Pagina principal</option>';
         $data['global'][] = 'global';
 
-        // set for area context
+        // set for area
         $model_areas = new Areas();
         $areas = $model_areas->selectAll();
         if (count($areas) != 0) {
@@ -43,13 +42,13 @@ class Yachay_Helpers_Context
             }
             $options[] = '<optgroup label="Areas">';
             foreach ($areas as $area) {
-                $options[] = '<option value="area-' . $area->ident . '" ' . (($default && ($context->{$context_type}->ident == $area->ident)) ? $select : '') . '>' . $area->label . '</option>';
+                $options[] = '<option value="area-' . $area->ident . '" ' . (($default && ($context_id == $area->ident)) ? $select : '') . '>' . $area->label . '</option>';
                 $data['areas'][] = 'area-' . $area->ident;
             }
             $options[] = '</optiongroup>';
         }
 
-        // set for career context
+        // set for career
         $model_careers = new Careers();
         $careers = $model_careers->selectAll();
         if (count($careers) != 0) {
@@ -60,7 +59,7 @@ class Yachay_Helpers_Context
             }
             $options[] = '<optgroup label="Carreras">';
             foreach ($careers as $career) {
-                $options[] = '<option value="career-' . $career->ident . '" ' . (($default && ($context->{$context_type}->ident == $career->ident)) ? $select : '') . '>' . $career->label . '</option>';
+                $options[] = '<option value="career-' . $career->ident . '" ' . (($default && ($context_id == $career->ident)) ? $select : '') . '>' . $career->label . '</option>';
                 $data['careers'][] = 'career-' . $career->ident;
             }
             $options[] = '</optiongroup>';
@@ -71,7 +70,7 @@ class Yachay_Helpers_Context
         $gestion = $model_gestion->findByActive();
 
         if (!empty($gestion)) {
-            // set for subject context
+            // set for subject
             $model_subjects = new Subjects();
             $assignement1 = new Subjects_Users();
             $subjects1 = $model_subjects->selectAll($gestion->ident);
@@ -112,13 +111,13 @@ class Yachay_Helpers_Context
                     $default = false;
                 }
                 foreach ($subjects2 as $subject) {
-                    $options[] = '<option value="subject-' . $subject->ident . '" ' . (($default && ($context->{$context_type}->ident == $subject->ident)) ? $select : '') . '>' . $subject->label . '</option>';
+                    $options[] = '<option value="subject-' . $subject->ident . '" ' . (($default && ($context_id == $subject->ident)) ? $select : '') . '>' . $subject->label . '</option>';
                     $data['subjects'][] = 'subject-' . $subject->ident;
                 }
                 $options[] = '</optiongroup>';
             }
 
-            // set for groupset context
+            // set for groupset
             $model_groupsets = new Groupsets();
             $groupsets1 = $model_groupsets->selectByAuthor($USER->ident);
             $groupsets2 = array();
@@ -136,7 +135,7 @@ class Yachay_Helpers_Context
                 $options[] = '</optiongroup>';
             }
 
-            // set for group context
+            // set for group
             $model_groups = new Groups();
             $assignement2 = new Groups_Users();
             $groups = array();
@@ -161,13 +160,13 @@ class Yachay_Helpers_Context
                 $options[] = '<optgroup label="Grupos">';
                 foreach ($groups as $group) {
                     $subject = $group->getSubject();
-                    $options[] = '<option value="group-' . $group->ident . '" ' . (($default && ($context->{$context_type}->ident == $group->ident)) ? $select : '') . '>' . 'Grupo ' . $group->label . ' (' . $subject->label . ')</option>';
+                    $options[] = '<option value="group-' . $group->ident . '" ' . (($default && ($context_id == $group->ident)) ? $select : '') . '>' . 'Grupo ' . $group->label . ' (' . $subject->label . ')</option>';
                     $data['groups'][] = 'group-' . $group->ident;
                 }
                 $options[] = '</optiongroup>';
             }
 
-            // set for team context
+            // set for team
             $model_teams = new Teams();
             $assignement3 = new Teams_Users();
             $teams = array();
@@ -193,13 +192,13 @@ class Yachay_Helpers_Context
                 foreach ($teams as $team) {
                     $group = $team->getGroup();
                     $subject = $group->getSubject();
-                    $options[] = '<option value="team-' . $team->ident . '" ' . (($default && ($context->{$context_type}->ident == $team->ident)) ? $select : '') . '>' . 'Equipo ' . $team->label . ' - Grupo ' . $group->label . ' (' . $subject->label . ')</option>';
+                    $options[] = '<option value="team-' . $team->ident . '" ' . (($default && ($context_id == $team->ident)) ? $select : '') . '>' . 'Equipo ' . $team->label . ' - Grupo ' . $group->label . ' (' . $subject->label . ')</option>';
                     $data['teams'][] = 'team-' . $team->ident;
                 }
                 $options[] = '</optiongroup>';
             }
         }
-        // set for community context
+        // set for community
         $model_commnities = new Communities();
         $assignement4 = new Communities_Users();
         $communities1 = $model_commnities->selectAll();
@@ -218,13 +217,13 @@ class Yachay_Helpers_Context
             }
             $options[] = '<optgroup label="Comunidades">';
             foreach ($communities2 as $community) {
-                $options[] = '<option value="community-' . $community->ident . '" ' . (($default && ($context->{$context_type}->ident == $community->ident)) ? $select : '') . '>' . $community->label . '</option>';
+                $options[] = '<option value="community-' . $community->ident . '" ' . (($default && ($context_id == $community->ident)) ? $select : '') . '>' . $community->label . '</option>';
                 $data['communities'][] = 'community-' . $community->ident;
             }
             $options[] = '</optiongroup>';
         }
 
-        // set for user context
+        // set for user
         $model_users = new Users();
         $model_friends = new Friends();
         $list_friends = $model_friends->selectFriendsByUser($USER->ident);
@@ -238,14 +237,14 @@ class Yachay_Helpers_Context
             foreach ($list_friends as $friend) {
                 $user = $model_users->findByIdent($friend->friend);
                 if ($user->status == 'active') {
-                    $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context->{$context_type}->ident == $user->ident)) ? $select : '') . '>' . $user->label . '</option>';
+                    $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context_id == $user->ident)) ? $select : '') . '>' . $user->label . '</option>';
                     $data['users'][] = 'user-' . $user->ident;
                 }
             }
             $options[] = '</optiongroup>';
         }
 
-        // set for personal context
+        // set for personal
         if ($USER->ident <> 0) {
             if ($context_type == 'user') {
                 $default = true;
@@ -255,7 +254,7 @@ class Yachay_Helpers_Context
             $options[] = '<optgroup label="Personal">';
 
             $user = $USER;
-            $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context->{$context_type}->ident == $user->ident)) ? $select : '') . '>' . $user->label . '</option>';
+            $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context_id == $user->ident)) ? $select : '') . '>' . $user->label . '</option>';
             $data['me'][] = 'user-' . $user->ident;
             $options[] = '</optiongroup>';
         }

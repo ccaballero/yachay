@@ -20,7 +20,7 @@ class Califications_ManagerController extends Yachay_Action
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
-        context('group', $group);
+        $this->context('group', $group);
 
         $students = $group->findUsersViaGroups_Users($group->select()->where('type = ?', 'student')->order('formalname ASC'));
         $evaluation = $group->getEvaluation();
@@ -157,7 +157,7 @@ class Califications_ManagerController extends Yachay_Action
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
-        context('group', $group);
+        $this->context('group', $group);
 
         $model_users = new Users();
         $students = $group->findUsersViaGroups_Users($group->select()->where('type = ?', 'student'));
@@ -378,7 +378,7 @@ class Califications_ManagerController extends Yachay_Action
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
-        context('group', $group);
+        $this->context('group', $group);
 
         $students = $group->findUsersViaGroups_Users($group->select()->where('type = ?', 'student'));
 

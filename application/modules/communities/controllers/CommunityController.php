@@ -10,7 +10,7 @@ class Communities_CommunityController extends Yachay_Action
         $community = $model_communities->findByUrl($request->getParam('community'));
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
 
-        context('community', $community);
+        $this->context('community', $community);
 
         $resources = $community->findResourcesViaCommunities_Resources($community->select()->order('tsregister DESC'));
 
@@ -53,7 +53,7 @@ class Communities_CommunityController extends Yachay_Action
         $community = $model_communities->findByUrl($request->getParam('community'));
         $this->requireExistence($community, 'community', 'communities_community_view', 'community_list');
 
-        context('community', $community);
+        $this->context('community', $community);
 
         $_tags = array();
         $tags = $community->findTagsViaTags_Communities();

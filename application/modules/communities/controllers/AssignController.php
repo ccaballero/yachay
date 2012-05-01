@@ -37,7 +37,7 @@ class Communities_AssignController extends Yachay_Action
             }
         }
 
-        context('community', $community);
+        $this->context('community', $community);
 
         $moderators = $community->findUsersViaCommunities_Users($community->select()->where('type = ?', 'moderator'));
         $members = $community->findUsersViaCommunities_Users($community->select()->where('type = ?', 'member'));

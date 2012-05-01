@@ -13,7 +13,7 @@ class Users_UserController extends Yachay_Action
 
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
 
-        context('user', $user);
+        $this->context('user', $user);
 
         $resources = $user->findResourcesViaUsers_Resources($user->select()->order('tsregister DESC'));
 
@@ -56,7 +56,7 @@ class Users_UserController extends Yachay_Action
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
 
-        context('user', $user);
+        $this->context('user', $user);
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace('yachay');

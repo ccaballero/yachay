@@ -25,7 +25,7 @@ class Subjects_SubjectController extends Yachay_Action
         $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
-        context('subject', $subject);
+        $this->context('subject', $subject);
 
         $url = $this->view->url(array(), 'subjects_list');
         if ($subject->status == 'inactive' && !$this->acl('subjects', 'edit')) {
@@ -126,7 +126,7 @@ class Subjects_SubjectController extends Yachay_Action
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
-        context('subject', $subject);
+        $this->context('subject', $subject);
 
         $checks = array();
         $list_areas = $subject->findAreasViaAreas_Subjects();

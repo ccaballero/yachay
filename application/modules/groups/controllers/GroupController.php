@@ -19,7 +19,7 @@ class Groups_GroupController extends Yachay_Action
         $group = $model_groups->findByUrl($subject->ident, $url_group);
         $this->requireExistenceGroup($group, $subject);
 
-        context('group', $group);
+        $this->context('group', $group);
 
         $model_teams = new Teams();
         $list_teams = $model_teams->selectByStatus($group->ident, 'active');
@@ -82,7 +82,7 @@ class Groups_GroupController extends Yachay_Action
         $group = $model_groups->findByUrl($subject->ident, $url_group);
         $this->requireExistenceGroup($group, $subject);
 
-        context('group', $group);
+        $this->context('group', $group);
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace('yachay');

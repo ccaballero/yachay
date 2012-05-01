@@ -12,7 +12,7 @@ class Areas_AreaController extends Yachay_Action
         $area = $model_areas->findByUrl($request->getParam('area'));
         $this->requireExistence($area, 'area', 'areas_area_view', 'areas_list');
 
-        context('area', $area);
+        $this->context('area', $area);
 
         $model_gestions = new Gestions();
         $gestion = $model_gestions->findByActive();
@@ -89,7 +89,7 @@ class Areas_AreaController extends Yachay_Action
         $area = $model_areas->findByUrl($request->getParam('area'));
         $this->requireExistence($area, 'area', 'areas_area_view', 'areas_list');
 
-        context('area', $area);
+        $this->context('area', $area);
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace('yachay');

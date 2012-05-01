@@ -30,7 +30,7 @@ class Subjects_AssignController extends Yachay_Action
         $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
-        context('subject', $subject);
+        $this->context('subject', $subject);
 
         $teachers = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'teacher'));
         $auxiliars = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'auxiliar'));
@@ -74,7 +74,7 @@ class Subjects_AssignController extends Yachay_Action
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
-        context('subject', $subject);
+        $this->context('subject', $subject);
 
         $model_users = new Users();
         $model_subjects_users = new Subjects_Users();
@@ -250,7 +250,7 @@ class Subjects_AssignController extends Yachay_Action
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
-        context('subject', $subject);
+        $this->context('subject', $subject);
         $this->view->step = 1;
         $this->view->subject = $subject;
 
@@ -427,7 +427,7 @@ class Subjects_AssignController extends Yachay_Action
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
-        context('subject', $subject);
+        $this->context('subject', $subject);
 
         if ($request->isPost()) {
             $extension = $request->getParam('extension');

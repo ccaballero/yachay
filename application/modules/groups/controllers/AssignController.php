@@ -35,7 +35,7 @@ class Groups_AssignController extends Yachay_Action
         $group = $model_groups->findByUrl($subject->ident, $url_group);
         $this->requireExistenceGroup($group, $subject);
 
-        context('group', $group);
+        $this->context('group', $group);
 
         $auxiliars = $group->findUsersViaGroups_Users($group->select()->where('type = ?', 'auxiliar'));
         $students = $group->findUsersViaGroups_Users($group->select()->where('type = ?', 'student'));
@@ -85,7 +85,7 @@ class Groups_AssignController extends Yachay_Action
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
-        context('group', $group);
+        $this->context('group', $group);
 
         $model_users = new Users();
         $assignement = new Groups_Users();
@@ -292,7 +292,7 @@ class Groups_AssignController extends Yachay_Action
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
-        context('group', $group);
+        $this->context('group', $group);
         $this->view->step = 1;
         $this->view->subject = $subject;
         $this->view->group = $group;
@@ -510,7 +510,7 @@ class Groups_AssignController extends Yachay_Action
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
-        context('group', $group);
+        $this->context('group', $group);
 
         $this->view->subject = $subject;
         $this->view->group = $group;

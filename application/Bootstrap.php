@@ -80,9 +80,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('session');
         
         $session = new Zend_Session_Namespace('yachay');
-        // Set for context information
         if (!isset($session->context)) {
-            $session->context = new Yachay_Sessions_Context();
+            $session->context_type = 'global';
+        }
+        if (!isset($session->context_label)) {
+            $session->context_label = '';
+        }
+        if (!isset($session->context_id)) {
+            $session->context_id = 0;
         }
     }
     

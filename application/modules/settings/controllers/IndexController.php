@@ -17,7 +17,7 @@ class Settings_IndexController extends Yachay_Action
         $user = $model_users->findByUrl($url);
         $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
 
-        context('user', $user);
+        $this->context('user', $user);
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace('yachay');

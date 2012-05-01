@@ -25,7 +25,7 @@ class Teams_TeamController extends Yachay_Action
         $this->requireExistenceTeam($team, $group, $subject);
         $this->requireMemberTeam($team);
 
-        context('team', $team);
+        $this->context('team', $team);
 
         $members = $team->findUsersViaTeams_Users();
         $resources = $team->findResourcesViaTeams_Resources($team->select()->order('tsregister DESC'));
@@ -96,7 +96,7 @@ class Teams_TeamController extends Yachay_Action
         $this->requireExistenceTeam($team, $group, $subject);
         $this->requireMemberTeam($team);
 
-        context('team', $team);
+        $this->context('team', $team);
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace('yachay');

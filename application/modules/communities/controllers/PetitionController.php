@@ -24,7 +24,7 @@ class Communities_PetitionController extends Yachay_Action
             }
         }
 
-        context('community', $community);
+        $this->context('community', $community);
 
         $applicants = $community->findUsersViaCommunities_Petitions($community->select()->order('tsregister ASC'));
 

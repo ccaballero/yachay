@@ -1,6 +1,5 @@
 <div id="full">
     <h1><?php echo $this->message ?></h1>
-
     <?php if (isset($this->exception)) { ?>
         <h2>Exception information:</h2>
         <p><?php echo $this->exception->getMessage() ?></p>

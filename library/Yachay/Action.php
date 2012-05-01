@@ -10,6 +10,19 @@ abstract class Yachay_Action extends Zend_Controller_Action
         $session->currentPage = $config->resources->frontController->baseUrl . '/' . $url_page;
     }
     
+    public function context($type, $value = null) {
+        $session = new Zend_Session_Namespace('yachay');
+
+        $session->context_type = $type;
+        if ($type <> 'global') {
+            $session->context_id = $value->ident;
+            $session->context_label = $value->label;
+        } else {
+            $session->context_id = 0;
+            $session->context_label = '';
+        }
+    }
+    
     public function acl($module, $privilege) {
         return Yachay_Acl::hasPermission($module, $privilege);
     }
@@ -133,6 +146,9 @@ abstract class Yachay_Action extends Zend_Controller_Action
     public function init() {
         $this->_redirector = $this->_helper->getHelper('Redirector');
         $this->_redirector->setPrependBase(false);
+        
+        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $this->_flashMessenger->setNamespace('yachay');
     }
     
     public function preDispatch() {
@@ -160,7 +176,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
 
         // set context by default
         if (!isset($this->_ignoreContextDefault)) {
-            context('global');
+            $this->context('global');
         }
 
         // Add the helpers of application
@@ -172,8 +188,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
                 $this->view->addScriptPath(APPLICATION_PATH . '/modules/' . $module->url . '/views/scripts/application');
             }
         }
-
-        $session = new Zend_Session_Namespace('yachay');
 
         // Regions settings
         global $TITLE;
@@ -189,7 +203,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
         $this->view->PAGE = $PAGE;
         $this->view->TEMPLATE = $TEMPLATE;
         $this->view->USER = $USER;
-        $this->view->SESSION = $session;
 
         // Register last login
         global $USER;
@@ -216,8 +229,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
             return;
         }
 
-        $session = new Zend_Session_Namespace('yachay');
-
         $regions = $PAGE->findRegionsViaRegions_Pages();
         if (!empty($regions)) {
             foreach ($regions as $region) {
@@ -242,7 +253,6 @@ abstract class Yachay_Action extends Zend_Controller_Action
             $view->PAGE = $PAGE;
             $view->TEMPLATE = $TEMPLATE;
             $view->USER = $USER;
-            $view->SESSION = $session;
 
             $widget_page = $model_widgets_pages->getPosition($PAGE->ident, $widget->ident);
             $position = $widget_page->position;
@@ -261,7 +271,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
                 );
             }
         }
-       
+
         global $TITLE, $ICON, $TOOLBAR, $SEARCH, $MENUBAR, $BREADCRUMB, $WIDGETS, $FOOTER;
 
         $this->view->TITLE = $TITLE;
@@ -273,9 +283,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
         $this->view->WIDGETS = $WIDGETS;
         $this->view->FOOTER = $FOOTER;
 
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        $this->view->messages = $this->_flashMessenger->getMessages();
-        $this->_flashMessenger->clearMessages();
+        $this->view->messages = $this->_helper->getHelper('FlashMessenger')->getMessages();
 
         // rendering customized theme
         $script = $this->view->getScriptPath($PAGE->controller) . '/' . $PAGE->action . '-' . $TEMPLATE->label . '.php';

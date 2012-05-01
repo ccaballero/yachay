@@ -69,7 +69,7 @@ class Templates_TemplateController extends Yachay_Action
         $user = $model_users->findByUrl($USER->url);
         $session = new Zend_Session_Namespace('yachay');
 
-        context('user', $user);
+        $this->context('user', $user);
         $template = $model_templates->findByLabel($label_template);
         if (!empty($template)) {
             $user->template = $template->label;

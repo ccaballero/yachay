@@ -7,8 +7,7 @@ $model_roles = new Roles();
 $role = $model_roles->findByIdent($USER->role);
 
 $session = new Zend_Session_Namespace('yachay');
-$context = $session->context;
-$TOOLBAR->items[] = $context->__toString();
+$TOOLBAR->items[] = $this->contextLabel($session->context_type, $session->context_label);
 
 if ($USER->role == 1) {
     $TOOLBAR->items[] = $role->label;

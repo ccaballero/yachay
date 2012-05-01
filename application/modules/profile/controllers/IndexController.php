@@ -13,7 +13,7 @@ class Profile_IndexController extends Yachay_Action
         $user = $model_users->findByUrl($USER->url);
         $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
 
-        context('user', $user);
+        $this->context('user', $user);
 
         $this->view->model_users = $model_users;
         $this->view->user = $user;
@@ -37,7 +37,7 @@ class Profile_IndexController extends Yachay_Action
         $user = $model_users->findByUrl($USER->url);
         $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
 
-        context('user', $user);
+        $this->context('user', $user);
 
         $_tags = array();
         $tags = $user->getTags();
