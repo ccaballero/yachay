@@ -20,10 +20,10 @@ class Videos_ManagerController extends Yachay_Action
         $model_tags = new Tags();
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $upload = new Zend_File_Transfer_Adapter_Http();
-            $upload->setDestination(APPLICATION_PATH . '/../public/media/upload');
+            $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
             $upload->addValidator('Size', false, 20971520);
 
             $publish = $request->getParam('publish');
@@ -33,11 +33,10 @@ class Videos_ManagerController extends Yachay_Action
             $spaces_valids = $context->context(NULL, 'plain');
 
             if (empty($publish)) {
-                $session->messages->addMessage('Usted debe seleccionar un espacio de publicación');
+                $this->_helper->flashMessenger->addMessage('Usted debe seleccionar un espacio de publicación');
             } else if (in_array($publish, $spaces_valids)) {
                 if ($upload->receive()) {
                     $filename = $upload->getFileName('video');
-                    $extension = strtolower(substr($filename, -3));
 
                     $video = $model_videos->createRow();
                     $video->filename = basename($filename);
@@ -55,7 +54,7 @@ class Videos_ManagerController extends Yachay_Action
                         $video->resource = $resource->ident;
                         $video->save();
 
-                        rename(APPLICATION_PATH . '/../public/media/upload/' . $video->filename, APPLICATION_PATH . '/../public/media/videos/' . $video->resource);
+                        rename(APPLICATION_PATH . '/../data/upload//' . $video->filename, APPLICATION_PATH . '/../public/media/videos/' . $video->resource);
 
                         $resource->saveContext($request);
                         $model_valorations->addActivity(8);
@@ -65,25 +64,25 @@ class Videos_ManagerController extends Yachay_Action
 
                         $session->url = $video->resource;
 
-                        $session->messages->addMessage('El video fue cargado exitosamente');
+                        $this->_helper->flashMessenger->addMessage('El video fue cargado exitosamente');
                         $this->_redirect($request->getParam('return'));
                     } else {
                         foreach ($video->getMessages() as $message) {
-                            $session->messages->addMessage($message);
+                            $this->_helper->flashMessenger->addMessage($message);
                         }
                     }
                 } else {
-                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
+                    $this->_helper->flashMessenger->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
             } else {
-                $session->messages->addMessage('Usted no tiene privilegios para publicar en ese espacio');
+                $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
         }
 
         $this->view->video = $video;
         $this->view->tags = $tags;
 
-        history('videos/new');
+        $this->history('videos/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Videos'] = $this->view->url(array('filter' => 'videos'), 'resources_filtered');

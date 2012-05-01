@@ -23,7 +23,7 @@ class Tags_IndexController extends Yachay_Action
         $this->view->model_tags = $model_tags;
         $this->view->tags = $_tags;
 
-        history('tags');
+        $this->history('tags');
         $breadcrumb = array();
         if ($this->acl('tags', 'delete')) {
             $breadcrumb['Administrador de etiquetas'] = $this->view->url(array(), 'tags_manager');

@@ -10,7 +10,7 @@ class Pages_IndexController extends Yachay_Action
         $this->view->model_pages = $model_pages;
         $this->view->pages = $model_pages->selectAll();
 
-        history('pages');
+        $this->history('pages');
         $breadcrumb = array();
         if ($this->acl('pages', 'manage')) {
             $breadcrumb['Administrador de paginas'] = $this->view->url(array(), 'pages_manager');

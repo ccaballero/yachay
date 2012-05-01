@@ -6,11 +6,11 @@ echo '<p>En esta pagina usted puede ver sus datos registrados en el sistema, se 
 
 echo '<table width="100%"><tr><td rowspan="14" width="200px" valign="top">';
 echo '<b><i>Imagen grande:</i></b><br />';
-echo '<img src="' . $this->media . 'users/thumbnail_large/' . $this->user->getAvatar() . '" alt="' . $this->user->getFullName() . '" />';
+echo '<img src="' . $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_large/' . $this->user->getAvatar() . '" alt="' . $this->user->getFullName() . '" />';
 echo '<br /><b><i>Imagen mediana:</i></b><br />';
-echo '<img src="' . $this->media . 'users/thumbnail_medium/' . $this->user->getAvatar() . '" alt="' . $this->user->getFullName() . '" />';
+echo '<img src="' . $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $this->user->getAvatar() . '" alt="' . $this->user->getFullName() . '" />';
 echo '<br /><b><i>Imagen pequeña:</i></b><br />';
-echo '<img src="' . $this->media . 'users/thumbnail_small/' . $this->user->getAvatar() . '" alt="' . $this->user->getFullName() . '" />';
+echo '<img src="' . $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $this->user->getAvatar() . '" alt="' . $this->user->getFullName() . '" />';
 echo '</td><td colspan="2"><b>Usuario: </b>' . $this->user->label . '</td>';
 echo '<td colspan="2"><b>Codigo: </b>' . $this->user->code . '</td></tr>';
 echo '<tr><td colspan="4"><b>Correo electronico: </b>' . $this->none($this->user->email) . '</td></tr>';

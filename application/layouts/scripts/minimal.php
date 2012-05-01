@@ -13,14 +13,14 @@ echo renderWidget($this->WIDGETS[3]);
 echo !empty($this->WIDGETS[3]) ? '<hr />' : '';
 echo '</td><td valign="top">';
 echo renderBreadcrumb($this->BREADCRUMB);
-echo renderMessage();
+echo renderMessage($this->messages);
 echo $this->layout()->content;
 echo '</td><td valign="top" width="15%">';
 echo renderWidget($this->WIDGETS[2]);
 echo !empty($this->WIDGETS[2]) ? '<hr />' : '';
 echo renderWidget($this->WIDGETS[4]);
 echo !empty($this->WIDGETS[4]) ? '<hr />' : '';
-echo '</td></tr></table><hr /><center>';
+echo '</td></tr></table><hr/><center>';
 echo renderFooter($this->FOOTER);
 echo '</center></body></html>';
 
@@ -36,12 +36,12 @@ function renderMenubar($menubar) {
     return '<table align="left"><tr><td>' . implode('</td><td>', $menu) . '</td></tr></table>';
 }
 
-function renderMessage() {
-    $session = new Zend_Session_Namespace();
-    $messages = $session->messages->getMessages();
-    $ret = implode('<br />', $messages);
-    $session->messages->clean();
-    return "<center>$ret</center>";
+function renderMessage($messages = array()) {
+    if (!empty($messages)) {
+        $ret = implode('<br />', $messages);
+        return "<center>$ret</center>";
+    }
+    return '';
 }
 
 function renderBreadcrumb($breadcrumb) {

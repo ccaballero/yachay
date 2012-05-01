@@ -66,7 +66,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('autoload');
         $this->bootstrap('session');
         
-        $session = new Zend_Session_Namespace();
+        $session = new Zend_Session_Namespace('yachay');
         // Set for user information, if exists
         global $USER;
         if (isset($session->user)) {
@@ -79,20 +79,25 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initContext() {
         $this->bootstrap('session');
         
-        $session = new Zend_Session_Namespace();
+        $session = new Zend_Session_Namespace('yachay');
         // Set for context information
         if (!isset($session->context)) {
-            $session->context = new Yachay_Settings_Context();
+            $session->context = new Yachay_Sessions_Context();
         }
     }
     
     protected function _initHistory() {
+        $this->bootstrap('config');
         $this->bootstrap('session');
 
-        $session = new Zend_Session_Namespace();
-        // Set of history of navigation
-        if (!isset($session->history)) {
-            $session->history = new Yachay_Settings_History();
+        $config = Zend_Registry::get('config');
+
+        $session = new Zend_Session_Namespace('yachay');
+        if (!isset($session->currentPage)) {
+            $session->currentPage = $config->resources->frontController->baseUrl;
+        }
+        if (!isset($session->lastPage)) {
+            $session->lastPage = $config->resources->frontController->baseUrl;
         }
     }
     
@@ -127,9 +132,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     protected function _initPlaceholder() {
-        $this->bootstrap('session');
-
-        $session = new Zend_Session_Namespace();
         // Set of web regions
         global $TITLE;
         $TITLE = new Yachay_Regions_Title();
@@ -148,11 +150,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         // Set of web widgets
         global $WIDGETS;
         $WIDGETS = array(1=>'',2=>'',3=>'',4=>'');
-
-        // Set region for messages
-        if (!isset($session->messages)) {
-            $session->messages = new Yachay_Regions_Message();
-        }
     }
 
     protected function _initView() {

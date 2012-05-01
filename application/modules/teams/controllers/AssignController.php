@@ -23,8 +23,7 @@ class Teams_AssignController extends Yachay_Action
         $model_teams = new Teams();
         $list_teams = $model_teams->selectAll($group->ident);
 
-        $assignement1 = new Groups_Users();
-        $assignement2 = new Teams_Users();
+        $assignement = new Teams_Users();
 
         $group_members1 = $group->findUsersViaGroups_Users();
         $group_members2 = array();
@@ -33,7 +32,7 @@ class Teams_AssignController extends Yachay_Action
             if ($assign->type != 'auxiliar') {
                 $flag = true;
                 foreach ($list_teams as $team) {
-                    $assign = $assignement2->findByTeamAndUser($team->ident, $member->ident);
+                    $assign = $assignement->findByTeamAndUser($team->ident, $member->ident);
                     if (!empty($assign)) {
                         $flag &= false;
                     }
@@ -45,7 +44,7 @@ class Teams_AssignController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $selects = $request->getParam('team');
             foreach ($selects as $member_ident => $team_ident) {
@@ -53,7 +52,7 @@ class Teams_AssignController extends Yachay_Action
                 $team_ident = intval($team_ident);
                 if ($team_ident <> 0 && $member_ident <> 0) {
                     // FIXME
-                    $assign = $assignement2->createRow();
+                    $assign = $assignement->createRow();
                     $assign->team = $team_ident;
                     $assign->user = $member_ident;
                     $assign->tsregister = time();
@@ -61,7 +60,7 @@ class Teams_AssignController extends Yachay_Action
                 }
             }
             
-            $session->messages->addMessage('La asignación de equipos ha sido almacenada');
+            $this->_helper->flashMessenger->addMessage('La asignación de equipos ha sido almacenada');
             $this->_redirect($request->getParam('return'));
         }
 
@@ -70,7 +69,7 @@ class Teams_AssignController extends Yachay_Action
         $this->view->group = $group;
         $this->view->members = $group_members2;
 
-        history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/assign');
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/assign');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');

@@ -6,7 +6,7 @@ global $USER;
 $model_roles = new Roles();
 $role = $model_roles->findByIdent($USER->role);
 
-$session = new Zend_Session_Namespace();
+$session = new Zend_Session_Namespace('yachay');
 $context = $session->context;
 $TOOLBAR->items[] = $context->__toString();
 

@@ -19,10 +19,10 @@ class Photos_ManagerController extends Yachay_Action
         $model_tags = new Tags();
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $upload = new Zend_File_Transfer_Adapter_Http();
-            $upload->setDestination(APPLICATION_PATH . '/../public/media/upload');
+            $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
             $upload->addValidator('Size', false, 2097152);
              
             $publish = $request->getParam('publish');
@@ -32,7 +32,7 @@ class Photos_ManagerController extends Yachay_Action
             $spaces_valids = $context->context(NULL, 'plain');
 
             if (empty($publish)) {
-                $session->messages->addMessage('Usted debe seleccionar un espacio de publicación');
+                $this->_helper->flashMessenger->addMessage('Usted debe seleccionar un espacio de publicación');
             } else if (in_array($publish, $spaces_valids)) {
                 if ($upload->receive()) {
                     $filename = $upload->getFileName('photo');
@@ -55,7 +55,7 @@ class Photos_ManagerController extends Yachay_Action
                         $thumbnail = new Yachay_Helpers_Thumbnail();
                         $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/photos/' . $photo->resource . '.thumb', 300, 300);
 
-                        rename(APPLICATION_PATH . '/../public/media/upload/' . $photo->filename, APPLICATION_PATH . '/../public/media/photos/' . $photo->resource);
+                        rename(APPLICATION_PATH . '/../data/upload//' . $photo->filename, APPLICATION_PATH . '/../public/media/photos/' . $photo->resource);
 
                         $resource->saveContext($request);
                         $model_valorations->addActivity(2);
@@ -65,25 +65,25 @@ class Photos_ManagerController extends Yachay_Action
 
                         $session->url = $photo->resource;
 
-                        $session->messages->addMessage('La imagen fue cargada exitosamente');
+                        $this->_helper->flashMessenger->addMessage('La imagen fue cargada exitosamente');
                         $this->_redirect($request->getParam('return'));
                     } else {
                         foreach ($photo->getMessages() as $message) {
-                            $session->messages->addMessage($message);
+                            $this->_helper->flashMessenger->addMessage($message);
                         }
                     }
                 } else {
-                    $session->messages->addMessage('Debe escoger una imagen valida para poder interpretarla adecuadamente');
+                    $this->_helper->flashMessenger->addMessage('Debe escoger una imagen valida para poder interpretarla adecuadamente');
                 }
             } else {
-                $session->messages->addMessage('Usted no tiene privilegios para publicar en ese espacio');
+                $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
         }
 
         $this->view->photo = $photo;
         $this->view->tags = $tags;
 
-        history('photos/new');
+        $this->history('photos/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Fotografias'] = $this->view->url(array('filter' => 'photos'), 'resources_filtered');

@@ -70,7 +70,7 @@ class Areas_AreaController extends Yachay_Action
         $this->view->area = $area;
         $this->view->subjects = $subjects2;
 
-        history('areas/' . $area->url);
+        $this->history('areas/' . $area->url);
         $breadcrumb = array();
         if ($this->acl('areas', 'list')) {
             $breadcrumb['Areas'] = $this->view->url(array(), 'areas_list');
@@ -92,7 +92,7 @@ class Areas_AreaController extends Yachay_Action
         context('area', $area);
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $area->label = $request->getParam('label');
             $area->url = convert($area->label);
@@ -101,12 +101,13 @@ class Areas_AreaController extends Yachay_Action
             if ($area->isValid()) {
                 $area->save();
 
-                $session->messages->addMessage("El area {$area->label} se ha actualizado correctamente");
+                $this->_helper->flashMessenger->addMessage("El area {$area->label} se ha actualizado correctamente");
+
                 $session->url = $area->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($area->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -114,7 +115,7 @@ class Areas_AreaController extends Yachay_Action
         $this->view->model_areas = $model_areas;
         $this->view->area = $area;
 
-        history('areas/' . $area->url . '/edit');
+        $this->history('areas/' . $area->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('areas', 'list')) {
             $breadcrumb['Areas'] = $this->view->url(array(), 'areas_list');
@@ -136,13 +137,12 @@ class Areas_AreaController extends Yachay_Action
         $model_areas = new Areas();
         $area = $model_areas->findByUrl($url);
 
-        $session = new Zend_Session_Namespace();
         if (!empty($area) && $area->isEmpty()) {
             $label = $area->label;
             $area->delete();
-            $session->messages->addMessage("El area $label ha sido eliminada");
+            $this->_helper->flashMessenger->addMessage("El area $label ha sido eliminada");
         } else {
-            $session->messages->addMessage("El area no puede ser eliminada");
+            $this->_helper->flashMessenger->addMessage('El area no puede ser eliminada');
         }
 
         $this->_redirect($this->view->currentPage());

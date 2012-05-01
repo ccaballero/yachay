@@ -1,13 +1,16 @@
-<ul class="menu">
-    <?php foreach ($this->FOOTER->items as $item) { ?>
-    <li><a href="<?php echo $item['link'] ?>"><?php echo $item['label'] ?></a></li>
-    <?php } ?>
-</ul>
+<?php
+$count = 0;
+$container = array();
 
-<ul class="menu">
-    <li><a href="<?php echo $this->url(array(), 'frontpage_development') ?>">&nbsp;</a></li>
-    <li><a href="<?php echo $this->url(array(), 'frontpage_terms') ?>">&nbsp;</a></li>
-    <li><a href="<?php echo $this->url(array(), 'frontpage_privacy') ?>">&nbsp;</a></li>
-</ul>
+foreach ($this->FOOTER->items as $item) {
+    $container[(int)($count / 9)][$count % 9] = '<li><a href="' . $item['link'] . '">' . $item['label'] . '</a></li>';
+    $count++;
+}
+
+foreach ($container as $row) { 
+    echo '<ul class="menu">' . implode('', $row) . '</ul>';
+}
+
+?>
 
 <span><?php echo $this->FOOTER->copyright ?></span>

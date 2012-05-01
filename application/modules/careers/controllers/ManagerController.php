@@ -11,7 +11,7 @@ class Careers_ManagerController extends Yachay_Action
         $this->view->model_careers = $model_careers;
         $this->view->careers = $model_careers->selectAll();
 
-        history('careers/manager');
+        $this->history('careers/manager');
         $breadcrumb = array();
         if ($this->acl('careers', 'list')) {
             $breadcrumb['Carreras'] = $this->view->url(array(), 'careers_list');
@@ -26,7 +26,7 @@ class Careers_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_careers = new Careers();
             $career = $model_careers->createRow();
@@ -37,19 +37,21 @@ class Careers_ManagerController extends Yachay_Action
             if ($career->isValid()) {
                 $career->tsregister = time();
                 $career->save();
-                $session->messages->addMessage("La carrera {$career->label} se ha creado correctamente");
+
+                $this->_helper->flashMessenger->addMessage("La carrera {$career->label} se ha creado correctamente");
+
                 $session->url = $career->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($career->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
             $this->view->career = $career;
         }
 
-        history('careers/new');
+        $this->history('careers/new');
         $breadcrumb = array();
         if ($this->acl('careers', 'list')) {
             $breadcrumb['Carreras'] = $this->view->url(array(), 'careers_list');

@@ -19,9 +19,8 @@ class Invitations_InvitationController extends Yachay_Action
         $invitation = $model_invitations->findByCode(md5($config->yachay->properties->key . $code));
         $this->requireExistence($invitation, 'invitation', 'frontpage_user', 'frontpage_user');
 
-        $session = new Zend_Session_Namespace();
         if ($invitation->accepted) {
-            $session->messages->addMessage('El recurso solicitado no existe');
+            $this->_helper->flashMessenger->addMessage('El recurso solicitado no existe');
             $this->_redirect($this->view->url(array(), 'frontpage_visitor'));
         }
 
@@ -85,11 +84,11 @@ class Invitations_InvitationController extends Yachay_Action
                 $invitation->accepted = true;
                 $invitation->save();
 
-                $session->messages->addMessage('Ha sido enviado un correo con tu contraseña a tu correo electronico');
+                $this->_helper->flashMessenger->addMessage('Ha sido enviado un correo con tu contraseña a tu correo electronico');
                 $this->_redirect($this->view->url(array(), 'login_in'));
             } else {
                 foreach ($user->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
@@ -112,12 +111,11 @@ class Invitations_InvitationController extends Yachay_Action
         $this->requireExistence($invitation, 'invitation', 'invitations_manager', 'frontpage_user');
         $this->requireResourceAuthor($invitation);
 
-        $session = new Zend_Session_Namespace();
         if (!$invitation->accepted) {
             $invitation->delete();
-            $session->messages->addMessage('La invitación ha sido revocada');
+            $this->_helper->flashMessenger->addMessage('La invitación ha sido revocada');
         } else {
-            $session->messages->addMessage('La invitación ya ha sido aceptada');
+            $this->_helper->flashMessenger->addMessage('La invitación ya ha sido aceptada');
         }
 
         $this->_redirect($this->view->currentPage());

@@ -1,21 +1,5 @@
 <?php
 
-function print_params($array = array()) {
-    $ret = '';
-    foreach ($array as $key => $value) {
-        $ret .= "[$key => $value] ";
-    }
-    return $ret;
-}
-
-function history($url_page = '') {
-    $config = Zend_Registry::get('config');
-
-    $session = new Zend_Session_Namespace();
-    $history = $session->history;
-    $history->addUrl($config->resources->frontController->baseUrl . '/' . $url_page);
-}
-
 function breadcrumb($elements = array()) {
     global $BREADCRUMB;
     $config = Zend_Registry::get('config');
@@ -71,7 +55,7 @@ function generatecode($type = 'alphanum', $code = NULL, $size = 16) {
 }
 
 function context ($type,  $value = null) {
-    $session = new Zend_Session_Namespace();
+    $session = new Zend_Session_Namespace('yachay');
     $context = $session->context;
 
     switch ($type) {

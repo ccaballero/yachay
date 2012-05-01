@@ -46,7 +46,7 @@ class Groups_GroupController extends Yachay_Action
             ),
         );
 
-        history('subjects/' . $subject->url . '/groups/' . $group->url);
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url);
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -85,7 +85,7 @@ class Groups_GroupController extends Yachay_Action
         context('group', $group);
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $group->label = $request->getParam('label');
             $group->url = convert($group->label);
@@ -96,12 +96,13 @@ class Groups_GroupController extends Yachay_Action
             if ($group->isValid()) {
                 $group->save();
 
-                $session->messages->addMessage("El grupo {$group->label} se ha actualizado correctamente");
+                $this->_helper->flashMessenger->addMessage("El grupo {$group->label} se ha actualizado correctamente");
+
                 $session->url = $group->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($group->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -109,7 +110,7 @@ class Groups_GroupController extends Yachay_Action
         $this->view->subject = $subject;
         $this->view->group = $group;
 
-        history('subjects/' . $subject->url . '/groups/' . $group->url . '/edit');
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -150,7 +151,6 @@ class Groups_GroupController extends Yachay_Action
         $tests = $evaluation->findEvaluations_Tests($evaluation->select()->order('order ASC'));
 
         $model_califications = new Califications();
-        $calification = array();
         foreach ($tests as $test) {
             if (!empty($test->formula)) {
                 $califications[$test->ident] = $model_califications->getCalification($group->ident, $user->ident, $evaluation->ident, $test);
@@ -172,7 +172,7 @@ class Groups_GroupController extends Yachay_Action
         $this->view->test_evaluations = $tests;
         $this->view->califications = $califications;
 
-        history('subjects/' . $subject->url . '/groups/' . $group->url . '/calification');
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/calification');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -208,8 +208,7 @@ class Groups_GroupController extends Yachay_Action
         $group->status = 'inactive';
         $group->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El grupo {$group->label} ha sido desactivado");
+        $this->_helper->flashMessenger->addMessage("El grupo {$group->label} ha sido desactivado");
 
         $this->_redirect($this->view->currentPage());
     }
@@ -235,8 +234,7 @@ class Groups_GroupController extends Yachay_Action
         $group->status = 'active';
         $group->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El grupo {$group->label} ha sido activado");
+        $this->_helper->flashMessenger->addMessage("El grupo {$group->label} ha sido activado");
 
         $this->_redirect($this->view->currentPage());
     }
@@ -259,12 +257,11 @@ class Groups_GroupController extends Yachay_Action
         $url_group = $request->getParam('group');
         $group = $model_groups->findByUrl($subject->ident, $url_group);
 
-        $session = new Zend_Session_Namespace();
         if ($group->isEmpty()) {
             $group->delete();
-            $session->messages->addMessage("El grupo {$group->label} ha sido desactivado");
+            $this->_helper->flashMessenger->addMessage("El grupo {$group->label} ha sido desactivado");
         } else {
-            $session->messages->addMessage("El grupo {$group->label} no puede ser eliminado");
+            $this->_helper->flashMessenger->addMessage("El grupo {$group->label} no puede ser eliminado");
         }
 
         $this->_redirect($this->view->currentPage());

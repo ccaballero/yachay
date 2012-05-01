@@ -19,17 +19,15 @@ class Communities_MemberController extends Yachay_Action
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireCommunityModerator($community);
 
-        $session = new Zend_Session_Namespace();
-
         if ($community->author == $user->ident) {
-            $session->messages->addMessage('El usuario ' . $user->label . ' no puede ser deshabilitado de la comunidad');
+            $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' no puede ser deshabilitado de la comunidad');
         } else {
             $model_communities_users = new Communities_Users();
             $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
             $assign->status = 'inactive';
             $assign->save();
 
-            $session->messages->addMessage('El usuario ' . $user->label . ' ha sido deshabilitado de la comunidad');
+            $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido deshabilitado de la comunidad');
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -51,17 +49,15 @@ class Communities_MemberController extends Yachay_Action
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireCommunityModerator($community);
 
-        $session = new Zend_Session_Namespace();
-
         if ($community->author == $user->ident) {
-            $session->messages->addMessage('El usuario ' . $user->label . ' no puede ser habilitado de la comunidad');
+            $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' no puede ser habilitado de la comunidad');
         } else {
             $model_communities_users = new Communities_Users();
             $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
             $assign->status = 'active';
             $assign->save();
 
-            $session->messages->addMessage('El usuario ' . $user->label . ' ha sido habilitado de la comunidad');
+            $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido habilitado de la comunidad');
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -83,10 +79,8 @@ class Communities_MemberController extends Yachay_Action
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireCommunityModerator($community);
 
-        $session = new Zend_Session_Namespace();
-
         if ($community->author == $user->ident) {
-            $session->messages->addMessage('El usuario ' . $user->label . ' no puede ser retirado de la comunidad');
+            $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' no puede ser retirado de la comunidad');
         } else {
             $model_communities_users = new Communities_Users();
             $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
@@ -95,7 +89,7 @@ class Communities_MemberController extends Yachay_Action
             $community->members = $community->members - 1;
             $community->save();
 
-            $session->messages->addMessage('El usuario ' . $user->label . ' ha sido retirado de la comunidad');
+            $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido retirado de la comunidad');
         }
         $this->_redirect($this->view->currentPage());
     }

@@ -22,7 +22,7 @@ class Communities_ManagerController extends Yachay_Action
         $this->view->model_communities = $model_communities;
         $this->view->communities = $communities;
 
-        history('communities/manager');
+        $this->history('communities/manager');
         $breadcrumb = array();
         if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
@@ -38,7 +38,7 @@ class Communities_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_communities = new Communities();
             $model_tags = new Tags();
@@ -67,7 +67,7 @@ class Communities_ManagerController extends Yachay_Action
 
                 // config of avatar
                 $upload = new Zend_File_Transfer_Adapter_Http();
-                $upload->setDestination(APPLICATION_PATH . '/../public/media/upload');
+                $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
                 $upload->addValidator('Size', false, 2097152)
                        ->addValidator('Extension', false, array('jpg', 'png', 'gif'));
                 if ($upload->receive()) {
@@ -90,18 +90,18 @@ class Communities_ManagerController extends Yachay_Action
                 $community->save();
                 $session->url = $community->url;
 
-                $session->messages->addMessage("La comunidad {$community->label} se ha creado correctamente");
+                $this->_helper->flashMessenger->addMessage("La comunidad {$community->label} se ha creado correctamente");
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($community->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
             $this->view->community = $community;
         }
 
-        history('communities/new');
+        $this->history('communities/new');
         $breadcrumb = array();
         if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
@@ -151,8 +151,7 @@ class Communities_ManagerController extends Yachay_Action
                 }
             }
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han eliminado $count comunidades");
+            $this->_helper->flashMessenger->addMessage("Se han eliminado $count comunidades");
         }
         $this->_redirect($this->view->currentPage());
     }

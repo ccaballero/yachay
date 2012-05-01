@@ -34,9 +34,7 @@ class Teams_MemberController extends Yachay_Action
         $assign = $assignement->findByTeamAndUser($team->ident, $user->ident);
         $assign->delete();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('El usuario ' . $user->label . ' ha sido retirado del equipo');
-
+        $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido retirado del equipo');
         $this->_redirect($this->view->currentPage());
     }
 }

@@ -3,8 +3,6 @@
 class Communities_CommunityController extends Yachay_Action
 {
     public function viewAction() {
-        global $USER;
-
         $this->requirePermission('communities', 'view');
 
         $request = $this->getRequest();
@@ -34,7 +32,7 @@ class Communities_CommunityController extends Yachay_Action
         $this->view->model = $model_communities;
         $this->view->community = $community;
 
-        history('communities/' . $community->url);
+        $this->history('communities/' . $community->url);
         $breadcrumb = array();
         if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
@@ -64,7 +62,7 @@ class Communities_CommunityController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $community->label = $request->getParam('label');
             $community->url = convert($community->label);
@@ -74,7 +72,7 @@ class Communities_CommunityController extends Yachay_Action
             if ($community->isValid()) {
                 // config of avatar
                 $upload = new Zend_File_Transfer_Adapter_Http();
-                $upload->setDestination(APPLICATION_PATH . '/../public/media/upload');
+                $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
                 $upload->addValidator('Size', false, 2097152)
                        ->addValidator('Extension', false, array('jpg', 'png', 'gif'));
                 if ($upload->receive()) {
@@ -96,11 +94,11 @@ class Communities_CommunityController extends Yachay_Action
                 $community->save();
                 $session->url = $community->url;
 
-                $session->messages->addMessage("La comunidad {$community->label} se ha actualizado correctamente");
+                $this->_helper->flashMessenger->addMessage("La comunidad {$community->label} se ha actualizado correctamente");
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($community->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -109,7 +107,7 @@ class Communities_CommunityController extends Yachay_Action
         $this->view->community = $community;
         $this->view->tags = implode(', ', $_tags);
 
-        history('community/' . $community->url . '/edit');
+        $this->history('community/' . $community->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
@@ -135,7 +133,6 @@ class Communities_CommunityController extends Yachay_Action
         $url = $request->getParam('community');
         $community = $model_communities->findByUrl($url);
 
-        $session = new Zend_Session_Namespace();
         if (!empty($community) && $community->amAuthor()) {
             $label = $community->label;
             $model_communities_users->deleteUsersInCommunity($community->ident);
@@ -157,9 +154,9 @@ class Communities_CommunityController extends Yachay_Action
             }
 
             $community->delete();
-            $session->messages->addMessage("La comunidad $label ha sido eliminada");
+            $this->_helper->flashMessenger->addMessage("La comunidad $label ha sido eliminada");
         } else {
-            $session->messages->addMessage("La comunidad no puede ser eliminada");
+            $this->_helper->flashMessenger->addMessage('La comunidad no puede ser eliminada');
         }
 
         $this->_redirect($this->view->currentPage());

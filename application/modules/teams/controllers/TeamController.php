@@ -52,7 +52,7 @@ class Teams_TeamController extends Yachay_Action
             ),
         );
 
-        history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/' . $team->url);
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/' . $team->url);
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -99,7 +99,7 @@ class Teams_TeamController extends Yachay_Action
         context('team', $team);
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $team->label = $request->getParam('label');
             $team->url = convert($team->label);
@@ -108,12 +108,13 @@ class Teams_TeamController extends Yachay_Action
             if ($team->isValid()) {
                 $team->save();
 
-                $session->messages->addMessage("El equipo {$team->label} se ha actualizado correctamente");
+                $this->_helper->flashMessenger->addMessage("El equipo {$team->label} se ha actualizado correctamente");
+
                 $session->url = $team->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($team->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -123,7 +124,7 @@ class Teams_TeamController extends Yachay_Action
         $this->view->group = $group;
         $this->view->team = $team;
         
-        history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/' . $team->url . '/edit');
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/' . $team->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -172,9 +173,7 @@ class Teams_TeamController extends Yachay_Action
         $team->status = 'inactive';
         $team->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El equipo {$team->label} ha sido desactivado");
-
+        $this->_helper->flashMessenger->addMessage("El equipo {$team->label} ha sido desactivado");
         $this->_redirect($this->view->currentPage());
     }
 
@@ -205,9 +204,7 @@ class Teams_TeamController extends Yachay_Action
         $team->status = 'active';
         $team->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El equipo {$team->label} ha sido activado");
-
+        $this->_helper->flashMessenger->addMessage("El equipo {$team->label} ha sido activado");
         $this->_redirect($this->view->currentPage());
     }
 
@@ -238,9 +235,7 @@ class Teams_TeamController extends Yachay_Action
         $label = $team->label;
         $team->delete();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El equipo {$label} ha sido eliminado");
-
+        $this->_helper->flashMessenger->addMessage("El equipo {$label} ha sido eliminado");
         $this->_redirect($this->view->currentPage());
     }
 }

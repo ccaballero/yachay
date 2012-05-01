@@ -25,7 +25,7 @@ class Modules_ModuleController extends Yachay_Action
         $this->view->module = $module;
         $this->view->routes = $model;
 
-        history('modules/' . $module->url);
+        $this->history('modules/' . $module->url);
         $breadcrumb = array();
         if ($this->acl('modules', 'list')) {
             $breadcrumb['Modulos'] = $this->view->url(array(), 'modules_list');
@@ -49,9 +49,7 @@ class Modules_ModuleController extends Yachay_Action
         $module->status = 'inactive';
         $module->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El modulo {$module->label} ha sido deshabilitado");
-
+        $this->_helper->flashMessenger->addMessage("El modulo {$module->label} ha sido deshabilitado");
         $this->_redirect($this->view->currentPage());
     }
 
@@ -68,9 +66,7 @@ class Modules_ModuleController extends Yachay_Action
         $module->status = 'active';
         $module->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El modulo {$module->label} ha sido habilitado");
-
+        $this->_helper->flashMessenger->addMessage("El modulo {$module->label} ha sido habilitado");
         $this->_redirect($this->view->currentPage());
     }
 }

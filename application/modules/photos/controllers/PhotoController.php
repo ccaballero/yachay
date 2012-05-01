@@ -24,7 +24,7 @@ class Photos_PhotoController extends Yachay_Action
         $this->view->photo = $photo;
         $this->view->tags = $tags;
 
-        history('photos/' . $resource->ident);
+        $this->history('photos/' . $resource->ident);
         $breadcrumb = array();
         if ($this->acl('resources', 'new')) {
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
@@ -55,7 +55,7 @@ class Photos_PhotoController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $photo->description = $request->getParam('description');
 
@@ -66,11 +66,11 @@ class Photos_PhotoController extends Yachay_Action
                 $photo->save();
                 $session->url = $photos->resource;
 
-                $session->messages->addMessage('La descripción se modifico correctamente');
+                $this->_helper->flashMessenger->addMessage('La descripción se modifico correctamente');
                 $this->_redirect($this->view->url(array('photo' => $photo->resource), 'photos_photo_view'));
             } else {
                 foreach ($photo->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -78,7 +78,7 @@ class Photos_PhotoController extends Yachay_Action
         $this->view->photo = $photo;
         $this->view->tags = implode(', ', $_tags);
 
-        history('photos/' . $photo->resource . '/edit');
+        $this->history('photos/' . $photo->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Fotografias'] = $this->view->url(array('filter' => 'photos'), 'resources_filtered');
@@ -121,8 +121,7 @@ class Photos_PhotoController extends Yachay_Action
         $resource->delete();
         $model_valorations->decreaseActivity(2);
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('La imagen ha sido eliminada');
+        $this->_helper->flashMessenger->addMessage('La imagen ha sido eliminada');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -161,8 +160,7 @@ class Photos_PhotoController extends Yachay_Action
         $resource->delete();
         $model_valorations->decreaseActivity(2, $resource->author);
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('La imagen ha sido eliminada');
+        $this->_helper->flashMessenger->addMessage('La imagen ha sido eliminada');
         $this->_redirect($this->view->currentPage());
     }
 }

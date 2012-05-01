@@ -31,7 +31,7 @@ class Groupsets_ManagerController extends Yachay_Action
         $this->view->model_groupsets = $model_groupsets;
         $this->view->groupsets = $array1;
 
-        history('groupsets/manager');
+        $this->history('groupsets/manager');
         breadcrumb();
     }
 
@@ -70,7 +70,7 @@ class Groupsets_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_groupsets = new Groupsets();
             $groupset = $model_groupsets->createRow();
@@ -95,12 +95,13 @@ class Groupsets_ManagerController extends Yachay_Action
                     $assign->save();
                 }
 
-                $session->messages->addMessage("El conjunto {$groupset->label} se ha creado correctamente");
+                $this->_helper->flashMessenger->addMessage("El conjunto {$groupset->label} se ha creado correctamente");
+
                 $session->url = $groupset->ident;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($groupset->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
             
@@ -108,7 +109,7 @@ class Groupsets_ManagerController extends Yachay_Action
             $this->view->checks = $checks;
         }
 
-        history('groupsets/new');
+        $this->history('groupsets/new');
         $breadcrumb = array();
         $breadcrumb['Conjuntos'] = $this->view->url(array(), 'groupsets_manager');
         breadcrumb($breadcrumb);
@@ -135,8 +136,7 @@ class Groupsets_ManagerController extends Yachay_Action
                 }
             }
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han eliminado $count conjuntos");
+            $this->_helper->flashMessenger->addMessage("Se han eliminado $count conjuntos");
         }
         $this->_redirect($this->view->currentPage());
     }

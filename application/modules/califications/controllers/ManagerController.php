@@ -3,8 +3,6 @@
 class Califications_ManagerController extends Yachay_Action
 {
     public function indexAction () {
-        global $USER;
-
         $this->requirePermission('subjects', 'view');
         $request = $this->getRequest();
 
@@ -24,10 +22,7 @@ class Califications_ManagerController extends Yachay_Action
 
         context('group', $group);
 
-        $model_users = new Users();
         $students = $group->findUsersViaGroups_Users($group->select()->where('type = ?', 'student')->order('formalname ASC'));
-
-        $model_evaluations = new Evaluations();
         $evaluation = $group->getEvaluation();
         $tests_evaluations = $evaluation->findEvaluations_Tests($evaluation->select()->order('order ASC'));
 
@@ -43,8 +38,6 @@ class Califications_ManagerController extends Yachay_Action
         $this->view->students = $students;
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
-
             $save = $request->getParam('save');
             $clean = $request->getParam('clean');
             $change = $request->getParam('change');
@@ -90,7 +83,7 @@ class Califications_ManagerController extends Yachay_Action
                         }
                     }
                 }
-                $session->messages->addMessage('Las calificaciones han sido almacenadas correctamente');
+                $this->_helper->flashMessenger->addMessage('Las calificaciones han sido almacenadas correctamente');
             } else if (!empty($clean)) {
                 foreach ($students as $student) {
                     foreach ($tests_evaluations as $test) {
@@ -100,7 +93,7 @@ class Califications_ManagerController extends Yachay_Action
                         }
                     }
                 }
-                $session->messages->addMessage('Las calificaciones han sido limpiadas');
+                $this->_helper->flashMessenger->addMessage('Las calificaciones han sido limpiadas');
             } else if (!empty($change)) {
                 $evaluation_selected = $request->getParam('evaluation');
                 $evaluation_selected = intval($evaluation_selected);
@@ -118,18 +111,18 @@ class Califications_ManagerController extends Yachay_Action
                     $group->evaluation = $evaluation_selected;
                     if ($group->isValid()) {
                         $group->save();
-                        $session->messages->addMessage('El criterio de evaluation ha sido cambiado');
+                        $this->_helper->flashMessenger->addMessage('El criterio de evaluation ha sido cambiado');
                         $this->_redirect($this->view->currentPage());
                     } else {
                         foreach ($group->getMessages() as $message) {
-                            $session->messages->addMessage($message);
+                            $this->_helper->flashMessenger->addMessage($message);
                         }
                     }
                 }
             }
         }
 
-        history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications');
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications');
         $breadcrumb = array();
         if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
@@ -174,7 +167,6 @@ class Califications_ManagerController extends Yachay_Action
             $students_list[] = $student->ident;
         }
 
-        $model_evaluations = new Evaluations();
         $evaluation = $group->getEvaluation();
         $tests_evaluations = $evaluation->findEvaluations_Tests($evaluation->select()->order('order ASC'));
 
@@ -200,12 +192,12 @@ class Califications_ManagerController extends Yachay_Action
         $this->view->students = $students;
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $selections = $request->getParam('student');
             if (empty($selections)) {
                 $upload = new Zend_File_Transfer_Adapter_Http();
-                $upload->setDestination(APPLICATION_PATH . '/../public/media/upload');
+                $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
                 $upload->addValidator('Size', false, 2097152)
                        ->addValidator('Extension', false, array('csv'));
 
@@ -283,14 +275,14 @@ class Califications_ManagerController extends Yachay_Action
 
                                 $session->import_califications = $results;
                             } else {
-                                $session->messages->addMessage('La columna CODIGO no fue encontrada');
+                                $this->_helper->flashMessenger->addMessage('La columna CODIGO no fue encontrada');
                                 $this->_redirect($this->view->currentPage());
                             }
                         break;
                     }
                     unlink($filename);
                 } else {
-                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
+                    $this->_helper->flashMessenger->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
             } else {
                 if (isset($session->import_califications)) {
@@ -343,14 +335,14 @@ class Califications_ManagerController extends Yachay_Action
                             }
                         }
                     }
-                    $session->messages->addMessage("Se han creado importado $count_new calificaciones nuevas y se han editado $count_edit calificaciones");
+                    $this->_helper->flashMessenger->addMessage("Se han creado importado $count_new calificaciones nuevas y se han editado $count_edit calificaciones");
                     $this->_redirect($this->view->lastPage());
                 }
                 unset($session->import_califications);
             }
         }
 
-        history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications/import');
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications/import');
         $breadcrumb = array();
         if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
@@ -369,8 +361,6 @@ class Califications_ManagerController extends Yachay_Action
     }
 
     public function exportAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'view');
         $request = $this->getRequest();
 
@@ -390,7 +380,6 @@ class Califications_ManagerController extends Yachay_Action
 
         context('group', $group);
 
-        $model_users = new Users();
         $students = $group->findUsersViaGroups_Users($group->select()->where('type = ?', 'student'));
 
         $students_list = array();
@@ -398,7 +387,6 @@ class Califications_ManagerController extends Yachay_Action
             $students_list[] = $student->ident;
         }
 
-        $model_evaluations = new Evaluations();
         $evaluation = $group->getEvaluation();
         $tests_evaluations = $evaluation->findEvaluations_Tests($evaluation->select()->order('order ASC'));
 
@@ -470,7 +458,7 @@ class Califications_ManagerController extends Yachay_Action
             }
         }
 
-        history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications/export');
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications/export');
         $breadcrumb = array();
         if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');

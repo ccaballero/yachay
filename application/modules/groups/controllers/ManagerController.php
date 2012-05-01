@@ -39,7 +39,7 @@ class Groups_ManagerController extends Yachay_Action
         $this->view->subject = $subject;
         $this->view->groups = $model_groups->selectAll($subject->ident);
 
-        history('subjects/' . $subject->url . '/groups/manager');
+        $this->history('subjects/' . $subject->url . '/groups/manager');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -74,7 +74,7 @@ class Groups_ManagerController extends Yachay_Action
         $this->view->group = new Groups_Empty();
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_groups = new Groups();
             $group = $model_groups->createRow();
@@ -91,19 +91,19 @@ class Groups_ManagerController extends Yachay_Action
                 $group->tsregister = time();
                 $group->save();
 
-                $session->messages->addMessage("El grupo {$group->label} se ha creado correctamente");
+                $this->_helper->flashMessenger->addMessage("El grupo {$group->label} se ha creado correctamente");
                 $session->url = $group->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($group->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
             $this->view->group = $group;
         }
 
-        history('subjects/' . $subject->url . '/groups/new');
+        $this->history('subjects/' . $subject->url . '/groups/new');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -143,8 +143,7 @@ class Groups_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han desactivado $count grupos");
+            $this->_helper->flashMessenger->addMessage("Se han desactivado $count grupos");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -174,8 +173,7 @@ class Groups_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han activado $count grupos");
+            $this->_helper->flashMessenger->addMessage("Se han activado $count grupos");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -207,8 +205,7 @@ class Groups_ManagerController extends Yachay_Action
                 }
             }
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han eliminado $count grupos");
+            $this->_helper->flashMessenger->addMessage("Se han eliminado $count grupos");
         }
         $this->_redirect($this->view->currentPage());
     }

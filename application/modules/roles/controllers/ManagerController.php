@@ -11,7 +11,7 @@ class Roles_ManagerController extends Yachay_Action {
         $this->view->model_roles = $model_roles;
         $this->view->roles = $model_roles->selectAll();
 
-        history('roles/manager');
+        $this->history('roles/manager');
         $breadcrumb = array();
         if ($this->acl('roles', 'list')) {
             $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');
@@ -30,7 +30,7 @@ class Roles_ManagerController extends Yachay_Action {
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_roles = new Roles();
             $model_roles_privileges = new Roles_Privileges();
@@ -57,12 +57,13 @@ class Roles_ManagerController extends Yachay_Action {
                     }
                 }
 
-                $session->messages->addMessage("El rol {$role->label} se ha creado correctamente");
+                $this->_helper->flashMessenger->addMessage("El rol {$role->label} se ha creado correctamente");
+
                 $session->url = $role->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($role->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
@@ -70,7 +71,7 @@ class Roles_ManagerController extends Yachay_Action {
             $this->view->role_privilege = $privileges_idents;
         }
 
-        history('roles/new');
+        $this->history('roles/new');
         $breadcrumb = array();
         if ($this->acl('roles', 'list')) {
             $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');

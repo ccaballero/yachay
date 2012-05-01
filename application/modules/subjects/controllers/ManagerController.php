@@ -39,7 +39,7 @@ class Subjects_ManagerController extends Yachay_Action
             $this->view->subjects = array();
         }
 
-        history('subjects/manager');
+        $this->history('subjects/manager');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -68,7 +68,7 @@ class Subjects_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_subjects = new Subjects();
             $subject = $model_subjects->createRow();
@@ -112,12 +112,13 @@ class Subjects_ManagerController extends Yachay_Action
                     $assign->save();
                 }
 
-                $session->messages->addMessage("La materia {$subject->label} se ha creado correctamente");
+                $this->_helper->flashMessenger->addMessage("La materia {$subject->label} se ha creado correctamente");
+
                 $session->url = $subject->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($subject->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
@@ -126,7 +127,7 @@ class Subjects_ManagerController extends Yachay_Action
             $this->view->checks_careers = $checks_careers;
         }
 
-        history('subjects/new');
+        $this->history('subjects/new');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -152,8 +153,7 @@ class Subjects_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han bloqueado $count materias");
+            $this->_helper->flashMessenger->addMessage("Se han bloqueado $count materias");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -173,8 +173,7 @@ class Subjects_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han bloqueado $count materias");
+            $this->_helper->flashMessenger->addMessage("Se han bloqueado $count materias");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -195,8 +194,7 @@ class Subjects_ManagerController extends Yachay_Action
                 }
             }
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han eliminado $count materias");
+            $this->_helper->flashMessenger->addMessage("Se han eliminado $count materias");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -226,16 +224,15 @@ class Subjects_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_subjects = new Subjects();
             $model_users = new Users();
-            $me = $model_users->findByIdent($USER->ident);
 
             $selections = $request->getParam('subjects');
             if (empty($selections)) {
                 $upload = new Zend_File_Transfer_Adapter_Http();
-                $upload->setDestination(APPLICATION_PATH . '/../public/media/upload');
+                $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
                 $upload->addValidator('Size', false, 2097152)
                        ->addValidator('Extension', false, array('csv'));
 
@@ -304,12 +301,12 @@ class Subjects_ManagerController extends Yachay_Action
                                 $session->import_subjects = $results;
                             } else {
                                 if (!$csv->hasColumn($_headers['CODIGO'])) {
-                                    $session->messages->addMessage('La columna CODIGO no fue encontrada');
+                                    $this->_helper->flashMessenger->addMessage('La columna CODIGO no fue encontrada');
                                     $this->_redirect($this->view->currentPage());
 
                                 }
                                 if (!$csv->hasColumn($_headers['MATERIA'])) {
-                                    $session->messages->addMessage('La columna MATERIA no fue encontrada');
+                                    $this->_helper->flashMessenger->addMessage('La columna MATERIA no fue encontrada');
                                     $this->_redirect($this->view->currentPage());
                                 }
                             }
@@ -317,7 +314,7 @@ class Subjects_ManagerController extends Yachay_Action
                     }
                     unlink($filename);
                 } else {
-                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
+                    $this->_helper->flashMessenger->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
             } else {
                 if (isset($session->import_subjects)) {
@@ -356,14 +353,15 @@ class Subjects_ManagerController extends Yachay_Action
                             }
                         }
                     }
-                    $session->messages->addMessage("Se han creado $count_new materias nuevas y se han editado $count_edit materias");
+
+                    $this->_helper->flashMessenger->addMessage("Se han creado $count_new materias nuevas y se han editado $count_edit materias");
                     $this->_redirect($this->view->lastPage());
                 }
                 unset($session->import_subjects);
             }
         }
 
-        history('subjects/import');
+        $this->history('subjects/import');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -425,7 +423,7 @@ class Subjects_ManagerController extends Yachay_Action
             }
         }
 
-        history('subjects/export');
+        $this->history('subjects/export');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');

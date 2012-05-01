@@ -9,7 +9,7 @@ class Templates_IndexController extends Yachay_Action
 
         $this->view->templates = $model_templates->selectAll();
 
-        history('templates');
+        $this->history('templates');
         breadcrumb();
     }
 }

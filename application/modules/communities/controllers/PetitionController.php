@@ -32,7 +32,7 @@ class Communities_PetitionController extends Yachay_Action
         $this->view->community = $community;
         $this->view->applicants = $applicants;
 
-        history('communities/' . $community->url . '/petition');
+        $this->history('communities/' . $community->url . '/petition');
         $breadcrumb = array();
         if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
@@ -85,8 +85,7 @@ class Communities_PetitionController extends Yachay_Action
             $community->petitions = $community->petitions - $count;
             $community->save();
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han aceptado a $count miembros en la comunidad");
+            $this->_helper->flashMessenger->addMessage("Se han aceptado a $count miembros en la comunidad");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -120,8 +119,7 @@ class Communities_PetitionController extends Yachay_Action
             $community->petitions = $community->petitions - $count;
             $community->save();
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han rechazado a $count miembros de la comunidad");
+            $this->_helper->flashMessenger->addMessage("Se han rechazado a $count miembros de la comunidad");
         }
         $this->_redirect($this->view->currentPage());
     }

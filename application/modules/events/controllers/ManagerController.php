@@ -19,7 +19,8 @@ class Events_ManagerController extends Yachay_Action
         $model_tags = new Tags();
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
+
             $publish = $request->getParam('publish');
             $tags = $request->getParam('tags');
         
@@ -45,10 +46,10 @@ class Events_ManagerController extends Yachay_Action
             $spaces_valids = $context->context(NULL, 'plain');
 
             if (empty($publish)) {
-                $session->messages->addMessage('Usted debe seleccionar un espacio de publicación');
+                $this->_helper->flashMessenger->addMessage('Usted debe seleccionar un espacio de publicación');
             } else if (in_array($publish, $spaces_valids)) {
                 if ($event->event == 0) {
-                    $session->messages->addMessage('El evento no describe una fecha correcta');
+                    $this->_helper->flashMessenger->addMessage('El evento no describe una fecha correcta');
                 } else if ($event->isValid()) {
                     $resource = $model_resources->createRow();
                     $resource->author = $USER->ident;
@@ -67,22 +68,22 @@ class Events_ManagerController extends Yachay_Action
 
                     $session->url = $event->resource;
 
-                    $session->messages->addMessage('El evento ha sido creado');
+                    $this->_helper->flashMessenger->addMessage('El evento ha sido creado');
                     $this->_redirect($request->getParam('return'));
                 } else {
                     foreach ($event->getMessages() as $message) {
-                        $session->messages->addMessage($message);
+                        $this->_helper->flashMessenger->addMessage($message);
                     }
                 }
             } else {
-                $session->messages->addMessage('Usted no tiene privilegios para publicar en ese espacio');
+                $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
         }
 
         $this->view->event = $event;
         $this->view->tags = $tags;
 
-        history('events/new');
+        $this->history('events/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Eventos'] = $this->view->url(array('filter' => 'events'), 'resources_filtered');

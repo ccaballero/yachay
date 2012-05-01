@@ -30,9 +30,7 @@ class Groups_MemberController extends Yachay_Action
         $assign->status = 'inactive';
         $assign->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('El usuario ' . $user->label . ' ha sido deshabilitado del grupo');
-
+        $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido deshabilitado del grupo');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -64,9 +62,7 @@ class Groups_MemberController extends Yachay_Action
         $assign->status = 'active';
         $assign->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('El usuario ' . $user->label . ' ha sido habilitado del grupo');
-
+        $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido habilitado del grupo');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -97,9 +93,7 @@ class Groups_MemberController extends Yachay_Action
         $assign = $model_groups_users->findByGroupAndUser($group->ident, $user->ident);
         $assign->delete();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('El usuario ' . $user->label . ' ha sido retirado del grupo');
-
+        $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido retirado del grupo');
         $this->_redirect($this->view->currentPage());
     }
 }

@@ -16,7 +16,7 @@ class IndexController extends Yachay_Action
         global $USER;
 
         if ($USER->role == 1) {
-            history();
+            $this->history();
             $model_resources = new Resources();
             $model_resources_globales = new Resources_Globales();
 
@@ -53,7 +53,7 @@ class IndexController extends Yachay_Action
         global $USER;
 
         if ($USER->role != 1) {
-            history();
+            $this->history();
 
             $model_resources = new Resources();
             $model_resources_globales = new Resources_Globales();
@@ -212,7 +212,7 @@ class IndexController extends Yachay_Action
         if ($request->isPost()) {
             $spaces = $request->getParam('spaces');
 
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $context = new Yachay_Helpers_Context;
             $list_spaces = $context->context(NULL, 'plain');

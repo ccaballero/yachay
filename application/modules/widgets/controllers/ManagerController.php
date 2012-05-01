@@ -11,8 +11,6 @@ class Widgets_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
-
             $config = $request->getParam('widgets');
             foreach ($config as $page_ident => $array_widgets) {
                 $page = $model_pages->findByIdent($page_ident);
@@ -34,7 +32,7 @@ class Widgets_ManagerController extends Yachay_Action
                 }
             }
 
-            $session->messages->addMessage('Su configuración de los widgets ha sido almacenada');
+            $this->_helper->flashMessenger->addMessage('Su configuración de los widgets ha sido almacenada');
         }
 
         $matrix = array();
@@ -59,7 +57,7 @@ class Widgets_ManagerController extends Yachay_Action
         $this->view->widgets = $model_widgets->selectAll();
         $this->view->widgets_pages = $matrix;
 
-        history('widgets/manager');
+        $this->history('widgets/manager');
         $breadcrumb = array();
         if ($this->acl('widgets', 'list')) {
             $breadcrumb['Widgets'] = $this->view->url(array(), 'widgets_list');

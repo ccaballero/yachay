@@ -11,7 +11,7 @@ class Evaluations_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_evaluations = new Evaluations();
 
@@ -28,14 +28,14 @@ class Evaluations_ManagerController extends Yachay_Action
                 $this->_redirect($this->view->url(array('evaluation' => $evaluation->ident), 'evaluations_evaluation_view'));
             } else {
                 foreach ($evaluation->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
             
             $this->view->evaluation = $evaluation;
         }
 
-        history('evaluations/new');
+        $this->history('evaluations/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');
@@ -61,7 +61,7 @@ class Evaluations_ManagerController extends Yachay_Action
         $this->view->formula = $formula;
         $this->view->result = $result;
 
-        history('evaluations/new');
+        $this->history('evaluations/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');

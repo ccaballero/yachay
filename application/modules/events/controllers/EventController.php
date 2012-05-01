@@ -24,7 +24,7 @@ class Events_EventController extends Yachay_Action
         $this->view->event = $event;
         $this->view->tags = $tags;
 
-        history('events/' . $resource->ident);
+        $this->history('events/' . $resource->ident);
         $breadcrumb = array();
         if ($this->acl('resources', 'new')) {
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
@@ -55,7 +55,7 @@ class Events_EventController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $event->label = $request->getParam('name');
             $event->place = $request->getParam('place');
@@ -81,11 +81,11 @@ class Events_EventController extends Yachay_Action
                 $event->save();
                 $session->url = $event->resource;
 
-                $session->messages->addMessage("El evento {$event->label} se ha actualizado correctamente");
+                $this->_helper->flashMessenger->addMessage("El evento {$event->label} se ha actualizado correctamente");
                 $this->_redirect($this->view->url(array('event' => $event->resource), 'events_event_view'));
             } else {
                 foreach ($event->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -93,7 +93,7 @@ class Events_EventController extends Yachay_Action
         $this->view->event = $event;
         $this->view->tags = implode(', ', $_tags);
 
-        history('events/' . $event->resource . '/edit');
+        $this->history('events/' . $event->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Eventos'] = $this->view->url(array('filter' => 'events'), 'resources_filtered');
@@ -134,8 +134,7 @@ class Events_EventController extends Yachay_Action
         $resource->delete();
         $model_valorations->decreaseActivity(4);
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El evento ha sido eliminado");
+        $this->_helper->flashMessenger->addMessage('El evento ha sido eliminado');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -172,8 +171,7 @@ class Events_EventController extends Yachay_Action
         $resource->delete();
         $model_valorations->decreaseActivity(4, $resource->author);
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El evento ha sido eliminado");
+        $this->_helper->flashMessenger->addMessage('El evento ha sido eliminado');
         $this->_redirect($this->view->currentPage());
     }
 }

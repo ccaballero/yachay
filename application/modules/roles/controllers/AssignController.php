@@ -12,8 +12,6 @@ class Roles_AssignController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
-
             $radio = $request->getParam('radio');
             foreach ($radio as $user_ident => $role_ident) {
                 $role_ident = intval($role_ident);
@@ -25,7 +23,8 @@ class Roles_AssignController extends Yachay_Action
                     }
                 }
             }
-            $session->messages->addMessage("La asignación de roles ha sido actualizada correctamente");
+
+            $this->_helper->flashMessenger->addMessage('La asignación de roles ha sido actualizada correctamente');
         }
 
         $users = $model_users->selectAll();
@@ -36,7 +35,7 @@ class Roles_AssignController extends Yachay_Action
         $this->view->model_roles = $model_roles;
         $this->view->roles = $roles;
 
-        history('roles/assign');
+        $this->history('roles/assign');
         $breadcrumb = array();
         if ($this->acl('roles', 'list')) {
             $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');

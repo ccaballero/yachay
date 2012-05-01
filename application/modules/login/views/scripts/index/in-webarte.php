@@ -9,3 +9,9 @@
     <p class="submit"><input type="submit" value="Ingresar" /></p>
     <p class="submit"><a href="<?php echo $this->url(array(), 'login_forgot') ?>">Olvide mi contraseña</a></p>
 </form>
+
+<script type="text/javascript">
+window.onload = function() {
+  document.getElementById("login_username").focus();
+}
+</script>

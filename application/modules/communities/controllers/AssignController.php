@@ -47,7 +47,7 @@ class Communities_AssignController extends Yachay_Action
         $this->view->moderators = $moderators;
         $this->view->members = $members;
 
-        history('communities/' . $community->url . '/assign');
+        $this->history('communities/' . $community->url . '/assign');
         $breadcrumb = array();
         if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
@@ -90,8 +90,7 @@ class Communities_AssignController extends Yachay_Action
                 }
             }
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han deshabilitado $count miembros");
+            $this->_helper->flashMessenger->addMessage("Se han deshabilitado $count miembros");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -125,8 +124,7 @@ class Communities_AssignController extends Yachay_Action
                 }
             }
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han habilitado $count miembros");
+            $this->_helper->flashMessenger->addMessage("Se han habilitado $count miembros");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -162,8 +160,7 @@ class Communities_AssignController extends Yachay_Action
             $community->members = $community->members - $count;
             $community->save();
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han retirado $count miembros");
+            $this->_helper->flashMessenger->addMessage("Se han retirado $count miembros");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -197,8 +194,7 @@ class Communities_AssignController extends Yachay_Action
                 }
             }
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han convertido a $count miembros en moderadores");
+            $this->_helper->flashMessenger->addMessage("Se han convertido a $count miembros en moderadores");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -232,8 +228,7 @@ class Communities_AssignController extends Yachay_Action
                 }
             }
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han convertido a $count miembros en miembros");
+            $this->_helper->flashMessenger->addMessage("Se han convertido a $count miembros en miembros");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -255,7 +250,7 @@ class Communities_AssignController extends Yachay_Action
             $model_communities_users = new Communities_Users();
             $assignement = $model_communities_users->findByCommunityAndUser($community->ident, $USER->ident);
 
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
             if ($assignement == NULL) {
                 $row = $model_communities_users->createRow();
                 $row->community = $community->ident;
@@ -266,16 +261,17 @@ class Communities_AssignController extends Yachay_Action
                 $row->save();
                 $community->members = $community->members + 1;
                 $community->save();
-                $session->messages->addMessage("Tu te has unido a la comunidad {$community->label}");
+
+                $this->_helper->flashMessenger->addMessage("Tu te has unido a la comunidad {$community->label}");
             } else {
-                $session->messages->addMessage("Tu ya perteneces a esta comunidad");
+                $this->_helper->flashMessenger->addMessage('Tu ya perteneces a esta comunidad');
             }
         }
         if ($community->mode == 'close') {
             $model_communities_petitions = new Communities_Petitions();
             $assignement = $model_communities_petitions->findByCommunityAndUser($community->ident, $USER->ident);
 
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
             if ($assignement == NULL) {
                 $row = $model_communities_petitions->createRow();
                 $row->community = $community->ident;
@@ -284,9 +280,10 @@ class Communities_AssignController extends Yachay_Action
                 $row->save();
                 $community->petitions = $community->petitions + 1;
                 $community->save();
-                $session->messages->addMessage("Tu solicitud de ingreso a la comunidad {$community->label} ha sido enviada");
+
+                $this->_helper->flashMessenger->addMessage("Tu solicitud de ingreso a la comunidad {$community->label} ha sido enviada");
             } else {
-                $session->messages->addMessage("Tu ya has solicitado el ingreso a esta comunidad");
+                $this->_helper->flashMessenger->addMessage('Tu ya has solicitado el ingreso a esta comunidad');
             }
         }
 
@@ -309,14 +306,14 @@ class Communities_AssignController extends Yachay_Action
         $model_communities_users = new Communities_Users();
         $assignement = $model_communities_users->findByCommunityAndUser($community->ident, $USER->ident);
 
-        $session = new Zend_Session_Namespace();
         if ($assignement <> NULL) {
             $assignement->delete();
             $community->members = $community->members - 1;
             $community->save();
-            $session->messages->addMessage("Tu has dejado la communidad {$community->label}");
+            
+            $this->_helper->flashMessenger->addMessage("Tu has dejado la communidad {$community->label}");
         } else {
-            $session->messages->addMessage("Tu no perteneces a&uacute;n a esa comunidad");
+            $this->_helper->flashMessenger->addMessage('Tu no perteneces a&uacute;n a esa comunidad');
         }
 
         $this->_redirect($this->view->currentPage());

@@ -52,7 +52,7 @@ class Ratings_RatingController extends Yachay_Action
         }
 
         $this->requireContext($resource);
-        $session = new Zend_Session_Namespace();
+        $session = new Zend_Session_Namespace('yachay');
 
         $model_ratings = new Ratings();
         $exists_rating = $model_ratings->findByResourceAndAuthor($resource->ident, $USER->ident);
@@ -69,10 +69,10 @@ class Ratings_RatingController extends Yachay_Action
             $resource->save();
 
             $model_valorations->addPopularity($resource->author);
-            $session->messages->addMessage('Tu has valorado el recurso positivamente');
+            $this->_helper->flashMessenger->addMessage('Tu has valorado el recurso positivamente');
         } else {
             if ($exists_rating->rating) {
-                $session->messages->addMessage('Tu ya has valorado este recurso');
+                $this->_helper->flashMessenger->addMessage('Tu ya has valorado este recurso');
             } else {
                 $exists_rating->delete();
 
@@ -81,7 +81,7 @@ class Ratings_RatingController extends Yachay_Action
                 $resource->save();
 
                 $model_valorations->decreasePopularity($resource->author);
-                $session->messages->addMessage('Tu has cancelado tu valoración del recurso');
+                $this->_helper->flashMessenger->addMessage('Tu has cancelado tu valoración del recurso');
             }
         }
 
@@ -127,7 +127,6 @@ class Ratings_RatingController extends Yachay_Action
         }
 
         $this->requireContext($resource);
-        $session = new Zend_Session_Namespace();
 
         $model_ratings = new Ratings();
         $exists_rating = $model_ratings->findByResourceAndAuthor($resource->ident, $USER->ident);
@@ -144,10 +143,10 @@ class Ratings_RatingController extends Yachay_Action
             $resource->save();
 
             $model_valorations->addPopularity($resource->author);
-            $session->messages->addMessage('Tu has valorado el recurso negativamente');
+            $this->_helper->flashMessenger->addMessage('Tu has valorado el recurso negativamente');
         } else {
             if (!$exists_rating->rating) {
-                $session->messages->addMessage('Tu ya has valorado este recurso');
+                $this->_helper->flashMessenger->addMessage('Tu ya has valorado este recurso');
             } else {
                 $exists_rating->delete();
 
@@ -156,7 +155,7 @@ class Ratings_RatingController extends Yachay_Action
                 $resource->save();
 
                 $model_valorations->decreasePopularity($resource->author);
-                $session->messages->addMessage('Tu has cancelado tu valoración del recurso');
+                $this->_helper->flashMessenger->addMessage('Tu has cancelado tu valoración del recurso');
             }
         }
 

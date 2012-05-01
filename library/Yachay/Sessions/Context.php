@@ -1,6 +1,6 @@
 <?php
 
-class Yachay_Settings_Context
+class Yachay_Sessions_Context
 {
     public $global;
     public $area;

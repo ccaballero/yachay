@@ -19,10 +19,10 @@ class Files_ManagerController extends Yachay_Action
         $model_tags = new Tags();
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $upload = new Zend_File_Transfer_Adapter_Http();
-            $upload->setDestination(APPLICATION_PATH . '/../public/media/upload');
+            $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
             $upload->addValidator('Size', false, 2097152);
              
             $publish = $request->getParam('publish');
@@ -32,11 +32,10 @@ class Files_ManagerController extends Yachay_Action
             $spaces_valids = $context->context(NULL, 'plain');
 
             if (empty($publish)) {
-                $session->messages->addMessage('Usted debe seleccionar un espacio de publicación');
+                $this->_helper->flashMessenger->addMessage('Usted debe seleccionar un espacio de publicación');
             } else if (in_array($publish, $spaces_valids)) {
                 if ($upload->receive()) {
                     $filename = $upload->getFileName('file');
-                    $extension = strtolower(substr($filename, -3));
 
                     $file = $model_files->createRow();
                     $file->filename = basename($filename);
@@ -54,7 +53,7 @@ class Files_ManagerController extends Yachay_Action
                         $file->resource = $resource->ident;
                         $file->save();
 
-                        rename(APPLICATION_PATH . '/../public/media/upload/' . $file->filename, APPLICATION_PATH . '/../public/media/files/' . $file->resource);
+                        rename(APPLICATION_PATH . '/../data/upload//' . $file->filename, APPLICATION_PATH . '/../public/media/files/' . $file->resource);
 
                         $resource->saveContext($request);
                         $model_valorations->addActivity(2);
@@ -64,25 +63,25 @@ class Files_ManagerController extends Yachay_Action
 
                         $session->url = $file->resource;
 
-                        $session->messages->addMessage('El archivo fue cargado exitosamente');
+                        $this->_helper->flashMessenger->addMessage('El archivo fue cargado exitosamente');
                         $this->_redirect($request->getParam('return'));
                     } else {
                         foreach ($file->getMessages() as $message) {
-                            $session->messages->addMessage($message);
+                            $this->_helper->flashMessenger->addMessage($message);
                         }
                     }
                 } else {
-                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
+                    $this->_helper->flashMessenger->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
             } else {
-                $session->messages->addMessage('Usted no tiene privilegios para publicar en ese espacio');
+                $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
         }
 
         $this->view->file = $file;
         $this->view->tags = $tags;
 
-        history('files/new');
+        $this->history('files/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Archivos'] = $this->view->url(array('filter' => 'files'), 'resources_filtered');

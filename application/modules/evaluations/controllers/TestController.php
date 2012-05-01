@@ -32,10 +32,9 @@ class Evaluations_TestController extends Yachay_Action
         $model_evaluations_tests_values = new Evaluations_Tests_Values();
         $value_test_evaluation = $model_evaluations_tests_values->findByIdent($url_test_value_evaluation);
 
-        $session = new Zend_Session_Namespace();
         if (!empty($value_test_evaluation)) {
             $value_test_evaluation->delete();
-            $session->messages->addMessage("La calificacion ha sido eliminada");
+            $this->_helper->flashMessenger->addMessage('La calificacion ha sido eliminada');
         }
 
         $this->_redirect($this->view->currentPage());
@@ -70,8 +69,6 @@ class Evaluations_TestController extends Yachay_Action
         $this->view->test_value_evaluation = $empty_test_value_evaluation;
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
-
             $model_evaluations_tests_values = new Evaluations_Tests_Values();
             $test_value_evaluation = $model_evaluations_tests_values->createRow();
             $test_value_evaluation->label = $request->getParam('label');
@@ -82,14 +79,14 @@ class Evaluations_TestController extends Yachay_Action
             if ($test_value_evaluation->isValid()) {
                 if ($test_evaluation->minimumnote <= $test_value_evaluation->value && $test_value_evaluation->value <=  $test_evaluation->maximumnote) {
                     $test_value_evaluation->save();
-                    $session->messages->addMessage("Se ha agregado un nuevo valor cualitativo");
+                    $this->_helper->flashMessenger->addMessage('Se ha agregado un nuevo valor cualitativo');
                 } else {
-                    $session->messages->addMessage("El valor de la nota no esta dentro del rango");
+                    $this->_helper->flashMessenger->addMessage('El valor de la nota no esta dentro del rango');
                     $this->view->test_value_evaluation = $test_value_evaluation;
                 }
             } else {
                 foreach ($test_value_evaluation->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
                 $this->view->test_value_evaluation = $test_value_evaluation;
             }
@@ -103,7 +100,7 @@ class Evaluations_TestController extends Yachay_Action
         $this->view->test_evaluation = $test_evaluation;
         $this->view->test_values_evaluation = $test_values_evaluation;
 
-        history('evaluations/' . $evaluation->ident . '/' . $test_evaluation->ident);
+        $this->history('evaluations/' . $evaluation->ident . '/' . $test_evaluation->ident);
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');
@@ -133,8 +130,6 @@ class Evaluations_TestController extends Yachay_Action
         $this->view->test_evaluation = $empty_test_evaluation;
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
-
             $model_evaluations_tests = new Evaluations_Tests();
             $test_evaluation = $model_evaluations_tests->createRow();
             $test_evaluation->label = $request->getParam('label');
@@ -154,15 +149,15 @@ class Evaluations_TestController extends Yachay_Action
                     if (!empty($parsing_result)) {
                         $test_evaluation->save();
                         $evaluation->checkUseful();
-                        $session->messages->addMessage("Se ha agregado una nueva calificación");
+                        $this->_helper->flashMessenger->addMessage('Se ha agregado una nueva calificación');
                     }
                 } else {
-                    $session->messages->addMessage("Los rangos de notas no son adecuados");
+                    $this->_helper->flashMessenger->addMessage('Los rangos de notas no son adecuados');
                     $this->view->test_evaluation = $test_evaluation;
                 }
             } else {
                 foreach ($test_evaluation->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
                 $this->view->test_evaluation = $test_evaluation;
             }
@@ -174,7 +169,7 @@ class Evaluations_TestController extends Yachay_Action
         $this->view->evaluation = $evaluation;
         $this->view->tests_evaluation = $tests_evaluation;
 
-        history('evaluations/' . $evaluation->ident . '/add');
+        $this->history('evaluations/' . $evaluation->ident . '/add');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');
@@ -204,14 +199,13 @@ class Evaluations_TestController extends Yachay_Action
         $model_evaluations_tests = new Evaluations_Tests();
         $test_evaluation = $model_evaluations_tests->findByIdent($url_test_evaluation);
 
-        $session = new Zend_Session_Namespace();
         if (!empty($test_evaluation)) {
             if ($evaluation->author == $USER->ident) {
                 $test_evaluation->delete();
                 $evaluation->checkUseful();
-                $session->messages->addMessage("La calificacion ha sido eliminada");
+                $this->_helper->flashMessenger->addMessage('La calificacion ha sido eliminada');
             } else {
-                $session->messages->addMessage("Usted no puede eliminar la calificacion");
+                $this->_helper->flashMessenger->addMessage('Usted no puede eliminar la calificacion');
             }
         }
 

@@ -9,8 +9,6 @@ class Pages_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
-
             $bads = 0;
 
             $config = $request->getParam('pages');
@@ -32,16 +30,16 @@ class Pages_ManagerController extends Yachay_Action
             }
 
             if ($bads == 0) {
-                $session->messages->addMessage('La configuración de las paginas ha sido almacenada');
+                $this->_helper->flashMessenger->addMessage('La configuración de las paginas ha sido almacenada');
             } else {
-                $session->messages->addMessage("Se han almacenado las paginas correctas, y se han encontrado $bads errores");
+                $this->_helper->flashMessenger->addMessage("Se han almacenado las paginas correctas, y se han encontrado $bads errores");
             }
         }
 
         $this->view->model_pages = $model_pages;
         $this->view->pages = $model_pages->selectByMenuable(true);
 
-        history('pages/manager');
+        $this->history('pages/manager');
         $breadcrumb = array();
         if ($this->acl('pages', 'list')) {
             $breadcrumb['Paginas'] = $this->view->url(array(), 'pages_list');

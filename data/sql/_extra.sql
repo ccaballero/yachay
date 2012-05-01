@@ -242,15 +242,18 @@ UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 6 WHERE `ident` = 56; /*
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 7 WHERE `ident` = 45; /* subjects_list */
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 8 WHERE `ident` = 81; /* communities_list */
 
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 3 WHERE `ident` = 1;   /* modules_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 4 WHERE `ident` = 10;  /* pages_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 5 WHERE `ident` = 12;  /* regions_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 6 WHERE `ident` = 14;  /* widgets_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 2 WHERE `ident` = 16;  /* roles_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 7 WHERE `ident` = 92;  /* resources_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 1 WHERE `ident` = 122; /* tags_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 9 WHERE `ident` = 125; /* feedback_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 8 WHERE `ident` = 130; /* templates_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  3 WHERE `ident` = 1;   /* modules_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 10 WHERE `ident` = 7;  /* frontpage_development */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 11 WHERE `ident` = 8;  /* frontpage_terms */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 12 WHERE `ident` = 9;  /* frontpage_privacy */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  4 WHERE `ident` = 10;  /* pages_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  5 WHERE `ident` = 12;  /* regions_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  6 WHERE `ident` = 14;  /* widgets_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  2 WHERE `ident` = 16;  /* roles_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  7 WHERE `ident` = 92;  /* resources_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  1 WHERE `ident` = 122; /* tags_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  9 WHERE `ident` = 125; /* feedback_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  8 WHERE `ident` = 130; /* templates_list */
 /*====================================================================================================================*/
 /*====================================================================================================================*/
 
@@ -567,7 +570,7 @@ VALUES
 
 
 INSERT INTO `evaluation`
-(`author`, `label`,          `access`,  `tsregister`, `useful`, `description`)
+(`author`, `label`,          `access`,  `tsregister`,       `useful`, `description`)
 VALUES
 (1,        'Metodo clasico', 'public',  UNIX_TIMESTAMP(),   TRUE,     'El metodo clasico de evaluacion');
 

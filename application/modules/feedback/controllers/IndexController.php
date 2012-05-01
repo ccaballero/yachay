@@ -16,7 +16,7 @@ class Feedback_IndexController extends Yachay_Action
         }
         $this->view->resources = $resources;
 
-        history('feedback');
+        $this->history('feedback');
         $breadcrumb = array();
         $breadcrumb['Sugerencias'] = $this->view->url(array(), 'feedback_list');
         if ($this->acl('feedback', array('resolv', 'mark', 'delete'))) {

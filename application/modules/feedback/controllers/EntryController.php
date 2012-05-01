@@ -25,7 +25,7 @@ class Feedback_EntryController extends Yachay_Action
         $this->view->entry = $entry;
         $this->view->tags = $tags;
 
-        history('feedback/' . $resource->ident);
+        $this->history('feedback/' . $resource->ident);
         $breadcrumb = array();
         if ($this->acl('resources', 'new')) {
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
@@ -57,7 +57,7 @@ class Feedback_EntryController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
             $entry->description = $request->getParam('description');
 
             if ($entry->isValid()) {
@@ -67,11 +67,11 @@ class Feedback_EntryController extends Yachay_Action
                 $entry->save();
                 $session->url = $entry->resource;
 
-                $session->messages->addMessage('La sugerencia se modifico correctamente');
+                $this->_helper->flashMessenger->addMessage('La sugerencia se modifico correctamente');
                 $this->_redirect($this->view->url(array('entry' => $entry->resource), 'feedback_entry_view'));
             } else {
                 foreach ($entry->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -79,7 +79,7 @@ class Feedback_EntryController extends Yachay_Action
         $this->view->entry = $entry;
         $this->view->tags = implode(', ', $_tags);
 
-        history('feedback/' . $entry->resource . '/edit');
+        $this->history('feedback/' . $entry->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Sugerencias'] = $this->view->url(array('filter' => 'feedback'), 'resources_filtered');
@@ -100,8 +100,7 @@ class Feedback_EntryController extends Yachay_Action
         $entry->mark = true;
         $entry->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La sugerencia ha sido marcada como favorita");
+        $this->_helper->flashMessenger->addMessage('La sugerencia ha sido marcada como favorita');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -118,8 +117,7 @@ class Feedback_EntryController extends Yachay_Action
         $entry->mark = false;
         $entry->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La sugerencia ha sido desmarcada como favorita");
+        $this->_helper->flashMessenger->addMessage('La sugerencia ha sido desmarcada como favorita');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -136,8 +134,7 @@ class Feedback_EntryController extends Yachay_Action
         $entry->resolved = true;
         $entry->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La sugerencia ha sido marcada como resuelta");
+        $this->_helper->flashMessenger->addMessage('La sugerencia ha sido marcada como resuelta');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -154,8 +151,7 @@ class Feedback_EntryController extends Yachay_Action
         $entry->resolved = false;
         $entry->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La sugerencia ha sido desmarcada como resuelta");
+        $this->_helper->flashMessenger->addMessage('La sugerencia ha sido desmarcada como resuelta');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -192,8 +188,7 @@ class Feedback_EntryController extends Yachay_Action
         $entry->delete();
         $resource->delete();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La sugerencia ha sido eliminada");
+        $this->_helper->flashMessenger->addMessage('La sugerencia ha sido eliminada');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -229,8 +224,7 @@ class Feedback_EntryController extends Yachay_Action
         $entry->delete();
         $resource->delete();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('La sugerencia ha sido eliminada');
+        $this->_helper->flashMessenger->addMessage('La sugerencia ha sido eliminada');
         $this->_redirect($this->view->currentPage());
     }
 }

@@ -3,8 +3,6 @@
 class Evaluations_EvaluationController extends Yachay_Action
 {
     public function viewAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
         $request = $this->getRequest();
 
@@ -21,7 +19,7 @@ class Evaluations_EvaluationController extends Yachay_Action
         $this->view->tests_evaluation = $tests_evaluation;
         $this->view->groups = $groups;
 
-        history('evaluations/' . $evaluation->ident);
+        $this->history('evaluations/' . $evaluation->ident);
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');
@@ -46,7 +44,7 @@ class Evaluations_EvaluationController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $evaluation->label = $request->getParam('label');
             $evaluation->access = $request->getParam('access');
@@ -55,12 +53,13 @@ class Evaluations_EvaluationController extends Yachay_Action
 
             if ($evaluation->isValid()) {
                 $evaluation->save();
-                $session->messages->addMessage('El criterio de evaluacion se modifico correctamente');
+                $this->_helper->flashMessenger->addMessage('El criterio de evaluacion se modifico correctamente');
+
                 $session->url = $evaluation->ident;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($evaluation->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
@@ -73,7 +72,7 @@ class Evaluations_EvaluationController extends Yachay_Action
         $this->view->evaluation = $evaluation;
         $this->view->tests_evaluations = $tests_evaluation;
 
-        history('evaluations/' . $evaluation->ident . '/edit');
+        $this->history('evaluations/' . $evaluation->ident . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');

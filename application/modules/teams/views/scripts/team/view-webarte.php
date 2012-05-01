@@ -28,7 +28,7 @@
         <?php if ($this->acl('users', 'view')) { ?>
             <a href="<?php echo $this->url(array('user' => $member->url), 'users_user_view') ?>">
         <?php } ?>
-            <img src="<?php echo $this->media . 'users/thumbnail_small/' . $member->getAvatar() ?>" alt="<?php echo $member->getFullName() ?>" title="<?php echo $member->getFullName() ?>" />
+            <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $member->getAvatar() ?>" alt="<?php echo $member->getFullName() ?>" title="<?php echo $member->getFullName() ?>" />
         <?php if ($this->acl('users', 'view')) { ?>
             </a>
         <?php } ?>

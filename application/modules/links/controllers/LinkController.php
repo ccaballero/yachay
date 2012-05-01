@@ -24,7 +24,7 @@ class Links_LinkController extends Yachay_Action
         $this->view->link = $link;
         $this->view->tags = $tags;
 
-        history('links/' . $resource->ident);
+        $this->history('links/' . $resource->ident);
         $breadcrumb = array();
         if ($this->acl('resources', 'new')) {
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
@@ -55,7 +55,7 @@ class Links_LinkController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
             $link->link = $request->getParam('link_link');
             $link->description = $request->getParam('description');
             $priority = $request->getParam('priority');
@@ -72,11 +72,11 @@ class Links_LinkController extends Yachay_Action
                 $link->save();
                 $session->url = $link->resource;
 
-                $session->messages->addMessage('El enlace se modifico correctamente');
+                $this->_helper->flashMessenger->addMessage('El enlace se modifico correctamente');
                 $this->_redirect($this->view->url(array('link' => $link->resource), 'links_link_view'));
             } else {
                 foreach ($link->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -84,7 +84,7 @@ class Links_LinkController extends Yachay_Action
         $this->view->link = $link;
         $this->view->tags = implode(', ', $_tags);
 
-        history('links/' . $link->resource . '/edit');
+        $this->history('links/' . $link->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Enlaces'] = $this->view->url(array('filter' => 'links'), 'resources_filtered');
@@ -125,8 +125,7 @@ class Links_LinkController extends Yachay_Action
         $resource->delete();
         $model_valorations->decreaseActivity(1);
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El enlace ha sido eliminado");
+        $this->_helper->flashMessenger->addMessage('El enlace ha sido eliminado');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -163,8 +162,7 @@ class Links_LinkController extends Yachay_Action
         $resource->delete();
         $model_valorations->decreaseActivity(1, $resource->author);
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("El enlace ha sido eliminado");
+        $this->_helper->flashMessenger->addMessage('El enlace ha sido eliminado');
         $this->_redirect($this->view->currentPage());
     }
 }

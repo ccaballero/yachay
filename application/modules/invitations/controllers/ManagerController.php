@@ -10,7 +10,7 @@ class Invitations_ManagerController extends Yachay_Action
         $this->view->model_invitations = $model_invitations;
         $this->view->invitations = $model_invitations->selectAll();
 
-        history('invitations/manager');
+        $this->history('invitations/manager');
         breadcrumb(array('Administrador de invitaciones' => $this->view->url(array(), 'invitations_manager')));
     }
 
@@ -25,8 +25,6 @@ class Invitations_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
-
             $model_invitations = new Invitations();
             $invitation = $model_invitations->createRow();
 
@@ -56,7 +54,7 @@ class Invitations_ManagerController extends Yachay_Action
                 $view->url = $this->view->url(array('code' => $code), 'invitations_invitation_proceed');
                 $view->message = $invitation->message;
                 $view->user = $USER;
-                $view->site = $config->yachay->propertied->servername;
+                $view->site = $config->yachay->properties->servername;
 
                 $content = $view->render('mail.php');
 
@@ -67,18 +65,18 @@ class Invitations_ManagerController extends Yachay_Action
                      ->setSubject($USER->label . ' te ha invitado a ' . $config->yachay->properties->servername)
                      ->send();
 
-                $session->messages->addMessage('La invitación ha sido enviada al correo electronico');
+                $this->_helper->flashMessenger->addMessage('La invitación ha sido enviada al correo electronico');
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($invitation->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
             $this->view->invitation = $invitation;
         }
 
-        history('invitations/manager');
+        $this->history('invitations/manager');
         breadcrumb(array(
             'Administrador de invitaciones' => $this->view->url(array(), 'invitations_manager'),
             'Nueva invitación' => $this->view->url(array(), 'invitations_new'),

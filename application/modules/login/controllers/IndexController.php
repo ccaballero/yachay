@@ -40,7 +40,7 @@ class Login_IndexController extends Yachay_Action
                 'notEmptyMessage' => 'El campo %rule% no puede estar vacio'
             );
             $input = new Zend_Filter_Input($filters, $validators, $_POST, $options);
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
             if ($input->isValid()) {
                 $model_users = new Users();
                 $user = $model_users->findByLogin($input->username, md5($config->yachay->properties->key . $input->password));
@@ -49,7 +49,7 @@ class Login_IndexController extends Yachay_Action
                         $session->user = $user;
                         $this->_redirect($request->getParam('return'));
                     } else {
-                        $session->messages->addMessage("El usuario {$user->label} ha sido bloqueado, comuniquese con algún encargado");
+                        $this->_helper->flashMessenger->addMessage("El usuario {$user->label} ha sido bloqueado, comuniquese con algún encargado");
                     }
                 } else {
                     // validation for login forgot process
@@ -64,38 +64,37 @@ class Login_IndexController extends Yachay_Action
                                 $expiration = $forgot->tsregister + $forgot->tstimeout;
                                 $forgot->delete();
                                 if ($now < $expiration) {
-                                    $session->messages->addMessage('Le recomiendamos que establezca su nueva contraseña');
+                                    $this->_helper->flashMessenger->addMessage('Le recomiendamos que establezca su nueva contraseña');
                                     $session->user = $user;
                                     $this->_redirect($this->view->url(array(), 'frontpage'));
                                 }
                             }
                         }
                     }
-                    $session->messages->addMessage('Datos de accesso incorrectos');
+                    $this->_helper->flashMessenger->addMessage('Datos de accesso incorrectos');
                 }
             } else {
                 foreach($input->getMessages() as $messages) {
                     foreach($messages as $message) {
-                        $session->messages->addMessage($message);
+                        $this->_helper->flashMessenger->addMessage($message);
                     }
                 }
             }
             
             $this->view->values = array('username' => $request->getParam('username'));
         }
-        history('login');
+        $this->history('login');
         breadcrumb();
     }
 
     public function outAction() {
-        $session = new Zend_Session_Namespace();
+        $session = new Zend_Session_Namespace('yachay');
         $user = $session->user;
         if (!empty($user)) {
             $session->user = null;
         }
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('Usted salió del sistema');
+        $this->_helper->flashMessenger->addMessage('Usted salió del sistema');
 
         $url = new Zend_View_Helper_Url();
         $this->_redirect($url->url(array(), 'login_in'));

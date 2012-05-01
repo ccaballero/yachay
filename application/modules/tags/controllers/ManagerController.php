@@ -19,7 +19,7 @@ class Tags_ManagerController extends Yachay_Action
         $this->view->model_tags = $model_tags;
         $this->view->tags = $model_tags->selectAll();
 
-        history('tags/manager');
+        $this->history('tags/manager');
         $breadcrumb = array();
         if ($this->acl('tags', 'list')) {
             $breadcrumb['Etiquetas'] = $this->view->url(array(), 'tags_list');
@@ -53,8 +53,7 @@ class Tags_ManagerController extends Yachay_Action
                 }
             }
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han eliminado $count etiquetas");
+            $this->_helper->flashMessenger->addMessage("Se han eliminado $count etiquetas");
         }
         $this->_redirect($this->view->currentPage());
     }

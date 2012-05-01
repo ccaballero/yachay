@@ -20,16 +20,14 @@ class Friends_FriendController extends Yachay_Action
             $this->_redirect($this->view->currentPage());
         }
 
-        $session = new Zend_Session_Namespace();
-
         $follower = $model_friends->hasContact($USER->ident, $user->ident);
         $following = $model_friends->hasContact($user->ident, $USER->ident);
 
         if ($follower) {
             if ($following) {
-                $session->messages->addMessage("El usuario {$user->label} ya esta agregado");
+                $this->_helper->flashMessenger->addMessage("El usuario {$user->label} ya esta agregado");
             } else {
-                $session->messages->addMessage("Ya existe una solicitud registrada al usuario {$user->label}");
+                $this->_helper->flashMessenger->addMessage("Ya existe una solicitud registrada al usuario {$user->label}");
             }
         } else {
             if ($following) {
@@ -45,7 +43,7 @@ class Friends_FriendController extends Yachay_Action
 
                 $model_valorations->addSociability($user, 3, 2);
 
-                $session->messages->addMessage("El usuario {$user->label} ha sido agregado a la lista de amigos");
+                $this->_helper->flashMessenger->addMessage("El usuario {$user->label} ha sido agregado a la lista de amigos");
             } else {
                 $row = $model_friends->createRow();
                 $row->user = $USER->ident;
@@ -56,7 +54,7 @@ class Friends_FriendController extends Yachay_Action
 
                 $model_valorations->addSociability($user, 2, 1);
 
-                $session->messages->addMessage("Se envio un petición al usuario {$user->label}");
+                $this->_helper->flashMessenger->addMessage("Se envio un petición al usuario {$user->label}");
             }
         }
 
@@ -81,8 +79,6 @@ class Friends_FriendController extends Yachay_Action
             $this->_redirect($this->view->currentPage());
         }
 
-        $session = new Zend_Session_Namespace();
-
         $follower = $model_friends->hasContact($USER->ident, $user->ident);
         $following = $model_friends->hasContact($user->ident, $USER->ident);
 
@@ -96,20 +92,20 @@ class Friends_FriendController extends Yachay_Action
 
                 $model_valorations->decreaseSociability($user, 3, 2);
 
-                $session->messages->addMessage("El usuario {$user->label} ha sido retirado de la lista de amigos");
+                $this->_helper->flashMessenger->addMessage("El usuario {$user->label} ha sido retirado de la lista de amigos");
             } else {
                 $row = $model_friends->getContact($USER->ident, $user->ident);
                 $row->delete();
 
                 $model_valorations->decreaseSociability($user, 2, 1);
 
-                $session->messages->addMessage("Has cancelado tu petición al usuario {$user->label}");
+                $this->_helper->flashMessenger->addMessage("Has cancelado tu petición al usuario {$user->label}");
             }
         } else {
             if ($following) {
-                $session->messages->addMessage("El usuario {$user->label} no esta en la lista de contactos");
+                $this->_helper->flashMessenger->addMessage("El usuario {$user->label} no esta en la lista de contactos");
             } else {
-                $session->messages->addMessage("El usuario {$user->label} no esta en la lista de contactos");
+                $this->_helper->flashMessenger->addMessage("El usuario {$user->label} no esta en la lista de contactos");
             }
         }
 

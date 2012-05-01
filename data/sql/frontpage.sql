@@ -15,13 +15,13 @@ VALUES
 /* Registro de paginas para el modulo                                                                                 */
 /*====================================================================================================================*/
 INSERT INTO `page`
-(`label`,                         `title`,            `menuable`,    `module`,           `controller`,  `action`,      `route`)
+(`label`,                         `title`,             `menuable`,    `module`,           `controller`,  `action`,      `route`)
 VALUES
-('Pagina inicial',                'Inicio',           TRUE,          'frontpage',        'index',       'visitor',     'frontpage_visitor'),
-('Pagina de usuario',             '',                 FALSE,         'frontpage',        'index',       'user',        'frontpage_user'),
-('Colabora',                      '',                 FALSE,         'frontpage',        'static',      'development', 'frontpage_development'),
-('Condiciones de uso',            '',                 FALSE,         'frontpage',        'static',      'terms',       'frontpage_terms'),
-('Politica de privacidad',        '',                 FALSE,         'frontpage',        'static',      'privacy',     'frontpage_privacy');
+('Pagina inicial',                'Inicio',            TRUE,          'frontpage',        'index',       'visitor',     'frontpage_visitor'),
+('Pagina de usuario',             '',                  FALSE,         'frontpage',        'index',       'user',        'frontpage_user'),
+('Colabora',                      'Desarrollo',        TRUE,          'frontpage',        'static',      'development', 'frontpage_development'),
+('Condiciones de uso',            'Terminos',          TRUE,          'frontpage',        'static',      'terms',       'frontpage_terms'),
+('Politica de privacidad',        'Privacidad',        TRUE,          'frontpage',        'static',      'privacy',     'frontpage_privacy');
 
 /*====================================================================================================================*/
 /* Registro de widgets para el modulo                                                                                 */

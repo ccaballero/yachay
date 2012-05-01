@@ -7,7 +7,7 @@ class Yachay_Helpers_Context
         global $USER;
 
         // context
-        $session = new Zend_Session_Namespace();
+        $session = new Zend_Session_Namespace('yachay');
         $context = $session->context;
         $context_type = $context->getElement();
 

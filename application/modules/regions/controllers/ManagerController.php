@@ -11,8 +11,6 @@ class Regions_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
-
             $config = $request->getParam('regions');
             foreach ($config as $page_ident => $array_regions) {
                 $page = $model_pages->findByIdent($page_ident);
@@ -32,7 +30,7 @@ class Regions_ManagerController extends Yachay_Action
                 }
             }
 
-            $session->messages->addMessage('Su configuración de las regiones ha sido almacenada');
+            $this->_helper->flashMessenger->addMessage('Su configuración de las regiones ha sido almacenada');
         }
 
         $regions_pages = array();
@@ -55,7 +53,7 @@ class Regions_ManagerController extends Yachay_Action
         $this->view->regions = $model_regions->selectAll();
         $this->view->regions_pages = $regions_pages;
 
-        history('regions/manager');
+        $this->history('regions/manager');
         $breadcrumb = array();
         if ($this->acl('regions', 'list')) {
             $breadcrumb['Regiones'] = $this->view->url(array(), 'regions_list');

@@ -46,7 +46,7 @@ class Tags_TagController extends Yachay_Action
             'params' => array(),
         );
 
-        history('tags/' . $tag->url);
+        $this->history('tags/' . $tag->url);
         $breadcrumb = array();
         if ($this->acl('tags', 'list')) {
             $breadcrumb['Etiquetas'] = $this->view->url(array(), 'tags_list');
@@ -69,7 +69,6 @@ class Tags_TagController extends Yachay_Action
         $url_tag = $request->getParam('tag');
         $tag = $model_tags->findByUrl($url_tag);
 
-        $session = new Zend_Session_Namespace();
         if (!empty($tag)) {
             $label = $tag->label;
 
@@ -78,9 +77,9 @@ class Tags_TagController extends Yachay_Action
             $model_tags_users->deleteUsersInTag($tag->ident);
 
             $tag->delete();
-            $session->messages->addMessage("La etiqueta $label ha sido eliminada");
+            $this->_helper->flashMessenger->addMessage("La etiqueta $label ha sido eliminada");
         } else {
-            $session->messages->addMessage("La etiqueta no puede ser eliminada");
+            $this->_helper->flashMessenger->addMessage('La etiqueta no puede ser eliminada');
         }
 
         $this->_redirect($this->view->currentPage());

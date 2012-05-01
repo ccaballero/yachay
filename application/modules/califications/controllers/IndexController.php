@@ -69,7 +69,7 @@ class Califications_IndexController extends Yachay_Action
             $this->view->error = 'no user';
         }
 
-        history('califications');
+        $this->history('califications');
         breadcrumb();
     }
 }

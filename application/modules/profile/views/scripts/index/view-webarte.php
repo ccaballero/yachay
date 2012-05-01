@@ -13,11 +13,11 @@
 <div id="user">
     <div class="photo">
         <span class="bold">Imagen grande:</span><br />
-        <img src="<?php echo $this->media . 'users/thumbnail_large/' . $this->user->getAvatar() ?>" alt="Imagen grande (200x200)" title="Imagen grande (200x200)" /><br />
+        <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_large/' . $this->user->getAvatar() ?>" alt="Imagen grande (200x200)" title="Imagen grande (200x200)" /><br />
         <span class="bold">Imagen mediana:</span><br />
-        <img src="<?php echo $this->media . 'users/thumbnail_medium/' . $this->user->getAvatar() ?>" alt="Imagen mediana (100x100)" title="Imagen mediana (100x100)" /><br />
+        <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $this->user->getAvatar() ?>" alt="Imagen mediana (100x100)" title="Imagen mediana (100x100)" /><br />
         <span class="bold">Imagen pequeña:</span><br />
-        <img src="<?php echo $this->media . 'users/thumbnail_small/' . $this->user->getAvatar() ?>" alt="Imagen pequeña (50x50)" title="Imagen pequeña (50x50)" />
+        <img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_small/' . $this->user->getAvatar() ?>" alt="Imagen pequeña (50x50)" title="Imagen pequeña (50x50)" />
     </div>
     <p><span class="bold">Usuario: </span><?php echo $this->user->label ?></p>
     <p><span class="bold">Codigo: </span><?php echo $this->user->code ?></p>

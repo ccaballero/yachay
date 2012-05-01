@@ -20,7 +20,7 @@
 </h1>
 
 <div id="user">
-    <div class="photo"><img src="<?php echo $this->media . 'users/thumbnail_large/' . $this->user->getAvatar() ?>" alt="" title="" /></div>
+    <div class="photo"><img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_large/' . $this->user->getAvatar() ?>" alt="" title="" /></div>
     <p><span class="bold">Nombre Completo: </span><?php echo $this->user->getFullName() ?></p>
     <p><span class="bold">Cargo: </span><?php echo $this->user->getRole()->label ?></p>
     <p><span class="bold">Carrera: </span><?php echo $this->none($this->user->getCareer()->label) ?></p>

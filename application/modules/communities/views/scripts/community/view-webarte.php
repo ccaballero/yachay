@@ -23,7 +23,7 @@
 </h1>
 
 <div id="user">
-    <div class="photo"><img src="<?php echo $this->media . 'communities/thumbnail_large/' . $this->community->getAvatar() ?>" alt="" title="" /></div>
+    <div class="photo"><img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/communities/thumbnail_large/' . $this->community->getAvatar() ?>" alt="" title="" /></div>
     <p><span class="bold">Descripción: </span><?php echo $this->community->description ?></p>
     <p><span class="bold">Modalidad: </span><?php echo $this->mode(NULL, $this->community->mode) ?></p>
     <p><span class="bold">Autor: </span>

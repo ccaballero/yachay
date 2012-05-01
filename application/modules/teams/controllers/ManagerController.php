@@ -45,7 +45,7 @@ class Teams_ManagerController extends Yachay_Action
         $this->view->group = $group;
         $this->view->teams = $list_teams;
 
-        history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/manager');
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/manager');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -89,7 +89,7 @@ class Teams_ManagerController extends Yachay_Action
         $this->view->team = new Teams_Empty();
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_teams = new Teams();
             $team = $model_teams->createRow();
@@ -103,19 +103,19 @@ class Teams_ManagerController extends Yachay_Action
                 $team->tsregister = time();
                 $team->save();
 
-                $session->messages->addMessage("El equipo {$team->label} se ha creado correctamente");
+                $this->_helper->flashMessenger->addMessage("El equipo {$team->label} se ha creado correctamente");
                 $session->url = $team->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($team->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
             $this->view->team = $team;
         }
 
-        history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/new');
+        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/new');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -166,8 +166,7 @@ class Teams_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han desactivado $count equipos");
+            $this->_helper->flashMessenger->addMessage("Se han desactivado $count equipos");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -202,8 +201,7 @@ class Teams_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han activado $count equipos");
+            $this->_helper->flashMessenger->addMessage("Se han activado $count equipos");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -237,8 +235,7 @@ class Teams_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han eliminado $count equipos");
+            $this->_helper->flashMessenger->addMessage("Se han eliminado $count equipos");
         }
         $this->_redirect($this->view->currentPage());
     }

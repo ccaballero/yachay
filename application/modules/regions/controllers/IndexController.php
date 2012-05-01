@@ -28,7 +28,7 @@ class Regions_IndexController extends Yachay_Action
         $this->view->regions = $model_regions->selectAll();
         $this->view->regions_pages = $regions_pages;
 
-        history('regions');
+        $this->history('regions');
         $breadcrumb = array();
         if ($this->acl('regions', 'manage')) {
             $breadcrumb['Administrador de regiones'] = $this->view->url(array(), 'regions_manager');

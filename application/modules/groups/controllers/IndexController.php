@@ -61,7 +61,7 @@ class Groups_IndexController extends Yachay_Action
         $this->view->groups = $groups;
         $this->view->model_groups_users = $model_groups_users;
 
-        history('groups');
+        $this->history('groups');
         breadcrumb();
     }
 }

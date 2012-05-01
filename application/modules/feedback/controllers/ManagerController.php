@@ -38,7 +38,7 @@ class Feedback_ManagerController extends Yachay_Action
         $this->view->model_feedback = $model_feedback;
         $this->view->feedback = $model_feedback->selectAll();
 
-        history('feedback/manager');
+        $this->history('feedback/manager');
         $breadcrumb = array();
         $breadcrumb['Sugerencias'] = $this->view->url(array(), 'feedback_list');
         if ($this->acl('feedback', array('resolv', 'mark', 'delete'))) {
@@ -63,7 +63,7 @@ class Feedback_ManagerController extends Yachay_Action
         $model_tags = new Tags();
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $entry = $model_feedback->createRow();
             $entry->description = $request->getParam('description');
@@ -84,11 +84,11 @@ class Feedback_ManagerController extends Yachay_Action
 
                 $session->url = $entry->resource;
 
-                $session->messages->addMessage('La sugerencia ha sido creada');
+                $this->_helper->flashMessenger->addMessage('La sugerencia ha sido creada');
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($entry->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -96,7 +96,7 @@ class Feedback_ManagerController extends Yachay_Action
         $this->view->entry = $entry;
         $this->view->tags = $tags;
 
-        history('feedback/new');
+        $this->history('feedback/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Sugerencias'] = $this->view->url(array('filter' => 'feedback'), 'resources_filtered');
@@ -119,8 +119,7 @@ class Feedback_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han marcado $count sugerencias");
+            $this->_helper->flashMessenger->addMessage("Se han marcado $count sugerencias");
         }
 
         $this->_redirect($this->view->currentPage());
@@ -142,8 +141,7 @@ class Feedback_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han desmarcado $count sugerencias");
+            $this->_helper->flashMessenger->addMessage("Se han desmarcado $count sugerencias");
         }
 
         $this->_redirect($this->view->currentPage());
@@ -165,8 +163,7 @@ class Feedback_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han resuelto $count sugerencias");
+            $this->_helper->flashMessenger->addMessage("Se han resuelto $count sugerencias");
         }
 
         $this->_redirect($this->view->currentPage());
@@ -188,8 +185,7 @@ class Feedback_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han marcado como no resueltos $count sugerencias");
+            $this->_helper->flashMessenger->addMessage("Se han marcado como no resueltos $count sugerencias");
         }
 
         $this->_redirect($this->view->currentPage());
@@ -227,8 +223,7 @@ class Feedback_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han eliminado $count sugerencias");
+            $this->_helper->flashMessenger->addMessage("Se han eliminado $count sugerencias");
         }
 
         $this->_redirect($this->view->currentPage());

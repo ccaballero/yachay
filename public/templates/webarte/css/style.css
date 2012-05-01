@@ -68,9 +68,9 @@ body {
 
 #footer {
     border-top: 2pt solid;
-    height: 5.0em;
     text-align: center;
     padding-top: 0.1em;
+    padding-bottom: 0.6em;
 }
 
 #primary {

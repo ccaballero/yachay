@@ -24,7 +24,7 @@ class Notes_NoteController extends Yachay_Action
         $this->view->note = $note;
         $this->view->tags = $tags;
 
-        history('notes/' . $resource->ident);
+        $this->history('notes/' . $resource->ident);
         $breadcrumb = array();
         if ($this->acl('resources', 'new')) {
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
@@ -55,7 +55,7 @@ class Notes_NoteController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
             $note->note = $request->getParam('message');
             $priority = $request->getParam('priority');
             if (empty($priority)) {
@@ -71,11 +71,11 @@ class Notes_NoteController extends Yachay_Action
                 $note->save();
                 $session->url = $note->resource;
 
-                $session->messages->addMessage('La nota se modifico correctamente');
+                $this->_helper->flashMessenger->addMessage('La nota se modifico correctamente');
                 $this->_redirect($this->view->url(array('note' => $note->resource), 'notes_note_view'));
             } else {
                 foreach ($note->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -83,7 +83,7 @@ class Notes_NoteController extends Yachay_Action
         $this->view->note = $note;
         $this->view->tags = implode(', ', $_tags);
 
-        history('notes/' . $note->resource . '/edit');
+        $this->history('notes/' . $note->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Notas'] = $this->view->url(array('filter' => 'notes'), 'resources_filtered');
@@ -124,8 +124,7 @@ class Notes_NoteController extends Yachay_Action
         $resource->delete();
         $model_valorations->decreaseActivity(1);
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La nota ha sido eliminada");
+        $this->_helper->flashMessenger->addMessage('La nota ha sido eliminada');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -162,8 +161,7 @@ class Notes_NoteController extends Yachay_Action
         $resource->delete();
         $model_valorations->decreaseActivity(1, $resource->author);
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La nota ha sido eliminada");
+        $this->_helper->flashMessenger->addMessage('La nota ha sido eliminada');
         $this->_redirect($this->view->currentPage());
     }
 }

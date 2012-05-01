@@ -2,16 +2,23 @@
 
 abstract class Yachay_Action extends Zend_Controller_Action
 {
+    public function history($url_page = '') {
+        $config = Zend_Registry::get('config');
+
+        $session = new Zend_Session_Namespace('yachay');
+        $session->lastPage = $session->currentPage;
+        $session->currentPage = $config->resources->frontController->baseUrl . '/' . $url_page;
+    }
+    
     public function acl($module, $privilege) {
         return Yachay_Acl::hasPermission($module, $privilege);
     }
 
     public function requirePermission($module, $privilege) {
         global $USER;
-        $session = new Zend_Session_Namespace();
         if (!is_array($privilege)) {
             if (!$USER->hasPermission($module, $privilege)) {
-                $session->messages->addMessage('Usted no tiene permisos suficientes');
+                $this->_helper->flashMessenger->addMessage('Usted no tiene permisos suficientes');
                 $this->_redirect($this->view->url(array(), 'frontpage'));
             }
         } else {
@@ -20,7 +27,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
                 $flag |= $USER->hasPermission($module, $priv);
             }
             if (!$flag) {
-                $session->messages->addMessage('Usted no tiene permisos suficientes');
+                $this->_helper->flashMessenger->addMessage('Usted no tiene permisos suficientes');
                 $this->_redirect($this->view->url(array(), 'frontpage'));
             }
         }
@@ -28,9 +35,8 @@ abstract class Yachay_Action extends Zend_Controller_Action
 
     public function requireMorePrivileges($user) {
         global $USER;
-        $session = new Zend_Session_Namespace();
         if (!$USER->hasFewerPrivileges($user)) {
-            $session->messages->addMessage('Usted no puede otorgar tantos privilegios');
+            $this->_helper->flashMessenger->addMessage('Usted no puede otorgar tantos privilegios');
             $this->_redirect($this->view->url(array('user' => $user->url), 'users_user_view'));
         }
     }
@@ -44,7 +50,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
             } else {
                 $url = $this->view->url(array(), $route2);
             }
-            $session->messages->addMessage('El recurso solicitado no existe');
+            $this->_helper->flashMessenger->addMessage('El recurso solicitado no existe');
             $this->_redirect($url);
         }
     }
@@ -58,7 +64,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
             } else {
                 $url = $this->view->url(array('subject' => $subject->url), 'subjects_view');
             }
-            $session->messages->addMessage('El grupo solicitado no existe');
+            $this->_helper->flashMessenger->addMessage('El grupo solicitado no existe');
             $this->_redirect($url);
         }
     }
@@ -72,60 +78,54 @@ abstract class Yachay_Action extends Zend_Controller_Action
             } else {
                 $url = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'teams_view');
             }
-            $session->messages->addMessage('El equipo solicitado no existe');
+            $this->_helper->flashMessenger->addMessage('El equipo solicitado no existe');
             $this->_redirect($url);
         }
     }
 
     public function requireModerator($subject) {
-        $session = new Zend_session_Namespace();
         if (!$subject->amModerator()) {
-            $session->messages->addMessage('Usted debe ser el moderador asignado en la materia');
+            $this->_helper->flashMessenger->addMessage('Usted debe ser el moderador asignado en la materia');
             $this->_redirect($this->view->url(array('subject' => $subject->url), 'subjects_subject_view'));
         }
     }
 
     public function requireTeacher($group) {
-        $session = new Zend_session_Namespace();
         if (!$group->amTeacher()) {
             $subject = $group->getSubject();
-            $session->messages->addMessage('Usted debe ser el docente asignado al grupo');
+            $this->_helper->flashMessenger->addMessage('Usted debe ser el docente asignado al grupo');
             $this->_redirect($this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view'));
         }
     }
     
     public function requireMemberTeam($team) {
-        $session = new Zend_session_Namespace();
         if (!$team->amMemberTeam()) {
             $group = $team->getGroup();
             $subject = $group->getSubject();
-            $session->messages->addMessage('Usted debe ser un miembro asignado del equipo');
+            $this->_helper->flashMessenger->addMessage('Usted debe ser un miembro asignado del equipo');
             $this->_redirect($this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view'));
         }
     }
 
     public function requireCommunityModerator($community) {
-        $session = new Zend_session_Namespace();
         if (!$community->amModerator()) {
-            $session->messages->addMessage('Usted debe ser un moderador de esa comunidad');
+            $this->_helper->flashMessenger->addMessage('Usted debe ser un moderador de esa comunidad');
             $this->_redirect($this->view->url(array('community' => $community->url), 'communities_community_view'));
         }
     }
 
     public function requireResourceAuthor($resource) {
-        $session = new Zend_session_Namespace();
         if (!$resource->amAuthor()) {
-            $session->messages->addMessage('Usted debe ser el autor de este recurso');
+            $this->_helper->flashMessenger->addMessage('Usted debe ser el autor de este recurso');
             $this->_redirect($this->view->url(array(), 'frontpage_user'));
         }
     }
 
     public function requireContext($resource) {
-        $session = new Zend_session_Namespace();
         $context = new Yachay_Helpers_Context();
         $spaces_valids = $context->context(NULL, 'plain');
         if (!in_array($resource->recipient, $spaces_valids)) {
-            $session->messages->addMessage('Usted debe ser parte de ese espacio para realizar esa acción');
+            $this->_helper->flashMessenger->addMessage('Usted debe ser parte de ese espacio para realizar esa acción');
             $this->_redirect($this->view->url(array(), 'frontpage_user'));
         }
     }
@@ -173,7 +173,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
             }
         }
 
-        $session = new Zend_Session_Namespace();
+        $session = new Zend_Session_Namespace('yachay');
 
         // Regions settings
         global $TITLE;
@@ -185,11 +185,22 @@ abstract class Yachay_Action extends Zend_Controller_Action
         global $USER;
 
         $this->view->config = $config;
-        
+
         $this->view->PAGE = $PAGE;
         $this->view->TEMPLATE = $TEMPLATE;
         $this->view->USER = $USER;
         $this->view->SESSION = $session;
+
+        // Register last login
+        global $USER;
+        $model_users = new Users();
+        $user = $model_users->findByIdent($USER->ident);
+        if (!empty($user)) {
+            $user->lastLogin();
+            if ($user->needFillProfile()) {
+                $this->_helper->flashMessenger->addMessage('Se recomienda que ingrese su nombre, apellido y correo electrónico. <a href="' . $this->view->url(array(), 'profile_edit') . '">Editar</a>');
+            }
+        }
     }
 
     public function postDispatch() {
@@ -205,7 +216,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
             return;
         }
 
-        $session = new Zend_Session_Namespace();
+        $session = new Zend_Session_Namespace('yachay');
 
         $regions = $PAGE->findRegionsViaRegions_Pages();
         if (!empty($regions)) {
@@ -250,21 +261,7 @@ abstract class Yachay_Action extends Zend_Controller_Action
                 );
             }
         }
-
-        // Register last login
-        global $USER;
-        $model_users = new Users();
-        $user = $model_users->findByIdent($USER->ident);
-        if (!empty($user)) {
-            $user->lastLogin();
-            if ($user->needFillProfile()) {
-                $message = 'Se recomienda que ingrese su nombre, apellido y correo electrónico. <a href="' . $this->view->url(array(), 'profile_edit') . '">Editar</a>';
-                if (!in_array($message, $session->messages->getMessages())) {
-                    $session->messages->addMessage($message);
-                }
-            }
-        }
-
+       
         global $TITLE, $ICON, $TOOLBAR, $SEARCH, $MENUBAR, $BREADCRUMB, $WIDGETS, $FOOTER;
 
         $this->view->TITLE = $TITLE;
@@ -275,6 +272,10 @@ abstract class Yachay_Action extends Zend_Controller_Action
         $this->view->BREADCRUMB = $BREADCRUMB;
         $this->view->WIDGETS = $WIDGETS;
         $this->view->FOOTER = $FOOTER;
+
+        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
+        $this->view->messages = $this->_flashMessenger->getMessages();
+        $this->_flashMessenger->clearMessages();
 
         // rendering customized theme
         $script = $this->view->getScriptPath($PAGE->controller) . '/' . $PAGE->action . '-' . $TEMPLATE->label . '.php';

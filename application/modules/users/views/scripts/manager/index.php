@@ -46,21 +46,21 @@ if (count($this->users)) {
         echo '<td>';
 
         if ($this->acl('users', 'view')) {
-            echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_view') . '">Ver</a>';
+            echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_view') . '">Ver</a>&nbsp;';
         }
         if ($this->USER->hasFewerPrivileges($user)) {
             if ($this->acl('users', 'edit')) {
-                echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_edit') . '">Editar</a>';
+                echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_edit') . '">Editar</a>&nbsp;';
             }
             if ($this->acl('users', 'lock')) {
                 if ($user->status == 'active') {
-                    echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_lock') . '">Bloquear</a>';
+                    echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_lock') . '">Bloquear</a>&nbsp;';
                 } else {
-                    echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_unlock') . '">Desbloquear</a>';
+                    echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_unlock') . '">Desbloquear</a>&nbsp;';
                 }
             }
             if ($this->acl('users', 'delete')) {
-                echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_delete') . '">Eliminar</a>';
+                echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_delete') . '">Eliminar</a>&nbsp;';
             }
         }
 

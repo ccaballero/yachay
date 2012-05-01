@@ -31,7 +31,7 @@ class Widgets_IndexController extends Yachay_Action
         $this->view->widgets = $model_widgets->selectAll();
         $this->view->widgets_pages = $matrix;
 
-        history('widgets');
+        $this->history('widgets');
         $breadcrumb = array();
         if ($this->acl('widgets', 'manage')) {
             $breadcrumb['Administrador de widgets'] = $this->view->url(array(), 'widgets_manager');

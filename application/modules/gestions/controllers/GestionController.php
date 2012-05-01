@@ -54,7 +54,7 @@ class Gestions_GestionController extends Yachay_Action
         $this->view->gestion = $gestion;
         $this->view->subjects = $subjects2;
 
-        history('gestions/' . $gestion->url);
+        $this->history('gestions/' . $gestion->url);
         $breadcrumb = array();
         if ($this->acl('gestions', 'list')) {
             $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_list');
@@ -76,13 +76,12 @@ class Gestions_GestionController extends Yachay_Action
 
         $this->requireExistence($gestion, 'gestion', 'gestions_gestion_view', 'gestions_list');
 
-        $session = new Zend_Session_Namespace();
         if (!empty($gestion) && $gestion->status == 'inactive' && $gestion->isEmpty()) {
             $label = $gestion->label;
             $gestion->delete();
-            $session->messages->addMessage("La gestion $label ha sido eliminada");
+            $this->_helper->flashMessenger->addMessage("La gestion $label ha sido eliminada");
         } else {
-            $session->messages->addMessage("La gestion debe estar vacia e inactiva para ser eliminada");
+            $this->_helper->flashMessenger->addMessage("La gestion debe estar vacia e inactiva para ser eliminada");
         }
 
         $this->_redirect($this->view->currentPage());
@@ -105,8 +104,7 @@ class Gestions_GestionController extends Yachay_Action
         $gestion->status = 'active';
         $gestion->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage("La gestion {$gestion->label} ha sido establecida como actual");
+        $this->_helper->flashMessenger->addMessage("La gestion {$gestion->label} ha sido establecida como actual");
 
         $this->_redirect($this->view->currentPage());
     }

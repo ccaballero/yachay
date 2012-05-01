@@ -3,8 +3,6 @@
 class Users_UserController extends Yachay_Action
 {
     public function viewAction() {
-        global $USER;
-
         $this->requirePermission('users', 'view');
 
         $model_friends = new Friends();
@@ -37,7 +35,7 @@ class Users_UserController extends Yachay_Action
             ),
         );
 
-        history('users/' . $user->url);
+        $this->history('users/' . $user->url);
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
@@ -61,7 +59,7 @@ class Users_UserController extends Yachay_Action
         context('user', $user);
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $user->label = $request->getParam('label');
             $user->url = convert($user->label);
@@ -98,15 +96,15 @@ class Users_UserController extends Yachay_Action
                 if ($valid_role) {
                     $user->save();
 
-                    $session->messages->addMessage("El usuario {$user->label} se ha actualizado correctamente");
+                    $this->_helper->flashMessenger->addMessage("El usuario {$user->label} se ha actualizado correctamente");
                     $session->url = $user->url;
                     $this->_redirect($request->getParam('return'));
                 } else {
-                    $session->messages->addMessage("No tiene permisos para establecer ese rol en ese usuario");
+                    $this->_helper->flashMessenger->addMessage("No tiene permisos para establecer ese rol en ese usuario");
                 }
             } else {
                 foreach ($user->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -114,7 +112,7 @@ class Users_UserController extends Yachay_Action
         $this->view->model_users = $model_users;
         $this->view->user = $user;
 
-        history('users/' . $user->url . '/edit');
+        $this->history('users/' . $user->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
@@ -139,11 +137,10 @@ class Users_UserController extends Yachay_Action
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
 
-        $session = new Zend_Session_Namespace();
         $user->status = 'inactive';
         $user->save();
-        $session->messages->addMessage("El usuario {$user->label} ha sido bloqueado");
 
+        $this->_helper->flashMessenger->addMessage("El usuario {$user->label} ha sido bloqueado");
         $this->_redirect($this->view->currentPage());
     }
 
@@ -158,11 +155,10 @@ class Users_UserController extends Yachay_Action
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
 
-        $session = new Zend_Session_Namespace();
         $user->status = 'active';
         $user->save();
-        $session->messages->addMessage("El usuario {$user->label} ha sido desbloqueado");
-
+        
+        $this->_helper->flashMessenger->addMessage("El usuario {$user->label} ha sido desbloqueado");
         $this->_redirect($this->view->currentPage());
     }
 
@@ -177,12 +173,11 @@ class Users_UserController extends Yachay_Action
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireMorePrivileges($user, 'user', 'users_user_view', 'users_list');
 
-        $session = new Zend_Session_Namespace();
         // FIXME Agregar prohibiciones para usuarios con asignaciones criticas.
         $label = $user->label;
         $user->delete();
-        $session->messages->addMessage("El usuario $label ha sido eliminado");
 
+        $this->_helper->flashMessenger->addMessage("El usuario $label ha sido eliminado");
         $this->_redirect($this->view->currentPage());
     }
 }

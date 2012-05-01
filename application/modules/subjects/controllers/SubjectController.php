@@ -9,7 +9,6 @@ class Subjects_SubjectController extends Yachay_Action
         $request = $this->getRequest();
 
         $model_gestions = new Gestions();
-        $model_areas = new Areas();
         $model_subjects = new Subjects();
         $model_groups = new Groups();
 
@@ -30,8 +29,7 @@ class Subjects_SubjectController extends Yachay_Action
 
         $url = $this->view->url(array(), 'subjects_list');
         if ($subject->status == 'inactive' && !$this->acl('subjects', 'edit')) {
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("La materia {$subject->label} no esta activa");
+            $this->_helper->flashMessenger->addMessage("La materia {$subject->label} no esta activa");
             $this->_redirect($url);
         }
 
@@ -90,7 +88,7 @@ class Subjects_SubjectController extends Yachay_Action
         );
 
         if ($historial) {
-            history('gestions/' . $gestion->url . '/' . $subject->url);
+            $this->history('gestions/' . $gestion->url . '/' . $subject->url);
             $breadcrumb = array();
             if ($this->acl('gestions', 'list')) {
                 $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_list');
@@ -103,7 +101,7 @@ class Subjects_SubjectController extends Yachay_Action
             }
             breadcrumb($breadcrumb);
         } else {
-            history('subjects/' . $subject->url);
+            $this->history('subjects/' . $subject->url);
             $breadcrumb = array();
             if ($this->acl('subjects', 'list')) {
                 $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -138,7 +136,7 @@ class Subjects_SubjectController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $subject->label = $request->getParam('label');
             $subject->url = convert($subject->label);
@@ -165,12 +163,13 @@ class Subjects_SubjectController extends Yachay_Action
                     $assign->save();
                 }
 
-                $session->messages->addMessage("La materia {$subject->label} se ha actualizado correctamente");
+                $this->_helper->flashMessenger->addMessage("La materia {$subject->label} se ha actualizado correctamente");
+
                 $session->url = $subject->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($subject->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -180,7 +179,7 @@ class Subjects_SubjectController extends Yachay_Action
         $this->view->checks = $checks;
         $this->view->subject = $subject;
 
-        history('subjects/' . $subject->url . '/edit');
+        $this->history('subjects/' . $subject->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -207,13 +206,11 @@ class Subjects_SubjectController extends Yachay_Action
         $subject = $model_subjects->findByUrl($gestion->ident, $url);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
-        $session = new Zend_Session_Namespace();
         $label = $subject->label;
-
         $subject->status = 'inactive';
         $subject->save();
-        $session->messages->addMessage("La materia $label ha sido desactivada");
 
+        $this->_helper->flashMessenger->addMessage("La materia $label ha sido desactivada");
         $this->_redirect($this->view->currentPage());
     }
 
@@ -230,13 +227,11 @@ class Subjects_SubjectController extends Yachay_Action
         $subject = $model_subjects->findByUrl($gestion->ident, $url);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
-        $session = new Zend_Session_Namespace();
         $label = $subject->label;
-
         $subject->status = 'active';
         $subject->save();
-        $session->messages->addMessage("La materia $label ha sido activada");
-
+        
+        $this->_helper->flashMessenger->addMessage("La materia $label ha sido activada");
         $this->_redirect($this->view->currentPage());
     }
 
@@ -253,13 +248,12 @@ class Subjects_SubjectController extends Yachay_Action
         $subject = $model_subjects->findByUrl($gestion->ident, $url);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
-        $session = new Zend_Session_Namespace();
         $label = $subject->label;
         if ($subject->isEmpty()) {
             $subject->delete();
-            $session->messages->addMessage("La materia $label ha sido eliminada");
+            $this->_helper->flashMessenger->addMessage("La materia $label ha sido eliminada");
         } else {
-            $session->messages->addMessage("La materia $label no puede ser eliminada");
+            $this->_helper->flashMessenger->addMessage("La materia $label no puede ser eliminada");
         }
 
         $this->_redirect($this->view->currentPage());

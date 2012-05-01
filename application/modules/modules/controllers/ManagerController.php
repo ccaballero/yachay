@@ -24,7 +24,7 @@ class Modules_ManagerController extends Yachay_Action
         $this->view->model_modules = $model_modules;
         $this->view->modules = $model_modules->selectAll();
 
-        history('modules/manager');
+        $this->history('modules/manager');
         $breadcrumb = array();
         if ($this->acl('modules', 'list')) {
             $breadcrumb['Modulos'] = $this->view->url(array(), 'modules_list');
@@ -37,10 +37,8 @@ class Modules_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
-
             $upload = new Zend_File_Transfer_Adapter_Http();
-            $upload->setDestination(APPLICATION_PATH . '/../public/media/upload');
+            $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
             $upload->addValidator('Size', false, 2097152)
                    ->addValidator('Extension', false, array('zip'));
 
@@ -60,15 +58,15 @@ class Modules_ManagerController extends Yachay_Action
                 if (rename($oldsql, $newsql)) {
                     //mysql_import(APPLICATION_PATH . '/../data/sql/' . $module . '.sql');
                 }
-                $session->messages->addMessage('El modulo ha sido añadido');
+                $this->_helper->flashMessenger->addMessage('El modulo ha sido añadido');
                 unlink($filename);
             } else {
-                $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
+                $this->_helper->flashMessenger->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
             }
             $this->_redirect($this->view->currentPage());
         }
 
-        history('modules/new');
+        $this->history('modules/new');
         $breadcrumb = array();
         if ($this->acl('modules', array('new', 'lock'))) {
             $breadcrumb['Administrador de modulos'] = $this->view->url(array(), 'modules_manager');
@@ -90,8 +88,7 @@ class Modules_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han desactivado $count modulos");
+            $this->_helper->flashMessenger->addMessage("Se han desactivado $count modulos");
         }
         $this->_redirect($this->view->currentPage());
     }
@@ -110,8 +107,7 @@ class Modules_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han activado $count modulos");
+            $this->_helper->flashMessenger->addMessage("Se han activado $count modulos");
         }
         $this->_redirect($this->view->currentPage());
     }

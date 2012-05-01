@@ -27,9 +27,7 @@ class Subjects_MemberController extends Yachay_Action
         $assign->status = 'inactive';
         $assign->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('El usuario ' . $user->label . ' ha sido deshabilitado de la materia');
-
+        $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido deshabilitado de la materia');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -56,9 +54,7 @@ class Subjects_MemberController extends Yachay_Action
         $assign->status = 'active';
         $assign->save();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('El usuario ' . $user->label . ' ha sido habilitado de la materia');
-
+        $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido habilitado de la materia');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -84,9 +80,7 @@ class Subjects_MemberController extends Yachay_Action
         $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $user->ident);
         $assign->delete();
 
-        $session = new Zend_Session_Namespace();
-        $session->messages->addMessage('El usuario ' . $user->label . ' ha sido retirado de la materia');
-
+        $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido retirado de la materia');
         $this->_redirect($this->view->currentPage());
     }
 }

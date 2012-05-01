@@ -30,8 +30,8 @@ class Login_ForgotController extends Yachay_Action
             $options = array(
                 'notEmptyMessage' => 'El %rule% no puede estar vacio'
             );
+
             $input = new Zend_Filter_Input($filters, $validators, $_POST, $options);
-            $session = new Zend_Session_Namespace();
             if ($input->isValid()) {
                 $code = generatecode();
 
@@ -70,18 +70,18 @@ class Login_ForgotController extends Yachay_Action
 	                         ->setSubject('Petición de cambio de contraseña')
 	                         ->send();
 	
-	                    $session->messages->addMessage('Se envió la confirmación de nueva contraseña al correo ' . $user->email);
+	                    $this->_helper->flashMessenger->addMessage('Se envió la confirmación de nueva contraseña al correo ' . $user->email);
 	                    $this->_redirect($request->getParam('return'));
                     } else {
-                        $session->messages->addMessage('Usted se encuentra en estado inactivo, no puede solicitar una nueva contraseña, primero solicite la re-activación de su cuenta');
+                        $this->_helper->flashMessenger->addMessage('Usted se encuentra en estado inactivo, no puede solicitar una nueva contraseña, primero solicite la re-activación de su cuenta');
                     }
                 } else {
-                    $session->messages->addMessage('El correo no aparece en el registro de usuarios');
+                    $this->_helper->flashMessenger->addMessage('El correo no aparece en el registro de usuarios');
                 }
             } else {
                 foreach($input->getMessages() as $messages) {
                     foreach($messages as $message) {
-                        $session->messages->addMessage($message);
+                        $this->_helper->flashMessenger->addMessage($message);
                     }
                 }
             }
@@ -89,7 +89,7 @@ class Login_ForgotController extends Yachay_Action
             $this->view->values = array('email' => $request->getParam('email'));
         }
 
-        history('forgot');
+        $this->history('forgot');
         $breadcrumb = array();
         $breadcrumb['Ingresar'] = $this->view->url(array(), 'login_in');
         breadcrumb($breadcrumb);

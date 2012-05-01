@@ -18,8 +18,6 @@ class Templates_TemplateController extends Yachay_Action
         $this->requireExistence($template, 'template', 'template_template_view', 'frontpage_user');
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
-
             $class = new StdClass();
             foreach ($request->getParams() as $param => $value) {
                 if (strcasecmp(substr($param, 0, strlen('_')), '_') === 0) {
@@ -38,7 +36,7 @@ class Templates_TemplateController extends Yachay_Action
             $template_user->css_properties = json_encode($class);
             $template_user->save();
 
-            $session->messages->addMessage('Tu plantilla se configuró correctamente');
+            $this->_helper->flashMessenger->addMessage('Tu plantilla se configuró correctamente');
             $this->_redirect($this->view->url(array('template' => $template->label), 'templates_template_view'));
         }
 
@@ -51,7 +49,7 @@ class Templates_TemplateController extends Yachay_Action
 
         $this->view->properties = json_decode($user_template->css_properties, true);
 
-        history('templates/view/' . $template->label);
+        $this->history('templates/view/' . $template->label);
         $breadcrumb = array();
         $breadcrumb['Temas'] = $this->view->url(array(), 'templates_list');
         breadcrumb($breadcrumb);
@@ -69,7 +67,7 @@ class Templates_TemplateController extends Yachay_Action
         $label_template = $request->getParam('template');
 
         $user = $model_users->findByUrl($USER->url);
-        $session = new Zend_Session_Namespace();
+        $session = new Zend_Session_Namespace('yachay');
 
         context('user', $user);
         $template = $model_templates->findByLabel($label_template);
@@ -79,10 +77,10 @@ class Templates_TemplateController extends Yachay_Action
             if ($user->isValid()) {
                 $user->save();
                 $session->user = $user;
-                $session->messages->addMessage('Tu has cambiado tu plantilla correctamente');
+                $this->_helper->flashMessenger->addMessage('Tu has cambiado tu plantilla correctamente');
             }
         } else {
-            $session->messages->addMessage(ucfirst($label_template) . ' no se encuentra registrada como plantilla');
+            $this->_helper->flashMessenger->addMessage(ucfirst($label_template) . ' no se encuentra registrada como plantilla');
         }
 
         $url = new Zend_View_Helper_Url();

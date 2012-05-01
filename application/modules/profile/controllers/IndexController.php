@@ -18,7 +18,7 @@ class Profile_IndexController extends Yachay_Action
         $this->view->model_users = $model_users;
         $this->view->user = $user;
 
-        history('profile');
+        $this->history('profile');
         breadcrumb();
     }
 
@@ -46,7 +46,7 @@ class Profile_IndexController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $user->label = $request->getParam('label');
             $user->url = convert($user->label);
@@ -64,7 +64,7 @@ class Profile_IndexController extends Yachay_Action
             if ($user->isValid()) {
                 // config of avatar
                 $upload = new Zend_File_Transfer_Adapter_Http();
-                $upload->setDestination(APPLICATION_PATH . '/../public/media/upload');
+                $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
                 $upload->addValidator('Size', false, 2097152)
                        ->addValidator('Extension', false, array('jpg', 'png', 'gif'));
                 if ($upload->receive()) {
@@ -86,12 +86,12 @@ class Profile_IndexController extends Yachay_Action
                 $user->save();
                 $session->user = $user;
 
-                $session->messages->addMessage('Tu has modificado tu perfil correctamente');
+                $this->_helper->flashMessenger->addMessage('Tu has modificado tu perfil correctamente');
                 $session->url = $user->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($user->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -101,7 +101,7 @@ class Profile_IndexController extends Yachay_Action
         $this->view->user = $user;
         $this->view->tags = implode(', ', $_tags);
 
-        history('profile/edit');
+        $this->history('profile/edit');
         $breadcrumb = array();
         $breadcrumb['Perfil'] = $this->view->url(array(), 'profile_view');
         breadcrumb($breadcrumb);

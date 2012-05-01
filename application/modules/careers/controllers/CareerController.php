@@ -70,7 +70,7 @@ class Careers_CareerController extends Yachay_Action
         $this->view->career = $career;
         $this->view->subjects = $subjects2;
 
-        history('careers/' . $career->url);
+        $this->history('careers/' . $career->url);
         $breadcrumb = array();
         if ($this->acl('careers', 'list')) {
             $breadcrumb['Carreras'] = $this->view->url(array(), 'careers_list');
@@ -92,7 +92,7 @@ class Careers_CareerController extends Yachay_Action
         context('career', $career);
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $career->label = $request->getParam('label');
             $career->url = convert($career->label);
@@ -101,12 +101,12 @@ class Careers_CareerController extends Yachay_Action
             if ($career->isValid()) {
                 $career->save();
 
-                $session->messages->addMessage("La carrera {$career->label} se ha actualizado correctamente");
+                $this->_helper->flashMessenger->addMessage("La carrera {$career->label} se ha actualizado correctamente");
                 $session->url = $career->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($career->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
         }
@@ -114,7 +114,7 @@ class Careers_CareerController extends Yachay_Action
         $this->view->model_careers = $model_careers;
         $this->view->career = $career;
 
-        history('careers/' . $career->url . '/edit');
+        $this->history('careers/' . $career->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('careers', 'list')) {
             $breadcrumb['Carreras'] = $this->view->url(array(), 'careers_list');
@@ -136,13 +136,12 @@ class Careers_CareerController extends Yachay_Action
         $model_careers = new Careers();
         $career = $model_careers->findByUrl($url);
 
-        $session = new Zend_Session_Namespace();
         if (!empty($career) && $career->isEmpty()) {
             $label = $career->label;
             $career->delete();
-            $session->messages->addMessage("La carrera $label ha sido eliminada");
+            $this->_helper->flashMessenger->addMessage("La carrera $label ha sido eliminada");
         } else {
-            $session->messages->addMessage("La carrera no puede ser eliminada");
+            $this->_helper->flashMessenger->addMessage('La carrera no puede ser eliminada');
         }
 
         $this->_redirect($this->view->currentPage());

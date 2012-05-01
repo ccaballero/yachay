@@ -68,7 +68,7 @@ class Subjects_IndexController extends Yachay_Action
         $this->view->subjects = $subjects2;
         $this->view->assign = $assign;
 
-        history('subjects');
+        $this->history('subjects');
         $breadcrumb = array();
         if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');

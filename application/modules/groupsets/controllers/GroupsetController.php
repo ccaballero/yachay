@@ -20,9 +20,6 @@ class Groupsets_GroupsetController extends Yachay_Action
         $model_gestions = new Gestions();
         $current_gestion = $model_gestions->findByActive();
 
-        $model_users = new Users();
-        $user = $model_users->findByIdent($USER->ident);
-
         $model_groups = new Groups();
         $groups_in_teach = $model_groups->listGroupsWithTeacher($USER->ident);
 
@@ -37,7 +34,6 @@ class Groupsets_GroupsetController extends Yachay_Action
             }
         }
 
-        $assignement = new Groupsets_Groups();
         $groupset_groups = $groupset->findGroupsViaGroupsets_Groups();
 
         $this->view->model_groupsets = $model_groupsets;
@@ -46,7 +42,7 @@ class Groupsets_GroupsetController extends Yachay_Action
         $this->view->subjects = $subjects;
         $this->view->groups = $groups;
 
-        history('groupsets/' . $groupset->ident);
+        $this->history('groupsets/' . $groupset->ident);
         $breadcrumb = array();
         $breadcrumb['Conjuntos'] = $this->view->url(array(), 'groupsets_manager');
         breadcrumb($breadcrumb);
@@ -71,9 +67,6 @@ class Groupsets_GroupsetController extends Yachay_Action
 
         $model_gestions = new Gestions();
         $current_gestion = $model_gestions->findByActive();
-
-        $model_users = new Users();
-        $user = $model_users->findByIdent($USER->ident);
 
         $model_groups = new Groups();
         $groups_in_teach = $model_groups->listGroupsWithTeacher($USER->ident);
@@ -103,7 +96,7 @@ class Groupsets_GroupsetController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $groupset->label = $request->getParam('label');
  
@@ -127,20 +120,20 @@ class Groupsets_GroupsetController extends Yachay_Action
                     $assign->save();
                 }
 
-                $session->messages->addMessage("El conjunto {$groupset->label} se ha editado correctamente");
+                $this->_helper->flashMessenger->addMessage("El conjunto {$groupset->label} se ha editado correctamente");
                 $session->url = $groupset->ident;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($groupset->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
-            
+
             $this->view->groupset = $groupset;
             $this->view->checks = $checks;
         }
 
-        history('groupsets/' . $groupset->ident . '/edit');
+        $this->history('groupsets/' . $groupset->ident . '/edit');
         $breadcrumb = array();
         $breadcrumb['Conjuntos'] = $this->view->url(array(), 'groupsets_manager');
         $breadcrumb[$groupset->label] = $this->view->url(array('groupset' => $groupset->ident), 'groupsets_groupset_view');
@@ -162,13 +155,12 @@ class Groupsets_GroupsetController extends Yachay_Action
             return;
         }
 
-        $session = new Zend_Session_Namespace();
         $label = $groupset->label;
         if (!empty($groupset)) {
             $groupset->delete();
-            $session->messages->addMessage("El conjunto $label ha sido eliminado");
+            $this->_helper->flashMessenger->addMessage("El conjunto $label ha sido eliminado");
         } else {
-            $session->messages->addMessage("El conjunto $label no puede ser eliminado");
+            $this->_helper->flashMessenger->addMessage("El conjunto $label no puede ser eliminado");
         }
 
         $this->_redirect($this->view->currentPage());

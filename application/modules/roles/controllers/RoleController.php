@@ -3,8 +3,6 @@
 class Roles_RoleController extends Yachay_Action
 {
     public function viewAction() {
-        global $USER;
-
         $this->requirePermission('roles', 'view');
 
         $request = $this->getRequest();
@@ -26,7 +24,7 @@ class Roles_RoleController extends Yachay_Action
         $this->view->model_privileges = $model_privileges;
         $this->view->privileges = $privileges;
 
-        history('roles/' . $role->url);
+        $this->history('roles/' . $role->url);
         $breadcrumb = array();
         if ($this->acl('roles', 'list')) {
             $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');
@@ -38,8 +36,6 @@ class Roles_RoleController extends Yachay_Action
     }
 
     public function editAction() {
-        global $USER;
-
         $this->requirePermission('roles', 'edit');
 
         $request = $this->getRequest();
@@ -52,7 +48,7 @@ class Roles_RoleController extends Yachay_Action
         $this->view->privileges = $model_privileges->selectAll();
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_roles_privileges = new Roles_Privileges();
 
@@ -75,12 +71,13 @@ class Roles_RoleController extends Yachay_Action
                         $role_privilege->save();
                     }
                 }
-                $session->messages->addMessage("El rol {$role->label} se ha actualizado correctamente");
+                
+                $this->_helper->flashMessenger->addMessage("El rol {$role->label} se ha actualizado correctamente");
                 $session->url = $role->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($role->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
@@ -98,7 +95,7 @@ class Roles_RoleController extends Yachay_Action
         }
         $this->view->role_privilege = $idents_privileges;
 
-        history('roles/' . $role->url . '/edit');
+        $this->history('roles/' . $role->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('roles', 'list')) {
             $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');
@@ -122,13 +119,12 @@ class Roles_RoleController extends Yachay_Action
         $role = $model_roles->findByUrl($url);
         $this->requireExistence($role, 'role', 'roles_role_view', 'roles_list');
 
-        $session = new Zend_Session_Namespace();
         if (!empty($role) && $role->isEmpty()) {
             $label = $role->label;
             $role->delete();
-            $session->messages->addMessage("El rol $label ha sido eliminado");
+            $this->_helper->flashMessenger->addMessage("El rol $label ha sido eliminado");
         } else {
-            $session->messages->addMessage("El rol no puede ser eliminado");
+            $this->_helper->flashMessenger->addMessage('El rol no puede ser eliminado');
         }
 
         $this->_redirect($this->view->currentPage());

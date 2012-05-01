@@ -19,7 +19,7 @@ class Links_ManagerController extends Yachay_Action
         $model_tags = new Tags();
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $link = $model_links->createRow();
             $link->link = $request->getParam('link');
@@ -37,7 +37,7 @@ class Links_ManagerController extends Yachay_Action
             $spaces_valids = $context->context(NULL, 'plain');
 
             if (empty($publish)) {
-                $session->messages->addMessage('Usted debe seleccionar un espacio de publicación');
+                $this->_helper->flashMessenger->addMessage('Usted debe seleccionar un espacio de publicación');
             } else if (in_array($publish, $spaces_valids)) {
                 if ($link->isValid()) {
                     $resource = $model_resources->createRow();
@@ -57,22 +57,22 @@ class Links_ManagerController extends Yachay_Action
 
                     $session->url = $link->resource;
 
-                    $session->messages->addMessage('El enlace ha sido registrado');
+                    $this->_helper->flashMessenger->addMessage('El enlace ha sido registrado');
                     $this->_redirect($request->getParam('return'));
                 } else {
                     foreach ($link->getMessages() as $message) {
-                        $session->messages->addMessage($message);
+                        $this->_helper->flashMessenger->addMessage($message);
                     }
                 }
             } else {
-                $session->messages->addMessage('Usted no tiene privilegios para publicar en ese espacio');
+                $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
         }
 
         $this->view->link = $link;
         $this->view->tags = $tags;
 
-        history('links/new');
+        $this->history('links/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Enlaces'] = $this->view->url(array('filter' => 'links'), 'resources_filtered');

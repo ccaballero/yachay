@@ -14,7 +14,7 @@
 </h1>
 
 <div id="user-resource">
-    <div class="photo"><img src="<?php echo $this->media . 'users/thumbnail_medium/' . $this->resource->getAuthor()->getAvatar() ?>" alt="" title="" /></div>
+    <div class="photo"><img src="<?php echo $this->config->resources->frontController->baseUrl . '/media/users/thumbnail_medium/' . $this->resource->getAuthor()->getAvatar() ?>" alt="" title="" /></div>
     <p><span class="bold">Autor: </span>
     <?php if ($this->acl('users', 'view')) { ?>
         <a href="<?php echo $this->url(array('user' => $this->resource->getAuthor()->url), 'users_user_view') ?>"><?php echo $this->resource->getAuthor()->getFullName() ?></a>

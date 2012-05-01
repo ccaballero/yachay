@@ -17,7 +17,7 @@ class Friends_IndexController extends Yachay_Action
         $this->view->model_friends = $model_friends;
         $this->view->friends = $friends;
 
-        history('friends');
+        $this->history('friends');
         breadcrumb();
     }
 
@@ -36,7 +36,7 @@ class Friends_IndexController extends Yachay_Action
         $this->view->model_friends = $model_friends;
         $this->view->followings = $followings;
 
-        history('friends/followings');
+        $this->history('friends/followings');
         breadcrumb();
     }
 
@@ -55,7 +55,7 @@ class Friends_IndexController extends Yachay_Action
         $this->view->model_friends = $model_friends;
         $this->view->followers = $followers;
 
-        history('friends/followers');
+        $this->history('friends/followers');
         breadcrumb();
     }
 }

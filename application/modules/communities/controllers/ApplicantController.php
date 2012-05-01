@@ -19,8 +19,6 @@ class Communities_ApplicantController extends Yachay_Action
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireCommunityModerator($community);
 
-        $session = new Zend_Session_Namespace();
-
         $model_communities_users = new Communities_Users();
         $row = $model_communities_users->createRow();
         $row->community = $community->ident;
@@ -38,8 +36,7 @@ class Communities_ApplicantController extends Yachay_Action
         $community->petitions = $community->petitions - 1;
         $community->save();
 
-        $session->messages->addMessage('El usuario ' . $user->label . ' ha sido aceptado en la comunidad');
-
+        $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido aceptado en la comunidad');
         $this->_redirect($this->view->currentPage());
     }
 
@@ -60,8 +57,6 @@ class Communities_ApplicantController extends Yachay_Action
         $this->requireExistence($user, 'user', 'users_user_view', 'users_list');
         $this->requireCommunityModerator($community);
 
-        $session = new Zend_Session_Namespace();
-
         $model_communities_petitions = new Communities_Petitions();
         $row = $model_communities_petitions->findByCommunityAndUser($community->ident, $user->ident);
         $row->delete();
@@ -69,8 +64,7 @@ class Communities_ApplicantController extends Yachay_Action
         $community->petitions = $community->petitions - 1;
         $community->save();
 
-        $session->messages->addMessage('El usuario ' . $user->label . ' ha sido rechazado de la comunidad');
-
+        $this->_helper->flashMessenger->addMessage('El usuario ' . $user->label . ' ha sido rechazado de la comunidad');
         $this->_redirect($this->view->currentPage());
     }
 }

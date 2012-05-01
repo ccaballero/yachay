@@ -32,7 +32,6 @@ if (count($this->auxiliars) != 0) {
             echo '&nbsp;';
         }
         echo '</td>';
-        echo '<td rowspan="2" width="50px"><img src="' . $this->media . '../users/thumbnail_small/' . $auxiliar->getAvatar() . '" /></td>';
         echo '<td>';
         if ($this->acl('users', 'view')) {
             echo '<a href="' . $this->url(array('user' => $auxiliar->url), 'users_user_view') . '">' . $auxiliar->label . '</a>';
@@ -80,7 +79,6 @@ if (count($this->students) != 0) {
             echo '&nbsp;';
         }
         echo '</td>';
-        echo '<td rowspan="2" width="50px"><img src="' . $this->media . '../users/thumbnail_small/' . $student->getAvatar() . '" /></td>';
         echo '<td>';
         if ($this->acl('users', 'view')) {
             echo '<a href="' . $this->url(array('user' => $student->url), 'users_user_view') . '">' . $student->label . '</a>';
@@ -128,7 +126,6 @@ if (count($this->guests) != 0) {
             echo '&nbsp;';
         }
         echo '</td>';
-        echo '<td rowspan="2" width="50px"><img src="' . $this->media . '../users/thumbnail_small/' . $guest->getAvatar() . '" /></td>';
         echo '<td>';
         if ($this->acl('users', 'view')) {
             echo '<a href="' . $this->url(array('user' => $guest->url), 'users_user_view') . '">' . $guest->label . '</a>';

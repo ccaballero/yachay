@@ -11,7 +11,7 @@ class Areas_ManagerController extends Yachay_Action
         $this->view->model_areas = $model_areas;
         $this->view->areas = $model_areas->selectAll();
 
-        history('areas/manager');
+        $this->history('areas/manager');
         $breadcrumb = array();
         if ($this->acl('areas', 'list')) {
             $breadcrumb['Areas'] = $this->view->url(array(), 'areas_list');
@@ -26,7 +26,7 @@ class Areas_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_areas = new Areas();
             $area = $model_areas->createRow();
@@ -37,19 +37,21 @@ class Areas_ManagerController extends Yachay_Action
             if ($area->isValid()) {
                 $area->tsregister = time();
                 $area->save();
-                $session->messages->addMessage("El area {$area->label} se ha creado correctamente");
+
+                $this->_helper->flashMessenger->addMessage("El area {$area->label} se ha creado correctamente");
+
                 $session->url = $area->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($area->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
             
             $this->view->area = $area;
         }
 
-        history('areas/new');
+        $this->history('areas/new');
         $breadcrumb = array();
         if ($this->acl('areas', 'list')) {
             $breadcrumb['Areas'] = $this->view->url(array(), 'areas_list');

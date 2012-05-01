@@ -15,20 +15,20 @@ class Gestions_ManagerController extends Yachay_Action
                 $gestion = $model_gestions->findByIdent($gestion_ident);
                 if ($gestion->status == 'inactive') {
                     // clear all gestions
-                    $gestions->desactiveAll();
+                    $model_gestions->desactiveAll();
                     // Active the selected gestion
                     $gestion->status = 'active';
                     $gestion->save();
                 }
-                $session = new Zend_Session_Namespace();
-                $session->messages->addMessage("La gestion {$gestion->label} ha sido establecida como actual");
+
+                $this->_helper->flashMessenger->addMessage("La gestion {$gestion->label} ha sido establecida como actual");
             }
         }
 
         $this->view->model_gestions = $model_gestions;
         $this->view->gestions = $model_gestions->selectAll();
 
-        history('gestions/manager');
+        $this->history('gestions/manager');
         $breadcrumb = array();
         if ($this->acl('gestions', 'list')) {
             $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_list');
@@ -43,7 +43,7 @@ class Gestions_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_gestions = new Gestions();
             $gestion = $model_gestions->createRow();
@@ -53,18 +53,21 @@ class Gestions_ManagerController extends Yachay_Action
             if ($gestion->isValid()) {
                 $gestion->tsregister = time();
                 $gestion->save();
+
+                $this->_helper->flashMessenger->addMessage("La gestion {$gestion->label} se ha creado correctamente");
+
                 $session->url = $gestion->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 foreach ($gestion->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
             
             $this->view->gestion = $gestion;
         }
 
-        history('gestions/new');
+        $this->history('gestions/new');
         $breadcrumb = array();
         if ($this->acl('gestions', 'list')) {
             $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_list');

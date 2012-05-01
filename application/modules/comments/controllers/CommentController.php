@@ -56,7 +56,6 @@ class Comments_CommentController extends Yachay_Action
         }
 
         $this->requireContext($resource);
-        $session = new Zend_Session_Namespace();
 
         $comments_model = new Comments();
         $comment = $comments_model->createRow();
@@ -72,10 +71,10 @@ class Comments_CommentController extends Yachay_Action
             $resource->save();
 
             $model_valorations->addParticipation(2);
-            $session->messages->addMessage('Tu comentario ha sido publicado');
+            $this->_helper->flashMessenger->addMessage('Tu comentario ha sido publicado');
         } else {
             foreach ($comment->getMessages() as $message) {
-                $session->messages->addMessage($message);
+                $this->_helper->flashMessenger->addMessage($message);
             }
         }
 
@@ -140,7 +139,6 @@ class Comments_CommentController extends Yachay_Action
         $comments_model = new Comments();
         $comment = $comments_model->findByIdent($comment_resource);
 
-        $session = new Zend_Session_Namespace();
         if (!empty($comment) && $comment->author == $USER->ident) {
             $comment->delete();
 
@@ -148,7 +146,7 @@ class Comments_CommentController extends Yachay_Action
             $resource->save();
 
             $model_valorations->decreaseParticipation(2);
-            $session->messages->addMessage('Tu comentario ha sido removido');
+            $this->_helper->flashMessenger->addMessage('Tu comentario ha sido removido');
         }
 
         $this->_redirect($this->view->currentPage());
@@ -164,7 +162,6 @@ class Comments_CommentController extends Yachay_Action
 
         $model_valorations = new Valorations();
 
-        $session = new Zend_Session_Namespace();
         if (!empty($comment)) {
             $resource = $comment->getResource();
             $comment->delete();
@@ -173,7 +170,7 @@ class Comments_CommentController extends Yachay_Action
             $resource->save();
             
             $model_valorations->decreaseParticipation(2, $comment->author);
-            $session->messages->addMessage('El comentario ha sido removido');
+            $this->_helper->flashMessenger->addMessage('El comentario ha sido removido');
         }
 
         $this->_redirect($this->view->currentPage());

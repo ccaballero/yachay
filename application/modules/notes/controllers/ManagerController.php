@@ -19,7 +19,7 @@ class Notes_ManagerController extends Yachay_Action
         $model_tags = new Tags();
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $note = $model_notes->createRow();
             $note->note = $request->getParam('message');
@@ -36,7 +36,7 @@ class Notes_ManagerController extends Yachay_Action
             $spaces_valids = $context->context(NULL, 'plain');
 
             if (empty($publish)) {
-                $session->messages->addMessage('Usted debe seleccionar un espacio de publicación');
+                $this->_helper->flashMessenger->addMessage('Usted debe seleccionar un espacio de publicación');
             } else if (in_array($publish, $spaces_valids)) {
                 if ($note->isValid()) {
                     $resource = $model_resources->createRow();
@@ -56,22 +56,22 @@ class Notes_ManagerController extends Yachay_Action
 
                     $session->url = $note->resource;
 
-                    $session->messages->addMessage('La nota ha sido creada');
+                    $this->_helper->flashMessenger->addMessage('La nota ha sido creada');
                     $this->_redirect($request->getParam('return'));
                 } else {
                     foreach ($note->getMessages() as $message) {
-                        $session->messages->addMessage($message);
+                        $this->_helper->flashMessenger->addMessage($message);
                     }
                 }
             } else {
-                $session->messages->addMessage('Usted no tiene privilegios para publicar en ese espacio');
+                $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
         }
 
         $this->view->note = $note;
         $this->view->tags = $tags;
 
-        history('notes/new');
+        $this->history('notes/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Notas'] = $this->view->url(array('filter' => 'notes'), 'resources_filtered');

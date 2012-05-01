@@ -21,7 +21,7 @@ class Resources_IndexController extends Yachay_Action
         $this->view->resources = $list;
         $this->view->active = 'all';
 
-        history('resources');
+        $this->history('resources');
         breadcrumb();
     }
 
@@ -119,7 +119,7 @@ class Resources_IndexController extends Yachay_Action
         $template = new Yachay_Helpers_Template();
         $this->render($template->template('resources', 'list', 'index/', false));
 
-        history('resources');
+        $this->history('resources');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         breadcrumb($breadcrumb);

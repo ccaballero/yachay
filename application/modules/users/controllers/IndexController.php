@@ -24,7 +24,7 @@ class Users_IndexController extends Yachay_Action
             'params' => array(),
         );
 
-        history('users');
+        $this->history('users');
         $breadcrumb = array();
         if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');

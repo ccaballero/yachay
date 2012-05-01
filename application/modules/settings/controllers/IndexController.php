@@ -20,7 +20,7 @@ class Settings_IndexController extends Yachay_Action
         context('user', $user);
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $password1 = $request->getParam('password1');
             $password2 = $request->getParam('password2');
@@ -29,18 +29,18 @@ class Settings_IndexController extends Yachay_Action
                 $user->password = md5($config->yachay->properties->key . $password1);
                 $user->save();
 
-                $session->messages->addMessage('Tu has cambiado tus preferencias correctamente');
+                $this->_helper->flashMessenger->addMessage('Tu has cambiado tus preferencias correctamente');
                 $session->url = $user->url;
                 $this->_redirect($request->getParam('return'));
             } else {
-                $session->messages->addMessage('Las entradas no son validas, recuerde que deben ser iguales y no estar vacias');
+                $this->_helper->flashMessenger->addMessage('Las entradas no son validas, recuerde que deben ser iguales y no estar vacias');
             }
         }
 
         $this->view->model_users = $model_users;
         $this->view->user = $user;
 
-        history('settings/' . $user->url);
+        $this->history('settings/' . $user->url);
         breadcrumb();
     }
 }

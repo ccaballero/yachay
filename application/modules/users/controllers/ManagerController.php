@@ -30,7 +30,7 @@ class Users_ManagerController extends Yachay_Action
         $this->view->model = $model_users;
         $this->view->users = $model_users->selectAll();
 
-        history('users/manager');
+        $this->history('users/manager');
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
@@ -45,7 +45,7 @@ class Users_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_users = new Users();
             $user = $model_users->createRow();
@@ -107,22 +107,22 @@ class Users_ManagerController extends Yachay_Action
                              ->send();
                     }
 
-                    $session->messages->addMessage("El usuario {$user->label} se ha creado correctamente");
+                    $this->_helper->flashMessenger->addMessage("El usuario {$user->label} se ha creado correctamente");
                     $session->url = $user->url;
                     $this->_redirect($request->getParam('return'));
                 } else {
-                    $session->messages->addMessage('No tiene permisos para establecer ese rol en ese usuario');
+                    $this->_helper->flashMessenger->addMessage('No tiene permisos para establecer ese rol en ese usuario');
                 }
             } else {
                 foreach ($user->getMessages() as $message) {
-                    $session->messages->addMessage($message);
+                    $this->_helper->flashMessenger->addMessage($message);
                 }
             }
 
             $this->view->user = $user;
         }
 
-        history('users/new');
+        $this->history('users/new');
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
@@ -163,8 +163,7 @@ class Users_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han bloqueado $count usuarios");
+            $this->_helper->flashMessenger->addMessage("Se han bloqueado $count usuarios");
         }
 
         $this->_redirect($this->view->currentPage());
@@ -200,8 +199,7 @@ class Users_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han desbloqueado $count usuarios");
+            $this->_helper->flashMessenger->addMessage("Se han desbloqueado $count usuarios");
         }
 
         $this->_redirect($this->view->currentPage());
@@ -235,8 +233,7 @@ class Users_ManagerController extends Yachay_Action
             }
             $count = count($check);
 
-            $session = new Zend_Session_Namespace();
-            $session->messages->addMessage("Se han eliminado $count usuarios");
+            $this->_helper->flashMessenger->addMessage("Se han eliminado $count usuarios");
         }
 
         $this->_redirect($this->view->currentPage());
@@ -265,7 +262,7 @@ class Users_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace();
+            $session = new Zend_Session_Namespace('yachay');
 
             $model_users = new Users();
             $model_roles = new Roles();
@@ -275,12 +272,12 @@ class Users_ManagerController extends Yachay_Action
             if (empty($selections)) {
                 $password = $request->getParam('password');
                 if ($password == '') {
-                    $session->messages->addMessage('Debe establecer un generador de contraseña');
+                    $this->_helper->flashMessenger->addMessage('Debe establecer un generador de contraseña');
                     $this->_redirect($this->view->currentPage());
                 }
 
                 $upload = new Zend_File_Transfer_Adapter_Http();
-                $upload->setDestination(APPLICATION_PATH . '/../public/media/upload');
+                $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
                 $upload->addValidator('Size', false, 2097152)
                        ->addValidator('Extension', false, array('csv'));
 
@@ -364,11 +361,11 @@ class Users_ManagerController extends Yachay_Action
                                 $session->import_users = $results;
                             } else {
                                 if (!$csv->hasColumn($_headers['CODIGO'])) {
-                                    $session->messages->addMessage('La columna CODIGO no fue encontrada');
+                                    $this->_helper->flashMessenger->addMessage('La columna CODIGO no fue encontrada');
                                     $this->_redirect($this->view->currentPage());
                                 }
                                 if (!$csv->hasColumn($_headers['NOMBRE COMPLETO'])) {
-                                    $session->messages->addMessage('La columna NOMBRE COMPLETO no fue encontrada');
+                                    $this->_helper->flashMessenger->addMessage('La columna NOMBRE COMPLETO no fue encontrada');
                                     $this->_redirect($this->view->currentPage());
                                 }
                             }
@@ -376,7 +373,7 @@ class Users_ManagerController extends Yachay_Action
                     }
                     unlink($filename);
                 } else {
-                    $session->messages->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
+                    $this->_helper->flashMessenger->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
                 }
             } else {
                 if (isset($session->import_users)) {
@@ -436,14 +433,15 @@ class Users_ManagerController extends Yachay_Action
                             }
                         }
                     }
-                    $session->messages->addMessage("Se han creado $count_new usuarios nuevos y se han editado $count_edit usuarios");
+
+                    $this->_helper->flashMessenger->addMessage("Se han creado $count_new usuarios nuevos y se han editado $count_edit usuarios");
                     $this->_redirect($this->view->lastPage());
                 }
                 unset($session->import_users);
             }
         }
 
-        history('users/import');
+        $this->history('users/import');
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
@@ -505,7 +503,7 @@ class Users_ManagerController extends Yachay_Action
             }
         }
 
-        history('users/export');
+        $this->history('users/export');
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
