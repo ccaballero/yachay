@@ -1,0 +1,76 @@
+\select@language {spanish}
+\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Antecedentes}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Definici\IeC {\'o}n del problema}{2}{section.1.2}
+\contentsline {section}{\numberline {1.3}Objetivos}{3}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Objetivo General}{3}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Objetivos Espec\IeC {\'\i }ficos}{3}{subsection.1.3.2}
+\contentsline {section}{\numberline {1.4}Justificaci\IeC {\'o}n}{3}{section.1.4}
+\contentsline {section}{\numberline {1.5}Teor\IeC {\'\i }a del aprendizaje social}{4}{section.1.5}
+\contentsline {chapter}{\numberline {2}El modelo base}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Rese\IeC {\~n}a hist\IeC {\'o}rica}{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Primeras intenciones}{7}{section.2.2}
+\contentsline {section}{\numberline {2.3}Funciones que moldean el sistema}{8}{section.2.3}
+\contentsline {section}{\numberline {2.4}Estructura}{8}{section.2.4}
+\contentsline {section}{\numberline {2.5}M\IeC {\'o}dulos}{8}{section.2.5}
+\contentsline {section}{\numberline {2.6}Cr\IeC {\'\i }ticas al modelo establecido}{11}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Sistema de plantillas}{11}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}Instalaci\IeC {\'o}n}{11}{subsection.2.6.2}
+\contentsline {subsection}{\numberline {2.6.3}Conectitividad}{11}{subsection.2.6.3}
+\contentsline {subsection}{\numberline {2.6.4}Modelos muy teoricos}{11}{subsection.2.6.4}
+\contentsline {chapter}{\numberline {3}El sistema}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Instalaci\IeC {\'o}n}{13}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Archivo de hosts}{13}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Host virtual}{14}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Logs}{14}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Script instalador}{15}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Archivo .htaccess}{15}{subsection.3.1.5}
+\contentsline {section}{\numberline {3.2}Linea de comandos}{15}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}installer.php}{16}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}Sobre modulos, controladores y acciones}{16}{section.3.3}
+\contentsline {section}{\numberline {3.4}Paquetes construidos}{18}{section.3.4}
+\contentsline {chapter}{\numberline {4}La plataforma}{19}{chapter.4}
+\contentsline {section}{\numberline {4.1}El gestor de paquetes \emph {packages}}{19}{section.4.1}
+\contentsline {section}{\numberline {4.2}El manejo de privilegios \emph {privileges}}{19}{section.4.2}
+\contentsline {section}{\numberline {4.3}El manejo de rutas y navegaci\IeC {\'o}n \emph {routes}}{19}{section.4.3}
+\contentsline {section}{\numberline {4.4}El sistema de plantillas \emph {templates}}{19}{section.4.4}
+\contentsline {section}{\numberline {4.5}El motor de busqueda \emph {search}}{19}{section.4.5}
+\contentsline {section}{\numberline {4.6}El sistema de traducciones \emph {i18n}}{19}{section.4.6}
+\contentsline {section}{\numberline {4.7}La automatizaci\IeC {\'o}n de tareas \emph {cron}}{19}{section.4.7}
+\contentsline {section}{\numberline {4.8}La cola de envio de correo \emph {mailer}}{19}{section.4.8}
+\contentsline {chapter}{\numberline {5}La conectitividad}{21}{chapter.5}
+\contentsline {section}{\numberline {5.1}La inteligencia colectiva \emph {axon}}{21}{section.5.1}
+\contentsline {chapter}{\numberline {6}Las personas}{23}{chapter.6}
+\contentsline {section}{\numberline {6.1}El espacio personal \emph {users}}{23}{section.6.1}
+\contentsline {section}{\numberline {6.2}El control de las funciones \emph {roles}}{23}{section.6.2}
+\contentsline {chapter}{\numberline {7}La red de contactos}{25}{chapter.7}
+\contentsline {section}{\numberline {7.1}Las redes sociales \emph {contacts}}{25}{section.7.1}
+\contentsline {section}{\numberline {7.2}Los circulos \emph {sets}}{25}{section.7.2}
+\contentsline {section}{\numberline {7.3}La propagaci\IeC {\'o}n \emph {invitations}}{25}{section.7.3}
+\contentsline {chapter}{\numberline {8}Los espacios virtuales}{27}{chapter.8}
+\contentsline {section}{\numberline {8.1}El espacio generico \emph {spaces}}{27}{section.8.1}
+\contentsline {section}{\numberline {8.2}Los espacios formales \emph {gestions}, \emph {careers}, \emph {areas}}{27}{section.8.2}
+\contentsline {section}{\numberline {8.3}El espacio informal \emph {communities}}{27}{section.8.3}
+\contentsline {section}{\numberline {8.4}Los espacios jerarquicos \emph {subjects}, \emph {groups}, \emph {teams}}{27}{section.8.4}
+\contentsline {section}{\numberline {8.5}Las utilidades sobre grupos \emph {groupsets}}{27}{section.8.5}
+\contentsline {chapter}{\numberline {9}El B-learning}{29}{chapter.9}
+\contentsline {section}{\numberline {9.1}Los sistemas de evaluaci\IeC {\'o}n \emph {evaluations}}{29}{section.9.1}
+\contentsline {section}{\numberline {9.2}Las calificaciones \emph {califications}}{29}{section.9.2}
+\contentsline {section}{\numberline {9.3}El trabajo para casa \emph {tasks}}{29}{section.9.3}
+\contentsline {chapter}{\numberline {10}Los recursos}{31}{chapter.10}
+\contentsline {section}{\numberline {10.1}Los componentes genericos \emph {resources}}{31}{section.10.1}
+\contentsline {section}{\numberline {10.2}El recurso mas basico \emph {notes}}{31}{section.10.2}
+\contentsline {section}{\numberline {10.3}Los archivos en general \emph {files}}{31}{section.10.3}
+\contentsline {section}{\numberline {10.4}Los archivos especiales \emph {photos}, \emph {videos}}{31}{section.10.4}
+\contentsline {section}{\numberline {10.5}Los recursos espacio-temporales \emph {events}}{31}{section.10.5}
+\contentsline {section}{\numberline {10.6}La reenderizacion personalizada \emph {links}}{31}{section.10.6}
+\contentsline {section}{\numberline {10.7}Las sugerencias \emph {feedback}}{31}{section.10.7}
+\contentsline {chapter}{\numberline {11}Los aspectos 2.0}{33}{chapter.11}
+\contentsline {section}{\numberline {11.1}Los comentarios \emph {comments}}{33}{section.11.1}
+\contentsline {section}{\numberline {11.2}La calidad del recurso \emph {ratings}}{33}{section.11.2}
+\contentsline {section}{\numberline {11.3}Las nuevas interpretaciones \emph {tags}}{33}{section.11.3}
+\contentsline {section}{\numberline {11.4}Los sistemas de reputaci\IeC {\'o}n \emph {valorations}}{33}{section.11.4}
+\contentsline {section}{\numberline {11.5}Los refuerzos positivos \emph {awards}}{33}{section.11.5}
+\contentsline {chapter}{\numberline {12}Los sistemas de control}{35}{chapter.12}
+\contentsline {section}{\numberline {12.1}Los indicadores medibles \emph {stats}}{35}{section.12.1}
+\contentsline {section}{\numberline {12.2}El panel de control \emph {panels}}{35}{section.12.2}

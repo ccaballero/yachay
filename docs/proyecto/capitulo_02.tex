@@ -1,0 +1,219 @@
+\chapter{El modelo base}
+
+Como parte del análisis requerido para la desarrollo del sistema, en este capítulo describiremos las características y
+limitaciones del sistema Yeah!, antecesor del cuál se basaron las primeras ideas e intenciones del presente trabajo.
+
+\section{Reseña histórica}
+El proyecto Yeah! se inicia en febrero del 2009, con la intención de desarrollar un sistema web de administración de
+cursos y notas, pasadas varias situaciones, se llega a una versión estable en junio del mismo año, dándose por terminado
+el desarrollo e intenciones iniciales (versión 0.1).
+
+Transcurridos varios años, se reactiva el proyecto en mayo del 2010, con la intención inicial de mejorar las funciones
+inicialmente propuestas, además de complementar con ideas que nacieron en el transcurso del tiempo. Llegando a un nuevo
+producto estable en noviembre del 2010, y cambiando el nombre a proyecto Yachay  (versión 0.2).
+
+En este año 2011, se fueron realizando varias adaptaciones, necesarias para la utilización en un contexto real
+(instalación de la primera instancia en colaboración con el centro MEMI), que ha su vez fueron develando muchas
+necesidades de reestructuración; el resultado final fue la versión 0.3, siendo esta la que esta siendo evaluada y
+utilizada.
+
+\section{Primeras intenciones}
+El objetivo del proyecto Yeah!, estaba definido como:
+
+\emph{Desarrollar una plataforma social basada en tecnologías web 2.0, que posea fines educativos, de manera que mejore
+el proceso enseñanza-aprendizaje y la interacción entre docentes y estudiantes.}
+
+\section{Funciones que moldean el sistema}
+\begin{description}
+\item [Gestión de usuarios] Componente encargado de la gestión de usuarios y roles de usuarios.
+\item [Gestión de espacios virtuales] Componente encargado de la gestión de espacios de materias, espacios de discusión
+y espacios privados.
+\item [Gestión de equipos de trabajo] Componente encargado de la gestión de equipos de trabajo entre los usuarios del
+sistema.
+\item [Sub-sistema de administración del sistema] Componente encargado de facilitar la administración del sistema.
+\item [Sub-sistema de administración de módulos] Componente encargado de la gestión de los módulos del sistema.
+\end{itemize}
+
+\section{Estructura}
+La estructura del sistema siempre estuvo regida por las recomendaciones de la librería Zend en su versión 1.8.x, desde
+ese entonces hasta ahora (versión 1.11.x), varios métodos y aspectos han cambiado, con la salida de nuevas versiones, lo
+que hizó que la estructura requiera cambios importantes\footnote{Todos los cambios requeridos, estan basados en la
+documentación oficial alojada en http://framework.zend.com/manual/en/learning.quickstart.create-project.html}.
+
+En la gráfica~\ref{estructura_base} se muestra la estructura antigua, mucho mas simple que la nueva que puede verse en la
+gráfica~\ref{estructura_actual}, la estructura ahora utilizada frecuentemente por la librería Zend, que está por demás
+demostrado posee una mejor adecuación a los nuevos requerimientos en el desarrollo web, ademas de ofrecer mayor control
+y seguridad que la versiones mas antiguas\cite{Gilmore}.
+
+\begin{figure}
+\small
+\dirtree{%
+.1 /.
+.2 libs \ldots{} \begin{minipage}[t]{8cm} Carpeta contenedora de las clases php.\end{minipage}.
+.3 File.
+.3 Xcel.
+.3 Yeah \ldots{} \begin{minipage}[t]{8cm} Librerías propias del sistema.\end{minipage}.
+.4 Helpers.
+.4 Model.
+.5 Row.
+.6 Validation.php \ldots{} \begin{minipage}[t]{8cm} Validador automático de modelos.\end{minipage}.
+.5 Table.php \ldots{} \begin{minipage}[t]{8cm} Superclase base de todos los adaptadores de base de datos.\end{minipage}.
+.4 Regions.
+.5 \ldots{}.
+.4 Settings.
+.5 Config.php \ldots{} \begin{minipage}[t]{8cm} Archivo de configuración del sistema.\end{minipage}.
+.5 Database.php \ldots{} \begin{minipage}[t]{8cm} Archivo de configuración de la base de datos.\end{minipage}.
+.5 \ldots{}.
+.4 Validators.
+.5 \ldots{}.
+.4 Acl.php.
+.4 Action.php \ldots{} \begin{minipage}[t]{8cm} Superclase base de todos los controladores.\end{minipage}.
+.4 Adapter.php.
+.4 Bootstrap.php \ldots{} \begin{minipage}[t]{8cm} Inicializador del motor de Zend Framework.\end{minipage}.
+.4 Init.php.
+.4 Loader.php \ldots{} \begin{minipage}[t]{8cm} Cargador automático de modelos.\end{minipage}.
+.4 Utils.php.
+.3 Zend.
+.4 \ldots{}.
+.2 media.
+.3 upload.
+.3 \ldots{}.
+.2 modules \ldots{} \begin{minipage}[t]{8cm} Módulos instalados.\end{minipage}.
+.3 \ldots{}.
+.2 templates \ldots{} \begin{minipage}[t]{8cm} Plantillas instaladas.\end{minipage}.
+.3 \ldots{}.
+.2 .htaccess.
+.2 index.php.
+.2 yeah.log \ldots{} \begin{minipage}[t]{8cm} Archivo de log de rutas visitadas.\end{minipage}.
+}
+\caption{Estructura de ficheros del modelo base.}
+\label{estructura_base}
+\end{figure}
+
+\begin{figure}
+\small
+\dirtree{%
+.1 /.
+.2 application \ldots{} \begin{minipage}[t]{8cm} Librerías especificas del sistema.\end{minipage}.
+.3 configs.
+.4 application.ini \ldots{} \begin{minipage}[t]{8cm} Archivo de configuración del sistema.\end{minipage}.
+.3 modules \ldots{} \begin{minipage}[t]{8cm} Módulos habilitados.\end{minipage}.
+.4 \ldots{}.
+.3 Bootstrap.php.
+.2 data \ldots{} \begin{minipage}[t]{8cm} Carpetas para información especifica de la instancia instalada.\end{minipage}.
+.3 dtd.
+.3 sql \ldots{} \begin{minipage}[t]{8cm} Plantillas SQL de instalación de los módulos.\end{minipage}.
+.3 src \ldots{} \begin{minipage}[t]{8cm} Paquetes disponibles para uso.\end{minipage}.
+.3 \ldots{}.
+.2 library.
+.3 Yachay.
+.4 Controller.
+.5 Plugins.
+.6 Formatter.php.
+.5 Templates.
+.6 \ldots{}.
+.5 Action.php.
+.4 Db.
+.5 Table.
+.6 Row.php.
+.5 Table.php.
+.4 Model.
+.5 Loader.php.
+.4 Console.php.
+.3 Zend.
+.4 \ldots{}.
+.3 \ldots{}.
+.2 logs.
+.3 \ldots{}.
+.2 public \ldots{} \begin{minipage}[t]{8cm} Carpeta para archivos estáticos.\end{minipage}.
+.3 media.
+.4 \ldots{}.
+.3 index.php.
+.2 shell \ldots{} \begin{minipage}[t]{8cm} Herramientas del sistema por consola.\end{minipage}.
+.3 \_\_header.php.
+.3 installer.php.
+.3 \ldots{}.
+}
+\caption{Estructura de ficheros del modelo actual.}
+\label{estructura_actual}
+\end{figure}
+
+\section{Módulos}
+El proyecto tenía desarrollados varios módulos, cuyas funciones iban desde la manipulación de menús, hasta el manejo de
+comunidades. Una de las máximas desventajas del modelo base fue su alto acoplamiento, que hizó a los módulos
+tremendamente interdependientes, haciendo de todo el sistema algo complejo de mantener.
+
+En el cuadro~\ref{modulos_base} se detallan los módulos que ya estaban construidos con anterioridad y la función que
+desempeñan.
+
+\begin{table}
+\begin{tabular}{l|l}
+Módulo & Descripción \\
+\hline
+areas & Administración de áreas temáticas. \\
+califications & Manejo de notas en los cursos. \\
+careers & Administración de carreras. \\
+comments & Manejo de comentarios. \\
+communities & Administración de comunidades. \\
+evaluations & Manejo de las formas de evaluación en los cursos. \\
+events & Manejo de recursos tipo evento. \\
+feedback & Manejo de mensajes de retroalimentación. \\
+files & Manejo de recursos tipo archivo. \\
+friends & Administración de la red de contactos. \\
+frontpage & Manejo de pagina principal. \\
+gestions & Administración de periodos académicos. \\
+groups & Administración de grupos de estudio. \\
+groupsets & Utilitario de manejo de múltiples grupos. \\
+invitations & Manejo de invitaciones de registro. \\
+links & Manejo de recursos tipo enlace. \\
+login & Autentificación de usuarios. \\
+menus & Manejo de regiones en plantilla. \\
+modules & Administración de módulos. \\
+notes & Manejo de recursos tipo nota. \\
+pages & Administración de paginas. \\
+paginator & Utilidad de paginación de recursos. \\
+photos & Manejo de recursos tipo fotografía. \\
+privileges & Administración de privilegios del sistema. \\
+profile & Utilidad de configuración de información de usuario. \\
+ratings & Manejo de rankings sobre recursos. \\
+regions & Manejo genérico de regiones. \\
+resources & Administración genérica de recursos. \\
+roles & Administración de grupos de privilegios. \\
+settings & Utilidad de configuración de usuario. \\
+subjects & Administración de materias. \\
+tags & Manejo de etiquetas sobre recursos. \\
+teams & Administración de equipos de trabajo. \\
+templates & Manejo de plantillas. \\
+toolbar & Manejo de la region toolbar en plantilla. \\
+users & Administración de usuarios. \\
+valorations & Manejo de valoraciones en los usuarios. \\
+videos & Manejo de recursos tipo video. \\
+widgets & Manejo de widgets en plantilla. \\
+\end{tabular}
+\caption{Módulos existentes en el modelo base.}
+\label{modulos_base}
+\end{table}
+
+\section{Críticas al modelo establecido}
+Aunque se han discutido ya los problemas concernientes a la ya casi caduca estructuración del sistema, y el problema del
+alto acoplamiento de los módulos; existían otros problemas menores que requerían plantearse.
+
+\subsection{Sistema de plantillas}
+Se tenían creadas dos plantillas, una de ellas, construida en html, y la otra, en xhtml con hojas de estilo (css2). Si
+bien era posible crear plantillas que aprovechen toda la potencia de html, css, y javascript, resultaba este, un proceso
+altamente costoso, debido al uso de paginas muy personalizadas, lo que conducía al casi imposible uso de la tecnología
+ajax, haciendo de toda la arquitectura de plantillas implementada, cuestión de imperioso reemplazo.
+
+\subsection{Instalación}
+El sistema no poseía un método cómodo o claramente establecido para la instalación, lo que complicaba el uso de esta
+herramienta a los administradores.
+
+\subsection{Conectitividad}
+Una de las características más llamativas para el sistema, es la conexión con otros sistemas, su bien las redes sociales
+populares tienden hacia la centralización, el objetivo prioritario en este sistema será la descentralización de la
+información, una cuestión muy análoga a lo referente a las tecnologías p2p.
+
+\subsection{Modelos muy teoricos}
+El problema final encontrado era la falta de roce del sistema con la vida real, lo que resultó un modelo de soluciones a
+un campo de visión muy estrecho, siendo prioridad para este nuevo recorrido escuchar a los usuarios en todo su espectro
+y categorización.

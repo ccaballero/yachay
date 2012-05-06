@@ -1,0 +1,237 @@
+\chapter{El sistema}
+
+En lo que respecta al sistema creado, antes de describir paso a paso, lo referente a sus funciones, primeramente 
+describiremos aspectos referentes a las decisiones tomadas respecto a su instalación, tareas de mantenimiento y puesta en
+marcha.
+
+\section{Instalación}
+Cabe recalcar que toda la hermenéutica descrita, se restringe al sistema operativo linux, no siendo probado o
+corregido para ningun otro sistema operativo.
+
+\subsection{Archivo de hosts}
+Edicion del archivo de hosts (/etc/hosts) para la creacion del dominio y subdominios, dependiendo de los paquetes que se
+tengan instalados, estos podrian ser entre otros los que siguen:
+
+\small
+\begin{verbatim}
+127.0.0.1    yachay.local         -> Requerido
+127.0.0.1    www.yachay.local     -> Requerido
+127.0.0.1    xml.yachay.local     -> Requerido
+127.0.0.1    dtd.yachay.local     -> Requerido
+
+127.0.0.1    json.yachay.local    -> Requerido por el paquete routes
+127.0.0.1    rss.yachay.local     -> Requerido por el paquete axon
+127.0.0.1    meta.yachay.local    -> Requerido por el paquete axon
+\end{verbatim}
+
+En este caso \emph{yachay.local} es el dominio sobre el que estamos instalando.
+
+\subsection{Host virtual}
+Hecho esto, se pasa a configurar un host virtual para el servidor de aplicaciones web, en este caso Apache (y el unico en
+el que se hicieron todas las pruebas):
+
+\small
+\begin{verbatim}
+<VirtualHost *:80>
+    ServerName yachay.local
+    ServerAlias *.yachay.local
+    DocumentRoot /var/www/Yachay/public
+
+    SetEnv APPLICATION_ENV "production"
+
+    LogLevel info
+    ErrorLog "/var/www/Yachay/logs/error.log"
+    CustomLog "/var/www/Yachay/logs/user-agent.log" "%{User-agent}i"
+    CustomLog "/var/www/Yachay/logs/referer.log" "%{Referer}i"
+    CustomLog "/var/www/Yachay/logs/resume.log" "%v %m %U%q"
+
+    <Directory /home/carlos/Yachay/public>
+        DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
+\end{verbatim}
+
+En este caso \emph{/var/www/Yachay} es el sitio donde esta instalado.
+
+\subsection{Logs}
+Ahora nos aseguramos que los archivos de log, posean los permisos suficientes y que existan. En caso de no existir, debe
+reiniciar su servidor apache, que es el encargado de crearlos y escribir en ellos.
+
+Como puede apreciarse en la configuración del host virtual; se definen 4 tipos de ficheros de log:
+\begin{description}
+\item [error.log] Fichero para los posibles errores de la aplicación.
+\item [user-agent.log] Fichero que captura la variable \emph{User-Agent} del navegador cliente, este fichero es ampliamente discutido en el capitulo acerca de los sistemas de control.
+\item [referer.log] Fichero que captura la variable \emph{Referer} del navegador cliente, tambien es muy util para tareas
+de definición y utilización de indicadores.
+\item [resume.log] Fichero de registro de acceso.
+\end{description}
+
+\subsection{Script instalador}
+Para la instalación se dispone de un script de ejecución por consola, que se encargará del sistema base.
+
+\small
+\begin{verbatim}
+$> cd shell
+$> php installer.php --env=production --check
+checking db resource............................................[OK]
+checking the database adapter...................................[OK]
+test the database connection....................................[OK]
+check was completed successfully
+$> php installer.php --env=production --install
+installing the base package.....................................[OK]
+install was completed successfully
+\end{verbatim}
+
+Ejecutamos la opcion check para la verificacion de las condiciones, es decir, el estado de los recursos vitales, como
+por ejemplo la conexion hacia la base de datos.
+Si todo resultó exitoso podremos ejecutar el install, y se crearán las tablas iniciales en la base de datos.
+
+Las opciones y parametros de este y otros scripts se discutirán mas adelante en su totalidad.
+
+\subsection{Archivo .htaccess}
+Como parte de la definición de la arquitectura diseñada. se detalla tambien el archivo .htaccess utilizado, para manejar 
+varios formatos de respuesta de la peticion, y asegurar la calidad de las url, se define como se muestra a continuacion:
+
+\begin{verbatim}
+RewriteEngine on
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{HTTP_HOST} ^([a-z]*)\.yachay\.local$ [NC]
+RewriteRule ^(.*)$ index.php?format=%1 [L,QSA]
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{HTTP_HOST} ^yachay\.local$ [NC]
+RewriteRule ^(.*)$ index.php?format=www [L,QSA]
+\end{verbatim}
+
+Pueden verse dos reglas; la primera para cualquier subdominio que los paquetes requieran; la segunda para el dominio
+principal, de modo tal que en cualquier caso se envie por peticion GET la variable `format` que define el tipo de
+respuesta que se espera.
+
+\section{Linea de comandos}
+Para reducir cualquier brecha de accesibilidad impuesta por la amplia variedad tecnologica en la que vivimos, se ha
+considerado crear un conjunto de programas en linea de comandos, para la administracion eficiente del sistema en su
+totalidad.
+
+Todos los comandos creados, se encontrarán en /shell; estos podrán ser definidos por los paquetes, ademas de existir
+algunos plenamente establecidos en tiempo de instalacion.
+
+\subsection{installer.php}
+Por defecto los unicos paquetes que se distribuyen con la aplicacion son los esenciales (packages, routes, privileges),
+los demas paquetes pueden obtenerse desde internet o desde archivos especificos en el disco, pudiendo instalarse
+cualquier paquete en cualquier momento, siempre y cuando se consideren las dependencias establecidas en cada uno.
+
+Para eso se creó el script \emph{installer.php}, que se encarga de verificar e instalar nuevos paquetes, asi como
+realizar otras tareas de mantenimiento y reparación, descritas en su totalidad en el capítulo 4.
+
+Las opciones del script son:
+
+\begin{description}
+\item [--check] Ejecuta una verificacion de condiciones necesarias para la instalación.
+\item [--install] Instala los paquetes 'base' segun las configuraciones establecidas.
+\end{description}
+
+\section{Sobre modulos, controladores y acciones}
+Todo los recursos (no importando de que tipo, es decir, en su mayor grado de abstraccion) poseen en esencia dos
+controladores iniciales:
+
+\begin{description}
+\item [index (list)] Que presenta una lista de los recursos disponibles.
+\item [manager (admin)] Que presenta el conjunto de funciones disponibles sobre los recursos.
+\end{description}
+
+Estas funciones sobre los recursos, dependiendo del paquete, pueden ser:
+
+\begin{description}
+\item [new (put)] Funcion de creacion de un nuevo recurso.
+\item [view (get)] Funcion de presentacion de la informacion de un recurso.
+\item [edit (post)] Funcion de edicion del recurso.
+\item [delete (delete)] Funcion de eliminacion del recurso.
+\item [lock] Funcion de bloqueo o deshabilitacion del recurso.
+\item [unlock] Funcion de desbloqueo o habilitacion del recurso.
+\end{description}
+
+\section{Paquetes construidos}
+Si bien, ya existian una gran cantidad de paquetes (antes denominados modulos), contemplando varios aspectos, como la
+modularidad, el acoplamiento, entre otros; fueron readecuados a los nuevos requerimientos, muchos fueron eliminados,
+otros nuevos se construyeron, o fusionaron. En el cuadro~\ref{modulos_actuales} se detallan los paquetes de los que se
+dispone en la actualidad y la función que desempeñan.
+
+\begin{table}
+\begin{tabular}{l|l}
+Paquete & Descripción \\
+\hline
+packages & Administración de paquetes del sistema. \\
+privileges & Administración de privilegios del sistema. \\
+routes & Administración de direcciónes (URIs) del sistema. \\
+i18n & Administración y soporte para la utilización de varios idiomas. \\
+templates & Administración de plantillas basado en xslt 1.0. \\
+\hline
+cron & Administración de las funciones automaticas. \\
+mailer & Administración de la cola de envio de correo electronico. \\
+roles & Administración de conjuntos de privilegios. \\
+users & Administración de usuarios. \\
+search & Motor de busqueda sobre la información del sistema. \\
+axon & Administración de conexiones remotas con pares. \\
+spaces & Administración de espacios genericos del sistema. \\
+resources & Administración de recursos genericos del sistema. \\
+\hline
+contacts & Administración de la red de contactos. \\
+communities & Administración de comunidades. \\
+gestions & Administración de periodos académicos. \\
+subjects & Administración de materias. \\
+careers & Administración de carreras. \\
+areas & Administración de áreas temáticas. \\
+groups & Administración de grupos de estudio. \\
+teams & Administración de equipos de trabajo. \\
+evaluations & Manejo de las formas de evaluación en los cursos. \\
+califications & Manejo de notas en los cursos. \\
+tasks & Manejo de tareas en los cursos. \\
+notes & Manejo de recursos tipo nota. \\
+feedback & Manejo de mensajes de retroalimentación. \\
+events & Manejo de recursos tipo evento. \\
+links & Manejo de recursos tipo enlace. \\
+files & Manejo de recursos tipo archivo. \\
+photos & Manejo de recursos tipo fotografía. \\
+videos & Manejo de recursos tipo video. \\
+tags & Manejo de etiquetas sobre recursos. \\
+valorations & Manejo de valoraciones en los usuarios. \\
+stats & Recopilador de información en general. \\
+\hline
+sets & Manejo de grupos de contacto. \\
+invitations & Manejo de invitaciones de registro. \\
+comments & Manejo de comentarios. \\
+ratings & Manejo de rankings sobre recursos. \\
+groupsets & Utilitario de manejo de múltiples grupos. \\
+panels & Sistema de monitoreo y alarma sobre indicadores estadisticos. \\
+awards & Sistema de manejo de reputaciones.
+\end{tabular}
+\caption{Paquetes construidos durante el proyecto.}
+\label{modulos_actuales}
+\end{table}
+
+El objetivo de los siguientes capitulos tratan exclusivamente de la explicación detallada de estos paquetes, detallando
+sus especificaciones y justificación de existencia, enfatizando en como estan relacionados con los objetivos del
+proyecto.
+
+Adicionalmente, en el cuadro~\ref{modulos_eliminados} se detallan los que antes eran modulos y ahora no estan presentes,
+tambien se justifica su eliminación.
+
+\begin{table}
+\begin{tabular}{l|l}
+Modulo & Detalle \\
+\hline
+frontpage & Sus funciones fueron incluidas en el paquete \emph{spaces}. \\
+login & Sus funciones fueron incluidas en el paquete \emph{users}. \\
+menus & Sus funciones fueron incluidas en el paquete \emph{templates}. \\
+paginator & Sus funciones fueron incluidas en el paquete \emph{spaces}. \\
+profile & Sus funciones fueron incluidas en el paquete \emph{users}. \\
+regions & Sus funciones fueron incluidas en el paquete \emph{templates}. \\
+settings & Sus funciones fueron incluidas en el paquete \emph{users}. \\
+toolbar & Sus funciones fueron incluidas en el paquete \emph{templates}. \\
+widgets & Sus funciones fueron incluidas en el paquete \emph{templates}. \\
+\end{tabular}
+\caption{Modulos que no llegaron a ser paquetes.}
+\label{modulos_eliminados}
+\end{table}
