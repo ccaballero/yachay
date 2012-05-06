@@ -99,7 +99,7 @@ class Subjects_SubjectController extends Yachay_Action
             if ($this->acl('gestions', 'view')) {
                 $breadcrumb[$gestion->label] = $this->view->url(array('gestion' => $gestion->url), 'gestions_gestion_view');
             }
-            breadcrumb($breadcrumb);
+            $this->breadcrumb($breadcrumb);
         } else {
             $this->history('subjects/' . $subject->url);
             $breadcrumb = array();
@@ -109,7 +109,7 @@ class Subjects_SubjectController extends Yachay_Action
             if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
                 $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
             }
-            breadcrumb($breadcrumb);
+            $this->breadcrumb($breadcrumb);
         }
     }
 
@@ -136,10 +136,11 @@ class Subjects_SubjectController extends Yachay_Action
         }
 
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $subject->label = $request->getParam('label');
-            $subject->url = convert($subject->label);
+            $subject->url = $convert->convert($subject->label);
             $subject->moderator = $request->getParam('moderator');
             $subject->code = $request->getParam('code');
             $subject->visibility = $request->getParam('visibility');
@@ -190,7 +191,7 @@ class Subjects_SubjectController extends Yachay_Action
         if ($this->acl('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {

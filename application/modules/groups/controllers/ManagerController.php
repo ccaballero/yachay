@@ -50,7 +50,7 @@ class Groups_ManagerController extends Yachay_Action
         if ($this->acl('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -74,12 +74,13 @@ class Groups_ManagerController extends Yachay_Action
         $this->view->group = new Groups_Empty();
 
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $model_groups = new Groups();
             $group = $model_groups->createRow();
             $group->label = $request->getParam('label');
-            $group->url = convert($group->label);
+            $group->url = $convert->convert($group->label);
             $group->teacher = $request->getParam('teacher');
             $group->evaluation = $request->getParam('evaluation');
             $group->description = $request->getParam('description');
@@ -115,7 +116,7 @@ class Groups_ManagerController extends Yachay_Action
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {

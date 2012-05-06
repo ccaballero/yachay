@@ -36,6 +36,6 @@ class Widgets_IndexController extends Yachay_Action
         if ($this->acl('widgets', 'manage')) {
             $breadcrumb['Administrador de widgets'] = $this->view->url(array(), 'widgets_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

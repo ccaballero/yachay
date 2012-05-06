@@ -84,7 +84,7 @@ class Login_IndexController extends Yachay_Action
             $this->view->values = array('username' => $request->getParam('username'));
         }
         $this->history('login');
-        breadcrumb();
+        $this->breadcrumb();
     }
 
     public function outAction() {

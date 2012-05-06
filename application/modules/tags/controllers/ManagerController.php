@@ -24,7 +24,7 @@ class Tags_ManagerController extends Yachay_Action
         if ($this->acl('tags', 'list')) {
             $breadcrumb['Etiquetas'] = $this->view->url(array(), 'tags_list');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

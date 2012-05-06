@@ -205,7 +205,7 @@ class IndexController extends Yachay_Action
         }
     }
 
-    public function spacesAction () {
+    public function spacesAction() {
         global $USER;
 
         $request = $this->getRequest();

@@ -30,7 +30,7 @@ class Videos_VideoController extends Yachay_Action
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
             $breadcrumb['Videos'] = $this->view->url(array('filter' => 'videos'), 'resources_filtered');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -84,7 +84,7 @@ class Videos_VideoController extends Yachay_Action
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Videos'] = $this->view->url(array('filter' => 'videos'), 'resources_filtered');
         $breadcrumb['Video'] = $this->view->url(array('video' => $video->resource), 'videos_video_view');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

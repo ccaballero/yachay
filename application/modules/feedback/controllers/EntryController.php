@@ -31,7 +31,7 @@ class Feedback_EntryController extends Yachay_Action
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
             $breadcrumb['Sugerencias'] = $this->view->url(array('filter' => 'feedback'), 'resources_filtered');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -84,7 +84,7 @@ class Feedback_EntryController extends Yachay_Action
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Sugerencias'] = $this->view->url(array('filter' => 'feedback'), 'resources_filtered');
         $breadcrumb['Entrada'] = $this->view->url(array('entry' => $entry->resource), 'feedback_entry_view');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function markAction() {

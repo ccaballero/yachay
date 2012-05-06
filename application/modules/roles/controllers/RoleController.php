@@ -32,7 +32,7 @@ class Roles_RoleController extends Yachay_Action
         if ($this->acl('roles', array('new', 'assign', 'delete'))) {
             $breadcrumb['Administrador de roles'] = $this->view->url(array(), 'roles_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -48,12 +48,13 @@ class Roles_RoleController extends Yachay_Action
         $this->view->privileges = $model_privileges->selectAll();
 
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $model_roles_privileges = new Roles_Privileges();
 
             $role->label = $request->getParam('label');
-            $role->url = convert($role->label);
+            $role->url = $convert->convert($role->label);
             $role->description = $request->getParam('description');
             $privileges_idents = $request->getParam('privileges');
 
@@ -106,7 +107,7 @@ class Roles_RoleController extends Yachay_Action
         if ($this->acl('roles', 'view')) {
             $breadcrumb[$role->label] = $this->view->url(array('role' => $role->url), 'roles_role_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

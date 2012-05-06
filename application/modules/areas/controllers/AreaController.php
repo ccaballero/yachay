@@ -78,7 +78,7 @@ class Areas_AreaController extends Yachay_Action
         if ($this->acl('areas', array('new', 'delete'))) {
             $breadcrumb['Administrador de areas'] = $this->view->url(array(), 'areas_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -92,10 +92,11 @@ class Areas_AreaController extends Yachay_Action
         $this->context('area', $area);
 
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $area->label = $request->getParam('label');
-            $area->url = convert($area->label);
+            $area->url = $convert->convert($area->label);
             $area->description = $request->getParam('description');
 
             if ($area->isValid()) {
@@ -126,7 +127,7 @@ class Areas_AreaController extends Yachay_Action
         if ($this->acl('areas', 'view')) {
             $breadcrumb[$area->label] = $this->view->url(array('area' => $area->url), 'areas_area_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

@@ -62,6 +62,6 @@ class Widgets_ManagerController extends Yachay_Action
         if ($this->acl('widgets', 'list')) {
             $breadcrumb['Widgets'] = $this->view->url(array(), 'widgets_list');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

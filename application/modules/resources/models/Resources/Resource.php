@@ -58,7 +58,7 @@ class Resources_Resource extends Yachay_Models_Row_Validation
         return ($USER->ident == $this->author);
     }
 
-    public function saveContext ($request) {
+    public function saveContext($request) {
         $publish = $request->getParam('publish');
         list($element, $ident) = @split('-', $publish);
 

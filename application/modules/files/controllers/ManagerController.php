@@ -85,6 +85,6 @@ class Files_ManagerController extends Yachay_Action
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Archivos'] = $this->view->url(array('filter' => 'files'), 'resources_filtered');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

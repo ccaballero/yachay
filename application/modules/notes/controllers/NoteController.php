@@ -30,7 +30,7 @@ class Notes_NoteController extends Yachay_Action
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
             $breadcrumb['Notas'] = $this->view->url(array('filter' => 'notes'), 'resources_filtered');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -88,7 +88,7 @@ class Notes_NoteController extends Yachay_Action
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Notas'] = $this->view->url(array('filter' => 'notes'), 'resources_filtered');
         $breadcrumb['Nota'] = $this->view->url(array('note' => $note->resource), 'notes_note_view');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

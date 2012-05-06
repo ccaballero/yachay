@@ -29,7 +29,7 @@ class Modules_ManagerController extends Yachay_Action
         if ($this->acl('modules', 'list')) {
             $breadcrumb['Modulos'] = $this->view->url(array(), 'modules_list');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -71,7 +71,7 @@ class Modules_ManagerController extends Yachay_Action
         if ($this->acl('modules', array('new', 'lock'))) {
             $breadcrumb['Administrador de modulos'] = $this->view->url(array(), 'modules_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {

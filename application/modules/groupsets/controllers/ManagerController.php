@@ -32,7 +32,7 @@ class Groupsets_ManagerController extends Yachay_Action
         $this->view->groupsets = $array1;
 
         $this->history('groupsets/manager');
-        breadcrumb();
+        $this->breadcrumb();
     }
 
     public function newAction() {
@@ -112,7 +112,7 @@ class Groupsets_ManagerController extends Yachay_Action
         $this->history('groupsets/new');
         $breadcrumb = array();
         $breadcrumb['Conjuntos'] = $this->view->url(array(), 'groupsets_manager');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

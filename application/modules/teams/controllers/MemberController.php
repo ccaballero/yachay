@@ -2,7 +2,7 @@
 
 class Teams_MemberController extends Yachay_Action
 {
-    public function deleteAction () {
+    public function deleteAction() {
         $this->requirePermission('subjects', 'view');
         $request = $this->getRequest();
 

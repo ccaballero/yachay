@@ -30,7 +30,7 @@ class Events_EventController extends Yachay_Action
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
             $breadcrumb['Eventos'] = $this->view->url(array('filter' => 'events'), 'resources_filtered');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -98,7 +98,7 @@ class Events_EventController extends Yachay_Action
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Eventos'] = $this->view->url(array('filter' => 'events'), 'resources_filtered');
         $breadcrumb['Evento'] = $this->view->url(array('event' => $event->resource), 'events_event_view');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

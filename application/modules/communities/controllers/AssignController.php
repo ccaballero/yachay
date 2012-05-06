@@ -58,7 +58,7 @@ class Communities_AssignController extends Yachay_Action
         if ($this->acl('communities', 'view')) {
             $breadcrumb[$community->label] = $this->view->url(array('community' => $community->url), 'communities_community_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {

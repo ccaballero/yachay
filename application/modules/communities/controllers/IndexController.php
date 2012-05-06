@@ -26,6 +26,6 @@ class Communities_IndexController extends Yachay_Action
         if ($this->acl('communities', 'enter')) {
             $breadcrumb['Administrador de comunidades'] = $this->view->url(array(), 'communities_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

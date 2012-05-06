@@ -55,7 +55,7 @@ class Subjects_AssignController extends Yachay_Action
         if ($this->acl('subjects', 'view')) {
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -132,7 +132,7 @@ class Subjects_AssignController extends Yachay_Action
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             $breadcrumb['Miembros'] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_assign');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {
@@ -291,11 +291,13 @@ class Subjects_AssignController extends Yachay_Action
                             $rows = $csv->connect(); //te devuelve el contenido del archivo
 
                             $this->view->step = 2;
+                            
+                            $normalize = new Yachay_Helpers_Normalize();
 
                             $headers = $csv->getHeaders();
                             $_headers = array();
                             foreach ($headers as $header) {
-                                $key = trim(strtoupper(normalize($header)));
+                                $key = trim(strtoupper($normalize->normalize($header)));
                                 $_headers[$key] = $header;
                             }
 
@@ -322,7 +324,7 @@ class Subjects_AssignController extends Yachay_Action
                                         $result['ERROR'] = FALSE;
 
                                         $result['CARGO'] = isset($_headers['CARGO']) ? $row[$_headers['CARGO']] : $_types[$type];
-                                        $assign_type = trim(strtolower(normalize($result['CARGO'])));
+                                        $assign_type = trim(strtolower($normalize->normalize($result['CARGO'])));
 
                                         if (isset($types[$assign_type])) {
                                             if ($user->hasPermission('subjects', $types[$assign_type][0])) {
@@ -408,7 +410,7 @@ class Subjects_AssignController extends Yachay_Action
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             $breadcrumb['Miembros'] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_assign');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function exportAction() {
@@ -487,6 +489,6 @@ class Subjects_AssignController extends Yachay_Action
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             $breadcrumb['Miembros'] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_assign');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

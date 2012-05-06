@@ -11,7 +11,7 @@ class Invitations_ManagerController extends Yachay_Action
         $this->view->invitations = $model_invitations->selectAll();
 
         $this->history('invitations/manager');
-        breadcrumb(array('Administrador de invitaciones' => $this->view->url(array(), 'invitations_manager')));
+        $this->breadcrumb(array('Administrador de invitaciones' => $this->view->url(array(), 'invitations_manager')));
     }
 
     public function newAction() {
@@ -30,7 +30,8 @@ class Invitations_ManagerController extends Yachay_Action
 
             $code_valid = false;
             while (!$code_valid) {
-                $code = generatecode('alphanum', NULL, 64);
+                $generateCode = new Yachay_Helpers_GenerateCode();
+                $code = $generateCode->generateCode('alphanum', NULL, 64);
                 $existent_invitation = $model_invitations->findByCode(md5($config->yachay->properties->key . $code));
                 if (empty($existent_invitation)) {
                     $code_valid = true;
@@ -77,7 +78,7 @@ class Invitations_ManagerController extends Yachay_Action
         }
 
         $this->history('invitations/manager');
-        breadcrumb(array(
+        $this->breadcrumb(array(
             'Administrador de invitaciones' => $this->view->url(array(), 'invitations_manager'),
             'Nueva invitación' => $this->view->url(array(), 'invitations_new'),
         ));

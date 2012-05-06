@@ -75,6 +75,7 @@ class Tags extends Yachay_Models_Table
         }
 
         // add new tags
+        $convert = new Yachay_Helpers_Convert();
         foreach ($saved_tags as $tag_label) {
             if ($tag_label <> NULL) {
                 $tag_label = trim(strtolower($tag_label));
@@ -84,14 +85,14 @@ class Tags extends Yachay_Models_Table
                     $tag = $this->createRow();
                     $tag->label = $tag_label;
 
-                    $tag->url = convert($tag->label);
+                    $tag->url = $convert->convert($tag->label);
                     $count = 1;
                     while ($count <> 0) {
                         $_tag = $this->findByUrl($tag->url);
                         if (empty($_tag)) {
                             $count = 0;
                         } else {
-                            $tag->url = convert($tag->label . $count);
+                            $tag->url = $convert->convert($tag->label . $count);
                             $count++;
                         }
                     }

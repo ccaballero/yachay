@@ -35,7 +35,7 @@ class Users_ManagerController extends Yachay_Action
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -45,13 +45,14 @@ class Users_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $model_users = new Users();
             $user = $model_users->createRow();
 
             $user->label = $request->getParam('label');
-            $user->url = convert($user->label);
+            $user->url = $convert->convert($user->label);
             $user->password = $request->getParam('password');
             $user->code = $request->getParam('code');
             $user->formalname = $request->getParam('formal');
@@ -81,7 +82,8 @@ class Users_ManagerController extends Yachay_Action
 
                 if ($valid_role) {
                     // Password generation
-                    $password = generatecode($user->password, $user->code);
+                    $generateCode = new Yachay_Helpers_GenerateCode();
+                    $password = $generateCode->generateCode($user->password, $user->code);
                     $user->password = md5($config->yachay->properties->key . $password);
 
                     $user->tsregister = time();
@@ -130,7 +132,7 @@ class Users_ManagerController extends Yachay_Action
         if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {
@@ -296,10 +298,12 @@ class Users_ManagerController extends Yachay_Action
 
                             $this->view->step = 2;
 
+                            $normalize = new Yachay_Helpers_Normalize();
+                            
                             $headers = $csv->getHeaders();
                             $_headers = array();
                             foreach ($headers as $header) {
-                                $key = trim(strtoupper(normalize($header)));
+                                $key = trim(strtoupper($normalize->normalize($header)));
                                 $_headers[$key] = $header;
                             }
 
@@ -377,6 +381,7 @@ class Users_ManagerController extends Yachay_Action
                 }
             } else {
                 if (isset($session->import_users)) {
+                    $convert = new Yachay_Helpers_Convert();
                     $count_new = 0;
                     $count_edit = 0;
                     foreach ($session->import_users as $result) {
@@ -386,8 +391,10 @@ class Users_ManagerController extends Yachay_Action
                                 $user->code = $result['CODIGO'];
                                 $user->status = 'active';
                                 $user->tsregister = time();
+
                                 // Password generation
-                                $password = generatecode($result['PASSWORD'], $result['CODIGO']);
+                                $generateCode = new Yachay_Helpers_GenerateCode();
+                                $password = $generateCode->generateCode($result['PASSWORD'], $result['CODIGO']);
                                 $user->password = md5($config->yachay->properties->key . $password);
                             }
                             if (!$result['CODIGO_NUE'] && Yachay_Acl::hasPermission('users', 'edit')) {
@@ -399,7 +406,7 @@ class Users_ManagerController extends Yachay_Action
                                 }
                                 $user->formalname = $result['NOMBRE COMPLETO'];
                                 $user->label = $result['USUARIO'];
-                                $user->url = convert($user->label);
+                                $user->url = $convert->convert($user->label);
                                 $user->email = $result['CORREO ELECTRONICO'];
                                 $user->surname = $result['APELLIDOS'];
                                 $user->name = $result['NOMBRES'];
@@ -449,7 +456,7 @@ class Users_ManagerController extends Yachay_Action
         if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function exportAction() {
@@ -511,6 +518,6 @@ class Users_ManagerController extends Yachay_Action
         if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

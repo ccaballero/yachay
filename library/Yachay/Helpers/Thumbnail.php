@@ -2,7 +2,7 @@
 
 class Yachay_Helpers_Thumbnail
 {
-    public function thumbnail ($copy_from, $copy_to, $maxwidth, $maxheight) {
+    public function thumbnail($copy_from, $copy_to, $maxwidth, $maxheight) {
         $position = strpos($copy_from, '.');
         $extension = strtolower(substr($copy_from, ++$position));
 
@@ -28,7 +28,7 @@ class Yachay_Helpers_Thumbnail
         $ratio = $width / $height;
         if ($ratio == 1) {
             $newwidth = $maxwidth;
-            $newheigth = $maxwidth;
+            $newheight = $maxwidth;
         } else if ($ratio > 1) {
             $newwidth = $maxwidth;
             $newheight = $maxwidth / $ratio;

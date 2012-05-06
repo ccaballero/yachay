@@ -33,7 +33,7 @@ class Gestions_ManagerController extends Yachay_Action
         if ($this->acl('gestions', 'list')) {
             $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_list');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -43,12 +43,13 @@ class Gestions_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $model_gestions = new Gestions();
             $gestion = $model_gestions->createRow();
             $gestion->label = $request->getParam('label');
-            $gestion->url = convert($gestion->label);
+            $gestion->url = $convert->convert($gestion->label);
 
             if ($gestion->isValid()) {
                 $gestion->tsregister = time();
@@ -75,6 +76,6 @@ class Gestions_ManagerController extends Yachay_Action
         if ($this->acl('gestions', array('new', 'active', 'delete'))) {
             $breadcrumb['Administrador de gestiones'] = $this->view->url(array(), 'gestions_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

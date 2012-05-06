@@ -2,7 +2,7 @@
 
 class Califications_ManagerController extends Yachay_Action
 {
-    public function indexAction () {
+    public function indexAction() {
         $this->requirePermission('subjects', 'view');
         $request = $this->getRequest();
 
@@ -136,7 +136,7 @@ class Califications_ManagerController extends Yachay_Action
             }
             $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function importAction() {
@@ -215,10 +215,12 @@ class Califications_ManagerController extends Yachay_Action
 
                             $this->view->step = 2;
 
+                            $normalize = new Yachay_Helpers_Normalize();
+
                             $headers = $csv->getHeaders();
                             $_headers = array();
                             foreach ($headers as $header) {
-                                $key = trim(strtoupper(normalize($header)));
+                                $key = trim(strtoupper($normalize->normalize($header)));
                                 $_headers[$key] = $header;
                             }
 
@@ -357,7 +359,7 @@ class Califications_ManagerController extends Yachay_Action
             $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
             $breadcrumb['Calificaciones'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'califications_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function exportAction() {
@@ -473,6 +475,6 @@ class Califications_ManagerController extends Yachay_Action
             $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
             $breadcrumb['Calificaciones'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'califications_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

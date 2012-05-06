@@ -3,8 +3,6 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initConfig() {
-        require_once APPLICATION_PATH . '/../library/Yachay/Utils.php';
-
         $config = new Zend_Config($this->getOptions());
         Zend_Registry::set('config', $config);
         return $config;

@@ -87,6 +87,6 @@ class Events_ManagerController extends Yachay_Action
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Eventos'] = $this->view->url(array('filter' => 'events'), 'resources_filtered');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

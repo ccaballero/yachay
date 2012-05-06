@@ -29,6 +29,6 @@ class Users_IndexController extends Yachay_Action
         if ($this->acl('users', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Administrador de usuarios'] = $this->view->url(array(), 'users_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

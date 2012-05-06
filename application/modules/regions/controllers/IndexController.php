@@ -33,6 +33,6 @@ class Regions_IndexController extends Yachay_Action
         if ($this->acl('regions', 'manage')) {
             $breadcrumb['Administrador de regiones'] = $this->view->url(array(), 'regions_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

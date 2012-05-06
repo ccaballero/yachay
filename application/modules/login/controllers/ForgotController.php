@@ -33,7 +33,8 @@ class Login_ForgotController extends Yachay_Action
 
             $input = new Zend_Filter_Input($filters, $validators, $_POST, $options);
             if ($input->isValid()) {
-                $code = generatecode();
+                $generateCode = new Yachay_Helpers_GenerateCode();
+                $code = $generateCode->generateCode();
 
                 $model_users = new Users();
                 $user = $model_users->findByEmail($input->email);
@@ -92,6 +93,6 @@ class Login_ForgotController extends Yachay_Action
         $this->history('forgot');
         $breadcrumb = array();
         $breadcrumb['Ingresar'] = $this->view->url(array(), 'login_in');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

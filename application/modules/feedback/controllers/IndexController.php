@@ -22,6 +22,6 @@ class Feedback_IndexController extends Yachay_Action
         if ($this->acl('feedback', array('resolv', 'mark', 'delete'))) {
             $breadcrumb['Administrador de sugerencias'] = $this->view->url(array(), 'feedback_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

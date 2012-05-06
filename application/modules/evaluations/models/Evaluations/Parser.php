@@ -8,7 +8,7 @@ class Evaluations_Parser extends Xcel_Parser
     private $_user;
     private $_evaluation;
 
-    public function Evaluations_Parser ($evaluation) {
+    public function Evaluations_Parser($evaluation) {
         $this->_evaluation = $evaluation;
     }
 

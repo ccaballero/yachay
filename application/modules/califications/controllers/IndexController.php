@@ -70,6 +70,6 @@ class Califications_IndexController extends Yachay_Action
         }
 
         $this->history('califications');
-        breadcrumb();
+        $this->breadcrumb();
     }
 }

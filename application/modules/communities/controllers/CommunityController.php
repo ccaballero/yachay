@@ -40,7 +40,7 @@ class Communities_CommunityController extends Yachay_Action
         if ($this->acl('communities', 'enter')) {
             $breadcrumb['Administrador de comunidades'] = $this->view->url(array(), 'communities_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -62,10 +62,11 @@ class Communities_CommunityController extends Yachay_Action
         }
 
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $community->label = $request->getParam('label');
-            $community->url = convert($community->label);
+            $community->url = $convert->convert($community->label);
             $community->mode = $request->getParam('mode');
             $community->description = $request->getParam('description');
 
@@ -118,7 +119,7 @@ class Communities_CommunityController extends Yachay_Action
         if ($this->acl('communities', 'view')) {
             $breadcrumb[$community->label] = $this->view->url(array('community' => $community->url), 'communities_community_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

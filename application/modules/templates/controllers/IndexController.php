@@ -10,6 +10,6 @@ class Templates_IndexController extends Yachay_Action
         $this->view->templates = $model_templates->selectAll();
 
         $this->history('templates');
-        breadcrumb();
+        $this->breadcrumb();
     }
 }

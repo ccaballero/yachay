@@ -10,6 +10,23 @@ abstract class Yachay_Action extends Zend_Controller_Action
         $session->currentPage = $config->resources->frontController->baseUrl . '/' . $url_page;
     }
     
+    public function breadcrumb($elements = array()) {
+        global $BREADCRUMB;
+        $config = Zend_Registry::get('config');
+
+        $BREADCRUMB->items[] = array(
+            'link'  => $config->resources->frontController->baseUrl,
+            'label' => 'Inicio',
+        );
+
+        foreach ($elements as $element => $url) {
+            $BREADCRUMB->items[] = array(
+                'link' => $url,
+                'label' => $element,
+            );
+        }
+    }
+    
     public function context($type, $value = null) {
         $session = new Zend_Session_Namespace('yachay');
 

@@ -43,6 +43,6 @@ class Roles_AssignController extends Yachay_Action
         if ($this->acl('roles', array('new', 'assign', 'delete'))) {
             $breadcrumb['Administrador de roles'] = $this->view->url(array(), 'roles_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

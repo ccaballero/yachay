@@ -30,7 +30,7 @@ class Files_FileController extends Yachay_Action
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
             $breadcrumb['Archivos'] = $this->view->url(array('filter' => 'files'), 'resources_filtered');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -83,7 +83,7 @@ class Files_FileController extends Yachay_Action
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Archivos'] = $this->view->url(array('filter' => 'files'), 'resources_filtered');
         $breadcrumb['Archivo'] = $this->view->url(array('file' => $file->resource), 'files_file_view');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function downloadAction() {

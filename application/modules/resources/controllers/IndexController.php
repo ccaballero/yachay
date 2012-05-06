@@ -22,7 +22,7 @@ class Resources_IndexController extends Yachay_Action
         $this->view->active = 'all';
 
         $this->history('resources');
-        breadcrumb();
+        $this->breadcrumb();
     }
 
     public function filteredAction() {
@@ -122,6 +122,6 @@ class Resources_IndexController extends Yachay_Action
         $this->history('resources');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     } 
 }

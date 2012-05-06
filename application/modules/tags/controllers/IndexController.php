@@ -28,6 +28,6 @@ class Tags_IndexController extends Yachay_Action
         if ($this->acl('tags', 'delete')) {
             $breadcrumb['Administrador de etiquetas'] = $this->view->url(array(), 'tags_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

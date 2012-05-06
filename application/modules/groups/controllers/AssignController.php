@@ -62,7 +62,7 @@ class Groups_AssignController extends Yachay_Action
             }
             $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -157,7 +157,7 @@ class Groups_AssignController extends Yachay_Action
             $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
             $breadcrumb['Miembros'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_assign');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {
@@ -334,10 +334,12 @@ class Groups_AssignController extends Yachay_Action
 
                             $this->view->step = 2;
 
+                            $normalize = new Yachay_Helpers_Normalize();
+
                             $headers = $csv->getHeaders();
                             $_headers = array();
                             foreach ($headers as $header) {
-                                $key = trim(strtoupper(normalize($header)));
+                                $key = trim(strtoupper($normalize->normalize($header)));
                                 $_headers[$key] = $header;
                             }
 
@@ -365,7 +367,7 @@ class Groups_AssignController extends Yachay_Action
                                         $result['ASSIGN_RES'] = TRUE;
 
                                         $result['CARGO'] = isset($_headers['CARGO']) ? $row[$_headers['CARGO']] : $_types[$type];
-                                        $assign_type = trim(strtolower(normalize($result['CARGO'])));
+                                        $assign_type = trim(strtolower($normalize->normalize($result['CARGO'])));
 
                                         if (isset($types[$assign_type])) {
                                             if ($user->hasPermission('subjects', $types[$assign_type][0])) {
@@ -489,7 +491,7 @@ class Groups_AssignController extends Yachay_Action
             $breadcrumb['Grupo ' .$group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
             $breadcrumb['Miembros'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_assign');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function exportAction() {
@@ -571,6 +573,6 @@ class Groups_AssignController extends Yachay_Action
             $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
             $breadcrumb['Miembros'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_assign');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

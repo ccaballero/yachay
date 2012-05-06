@@ -44,7 +44,7 @@ class Feedback_ManagerController extends Yachay_Action
         if ($this->acl('feedback', array('resolv', 'mark', 'delete'))) {
             $breadcrumb['Administrador de sugerencias'] = $this->view->url(array(), 'feedback_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -100,7 +100,7 @@ class Feedback_ManagerController extends Yachay_Action
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Sugerencias'] = $this->view->url(array('filter' => 'feedback'), 'resources_filtered');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function markAction() {

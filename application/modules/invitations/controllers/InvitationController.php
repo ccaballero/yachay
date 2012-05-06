@@ -27,11 +27,13 @@ class Invitations_InvitationController extends Yachay_Action
         $this->view->user = new Users_Empty();
 
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
+
             $model_users = new Users();
             $user = $model_users->createRow();
 
             $user->label = $request->getParam('label');
-            $user->url = convert($user->label);
+            $user->url = $convert->convert($user->label);
             $user->password = 'alphanum';
             $user->email = $invitation->email;
             $user->surname = $request->getParam('surname');
@@ -42,7 +44,8 @@ class Invitations_InvitationController extends Yachay_Action
 
             if ($user->isValid()) {
                 // Password generation
-                $password = generatecode($user->password, $user->code);
+                $generateCode = new Yachay_Helpers_GenerateCode();
+                $password = $generateCode->generateCode($user->password, $user->code);
                 $user->password = md5($config->yachay->properties->key . $password);
 
                 $user->sociability = 1;
@@ -95,7 +98,7 @@ class Invitations_InvitationController extends Yachay_Action
             $this->view->user = $user;
         }
 
-        breadcrumb();
+        $this->breadcrumb();
     }
 
     public function deleteAction() {

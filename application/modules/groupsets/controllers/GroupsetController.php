@@ -45,7 +45,7 @@ class Groupsets_GroupsetController extends Yachay_Action
         $this->history('groupsets/' . $groupset->ident);
         $breadcrumb = array();
         $breadcrumb['Conjuntos'] = $this->view->url(array(), 'groupsets_manager');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -137,7 +137,7 @@ class Groupsets_GroupsetController extends Yachay_Action
         $breadcrumb = array();
         $breadcrumb['Conjuntos'] = $this->view->url(array(), 'groupsets_manager');
         $breadcrumb[$groupset->label] = $this->view->url(array('groupset' => $groupset->ident), 'groupsets_groupset_view');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

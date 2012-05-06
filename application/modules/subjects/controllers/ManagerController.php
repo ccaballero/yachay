@@ -44,7 +44,7 @@ class Subjects_ManagerController extends Yachay_Action
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -68,12 +68,13 @@ class Subjects_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $model_subjects = new Subjects();
             $subject = $model_subjects->createRow();
             $subject->label = $request->getParam('label');
-            $subject->url = convert($subject->label);
+            $subject->url = $convert->convert($subject->label);
             $subject->moderator = $request->getParam('moderator');
             $subject->code = $request->getParam('code');
             $subject->visibility = $request->getParam('visibility');
@@ -135,7 +136,7 @@ class Subjects_ManagerController extends Yachay_Action
         if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {
@@ -249,10 +250,12 @@ class Subjects_ManagerController extends Yachay_Action
 
                             $this->view->step = 2;
 
+                            $normalize = new Yachay_Helpers_Normalize();
+
                             $headers = $csv->getHeaders();
                             $_headers = array();
                             foreach ($headers as $header) {
-                                $key = trim(strtoupper(normalize($header)));
+                                $key = trim(strtoupper($normalize->normalize($header)));
                                 $_headers[$key] = $header;
                             }
 
@@ -318,6 +321,7 @@ class Subjects_ManagerController extends Yachay_Action
                 }
             } else {
                 if (isset($session->import_subjects)) {
+                    $convert = new Yachay_Helpers_Convert();
                     $count_new = 0;
                     $count_edit = 0;
                     foreach ($session->import_subjects as $result) {
@@ -335,7 +339,7 @@ class Subjects_ManagerController extends Yachay_Action
                             }
                             if (isset($subject)) {
                                 $subject->label = $result['MATERIA'];
-                                $subject->url = convert($subject->label);
+                                $subject->url = $convert->convert($subject->label);
                                 if (isset($result['MODERADOR_OBJ'])) {
                                     $subject->moderator = $result['MODERADOR_OBJ']->ident;
                                 }
@@ -369,7 +373,7 @@ class Subjects_ManagerController extends Yachay_Action
         if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function exportAction() {
@@ -431,6 +435,6 @@ class Subjects_ManagerController extends Yachay_Action
         if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Administrador de materias'] = $this->view->url(array(), 'subjects_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

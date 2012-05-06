@@ -41,6 +41,6 @@ class Settings_IndexController extends Yachay_Action
         $this->view->user = $user;
 
         $this->history('settings/' . $user->url);
-        breadcrumb();
+        $this->breadcrumb();
     }
 }

@@ -60,7 +60,7 @@ class Teams_ManagerController extends Yachay_Action
             }
             $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -89,12 +89,13 @@ class Teams_ManagerController extends Yachay_Action
         $this->view->team = new Teams_Empty();
 
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $model_teams = new Teams();
             $team = $model_teams->createRow();
             $team->label = $request->getParam('label');
-            $team->url = convert($team->label);
+            $team->url = $convert->convert($team->label);
             $team->description = $request->getParam('description');
             $team->group = $group->ident;
 
@@ -133,7 +134,7 @@ class Teams_ManagerController extends Yachay_Action
                 $breadcrumb['Equipos'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'teams_manager');
             }
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {

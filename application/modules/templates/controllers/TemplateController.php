@@ -52,7 +52,7 @@ class Templates_TemplateController extends Yachay_Action
         $this->history('templates/view/' . $template->label);
         $breadcrumb = array();
         $breadcrumb['Temas'] = $this->view->url(array(), 'templates_list');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function switchAction() {

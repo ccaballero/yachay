@@ -44,8 +44,6 @@ class Teams_AssignController extends Yachay_Action
         }
 
         if ($request->isPost()) {
-            $session = new Zend_Session_Namespace('yachay');
-
             $selects = $request->getParam('team');
             foreach ($selects as $member_ident => $team_ident) {
                 $member_ident = intval($member_ident);
@@ -87,6 +85,6 @@ class Teams_AssignController extends Yachay_Action
                 $breadcrumb['Equipos'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'teams_manager');
             }
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

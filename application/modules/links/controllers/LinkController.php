@@ -30,7 +30,7 @@ class Links_LinkController extends Yachay_Action
             $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
             $breadcrumb['Enlaces'] = $this->view->url(array('filter' => 'links'), 'resources_filtered');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -89,7 +89,7 @@ class Links_LinkController extends Yachay_Action
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Enlaces'] = $this->view->url(array('filter' => 'links'), 'resources_filtered');
         $breadcrumb['Enlace'] = $this->view->url(array('link' => $link->resource), 'links_link_view');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

@@ -44,6 +44,6 @@ class Pages_ManagerController extends Yachay_Action
         if ($this->acl('pages', 'list')) {
             $breadcrumb['Paginas'] = $this->view->url(array(), 'pages_list');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

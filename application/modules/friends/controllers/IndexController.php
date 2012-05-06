@@ -18,7 +18,7 @@ class Friends_IndexController extends Yachay_Action
         $this->view->friends = $friends;
 
         $this->history('friends');
-        breadcrumb();
+        $this->breadcrumb();
     }
 
     public function followingsAction() {
@@ -37,7 +37,7 @@ class Friends_IndexController extends Yachay_Action
         $this->view->followings = $followings;
 
         $this->history('friends/followings');
-        breadcrumb();
+        $this->breadcrumb();
     }
 
     public function followersAction() {
@@ -56,6 +56,6 @@ class Friends_IndexController extends Yachay_Action
         $this->view->followers = $followers;
 
         $this->history('friends/followers');
-        breadcrumb();
+        $this->breadcrumb();
     }
 }

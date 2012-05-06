@@ -19,7 +19,7 @@ class Profile_IndexController extends Yachay_Action
         $this->view->user = $user;
 
         $this->history('profile');
-        breadcrumb();
+        $this->breadcrumb();
     }
 
     public function editAction() {
@@ -46,10 +46,11 @@ class Profile_IndexController extends Yachay_Action
         }
 
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $user->label = $request->getParam('label');
-            $user->url = convert($user->label);
+            $user->url = $convert->convert($user->label);
             $user->email = $request->getParam('email');
             $user->surname = $request->getParam('surname');
             $user->name = $request->getParam('name');
@@ -104,6 +105,6 @@ class Profile_IndexController extends Yachay_Action
         $this->history('profile/edit');
         $breadcrumb = array();
         $breadcrumb['Perfil'] = $this->view->url(array(), 'profile_view');
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

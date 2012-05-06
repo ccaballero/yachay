@@ -62,7 +62,7 @@ class Gestions_GestionController extends Yachay_Action
         if ($this->acl('gestions', array('new', 'active', 'delete'))) {
             $breadcrumb['Administrador de gestiones'] = $this->view->url(array(), 'gestions_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function deleteAction() {

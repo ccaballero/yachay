@@ -60,7 +60,7 @@ class Groups_GroupController extends Yachay_Action
                 $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');
             }
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -85,10 +85,11 @@ class Groups_GroupController extends Yachay_Action
         $this->context('group', $group);
 
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $group->label = $request->getParam('label');
-            $group->url = convert($group->label);
+            $group->url = $convert->convert($group->label);
             $group->teacher = $request->getParam('teacher');
             $group->evaluation = $request->getParam('evaluation');
             $group->description = $request->getParam('description');
@@ -123,7 +124,7 @@ class Groups_GroupController extends Yachay_Action
             $breadcrumb['Grupos'] = $this->view->url(array('subject' => $subject->url), 'groups_manager');
             $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function calificationAction() {
@@ -184,7 +185,7 @@ class Groups_GroupController extends Yachay_Action
             $breadcrumb[$subject->label] = $this->view->url(array('subject' => $subject->url), 'subjects_subject_view');
             $breadcrumb['Grupo ' . $group->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {

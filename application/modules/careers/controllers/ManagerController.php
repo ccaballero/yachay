@@ -16,7 +16,7 @@ class Careers_ManagerController extends Yachay_Action
         if ($this->acl('careers', 'list')) {
             $breadcrumb['Carreras'] = $this->view->url(array(), 'careers_list');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function newAction() {
@@ -26,12 +26,13 @@ class Careers_ManagerController extends Yachay_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $model_careers = new Careers();
             $career = $model_careers->createRow();
             $career->label = $request->getParam('label');
-            $career->url = convert($career->label);
+            $career->url = $convert->convert($career->label);
             $career->description = $request->getParam('description');
 
             if ($career->isValid()) {
@@ -59,6 +60,6 @@ class Careers_ManagerController extends Yachay_Action
         if ($this->acl('careers', array('new', 'delete'))) {
             $breadcrumb['Administrador de carreras'] = $this->view->url(array(), 'careers_manager');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 }

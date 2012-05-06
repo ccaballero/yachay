@@ -70,7 +70,7 @@ class Teams_TeamController extends Yachay_Action
                 $breadcrumb['Equipos'] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'teams_manager');
             }
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function editAction() {
@@ -99,10 +99,11 @@ class Teams_TeamController extends Yachay_Action
         $this->context('team', $team);
 
         if ($request->isPost()) {
+            $convert = new Yachay_Helpers_Convert();
             $session = new Zend_Session_Namespace('yachay');
 
             $team->label = $request->getParam('label');
-            $team->url = convert($team->label);
+            $team->url = $convert->convert($team->label);
             $team->description = $request->getParam('description');
 
             if ($team->isValid()) {
@@ -143,7 +144,7 @@ class Teams_TeamController extends Yachay_Action
             }
             $breadcrumb[$team->label] = $this->view->url(array('subject' => $subject->url, 'group' => $group->url, 'team' => $team->url), 'teams_team_view');
         }
-        breadcrumb($breadcrumb);
+        $this->breadcrumb($breadcrumb);
     }
 
     public function lockAction() {
