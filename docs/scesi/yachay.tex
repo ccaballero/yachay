@@ -1,0 +1,84 @@
+\documentclass[letter,12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\renewcommand*\familydefault{\sfdefault}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{pifont}
+\usepackage[
+pdfauthor={Carlos Caballero Burgoa},%
+pdftitle={Proyecto Yachay},%
+colorlinks,%
+citecolor=black,%
+filecolor=black,%
+linkcolor=black,%
+%urlcolor=black
+pdftex]{hyperref}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+
+% Para la primera página
+\fancypagestyle{plain}{
+\fancyhead[l]{}
+\fancyhead[r]{}
+\fancyhead[c]{}
+\renewcommand{\headrulewidth}{0.5pt}
+\fancyfoot[l]{SCESI \\ Sociedad Científica de Estudiantes de Sistemas e Informática}
+\fancyfoot[c]{}
+\fancyfoot[r]{\thepage/\pageref{LastPage}}
+\renewcommand{\footrulewidth}{0.5pt}}
+
+% Para el resto de páginas
+\lhead{Proyecto Yachay}
+\chead{}
+\rhead{\includegraphics[width=0.1\textwidth]{scesi.png}}
+\renewcommand{\headrulewidth}{0.4pt}
+\lfoot{SCESI \\ Sociedad Científica de Estudiantes de Sistemas e Informática \\ 
+\url {http://scesi.fcyt.umss.edu.bo}}
+\cfoot{}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\title{\bf Yachay}
+\author{Carlos Caballero Burgoa} 
+
+\begin{document}
+\maketitle
+\begin{center}\includegraphics[width=0.48\textwidth]{yachay.png}\end{center}
+\begin{center}\url {http://scesi.fcyt.umss.edu.bo}\end{center}
+\pagebreak
+
+\tableofcontents
+\pagebreak
+
+\section{Introducción}
+
+\section{Antecedentes}
+
+\section{Definición del Problema}
+
+
+\section{Objetivo General}
+Implantar sobre la infraestructura de la sociedad cientifica, el sistema yachay para fomentar el uso y desarrollo de esta.
+
+\section{Objetivos Específicos}
+\begin{itemize}
+\item Crear un marco de trabajo en el que puedan ser captadas todas las iniciativas de tipo local.
+\item Aprovechar el conocimiento acerca de la herramienta, para proveer funciones especializadas.
+\end{itemize}
+
+\section{Herramientas}
+
+\section{Justificación}
+
+\begin{thebibliography}{99}
+\end{thebibliography}
+
+\end{document}          

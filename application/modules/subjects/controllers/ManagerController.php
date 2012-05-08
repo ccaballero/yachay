@@ -1,6 +1,6 @@
 <?php
 
-class Subjects_ManagerController extends Yachay_Action
+class Subjects_ManagerController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('subjects', 'list');
@@ -48,8 +48,6 @@ class Subjects_ManagerController extends Yachay_Action
     }
 
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'new');
 
         $model_areas = new Areas();
@@ -93,7 +91,7 @@ class Subjects_ManagerController extends Yachay_Action
             $subject->gestion = $gestion->ident;
 
             if ($subject->isValid()) {
-                $subject->author = $USER->ident;
+                $subject->author = $this->user->ident;
                 $subject->tsregister = time();
                 $subject->save();
 
@@ -201,8 +199,6 @@ class Subjects_ManagerController extends Yachay_Action
     }
 
     public function importAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'import');
         $this->requirePermission('subjects', array('new', 'edit'));
 
@@ -278,7 +274,7 @@ class Subjects_ManagerController extends Yachay_Action
                                     $result['VISIBILIDAD'] = isset($_headers['VISIBILIDAD']) ? $row[$_headers['VISIBILIDAD']] : 'private';
                                     $result['DESCRIPCION'] = isset($_headers['DESCRIPCION']) ? $row[$_headers['DESCRIPCION']] : '';
 
-                                    $result['MODERADOR'] = isset($_headers['MODERADOR']) ? $row[$_headers['MODERADOR']] : $USER->label;
+                                    $result['MODERADOR'] = isset($_headers['MODERADOR']) ? $row[$_headers['MODERADOR']] : $this->user->label;
                                     $moderator = $model_users->findByLabel($result['MODERADOR']);
                                     if (!empty($moderator)) {
                                         if ($moderator->hasPermission('subjects', 'moderate')) {
@@ -331,7 +327,7 @@ class Subjects_ManagerController extends Yachay_Action
                                 $subject->gestion = $gestion->ident;
                                 $subject->code = $result['CODIGO'];
                                 $subject->status = 'inactive';
-                                $subject->author = $USER->ident;
+                                $subject->author = $this->user->ident;
                                 $subject->tsregister = time();
                             }
                             if (!$result['CODIGO_NUE'] && $this->acl('subjects', 'edit')) {

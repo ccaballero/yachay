@@ -1,6 +1,6 @@
 <?php
 
-class Users_ManagerController extends Yachay_Action
+class Users_ManagerController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('users', 'list');
@@ -41,7 +41,7 @@ class Users_ManagerController extends Yachay_Action
     public function newAction() {
         $this->requirePermission('users', 'new');
 
-        $this->view->user = new Users_Empty();
+        $this->view->user = new Users_Empty(); // Overwrite
 
         $request = $this->getRequest();
         if ($request->isPost()) {
@@ -67,12 +67,9 @@ class Users_ManagerController extends Yachay_Action
             $user->role = $request->getParam('role');
 
             if ($user->isValid()) {
-                $config = Zend_Registry::get('config');
-
                 // role validation,, critical point
-                global $USER;
                 $model_roles = new Roles();
-                $roles = $model_roles->selectByIncludes($USER->role);
+                $roles = $model_roles->selectByIncludes($this->user->role);
                 $valid_role = false;
                 foreach ($roles as $role) {
                     if ($role->ident == $user->role) {
@@ -84,7 +81,7 @@ class Users_ManagerController extends Yachay_Action
                     // Password generation
                     $generateCode = new Yachay_Helpers_GenerateCode();
                     $password = $generateCode->generateCode($user->password, $user->code);
-                    $user->password = md5($config->yachay->properties->key . $password);
+                    $user->password = md5($this->config->yachay->properties->key . $password);
 
                     $user->tsregister = time();
                     $user->save();
@@ -96,14 +93,14 @@ class Users_ManagerController extends Yachay_Action
                         $view->setScriptPath(APPLICATION_PATH . '/modules/users/views/scripts/user/');
 
                         $view->user       = $user;
-                        $view->servername = $config->yachay->properties->servername;
-                        $view->author     = $USER->label;
+                        $view->servername = $this->config->yachay->properties->servername;
+                        $view->author     = $this->user->label;
                         $view->password   = $password;
 
                         $content = $view->render('mail.php');
                         $mail = new Zend_Mail('UTF-8');
                         $mail->setBodyHtml($content)
-                             ->setFrom($config->yachay->properties->email_direction, $config->yachay->properties->email_name)
+                             ->setFrom($this->config->yachay->properties->email_direction, $this->config->yachay->properties->email_name)
                              ->addTo($user->email, $user->getFullName())
                              ->setSubject('Notificacion de registro de usuario')
                              ->send();
@@ -121,7 +118,7 @@ class Users_ManagerController extends Yachay_Action
                 }
             }
 
-            $this->view->user = $user;
+            $this->view->user = $user; // Overwrite
         }
 
         $this->history('users/new');
@@ -136,8 +133,6 @@ class Users_ManagerController extends Yachay_Action
     }
 
     public function lockAction() {
-        global $USER;
-
         $this->requirePermission('users', 'lock');
         $request = $this->getRequest();
 
@@ -145,7 +140,7 @@ class Users_ManagerController extends Yachay_Action
             $check = $request->getParam("check");
 
             $model_roles = new Roles();
-            $roles = $model_roles->selectByIncludes($USER->role);
+            $roles = $model_roles->selectByIncludes($this->user->role);
 
             foreach ($check as $value) {
                 $model_users = new Users();
@@ -172,8 +167,6 @@ class Users_ManagerController extends Yachay_Action
     }
 
     public function unlockAction() {
-        global $USER;
-
         $this->requirePermission('users', 'lock');
         $request = $this->getRequest();
 
@@ -181,7 +174,7 @@ class Users_ManagerController extends Yachay_Action
             $check = $request->getParam("check");
 
             $model_roles = new Roles();
-            $roles = $model_roles->selectByIncludes($USER->role);
+            $roles = $model_roles->selectByIncludes($this->user->role);
 
             foreach ($check as $value) {
                 $model_users = new Users();
@@ -208,15 +201,13 @@ class Users_ManagerController extends Yachay_Action
     }
 
     public function deleteAction() {
-        global $USER;
-
         $this->requirePermission('users', 'delete');
         $request = $this->getRequest();
         if ($request->isPost()) {
             $check = $request->getParam("check");
 
             $model_roles = new Roles();
-            $roles = $model_roles->selectByIncludes($USER->role);
+            $roles = $model_roles->selectByIncludes($this->user->role);
 
             foreach ($check as $value) {
                 $model_users = new Users();
@@ -242,10 +233,6 @@ class Users_ManagerController extends Yachay_Action
     }
 
     public function importAction() {
-        global $USER;
-        
-        $config = Zend_Registry::get('config');
-
         $this->requirePermission('users', 'import');
         $this->requirePermission('users', array('new', 'edit'));
 
@@ -338,7 +325,7 @@ class Users_ManagerController extends Yachay_Action
                                     }
 
                                     $result['ROL'] = isset($_headers['ROL']) ? $row[$_headers['ROL']] : $label;
-                                    $roles_allowed = $model_roles->selectByIncludes($USER->role);
+                                    $roles_allowed = $model_roles->selectByIncludes($this->user->role);
                                     $valid_role = false;
                                     foreach ($roles_allowed as $role_allowed) {
                                         if (strtolower($role_allowed->label) == strtolower($result['ROL'])) {
@@ -395,7 +382,7 @@ class Users_ManagerController extends Yachay_Action
                                 // Password generation
                                 $generateCode = new Yachay_Helpers_GenerateCode();
                                 $password = $generateCode->generateCode($result['PASSWORD'], $result['CODIGO']);
-                                $user->password = md5($config->yachay->properties->key . $password);
+                                $user->password = md5($this->config->yachay->properties->key . $password);
                             }
                             if (!$result['CODIGO_NUE'] && Yachay_Acl::hasPermission('users', 'edit')) {
                                 $user = $model_users->findByCode($result['CODIGO']);
@@ -420,13 +407,13 @@ class Users_ManagerController extends Yachay_Action
                                         $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
                                         $view->setScriptPath(APPLICATION_PATH . '/modules/users/views/scripts/user/');
                                         $view->user       = $user;
-                                        $view->servername = $config->yachay->properties->servername;
-                                        $view->author     = $USER->label;
+                                        $view->servername = $this->config->yachay->properties->servername;
+                                        $view->author     = $this->user->label;
                                         $view->password   = $password;
                                         $content = $view->render('mail.php');
                                         $mail = new Zend_Mail('UTF-8');
                                         $mail->setBodyHtml($content)
-                                             ->setFrom($config->yachay->properties->email_direction, $config->yachay->properties->email_name)
+                                             ->setFrom($this->config->yachay->properties->email_direction, $this->config->yachay->properties->email_name)
                                              ->addTo($user->email, $user->getFullName())
                                              ->setSubject('Notificacion de registro de usuario')
                                              ->send(); // FIXME agregar opcion smtp al gestor de correos

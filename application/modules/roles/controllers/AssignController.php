@@ -1,10 +1,8 @@
 <?php
 
-class Roles_AssignController extends Yachay_Action
+class Roles_AssignController extends Yachay_Controller_Action
 {
     public function indexAction() {
-        global $USER;
-
         $this->requirePermission('roles', 'assign');
 
         $model_users = new Users();
@@ -17,7 +15,7 @@ class Roles_AssignController extends Yachay_Action
                 $role_ident = intval($role_ident);
                 if (is_int($role_ident)) {
                     $user = $model_users->findByIdent($user_ident);
-                    if ($USER->ident != $user->ident) {
+                    if ($this->user->ident != $user->ident) {
                         $user->role = $role_ident;
                         $user->save();
                     }

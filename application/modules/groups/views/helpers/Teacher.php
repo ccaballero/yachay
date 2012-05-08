@@ -3,10 +3,6 @@
 class Groups_View_Helper_Teacher
 {
     public function teacher($name, $value, $subject) {
-        global $USER;
-
-        $model_users = new Users();
-
         $teachers = $subject->findUsersViaSubjects_Users($subject->select()->where('type = ?', 'teacher'));
 
         $options = array();

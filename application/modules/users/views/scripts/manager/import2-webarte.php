@@ -73,5 +73,4 @@
     <div>
 <input type="button" name="import" value="Subir nuevamente" onclick="location.href='<?php echo $this->url(array(), 'users_import') ?>'" /><input type="submit" name="finish" value="Importar usuarios" />
     </div>
-
 </form>

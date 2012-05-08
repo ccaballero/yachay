@@ -1,6 +1,6 @@
 <?php
 
-class Groups_MemberController extends Yachay_Action
+class Groups_MemberController extends Yachay_Controller_Action
 {
     public function lockAction() {
         $this->requirePermission('subjects', 'teach');

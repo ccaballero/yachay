@@ -24,4 +24,9 @@ class Users_Visitor
     public function hasPermission($module, $privilege) {
         return in_array($module . '_' . $privilege, $this->_acl);
     }
+
+    public function lastLogin() {}
+    public function needFillProfile() {
+        return false;
+    }
 }

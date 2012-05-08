@@ -1,6 +1,6 @@
 <?php
 
-class Invitations_ManagerController extends Yachay_Action
+class Invitations_ManagerController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('invitations', 'invite');
@@ -15,10 +15,6 @@ class Invitations_ManagerController extends Yachay_Action
     }
 
     public function newAction() {
-        global $USER;
-
-        $config = Zend_Registry::get('config');
-
         $this->requirePermission('invitations', 'invite');
 
         $this->view->invitation = new Invitations_Empty();
@@ -32,18 +28,18 @@ class Invitations_ManagerController extends Yachay_Action
             while (!$code_valid) {
                 $generateCode = new Yachay_Helpers_GenerateCode();
                 $code = $generateCode->generateCode('alphanum', NULL, 64);
-                $existent_invitation = $model_invitations->findByCode(md5($config->yachay->properties->key . $code));
+                $existent_invitation = $model_invitations->findByCode(md5($this->config->yachay->properties->key . $code));
                 if (empty($existent_invitation)) {
                     $code_valid = true;
                 }
             }
 
-            $invitation->author = $USER->ident;
+            $invitation->author = $this->user->ident;
             $invitation->email = $request->getParam('email');
             $invitation->message = $request->getParam('message');
 
             if ($invitation->isValid()) {
-                $invitation->code = md5($config->yachay->properties->key . $code);
+                $invitation->code = md5($this->config->yachay->properties->key . $code);
                 $invitation->tsregister = time();
                 $invitation->save();
 
@@ -54,16 +50,16 @@ class Invitations_ManagerController extends Yachay_Action
 
                 $view->url = $this->view->url(array('code' => $code), 'invitations_invitation_proceed');
                 $view->message = $invitation->message;
-                $view->user = $USER;
-                $view->site = $config->yachay->properties->servername;
+                $view->user = $this->user;
+                $view->site = $this->config->yachay->properties->servername;
 
                 $content = $view->render('mail.php');
 
                 $mail = new Zend_Mail('UTF-8');
                 $mail->setBodyHtml($content)
-                     ->setFrom($config->yachay->properties->email_direction, $config->yachay->properties->email_name)
+                     ->setFrom($this->config->yachay->properties->email_direction, $this->config->yachay->properties->email_name)
                      ->addTo($invitation->email)
-                     ->setSubject($USER->label . ' te ha invitado a ' . $config->yachay->properties->servername)
+                     ->setSubject($this->user->label . ' te ha invitado a ' . $this->config->yachay->properties->servername)
                      ->send();
 
                 $this->_helper->flashMessenger->addMessage('La invitación ha sido enviada al correo electronico');

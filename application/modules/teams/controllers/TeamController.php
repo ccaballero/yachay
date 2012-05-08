@@ -1,6 +1,6 @@
 <?php
 
-class Teams_TeamController extends Yachay_Action
+class Teams_TeamController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('subjects', 'view');

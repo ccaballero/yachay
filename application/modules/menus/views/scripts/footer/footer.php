@@ -1,9 +1,6 @@
 <?php
 
 global $FOOTER;
-global $USER;
-
-$config = Zend_Registry::get('config');
 
 $model_pages = new Pages();
 $items = $model_pages->selectByMenutype('footer');
@@ -16,12 +13,11 @@ foreach ($items as $item) {
         if ($perm == '') {
             $bool |= true;
         } else {
-            $bool |= $USER->hasPermission($item->module, $perm);
+            $bool |= $this->user->hasPermission($item->module, $perm);
         }
     }
 
     if ($bool) {
-    var_dump($item->label);
         $FOOTER->items[] = array (
             'link'  => $this->url(array(), $item->route),
             'label' => ucfirst($item->title),
@@ -29,4 +25,4 @@ foreach ($items as $item) {
     }
 }
 
-$FOOTER->copyright = 'yachay ' . $config->yachay->properties->version;
+$FOOTER->copyright = 'yachay ' . $this->config->yachay->properties->version;

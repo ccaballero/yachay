@@ -1,6 +1,6 @@
 <?php
 
-class Subjects_MemberController extends Yachay_Action
+class Subjects_MemberController extends Yachay_Controller_Action
 {
     public function lockAction() {
         $this->requirePermission('subjects', 'moderate');

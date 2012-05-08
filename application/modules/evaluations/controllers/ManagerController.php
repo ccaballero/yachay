@@ -1,10 +1,8 @@
 <?php
 
-class Evaluations_ManagerController extends Yachay_Action
+class Evaluations_ManagerController extends Yachay_Controller_Action
 {
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('resources', 'new');
 
         $this->view->evaluation = new Evaluations_Empty();
@@ -19,7 +17,7 @@ class Evaluations_ManagerController extends Yachay_Action
             $evaluation->label = $request->getParam('label');
             $evaluation->access = $request->getParam('access');
             $evaluation->description = $request->getParam('description');
-            $evaluation->author = $USER->ident;
+            $evaluation->author = $this->user->ident;
 
             if ($evaluation->isValid()) {
                 $evaluation->tsregister = time();

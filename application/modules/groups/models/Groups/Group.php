@@ -122,15 +122,15 @@ class Groups_Group extends Yachay_Models_Row_Validation
     }
 
     public function amTeacher() {
-        global $USER;
-        return ($this->teacher == $USER->ident);
+        $user = Zend_Registry::get('user');
+        return ($this->teacher == $user->ident);
     }
 
     public function amMember() {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $db = Zend_Db_Table::getDefaultAdapter();
-        $select = $db->select()->from('group_user')->where('`group` = ?' , $this->ident)->where('user = ?', $USER->ident);
+        $select = $db->select()->from('group_user')->where('`group` = ?' , $this->ident)->where('user = ?', $user->ident);
         $result = $db->fetchRow($select);
         return ($result <> NULL);
     }

@@ -15,7 +15,7 @@
 
 <h2>Calificaciones previstas
 <strong class="task">
-<?php if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) { ?>
+<?php if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) { ?>
     <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_test_add') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/add.png' ?>" alt="Agregar" title="Agregar" /></a>
 <?php } ?>
 </strong>
@@ -27,7 +27,7 @@
             <span class="mark"><?php echo $test->key ?></span>
             <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_config') ?>"><?php echo $test->label ?></a>
             <strong class="task">
-            <?php if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) { ?>
+            <?php if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) { ?>
                 <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
             <?php } ?>
             </strong>

@@ -1,23 +1,13 @@
 <?php
 
-class Settings_IndexController extends Yachay_Action
+class Settings_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
-        global $USER;
-
-        $config = Zend_Registry::get('config');
         $request = $this->getRequest();
 
-        $url = $request->getParam('user');
-        if ($url != $USER->url) {
-            $this->_redirect($this->view->url(array(), 'frontpage'));
-        }
+        $this->requireExistence($this->user, 'user', 'profile_view', 'frontpage_user');
 
-        $model_users = new Users();
-        $user = $model_users->findByUrl($url);
-        $this->requireExistence($user, 'user', 'profile_view', 'frontpage_user');
-
-        $this->context('user', $user);
+        $this->context('user', $this->user);
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace('yachay');
@@ -26,21 +16,18 @@ class Settings_IndexController extends Yachay_Action
             $password2 = $request->getParam('password2');
 
             if (!empty($password1) && !empty($password2) && $password1 == $password2) {
-                $user->password = md5($config->yachay->properties->key . $password1);
-                $user->save();
+                $this->user->password = md5($this->config->yachay->properties->key . $password1);
+                $this->user->save();
 
                 $this->_helper->flashMessenger->addMessage('Tu has cambiado tus preferencias correctamente');
-                $session->url = $user->url;
+                $session->url = $this->user->url;
                 $this->_redirect($request->getParam('return'));
             } else {
                 $this->_helper->flashMessenger->addMessage('Las entradas no son validas, recuerde que deben ser iguales y no estar vacias');
             }
         }
 
-        $this->view->model_users = $model_users;
-        $this->view->user = $user;
-
-        $this->history('settings/' . $user->url);
+        $this->history('settings/' . $this->user->url);
         $this->breadcrumb();
     }
 }

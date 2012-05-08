@@ -1,10 +1,8 @@
 <?php
 
-class Areas_AreaController extends Yachay_Action
+class Areas_AreaController extends Yachay_Controller_Action
 {
     public function viewAction() {
-        global $USER;
-
         $this->requirePermission('areas', 'view');
         $request = $this->getRequest();
 
@@ -28,16 +26,16 @@ class Areas_AreaController extends Yachay_Action
                             $subjects2[] = $subject;
                             break;
                         case 'register':
-                            if ($USER->role != 1) {
+                            if ($this->user->role != 1) {
                                 $subjects2[] = $subject;
                             }
                             break;
                         case 'private':
-                            if ($USER->role != 1) {
+                            if ($this->user->role != 1) {
                                 if ($this->acl('subjects', 'edit')) {
                                     $subjects2[] = $subject;
                                 } else {
-                                    $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $USER->ident);
+                                    $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $this->user->ident);
                                     if (!empty($assign)) {
                                         $subjects2[] = $subject;
                                     }

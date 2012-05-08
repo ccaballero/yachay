@@ -50,7 +50,7 @@
         <?php foreach ($this->groups as $group) { ?>
         <li>
             <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'group' => $group->url), 'groups_group_view') ?>">Grupo <?php echo $group->label ?></a>: <?php echo $group->getTeacher()->getFullName() ?>
-            <?php $assign = $this->model_groups_users->findByGroupAndUser($group->ident, $this->USER->ident); ?>
+            <?php $assign = $this->model_groups_users->findByGroupAndUser($group->ident, $this->user->ident); ?>
             <?php if (!empty($assign)) { ?>
                 <span class="mark"><?php echo $this->typeAssign($assign->type) ?></span>
             <?php } ?>

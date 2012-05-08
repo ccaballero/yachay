@@ -38,7 +38,7 @@
             <td><?php echo $value->label ?></td>
             <td><?php echo $value->value ?></td>
             <td class="center">
-            <?php if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) { ?>
+            <?php if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) { ?>
                 <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $this->test_evaluation->ident, 'value' => $value->ident), 'evaluations_evaluation_test_value_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
             <?php } ?>
             </td>

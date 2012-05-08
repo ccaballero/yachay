@@ -3,8 +3,6 @@
 class Subjects_View_Helper_Moderator
 {
     public function moderator($id, $name, $value = 0) {
-        global $USER;
-
         $model_users = new Users();
         $users = $model_users->selectByStatus('active');
 

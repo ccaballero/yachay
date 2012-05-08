@@ -1,6 +1,6 @@
 <?php
 
-class Photos_PhotoController extends Yachay_Action
+class Photos_PhotoController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('resources', 'view');

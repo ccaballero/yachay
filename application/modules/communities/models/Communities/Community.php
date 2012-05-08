@@ -60,8 +60,8 @@ class Communities_Community extends Yachay_Models_Row_Validation
     );
 
     public function amAuthor() {
-        global $USER;
-        return $this->author == $USER->ident;
+        $user = Zend_Registry::get('user');
+        return $this->author == $user->ident;
     }
 
     public function getAuthor() {
@@ -111,23 +111,23 @@ class Communities_Community extends Yachay_Models_Row_Validation
     }
 
     public function amModerator() {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $model_communities_user = new Communities_Users();
-        $user = $model_communities_user->findByCommunityAndUser($this->ident, $USER->ident);
-        if ($user == NULL) {
-            return FALSE;
+        $user = $model_communities_user->findByCommunityAndUser($this->ident, $user->ident);
+        if ($user == null) {
+            return false;
         }
         return $user->type == 'moderator';
     }
 
     public function amMember() {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $model_communities_user = new Communities_Users();
-        $user = $model_communities_user->findByCommunityAndUser($this->ident, $USER->ident);
-        if ($user == NULL) {
-            return FALSE;
+        $user = $model_communities_user->findByCommunityAndUser($this->ident, $user->ident);
+        if ($user == null) {
+            return false;
         }
         return $user->type == 'member';
     }

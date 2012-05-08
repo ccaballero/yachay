@@ -30,7 +30,7 @@ if (count($this->tests_evaluation)) {
         if ($test->formula) {
             echo ': ' . $test->formula;
         }
-        if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) {
+        if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) {
             echo '[<i><a href="' . $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_delete') . '">Eliminar</a></i>]';
         }
         echo '</dt>';

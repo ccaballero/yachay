@@ -1,6 +1,6 @@
 <?php
 
-class Evaluations_EvaluationController extends Yachay_Action
+class Evaluations_EvaluationController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('subjects', 'teach');
@@ -28,8 +28,6 @@ class Evaluations_EvaluationController extends Yachay_Action
 
     // FIXME Agregar restricciones de historial
     public function editAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
 
         $request = $this->getRequest();
@@ -39,7 +37,7 @@ class Evaluations_EvaluationController extends Yachay_Action
         $evaluation = $model_evaluations->findByIdent($url_evaluation);
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
-        if ($evaluation->author != $USER->ident) {
+        if ($evaluation->author != $this->user->ident) {
             $this->_redirect($this->view->url(array(), 'frontpage'));
         }
 
@@ -49,7 +47,7 @@ class Evaluations_EvaluationController extends Yachay_Action
             $evaluation->label = $request->getParam('label');
             $evaluation->access = $request->getParam('access');
             $evaluation->description = $request->getParam('description');
-            $evaluation->author = $USER->ident;
+            $evaluation->author = $this->user->ident;
 
             if ($evaluation->isValid()) {
                 $evaluation->save();

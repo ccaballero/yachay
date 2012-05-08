@@ -1,6 +1,6 @@
 <?php
 
-class Areas_IndexController extends Yachay_Action
+class Areas_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('areas', 'list');

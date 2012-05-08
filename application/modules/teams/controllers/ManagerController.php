@@ -1,6 +1,6 @@
 <?php
 
-class Teams_ManagerController extends Yachay_Action
+class Teams_ManagerController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('subjects', 'view');
@@ -64,8 +64,6 @@ class Teams_ManagerController extends Yachay_Action
     }
 
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'view');
         $request = $this->getRequest();
 
@@ -100,7 +98,7 @@ class Teams_ManagerController extends Yachay_Action
             $team->group = $group->ident;
 
             if ($team->isValid()) {
-                $team->author = $USER->ident;
+                $team->author = $this->user->ident;
                 $team->tsregister = time();
                 $team->save();
 

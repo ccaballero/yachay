@@ -48,7 +48,7 @@ if (count($this->users)) {
         if ($this->acl('users', 'view')) {
             echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_view') . '">Ver</a>&nbsp;';
         }
-        if ($this->USER->hasFewerPrivileges($user)) {
+        if ($this->user->hasFewerPrivileges($user)) {
             if ($this->acl('users', 'edit')) {
                 echo '<a href="' . $this->url(array('user' => $user->url), 'users_user_edit') . '">Editar</a>&nbsp;';
             }

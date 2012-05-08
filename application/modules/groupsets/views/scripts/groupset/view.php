@@ -1,7 +1,7 @@
 <?php
 
 echo '<h1>Conjunto: ' . $this->groupset->label;
-if ($this->groupset->author == $this->USER->ident) {
+if ($this->groupset->author == $this->user->ident) {
     echo '[<i><a href="' . $this->url(array('groupset' => $this->groupset->ident), 'groupsets_groupset_edit') . '">Editar</a></i>]';
 }
 echo '</h1>';

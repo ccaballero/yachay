@@ -1,6 +1,6 @@
 <?php
 
-class Modules_ModuleController extends Yachay_Action
+class Modules_ModuleController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('modules', 'view');

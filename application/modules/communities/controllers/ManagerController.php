@@ -1,10 +1,8 @@
 <?php
 
-class Communities_ManagerController extends Yachay_Action
+class Communities_ManagerController extends Yachay_Controller_Action
 {
     public function indexAction() {
-        global $USER;
-
         $this->requirePermission('communities', 'list');
         $this->requirePermission('communities', 'enter');
 
@@ -17,7 +15,7 @@ class Communities_ManagerController extends Yachay_Action
         }
 
         $model_communities = new Communities();
-        $communities = $model_communities->selectByAuthor($USER->ident);
+        $communities = $model_communities->selectByAuthor($this->user->ident);
 
         $this->view->model_communities = $model_communities;
         $this->view->communities = $communities;
@@ -31,8 +29,6 @@ class Communities_ManagerController extends Yachay_Action
     }
 
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('communities', 'enter');
         $this->view->community = new Communities_Empty();
 
@@ -53,14 +49,14 @@ class Communities_ManagerController extends Yachay_Action
             $community->description = $request->getParam('description');
 
             if ($community->isValid()) {
-                $community->author = $USER->ident;
+                $community->author = $this->user->ident;
                 $community->tsregister = time();
                 $community->save();
 
                 // add author to community's users
                 $assignement = $model_communities_users->createRow();
                 $assignement->community = $community->ident;
-                $assignement->user = $USER->ident;
+                $assignement->user = $this->user->ident;
                 $assignement->type = 'moderator';
                 $assignement->status = 'active';
                 $assignement->tsregister = time();

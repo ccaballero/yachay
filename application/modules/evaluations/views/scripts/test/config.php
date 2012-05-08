@@ -16,7 +16,7 @@ if (count($this->test_values_evaluation)) {
     foreach ($this->test_values_evaluation as $value) {
         echo '<li>';
         echo '<b>[' . $value->label . ']&nbsp;</b>' . $value->value;
-        if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) {
+        if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) {
             echo '[<i><a href="' . $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $this->test_evaluation->ident, 'value' => $value->ident), 'evaluations_evaluation_test_value_delete') . '">Eliminar</a></i>]';
         }
         echo '</li>';

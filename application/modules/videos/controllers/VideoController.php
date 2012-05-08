@@ -1,6 +1,6 @@
 <?php
 
-class Videos_VideoController extends Yachay_Action
+class Videos_VideoController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('resources', 'view');

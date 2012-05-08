@@ -5,15 +5,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initConfig() {
         $config = new Zend_Config($this->getOptions());
         Zend_Registry::set('config', $config);
-        return $config;
     }
 
     protected function _initAutoload() {
-        $this->bootstrap('config');
-        
         $loader = Zend_Loader_Autoloader::getInstance();
         $loader->pushAutoloader(new Yachay_Loader());
-        return $loader;
     }
 
     protected function _initRouter() {
@@ -38,8 +34,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 }
             }
         }
-
-        return $router;
     }
 
     protected function _initSession() {
@@ -49,6 +43,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initLocale() {
         $this->bootstrap('config');
         $config = Zend_Registry::get('config');
+
         // Set for localization
         setlocale(LC_CTYPE, $config->yachay->properties->locale);
         Zend_Locale::setDefault($config->yachay->properties->locale);
@@ -57,21 +52,31 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initTimezone() {
         $this->bootstrap('config');
         $config = Zend_Registry::get('config');
+
         date_default_timezone_set($config->yachay->properties->timezone);
     }
     
     protected function _initUser() {
         $this->bootstrap('autoload');
         $this->bootstrap('session');
-        
+        $this->bootstrap('db');
+
         $session = new Zend_Session_Namespace('yachay');
-        // Set for user information, if exists
-        global $USER;
+
+        $user = new Users_Visitor();
+
         if (isset($session->user)) {
-            $USER = $session->user;
-        } else {
-            $USER = new Users_Visitor();
+            $ident = $session->user->ident;
+            
+            $model_users = new Users();
+            $user_logged = $model_users->findByIdent($ident);
+            
+            if (!empty($user_logged)) {
+                $user = $user_logged;
+            }
         }
+
+        Zend_Registry::set('user',$user);
     }
     
     protected function _initContext() {
@@ -93,9 +98,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->bootstrap('config');
         $this->bootstrap('session');
 
+        $session = new Zend_Session_Namespace('yachay');
         $config = Zend_Registry::get('config');
 
-        $session = new Zend_Session_Namespace('yachay');
         if (!isset($session->currentPage)) {
             $session->currentPage = $config->resources->frontController->baseUrl;
         }
@@ -110,12 +115,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         // Set of theme
         global $TEMPLATE;
-        global $USER;
         
+        $user = Zend_Registry::get('user');
         $config = Zend_Registry::get('config');
 
         $model_templates = new Templates();
-        $template = $model_templates->findByLabel($USER->template);
+        $template = $model_templates->findByLabel($user->template);
 
         $TEMPLATE = new StdClass();
         $TEMPLATE->label = $template->label;
@@ -127,7 +132,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         global $PALETTE;
         $model_templates_users = new Templates_Users();
-        $template_user = $model_templates_users->findByTemplateAndUser($template->ident, $USER->ident);
+        $template_user = $model_templates_users->findByTemplateAndUser($template->ident, $user->ident);
         if (empty($template_user)) {
             $template_user = $template;
         }
@@ -162,9 +167,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $renderer = new Zend_Controller_Action_Helper_ViewRenderer();
         $renderer->setViewSuffix('php');
         Zend_Controller_Action_HelperBroker::addHelper($renderer);
-
-        $view = new Zend_View();
-        return $view;
     }
     
     protected function _initLayout() {

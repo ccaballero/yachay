@@ -1,13 +1,9 @@
 <?php
 
-class Invitations_InvitationController extends Yachay_Action
+class Invitations_InvitationController extends Yachay_Controller_Action
 {
     public function proceedAction() {
-        global $USER;
-        
-        $config = Zend_Registry::get('config');
-
-        if ($USER->role != 1) {
+        if ($this->user->role != 1) {
             $this->_redirect($this->view->url(array(), 'frontpage'));
         }
 
@@ -16,7 +12,7 @@ class Invitations_InvitationController extends Yachay_Action
 
         $model_invitations = new Invitations();
 
-        $invitation = $model_invitations->findByCode(md5($config->yachay->properties->key . $code));
+        $invitation = $model_invitations->findByCode(md5($this->config->yachay->properties->key . $code));
         $this->requireExistence($invitation, 'invitation', 'frontpage_user', 'frontpage_user');
 
         if ($invitation->accepted) {
@@ -46,7 +42,7 @@ class Invitations_InvitationController extends Yachay_Action
                 // Password generation
                 $generateCode = new Yachay_Helpers_GenerateCode();
                 $password = $generateCode->generateCode($user->password, $user->code);
-                $user->password = md5($config->yachay->properties->key . $password);
+                $user->password = md5($this->config->yachay->properties->key . $password);
 
                 $user->sociability = 1;
                 $user->tsregister = time();
@@ -58,14 +54,14 @@ class Invitations_InvitationController extends Yachay_Action
                 $view->setScriptPath(APPLICATION_PATH . '/modules/users/views/scripts/user/');
 
                 $view->user       = $user;
-                $view->servername = $config->yachay->properties->servername;
+                $view->servername = $this->config->yachay->properties->servername;
                 $view->author     = NULL;
                 $view->password   = $password;
 
                 $content = $view->render('mail.php');
                 $mail = new Zend_Mail('UTF-8');
                 $mail->setBodyHtml($content)
-                     ->setFrom($config->yachay->properties->email_direction, $config->yachay->properties->email_name)
+                     ->setFrom($this->config->yachay->properties->email_direction, $this->config->yachay->properties->email_name)
                      ->addTo($user->email, $user->getFullName())
                      ->setSubject('Notificacion de registro de usuario')
                      ->send();
@@ -95,7 +91,7 @@ class Invitations_InvitationController extends Yachay_Action
                 }
             }
 
-            $this->view->user = $user;
+            $this->view->user = $user; // Overwrite
         }
 
         $this->breadcrumb();

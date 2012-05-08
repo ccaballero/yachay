@@ -145,15 +145,15 @@ class Subjects_Subject extends Yachay_Models_Row_Validation
     }
 
     public function amModerator() {
-        global $USER;
-        return ($this->moderator == $USER->ident);
+        $user = Zend_Registry::get('user');
+        return ($this->moderator == $user->ident);
     }
 
     public function amMember() {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $db = Zend_Db_Table::getDefaultAdapter();
-        $select = $db->select()->from('subject_user')->where('subject = ?' , $this->ident)->where('user = ?', $USER->ident);
+        $select = $db->select()->from('subject_user')->where('subject = ?' , $this->ident)->where('user = ?', $user->ident);
         $result = $db->fetchRow($select);
         return ($result <> NULL);
     }

@@ -1,10 +1,8 @@
 <?php
 
-class Ratings_RatingController extends Yachay_Action
+class Ratings_RatingController extends Yachay_Controller_Action
 {
     public function upAction() {
-        global $USER;
-
         $this->requirePermission('resources', 'view');
         $this->requirePermission('ratings', 'new');
 
@@ -52,15 +50,14 @@ class Ratings_RatingController extends Yachay_Action
         }
 
         $this->requireContext($resource);
-        $session = new Zend_Session_Namespace('yachay');
 
         $model_ratings = new Ratings();
-        $exists_rating = $model_ratings->findByResourceAndAuthor($resource->ident, $USER->ident);
+        $exists_rating = $model_ratings->findByResourceAndAuthor($resource->ident, $this->user->ident);
 
         if (empty($exists_rating)) {
             $rating = $model_ratings->createRow();
             $rating->resource = $resource->ident;
-            $rating->author = $USER->ident;
+            $rating->author = $this->user->ident;
             $rating->rating = true;
             $rating->save();
 
@@ -89,8 +86,6 @@ class Ratings_RatingController extends Yachay_Action
     }
 
     public function downAction() {
-        global $USER;
-
         $this->requirePermission('resources', 'view');
         $this->requirePermission('ratings', 'new');
 
@@ -129,12 +124,12 @@ class Ratings_RatingController extends Yachay_Action
         $this->requireContext($resource);
 
         $model_ratings = new Ratings();
-        $exists_rating = $model_ratings->findByResourceAndAuthor($resource->ident, $USER->ident);
+        $exists_rating = $model_ratings->findByResourceAndAuthor($resource->ident, $this->user->ident);
 
         if (empty($exists_rating)) {
             $rating = $model_ratings->createRow();
             $rating->resource = $resource->ident;
-            $rating->author = $USER->ident;
+            $rating->author = $this->user->ident;
             $rating->rating = false;
             $rating->save();
 

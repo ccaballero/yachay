@@ -3,10 +3,10 @@
 class Yachay_Helpers_Evaluation
 {
     public function evaluation($name, $value = 0) {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $model_evaluations = new Evaluations();
-        $owner = $model_evaluations->selectByAuthor($USER->ident);
+        $owner = $model_evaluations->selectByAuthor($user->ident);
         $public = $model_evaluations->selectByAccess('public');
 
         $options = array();
@@ -21,7 +21,7 @@ class Yachay_Helpers_Evaluation
             }
         }
         foreach ($public as $item) {
-            if ($item->useful && $item->author != $USER->ident) {
+            if ($item->useful && $item->author != $user->ident) {
                 $selected = '';
                 if ($item->ident == $value) {
                     $selected = 'selected="selected" ';

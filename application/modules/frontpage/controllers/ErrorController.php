@@ -1,6 +1,6 @@
 <?php
 
-class ErrorController extends Yachay_Action
+class ErrorController extends Yachay_Controller_Action
 {
     public function errorAction() {
         $errors = $this->_getParam('error_handler');

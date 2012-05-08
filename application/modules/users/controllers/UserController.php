@@ -1,6 +1,6 @@
 <?php
 
-class Users_UserController extends Yachay_Action
+class Users_UserController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('users', 'view');
@@ -25,7 +25,8 @@ class Users_UserController extends Yachay_Action
         $paginator->setPageRange(10);
 
         $this->view->model_users = $model_users;
-        $this->view->user = $user;
+        $this->view->user = $user; // Overwrite
+        $this->view->me = $this->user;
         $this->view->model_friends = $model_friends;
         $this->view->resources = $paginator;
         $this->view->route = array (
@@ -75,19 +76,18 @@ class Users_UserController extends Yachay_Action
             $user->phone = $request->getParam('phone');
             $user->cellphone = $request->getParam('cellphone');
 
-            global $USER;
-            if ($USER->ident <> $user->ident) {
+            if ($this->user->ident <> $user->ident) {
                 $user->role = $request->getParam('role');
             }
 
             if ($user->isValid()) {
                 // role validation,, critical point
                 $valid_role = false;
-                if ($USER->ident == $user->ident) {
+                if ($this->user->ident == $user->ident) {
                     $valid_role = true;
                 } else {
                     $model_roles = new Roles();
-                    $roles = $model_roles->selectByIncludes($USER->role);
+                    $roles = $model_roles->selectByIncludes($this->user->role);
                     foreach ($roles as $role) {
                         if ($role->ident == $user->role) {
                             $valid_role |= true;
@@ -112,7 +112,8 @@ class Users_UserController extends Yachay_Action
         }
 
         $this->view->model_users = $model_users;
-        $this->view->user = $user;
+        $this->view->user = $user; // Overwrite
+        $this->view->me = $this->user;
 
         $this->history('users/' . $user->url . '/edit');
         $breadcrumb = array();

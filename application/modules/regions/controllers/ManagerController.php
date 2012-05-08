@@ -1,6 +1,6 @@
 <?php
 
-class Regions_ManagerController extends Yachay_Action
+class Regions_ManagerController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('regions', 'manage');

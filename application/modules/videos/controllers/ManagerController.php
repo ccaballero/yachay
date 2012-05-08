@@ -1,12 +1,10 @@
 <?php
 
-class Videos_ManagerController extends Yachay_Action
+class Videos_ManagerController extends Yachay_Controller_Action
 {
     public $_ignoreContextDefault = true;
 
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('resources', array('new', 'view'));
         $this->requirePermission('videos', 'upload');
         $request = $this->getRequest();
@@ -46,7 +44,7 @@ class Videos_ManagerController extends Yachay_Action
 
                     if ($video->isValid()) {
                         $resource = $model_resources->createRow();
-                        $resource->author = $USER->ident;
+                        $resource->author = $this->user->ident;
                         $resource->recipient = $publish;
                         $resource->tsregister = time();
                         $resource->save();

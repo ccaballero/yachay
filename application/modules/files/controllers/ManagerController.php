@@ -1,12 +1,10 @@
 <?php
 
-class Files_ManagerController extends Yachay_Action
+class Files_ManagerController extends Yachay_Controller_Action
 {
     public $_ignoreContextDefault = true;
 
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('resources', array('new', 'view'));
         $request = $this->getRequest();
 
@@ -45,7 +43,7 @@ class Files_ManagerController extends Yachay_Action
 
                     if ($file->isValid()) {
                         $resource = $model_resources->createRow();
-                        $resource->author = $USER->ident;
+                        $resource->author = $this->user->ident;
                         $resource->recipient = $publish;
                         $resource->tsregister = time();
                         $resource->save();

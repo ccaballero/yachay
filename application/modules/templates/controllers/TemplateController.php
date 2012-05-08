@@ -1,10 +1,8 @@
 <?php
 
-class Templates_TemplateController extends Yachay_Action
+class Templates_TemplateController extends Yachay_Controller_Action
 {
     public function viewAction() {
-        global $USER;
-
         $this->requirePermission('templates', 'configure');
 
         $request = $this->getRequest();
@@ -26,11 +24,11 @@ class Templates_TemplateController extends Yachay_Action
                 }
             }
 
-            $template_user = $model_templates_users->findByTemplateAndUser($template->ident, $USER->ident);
+            $template_user = $model_templates_users->findByTemplateAndUser($template->ident, $this->user->ident);
             if (empty($template_user)) {
                 $template_user = $model_templates_users->createRow();
                 $template_user->template = $template->ident;
-                $template_user->user = $USER->ident;
+                $template_user->user = $this->user->ident;
             }
 
             $template_user->css_properties = json_encode($class);
@@ -42,7 +40,7 @@ class Templates_TemplateController extends Yachay_Action
 
         $this->view->template = $template;
 
-        $user_template = $model_templates_users->findByTemplateAndUser($template->ident, $USER->ident);
+        $user_template = $model_templates_users->findByTemplateAndUser($template->ident, $this->user->ident);
         if (empty($user_template)) {
             $user_template = $template;
         }
@@ -56,8 +54,6 @@ class Templates_TemplateController extends Yachay_Action
     }
 
     public function switchAction() {
-        global $USER;
-
         $this->requirePermission('templates', 'switch');
 
         $model_users = new Users();
@@ -66,7 +62,7 @@ class Templates_TemplateController extends Yachay_Action
         $request = $this->getRequest();
         $label_template = $request->getParam('template');
 
-        $user = $model_users->findByUrl($USER->url);
+        $user = $model_users->findByUrl($this->user->url);
         $session = new Zend_Session_Namespace('yachay');
 
         $this->context('user', $user);

@@ -1,6 +1,6 @@
 <?php
 
-class Communities_PetitionController extends Yachay_Action
+class Communities_PetitionController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('communities', 'enter');

@@ -1,6 +1,6 @@
 <?php
 
-class Gestions_ManagerController extends Yachay_Action
+class Gestions_ManagerController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('gestions', 'list');

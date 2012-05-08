@@ -6,9 +6,9 @@ $model_users = new Users();
 $count = 0;
 $limit = 4;
 
-$friends = $model_friends->selectFriendsByUser($this->USER->ident);
-$followings = $model_friends->selectFollowingsByUser($this->USER->ident);
-$followers = $model_friends->selectFollowersByUser($this->USER->ident);
+$friends = $model_friends->selectFriendsByUser($this->user->ident);
+$followings = $model_friends->selectFollowingsByUser($this->user->ident);
+$followers = $model_friends->selectFollowersByUser($this->user->ident);
 
 echo '<br />';
 echo '<b>Amigos</b>';

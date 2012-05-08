@@ -1,6 +1,6 @@
 <?php
 
-class Communities_ApplicantController extends Yachay_Action
+class Communities_ApplicantController extends Yachay_Controller_Action
 {
     public function acceptAction() {
         $this->requirePermission('communities', 'enter');

@@ -1,6 +1,6 @@
 <?php
 
-class Widgets_IndexController extends Yachay_Action
+class Widgets_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('widgets', 'list');

@@ -1,6 +1,6 @@
 <?php
 
-class Groups_AssignController extends Yachay_Action
+class Groups_AssignController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('subjects', 'view');
@@ -66,8 +66,6 @@ class Groups_AssignController extends Yachay_Action
     }
 
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'view');
         $request = $this->getRequest();
 
@@ -95,7 +93,7 @@ class Groups_AssignController extends Yachay_Action
         foreach ($users as $user) {
             if ($user->status == 'active') {
                 if ($user->hasPermission('subjects', 'helper') || $user->hasPermission('subjects', 'study') || $user->hasPermission('subjects', 'participate')) {
-                    if ($USER->ident != $user->ident) {
+                    if ($this->user->ident != $user->ident) {
                         if ($user->hasPermission('subjects', 'helper') || $user->hasPermission('subjects', 'participate')) {
                             $assign = $assignement->findByGroupAndUser($group->ident, $user->ident);
                             if (empty($assign)) {

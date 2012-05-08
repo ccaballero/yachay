@@ -11,7 +11,7 @@ echo '<td><input type="text" name="code" value="' . $this->user->code . '" maxle
 echo '</tr><tr><td><b>Nombre Formal :</b></td>';
 echo '<td><input type="text" name="formal" value="' . $this->user->formalname . '" maxlength="128" /></td></tr>';
 
-if ($this->USER->ident <> $this->user->ident) {
+if ($this->me->ident <> $this->user->ident) {
     echo '<tr><td><b>Rol (*):</b></td>';
     echo '<td>' . $this->role('role', $this->user->role) . '</td></tr>';
 }

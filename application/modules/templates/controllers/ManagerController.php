@@ -1,10 +1,9 @@
 <?php
 
-class Templates_ManagerController extends Yachay_Action
+class Templates_ManagerController extends Yachay_Controller_Action
 {
     public function cssAction() {
         global $TEMPLATE;
-        global $USER;
 
         $model_templates = new Templates();
         $model_templates_users = new Templates_Users();
@@ -12,7 +11,7 @@ class Templates_ManagerController extends Yachay_Action
         $template = $model_templates->findByLabel($TEMPLATE->label);
 
         $json_properties = $template->css_properties;
-        $custom_properties = $model_templates_users->findByTemplateAndUser($template->ident, $USER->ident);
+        $custom_properties = $model_templates_users->findByTemplateAndUser($template->ident, $this->user->ident);
         if ($custom_properties != NULL) {
             $json_properties = $custom_properties->css_properties;
         }
@@ -22,7 +21,7 @@ class Templates_ManagerController extends Yachay_Action
         $view = new Zend_View();
         $view->setScriptPath(APPLICATION_PATH . '/modules/templates/views/scripts/manager/');
 
-        $view->config = Zend_Registry::get('config');
+        $view->config = $this->config;
 
         foreach ($properties as $property => $value) {
             $view->{$property} = $value;

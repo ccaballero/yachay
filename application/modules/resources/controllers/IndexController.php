@@ -1,13 +1,12 @@
 <?php
 
-class Resources_IndexController extends Yachay_Action
+class Resources_IndexController extends Yachay_Controller_Action
 {
     public function listAction() {
-        global $USER;
         $this->requirePermission('resources', 'new');
 
         $model_resources = new Resources();
-        $resources = $model_resources->selectByAuthor($USER->ident);
+        $resources = $model_resources->selectByAuthor($this->user->ident);
 
         $list = array();
 
@@ -26,7 +25,6 @@ class Resources_IndexController extends Yachay_Action
     }
 
     public function filteredAction() {
-        global $USER;
         $this->requirePermission('resources', 'new');
 
         $request = $this->getRequest();
@@ -34,7 +32,7 @@ class Resources_IndexController extends Yachay_Action
 
         $list = array();
         $model_resources = new Resources();
-        $resources = $model_resources->selectByAuthor($USER->ident);
+        $resources = $model_resources->selectByAuthor($this->user->ident);
 
         switch ($filter) {
             case 'notes':
@@ -102,7 +100,7 @@ class Resources_IndexController extends Yachay_Action
                 break;
             case 'evaluations':
                 $model_evaluations = new Evaluations();
-                $evaluations = $model_evaluations->selectByAuthor($USER->ident);
+                $evaluations = $model_evaluations->selectByAuthor($this->user->ident);
                 foreach ($evaluations as $evaluation) {
                     $list[$evaluation->tsregister] = $evaluation;
                 }

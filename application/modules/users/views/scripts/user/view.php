@@ -1,12 +1,12 @@
 <?php
 
 echo '<h1>Usuario: ' . $this->user->label;
-if ($this->acl('users', 'edit') && $this->USER->hasFewerPrivileges($this->user)) {
+if ($this->acl('users', 'edit') && $this->me->hasFewerPrivileges($this->user)) {
     echo '[<i><a href="' . $this->url(array('user' => $this->user->url), 'users_user_edit') . '">Editar</a></i>]';
 }
 if ($this->acl('friends', 'contact')) {
-    if ($this->USER->ident != $this->user->ident) {
-        if ($this->model_friends->hasContact($this->USER->ident, $this->user->ident)) {
+    if ($this->me->ident != $this->user->ident) {
+        if ($this->model_friends->hasContact($this->me->ident, $this->user->ident)) {
             echo '[<a href="' . $this->url(array('user' => $this->user->url), 'friends_delete') . '"><b><i>Retirar contacto</i></b></a>]';
         } else {
             echo '[<a href="' . $this->url(array('user' => $this->user->url), 'friends_add') . '"><b><i>Agregar contacto</i></b></a>]';

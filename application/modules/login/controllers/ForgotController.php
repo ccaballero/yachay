@@ -1,13 +1,9 @@
 <?php
 
-class Login_ForgotController extends Yachay_Action
+class Login_ForgotController extends Yachay_Controller_Action
 {
     public function indexAction() {
-        global $USER;
-        
-        $config = Zend_Registry::get('config');
-
-        if ($USER->role != 1) {
+        if ($this->user->role != 1) {
             $this->_redirect($this->view->url(array(), 'frontpage'));
         }
 
@@ -47,7 +43,7 @@ class Login_ForgotController extends Yachay_Action
 	                        $forgot = $model_login->createRow();
 	                    }
 	                    $forgot->user = $user->ident;
-	                    $forgot->password = md5($config->yachay->properties->key . $code);
+	                    $forgot->password = md5($this->config->yachay->properties->key . $code);
 	                    $forgot->tsregister = time();
 	                    $forgot->tstimeout = 86400; // 24 horas
 	                    $forgot->save();
@@ -57,7 +53,7 @@ class Login_ForgotController extends Yachay_Action
 	                    $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
 	                    $view->setScriptPath(APPLICATION_PATH . '/modules/login/views/scripts/forgot/');
 	
-	                    $view->servername = $config->yachay->properties->servername;
+	                    $view->servername = $this->config->yachay->properties->servername;
 	                    $view->code       = $code;
 	                    $view->petition   = $forgot->tsregister;
 	                    $view->expiration = $forgot->tsregister + $forgot->tstimeout;
@@ -66,7 +62,7 @@ class Login_ForgotController extends Yachay_Action
 	
 	                    $mail = new Zend_Mail('UTF-8');
 	                    $mail->setBodyHtml($content)
-                                 ->setFrom($config->yachay->properties->email_direction, $config->yachay->properties->email_name)
+                                 ->setFrom($this->config->yachay->properties->email_direction, $this->config->yachay->properties->email_name)
 	                         ->addTo($user->email, $user->getFullName())
 	                         ->setSubject('Petición de cambio de contraseña')
 	                         ->send();

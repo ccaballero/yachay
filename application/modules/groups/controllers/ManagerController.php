@@ -1,6 +1,6 @@
 <?php
 
-class Groups_ManagerController extends Yachay_Action
+class Groups_ManagerController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('subjects', 'view');
@@ -54,8 +54,6 @@ class Groups_ManagerController extends Yachay_Action
     }
 
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'view');
         $this->requirePermission('subjects', 'moderate');
 
@@ -88,7 +86,7 @@ class Groups_ManagerController extends Yachay_Action
             $group->subject = $subject->ident;
 
             if ($group->isValid()) {
-                $group->author = $USER->ident;
+                $group->author = $this->user->ident;
                 $group->tsregister = time();
                 $group->save();
 

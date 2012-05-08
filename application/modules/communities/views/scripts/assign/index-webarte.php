@@ -14,7 +14,7 @@
     <?php foreach ($this->moderators as $moderator) { ?>
         <?php $assign = $this->community->getAssignement($moderator); ?>
         <div class="member">
-            <?php if ($this->community->amModerator() && $moderator->ident <> $this->community->author && $moderator->ident <> $this->USER->ident) { ?>
+            <?php if ($this->community->amModerator() && $moderator->ident <> $this->community->author && $moderator->ident <> $this->user->ident) { ?>
                 <input type="checkbox" name="members[]" value="<?php echo $moderator->ident ?>" />
             <?php } ?>
                 <p><span class="title"><?php echo $moderator->getFullName() ?></span></p>
@@ -29,7 +29,7 @@
             <?php } else { ?>
                 <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario deshabilitado" />
             <?php } ?>
-            <?php if ($this->community->amModerator() && $this->community->author <> $moderator->ident && $moderator->ident <> $this->USER->ident) { ?>
+            <?php if ($this->community->amModerator() && $this->community->author <> $moderator->ident && $moderator->ident <> $this->user->ident) { ?>
                 <?php if ($assign->status == 'active') { ?>
                     <a href="<?php echo $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_lock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock.png' ?>" alt="Deshabilitar" title="Deshabilitar" /></a>
                 <?php } else { ?>
@@ -52,7 +52,7 @@
     <?php foreach ($this->members as $member) { ?>
         <?php $assign = $this->community->getAssignement($member); ?>
         <div class="member">
-        <?php if ($this->community->amModerator() && $member->ident <> $this->community->author && $member->ident <> $this->USER->ident ) { ?>
+        <?php if ($this->community->amModerator() && $member->ident <> $this->community->author && $member->ident <> $this->user->ident ) { ?>
             <input type="checkbox" name="members[]" value="<?php echo $member->ident ?>" />
         <?php } ?>
             <p><span class="title"><?php echo $member->getFullName() ?></span></p>
@@ -67,7 +67,7 @@
             <?php } else { ?>
                 <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario deshabilitado" />
             <?php } ?>
-            <?php if ($this->community->amModerator() && $this->community->author <> $member->ident && $member->ident <> $this->USER->ident) { ?>
+            <?php if ($this->community->amModerator() && $this->community->author <> $member->ident && $member->ident <> $this->user->ident) { ?>
                 <?php if ($assign->status == 'active') { ?>
                     <a href="<?php echo $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_lock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock.png' ?>" alt="Deshabilitar" title="Deshabilitar" /></a>
                 <?php } else { ?>

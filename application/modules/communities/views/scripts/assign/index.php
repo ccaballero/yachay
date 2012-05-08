@@ -17,7 +17,7 @@ if (count($this->moderators) != 0) {
     foreach ($this->moderators as $moderator) {
         $assign = $this->community->getAssignement($moderator);
         echo '<table width="100%"><tr><td rowspan="2" width="18px">';
-        if ($this->community->amModerator() && $moderator->ident <> $this->community->author && $moderator->ident <> $this->USER->ident) {
+        if ($this->community->amModerator() && $moderator->ident <> $this->community->author && $moderator->ident <> $this->user->ident) {
             echo '<input type="checkbox" name="members[]" value="' . $moderator->ident . '" />';
         } else {
             echo '&nbsp;';
@@ -32,7 +32,7 @@ if (count($this->moderators) != 0) {
         echo '<td>Miembro desde: ' . $this->timestamp($assign->tsregister) . '</td><td width="80px">';
         echo $this->enable($assign->status);
         echo '</td><td width="350px">';
-        if ($this->community->amModerator() && $this->community->author <> $moderator->ident && $moderator->ident <> $this->USER->ident) {
+        if ($this->community->amModerator() && $this->community->author <> $moderator->ident && $moderator->ident <> $this->user->ident) {
             echo '[<a href="' . $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_unlock') . '">Habilitar</a>]';
             echo '[<a href="' . $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_lock') . '">Deshabilitar</a>]';
             echo '[<a href="' . $this->url(array('community' => $this->community->url, 'user' => $moderator->url), 'communities_community_assign_member_delete') . '">Retirar</a>]';
@@ -51,7 +51,7 @@ if (count($this->members) != 0) {
         $assign = $this->community->getAssignement($member);
         echo '<table width="100%"><tr><td rowspan="2" width="18px">';
         if ($this->community->amModerator()) {
-            if ($member->ident <> $this->community->author && $member->ident <> $this->USER->ident ) {
+            if ($member->ident <> $this->community->author && $member->ident <> $this->user->ident ) {
                 echo '<input type="checkbox" name="members[]" value="' . $member->ident . '" />';
             }
         } else {
@@ -67,7 +67,7 @@ if (count($this->members) != 0) {
         echo '<td>Miembro desde: ' . $this->timestamp($assign->tsregister) . '</td><td width="80px">';
         echo $this->enable($assign->status);
         echo '</td><td width="350px">';
-        if ($this->community->amModerator() && $this->community->author <> $member->ident && $member->ident <> $this->USER->ident) {
+        if ($this->community->amModerator() && $this->community->author <> $member->ident && $member->ident <> $this->user->ident) {
             echo '[<a href="' . $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_unlock') . '">Habilitar</a>]';
             echo '[<a href="' . $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_lock') . '">Deshabilitar</a>]';
             echo '[<a href="' . $this->url(array('community' => $this->community->url, 'user' => $member->url), 'communities_community_assign_member_delete') . '">Retirar</a>]';

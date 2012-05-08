@@ -1,11 +1,9 @@
 <?php
 
-class Evaluations_TestController extends Yachay_Action
+class Evaluations_TestController extends Yachay_Controller_Action
 {
     // FIXME Agregar restricciones de historial, sea lo que eso haya significado en ese momento
     public function valueAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
         $request = $this->getRequest();
 
@@ -18,7 +16,7 @@ class Evaluations_TestController extends Yachay_Action
 
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
-        if ($evaluation->author != $USER->ident) {
+        if ($evaluation->author != $this->user->ident) {
             $this->_redirect('/', array('prependBase' => true));
         }
 
@@ -42,8 +40,6 @@ class Evaluations_TestController extends Yachay_Action
 
     // FIXME Agregar restricciones de historial, sea lo que eso haya significado en ese momento
     public function configAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
         $request = $this->getRequest();
 
@@ -55,7 +51,7 @@ class Evaluations_TestController extends Yachay_Action
 
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
-        if ($evaluation->author != $USER->ident) {
+        if ($evaluation->author != $this->user->ident) {
             $this->_redirect('/', array('prependBase' => true));
         }
 
@@ -110,8 +106,6 @@ class Evaluations_TestController extends Yachay_Action
 
     // FIXME Agregar restricciones de historial
     public function addAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
         $request = $this->getRequest();
 
@@ -122,7 +116,7 @@ class Evaluations_TestController extends Yachay_Action
 
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
-        if ($evaluation->author != $USER->ident) {
+        if ($evaluation->author != $this->user->ident) {
             $this->_redirect('/', array('prependBase' => true));
         }
 
@@ -179,8 +173,6 @@ class Evaluations_TestController extends Yachay_Action
 
     // FIXME Agregar restricciones de historial
     public function deleteAction() {
-    	global $USER;
-
         $this->requirePermission('subjects', 'teach');
         $request = $this->getRequest();
 
@@ -192,7 +184,7 @@ class Evaluations_TestController extends Yachay_Action
 
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
-        if ($evaluation->author != $USER->ident) {
+        if ($evaluation->author != $this->user->ident) {
             $this->_redirect('/', array('prependBase' => true));
         }
 
@@ -200,7 +192,7 @@ class Evaluations_TestController extends Yachay_Action
         $test_evaluation = $model_evaluations_tests->findByIdent($url_test_evaluation);
 
         if (!empty($test_evaluation)) {
-            if ($evaluation->author == $USER->ident) {
+            if ($evaluation->author == $this->user->ident) {
                 $test_evaluation->delete();
                 $evaluation->checkUseful();
                 $this->_helper->flashMessenger->addMessage('La calificacion ha sido eliminada');

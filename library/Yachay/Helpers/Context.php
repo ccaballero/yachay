@@ -4,7 +4,7 @@ class Yachay_Helpers_Context
 {
     // Values for format: { html, plain, matrix}
     public function context($name, $format = 'html') {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $session = new Zend_Session_Namespace('yachay');
         $context_type = $session->context_type;
@@ -82,18 +82,18 @@ class Yachay_Helpers_Context
                             $subjects2[] = $subject;
                             break;
                         case 'register':
-                            if ($USER->role != 1) {
+                            if ($user->role != 1) {
                                 $subjects2[] = $subject;
                             }
                             break;
                         case 'private':
-                            if ($USER->role != 1) {
+                            if ($user->role != 1) {
                                 if (Yachay_Acl::hasPermission('subjects', 'edit')) {
                                     $subjects2[] = $subject;
-                                } else if ($subject->moderator == $USER->ident) {
+                                } else if ($subject->moderator == $user->ident) {
                                     $subjects2[] = $subject;
                                 } else {
-                                    $assign = $assignement1->findBySubjectAndUser($subject->ident, $USER->ident);
+                                    $assign = $assignement1->findBySubjectAndUser($subject->ident, $user->ident);
                                     if (!empty($assign) && $assign->status == 'active') {
                                         $subjects2[] = $subject;
                                     }
@@ -119,7 +119,7 @@ class Yachay_Helpers_Context
 
             // set for groupset
             $model_groupsets = new Groupsets();
-            $groupsets1 = $model_groupsets->selectByAuthor($USER->ident);
+            $groupsets1 = $model_groupsets->selectByAuthor($user->ident);
             $groupsets2 = array();
             foreach ($groupsets1 as $groupset) {
                 if ($groupset->gestion == $gestion->ident) {
@@ -142,10 +142,10 @@ class Yachay_Helpers_Context
             foreach ($subjects2 as $subject) {
                 $list_groups = $model_groups->selectAll($subject->ident);
                 foreach ($list_groups as $group) {
-                    if ($group->teacher == $USER->ident) {
+                    if ($group->teacher == $user->ident) {
                         $groups[] = $group;
                     }
-                    $assign = $assignement2->findByGroupAndUser($group->ident, $USER->ident);
+                    $assign = $assignement2->findByGroupAndUser($group->ident, $user->ident);
                     if (!empty($assign) && $assign->status == 'active') {
                         $groups[] = $group;
                     }
@@ -173,10 +173,10 @@ class Yachay_Helpers_Context
             foreach ($groups as $group) {
                 $list_teams = $model_teams->selectAll($group->ident);
                 foreach ($list_teams as $team) {
-                    if ($group->teacher == $USER->ident) {
+                    if ($group->teacher == $user->ident) {
                         $teams[] = $team;
                     }
-                    $assign = $assignement3->findByTeamAndUser($team->ident, $USER->ident);
+                    $assign = $assignement3->findByTeamAndUser($team->ident, $user->ident);
                     if (!empty($assign)) {
                         $teams[] = $team;
                     }
@@ -204,7 +204,7 @@ class Yachay_Helpers_Context
         $communities1 = $model_commnities->selectAll();
         $communities2 = array();
         foreach ($communities1 as $community) {
-            $assign = $assignement4->findByCommunityAndUser($community->ident, $USER->ident);
+            $assign = $assignement4->findByCommunityAndUser($community->ident, $user->ident);
             if (!empty($assign) && $assign->status <> 'inactive') {
                 $communities2[] = $community;
             }
@@ -226,7 +226,7 @@ class Yachay_Helpers_Context
         // set for user
         $model_users = new Users();
         $model_friends = new Friends();
-        $list_friends = $model_friends->selectFriendsByUser($USER->ident);
+        $list_friends = $model_friends->selectFriendsByUser($user->ident);
         if (count($list_friends) != 0) {
             if ($context_type == 'user') {
                 $default = true;
@@ -235,25 +235,24 @@ class Yachay_Helpers_Context
             }
             $options[] = '<optgroup label="Contactos">';
             foreach ($list_friends as $friend) {
-                $user = $model_users->findByIdent($friend->friend);
-                if ($user->status == 'active') {
-                    $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context_id == $user->ident)) ? $select : '') . '>' . $user->label . '</option>';
-                    $data['users'][] = 'user-' . $user->ident;
+                $contact = $model_users->findByIdent($friend->friend);
+                if ($contact->status == 'active') {
+                    $options[] = '<option value="user-' . $contact->ident . '" ' . (($default && ($context_id == $contact->ident)) ? $select : '') . '>' . $contact->label . '</option>';
+                    $data['users'][] = 'user-' . $contact->ident;
                 }
             }
             $options[] = '</optiongroup>';
         }
 
         // set for personal
-        if ($USER->ident <> 0) {
+        if ($user->ident <> 0) {
             if ($context_type == 'user') {
                 $default = true;
             } else {
                 $default = false;
             }
-            $options[] = '<optgroup label="Personal">';
 
-            $user = $USER;
+            $options[] = '<optgroup label="Personal">';
             $options[] = '<option value="user-' . $user->ident . '" ' . (($default && ($context_id == $user->ident)) ? $select : '') . '>' . $user->label . '</option>';
             $data['me'][] = 'user-' . $user->ident;
             $options[] = '</optiongroup>';

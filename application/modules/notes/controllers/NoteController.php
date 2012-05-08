@@ -1,6 +1,6 @@
 <?php
 
-class Notes_NoteController extends Yachay_Action
+class Notes_NoteController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('resources', 'view');

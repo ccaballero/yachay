@@ -3,35 +3,33 @@
 class Valorations
 {
     public function addActivity($score) {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $model_users = new Users();
-        $user = $model_users->findByIdent($USER->ident);
+        $user = $model_users->findByIdent($user->ident);
 
         $user->activity = $user->activity + $score;
         $user->save();
     }
 
-    public function decreaseActivity($score, $user = NULL) {
-        global $USER;
-
-        $ident = $USER->ident;
-        if (!empty($user)) {
-            $ident = $user;
+    public function decreaseActivity($score, $ident = null) {
+        $user = Zend_Registry::get('user');
+        if (empty($ident)) {
+            $ident = $user->ident;
         }
 
         $model_users = new Users();
-        $user = $model_users->findByIdent($USER->ident);
+        $user = $model_users->findByIdent($ident);
 
         $user->activity = $user->activity - $score;
         $user->save();
     }
 
     public function addSociability($contact, $score1, $score2) {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $model_users = new Users();
-        $user = $model_users->findByIdent($USER->ident);
+        $user = $model_users->findByIdent($user->ident);
 
         $user->sociability = $user->sociability + $score1;
         $user->save();
@@ -41,10 +39,10 @@ class Valorations
     }
 
     public function decreaseSociability($contact, $score1, $score2) {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $model_users = new Users();
-        $user = $model_users->findByIdent($USER->ident);
+        $user = $model_users->findByIdent($user->ident);
 
         $user->sociability = $user->sociability - $score1;
         $user->save();
@@ -54,21 +52,19 @@ class Valorations
     }
 
     public function addParticipation($score) {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $model_users = new Users();
-        $user = $model_users->findByIdent($USER->ident);
+        $user = $model_users->findByIdent($user->ident);
 
         $user->participation = $user->participation + $score;
         $user->save();
     }
-
-    public function decreaseParticipation($score, $user = NULL) {
-        global $USER;
-
-        $ident = $USER->ident;
-        if (!empty($user)) {
-            $ident = $user;
+    
+    public function decreaseParticipation($score, $ident = null) {
+        $user = Zend_Registry::get('user');
+        if (empty($ident)) {
+            $ident = $user->ident;
         }
 
         $model_users = new Users();

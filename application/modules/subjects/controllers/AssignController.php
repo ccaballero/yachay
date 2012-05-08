@@ -1,6 +1,6 @@
 <?php
 
-class Subjects_AssignController extends Yachay_Action
+class Subjects_AssignController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('subjects', 'view');

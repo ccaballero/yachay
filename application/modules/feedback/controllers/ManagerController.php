@@ -1,6 +1,6 @@
 <?php
 
-class Feedback_ManagerController extends Yachay_Action
+class Feedback_ManagerController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('feedback', array('resolv', 'mark', 'delete'));
@@ -48,8 +48,6 @@ class Feedback_ManagerController extends Yachay_Action
     }
 
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('feedback', 'list');
         $this->requirePermission('resources', array('new', 'view'));
 
@@ -71,7 +69,7 @@ class Feedback_ManagerController extends Yachay_Action
 
             if ($entry->isValid()) {
                 $resource = $model_resources->createRow();
-                $resource->author = $USER->ident;
+                $resource->author = $this->user->ident;
                 $resource->recipient = 'feedback';
                 $resource->tsregister = time();
                 $resource->save();

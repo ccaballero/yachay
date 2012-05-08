@@ -1,10 +1,8 @@
 <?php
 
-class Subjects_IndexController extends Yachay_Action
+class Subjects_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'list');
 
         $model_gestions = new Gestions();
@@ -23,12 +21,12 @@ class Subjects_IndexController extends Yachay_Action
             $subjects1 = $model_subjects->selectAll($gestion->ident);
 
             foreach ($subjects1 as $subject) {
-                $subject_user = $model_subjects_users->findBySubjectAndUser($subject->ident, $USER->ident);
+                $subject_user = $model_subjects_users->findBySubjectAndUser($subject->ident, $this->user->ident);
                 $type = '';
                 if (!empty($subject_user)) {
                     $type = $subject_user->type;
                 }
-                if ($subject->moderator == $USER->ident) {
+                if ($subject->moderator == $this->user->ident) {
                     $type = 'moderator';
                 }
 
@@ -39,17 +37,17 @@ class Subjects_IndexController extends Yachay_Action
                             $assign[$subject->url] = $type;
                             break;
                         case 'register':
-                            if ($USER->role != 1) {
+                            if ($this->user->role != 1) {
                                 $subjects2[] = $subject;
                                 $assign[$subject->url] = $type;
                             }
                             break;
                         case 'private':
-                            if ($USER->role != 1) {
+                            if ($this->user->role != 1) {
                                 if ($this->acl('subjects', 'edit')) {
                                     $subjects2[] = $subject;
                                     $assign[$subject->url] = $type;
-                                } else if ($subject->moderator == $USER->ident) {
+                                } else if ($subject->moderator == $this->user->ident) {
                                     $subjects2[] = $subject;
                                     $assign[$subject->url] = $type;
                                 } else {

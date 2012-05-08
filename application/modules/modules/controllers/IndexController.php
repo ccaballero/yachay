@@ -1,6 +1,6 @@
 <?php
 
-class Modules_IndexController extends Yachay_Action
+class Modules_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('modules', 'list');

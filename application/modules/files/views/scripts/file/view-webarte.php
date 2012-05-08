@@ -45,6 +45,6 @@
     <h2>Comentarios</h2>
     <?php echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'files_file_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, )) ?>
     <?php if ($this->acl('comments', 'new')) { ?>
-    <?php echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'files_file_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, 'USER' => $this->USER)) ?>
+    <?php echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'files_file_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, 'user' => $this->user)) ?>
     <?php } ?>
 <?php } ?>

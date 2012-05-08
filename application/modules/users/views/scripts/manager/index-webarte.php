@@ -38,7 +38,7 @@
             <?php if ($this->acl('users', 'view')) { ?>
                 <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_view') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
             <?php } ?>
-            <?php if ($this->USER->hasFewerPrivileges($user)) { ?>
+            <?php if ($this->user->hasFewerPrivileges($user)) { ?>
                 <?php if ($this->acl('users', 'edit')) { ?>
                     <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
                 <?php } ?>

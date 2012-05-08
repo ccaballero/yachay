@@ -1,10 +1,8 @@
 <?php
 
-class Groupsets_GroupsetController extends Yachay_Action
+class Groupsets_GroupsetController extends Yachay_Controller_Action
 {
     public function viewAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
 
         $request = $this->getRequest();
@@ -12,7 +10,7 @@ class Groupsets_GroupsetController extends Yachay_Action
         $groupset = $model_groupsets->findByIdent($request->getParam('groupset'));
         $this->requireExistence($groupset, 'groupset', 'groupsets_groupset_view', 'groupsets_manager');
 
-        if ($groupset->author != $USER->ident) {
+        if ($groupset->author != $this->user->ident) {
             $this->_redirect($this->view->url(array(), 'groupsets_manager'));
             return;
         }
@@ -21,7 +19,7 @@ class Groupsets_GroupsetController extends Yachay_Action
         $current_gestion = $model_gestions->findByActive();
 
         $model_groups = new Groups();
-        $groups_in_teach = $model_groups->listGroupsWithTeacher($USER->ident);
+        $groups_in_teach = $model_groups->listGroupsWithTeacher($this->user->ident);
 
         $subjects = array();
         $groups = array();
@@ -49,8 +47,6 @@ class Groupsets_GroupsetController extends Yachay_Action
     }
 
     public function editAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
 
         $request = $this->getRequest();
@@ -58,7 +54,7 @@ class Groupsets_GroupsetController extends Yachay_Action
         $groupset = $model_groupsets->findByIdent($request->getParam('groupset'));
         $this->requireExistence($groupset, 'groupset', 'groupsets_groupset_view', 'groupsets_manager');
 
-        if ($groupset->author != $USER->ident) {
+        if ($groupset->author != $this->user->ident) {
             $this->_redirect($this->view->url(array(), 'groupsets_manager'));
             return;
         }
@@ -69,7 +65,7 @@ class Groupsets_GroupsetController extends Yachay_Action
         $current_gestion = $model_gestions->findByActive();
 
         $model_groups = new Groups();
-        $groups_in_teach = $model_groups->listGroupsWithTeacher($USER->ident);
+        $groups_in_teach = $model_groups->listGroupsWithTeacher($this->user->ident);
 
         $subjects = array();
         $groups = array();
@@ -141,8 +137,6 @@ class Groupsets_GroupsetController extends Yachay_Action
     }
 
     public function deleteAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
 
         $request = $this->getRequest();
@@ -150,7 +144,7 @@ class Groupsets_GroupsetController extends Yachay_Action
         $groupset = $model_groupsets->findByIdent($request->getParam('groupset'));
         $this->requireExistence($groupset, 'groupset', 'groupsets_groupset_view', 'groupsets_manager');
 
-        if ($groupset->author != $USER->ident) {
+        if ($groupset->author != $this->user->ident) {
             $this->_redirect($this->view->url(array(), 'groupsets_manager'));
             return;
         }

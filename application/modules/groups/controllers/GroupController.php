@@ -1,6 +1,6 @@
 <?php
 
-class Groups_GroupController extends Yachay_Action
+class Groups_GroupController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('subjects', 'view');
@@ -128,8 +128,6 @@ class Groups_GroupController extends Yachay_Action
     }
 
     public function calificationAction() {
-        global $USER;
-
         $request = $this->getRequest();
 
         $model_gestions = new Gestions();
@@ -145,18 +143,15 @@ class Groups_GroupController extends Yachay_Action
         $group = $model_groups->findByUrl($subject->ident, $url_group);
         $this->requireExistenceGroup($group, $subject);
 
-        $model_users = new Users();
-        $user = $model_users->findByIdent($USER->ident);
-
         $evaluation = $group->getEvaluation();
         $tests = $evaluation->findEvaluations_Tests($evaluation->select()->order('order ASC'));
 
         $model_califications = new Califications();
         foreach ($tests as $test) {
             if (!empty($test->formula)) {
-                $califications[$test->ident] = $model_califications->getCalification($group->ident, $user->ident, $evaluation->ident, $test);
+                $califications[$test->ident] = $model_califications->getCalification($group->ident, $this->user->ident, $evaluation->ident, $test);
             } else {
-                $_calification = $model_califications->findCalification($group->ident, $user->ident, $evaluation->ident, $test->ident);
+                $_calification = $model_califications->findCalification($group->ident, $this->user->ident, $evaluation->ident, $test->ident);
                 if (empty($_calification)) {
                     $califications[$test->ident] = '--';
                 } else {
@@ -168,7 +163,6 @@ class Groups_GroupController extends Yachay_Action
         $this->view->subject = $subject;
         $this->view->group = $group;
         $this->view->evaluation = $evaluation;
-        $this->view->user = $user;
         $this->view->model = $model_califications;
         $this->view->test_evaluations = $tests;
         $this->view->califications = $califications;

@@ -74,7 +74,7 @@ class Evaluations_Evaluation extends Yachay_Models_Row_Validation
     }
 
     public function amAuthor() {
-        global $USER;
-        return ($USER->ident == $this->author);
+        $user = Zend_Registry::get('user');
+        return ($user->ident == $this->author);
     }
 }

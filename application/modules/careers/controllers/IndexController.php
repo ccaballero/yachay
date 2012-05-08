@@ -1,6 +1,6 @@
 <?php
 
-class Careers_IndexController extends Yachay_Action
+class Careers_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('careers', 'list');

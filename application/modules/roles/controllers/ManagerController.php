@@ -1,6 +1,6 @@
 <?php
 
-class Roles_ManagerController extends Yachay_Action {
+class Roles_ManagerController extends Yachay_Controller_Action {
 
     public function indexAction() {
         $this->requirePermission('roles', 'list');

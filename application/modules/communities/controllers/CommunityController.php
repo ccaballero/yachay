@@ -1,6 +1,6 @@
 <?php
 
-class Communities_CommunityController extends Yachay_Action
+class Communities_CommunityController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('communities', 'view');

@@ -1,6 +1,6 @@
 <?php
 
-class Users_IndexController extends Yachay_Action
+class Users_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('users', 'list');

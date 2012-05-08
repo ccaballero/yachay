@@ -1,6 +1,6 @@
 <?php
 
-class Feedback_EntryController extends Yachay_Action
+class Feedback_EntryController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('resources', 'view');

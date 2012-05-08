@@ -3,15 +3,16 @@
 class Yachay_Acl
 {
     public static function hasPermission($module, $privilege) {
-        global $USER;
+        $user = Zend_Registry::get('user');
+
         if (!is_array($privilege)) {
-            if (!$USER->hasPermission($module, $privilege)) {
+            if (!$user->hasPermission($module, $privilege)) {
                 return false;
             }
         } else {
             $flag = false;
             foreach ($privilege as $priv) {
-                $flag |= $USER->hasPermission($module, $priv);
+                $flag |= $user->hasPermission($module, $priv);
             }
             if (!$flag) {
                 return false;

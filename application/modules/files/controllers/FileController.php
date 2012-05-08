@@ -1,6 +1,6 @@
 <?php
 
-class Files_FileController extends Yachay_Action
+class Files_FileController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('resources', 'view');

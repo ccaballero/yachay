@@ -1,6 +1,6 @@
 <?php
 
-class Tags_IndexController extends Yachay_Action
+class Tags_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('tags', 'list');

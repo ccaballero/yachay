@@ -4,7 +4,7 @@
     <?php echo $this->paginator($this->communities, $this->route) ?>
     <div id="block">
     <?php foreach ($this->communities as $community) { ?>
-        <?php echo $this->partial('index/community-webarte.php', array('community' => $community, 'USER' => $this->USER, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE)) ?>
+        <?php echo $this->partial('index/community-webarte.php', array('community' => $community, 'user' => $this->user, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE)) ?>
     <?php } ?>
     </div>
     <div class="clear"></div>

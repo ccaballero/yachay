@@ -77,17 +77,15 @@ class Teams_Team extends Yachay_Models_Row_Validation
     }
 
     public function amMemberTeam() {
-        global $USER;
+        $user = Zend_Registry::get('user');
 
         $group = $this->getGroup();
-        if ($group->teacher == $USER->ident) {
+        if ($group->teacher == $user->ident) {
             return true;
         }
 
-        $model_users = new Users();
         $model_teams_users = new Teams_Users();
-        $user = $model_users->findByIdent($USER->ident);
-        $assign = $model_teams_users->findByTeamAndUser($this->ident, $USER->ident);
+        $assign = $model_teams_users->findByTeamAndUser($this->ident, $user->ident);
         if (!empty($assign)) {
             return true;
         }

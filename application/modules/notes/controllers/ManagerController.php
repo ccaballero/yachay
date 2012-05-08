@@ -1,12 +1,10 @@
 <?php
 
-class Notes_ManagerController extends Yachay_Action
+class Notes_ManagerController extends Yachay_Controller_Action
 {
     public $_ignoreContextDefault = true;
 
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('resources', array('new', 'view'));
         $request = $this->getRequest();
 
@@ -40,7 +38,7 @@ class Notes_ManagerController extends Yachay_Action
             } else if (in_array($publish, $spaces_valids)) {
                 if ($note->isValid()) {
                     $resource = $model_resources->createRow();
-                    $resource->author = $USER->ident;
+                    $resource->author = $this->user->ident;
                     $resource->recipient = $publish;
                     $resource->tsregister = time();
                     $resource->save();

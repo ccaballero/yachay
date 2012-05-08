@@ -1,6 +1,6 @@
 <?php
 
-class Templates_IndexController extends Yachay_Action
+class Templates_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('templates', 'switch');

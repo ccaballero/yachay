@@ -1,6 +1,6 @@
 <?php
 
-class Links_LinkController extends Yachay_Action
+class Links_LinkController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('resources', 'view');

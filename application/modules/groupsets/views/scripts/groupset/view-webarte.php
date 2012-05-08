@@ -1,6 +1,6 @@
 <h1><?php echo $this->groupset->label ?>
 <strong class="task">
-<?php if ($this->groupset->author == $this->USER->ident) { ?>
+<?php if ($this->groupset->author == $this->user->ident) { ?>
     <a href="<?php echo $this->url(array('groupset' => $this->groupset->ident), 'groupsets_groupset_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
 <?php } ?>
 </strong>

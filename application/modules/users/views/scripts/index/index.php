@@ -16,13 +16,13 @@ if (count($this->users)) {
         }
         echo '&nbsp;';
 
-        if ($this->acl('users', 'edit') && $this->USER->hasFewerPrivileges($user)) {
+        if ($this->acl('users', 'edit') && $this->user->hasFewerPrivileges($user)) {
             echo '<b>[<i><a href="' . $this->url(array('user' => $user->url), 'users_user_edit') . '">Editar</a></i>]</b>';
         }
 
         if ($this->acl('friends', 'contact')) {
-            if ($this->USER->ident != $user->ident) {
-                if ($this->model_friends->hasContact($this->USER->ident, $user->ident)) {
+            if ($this->user->ident != $user->ident) {
+                if ($this->model_friends->hasContact($this->user->ident, $user->ident)) {
                     echo '<a href="' . $this->url(array('user' => $user->url), 'friends_delete') . '">';
                     echo '<b>[<i>Retirar contacto</i>]</b>';
                     echo '</a>';

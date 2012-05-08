@@ -1,6 +1,6 @@
 <?php
 
-class Pages_IndexController extends Yachay_Action
+class Pages_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('pages', 'list');

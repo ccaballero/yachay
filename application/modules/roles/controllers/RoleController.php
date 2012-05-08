@@ -1,6 +1,6 @@
 <?php
 
-class Roles_RoleController extends Yachay_Action
+class Roles_RoleController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('roles', 'view');

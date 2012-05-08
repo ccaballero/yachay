@@ -1,10 +1,8 @@
 <?php
 
-class Groupsets_ManagerController extends Yachay_Action
+class Groupsets_ManagerController extends Yachay_Controller_Action
 {
     public function indexAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
 
         $request = $this->getRequest();
@@ -20,7 +18,7 @@ class Groupsets_ManagerController extends Yachay_Action
         $model_gestions = new Gestions();
         $current_gestion = $model_gestions->findByActive();
 
-        $array = $model_groupsets->selectByAuthor($USER->ident);
+        $array = $model_groupsets->selectByAuthor($this->user->ident);
         $array1 = array();
         foreach ($array as $element) {
             if ($element->gestion == $current_gestion->ident) {
@@ -36,8 +34,6 @@ class Groupsets_ManagerController extends Yachay_Action
     }
 
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
 
         $this->view->groupset = new Groupsets_Empty();
@@ -45,11 +41,8 @@ class Groupsets_ManagerController extends Yachay_Action
         $model_gestions = new Gestions();
         $current_gestion = $model_gestions->findByActive();
 
-        $model_users = new Users();
-        $user = $model_users->findByIdent($USER->ident);
-
         $model_groups = new Groups();
-        $groups_in_teach = $model_groups->listGroupsWithTeacher($USER->ident);
+        $groups_in_teach = $model_groups->listGroupsWithTeacher($this->user->ident);
 
         $subjects = array();
         $groups = array();
@@ -75,7 +68,7 @@ class Groupsets_ManagerController extends Yachay_Action
             $model_groupsets = new Groupsets();
             $groupset = $model_groupsets->createRow();
             $groupset->label = $request->getParam('label');
-            $groupset->author = $USER->ident;
+            $groupset->author = $this->user->ident;
             $groupset->gestion = $current_gestion->ident;
 
             $checks = $request->getParam('groups');
@@ -116,8 +109,6 @@ class Groupsets_ManagerController extends Yachay_Action
     }
 
     public function deleteAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'teach');
 
         $request = $this->getRequest();
@@ -129,7 +120,7 @@ class Groupsets_ManagerController extends Yachay_Action
             foreach ($check as $value) {
                 $groupset = $model_groupsets->findByIdent($value);
                 if (!empty($groupset)) {
-                    if ($groupset->author == $USER->ident) {
+                    if ($groupset->author == $this->user->ident) {
                         $groupset->delete();
                         $count++;
                     }

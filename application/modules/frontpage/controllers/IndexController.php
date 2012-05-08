@@ -1,11 +1,9 @@
 <?php
 
-class IndexController extends Yachay_Action
+class IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
-        global $USER;
-
-        if ($USER->role == 1) {
+        if ($this->user->role == 1) {
             $this->_redirect($this->view->url(array(), 'frontpage_visitor'));
         } else {
             $this->_redirect($this->view->url(array(), 'frontpage_user'));
@@ -13,9 +11,7 @@ class IndexController extends Yachay_Action
     }
 
     public function visitorAction() {
-        global $USER;
-
-        if ($USER->role == 1) {
+        if ($this->user->role == 1) {
             $this->history();
             $model_resources = new Resources();
             $model_resources_globales = new Resources_Globales();
@@ -50,9 +46,7 @@ class IndexController extends Yachay_Action
     }
 
     public function userAction() {
-        global $USER;
-
-        if ($USER->role != 1) {
+        if ($this->user->role != 1) {
             $this->history();
 
             $model_resources = new Resources();
@@ -64,7 +58,7 @@ class IndexController extends Yachay_Action
             $list_spaces = $context->context(NULL, 'matrix');
 
             // Filtering based on configuration
-            $filtered_spaces = explode(',', $USER->spaces);
+            $filtered_spaces = explode(',', $this->user->spaces);
             if (empty($filtered_spaces)) {
                 $filtered_spaces = array();
             }
@@ -206,8 +200,6 @@ class IndexController extends Yachay_Action
     }
 
     public function spacesAction() {
-        global $USER;
-
         $request = $this->getRequest();
         if ($request->isPost()) {
             $spaces = $request->getParam('spaces');
@@ -223,11 +215,9 @@ class IndexController extends Yachay_Action
                 }
             }
 
-            $model_users = new Users();
-            $user = $model_users->findByIdent($USER->ident);
-            $user->spaces = implode(',', $list_spaces);
-            $user->save();
-            $session->user = $user;
+            $this->user->spaces = implode(',', $list_spaces);
+            $this->user->save();
+            $session->user = $this->user;
         }
 
         $this->_redirect($request->getParam('return'));

@@ -42,7 +42,7 @@ if (!$this->historial) {
         echo '<ul>';
         foreach ($this->groups as $group) {
             echo '<li><i><a href="' .  $this->url(array('subject' => $this->subject->url, 'group' => $group->url), 'groups_group_view') . '">Grupo ' .  $group->label . '</a> [' .  $group->getTeacher()->getFullName() . ']</i>';
-            $assign = $this->model_groups_users->findByGroupAndUser($group->ident, $this->USER->ident);
+            $assign = $this->model_groups_users->findByGroupAndUser($group->ident, $this->user->ident);
             if (!empty($assign)) {
                 echo '[' . $this->typeAssign($assign->type) . ']';
             }
@@ -54,4 +54,4 @@ if (!$this->historial) {
     }
 }
 
-echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, ));
+echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE));

@@ -1,7 +1,7 @@
 <?php
 
 echo '<h1>Evaluación: ' . $this->evaluation->label;
-if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) {
+if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) {
     echo '[<i><a href="' . $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_edit') . '">Editar</a></i>]';
 }
 echo '[<i><a href="' . $this->url(array(), 'evaluations_sandbox') . '">Formulas</a></i>]';
@@ -14,7 +14,7 @@ echo '<b>Usable: <i>' . $this->boolean($this->evaluation->useful) . '</i></b><br
 echo '<p>' . $this->evaluation->description . '</p>';
 
 echo '<h2>Calificaciones previstas';
-if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) {
+if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) {
     echo '[<i><a href="' . $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_test_add') . '">Agregar</a></i>]';
 }
 echo '</h2>';
@@ -27,7 +27,7 @@ if (count($this->tests_evaluation)) {
         if ($test->formula) {
             echo ': ' . $test->formula;
         }
-        if ($this->evaluation->author == $this->USER->ident && count($this->groups) == 0) {
+        if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) {
             echo '[<i><a href="' . $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_delete') . '">Eliminar</a></i>]';
         }
         echo '</dt>';

@@ -1,6 +1,6 @@
 <?php
 
-class Communities_AssignController extends Yachay_Action
+class Communities_AssignController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('communities', 'view');
@@ -62,8 +62,6 @@ class Communities_AssignController extends Yachay_Action
     }
 
     public function lockAction() {
-        global $USER;
-
         $request = $this->getRequest();
         if ($request->isPost()) {
             $model_communities = new Communities();
@@ -82,7 +80,7 @@ class Communities_AssignController extends Yachay_Action
 
             foreach ($members as $member) {
                 $user = $model_users->findByIdent($member);
-                if (!empty($user) && $community->author <> $user->ident && $USER->ident <> $user->ident) {
+                if (!empty($user) && $community->author <> $user->ident && $this->user->ident <> $user->ident) {
                     $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
                     $assign->status = 'inactive';
                     $assign->save();
@@ -96,8 +94,6 @@ class Communities_AssignController extends Yachay_Action
     }
 
     public function unlockAction() {
-        global $USER;
-
         $request = $this->getRequest();
         if ($request->isPost()) {
             $model_communities = new Communities();
@@ -116,7 +112,7 @@ class Communities_AssignController extends Yachay_Action
 
             foreach ($members as $member) {
                 $user = $model_users->findByIdent($member);
-                if (!empty($user) && $community->author <> $user->ident && $USER->ident <> $user->ident) {
+                if (!empty($user) && $community->author <> $user->ident && $this->user->ident <> $user->ident) {
                     $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
                     $assign->status = 'active';
                     $assign->save();
@@ -130,8 +126,6 @@ class Communities_AssignController extends Yachay_Action
     }
 
     public function deleteAction() {
-        global $USER;
-
         $request = $this->getRequest();
         if ($request->isPost()) {
             $model_communities = new Communities();
@@ -150,7 +144,7 @@ class Communities_AssignController extends Yachay_Action
 
             foreach ($members as $member) {
                 $user = $model_users->findByIdent($member);
-                if (!empty($user) && $community->author <> $user->ident && $USER->ident <> $user->ident) {
+                if (!empty($user) && $community->author <> $user->ident && $this->user->ident <> $user->ident) {
                     $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
                     $assign->delete();
                     $count++;
@@ -166,8 +160,6 @@ class Communities_AssignController extends Yachay_Action
     }
 
     public function moderateAction() {
-        global $USER;
-
         $request = $this->getRequest();
         if ($request->isPost()) {
             $model_communities = new Communities();
@@ -186,7 +178,7 @@ class Communities_AssignController extends Yachay_Action
 
             foreach ($members as $member) {
                 $user = $model_users->findByIdent($member);
-                if (!empty($user) && $community->author <> $user->ident && $USER->ident <> $user->ident) {
+                if (!empty($user) && $community->author <> $user->ident && $this->user->ident <> $user->ident) {
                     $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
                     $assign->type = 'moderator';
                     $assign->save();
@@ -200,8 +192,6 @@ class Communities_AssignController extends Yachay_Action
     }
 
     public function unmoderateAction() {
-        global $USER;
-
         $request = $this->getRequest();
         if ($request->isPost()) {
             $model_communities = new Communities();
@@ -220,7 +210,7 @@ class Communities_AssignController extends Yachay_Action
 
             foreach ($members as $member) {
                 $user = $model_users->findByIdent($member);
-                if (!empty($user) && $community->author <> $user->ident && $USER->ident <> $user->ident) {
+                if (!empty($user) && $community->author <> $user->ident && $this->user->ident <> $user->ident) {
                     $assign = $model_communities_users->findByCommunityAndUser($community->ident, $user->ident);
                     $assign->type = 'member';
                     $assign->save();
@@ -234,8 +224,6 @@ class Communities_AssignController extends Yachay_Action
     }
 
     public function joinAction() {
-        global $USER;
-
         $this->requirePermission('communities', 'enter');
         $request = $this->getRequest();
 
@@ -248,13 +236,13 @@ class Communities_AssignController extends Yachay_Action
 
         if ($community->mode == 'open') {
             $model_communities_users = new Communities_Users();
-            $assignement = $model_communities_users->findByCommunityAndUser($community->ident, $USER->ident);
+            $assignement = $model_communities_users->findByCommunityAndUser($community->ident, $this->user->ident);
 
             $session = new Zend_Session_Namespace('yachay');
             if ($assignement == NULL) {
                 $row = $model_communities_users->createRow();
                 $row->community = $community->ident;
-                $row->user = $USER->ident;
+                $row->user = $this->user->ident;
                 $row->type = 'member';
                 $row->status = 'active';
                 $row->tsregister = time();
@@ -269,13 +257,13 @@ class Communities_AssignController extends Yachay_Action
         }
         if ($community->mode == 'close') {
             $model_communities_petitions = new Communities_Petitions();
-            $assignement = $model_communities_petitions->findByCommunityAndUser($community->ident, $USER->ident);
+            $assignement = $model_communities_petitions->findByCommunityAndUser($community->ident, $this->user->ident);
 
             $session = new Zend_Session_Namespace('yachay');
             if ($assignement == NULL) {
                 $row = $model_communities_petitions->createRow();
                 $row->community = $community->ident;
-                $row->user = $USER->ident;
+                $row->user = $this->user->ident;
                 $row->tsregister = time();
                 $row->save();
                 $community->petitions = $community->petitions + 1;
@@ -291,8 +279,6 @@ class Communities_AssignController extends Yachay_Action
     }
 
     public function leaveAction() {
-        global $USER;
-
         $this->requirePermission('communities', 'enter');
         $request = $this->getRequest();
 
@@ -304,7 +290,7 @@ class Communities_AssignController extends Yachay_Action
         $this->requireExistence($community, 'community', 'communities_community_view', 'communities_list');
 
         $model_communities_users = new Communities_Users();
-        $assignement = $model_communities_users->findByCommunityAndUser($community->ident, $USER->ident);
+        $assignement = $model_communities_users->findByCommunityAndUser($community->ident, $this->user->ident);
 
         if ($assignement <> NULL) {
             $assignement->delete();

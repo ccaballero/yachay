@@ -1,10 +1,8 @@
 <?php
 
-class Subjects_SubjectController extends Yachay_Action
+class Subjects_SubjectController extends Yachay_Controller_Action
 {
     public function viewAction() {
-        global $USER;
-
         $this->requirePermission('subjects', 'view');
         $request = $this->getRequest();
 
@@ -38,22 +36,22 @@ class Subjects_SubjectController extends Yachay_Action
             case 'public':
                 break;
             case 'register':
-                if ($USER->role == 1) {
+                if ($this->user->role == 1) {
                     $this->_redirect($url);
                 }
                 break;
             case 'private':
-                if ($USER->role == 1) {
+                if ($this->user->role == 1) {
                     $this->_redirect($url);
                     return;
                 }
                 if ($this->acl('subjects', 'edit')) {
                     break;
                 }
-                if ($subject->moderator == $USER->ident) {
+                if ($subject->moderator == $this->user->ident) {
                     break;
                 }
-                $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $USER->ident);
+                $assign = $model_subjects_users->findBySubjectAndUser($subject->ident, $this->user->ident);
                 if (empty($assign)) {
                     $this->_redirect($url);
                 }

@@ -1,6 +1,6 @@
 <?php
 
-class Tags_TagController extends Yachay_Action
+class Tags_TagController extends Yachay_Controller_Action
 {
     public function viewAction() {
         $this->requirePermission('tags', 'list');

@@ -1,7 +1,6 @@
 <?php 
 
 global $MENUBAR;
-global $USER;
 
 $model_pages = new Pages();
 $items = $model_pages->selectByMenutype('menubar');
@@ -14,7 +13,7 @@ foreach ($items as $item) {
         if ($perm == '') {
             $bool |= true;
         } else {
-            $bool |= $USER->hasPermission($item->module, $perm);
+            $bool |= $this->user->hasPermission($item->module, $perm);
         }
     }
 

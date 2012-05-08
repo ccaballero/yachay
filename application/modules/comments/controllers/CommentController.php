@@ -1,10 +1,8 @@
 <?php
 
-class Comments_CommentController extends Yachay_Action
+class Comments_CommentController extends Yachay_Controller_Action
 {
     public function newAction() {
-        global $USER;
-
         $this->requirePermission('resources', 'view');
         $this->requirePermission('comments', 'new');
 
@@ -60,7 +58,7 @@ class Comments_CommentController extends Yachay_Action
         $comments_model = new Comments();
         $comment = $comments_model->createRow();
         $comment->resource = $resource->ident;
-        $comment->author = $USER->ident;
+        $comment->author = $this->user->ident;
         $comment->comment = $comment_resource;
         $comment->tsregister = time();
 
@@ -82,8 +80,6 @@ class Comments_CommentController extends Yachay_Action
     }
 
     public function deleteAction() {
-        global $USER;
-
         $this->requirePermission('resources', 'view');
         $this->requirePermission('comments', 'delete');
 
@@ -139,7 +135,7 @@ class Comments_CommentController extends Yachay_Action
         $comments_model = new Comments();
         $comment = $comments_model->findByIdent($comment_resource);
 
-        if (!empty($comment) && $comment->author == $USER->ident) {
+        if (!empty($comment) && $comment->author == $this->user->ident) {
             $comment->delete();
 
             $resource->comments = $resource->comments - 1;

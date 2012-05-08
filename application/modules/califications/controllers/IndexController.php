@@ -1,6 +1,6 @@
 <?php
 
-class Califications_IndexController extends Yachay_Action
+class Califications_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $request = $this->getRequest();
@@ -9,7 +9,6 @@ class Califications_IndexController extends Yachay_Action
 
         if (!empty($siss)) {
             $model_gestions = new Gestions();
-            $model_groups = new Groups();
             $model_users = new Users();
             $model_califications = new Califications();
 
@@ -55,7 +54,7 @@ class Califications_IndexController extends Yachay_Action
 
                 $this->view->model = $model_califications;
                 $this->view->gestion = $current_gestion;
-                $this->view->user = $user;
+                $this->view->user = $user; // Overwrite
                 $this->view->subjects = $subjects;
                 $this->view->groups = $groups;
                 $this->view->evaluations = $evaluations;

@@ -1,6 +1,6 @@
 <?php
 
-class Communities_IndexController extends Yachay_Action
+class Communities_IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         $this->requirePermission('communities', 'list');
