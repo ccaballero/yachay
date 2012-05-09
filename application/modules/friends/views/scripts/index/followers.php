@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 
 if ($this->acl('friends', 'contact')) {
     echo '<table><tr>';

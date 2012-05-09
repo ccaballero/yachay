@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 if (count($this->tags) <> 0) {
     foreach ($this->tags as $tag) {
         echo '<a href="' . $this->url(array('tag' => $tag['tag']->url), 'tags_tag_view') . '">';

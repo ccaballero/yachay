@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label .'</h1>';
+echo '<h1>' . $this->page->label .'</h1>';
 
 echo '<table border="1" width="100%">';
 echo '<tr><td width="50%"><center>';

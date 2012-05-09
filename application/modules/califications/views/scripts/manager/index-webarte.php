@@ -1,15 +1,15 @@
 <h1>Calificaciones: Grupo <?php echo $this->group->label ?>
 <strong class="task">
 <?php if ($this->group->status == 'active') { ?>
-    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Grupo activo" title="Grupo activo" />
+    <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Grupo activo" title="Grupo activo" />
 <?php } else { ?>
-    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Grupo inactivo" title="Grupo inactivo" />
+    <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Grupo inactivo" title="Grupo inactivo" />
 <?php } ?>
 <?php if ($this->group->amTeacher() || $this->group->amMember()) { ?>
-    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/group.png' ?>" alt="Ver miembros" title="Ver miembros" /></a>
+    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_assign') ?>"><img src="<?php echo $this->template->htmlbase . 'images/group.png' ?>" alt="Ver miembros" title="Ver miembros" /></a>
 <?php } ?>
 <?php if ($this->subject->amModerator()) { ?>
-    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url), 'groups_group_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
 <?php } ?>
 </strong>
 </h1>

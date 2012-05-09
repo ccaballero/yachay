@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 <?php if (count($this->roles)) { ?>
     <dl>
     <?php foreach ($this->roles as $role) { ?>
@@ -9,7 +9,7 @@
                 <?php echo $role->label ?>
             <?php } ?>
             <?php if ($this->acl('roles', 'edit')) { ?>
-                <a href="<?php echo $this->url(array('role' => $role->url), 'roles_role_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+                <a href="<?php echo $this->url(array('role' => $role->url), 'roles_role_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
             <?php } ?>
         </dt>
         <dd><p><?php echo $role->description ?></p></dd>

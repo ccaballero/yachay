@@ -1,9 +1,9 @@
 <h1><?php echo $this->evaluation->label ?>
 <strong class="task">
 <?php if ($this->evaluation->useful) { ?>
-    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Evaluación usable" title="Evaluación usable" />
+    <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Evaluación usable" title="Evaluación usable" />
 <?php } else { ?>
-    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Evaluación inconclusa" title="Evaluación inconclusa" />
+    <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Evaluación inconclusa" title="Evaluación inconclusa" />
 <?php } ?>
 </strong>
 </h1>
@@ -39,7 +39,7 @@
             <td><?php echo $value->value ?></td>
             <td class="center">
             <?php if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) { ?>
-                <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $this->test_evaluation->ident, 'value' => $value->ident), 'evaluations_evaluation_test_value_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
+                <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $this->test_evaluation->ident, 'value' => $value->ident), 'evaluations_evaluation_test_value_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
             <?php } ?>
             </td>
         </tr>

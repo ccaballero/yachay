@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 echo '<center><table width="100%"><tr>';
 echo '<th>' . $this->model_pages->_mapping['label'] . '</th>';
 echo '<th>' . $this->model_pages->_mapping['module'] . '</th>';

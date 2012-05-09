@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?php echo $this->currentPage() ?>" />
@@ -29,28 +29,28 @@
             <td><?php echo $user->getFullName() ?></td>
             <td class="center">
             <?php if ($user->status == 'active') { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario activo" />
+                <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario activo" />
             <?php } else { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario inactivo" />
+                <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario inactivo" />
             <?php } ?>
             </td>
             <td class="options">
             <?php if ($this->acl('users', 'view')) { ?>
-                <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_view') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
+                <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_view') ?>"><img src="<?php echo $this->template->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
             <?php } ?>
             <?php if ($this->user->hasFewerPrivileges($user)) { ?>
                 <?php if ($this->acl('users', 'edit')) { ?>
-                    <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+                    <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
                 <?php } ?>
                 <?php if ($this->acl('users', 'lock')) { ?>
                     <?php if ($user->status == 'active') { ?>
-                        <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_lock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock.png' ?>" alt="Bloquear" title="Bloquear" /></a>
+                        <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_lock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock.png' ?>" alt="Bloquear" title="Bloquear" /></a>
                     <?php } else { ?>
-                        <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_unlock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock_open.png' ?>" alt="Desbloquear" title="Desbloquear" /></a>
+                        <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_unlock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock_open.png' ?>" alt="Desbloquear" title="Desbloquear" /></a>
                     <?php } ?>
                 <?php } ?>
                 <?php if ($this->acl('users', 'delete')) { ?>
-                    <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
+                    <a href="<?php echo $this->url(array('user' => $user->url), 'users_user_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
                 <?php } ?>
             <?php } ?>
             </td>

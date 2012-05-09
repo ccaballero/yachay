@@ -38,4 +38,4 @@ echo '<tr valign="top"><td colspan="4"><b>Pasatiempos:</b></td></tr>';
 echo '<tr valign="top"><td colspan="4">' . $this->none($this->user->hobbies) . '</td></tr>';
 echo '</table><hr />';
 
-echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, ));
+echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'template' => $this->template));

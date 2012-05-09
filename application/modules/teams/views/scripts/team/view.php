@@ -42,4 +42,4 @@ if (count($this->members)) {
     echo '<p>El equipo no se posee ningun miembro registrado.</p>';
 }
 
-echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, ));
+echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'template' => $this->template));

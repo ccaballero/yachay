@@ -1,14 +1,14 @@
 <h1><?php echo $this->evaluation->label ?>
 <strong class="task">
 <?php if ($this->evaluation->useful) { ?>
-    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Evaluación usable" title="Evaluación usable" />
+    <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Evaluación usable" title="Evaluación usable" />
 <?php } else { ?>
-    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Evaluación inconclusa" title="Evaluación inconclusa" />
+    <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Evaluación inconclusa" title="Evaluación inconclusa" />
 <?php } ?>
 <?php if ($this->evaluation->author == $this->user->ident) { ?>
-    <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+    <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
 <?php } ?>
-<a href="<?php echo $this->url(array(), 'evaluations_sandbox') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/bug.png' ?>" alt="Test de formulas" title="Test de formulas" /></a>
+<a href="<?php echo $this->url(array(), 'evaluations_sandbox') ?>"><img src="<?php echo $this->template->htmlbase . 'images/bug.png' ?>" alt="Test de formulas" title="Test de formulas" /></a>
 </strong>
 </h1>
 
@@ -24,7 +24,7 @@
 <h2>Calificaciones previstas
 <strong class="task">
 <?php if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) { ?>
-    <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_test_add') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/add.png' ?>" alt="Agregar" title="Agregar" /></a>
+    <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident), 'evaluations_evaluation_test_add') ?>"><img src="<?php echo $this->template->htmlbase . 'images/add.png' ?>" alt="Agregar" title="Agregar" /></a>
 <?php } ?>
 </strong>
 </h2>
@@ -36,7 +36,7 @@
             <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_config') ?>"><?php echo $test->label ?></a>
             <strong class="task">
             <?php if ($this->evaluation->author == $this->user->ident && count($this->groups) == 0) { ?>
-                <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
+                <a href="<?php echo $this->url(array('evaluation' => $this->evaluation->ident, 'test' => $test->ident), 'evaluations_evaluation_test_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
             <?php } ?>
             </strong>
         </h3>

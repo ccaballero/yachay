@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?php echo $this->lastPage() ?>" />

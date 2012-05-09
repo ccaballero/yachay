@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 <p>
     <span class="mark">Dictada por:</span> <?php echo $this->group->getTeacher()->getFullName() ?><br />
     <span class="mark">Grupo:</span> <?php echo $this->group->label ?><br />

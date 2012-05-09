@@ -3,11 +3,14 @@
 class Yachay_Controller_Require extends Zend_Controller_Action
 {
     protected $config = null;
+    protected $page = null;
     protected $user = null;
+    protected $template = null;
 
     public function init() {
         $this->config = Zend_Registry::get('config');
         $this->user = Zend_Registry::get('user');
+        $this->template = Zend_Registry::get('template');
 
         $this->_redirector = $this->_helper->getHelper('Redirector');
         $this->_redirector->setPrependBase(false);

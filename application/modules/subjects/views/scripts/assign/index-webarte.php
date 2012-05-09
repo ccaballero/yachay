@@ -26,18 +26,18 @@
                 <div class="body">
             <?php if ($this->subject->amModerator()) { ?>
                 <?php if ($assign->status == 'active') { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario habilitado" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario habilitado" />
                 <?php } else { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario deshabilitado" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario deshabilitado" />
                 <?php } ?>
             <?php } ?>
             <?php if ($this->subject->amModerator()) { ?>
                 <?php if ($assign->status == 'active') { ?>
-                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_lock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock.png' ?>" alt="Deshabilitar" title="Deshabilitar" /></a>
+                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_lock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock.png' ?>" alt="Deshabilitar" title="Deshabilitar" /></a>
                 <?php } else { ?>
-                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_unlock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock_open.png' ?>" alt="Habilitar" title="Habilitar" /></a>
+                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_unlock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock_open.png' ?>" alt="Habilitar" title="Habilitar" /></a>
                 <?php } ?>
-                <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Retirar" title="Retirar" /></a>
+                <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $teacher->url), 'subjects_subject_assign_member_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Retirar" title="Retirar" /></a>
             <?php } ?>
                 <p><span class="bold">Miembro desde: </span></p>
                 <p><?php echo $this->timestamp($assign->tsregister) ?></p>
@@ -66,18 +66,18 @@
             <div class="body">
             <?php if ($this->subject->amModerator()) { ?>
                 <?php if ($assign->status == 'active') { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario habilitado" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario habilitado" />
                 <?php } else { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario deshabilitado" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario deshabilitado" />
                 <?php } ?>
             <?php } ?>
             <?php if ($this->subject->amModerator()) { ?>
                 <?php if ($assign->status == 'active') { ?>
-                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_lock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock.png' ?>" alt="Deshabilitar" title="Deshabilitar" /></a>
+                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_lock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock.png' ?>" alt="Deshabilitar" title="Deshabilitar" /></a>
                 <?php } else { ?>
-                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_unlock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock_open.png' ?>" alt="Habilitar" title="Habilitar" /></a>
+                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_unlock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock_open.png' ?>" alt="Habilitar" title="Habilitar" /></a>
                 <?php } ?>
-                <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Retirar" title="Retirar" /></a>
+                <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $auxiliar->url), 'subjects_subject_assign_member_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Retirar" title="Retirar" /></a>
             <?php } ?>
                 <p><span class="bold">Miembro desde: </span></p>
                 <p><?php echo $this->timestamp($assign->tsregister) ?></p>
@@ -106,18 +106,18 @@
             <div class="body">
             <?php if ($this->subject->amModerator()) { ?>
                 <?php if ($assign->status == 'active') { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario habilitado" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario habilitado" />
                 <?php } else { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario deshabilitado" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario deshabilitado" />
                 <?php } ?>
             <?php } ?>
             <?php if ($this->subject->amModerator()) { ?>
                 <?php if ($assign->status == 'active') { ?>
-                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_lock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock.png' ?>" alt="Deshabilitar" title="Deshabilitar" /></a>
+                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_lock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock.png' ?>" alt="Deshabilitar" title="Deshabilitar" /></a>
                 <?php } else { ?>
-                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_unlock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock_open.png' ?>" alt="Habilitar" title="Habilitar" /></a>
+                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_unlock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock_open.png' ?>" alt="Habilitar" title="Habilitar" /></a>
                 <?php } ?>
-                <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Retirar" title="Retirar" /></a>
+                <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $student->url), 'subjects_subject_assign_member_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Retirar" title="Retirar" /></a>
             <?php } ?>
                 <p><span class="bold">Miembro desde: </span></p>
                 <p><?php echo $this->timestamp($assign->tsregister) ?></p>
@@ -146,18 +146,18 @@
             <div class="body">
             <?php if ($this->subject->amModerator()) { ?>
                 <?php if ($assign->status == 'active') { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario habilitado" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Usuario activo" title="Usuario habilitado" />
                 <?php } else { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario deshabilitado" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Usuario inactivo" title="Usuario deshabilitado" />
                 <?php } ?>
             <?php } ?>
             <?php if ($this->subject->amModerator()) { ?>
                 <?php if ($assign->status == 'active') { ?>
-                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_lock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock.png' ?>" alt="Deshabilitar" title="Deshabilitar" /></a>
+                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_lock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock.png' ?>" alt="Deshabilitar" title="Deshabilitar" /></a>
                 <?php } else { ?>
-                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_unlock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock_open.png' ?>" alt="Habilitar" title="Habilitar" /></a>
+                    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_unlock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock_open.png' ?>" alt="Habilitar" title="Habilitar" /></a>
                 <?php } ?>
-                <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Retirar" title="Retirar" /></a>
+                <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'user' => $guest->url), 'subjects_subject_assign_member_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Retirar" title="Retirar" /></a>
             <?php } ?>
                 <p><span class="bold">Miembro desde: </span></p>
                 <p><?php echo $this->timestamp($assign->tsregister) ?></p>

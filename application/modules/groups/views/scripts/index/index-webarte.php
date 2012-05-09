@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
 <?php if (!empty($this->gestion)) { ?>
     <p><span class="mark">Gestion:</span>
@@ -16,7 +16,7 @@
             <?php echo $subject->label ?>
         <?php } ?>
         <?php if ($this->acl('subjects', 'edit')) { ?>
-            <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+            <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
         <?php } ?>
         </dt>
         <dd>

@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 echo '<i><b>Materia: </b>' . $this->subject->label . '</i>';
 echo '<br />';
 echo '<i><b>Gestion: </b>' . $this->gestion->label . '</i>';

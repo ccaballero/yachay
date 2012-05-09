@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 echo '<center><table width="100%"><tr><th>Pagina</th><th>Busqueda</th><th>Menus</th><th>Tareas</th><th>Inferior</th></tr>';
 
 foreach ($this->pages as $page) {

@@ -24,7 +24,7 @@
                 <?php } ?>
                     <strong class="task">
                         <?php if ($this->acl('subjects', 'edit')) { ?>
-                            <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+                            <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
                         <?php } ?>
                     </strong>
             </h2>

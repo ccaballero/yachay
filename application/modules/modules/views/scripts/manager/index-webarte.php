@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?php echo $this->currentPage() ?>" />
@@ -30,20 +30,20 @@
             <td><?php echo $module->type ?></td>
             <td class="center">
             <?php if ($module->status == 'active') { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Modulo activo" title="Modulo activo" />
+                <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Modulo activo" title="Modulo activo" />
             <?php } else { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Modulo inactivo" title="Modulo inactivo" />
+                <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Modulo inactivo" title="Modulo inactivo" />
             <?php } ?>
             </td>
             <td class="options">
             <?php if ($this->acl('modules', 'view')) { ?>
-                <a href="<?php echo $this->url(array('mod' => $module->url), 'modules_module_view') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
+                <a href="<?php echo $this->url(array('mod' => $module->url), 'modules_module_view') ?>"><img src="<?php echo $this->template->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
             <?php } ?>
             <?php if ($this->acl('modules', 'lock')) { ?>
                 <?php if ($module->status == 'active') { ?>
-                <a href="<?php echo $this->url(array('mod' => $module->url), 'modules_module_lock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock.png' ?>" alt="Bloquear" title="Bloquear" /></a>
+                <a href="<?php echo $this->url(array('mod' => $module->url), 'modules_module_lock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock.png' ?>" alt="Bloquear" title="Bloquear" /></a>
                 <?php } else { ?>
-                <a href="<?php echo $this->url(array('mod' => $module->url), 'modules_module_unlock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock_open.png' ?>" alt="Desbloquear" title="Desbloquear" /></a>
+                <a href="<?php echo $this->url(array('mod' => $module->url), 'modules_module_unlock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock_open.png' ?>" alt="Desbloquear" title="Desbloquear" /></a>
                 <?php } ?>
             <?php } ?>
             </td>

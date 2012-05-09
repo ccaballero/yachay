@@ -50,8 +50,8 @@ if (!empty($this->video->description)) {
 
 if ($this->acl('comments', 'view')) {
     echo '<h2>Comentarios</h2>';
-    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'videos_video_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE));
+    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'videos_video_comment', 'config' => $this->config, 'template' => $this->template));
     if ($this->acl('comments', 'new')) {
-        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'videos_video_comment', 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, 'user' => $this->user));
+        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'videos_video_comment', 'config' => $this->config, 'template' => $this->template, 'user' => $this->user));
     }
 }

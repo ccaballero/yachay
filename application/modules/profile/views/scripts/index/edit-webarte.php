@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 <p>En esta pagina usted debe establecer la informacion que es solicitada, asegurese de mantenerla siempre actualizada, para no tener problemas en el uso del sistema.</p>
 
 <form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">

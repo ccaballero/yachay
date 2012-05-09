@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 echo '<p>Para finalizar el proceso de registro, debe escoger su nombre de usuario y sus datos personales.</p>';
 
 echo '<center><form method="post" action="" accept-charset="utf-8">';

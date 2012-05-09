@@ -13,9 +13,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     protected function _initRouter() {
-        $this->bootstrap('autoload');
-        $this->bootstrap('frontController');
-        $this->bootstrap('db');
+        $this->bootstrap(array('autoload','frontController','db'));
 
         $ctrl = Zend_Controller_Front::getInstance();
         $router = $ctrl->getRouter();
@@ -42,8 +40,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     
     protected function _initLocale() {
         $this->bootstrap('config');
-        $config = Zend_Registry::get('config');
 
+        $config = Zend_Registry::get('config');
         // Set for localization
         setlocale(LC_CTYPE, $config->yachay->properties->locale);
         Zend_Locale::setDefault($config->yachay->properties->locale);
@@ -51,26 +49,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     
     protected function _initTimezone() {
         $this->bootstrap('config');
-        $config = Zend_Registry::get('config');
 
+        $config = Zend_Registry::get('config');
         date_default_timezone_set($config->yachay->properties->timezone);
     }
-    
+
     protected function _initUser() {
-        $this->bootstrap('autoload');
-        $this->bootstrap('session');
-        $this->bootstrap('db');
+        $this->bootstrap(array('autoload','session','db'));
 
         $session = new Zend_Session_Namespace('yachay');
-
         $user = new Users_Visitor();
 
         if (isset($session->user)) {
             $ident = $session->user->ident;
-            
+
             $model_users = new Users();
             $user_logged = $model_users->findByIdent($ident);
-            
+
             if (!empty($user_logged)) {
                 $user = $user_logged;
             }
@@ -78,10 +73,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         Zend_Registry::set('user',$user);
     }
-    
+
     protected function _initContext() {
         $this->bootstrap('session');
-        
+
         $session = new Zend_Session_Namespace('yachay');
         if (!isset($session->context)) {
             $session->context_type = 'global';
@@ -95,8 +90,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     protected function _initHistory() {
-        $this->bootstrap('config');
-        $this->bootstrap('session');
+        $this->bootstrap(array('config','session'));
 
         $session = new Zend_Session_Namespace('yachay');
         $config = Zend_Registry::get('config');
@@ -110,33 +104,34 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     protected function _initTemplate() {
-        $this->bootstrap('autoload');
-        $this->bootstrap('user');
+        $this->bootstrap(array('autoload','user'));
 
-        // Set of theme
-        global $TEMPLATE;
-        
         $user = Zend_Registry::get('user');
         $config = Zend_Registry::get('config');
 
         $model_templates = new Templates();
         $template = $model_templates->findByLabel($user->template);
 
-        $TEMPLATE = new StdClass();
-        $TEMPLATE->label = $template->label;
-        $TEMPLATE->parent = $template->parent;
-        $TEMPLATE->doctype = $template->doctype;
-        $TEMPLATE->description = $template->description;
-        $TEMPLATE->css_properties = $template->css_properties;
-        $TEMPLATE->htmlbase = $config->resources->frontController->baseUrl . '/templates/' . $TEMPLATE->label . '/';
+        // Set of theme
+        $user_template = new StdClass();
+        $user_template->label = $template->label;
+        $user_template->parent = $template->parent;
+        $user_template->doctype = $template->doctype;
+        $user_template->description = $template->description;
+        $user_template->css_properties = $template->css_properties;
+        $user_template->htmlbase = $config->resources->frontController->baseUrl . '/templates/' . $user_template->label . '/';
+        
+        Zend_Registry::set('template', $user_template);
 
-        global $PALETTE;
+        // Set of color palette
         $model_templates_users = new Templates_Users();
         $template_user = $model_templates_users->findByTemplateAndUser($template->ident, $user->ident);
         if (empty($template_user)) {
             $template_user = $template;
         }
-        $PALETTE = json_decode($template_user->css_properties, true);
+        $palette = json_decode($template_user->css_properties, true);
+
+        Zend_Registry::set('palette', $palette);
     }
     
     protected function _initPlaceholder() {
@@ -171,18 +166,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     
     protected function _initLayout() {
         $this->bootstrap('template');
-        
-        global $TEMPLATE;
-        
-        $options = $this->getOptions();
-        $options = $options['resources']['layout'];
 
-        $layout = Zend_Layout::startMVC(array(
+        $template = Zend_Registry::get('template');
+        Zend_Layout::startMVC(array(
             'layoutPath' => APPLICATION_PATH . '/layouts/scripts/',
-            'layout' => $TEMPLATE->label,
+            'layout' => $template->label,
             'viewSuffix' => 'php',
         ));
-        
-        return $layout;
     }
 }

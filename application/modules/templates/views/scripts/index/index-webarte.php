@@ -1,16 +1,16 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
 <?php foreach ($this->templates as $template) { ?>
     <h2>
         <?php echo $template->label ?>
         <strong class="task">
             <?php if ($this->user->template == $template->label) { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Tema actual" title="Tema actual" />
+                <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Tema actual" title="Tema actual" />
                 <?php if ($this->acl('templates', 'configure')) { ?>
-                    <a href="<?php echo $this->url(array('template' => $template->label), 'templates_template_view') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/wrench.png' ?>" alt="Configurar" title="Configurar" /></a>
+                    <a href="<?php echo $this->url(array('template' => $template->label), 'templates_template_view') ?>"><img src="<?php echo $this->template->htmlbase . 'images/wrench.png' ?>" alt="Configurar" title="Configurar" /></a>
                 <?php } ?>
             <?php } else { ?>
-                <a href="<?php echo $this->url(array('template' => $template->label), 'templates_template_switch') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/paintcan.png' ?>" alt="Usar" title="Usar" /></a>
+                <a href="<?php echo $this->url(array('template' => $template->label), 'templates_template_switch') ?>"><img src="<?php echo $this->template->htmlbase . 'images/paintcan.png' ?>" alt="Usar" title="Usar" /></a>
             <?php } ?>
         </strong>
     </h2>

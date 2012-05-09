@@ -1,23 +1,23 @@
 <h1><?php echo $this->community->label ?>
 <strong class="task">
 <?php if ($this->community->amAuthor()) { ?>
-    <a href="<?php echo $this->url(array('community' => $this->community->url), 'communities_community_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+    <a href="<?php echo $this->url(array('community' => $this->community->url), 'communities_community_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
 <?php } ?>
 <?php if ($this->acl('communities', 'enter')) { ?>
     <?php if (!$this->community->amModerator() && !$this->community->amMember()) { ?>
-        <a href="<?php echo $this->url(array('community' => $this->community->url), 'communities_community_join') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/group_add.png' ?>" alt="Unirse" title="Unirse" /></a>
+        <a href="<?php echo $this->url(array('community' => $this->community->url), 'communities_community_join') ?>"><img src="<?php echo $this->template->htmlbase . 'images/group_add.png' ?>" alt="Unirse" title="Unirse" /></a>
     <?php } else if (!$this->community->amAuthor()) { ?>
-        <a href="<?php echo $this->url(array('community' => $this->community->url), 'communities_community_leave') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/group_delete.png' ?>" alt="Retirarse" title="Retirarse" /></a>
+        <a href="<?php echo $this->url(array('community' => $this->community->url), 'communities_community_leave') ?>"><img src="<?php echo $this->template->htmlbase . 'images/group_delete.png' ?>" alt="Retirarse" title="Retirarse" /></a>
     <?php } ?>
 <?php } ?>
 <?php if ($this->community->mode == 'close') { ?>
-    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/key.png' ?>" alt="Comunidad privada" title="Comunidad privada" />
+    <img src="<?php echo $this->template->htmlbase . 'images/key.png' ?>" alt="Comunidad privada" title="Comunidad privada" />
 <?php } ?>
 <?php if ($this->acl('communities', 'enter')) { ?>
-    <a href="<?php echo $this->url(array('community' => $this->community->url), 'communities_community_assign') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/group_go.png' ?>" alt="Ver miembros" title="Ver miembros" /></a>
+    <a href="<?php echo $this->url(array('community' => $this->community->url), 'communities_community_assign') ?>"><img src="<?php echo $this->template->htmlbase . 'images/group_go.png' ?>" alt="Ver miembros" title="Ver miembros" /></a>
 <?php } ?>
 <?php if ($this->community->amModerator() && $this->community->mode == 'close') { ?>
-    <a href="<?php echo $this->url(array('community' => $this->community->url), 'communities_community_petition') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/group_key.png' ?>" alt="Ver peticiones" title="Ver peticiones" /></a>
+    <a href="<?php echo $this->url(array('community' => $this->community->url), 'communities_community_petition') ?>"><img src="<?php echo $this->template->htmlbase . 'images/group_key.png' ?>" alt="Ver peticiones" title="Ver peticiones" /></a>
 <?php } ?>
 </strong>
 </h1>
@@ -52,11 +52,11 @@
     <?php $tags = $this->community->getTags() ?>
 <?php if (count($tags)) { ?>
     <p>
-        <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tag.png' ?>" alt="Etiquetas" title="Etiquetas" />
+        <img src="<?php echo $this->template->htmlbase . 'images/tag.png' ?>" alt="Etiquetas" title="Etiquetas" />
     <?php foreach ($tags as $tag) { ?>
         <span class="tag"><a href="<?php echo $this->url(array('tag' => $tag->url), 'tags_tag_view') ?>"><?php echo $tag->label ?></a></span>
     <?php } ?>
     </p>
 <?php } ?>
 </div>
-<?php echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, 'paginator' => true,)) ?>
+<?php echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'template' => $this->template, 'paginator' => true,)) ?>

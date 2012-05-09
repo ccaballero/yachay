@@ -32,14 +32,14 @@
             <input type="checkbox" name="users[]" <?php echo ($results['CHECKED'] && isset($results['ROL_OBJ'])) ? 'checked="checked" ' : '' ?>value="<?php echo $results['CODIGO'] ?>" />
             <div class="result">
             <?php if (!$result) { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/error.png' ?>" alt="<?php echo $message ?>" title="<?php echo $message ?>" />
+                <img src="<?php echo $this->template->htmlbase . 'images/error.png' ?>" alt="<?php echo $message ?>" title="<?php echo $message ?>" />
             <?php } else if (!isset($results['ROL_OBJ'])) { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/error.png' ?>" alt="No se ha definido un rol" title="No se ha definido un rol" />
+                <img src="<?php echo $this->template->htmlbase . 'images/error.png' ?>" alt="No se ha definido un rol" title="No se ha definido un rol" />
             <?php } ?>
             <?php if ($type == 'new') { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/user_add.png' ?>" alt="Nuevo usuario" title="Nuevo usuario" />
+                <img src="<?php echo $this->template->htmlbase . 'images/user_add.png' ?>" alt="Nuevo usuario" title="Nuevo usuario" />
             <?php } else { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/user_edit.png' ?>" alt="Edición de usuario" title="Edición de usuario" />
+                <img src="<?php echo $this->template->htmlbase . 'images/user_edit.png' ?>" alt="Edición de usuario" title="Edición de usuario" />
             <?php } ?>
             </div>
             <p><span class="title"><?php echo $results['NOMBRE COMPLETO'] ?></span></p>

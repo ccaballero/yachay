@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 
 echo '<center>';
 echo '<form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">';

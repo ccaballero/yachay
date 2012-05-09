@@ -22,7 +22,8 @@ class Videos_ManagerController extends Yachay_Controller_Action
 
             $upload = new Zend_File_Transfer_Adapter_Http();
             $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
-            $upload->addValidator('Size', false, 20971520);
+            $upload->addValidator('Size', false, 2097152)
+                   ->addValidator('Extension', false, array('flv'));
 
             $publish = $request->getParam('publish');
             $tags = $request->getParam('tags');
@@ -52,7 +53,7 @@ class Videos_ManagerController extends Yachay_Controller_Action
                         $video->resource = $resource->ident;
                         $video->save();
 
-                        rename(APPLICATION_PATH . '/../data/upload//' . $video->filename, APPLICATION_PATH . '/../public/media/videos/' . $video->resource);
+                        rename(APPLICATION_PATH . '/../data/upload/' . $video->filename, APPLICATION_PATH . '/../public/media/videos/' . $video->resource);
 
                         $resource->saveContext($request);
                         $model_valorations->addActivity(8);

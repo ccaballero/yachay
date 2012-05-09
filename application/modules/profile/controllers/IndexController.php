@@ -60,7 +60,6 @@ class Profile_IndexController extends Yachay_Controller_Action
                     $filename = $upload->getFileName('file');
 
                     $thumbnail = new Yachay_Helpers_Thumbnail();
-
                     $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/users/thumbnail_large/' . $this->user->ident . '.jpg', 200, 200);
                     $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/users/thumbnail_medium/' . $this->user->ident . '.jpg', 100, 100);
                     $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/users/thumbnail_small/' . $this->user->ident . '.jpg', 50, 50);

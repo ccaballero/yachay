@@ -14,22 +14,18 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         }
 
         $model_pages = new Pages();
-        global $PAGE;
-        $PAGE = $model_pages->findByRoute($route);
+        $this->page = $model_pages->findByRoute($route);
 
         // add the views in path
         $this->view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
+        $this->view->doctype($this->template->doctype);
 
-        global $TEMPLATE;
-        $this->view->doctype($TEMPLATE->doctype);
-
-        if (empty($PAGE)) {
-            return;
-        }
-
-        // Set context by default
         if (!isset($this->_ignoreContextDefault)) {
             $this->context('global');
+        }
+
+        if (empty($this->page)) {
+            return;
         }
 
         // Add the helpers of application
@@ -37,7 +33,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         $modules = $model_modules->selectByType('application');
         foreach ($modules as $module) {
             //FIXME Considerar las posibles alternativas en tipos de modulos
-            if ($PAGE->controller != 'manager') {
+            if ($this->page->controller != 'manager') {
                 $this->view->addScriptPath(APPLICATION_PATH . '/modules/' . $module->url . '/views/scripts/application');
             }
         }
@@ -50,9 +46,9 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         $ICON->icon = $this->config->resources->frontController->baseUrl . '/media/favicon.ico';
 
         $this->view->config = $this->config;
+        $this->view->page = $this->page;
         $this->view->user = $this->user;
-        $this->view->PAGE = $PAGE;
-        $this->view->TEMPLATE = $TEMPLATE;
+        $this->view->template = $this->template;
     }
 
     public function postDispatch() {
@@ -60,15 +56,13 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             return;
         }
 
-        global $PAGE;
-        if (empty($PAGE)) {
+        if (empty($this->page)) {
             return;
         }
 
-        global $TEMPLATE;
         global $WIDGETS;
 
-        $regions = $PAGE->findRegionsViaRegions_Pages();
+        $regions = $this->page->findRegionsViaRegions_Pages();
         if (!empty($regions)) {
             foreach ($regions as $region) {
                 $view = new Zend_View();
@@ -76,16 +70,16 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
                 $view->setScriptPath(APPLICATION_PATH . '/modules/' . $region->module . '/views/scripts/' . $region->region . '/');
 
                 $view->config = $this->config;
+                $view->page = $this->page;
                 $view->user = $this->user;
-                $view->PAGE = $PAGE;
-                $view->TEMPLATE = $TEMPLATE;
+                $view->template = $this->template;
 
                 $view->render($region->script . '.php');
             }
         }
 
         // FIXME Control de privilegios
-        $widgets = $PAGE->findWidgetsViaWidgets_Pages();
+        $widgets = $this->page->findWidgetsViaWidgets_Pages();
         $model_widgets_pages = new Widgets_Pages();
         foreach ($widgets as $widget) {
             $view = new Zend_View();
@@ -93,16 +87,16 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             $view->setScriptPath(APPLICATION_PATH . '/modules/' . $widget->module . '/views/scripts/widgets/');
             
             $view->config = $this->config;
+            $view->page = $this->page;
             $view->user = $this->user;
-            $view->PAGE = $PAGE;
-            $view->TEMPLATE = $TEMPLATE;
+            $view->template = $this->template;
 
-            $widget_page = $model_widgets_pages->getPosition($PAGE->ident, $widget->ident);
+            $widget_page = $model_widgets_pages->getPosition($this->page->ident, $widget->ident);
             $position = $widget_page->position;
 
-            $script = APPLICATION_PATH . "/modules/{$widget->module}/views/scripts/widgets/{$widget->script}-{$TEMPLATE->label}.php";
+            $script = APPLICATION_PATH . "/modules/{$widget->module}/views/scripts/widgets/{$widget->script}-{$this->template->label}.php";
             if (file_exists($script)) {
-                $to_render = "{$widget->script}-{$TEMPLATE->label}.php";
+                $to_render = "{$widget->script}-{$this->template->label}.php";
             } else {
                 $to_render = "{$widget->script}.php";
             }
@@ -136,9 +130,9 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         $this->view->messages = $this->_helper->getHelper('FlashMessenger')->getMessages();
 
         // Rendering customized theme
-        $script = $this->view->getScriptPath($PAGE->controller) . '/' . $PAGE->action . '-' . $TEMPLATE->label . '.php';
+        $script = $this->view->getScriptPath($this->page->controller) . '/' . $this->page->action . '-' . $this->template->label . '.php';
         if (file_exists($script)) {
-            $this->render($PAGE->action . '-' . $TEMPLATE->label);
+            $this->render($this->page->action . '-' . $this->template->label);
         }
     }
 

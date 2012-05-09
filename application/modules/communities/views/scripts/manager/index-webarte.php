@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?php echo $this->currentPage() ?>" />
@@ -23,15 +23,15 @@
             <td><?php echo $community->label ?></td>
             <td class="center">
                 <?php if ($community->mode == 'close') { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/key.png' ?>" alt="Comunidad privada" title="Comunidad privada" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/key.png' ?>" alt="Comunidad privada" title="Comunidad privada" />
                 <?php } ?>
                 <?php echo $this->mode(NULL, $community->mode) ?>
             </td>
             <td class="center"><?php echo $community->members ?></td>
             <td class="options">
-                <a href="<?php echo $this->url(array('community' => $community->url), 'communities_community_view') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
-                <a href="<?php echo $this->url(array('community' => $community->url), 'communities_community_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
-                <a href="<?php echo $this->url(array('community' => $community->url), 'communities_community_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
+                <a href="<?php echo $this->url(array('community' => $community->url), 'communities_community_view') ?>"><img src="<?php echo $this->template->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
+                <a href="<?php echo $this->url(array('community' => $community->url), 'communities_community_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+                <a href="<?php echo $this->url(array('community' => $community->url), 'communities_community_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
             </td>
             <td class="center"><?php echo $this->timestamp($community->tsregister) ?></td>
         </tr>

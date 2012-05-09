@@ -31,14 +31,14 @@
             <input type="checkbox" name="subjects[]" <?php echo ($results['CHECKED'] && isset($results['MODERADOR_OBJ'])) ? 'checked="checked" ' : '' ?>value="<?php echo $results['CODIGO']?>" />
             <div class="result">
             <?php if (!$result) { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/error.png' ?>" alt="<?php echo $message ?>" title="<?php echo $message ?>" />
+                <img src="<?php echo $this->template->htmlbase . 'images/error.png' ?>" alt="<?php echo $message ?>" title="<?php echo $message ?>" />
             <?php } else if (!isset($results['MODERADOR_OBJ'])) { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/error.png' ?>" alt="<?php echo $results['MODERADOR_MES'] ?>" title="<?php echo $results['MODERADOR_MES'] ?>" />
+                <img src="<?php echo $this->template->htmlbase . 'images/error.png' ?>" alt="<?php echo $results['MODERADOR_MES'] ?>" title="<?php echo $results['MODERADOR_MES'] ?>" />
             <?php } ?>
             <?php if ($type == 'new') { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/user_add.png' ?>" alt="Nueva materia" title="Nueva materia" />
+                <img src="<?php echo $this->template->htmlbase . 'images/user_add.png' ?>" alt="Nueva materia" title="Nueva materia" />
             <?php } else { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/user_edit.png' ?>" alt="Edición de materia" title="Edición de materia" />
+                <img src="<?php echo $this->template->htmlbase . 'images/user_edit.png' ?>" alt="Edición de materia" title="Edición de materia" />
             <?php } ?>
             </div>
             <p><span class="title"><?php echo $results['MATERIA'] ?></span></p>

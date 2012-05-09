@@ -15,16 +15,16 @@
         <?php if ($results['ERROR']) { ?>
             <input type="checkbox" disabled="disabled" />
             <div class="result">
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/error.png' ?>" alt="El usuario no existe" title="El usuario no existe" />
+                <img src="<?php echo $this->template->htmlbase . 'images/error.png' ?>" alt="El usuario no existe" title="El usuario no existe" />
             </div>
             <p><span class="title"><?php echo $results['USUARIO'] ?></span></p>
         <?php } else { ?>
             <input type="checkbox" name="users[]" <?php echo !($results['ERROR'] || $results['ASSIGN_RES']) ? 'checked="checked"':''?> value="<?php echo $results['CODIGO']?>" />
             <div class="result">
             <?php if (isset($results['TYPE'])) { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Información valida y lista para importar" title="Información valida y lista para importar" />
+                <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Información valida y lista para importar" title="Información valida y lista para importar" />
             <?php } else {?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="<?php echo $results['CARGO_MES'] ?>" title="<?php echo $results['CARGO_MES'] ?>" />
+                <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="<?php echo $results['CARGO_MES'] ?>" title="<?php echo $results['CARGO_MES'] ?>" />
             <?php } ?>
             </div>
             <p><span class="title"><?php echo $results['USUARIO_OBJ']->url ?></span></p>

@@ -1,7 +1,7 @@
 <h1><?php echo $this->role->label ?>
 <strong class="task">
 <?php if ($this->acl('roles', 'edit')) { ?>
-    <a href="<?php echo $this->url(array('role' => $this->role->url), 'roles_role_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+    <a href="<?php echo $this->url(array('role' => $this->role->url), 'roles_role_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
 <?php } ?>
 </strong>
 </h1>

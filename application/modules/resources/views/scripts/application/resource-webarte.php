@@ -19,33 +19,33 @@
                 <?php } ?>
                 </div>
                 <div class="message">
-                    <?php echo $this->partial($this->template($extended->__element, $extended->__type), array($extended->__type => $extended, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE)) ?>
+                    <?php echo $this->partial($this->template($extended->__element, $extended->__type), array($extended->__type => $extended, 'config' => $this->config, 'template' => $this->template)) ?>
                 </div>
                 <span class="addon">
             <?php if (isset($resource->viewers)) { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/eye.png' ?>" alt="Visitado" title="Visitas" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/eye.png' ?>" alt="Visitado" title="Visitas" />
                     <span>(<?php echo $resource->viewers ?>)</span>
             <?php } ?>
             <?php if (isset($resource->comments)) { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/comment.png' ?>" alt="Comentarios" title="Comentarios" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/comment.png' ?>" alt="Comentarios" title="Comentarios" />
                     <span>(<?php echo $resource->comments ?>)</span>
                 <?php if ($resource->ratings >= 0) { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/thumb_up.png' ?>" alt="Valoración" title="Valoración" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/thumb_up.png' ?>" alt="Valoración" title="Valoración" />
                 <?php } else { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/thumb_down.png' ?>" alt="Valoración" title="Valoración" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/thumb_down.png' ?>" alt="Valoración" title="Valoración" />
                 <?php } ?>
                     <span>(<?php echo $resource->ratings ?>/<?php echo $resource->raters ?>)</span>
             <?php } ?>
                     <span class="viewall">
-                        <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="" title="" />
+                        <img src="<?php echo $this->template->htmlbase . 'images/page_white_text.png' ?>" alt="" title="" />
                         <a href="<?php echo $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_view') ?>">Ver mas</a>
                 <?php if ($resource->amAuthor()) { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="" title="" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="" title="" />
                     <a href="<?php echo $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_edit') ?>">Editar</a>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="" title="" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="" title="" />
                     <a href="<?php echo $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_delete') ?>">Eliminar</a>
                 <?php } else if ($this->acl('resources', 'drop')) { ?>
-                    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/error.png' ?>" alt="" title="" />
+                    <img src="<?php echo $this->template->htmlbase . 'images/error.png' ?>" alt="" title="" />
                     <a href="<?php echo $this->url(array($extended->__type => $extended->resource), $extended->__element . '_' . $extended->__type . '_drop') ?>">Eliminar</a>
                 <?php } ?>
                     </span>

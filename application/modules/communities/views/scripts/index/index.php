@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 if (count($this->communities)) {
     echo '<center>' . $this->paginator($this->communities, $this->route) . '</center>';
     foreach ($this->communities as $community) {

@@ -21,10 +21,10 @@
             <span class="addon">
                 <span class="viewall">
             <?php if ($comment->amAuthor()) { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="" title="" />
+                <img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="" title="" />
                 <a href="<?php echo $this->url(array('resource' => $resource->ident, 'comment' => $comment->ident), $this->route . '_delete') ?>">Eliminar</a>
             <?php } else if ($this->acl('comments', 'drop')) { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/error.png' ?>" alt="" title="" />
+                <img src="<?php echo $this->template->htmlbase . 'images/error.png' ?>" alt="" title="" />
                 <a href="<?php echo $this->url(array('comment' => $comment->ident), 'comments_drop') ?>">Eliminar</a>
             <?php } ?>
                 </span>

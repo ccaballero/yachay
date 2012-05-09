@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
 <p>
     <span class="mark">Tema:</span> <?php echo $this->template->label ?><br />

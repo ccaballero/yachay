@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 <?php if (!empty($this->gestion)) { ?><p><span class="mark">Gestion: </span><?php echo $this->gestion->label ?></p><?php } ?>
 
 <form method="post" action="" accept-charset="utf-8">
@@ -32,27 +32,27 @@
             <td><?php echo $subject->label ?></td>
             <td class="center">
             <?php if ($subject->status == 'active') { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Materia activa" title="Materia activa" />
+                <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Materia activa" title="Materia activa" />
             <?php } else { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Materia inactiva" title="Materia inactiva" />
+                <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Materia inactiva" title="Materia inactiva" />
             <?php } ?>
             </td>
             <td class="options">
             <?php if ($this->acl('subjects', 'view')) { ?>
-                <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_view') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
+                <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_view') ?>"><img src="<?php echo $this->template->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
             <?php } ?>
             <?php if ($this->acl('subjects', 'edit')) { ?>
-                <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+                <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
             <?php } ?>
             <?php if ($this->acl('subjects', 'lock')) { ?>
                 <?php if ($subject->status == 'inactive') { ?>
-                    <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_unlock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock_open.png' ?>" alt="Activar" title="Activar" /></a>
+                    <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_unlock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock_open.png' ?>" alt="Activar" title="Activar" /></a>
                 <?php } else { ?>
-                    <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_lock') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/lock.png' ?>" alt="Desactivar" title="Desactivar" /></a>
+                    <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_lock') ?>"><img src="<?php echo $this->template->htmlbase . 'images/lock.png' ?>" alt="Desactivar" title="Desactivar" /></a>
                 <?php } ?>
             <?php } ?>
             <?php if ($this->acl('subjects', 'delete') && $subject->isEmpty()) { ?>
-                <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
+                <a href="<?php echo $this->url(array('subject' => $subject->url), 'subjects_subject_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
             <?php } ?>
             </td>
             <td class="center"><?php echo $this->timestamp($subject->tsregister) ?></td>

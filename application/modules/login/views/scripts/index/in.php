@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 echo '<p>Para acceder al sistema, debe colocar su nombre de usuario y la contraseña que le haya sido provista.</p>';
 
 echo '<center><form method="post" action="" accept-charset="utf-8">';

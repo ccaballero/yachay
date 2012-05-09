@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?php echo $this->currentPage() ?>" />
@@ -18,14 +18,14 @@
             <td><?php echo $invitation->email ?></td>
             <td class="center">
             <?php if ($invitation->accepted) { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Invitación aceptada" title="Invitación aceptada" />
+                <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Invitación aceptada" title="Invitación aceptada" />
             <?php } else { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/email.png' ?>" alt="Invitación pendiente" title="Invitación pendiente" />
+                <img src="<?php echo $this->template->htmlbase . 'images/email.png' ?>" alt="Invitación pendiente" title="Invitación pendiente" />
             <?php } ?>
             </td>
             <td class="options">
                 <?php if (!$invitation->accepted) { ?>
-                    <a href="<?php echo $this->url(array('invitation' => $invitation->ident), 'invitations_invitation_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Revocar invitación" title="Revocar invitación" /></a>
+                    <a href="<?php echo $this->url(array('invitation' => $invitation->ident), 'invitations_invitation_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Revocar invitación" title="Revocar invitación" /></a>
                 <?php } ?>
             </td>
             <td class="center"><?php echo $this->timestamp($invitation->tsregister) ?></td>

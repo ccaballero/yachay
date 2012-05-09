@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
     <div class="tabs top">
         <a class="<?php echo $this->active == 'all' ? 'active' : 'inactive' ?>" href="<?php echo $this->url(array(), 'resources_list') ?>">Todos</a>
@@ -15,7 +15,7 @@
     </div>
 
 <?php if (count($this->resources)) { ?>
-    <?php echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, 'paginator' => false,)) ?>
+    <?php echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'template' => $this->template, 'paginator' => false,)) ?>
 <?php } else { ?>
     <p>No existen recursos registrados</p>
 <?php } ?>

@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 if (count($this->areas)) {
     echo '<ul>';
     foreach ($this->areas as $area) {

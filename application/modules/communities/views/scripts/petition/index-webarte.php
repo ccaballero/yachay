@@ -23,8 +23,8 @@
             <?php } ?>
             <div class="body">
             <?php if ($this->community->amModerator()) { ?>
-                <a href="<?php echo $this->url(array('community' => $this->community->url, 'user' => $applicant->url), 'communities_community_petition_applicant_accept') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/group_add.png' ?>" alt="Aceptar" title="Aceptar" /></a>
-                <a href="<?php echo $this->url(array('community' => $this->community->url, 'user' => $applicant->url), 'communities_community_petition_applicant_decline') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/group_delete.png' ?>" alt="Denegar" title="Denegar" /></a>
+                <a href="<?php echo $this->url(array('community' => $this->community->url, 'user' => $applicant->url), 'communities_community_petition_applicant_accept') ?>"><img src="<?php echo $this->template->htmlbase . 'images/group_add.png' ?>" alt="Aceptar" title="Aceptar" /></a>
+                <a href="<?php echo $this->url(array('community' => $this->community->url, 'user' => $applicant->url), 'communities_community_petition_applicant_decline') ?>"><img src="<?php echo $this->template->htmlbase . 'images/group_delete.png' ?>" alt="Denegar" title="Denegar" /></a>
             <?php } ?>
                 <p><span class="bold">Fecha solicitud: </span></p>
                 <p><?php echo $this->timestamp($assign->tsregister) ?></p>

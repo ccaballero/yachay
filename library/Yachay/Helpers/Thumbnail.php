@@ -3,8 +3,7 @@
 class Yachay_Helpers_Thumbnail
 {
     public function thumbnail($copy_from, $copy_to, $maxwidth, $maxheight) {
-        $position = strpos($copy_from, '.');
-        $extension = strtolower(substr($copy_from, ++$position));
+        $extension = strtolower(substr($copy_from, -3));
 
         switch ($extension) {
             case 'jpeg':

@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->PAGE->label . '</h1>';
+echo '<h1>' . $this->page->label . '</h1>';
 if ($this->acl('resources', 'new')) {
     echo '[<a href="' . $this->url(array(), 'feedback_new') . '">Crear nueva sugerencia</a>]';
 }

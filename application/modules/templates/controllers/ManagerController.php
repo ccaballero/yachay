@@ -3,12 +3,10 @@
 class Templates_ManagerController extends Yachay_Controller_Action
 {
     public function cssAction() {
-        global $TEMPLATE;
-
         $model_templates = new Templates();
         $model_templates_users = new Templates_Users();
 
-        $template = $model_templates->findByLabel($TEMPLATE->label);
+        $template = $model_templates->findByLabel($this->template->label);
 
         $json_properties = $template->css_properties;
         $custom_properties = $model_templates_users->findByTemplateAndUser($template->ident, $this->user->ident);

@@ -3,11 +3,11 @@
 class Yachay_Helpers_Template
 {
     public function template($module, $script, $type = 'application/', $php = true) {
-        global $TEMPLATE;
+        $template = Zend_Registry::get('template');
 
-        $tpl = APPLICATION_PATH . '/modules/' . $module . '/views/scripts/' . $type . $script . '-' . $TEMPLATE->label . '.php';
+        $tpl = APPLICATION_PATH . '/modules/' . $module . '/views/scripts/' . $type . $script . '-' . $template->label . '.php';
         if (file_exists($tpl)) {
-            return "$script-{$TEMPLATE->label}" . ($php ? '.php' : '');
+            return "$script-{$template->label}" . ($php ? '.php' : '');
         }
         return $script . ($php ? '.php' : '');
     }

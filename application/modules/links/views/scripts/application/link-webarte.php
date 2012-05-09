@@ -3,6 +3,6 @@
 <?php } ?>
 
 <p class="center">
-    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/link.png' ?>" alt="" title="" />
+    <img src="<?php echo $this->template->htmlbase . 'images/link.png' ?>" alt="" title="" />
     <a target="_BLANK" href="<?php echo $this->link->link ?>"><?php echo $this->link->link ?></a>
 </p>

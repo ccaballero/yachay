@@ -1,12 +1,12 @@
 <h1>Equipo: <?php echo $this->team->label ?>
 <strong class="task">
 <?php if ($this->team->status == 'active') { ?>
-    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Equipo activo" title="Equipo activo" />
+    <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Equipo activo" title="Equipo activo" />
 <?php } else { ?>
-    <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Equipo inactivo" title="Equipo inactivo" />
+    <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Equipo inactivo" title="Equipo inactivo" />
 <?php } ?>
 <?php if ($this->group->amTeacher() || $this->team->amMemberTeam()) { ?>
-    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $this->team->url), 'teams_team_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+    <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $this->team->url), 'teams_team_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
 <?php } ?>
 </strong>
 </h1>
@@ -33,7 +33,7 @@
             </a>
         <?php } ?>
         <?php if ($this->team->amMemberTeam()) { ?>
-            <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $this->team->url, 'user' => $member->url), 'teams_team_member_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Retirar" title="Retirar" /></a>
+            <a href="<?php echo $this->url(array('subject' => $this->subject->url, 'group' => $this->group->url, 'team' => $this->team->url, 'user' => $member->url), 'teams_team_member_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Retirar" title="Retirar" /></a>
         <?php } ?>
     </div>
     <?php } ?>
@@ -43,4 +43,4 @@
     <p>El equipo no se posee ningun miembro registrado.</p>
 <?php } ?>
 
-<?php echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'TEMPLATE' => $this->TEMPLATE, 'paginator' => true,)) ?>
+<?php echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'template' => $this->template, 'paginator' => true,)) ?>

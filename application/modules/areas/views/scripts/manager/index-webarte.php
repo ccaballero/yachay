@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?php echo $this->currentPage() ?>" />
@@ -20,14 +20,14 @@
             <td><?php echo $area->label ?></td>
             <td class="options">
                 <?php if ($this->acl('areas', 'view')) { ?>
-                    <a href="<?php echo $this->url(array('area' => $area->url), 'areas_area_view') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
+                    <a href="<?php echo $this->url(array('area' => $area->url), 'areas_area_view') ?>"><img src="<?php echo $this->template->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
                 <?php } ?>
                 <?php if ($this->acl('areas', 'edit')) { ?>
-                    <a href="<?php echo $this->url(array('area' => $area->url), 'areas_area_edit') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
+                    <a href="<?php echo $this->url(array('area' => $area->url), 'areas_area_edit') ?>"><img src="<?php echo $this->template->htmlbase . 'images/pencil.png' ?>" alt="Editar" title="Editar" /></a>
                 <?php } ?>
                 <?php if ($this->acl('areas', 'delete')) { ?>
                     <?php if ($area->isEmpty()) { ?>
-                    <a href="<?php echo $this->url(array('area' => $area->url), 'areas_area_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
+                    <a href="<?php echo $this->url(array('area' => $area->url), 'areas_area_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
                     <?php } ?>
                 <?php } ?>
             </td>

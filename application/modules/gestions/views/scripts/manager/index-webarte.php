@@ -1,4 +1,4 @@
-<h1><?php echo $this->PAGE->label ?></h1>
+<h1><?php echo $this->page->label ?></h1>
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?php echo $this->currentPage() ?>" />
@@ -32,20 +32,20 @@
             <td><?php echo $gestion->label ?></td>
             <td class="center">
             <?php if ($gestion->status == 'active') { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/tick.png' ?>" alt="Gestión activa" title="Gestión activa" />
+                <img src="<?php echo $this->template->htmlbase . 'images/tick.png' ?>" alt="Gestión activa" title="Gestión activa" />
             <?php } else { ?>
-                <img src="<?php echo $this->TEMPLATE->htmlbase . 'images/cross.png' ?>" alt="Gestión inactiva" title="Gestión inactiva" />
+                <img src="<?php echo $this->template->htmlbase . 'images/cross.png' ?>" alt="Gestión inactiva" title="Gestión inactiva" />
             <?php } ?>
             </td>
             <td class="options">
                 <?php if ($this->acl('gestions', 'view')) { ?>
-                    <a href="<?php echo $this->url(array('gestion' => $gestion->url), 'gestions_gestion_view') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
+                    <a href="<?php echo $this->url(array('gestion' => $gestion->url), 'gestions_gestion_view') ?>"><img src="<?php echo $this->template->htmlbase . 'images/page_white_text.png' ?>" alt="Ver" title="Ver" /></a>
                 <?php } ?>
                 <?php if ($this->acl('gestions', 'active') && $gestion->status == 'inactive') { ?>
-                    <a href="<?php echo $this->url(array('gestion' => $gestion->url), 'gestions_gestion_active') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/key.png' ?>" alt="Activar" title="Activar" /></a>
+                    <a href="<?php echo $this->url(array('gestion' => $gestion->url), 'gestions_gestion_active') ?>"><img src="<?php echo $this->template->htmlbase . 'images/key.png' ?>" alt="Activar" title="Activar" /></a>
                 <?php } ?>
                 <?php if ($this->acl('gestions', 'delete') && $gestion->status == 'inactive' && $gestion->isEmpty()) { ?>
-                    <a href="<?php echo $this->url(array('gestion' => $gestion->url), 'gestions_gestion_delete') ?>"><img src="<?php echo $this->TEMPLATE->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
+                    <a href="<?php echo $this->url(array('gestion' => $gestion->url), 'gestions_gestion_delete') ?>"><img src="<?php echo $this->template->htmlbase . 'images/delete.png' ?>" alt="Eliminar" title="Eliminar" /></a>
                 <?php } ?>
             </td>
             <td><center><?php echo $this->timestamp($gestion->tsregister) ?></center></td>
