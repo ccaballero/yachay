@@ -86,6 +86,8 @@ class Evaluations_TestController extends Yachay_Controller_Action
                 }
                 $this->view->test_value_evaluation = $test_value_evaluation;
             }
+        } else {
+            $this->history('evaluations/' . $evaluation->ident . '/' . $test_evaluation->ident);
         }
 
         $test_values_evaluation = $test_evaluation->findEvaluations_Tests_Values($test_evaluation->select()->order('value ASC'));
@@ -96,7 +98,6 @@ class Evaluations_TestController extends Yachay_Controller_Action
         $this->view->test_evaluation = $test_evaluation;
         $this->view->test_values_evaluation = $test_values_evaluation;
 
-        $this->history('evaluations/' . $evaluation->ident . '/' . $test_evaluation->ident);
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');
@@ -155,6 +156,8 @@ class Evaluations_TestController extends Yachay_Controller_Action
                 }
                 $this->view->test_evaluation = $test_evaluation;
             }
+        } else {
+            $this->history('evaluations/' . $evaluation->ident . '/add');
         }
 
         $tests_evaluation = $evaluation->findEvaluations_Tests($evaluation->select()->order('order ASC'));
@@ -163,7 +166,6 @@ class Evaluations_TestController extends Yachay_Controller_Action
         $this->view->evaluation = $evaluation;
         $this->view->tests_evaluation = $tests_evaluation;
 
-        $this->history('evaluations/' . $evaluation->ident . '/add');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');

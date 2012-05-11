@@ -108,12 +108,13 @@ class Careers_CareerController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('careers/' . $career->url . '/edit');
         }
 
         $this->view->model_careers = $model_careers;
         $this->view->career = $career;
 
-        $this->history('careers/' . $career->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('careers', 'list')) {
             $breadcrumb['Carreras'] = $this->view->url(array(), 'careers_list');

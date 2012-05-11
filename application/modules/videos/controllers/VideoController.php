@@ -74,12 +74,13 @@ class Videos_VideoController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('videos/' . $video->resource . '/edit');
         }
 
         $this->view->video = $video;
         $this->view->tags = implode(', ', $_tags);
 
-        $this->history('videos/' . $video->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Videos'] = $this->view->url(array('filter' => 'videos'), 'resources_filtered');

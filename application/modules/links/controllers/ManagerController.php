@@ -65,12 +65,13 @@ class Links_ManagerController extends Yachay_Controller_Action
             } else {
                 $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
+        } else {
+            $this->history('links/new');
         }
 
         $this->view->link = $link;
         $this->view->tags = $tags;
 
-        $this->history('links/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Enlaces'] = $this->view->url(array('filter' => 'links'), 'resources_filtered');

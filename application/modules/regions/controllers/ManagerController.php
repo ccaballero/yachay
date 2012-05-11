@@ -31,6 +31,8 @@ class Regions_ManagerController extends Yachay_Controller_Action
             }
 
             $this->_helper->flashMessenger->addMessage('Su configuración de las regiones ha sido almacenada');
+        } else {
+            $this->history('regions/manager');
         }
 
         $regions_pages = array();
@@ -53,7 +55,6 @@ class Regions_ManagerController extends Yachay_Controller_Action
         $this->view->regions = $model_regions->selectAll();
         $this->view->regions_pages = $regions_pages;
 
-        $this->history('regions/manager');
         $breadcrumb = array();
         if ($this->acl('regions', 'list')) {
             $breadcrumb['Regiones'] = $this->view->url(array(), 'regions_list');

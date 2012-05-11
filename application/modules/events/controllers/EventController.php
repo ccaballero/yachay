@@ -88,12 +88,13 @@ class Events_EventController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('events/' . $event->resource . '/edit');
         }
         
         $this->view->event = $event;
         $this->view->tags = implode(', ', $_tags);
 
-        $this->history('events/' . $event->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Eventos'] = $this->view->url(array('filter' => 'events'), 'resources_filtered');

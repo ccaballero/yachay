@@ -84,6 +84,8 @@ class Roles_RoleController extends Yachay_Controller_Action
 
             $this->view->role = $role;
             $this->view->role_privilege = $privileges_idents;
+        } else {
+            $this->history('roles/' . $role->url . '/edit');
         }
 
         $this->view->model_roles = $model_roles;
@@ -96,7 +98,6 @@ class Roles_RoleController extends Yachay_Controller_Action
         }
         $this->view->role_privilege = $idents_privileges;
 
-        $this->history('roles/' . $role->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('roles', 'list')) {
             $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');

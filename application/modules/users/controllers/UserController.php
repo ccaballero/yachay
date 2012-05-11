@@ -109,13 +109,14 @@ class Users_UserController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('users/' . $user->url . '/edit');
         }
 
         $this->view->model_users = $model_users;
         $this->view->user = $user; // Overwrite
         $this->view->me = $this->user;
 
-        $this->history('users/' . $user->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');

@@ -74,12 +74,13 @@ class Files_ManagerController extends Yachay_Controller_Action
             } else {
                 $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
+        } else {
+            $this->history('files/new');
         }
 
         $this->view->file = $file;
         $this->view->tags = $tags;
 
-        $this->history('files/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Archivos'] = $this->view->url(array('filter' => 'files'), 'resources_filtered');

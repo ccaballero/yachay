@@ -31,6 +31,8 @@ class Feedback_ManagerController extends Yachay_Controller_Action
                     $this->_forward('delete');
                 }
             }
+        } else {
+            $this->history('feedback/manager');
         }
 
         $model_feedback = new Feedback();
@@ -38,7 +40,6 @@ class Feedback_ManagerController extends Yachay_Controller_Action
         $this->view->model_feedback = $model_feedback;
         $this->view->feedback = $model_feedback->selectAll();
 
-        $this->history('feedback/manager');
         $breadcrumb = array();
         $breadcrumb['Sugerencias'] = $this->view->url(array(), 'feedback_list');
         if ($this->acl('feedback', array('resolv', 'mark', 'delete'))) {
@@ -89,12 +90,13 @@ class Feedback_ManagerController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('feedback/new');
         }
 
         $this->view->entry = $entry;
         $this->view->tags = $tags;
 
-        $this->history('feedback/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Sugerencias'] = $this->view->url(array('filter' => 'feedback'), 'resources_filtered');

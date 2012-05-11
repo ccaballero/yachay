@@ -45,7 +45,10 @@ class Teams_ManagerController extends Yachay_Controller_Action
         $this->view->group = $group;
         $this->view->teams = $list_teams;
 
-        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/manager');
+        if ($request->isGet()) {
+            $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/manager');
+        }
+
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -112,9 +115,10 @@ class Teams_ManagerController extends Yachay_Controller_Action
             }
 
             $this->view->team = $team;
+        } else {
+            $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/new');
         }
 
-        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/new');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -167,6 +171,7 @@ class Teams_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han desactivado $count equipos");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -202,6 +207,7 @@ class Teams_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han activado $count equipos");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -236,6 +242,7 @@ class Teams_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han eliminado $count equipos");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 }

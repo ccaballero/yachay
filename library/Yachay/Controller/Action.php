@@ -127,7 +127,9 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         $this->view->WIDGETS = $WIDGETS;
         $this->view->FOOTER = $FOOTER;
 
-        $this->view->messages = $this->_helper->getHelper('FlashMessenger')->getMessages();
+        $this->view->messages = array_merge($this->_helper->getHelper('FlashMessenger')->getCurrentMessages(), $this->_helper->getHelper('FlashMessenger')->getMessages());
+        $this->_helper->getHelper('FlashMessenger')->clearCurrentMessages();
+        $this->_helper->getHelper('FlashMessenger')->clearMessages();
 
         // Rendering customized theme
         $script = $this->view->getScriptPath($this->page->controller) . '/' . $this->page->action . '-' . $this->template->label . '.php';

@@ -35,6 +35,8 @@ class Communities_AssignController extends Yachay_Controller_Action
                     $this->_forward('unmoderate');
                 }
             }
+        } else {
+            $this->history('communities/' . $community->url . '/assign');
         }
 
         $this->context('community', $community);
@@ -47,7 +49,6 @@ class Communities_AssignController extends Yachay_Controller_Action
         $this->view->moderators = $moderators;
         $this->view->members = $members;
 
-        $this->history('communities/' . $community->url . '/assign');
         $breadcrumb = array();
         if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
@@ -90,6 +91,7 @@ class Communities_AssignController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han deshabilitado $count miembros");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -122,6 +124,7 @@ class Communities_AssignController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han habilitado $count miembros");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -156,6 +159,7 @@ class Communities_AssignController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han retirado $count miembros");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -188,6 +192,7 @@ class Communities_AssignController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han convertido a $count miembros en moderadores");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -220,6 +225,7 @@ class Communities_AssignController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han convertido a $count miembros en miembros");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 

@@ -127,9 +127,10 @@ class Groupsets_GroupsetController extends Yachay_Controller_Action
 
             $this->view->groupset = $groupset;
             $this->view->checks = $checks;
+        } else {
+            $this->history('groupsets/' . $groupset->ident . '/edit');
         }
 
-        $this->history('groupsets/' . $groupset->ident . '/edit');
         $breadcrumb = array();
         $breadcrumb['Conjuntos'] = $this->view->url(array(), 'groupsets_manager');
         $breadcrumb[$groupset->label] = $this->view->url(array('groupset' => $groupset->ident), 'groupsets_groupset_view');

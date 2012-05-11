@@ -23,6 +23,8 @@ class Roles_AssignController extends Yachay_Controller_Action
             }
 
             $this->_helper->flashMessenger->addMessage('La asignación de roles ha sido actualizada correctamente');
+        } else {
+            $this->history('roles/assign');
         }
 
         $users = $model_users->selectAll();
@@ -33,7 +35,6 @@ class Roles_AssignController extends Yachay_Controller_Action
         $this->view->model_roles = $model_roles;
         $this->view->roles = $roles;
 
-        $this->history('roles/assign');
         $breadcrumb = array();
         if ($this->acl('roles', 'list')) {
             $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');

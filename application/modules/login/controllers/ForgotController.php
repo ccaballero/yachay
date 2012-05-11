@@ -84,9 +84,10 @@ class Login_ForgotController extends Yachay_Controller_Action
             }
             
             $this->view->values = array('email' => $request->getParam('email'));
+        } else {
+            $this->history('forgot');
         }
 
-        $this->history('forgot');
         $breadcrumb = array();
         $breadcrumb['Ingresar'] = $this->view->url(array(), 'login_in');
         $this->breadcrumb($breadcrumb);

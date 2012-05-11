@@ -23,6 +23,8 @@ class Subjects_ManagerController extends Yachay_Controller_Action
                     $this->_forward('delete');
                 }
             }
+        } else {
+            $this->history('subjects/manager');
         }
 
         $model_subjects = new Subjects();
@@ -39,7 +41,6 @@ class Subjects_ManagerController extends Yachay_Controller_Action
             $this->view->subjects = array();
         }
 
-        $this->history('subjects/manager');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -124,9 +125,10 @@ class Subjects_ManagerController extends Yachay_Controller_Action
             $this->view->subject = $subject;
             $this->view->checks_areas = $checks_areas;
             $this->view->checks_careers = $checks_careers;
+        } else {
+            $this->history('subjects/new');
         }
 
-        $this->history('subjects/new');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -154,6 +156,7 @@ class Subjects_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han bloqueado $count materias");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -174,6 +177,7 @@ class Subjects_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han bloqueado $count materias");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -195,6 +199,7 @@ class Subjects_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han eliminado $count materias");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -359,9 +364,10 @@ class Subjects_ManagerController extends Yachay_Controller_Action
                 }
                 unset($session->import_subjects);
             }
+        } else {
+            $this->history('subjects/import');
         }
 
-        $this->history('subjects/import');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -421,9 +427,10 @@ class Subjects_ManagerController extends Yachay_Controller_Action
                     die();
                     break;
             }
+        } else {
+            $this->history('subjects/export');
         }
 
-        $this->history('subjects/export');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');

@@ -25,9 +25,10 @@ class Settings_IndexController extends Yachay_Controller_Action
             } else {
                 $this->_helper->flashMessenger->addMessage('Las entradas no son validas, recuerde que deben ser iguales y no estar vacias');
             }
+        } else {
+            $this->history('settings/' . $this->user->url);
         }
 
-        $this->history('settings/' . $this->user->url);
         $this->breadcrumb();
     }
 }

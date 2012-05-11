@@ -76,12 +76,13 @@ class Events_ManagerController extends Yachay_Controller_Action
             } else {
                 $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
+        } else {
+            $this->history('events/new');
         }
 
         $this->view->event = $event;
         $this->view->tags = $tags;
 
-        $this->history('events/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Eventos'] = $this->view->url(array('filter' => 'events'), 'resources_filtered');

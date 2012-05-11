@@ -64,12 +64,13 @@ class Notes_ManagerController extends Yachay_Controller_Action
             } else {
                 $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
+        } else {
+            $this->history('notes/new');
         }
 
         $this->view->note = $note;
         $this->view->tags = $tags;
 
-        $this->history('notes/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Notas'] = $this->view->url(array('filter' => 'notes'), 'resources_filtered');

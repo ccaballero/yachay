@@ -79,12 +79,13 @@ class Links_LinkController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('links/' . $link->resource . '/edit');
         }
 
         $this->view->link = $link;
         $this->view->tags = implode(', ', $_tags);
 
-        $this->history('links/' . $link->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Enlaces'] = $this->view->url(array('filter' => 'links'), 'resources_filtered');

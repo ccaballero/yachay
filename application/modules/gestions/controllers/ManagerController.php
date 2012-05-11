@@ -23,12 +23,13 @@ class Gestions_ManagerController extends Yachay_Controller_Action
 
                 $this->_helper->flashMessenger->addMessage("La gestion {$gestion->label} ha sido establecida como actual");
             }
+        } else {
+            $this->history('gestions/manager');
         }
 
         $this->view->model_gestions = $model_gestions;
         $this->view->gestions = $model_gestions->selectAll();
 
-        $this->history('gestions/manager');
         $breadcrumb = array();
         if ($this->acl('gestions', 'list')) {
             $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_list');
@@ -66,9 +67,10 @@ class Gestions_ManagerController extends Yachay_Controller_Action
             }
             
             $this->view->gestion = $gestion;
+        } else {
+            $this->history('gestions/new');
         }
 
-        $this->history('gestions/new');
         $breadcrumb = array();
         if ($this->acl('gestions', 'list')) {
             $breadcrumb['Gestiones'] = $this->view->url(array(), 'gestions_list');

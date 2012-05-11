@@ -118,6 +118,8 @@ class Teams_TeamController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/' . $team->url . '/edit');
         }
 
         $this->view->gestion = $gestion;
@@ -125,7 +127,6 @@ class Teams_TeamController extends Yachay_Controller_Action
         $this->view->group = $group;
         $this->view->team = $team;
         
-        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/' . $team->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');

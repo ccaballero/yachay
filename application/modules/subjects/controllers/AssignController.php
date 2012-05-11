@@ -44,7 +44,10 @@ class Subjects_AssignController extends Yachay_Controller_Action
         $this->view->students = $students;
         $this->view->guests = $guests;
 
-        $this->history('subjects/' . $subject->url . '/assign');
+        if ($request->isGet()) {
+            $this->history('subjects/' . $subject->url . '/assign');
+        }
+
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -113,6 +116,8 @@ class Subjects_AssignController extends Yachay_Controller_Action
             $this->_helper->flashMessenger->addMessage('Se registraron las asignaciones hechas');
             $session->url = $subject->url;
             $this->_redirect($request->getParam('return'));
+        } else {
+            $this->history('subjects/' . $subject->url . '/assign/new');
         }
 
         $this->view->model_users = $model_users;
@@ -120,7 +125,6 @@ class Subjects_AssignController extends Yachay_Controller_Action
         $this->view->subject = $subject;
         $this->view->users = $filtered;
 
-        $this->history('subjects/' . $subject->url . '/assign/new');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -166,6 +170,7 @@ class Subjects_AssignController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han deshabilitado $count miembros");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -199,6 +204,7 @@ class Subjects_AssignController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han habilitado $count miembros");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -231,6 +237,7 @@ class Subjects_AssignController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han deshabilitado $count miembros");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -396,9 +403,10 @@ class Subjects_AssignController extends Yachay_Controller_Action
                 }
                 unset($session->assign_users);
             }
+        } else {
+            $this->history('subjects/' . $subject->url . '/assign/import');
         }
 
-        $this->history('subjects/' . $subject->url . '/assign/import');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -475,9 +483,10 @@ class Subjects_AssignController extends Yachay_Controller_Action
                     die();
                     break;
             }
+        } else {
+            $this->history('subjects/' . $subject->url . '/assign/export');
         }
 
-        $this->history('subjects/' . $subject->url . '/assign/export');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');

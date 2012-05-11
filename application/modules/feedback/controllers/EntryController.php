@@ -74,12 +74,13 @@ class Feedback_EntryController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('feedback/' . $entry->resource . '/edit');
         }
 
         $this->view->entry = $entry;
         $this->view->tags = implode(', ', $_tags);
 
-        $this->history('feedback/' . $entry->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Sugerencias'] = $this->view->url(array('filter' => 'feedback'), 'resources_filtered');

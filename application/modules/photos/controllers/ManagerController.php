@@ -77,12 +77,13 @@ class Photos_ManagerController extends Yachay_Controller_Action
             } else {
                 $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
+        } else {
+            $this->history('photos/new');
         }
 
         $this->view->photo = $photo;
         $this->view->tags = $tags;
 
-        $this->history('photos/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Fotografias'] = $this->view->url(array('filter' => 'photos'), 'resources_filtered');

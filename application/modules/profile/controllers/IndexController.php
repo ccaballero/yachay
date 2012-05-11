@@ -65,7 +65,6 @@ class Profile_IndexController extends Yachay_Controller_Action
                     $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/users/thumbnail_small/' . $this->user->ident . '.jpg', 50, 50);
 
                     unlink($filename);
-                    $this->user->avatar = true;
                 }
 
                 // re-tagging
@@ -82,12 +81,13 @@ class Profile_IndexController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('profile/edit');
         }
 
         $this->view->addHelperPath(APPLICATION_PATH . '/modules/users/views/helpers', 'Users_View_Helper_');
         $this->view->tags = implode(', ', $_tags);
 
-        $this->history('profile/edit');
         $breadcrumb = array();
         $breadcrumb['Perfil'] = $this->view->url(array(), 'profile_view');
         $this->breadcrumb($breadcrumb);

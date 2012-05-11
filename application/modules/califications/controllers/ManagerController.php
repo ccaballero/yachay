@@ -120,9 +120,10 @@ class Califications_ManagerController extends Yachay_Controller_Action
                     }
                 }
             }
+        } else {
+            $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications');
         }
 
-        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications');
         $breadcrumb = array();
         if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
@@ -342,9 +343,10 @@ class Califications_ManagerController extends Yachay_Controller_Action
                 }
                 unset($session->import_califications);
             }
+        } else {
+            $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications/import');
         }
 
-        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications/import');
         $breadcrumb = array();
         if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');
@@ -458,9 +460,10 @@ class Califications_ManagerController extends Yachay_Controller_Action
                     die();
                     break;
             }
+        } else {
+            $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications/export');
         }
 
-        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/califications/export');
         $breadcrumb = array();
         if ($this->acl('subjects', array('new', 'import', 'export', 'lock', 'delete'))) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_manager');

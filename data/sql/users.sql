@@ -16,7 +16,6 @@ CREATE TABLE `user` (
     `formalname`        varchar(128)                                                NOT NULL DEFAULT '',
     `surname`           varchar(128)                                                NOT NULL DEFAULT '',
     `name`              varchar(128)                                                NOT NULL DEFAULT '',
-    `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,
     `birthdate`         date                                                        NULL,
     `career`            int unsigned                                                NOT NULL DEFAULT 0,
     `phone`             varchar(64)                                                 NOT NULL DEFAULT '',

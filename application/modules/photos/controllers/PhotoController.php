@@ -73,12 +73,13 @@ class Photos_PhotoController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('photos/' . $photo->resource . '/edit');
         }
 
         $this->view->photo = $photo;
         $this->view->tags = implode(', ', $_tags);
 
-        $this->history('photos/' . $photo->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Fotografias'] = $this->view->url(array('filter' => 'photos'), 'resources_filtered');

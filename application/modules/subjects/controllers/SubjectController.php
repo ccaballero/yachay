@@ -171,6 +171,8 @@ class Subjects_SubjectController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('subjects/' . $subject->url . '/edit');
         }
 
         $this->view->model_subjects = $model_subjects;
@@ -178,7 +180,6 @@ class Subjects_SubjectController extends Yachay_Controller_Action
         $this->view->checks = $checks;
         $this->view->subject = $subject;
 
-        $this->history('subjects/' . $subject->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');

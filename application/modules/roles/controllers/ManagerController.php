@@ -70,9 +70,10 @@ class Roles_ManagerController extends Yachay_Controller_Action {
 
             $this->view->role = $role;
             $this->view->role_privilege = $privileges_idents;
+        } else {
+            $this->history('roles/new');
         }
 
-        $this->history('roles/new');
         $breadcrumb = array();
         if ($this->acl('roles', 'list')) {
             $breadcrumb['Roles'] = $this->view->url(array(), 'roles_list');

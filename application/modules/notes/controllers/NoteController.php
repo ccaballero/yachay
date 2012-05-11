@@ -78,12 +78,13 @@ class Notes_NoteController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('notes/' . $note->resource . '/edit');
         }
 
         $this->view->note = $note;
         $this->view->tags = implode(', ', $_tags);
 
-        $this->history('notes/' . $note->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Notas'] = $this->view->url(array('filter' => 'notes'), 'resources_filtered');

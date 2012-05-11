@@ -30,6 +30,8 @@ class Groups_ManagerController extends Yachay_Controller_Action
             if (!empty($delete)) {
                 $this->_forward('delete');
             }
+        } else {
+            $this->history('subjects/' . $subject->url . '/groups/manager');
         }
 
         $model_groups = new Groups();
@@ -39,7 +41,6 @@ class Groups_ManagerController extends Yachay_Controller_Action
         $this->view->subject = $subject;
         $this->view->groups = $model_groups->selectAll($subject->ident);
 
-        $this->history('subjects/' . $subject->url . '/groups/manager');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -100,9 +101,10 @@ class Groups_ManagerController extends Yachay_Controller_Action
             }
 
             $this->view->group = $group;
+        } else {
+            $this->history('subjects/' . $subject->url . '/groups/new');
         }
 
-        $this->history('subjects/' . $subject->url . '/groups/new');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');
@@ -144,6 +146,7 @@ class Groups_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han desactivado $count grupos");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -174,6 +177,7 @@ class Groups_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han activado $count grupos");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -206,6 +210,7 @@ class Groups_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han eliminado $count grupos");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 }

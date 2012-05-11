@@ -78,8 +78,10 @@ class Login_IndexController extends Yachay_Controller_Action
             }
             
             $this->view->values = array('username' => $request->getParam('username'));
+        } else {
+            $this->history('login');
         }
-        $this->history('login');
+
         $this->breadcrumb();
     }
 

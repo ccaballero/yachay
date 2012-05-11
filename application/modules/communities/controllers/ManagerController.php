@@ -12,6 +12,8 @@ class Communities_ManagerController extends Yachay_Controller_Action
             if (!empty($delete)) {
                 $this->_forward('delete');
             }
+        } else {
+            $this->history('communities/manager');
         }
 
         $model_communities = new Communities();
@@ -20,7 +22,6 @@ class Communities_ManagerController extends Yachay_Controller_Action
         $this->view->model_communities = $model_communities;
         $this->view->communities = $communities;
 
-        $this->history('communities/manager');
         $breadcrumb = array();
         if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');
@@ -77,8 +78,6 @@ class Communities_ManagerController extends Yachay_Controller_Action
                     $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/communities/thumbnail_small/' . $community->ident . '.jpg', 50, 50);
 
                     unlink($filename);
-                    $community->avatar = true;
-                    
                 }
 
                 // tagging
@@ -96,9 +95,10 @@ class Communities_ManagerController extends Yachay_Controller_Action
             }
 
             $this->view->community = $community;
+        } else {
+            $this->history('communities/new');
         }
 
-        $this->history('communities/new');
         $breadcrumb = array();
         if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');

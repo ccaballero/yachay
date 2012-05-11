@@ -109,12 +109,13 @@ class Areas_AreaController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('areas/' . $area->url . '/edit');
         }
 
         $this->view->model_areas = $model_areas;
         $this->view->area = $area;
 
-        $this->history('areas/' . $area->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('areas', 'list')) {
             $breadcrumb['Areas'] = $this->view->url(array(), 'areas_list');

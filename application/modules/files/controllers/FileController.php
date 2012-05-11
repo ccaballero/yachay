@@ -73,12 +73,13 @@ class Files_FileController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('files/' . $file->resource . '/edit');
         }
 
         $this->view->file = $file;
         $this->view->tags = implode(', ', $_tags);
 
-        $this->history('files/' . $file->resource . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Archivos'] = $this->view->url(array('filter' => 'files'), 'resources_filtered');

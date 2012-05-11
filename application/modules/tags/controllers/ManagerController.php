@@ -14,12 +14,13 @@ class Tags_ManagerController extends Yachay_Controller_Action
             if (!empty($delete)) {
                 $this->_forward('delete');
             }
+        } else {
+            $this->history('tags/manager');
         }
 
         $this->view->model_tags = $model_tags;
         $this->view->tags = $model_tags->selectAll();
 
-        $this->history('tags/manager');
         $breadcrumb = array();
         if ($this->acl('tags', 'list')) {
             $breadcrumb['Etiquetas'] = $this->view->url(array(), 'tags_list');
@@ -32,7 +33,6 @@ class Tags_ManagerController extends Yachay_Controller_Action
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-
             $model_tags = new Tags();
             $model_tags_resources = new Tags_Resources();
             $model_tags_communities = new Tags_Communities();
@@ -55,6 +55,7 @@ class Tags_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han eliminado $count etiquetas");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 }

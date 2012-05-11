@@ -62,6 +62,8 @@ class Evaluations_EvaluationController extends Yachay_Controller_Action
             }
 
             $this->view->evaluation = $evaluation;
+        } else {
+            $this->history('evaluations/' . $evaluation->ident . '/edit');
         }
 
         $tests_evaluation = $evaluation->findEvaluations_Tests($evaluation->select()->order('order ASC'));
@@ -70,7 +72,6 @@ class Evaluations_EvaluationController extends Yachay_Controller_Action
         $this->view->evaluation = $evaluation;
         $this->view->tests_evaluations = $tests_evaluation;
 
-        $this->history('evaluations/' . $evaluation->ident . '/edit');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');

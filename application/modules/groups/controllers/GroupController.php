@@ -106,12 +106,13 @@ class Groups_GroupController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/edit');
         }
 
         $this->view->subject = $subject;
         $this->view->group = $group;
 
-        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');

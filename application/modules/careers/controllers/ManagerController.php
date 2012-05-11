@@ -50,9 +50,10 @@ class Careers_ManagerController extends Yachay_Controller_Action
             }
 
             $this->view->career = $career;
+        } else {
+            $this->history('careers/new');
         }
 
-        $this->history('careers/new');
         $breadcrumb = array();
         if ($this->acl('careers', 'list')) {
             $breadcrumb['Carreras'] = $this->view->url(array(), 'careers_list');

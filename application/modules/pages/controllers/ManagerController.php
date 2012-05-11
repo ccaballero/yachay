@@ -34,12 +34,13 @@ class Pages_ManagerController extends Yachay_Controller_Action
             } else {
                 $this->_helper->flashMessenger->addMessage("Se han almacenado las paginas correctas, y se han encontrado $bads errores");
             }
+        } else {
+            $this->history('pages/manager');
         }
 
         $this->view->model_pages = $model_pages;
         $this->view->pages = $model_pages->selectByMenuable(true);
 
-        $this->history('pages/manager');
         $breadcrumb = array();
         if ($this->acl('pages', 'list')) {
             $breadcrumb['Paginas'] = $this->view->url(array(), 'pages_list');

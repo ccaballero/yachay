@@ -13,7 +13,6 @@ CREATE TABLE `community` (
     `members`           int unsigned                                                NOT NULL DEFAULT 1,
     `petitions`         int unsigned                                                NOT NULL DEFAULT 0,
     `description`       text                                                        NOT NULL DEFAULT '',
-    `avatar`            boolean                                                     NOT NULL DEFAULT FALSE,
     `tsregister`        int unsigned                                                NOT NULL,
     PRIMARY KEY (`ident`),
     INDEX (`author`),

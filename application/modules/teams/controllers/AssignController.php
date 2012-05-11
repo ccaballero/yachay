@@ -60,6 +60,8 @@ class Teams_AssignController extends Yachay_Controller_Action
             
             $this->_helper->flashMessenger->addMessage('La asignación de equipos ha sido almacenada');
             $this->_redirect($request->getParam('return'));
+        } else {
+            $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/assign');
         }
 
         $this->view->gestion = $gestion;
@@ -67,7 +69,6 @@ class Teams_AssignController extends Yachay_Controller_Action
         $this->view->group = $group;
         $this->view->members = $group_members2;
 
-        $this->history('subjects/' . $subject->url . '/groups/' . $group->url . '/teams/assign');
         $breadcrumb = array();
         if ($this->acl('subjects', 'list')) {
             $breadcrumb['Materias'] = $this->view->url(array(), 'subjects_list');

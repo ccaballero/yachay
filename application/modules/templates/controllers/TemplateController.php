@@ -36,6 +36,8 @@ class Templates_TemplateController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage('Tu plantilla se configuró correctamente');
             $this->_redirect($this->view->url(array('template' => $template->label), 'templates_template_view'));
+        } else {
+            $this->history('templates/view/' . $template->label);
         }
 
         $this->view->template = $template;
@@ -47,7 +49,6 @@ class Templates_TemplateController extends Yachay_Controller_Action
 
         $this->view->properties = json_decode($user_template->css_properties, true);
 
-        $this->history('templates/view/' . $template->label);
         $breadcrumb = array();
         $breadcrumb['Temas'] = $this->view->url(array(), 'templates_list');
         $this->breadcrumb($breadcrumb);

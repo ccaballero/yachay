@@ -17,6 +17,8 @@ class Modules_ManagerController extends Yachay_Controller_Action
                     $this->_forward('unlock');
                 }
             }
+        } else {
+            $this->history('modules/manager');
         }
 
         $model_modules = new Modules();
@@ -24,7 +26,6 @@ class Modules_ManagerController extends Yachay_Controller_Action
         $this->view->model_modules = $model_modules;
         $this->view->modules = $model_modules->selectAll();
 
-        $this->history('modules/manager');
         $breadcrumb = array();
         if ($this->acl('modules', 'list')) {
             $breadcrumb['Modulos'] = $this->view->url(array(), 'modules_list');
@@ -64,9 +65,10 @@ class Modules_ManagerController extends Yachay_Controller_Action
                 $this->_helper->flashMessenger->addMessage('Debe escoger un archivo valido para poder interpretarlo adecuadamente');
             }
             $this->_redirect($this->view->currentPage());
+        } else {
+            $this->history('modules/new');
         }
 
-        $this->history('modules/new');
         $breadcrumb = array();
         if ($this->acl('modules', array('new', 'lock'))) {
             $breadcrumb['Administrador de modulos'] = $this->view->url(array(), 'modules_manager');
@@ -90,6 +92,7 @@ class Modules_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han desactivado $count modulos");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 
@@ -109,6 +112,7 @@ class Modules_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han activado $count modulos");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 }

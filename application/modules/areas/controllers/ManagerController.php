@@ -50,9 +50,10 @@ class Areas_ManagerController extends Yachay_Controller_Action
             }
             
             $this->view->area = $area;
+        } else {
+            $this->history('areas/new');
         }
 
-        $this->history('areas/new');
         $breadcrumb = array();
         if ($this->acl('areas', 'list')) {
             $breadcrumb['Areas'] = $this->view->url(array(), 'areas_list');

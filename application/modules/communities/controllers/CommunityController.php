@@ -86,7 +86,6 @@ class Communities_CommunityController extends Yachay_Controller_Action
                     $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/communities/thumbnail_small/' . $community->ident . '.jpg', 50, 50);
 
                     unlink($filename);
-                    $community->avatar = true;
                 }
 
                 // re-tagging
@@ -102,13 +101,14 @@ class Communities_CommunityController extends Yachay_Controller_Action
                     $this->_helper->flashMessenger->addMessage($message);
                 }
             }
+        } else {
+            $this->history('community/' . $community->url . '/edit');
         }
 
         $this->view->model_communities = $model_communities;
         $this->view->community = $community;
         $this->view->tags = implode(', ', $_tags);
 
-        $this->history('community/' . $community->url . '/edit');
         $breadcrumb = array();
         if ($this->acl('communities', 'list')) {
             $breadcrumb['Comunidades'] = $this->view->url(array(), 'communities_list');

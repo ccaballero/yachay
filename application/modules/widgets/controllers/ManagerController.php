@@ -33,6 +33,8 @@ class Widgets_ManagerController extends Yachay_Controller_Action
             }
 
             $this->_helper->flashMessenger->addMessage('Su configuración de los widgets ha sido almacenada');
+        } else {
+            $this->history('widgets/manager');
         }
 
         $matrix = array();
@@ -57,7 +59,6 @@ class Widgets_ManagerController extends Yachay_Controller_Action
         $this->view->widgets = $model_widgets->selectAll();
         $this->view->widgets_pages = $matrix;
 
-        $this->history('widgets/manager');
         $breadcrumb = array();
         if ($this->acl('widgets', 'list')) {
             $breadcrumb['Widgets'] = $this->view->url(array(), 'widgets_list');

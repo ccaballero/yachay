@@ -31,9 +31,10 @@ class Evaluations_ManagerController extends Yachay_Controller_Action
             }
             
             $this->view->evaluation = $evaluation;
+        } else {
+            $this->history('evaluations/new');
         }
 
-        $this->history('evaluations/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');
@@ -54,12 +55,13 @@ class Evaluations_ManagerController extends Yachay_Controller_Action
                 $value = $parser->parse($formula);
                 $result = $value->extract();
             }
+        } else {
+            $this->history('evaluations/new');
         }
 
         $this->view->formula = $formula;
         $this->view->result = $result;
 
-        $this->history('evaluations/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Evaluaciones'] = $this->view->url(array('filter' => 'evaluations'), 'resources_filtered');

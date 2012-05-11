@@ -71,9 +71,10 @@ class Invitations_ManagerController extends Yachay_Controller_Action
             }
 
             $this->view->invitation = $invitation;
+        } else {
+            $this->history('invitations/manager');
         }
 
-        $this->history('invitations/manager');
         $this->breadcrumb(array(
             'Administrador de invitaciones' => $this->view->url(array(), 'invitations_manager'),
             'Nueva invitación' => $this->view->url(array(), 'invitations_new'),

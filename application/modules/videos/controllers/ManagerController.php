@@ -76,12 +76,13 @@ class Videos_ManagerController extends Yachay_Controller_Action
             } else {
                 $this->_helper->flashMessenger->addMessage('Usted no tiene privilegios para publicar en ese espacio');
             }
+        } else {
+            $this->history('videos/new');
         }
 
         $this->view->video = $video;
         $this->view->tags = $tags;
 
-        $this->history('videos/new');
         $breadcrumb = array();
         $breadcrumb['Recursos'] = $this->view->url(array(), 'resources_list');
         $breadcrumb['Videos'] = $this->view->url(array('filter' => 'videos'), 'resources_filtered');

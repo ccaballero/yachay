@@ -23,6 +23,8 @@ class Users_ManagerController extends Yachay_Controller_Action
                     $this->_forward('delete');
                 }
             }
+        } else {
+            $this->history('users/manager');
         }
 
         $model_users = new Users();
@@ -30,7 +32,6 @@ class Users_ManagerController extends Yachay_Controller_Action
         $this->view->model = $model_users;
         $this->view->users = $model_users->selectAll();
 
-        $this->history('users/manager');
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
@@ -119,9 +120,10 @@ class Users_ManagerController extends Yachay_Controller_Action
             }
 
             $this->view->user = $user; // Overwrite
+        } else {
+            $this->history('users/new');
         }
 
-        $this->history('users/new');
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
@@ -433,9 +435,10 @@ class Users_ManagerController extends Yachay_Controller_Action
                 }
                 unset($session->import_users);
             }
+        } else {
+            $this->history('users/import');
         }
 
-        $this->history('users/import');
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');
@@ -495,9 +498,10 @@ class Users_ManagerController extends Yachay_Controller_Action
                     die();
                     break;
             }
+        } else {
+            $this->history('users/export');
         }
 
-        $this->history('users/export');
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {
             $breadcrumb['Usuarios'] = $this->view->url(array(), 'users_list');

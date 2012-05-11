@@ -11,6 +11,8 @@ class Groupsets_ManagerController extends Yachay_Controller_Action
             if (!empty($delete)) {
                 $this->_forward('delete');
             }
+        } else {
+            $this->history('groupsets/manager');
         }
 
         $model_groupsets = new Groupsets();
@@ -29,7 +31,6 @@ class Groupsets_ManagerController extends Yachay_Controller_Action
         $this->view->model_groupsets = $model_groupsets;
         $this->view->groupsets = $array1;
 
-        $this->history('groupsets/manager');
         $this->breadcrumb();
     }
 
@@ -58,7 +59,6 @@ class Groupsets_ManagerController extends Yachay_Controller_Action
         $this->view->gestion = $current_gestion;
         $this->view->subjects = $subjects;
         $this->view->groups = $groups;
-
         $this->view->checks = array();
 
         $request = $this->getRequest();
@@ -100,9 +100,10 @@ class Groupsets_ManagerController extends Yachay_Controller_Action
             
             $this->view->groupset = $groupset;
             $this->view->checks = $checks;
+        } else {
+            $this->history('groupsets/new');
         }
 
-        $this->history('groupsets/new');
         $breadcrumb = array();
         $breadcrumb['Conjuntos'] = $this->view->url(array(), 'groupsets_manager');
         $this->breadcrumb($breadcrumb);
@@ -129,6 +130,7 @@ class Groupsets_ManagerController extends Yachay_Controller_Action
 
             $this->_helper->flashMessenger->addMessage("Se han eliminado $count conjuntos");
         }
+
         $this->_redirect($this->view->currentPage());
     }
 }

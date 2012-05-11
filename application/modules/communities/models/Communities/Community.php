@@ -70,7 +70,7 @@ class Communities_Community extends Yachay_Models_Row_Validation
     }
 
     public function getAvatar() {
-        if ($this->avatar) {
+        if (file_exists(APPLICATION_PATH . '/../public/media/communities/thumbnail_medium/' . $this->ident . '.jpg')) {
             return $this->ident . '.jpg';
         } else {
             return '0.jpg';
