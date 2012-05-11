@@ -8,8 +8,10 @@ if (empty($this->user)) {
         echo '<p>El codigo SISS que introdujo no es valido</p>';
     }
 } else {
-    echo '<i><b>Nombre Completo: </b>' . $this->user->getFullName() . '</i><br />';
-    echo '<i><b>Gestion: </b>' . $this->gestion->label . '</i><br />';
+    if (!empty($this->gestion)) {
+        echo '<i><b>Nombre Completo: </b>' . $this->user->getFullName() . '</i><br />';
+        echo '<i><b>Gestion: </b>' . $this->gestion->label . '</i><br />';
+    }
     if (count($this->subjects)) {
         echo '<ul>';
         foreach ($this->subjects as $subject) {

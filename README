@@ -1,35 +1,26 @@
 ###############################################################################
 
-Yeah version 0.1
+Yachay version 1.0
 
 == Developers ==
     Antonio Mamani Q. (antonio.mq@gmail.com)
     Carlos Caballero B. (cijkb.j@gmail.com)
-    Luis Arce C. (amigox100pre111@gmail.com)
+    Luis Arce C.
     Benjamin Perez S.
     Juan Jose Olivera R.
 
 == Dependencies ==
     PHP 5.3 or higher.
-    Apache Web Server (with mod_rewrite and gd).
+    Web Server (with mod_rewrite and gd).
     Zend Framework 1.8.3 or higher.
     MySQL 5.0 or higher.
 
 == License ==
-    GNU GPL 5.0.
+    GNU GPL v3.0.
 
 == Description ==
     A free and open source e-learning platform for management of courses and
     social network.
 
 == Instalation ==
-     1. Copy the htaccess-dist to .htaccess.
-     2. Copy the hgignore-dist to .hgignore.
-     3. Copy the libs/Yeah/Settings/Config-dist.php to libs/Yeah/Settings/Config.php
-     4. Edit the Config.php file.
-     5. Run the key.php file.
-     6. Copy the key in Config.php file in key field.
-     7. Copy the libs/Yeah/Settings/Database-dist.php to libs/Yeah/Database/Database.php
-     8. Edit the Database.php file.
-     9. Create an empty file called yeah.log and put write permissions (chmod ugo+w).
-    10. Create a symbolic link from libs/Zend1.10.7 to libs/Zend (ln -s libs/Zend1.10.7 libs/Zend).
+     

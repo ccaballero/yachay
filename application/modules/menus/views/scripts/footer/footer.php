@@ -19,10 +19,15 @@ foreach ($items as $item) {
 
     if ($bool) {
         $FOOTER->items[] = array (
-            'link'  => $this->url(array(), $item->route),
+            'link' => $this->url(array(), $item->route),
             'label' => ucfirst($item->title),
         );
     }
 }
+
+$FOOTER->items[] = array(
+    'link' => 'https://github.com/ccaballero/yachay',
+    'label' => 'Codigo fuente',
+);
 
 $FOOTER->copyright = 'yachay ' . $this->config->yachay->properties->version;

@@ -9,10 +9,12 @@
 
 <?php } else { ?>
 
+    <?php if (!empty($this->gestion)) { ?>
 <p>
     <span class="mark">Gestion:</span> <?php echo $this->gestion->label ?><br/>
     <span class="mark">Nombre Completo:</span> <?php echo $this->user->getFullName() ?>
 </p>
+    <?php } ?>
 
     <?php if (count($this->subjects)) { ?>
         <?php foreach ($this->subjects as $subject) { ?>
