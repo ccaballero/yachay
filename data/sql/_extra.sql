@@ -228,12 +228,19 @@ VALUES
 (131, 1), (132, 1),
 (131, 2), (132, 2),
 (131, 3), (132, 3),
-(131, 4), (132, 4);
+(131, 4), (132, 4),
+/*====================================================================================================================*/
+/* Inserciones extra para el modulo ANALYTICS                                                                         */
+/*====================================================================================================================*/
+(133, 1),
+(133, 2),
+(133, 3),
+(133, 4);
 
 /*====================================================================================================================*/
 /* Conecciones adicionales para la habilitacion de los menus                                                          */
 /*====================================================================================================================*/
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 1 WHERE `ident` = 5;  /* frontpage_visitor */
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 1 WHERE `ident` =  5; /* frontpage_visitor */
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 2 WHERE `ident` = 25; /* users_list */
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 3 WHERE `ident` = 35; /* friends_friends */
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 4 WHERE `ident` = 41; /* gestions_list */
@@ -242,18 +249,19 @@ UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 6 WHERE `ident` = 57; /*
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 7 WHERE `ident` = 46; /* subjects_list */
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 8 WHERE `ident` = 82; /* communities_list */
 
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  3 WHERE `ident` = 1;   /* modules_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 10 WHERE `ident` = 8;  /* frontpage_development */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 11 WHERE `ident` = 9;  /* frontpage_terms */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 12 WHERE `ident` = 10;  /* frontpage_privacy */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  4 WHERE `ident` = 11;  /* pages_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  5 WHERE `ident` = 13;  /* regions_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  6 WHERE `ident` = 15;  /* widgets_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  2 WHERE `ident` = 17;  /* roles_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  7 WHERE `ident` = 93;  /* resources_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  1 WHERE `ident` = 123; /* tags_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  9 WHERE `ident` = 126; /* feedback_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  8 WHERE `ident` = 131; /* templates_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  4 WHERE `ident` =   1; /* modules_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 11 WHERE `ident` =   8; /* frontpage_development */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 12 WHERE `ident` =   9; /* frontpage_terms */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 13 WHERE `ident` =  10; /* frontpage_privacy */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  5 WHERE `ident` =  11; /* pages_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  6 WHERE `ident` =  13; /* regions_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  7 WHERE `ident` =  15; /* widgets_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  3 WHERE `ident` =  17; /* roles_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  8 WHERE `ident` =  93; /* resources_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  2 WHERE `ident` = 123; /* tags_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 10 WHERE `ident` = 126; /* feedback_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  9 WHERE `ident` = 131; /* templates_list */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  1 WHERE `ident` = 133; /* analytics_list */
 /*====================================================================================================================*/
 /*====================================================================================================================*/
 
@@ -560,7 +568,17 @@ VALUES
 ( 5,75), ( 5,76),
 ( 4,75), ( 4,76),
 ( 3,75), ( 3,76),
-( 2,75), ( 2,76);
+( 2,75), ( 2,76),
+/*====================================================================================================================*/
+/* Inserciones extra para el modulo ANALYTICS                                                                         */
+/*====================================================================================================================*/
+( 8,77),
+( 7,77),
+( 6,77),
+( 5,77),
+( 4,77),
+( 3,77),
+( 2,77);
 
 
 INSERT INTO `user`

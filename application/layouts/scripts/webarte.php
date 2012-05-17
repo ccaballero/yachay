@@ -7,6 +7,12 @@
         <link href="<?php echo $this->config->resources->frontController->baseUrl . '/templates/css/properties' ?>" media="screen" rel="stylesheet" type="text/css" />
         <link rel="icon" type="image/x-icon" href="<?php echo $this->config->resources->frontController->baseUrl ?>/media/favicon.ico" />
         <title><?php echo $this->TITLE->toString(); ?></title>
+        
+        <?php /*echo $this->headTitle() ?>
+        <?php echo $this->headMeta() ?>
+        <?php echo $this->headLink() ?>
+        <?php echo $this->headStyle()*/ ?>
+        <?php echo $this->headScript() ?>
     </head>
     <body>
         <div id="header">

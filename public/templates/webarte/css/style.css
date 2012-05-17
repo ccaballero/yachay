@@ -121,15 +121,16 @@ body {
 
 #primary .tabs {
     padding-left: 0.3em;
-    margin-bottom: 0.75em;
 }
 
 #primary .tabs.top {
+    margin-bottom: 0.75em;
     border-bottom: 2px solid;
 }
 
 #primary .tabs.bottom {
     border-top: 2px solid;
+    margin-top: 0.75em;
 }
 
 #primary .tabs a {
@@ -624,4 +625,15 @@ body {
 
 #primary #main object {
     margin: 0.8em 0em 1.2em 0.45em;
+}
+    
+#analytics div.chart {
+    float: left;
+    margin: 0.5em 0em;
+    width: 680px;
+    min-height: 100px;
+}
+
+#analytics div.pie {
+    width: 340px;
 }
