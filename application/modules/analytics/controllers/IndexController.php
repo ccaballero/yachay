@@ -151,6 +151,8 @@ class Analytics_IndexController extends Yachay_Controller_Action
     }
 
     public function indexAction() {
+        $this->requirePermission('analytics', 'view');
+
         $request = $this->getRequest();
         $page = $request->getParam('page');
 

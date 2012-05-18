@@ -33,7 +33,6 @@ INSERT INTO `page`
 VALUES
 ('Lista de modulos',              'Modulos',          TRUE,          'modules',          'index',       'index',            'list',                  'modules_list'),
 ('Administrador de modulos',      'Modulos',          TRUE,          'modules',          'manager',     'index',            'new|lock',              'modules_manager'),
-('Nuevo modulo',                  'Nuevo modulo',     TRUE,          'modules',          'manager',     'new',              'new',                   'modules_new'),
 ('Vista de un modulo',            '',                 FALSE,         'modules',          'module',      'view',             '',                      'modules_module_view');
 
 /*====================================================================================================================*/
@@ -43,6 +42,5 @@ INSERT INTO `privilege`
 (`label`,                                                         `module`,           `privilege`)
 VALUES
 ('Listar los modulos disponibles',                                'modules',          'list'),
-('Instalar nuevos modulos',                                       'modules',          'new'),
 ('Activar/desactivar modulos',                                    'modules',          'lock'),
 ('Ver las caracteristicas de los modulos',                        'modules',          'view');
