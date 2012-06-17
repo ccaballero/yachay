@@ -1,18 +1,36 @@
 
-/*====================================================================================================================*/
-/* Registro de tablas imprescindibles para el manejo del sistema                                                      */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Registro de tablas imprescindibles para el manejo del sistema              */
+/*============================================================================*/
 
-/*====================================================================================================================*/
-/* Tabla necesaria para el manejo de paginas en el sistema                                                            */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Tablas requeridas para el registro de paquetes                             */
+/*============================================================================*/
+
+DROP TABLE IF EXISTS `package`;
+CREATE TABLE `package` (
+    `ident`             int unsigned                                                NOT NULL auto_increment,
+    `label`             varchar(64)                                                 NOT NULL,
+    `url`               varchar(64)                                                 NOT NULL,
+    `status`            enum('active', 'inactive')                                  NOT NULL DEFAULT 'active',
+    `type`              enum('platform', 'middleware', 'application', 'utility')    NOT NULL,
+    `description`       text                                                        NOT NULL DEFAULT '',
+    `tsregister`        int unsigned                                                NOT NULL,
+    PRIMARY KEY (`ident`),
+    UNIQUE INDEX (`label`),
+    UNIQUE INDEX (`url`)
+) DEFAULT CHARACTER SET UTF8;
+
+/*============================================================================*/
+/* Tabla necesaria para el manejo de paginas en el sistema                    */
+/*============================================================================*/
 
 DROP TABLE IF EXISTS `page`;
 CREATE TABLE `page` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `label`             varchar(64)                                                 NOT NULL,
     `title`             varchar(16)                                                 NOT NULL,
-    `module`            varchar(32)                                                 NOT NULL,
+    `package`           varchar(32)                                                 NOT NULL,
     `controller`        varchar(64)                                                 NOT NULL,
     `action`            varchar(64)                                                 NOT NULL,
     `route`             varchar(64)                                                 NOT NULL,
@@ -26,34 +44,34 @@ CREATE TABLE `page` (
     UNIQUE INDEX (`route`)
 ) DEFAULT CHARACTER SET UTF8;
 
-/*====================================================================================================================*/
-/* Tablas necesarias para el registro de privilegios                                                                  */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Tablas necesarias para el registro de privilegios                          */
+/*============================================================================*/
 
 DROP TABLE IF EXISTS `privilege`;
 CREATE TABLE `privilege` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `label`             varchar(64)                                                 NOT NULL,
-    `module`            varchar(32)                                                 NOT NULL,
+    `package`           varchar(32)                                                 NOT NULL,
     `privilege`         varchar(256)                                                NOT NULL,
     PRIMARY KEY (`ident`),
     UNIQUE INDEX (`label`),
-    UNIQUE INDEX (`module`, `privilege`)
+    UNIQUE INDEX (`package`, `privilege`)
 ) DEFAULT CHARACTER SET UTF8;
 
-/*====================================================================================================================*/
-/* Tablas necesarias para el registro de manejadores de region                                                        */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Tablas necesarias para el registro de manejadores de region                */
+/*============================================================================*/
 
 DROP TABLE IF EXISTS `region`;
 CREATE TABLE `region` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `label`             varchar(16)                                                 NOT NULL,
-    `module`            varchar(32)                                                 NOT NULL,
+    `package`           varchar(32)                                                 NOT NULL,
     `script`            varchar(32)                                                 NOT NULL,
     `region`            enum('toolbar', 'search', 'menubar', 'footer')              NOT NULL,
     PRIMARY KEY (`ident`),
-    UNIQUE INDEX (`module`, `script`)
+    UNIQUE INDEX (`package`, `script`)
 ) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `region_page`;
@@ -67,19 +85,19 @@ CREATE TABLE `region_page` (
     FOREIGN KEY (region)          REFERENCES region(ident) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-/*====================================================================================================================*/
-/* Tablas necesarias para el registro de manejadores de widgets                                                       */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Tablas necesarias para el registro de manejadores de widgets               */
+/*============================================================================*/
 
 DROP TABLE IF EXISTS `widget`;
 CREATE TABLE `widget` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `label`             varchar(64)                                                 NOT NULL,
     `title`             varchar(32)                                                 NOT NULL,
-    `module`            varchar(32)                                                 NOT NULL,
+    `package`           varchar(32)                                                 NOT NULL,
     `script`            varchar(32)                                                 NOT NULL,
     PRIMARY KEY (`ident`),
-    UNIQUE INDEX (`module`, `script`)
+    UNIQUE INDEX (`package`, `script`)
 ) DEFAULT CHARACTER SET UTF8;
 
 DROP TABLE IF EXISTS `widget_page`;

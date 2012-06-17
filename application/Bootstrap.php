@@ -19,14 +19,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router = $ctrl->getRouter();
 
         // Routes join
-        $model_modules = new Modules();
-        $modules = $model_modules->selectByStatus('active');
-        foreach ($modules as $module) {
-            $path = APPLICATION_PATH . '/modules/' . $module->url;
+        $model_packages = new Packages();
+        $packages = $model_packages->selectByStatus('active');
+        foreach ($packages as $package) {
+            $path = APPLICATION_PATH . '/packages/' . $package->url;
             if (is_dir($path)) {
                 if (file_exists("$path/Init.php")) {
                     include "$path/Init.php";
-                    $class = ucfirst(strtolower($module->url)) . '_Init';
+                    $class = ucfirst(strtolower($package->url)) . '_Init';
                     $obj = new $class();
                     $obj->setRoutes($router);
                 }

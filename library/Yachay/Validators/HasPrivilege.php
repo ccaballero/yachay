@@ -2,12 +2,12 @@
 
 class Yachay_Validators_HasPrivilege extends Zend_Validate_Abstract
 {
-    protected $_module;
+    protected $_package;
     protected $_privilege;
     protected $_ident;
 
-    public function __construct($module, $privilege, $ident) {
-        $this->_module = $module;
+    public function __construct($package, $privilege, $ident) {
+        $this->_package = $package;
         $this->_privilege = $privilege;
         $this->_ident = $ident;
     }
@@ -15,7 +15,7 @@ class Yachay_Validators_HasPrivilege extends Zend_Validate_Abstract
     public function isValid($ident) {
         $model_users = new Users();
         $user = $model_users->findByIdent($ident);
-        if ($user->hasPermission($this->_module, $this->_privilege)) {
+        if ($user->hasPermission($this->_package, $this->_privilege)) {
             return true;
         }
         return false;

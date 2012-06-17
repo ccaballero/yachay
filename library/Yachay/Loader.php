@@ -9,6 +9,6 @@ class Yachay_Loader implements Zend_Loader_Autoloader_Interface
         } else {
             $dir = strtolower(substr($class, 0, $position));
         }
-        Zend_Loader::loadClass($class, APPLICATION_PATH . '/modules/' . $dir . '/models');
+        Zend_Loader::loadClass($class, APPLICATION_PATH . '/packages/' . $dir . '/models');
     }
 }

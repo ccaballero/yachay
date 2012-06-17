@@ -1,43 +1,42 @@
 
-/*====================================================================================================================*/
-/* Tablas necesarias para el modulo de videos                                                                         */
-/*====================================================================================================================*/
-
+/*============================================================================*/
+/* Tablas necesarias para el paquete de videos                                */
+/*============================================================================*/
 DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video` (
-    `resource`          int unsigned                                                NOT NULL,
-    `description`       text                                                        NOT NULL DEFAULT '',
-    `proportion`        varchar(8)                                                  NOT NULL DEFAULT '1:1',
-    `size`              int unsigned                                                NOT NULL,
-    `filename`          varchar(64)                                                 NOT NULL,
-    `priority`          boolean                                                     NOT NULL DEFAULT FALSE,
+    `resource`    int unsigned NOT NULL,
+    `description` text         NOT NULL DEFAULT '',
+    `proportion`  varchar(8)   NOT NULL DEFAULT '1:1',
+    `size`        int unsigned NOT NULL,
+    `filename`    varchar(64)  NOT NULL,
+    `priority`    boolean      NOT NULL DEFAULT FALSE,
     PRIMARY KEY (`resource`),
     INDEX (`resource`),
-    FOREIGN KEY (`resource`)      REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
+    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-/*====================================================================================================================*/
-/* Registro del modulo                                                                                                */
-/*====================================================================================================================*/
-INSERT INTO `module`
-(`label`,          `url`,              `type`,        `tsregister`,       `description`)
+/*============================================================================*/
+/* Registro del paquete                                                       */
+/*============================================================================*/
+INSERT INTO `package`
+(`label`, `url`, `type`, `tsregister`, `description`)
 VALUES
-('videos',         'videos',           'application', UNIX_TIMESTAMP(),   'Modulo de gestion de videos online');
+('videos', 'videos', 'application', UNIX_TIMESTAMP(), 'Modulo de gestion de videos online');
 
-/*====================================================================================================================*/
-/* Registro de paginas para el modulo                                                                                 */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Registro de paginas para el paquete                                        */
+/*============================================================================*/
 INSERT INTO `page`
-(`label`,                         `title`,            `menuable`,    `module`,           `controller`,  `action`,           `privilege`,             `route`)
+(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
 VALUES
-('Nuevo video',                   'Nuevo video',      TRUE,          'videos',           'manager',     'new',              '',                      'videos_new'),
-('Visor de videos',               '',                 FALSE,         'videos',           'video',       'view',             '',                      'videos_video_view'),
-('Editor de videos',              '',                 FALSE,         'videos',           'video',       'edit',             '',                      'videos_video_edit');
+('Nuevo video',      'Nuevo video', TRUE,  'videos', 'manager', 'new',  '', 'videos_new'),
+('Visor de videos',  '',            FALSE, 'videos', 'video',   'view', '', 'videos_video_view'),
+('Editor de videos', '',            FALSE, 'videos', 'video',   'edit', '', 'videos_video_edit');
 
-/*====================================================================================================================*/
-/* Registro de privilegios para el modulo                                                                             */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
 INSERT INTO `privilege`
-(`label`,                                                         `module`,           `privilege`)
+(`label`, `package`, `privilege`)
 VALUES
-('Subir videos',                                                  'videos',           'upload');
+('Subir videos', 'videos', 'upload');

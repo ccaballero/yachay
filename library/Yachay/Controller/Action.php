@@ -26,12 +26,12 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         }
 
         // Add the helpers of application
-        $model_modules = new Modules();
-        $modules = $model_modules->selectByType('application');
-        foreach ($modules as $module) {
+        $model_packages = new Packages();
+        $packages = $model_packages->selectByType('application');
+        foreach ($packages as $package) {
             //FIXME Considerar las posibles alternativas en tipos de modulos
             if ($this->page->controller != 'manager') {
-                $this->view->addScriptPath(APPLICATION_PATH . '/modules/' . $module->url . '/views/scripts/application');
+                $this->view->addScriptPath(APPLICATION_PATH . '/packages/' . $package->url . '/views/scripts/application');
             }
         }
 
@@ -64,7 +64,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             foreach ($regions as $region) {
                 $view = new Zend_View();
                 $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
-                $view->setScriptPath(APPLICATION_PATH . '/modules/' . $region->module . '/views/scripts/' . $region->region . '/');
+                $view->setScriptPath(APPLICATION_PATH . '/packages/' . $region->package . '/views/scripts/' . $region->region . '/');
 
                 $view->config = $this->config;
                 $view->page = $this->page;
@@ -81,7 +81,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         foreach ($widgets as $widget) {
             $view = new Zend_View();
             $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
-            $view->setScriptPath(APPLICATION_PATH . '/modules/' . $widget->module . '/views/scripts/widgets/');
+            $view->setScriptPath(APPLICATION_PATH . '/packages/' . $widget->package . '/views/scripts/widgets/');
             
             $view->config = $this->config;
             $view->page = $this->page;
@@ -91,7 +91,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             $widget_page = $model_widgets_pages->getPosition($this->page->ident, $widget->ident);
             $position = $widget_page->position;
 
-            $script = APPLICATION_PATH . "/modules/{$widget->module}/views/scripts/widgets/{$widget->script}-{$this->template->label}.php";
+            $script = APPLICATION_PATH . "/packages/{$widget->package}/views/scripts/widgets/{$widget->script}-{$this->template->label}.php";
             if (file_exists($script)) {
                 $to_render = "{$widget->script}-{$this->template->label}.php";
             } else {
@@ -169,7 +169,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         }
     }
     
-    public function acl($module, $privilege) {
-        return Yachay_Acl::hasPermission($module, $privilege);
+    public function acl($package, $privilege) {
+        return Yachay_Acl::hasPermission($package, $privilege);
     }
 }

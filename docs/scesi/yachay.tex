@@ -12,7 +12,7 @@
 \usepackage{pifont}
 \usepackage[
 pdfauthor={Carlos Caballero Burgoa},%
-pdftitle={Proyecto Yachay},%
+pdftitle={La unificación},%
 colorlinks,%
 citecolor=black,%
 filecolor=black,%
@@ -36,7 +36,7 @@ pdftex]{hyperref}
 \renewcommand{\footrulewidth}{0.5pt}}
 
 % Para el resto de páginas
-\lhead{Proyecto Yachay}
+\lhead{La unificación}
 \chead{}
 \rhead{\includegraphics[width=0.1\textwidth]{scesi.png}}
 \renewcommand{\headrulewidth}{0.4pt}
@@ -46,7 +46,7 @@ pdftex]{hyperref}
 \rfoot{\thepage/\pageref{LastPage}}
 \renewcommand{\footrulewidth}{0.4pt}
 
-\title{\bf Yachay}
+\title{\bf La unificación}
 \author{Carlos Caballero Burgoa} 
 
 \begin{document}
@@ -59,9 +59,13 @@ pdftex]{hyperref}
 \pagebreak
 
 \section{Introducción}
+Este documento trata los temas referentes a las posibilidades de crecimiento de los servicios ofrecidos por la sociedad científica, y su necesidad de unificación; para conseguir el valor sinérgico capaz de fortalecer los objetivos y visión de tal institución.
 
 \section{Antecedentes}
-Desde la llegada a la sociedad cientifica de nueva infraestructura de hardware, y el espacio propio para proveer servicios web, poco a poco se han ido creando funcionalidades, estas
+Con la llegada de nueva infraestructura de hardware, y como consecuencia directa de esta; la sociedad científica tiene ahora la posibilidad de proveer a sus proyectos y grupos, el espacio y
+las funcionalidades que estas necesiten.
+
+A continuación se detallan los sitios que están (o deberían estar) en funcionamiento actualmente:
 
 \begin{itemize}
 \item babel.scesi.memi.umss.edu.bo
@@ -73,43 +77,67 @@ Desde la llegada a la sociedad cientifica de nueva infraestructura de hardware, 
 \item nonchalant.scesi.memi.umss.edu.bo
 \end{itemize}
 
+Incluidos estos sitios, se percibe una tendencia creciente al uso de otros dominios, que estarán 
+enfocadas a objetivos muy puntuales, y cuyas funciones pueden caer fácilmente en redundancia.
+
 \section{Definición del Problema}
-La sociedad cientifica de sistemas e informatica ha venido proveyendo una variedad cada vez mas
-amplia de servicios; ya sea desarrollando con fines academicos muchos de ellos, o implantando
-soluciones conocidas de software libre. Esta creciente variedad por el momento no se encuentra
-integrada en una plataforma común.
+La sociedad científica de sistemas e informática ha venido proveyendo una creciente variedad de servicios; ya sea desarrollando con fines académicos muchos de ellos, o implantando
+soluciones conocidas de software libre. Esta amplia gamma de aplicaciones ha creado un problema en lo que respecta a procedimientos, a menudo repetitivos sobre cada aplicación.
 
 Con la llegada de nuevos integrantes y el fomento hacia el uso y desarrollo de software libre, que
-es meta de esta sociedad, el problema antes mencionado comezará a ser critico en lo referente a
+es meta de esta sociedad; el problema antes mencionado comenzará a ser critico en lo referente a
 interconectividad de estos proyectos.
 
-Una de las barreras para solucionar este potencial situación será el grado de conocimiento que se
-debe tener respecto a los proyectos y sus formas de interrelación. Tal barrera sería superada
-aprovechando el uso de la plataforma yachay, debido en gran parte a la afinidad y facilidad de
-comunicación con los creadores de tal herramienta.
+Una de las barreras para solucionar esta potencial situación será el grado de conocimiento que se
+debe tener respecto a los proyectos y sus formas de interrelación. Tal barrera podría ser superada
+aprovechando el uso de la plataforma \emph{yachay}, debido en gran parte a la afinidad y facilidad
+de comunicación con los creadores de tal herramienta.
 
 Por lo mencionado anteriormente se define el problema como:
 
-La gran variedad de software potencial utilizado y por utilizar en la sociedad cientifica conducirá 
+La gran variedad de software potencial utilizado y por utilizar en la sociedad científica conducirá 
 en breve a un conjunto muy dispar de servicios inconexos.
 
 \section{Objetivo General}
-Implantar sobre la infraestructura de la sociedad cientifica, la plataforma yachay para unificar los servicios provistos por esta.
+Implantar sobre la infraestructura de la sociedad científica, la plataforma \emph{yachay} para
+unificar los servicios provistos por tal institución.
 
 \section{Objetivos Específicos}
 \begin{itemize}
 \item Crear un marco de trabajo en el que puedan ser captadas todas las iniciativas de tipo local para ampliar el numero de estas.
 \item Aprovechar el conocimiento acerca de la herramienta, para proveer funciones especializadas.
 \item Unificar todos los servicios que ofrece actualmente y los que ofrecerá en un futuro la
-sociedad cientifica para mejorar la difusion acerca de estos.
+sociedad científica para mejorar la difusión y por ende la utilidad de estas.
 \item Proveer de funcionalidades comunes de modo que estas no sean una dificultad para los objetivos de los proyectos.
 \end{itemize}
 
 \section{Herramientas}
+Para este proyecto, se requerirá utilizar la plataforma \emph{yachay}, como dominio principal de
+la sociedad científica, partiendo de ahí, sindicar los proyectos de desarrollo de software al
+sitio.
+
+A continuación se detallan los pasos a seguir:
+
+\begin{enumerate}
+\item Puesta en marcha de la plataforma \emph{yachay} sobre el dominio principal de la sociedad
+científica.
+\item Creación de roles específicos al dominio de la sociedad científica.
+\item Creación de cuentas para todos los miembros de la sociedad científica.
+\item Utilización del dominio principal para autentificación sobre todos los proyectos de la
+sociedad científica que requieran manejo de cuentas, basado en la tecnología OpenID.
+\item Reutilización de los espacios virtuales de la plataforma \emph{yachay} para complementar funcionalidades comunes de los proyectos (comentarios, etiquetado, rankeo, blogging, rss, boletines, etc.).
+\end{enumerate}
 
 \section{Justificación}
+El tener un sitio unificado, que englobe todos los servicios será en ultima instancia el factor
+determinante sobre el que se apoyan muchas de las premisas que son objetivos de la sociedad
+científica; tanto la difusión y apoyo al modelo de conocimiento libre, como la promoción de la
+investigación científica, en este momento parecen carencias por omisión cuyo resolución debería ser
+prioritaria.
 
-\begin{thebibliography}{99}
-\end{thebibliography}
+Con cada idea de la sociedad científica convertida en un proyecto, recaen sobre sus integrantes un
+conjunto de responsabilidades; debido a la falta de una metodología formal, la situación actual
+requiere invertir mucho mas tiempo en actividades de organización que las que podrían conseguirse
+con la estandarización de muchos de los procedimientos usados en proyectos mas desarrollados.
 
 \end{document}          

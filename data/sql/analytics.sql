@@ -1,24 +1,24 @@
 
-/*====================================================================================================================*/
-/* Registro del modulo                                                                                                */
-/*====================================================================================================================*/
-INSERT INTO `module`
-(`label`,          `url`,              `type`,        `tsregister`,       `description`)
+/*============================================================================*/
+/* Registro del paquete                                                       */
+/*============================================================================*/
+INSERT INTO `package`
+(`label`, `url`, `type`, `tsregister`, `description`)
 VALUES
-('analytics',      'analytics',        'application', UNIX_TIMESTAMP(),   'Modulo de visualizacion de estadisticas');
+('analytics', 'analytics', 'application', UNIX_TIMESTAMP(), 'Modulo de visualizacion de estadisticas');
 
-/*====================================================================================================================*/
-/* Registro de paginas para el modulo                                                                                 */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Registro de paginas para el paquete                                        */
+/*============================================================================*/
 INSERT INTO `page`
-(`label`,                         `title`,            `menuable`,    `module`,           `controller`,  `action`,           `privilege`,             `route`)
+(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
 VALUES
-('Estadisticas',                  'Estadisticas',     TRUE,          'analytics',        'index',       'index',            'view',                  'analytics_view');
+('Estadisticas', 'Estadisticas', TRUE, 'analytics', 'index', 'index', 'view', 'analytics_view');
 
-/*====================================================================================================================*/
-/* Registro de privilegios para el modulo                                                                             */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
 INSERT INTO `privilege`
-(`label`,                                                         `module`,           `privilege`)
+(`label`, `package`, `privilege`)
 VALUES
-('Ver las estadisticas del sistema',                              'analytics',        'view');
+('Ver las estadisticas del sistema', 'analytics', 'view');

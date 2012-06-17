@@ -1,25 +1,26 @@
-/*====================================================================================================================*/
-/* Registro del modulo                                                                                                */
-/*====================================================================================================================*/
-INSERT INTO `module`
-(`label`,          `url`,              `type`,        `tsregister`,       `description`)
-VALUES
-('widgets',        'widgets',          'platform',    UNIX_TIMESTAMP(),   'Modulo de configuracion para los widgets de las paginas');
 
-/*====================================================================================================================*/
-/* Registro de paginas para el modulo                                                                                 */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Registro del paquete                                                       */
+/*============================================================================*/
+INSERT INTO `package`
+(`label`, `url`, `type`, `tsregister`, `description`)
+VALUES
+('widgets', 'widgets', 'platform', UNIX_TIMESTAMP(), 'Modulo de configuracion para los widgets de las paginas');
+
+/*============================================================================*/
+/* Registro de paginas para el paquete                                        */
+/*============================================================================*/
 INSERT INTO `page`
-(`label`,                         `title`,            `menuable`,    `module`,           `controller`,  `action`,           `privilege`,             `route`)
+(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
 VALUES
-('Lista de widgets',              'Widgets',          TRUE,          'widgets',          'index',       'index',            'list',                  'widgets_list'),
-('Administrador de widgets',      'Widgets',          TRUE,          'widgets',          'manager',     'index',            'manage',                'widgets_manager');
+('Lista de widgets',         'Widgets', TRUE, 'widgets', 'index',   'index', 'list',   'widgets_list'),
+('Administrador de widgets', 'Widgets', TRUE, 'widgets', 'manager', 'index', 'manage', 'widgets_manager');
 
-/*====================================================================================================================*/
-/* Registro de privilegios para el modulo                                                                             */
-/*====================================================================================================================*/
+/*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
 INSERT INTO `privilege`
-(`label`,                                                         `module`,           `privilege`)
+(`label`, `package`, `privilege`)
 VALUES
-('Listar la configuracion de los widgets por pagina',             'widgets',          'list'),
-('Configuracion de las widgets por pagina',                       'widgets',          'manage');
+('Listar la configuracion de los widgets por pagina', 'widgets', 'list'),
+('Configuracion de las widgets por pagina',           'widgets', 'manage');
