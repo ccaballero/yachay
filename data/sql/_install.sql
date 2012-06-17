@@ -37,6 +37,9 @@ SELECT 'toolbar';
 SELECT 'roles';
 \. roles.sql
 
+SELECT 'spaces';
+\. spaces.sql
+
 /*============================================================================*/
 
 SELECT 'login';

@@ -9,16 +9,19 @@
 
 DROP TABLE IF EXISTS `package`;
 CREATE TABLE `package` (
-    `ident`             int unsigned                                                NOT NULL auto_increment,
-    `label`             varchar(64)                                                 NOT NULL,
-    `url`               varchar(64)                                                 NOT NULL,
-    `status`            enum('active', 'inactive')                                  NOT NULL DEFAULT 'active',
-    `type`              enum('platform', 'middleware', 'application', 'utility')    NOT NULL,
-    `description`       text                                                        NOT NULL DEFAULT '',
-    `tsregister`        int unsigned                                                NOT NULL,
+    `ident`       int unsigned                          NOT NULL auto_increment,
+    `label`       varchar(64)                           NOT NULL,
+    `url`         varchar(64)                           NOT NULL,
+    `status`      enum('active', 'inactive')            NOT NULL DEFAULT 'active',
+    `type`        enum('base', 'middle', 'app', 'util') NOT NULL,
+    `description` text                                  NOT NULL DEFAULT '',
+    `tsregister`  int unsigned                          NOT NULL,
+    `dependency`  varchar(64)                           NULL,
     PRIMARY KEY (`ident`),
     UNIQUE INDEX (`label`),
-    UNIQUE INDEX (`url`)
+    UNIQUE INDEX (`url`),
+    INDEX (`dependency`),
+    FOREIGN KEY (`dependency`) REFERENCES `package`(`label`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
 /*============================================================================*/

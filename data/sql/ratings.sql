@@ -19,9 +19,9 @@ CREATE TABLE `rating` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('ratings', 'ratings', 'application', UNIX_TIMESTAMP(), 'Modulo manejador de las puntuaciones en todos los recursos disponibles del sistema');
+('ratings', 'ratings', 'util', 'resources', UNIX_TIMESTAMP(), 'Modulo manejador de las puntuaciones en todos los recursos disponibles del sistema');
 
 /*============================================================================*/
 /* Registro de privilegios para el paquete                                    */

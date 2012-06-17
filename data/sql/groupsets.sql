@@ -32,9 +32,9 @@ CREATE TABLE `groupset_group` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('groupsets', 'groupsets', 'middleware', UNIX_TIMESTAMP(), 'Modulo manejador de las agrupaciones de los grupos');
+('groupsets', 'groupsets', 'middle', 'groups', UNIX_TIMESTAMP(), 'Modulo manejador de las agrupaciones de los grupos');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

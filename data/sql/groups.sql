@@ -58,9 +58,9 @@ CREATE TABLE `group_resource` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('groups', 'groups', 'middleware', UNIX_TIMESTAMP(), 'Modulo manejador de los grupos para las materias');
+('groups', 'groups', 'middle', 'subjects', UNIX_TIMESTAMP(), 'Modulo manejador de los grupos para las materias');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

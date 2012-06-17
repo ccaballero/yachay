@@ -61,9 +61,9 @@ CREATE TABLE `community_resource` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('communities', 'communities', 'middleware', UNIX_TIMESTAMP(), 'Modulo manejador de las comunidades');
+('communities', 'communities', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de las comunidades');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

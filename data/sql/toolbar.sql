@@ -7,9 +7,9 @@
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('toolbar', 'toolbar', 'middleware', UNIX_TIMESTAMP(), 'Modulo utilidad para la region toolbar del sistema');
+('toolbar', 'toolbar', 'middle', 'templates', UNIX_TIMESTAMP(), 'Modulo utilidad para la region toolbar del sistema');
 
 /*============================================================================*/
 /* Registro de regiones para el paquete                                       */

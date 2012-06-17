@@ -29,9 +29,9 @@ CREATE TABLE `role_privilege` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('roles', 'roles', 'platform', UNIX_TIMESTAMP(), 'Modulo manejador de los roles de los usuarios');
+('roles', 'roles', 'middle', 'privileges', UNIX_TIMESTAMP(), 'Modulo manejador de los roles de los usuarios');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

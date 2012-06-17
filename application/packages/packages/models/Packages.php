@@ -2,16 +2,19 @@
 
 class Packages extends Yachay_Models_Table
 {
-    protected $_name            = 'package';
-    protected $_primary         = 'ident';
-    public    $_mapping         = array(
-        'ident'                 => 'Codigo',
-        'label'                 => 'Paquete',
-        'url'                   => 'Identificador',
-        'status'                => 'Estado',
-        'type'                  => 'Tipo',
-        'description'           => 'Descripcion',
-        'tsregister'            => 'Fecha de Registro',
+    protected $_name = 'package';
+    protected $_primary = 'ident';
+    protected $_rowClass = 'Packages_Package';
+
+    protected $_dependentTables = array('Packages');
+    protected $_referenceMap    = array(
+        'Dependency'            => array(
+            'columns'           => 'dependency',
+            'refTableClass'     => 'Packages',
+            'refColumns'        => 'ident',
+            'onDelete'          => self::RESTRICT,
+            'onUpdate'          => self::RESTRICT,
+        ),
     );
 
     // Find uniques indexes
@@ -29,7 +32,7 @@ class Packages extends Yachay_Models_Table
 
     // Selects in table
     public function selectAll() {
-        return $this->fetchAll($this->select()->order('label ASC'));
+        return $this->fetchAll($this->select()->order('type ASC')->order('label ASC'));
     }
 
     public function selectByStatus($status) {

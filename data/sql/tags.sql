@@ -51,9 +51,9 @@ CREATE TABLE `tag_user` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('tags', 'tags', 'application', UNIX_TIMESTAMP(), 'Modulo manejador de las etiquetas en todos los recursos disponibles del sistema');
+('tags', 'tags', 'util', 'resources', UNIX_TIMESTAMP(), 'Modulo manejador de las etiquetas en todos los recursos disponibles del sistema');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

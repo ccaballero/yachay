@@ -603,11 +603,17 @@ body {
 }
 
 #primary #tagcloud {
-    line-height: 2.8em;
+    line-height: 2.0em;
 }
 
 #primary #tagcloud .tag {
     border: 3px solid;
+    padding: 0em 0.2em;
+    margin: 0em 0.25em;
+}
+
+#primary #tagcloud .box {
+    border: none;
     padding: 0em 0.2em;
     margin: 0em 0.25em;
 }

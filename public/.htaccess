@@ -1,0 +1,6 @@
+DirectoryIndex index.php
+
+RewriteEngine on
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^(.*)$ index.php/$1

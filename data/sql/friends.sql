@@ -19,9 +19,9 @@ CREATE TABLE `friend` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('friends', 'friends', 'middleware', UNIX_TIMESTAMP(), 'Modulo de conecciones entre usuarios');
+('friends', 'friends', 'middle', 'users', UNIX_TIMESTAMP(), 'Modulo de conecciones entre usuarios');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

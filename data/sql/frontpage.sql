@@ -7,9 +7,9 @@
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('frontpage', 'frontpage', 'platform', UNIX_TIMESTAMP(), 'Modulo manejador de la pagina de inicio');
+('frontpage', 'frontpage', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de la pagina de inicio');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

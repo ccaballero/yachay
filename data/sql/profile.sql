@@ -3,9 +3,9 @@
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('profile', 'profile', 'utility', UNIX_TIMESTAMP(), 'Modulo para la visualizacion de los datos del usuario');
+('profile', 'profile', 'util', 'users', UNIX_TIMESTAMP(), 'Modulo para la visualizacion de los datos del usuario');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

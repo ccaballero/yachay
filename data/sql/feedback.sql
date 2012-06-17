@@ -17,9 +17,9 @@ CREATE TABLE `feedback` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('feedback', 'feedback', 'application', UNIX_TIMESTAMP(), 'Modulo de registro de sugerencias del sistema');
+('feedback', 'feedback', 'app', 'notes', UNIX_TIMESTAMP(), 'Modulo de registro de sugerencias del sistema');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

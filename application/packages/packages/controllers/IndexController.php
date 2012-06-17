@@ -6,9 +6,15 @@ class Packages_IndexController extends Yachay_Controller_Action
         $this->requirePermission('packages', 'list');
 
         $model_packages = new Packages();
+        $packages = $model_packages->fetchAll();
 
-        $this->view->model_packages = $model_packages;
-        $this->view->packages = $model_packages->selectAll();
+        $tree = new Structures_Tree();
+        foreach ($packages as $package) {
+            $tree->addNode($package);
+        }
+
+        $tree->indexAll();
+        $this->view->tree = $tree;
 
         $this->history('packages');
         $breadcrumb = array();

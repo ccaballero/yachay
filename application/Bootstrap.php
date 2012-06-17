@@ -165,12 +165,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
     
     protected function _initLayout() {
-        $this->bootstrap('template');
+        $this->bootstrap(array('config', 'template'));
 
+        $config = Zend_Registry::get('config');
         $template = Zend_Registry::get('template');
         Zend_Layout::startMVC(array(
-            'layoutPath' => APPLICATION_PATH . '/layouts/scripts/',
-            'layout' => $template->label,
+            'layoutPath' => $config->resources->layout->layoutPath,
+            'layout'     => $template->label,
             'viewSuffix' => 'php',
         ));
     }

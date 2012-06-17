@@ -21,9 +21,9 @@ CREATE TABLE `event` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('events', 'events', 'application', UNIX_TIMESTAMP(), 'Modulo de gestion de calendarios y eventos');
+('events', 'events', 'app', 'resources', UNIX_TIMESTAMP(), 'Modulo de gestion de calendarios y eventos');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

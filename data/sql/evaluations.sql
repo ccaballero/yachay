@@ -53,9 +53,9 @@ CREATE TABLE `evaluation_test_value` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('evaluations', 'evaluations', 'application', UNIX_TIMESTAMP(), 'Modulo manejador de los criterios del sistema');
+('evaluations', 'evaluations', 'app', 'groups', UNIX_TIMESTAMP(), 'Modulo manejador de los criterios del sistema');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

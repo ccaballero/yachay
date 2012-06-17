@@ -31,9 +31,9 @@ CREATE TABLE `template_user` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('templates', 'templates', 'platform', UNIX_TIMESTAMP(), 'Modulo manejador de las plantillas web del sistema');
+('templates', 'templates', 'middle', 'pages', UNIX_TIMESTAMP(), 'Modulo manejador de las plantillas web del sistema');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

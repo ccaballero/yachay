@@ -9,7 +9,6 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
     public function preDispatch() {
         // settings for the page
         $route = $this->getFrontController()->getRouter()->getCurrentRouteName();
-
         $model_pages = new Pages();
         $this->page = $model_pages->findByRoute($route);
 

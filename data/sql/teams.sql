@@ -49,9 +49,9 @@ CREATE TABLE `team_resource` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('teams', 'teams', 'middleware', UNIX_TIMESTAMP(), 'Modulo manejador de los equipos de trabajo de los usuarios');
+('teams', 'teams', 'middle', 'groups', UNIX_TIMESTAMP(), 'Modulo manejador de los equipos de trabajo de los usuarios');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

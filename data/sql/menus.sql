@@ -7,9 +7,9 @@
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('menus', 'menus', 'middleware', UNIX_TIMESTAMP(), 'Modulo utilidad para la region de menus del sistema');
+('menus', 'menus', 'middle', 'templates', UNIX_TIMESTAMP(), 'Modulo utilidad para la region de menus del sistema');
 
 /*============================================================================*/
 /* Registro de regiones para el paquete                                       */

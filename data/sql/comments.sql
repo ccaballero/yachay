@@ -21,9 +21,9 @@ CREATE TABLE `comment` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('comments', 'comments', 'application', UNIX_TIMESTAMP(), 'Modulo manejador de los comentarios en todos los recursos disponibles del sistema');
+('comments', 'comments', 'util', 'resources', UNIX_TIMESTAMP(), 'Modulo manejador de comentarios en los recursos disponibles del sistema');
 
 /*============================================================================*/
 /* Registro de privilegios para el paquete                                    */

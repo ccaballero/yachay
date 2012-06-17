@@ -22,10 +22,10 @@ echo '<hr />';
 if (count($this->packages)) {
     echo '<center>';
     echo '<table width="100%"><tr><th>&nbsp;</th>';
-    echo '<th>' . $this->model_packages->_mapping['label'] . '</th>';
-    echo '<th>' . $this->model_packages->_mapping['type'] . '</th>';
+    echo '<th>Etiqueta</th>';
+    echo '<th>Tipo</th>';
     echo '<th>Opciones</th>';
-    echo '<th>' . $this->model_packages->_mapping['tsregister'] . '</th>';
+    echo '<th>Fecha de Registro</th>';
     echo '</tr>';
 
     foreach ($this->packages as $package) {

@@ -22,9 +22,9 @@ CREATE TABLE `login_forgot` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('login', 'login', 'platform', UNIX_TIMESTAMP(), 'Modulo manejador de acceso de los usuarios');
+('login', 'login', 'middle', 'users', UNIX_TIMESTAMP(), 'Modulo manejador de acceso de los usuarios');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

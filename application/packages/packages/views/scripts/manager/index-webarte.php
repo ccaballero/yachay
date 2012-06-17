@@ -15,11 +15,11 @@
         <?php if ($this->acl('packages', 'lock')) { ?>
             <th>&nbsp;</th>
         <?php } ?>
-            <th><?php echo $this->model_packages->_mapping['label'] ?></th>
-            <th><?php echo $this->model_packages->_mapping['type'] ?></th>
-            <th><?php echo $this->model_packages->_mapping['status'] ?></th>
+            <th>Etiqueta</th>
+            <th>Tipo</th>
+            <th>Estado</th>
             <th>Opciones</th>
-            <th><?php echo $this->model_packages->_mapping['tsregister'] ?></th>
+            <th>Fecha de Registro</th>
         </tr>
     <?php foreach ($this->packages as $key => $package) { ?>
         <tr class="<?php echo $key % 2 == 0 ? 'even' : 'odd' ?>">

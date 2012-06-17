@@ -57,9 +57,9 @@ CREATE TABLE `subject_resource` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('subjects', 'subjects', 'middleware', UNIX_TIMESTAMP(), 'Modulo manejador de las materias');
+('subjects', 'subjects', 'middle', 'gestions', UNIX_TIMESTAMP(), 'Modulo manejador de las materias');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

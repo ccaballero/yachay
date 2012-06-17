@@ -19,9 +19,9 @@ CREATE TABLE `gestion` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('gestions', 'gestions', 'platform', UNIX_TIMESTAMP(), 'Modulo guia de informacion para el manejo de periodos academicos');
+('gestions', 'gestions', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo guia de informacion para el manejo de periodos academicos');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

@@ -1,0 +1,26 @@
+syntax: glob
+*~
+*.swp
+*.orig
+*.tmp.
+*.bak
+*.log
+*.aux
+*.out
+*.synctex.gz
+*.toc
+
+.svn
+.cache/
+.settings/
+
+.buildpath
+.project
+
+library/Zend
+public/media/users/
+public/media/communities/
+public/media/files/
+public/media/photos/
+public/media/videos/
+

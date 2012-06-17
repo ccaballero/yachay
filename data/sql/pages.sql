@@ -3,9 +3,9 @@
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('pages', 'pages', 'platform', UNIX_TIMESTAMP(), 'Modulo de informacion para las paginas registradas');
+('pages', 'pages', 'base', NULL, UNIX_TIMESTAMP(), 'Modulo de informacion para las paginas registradas');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

@@ -29,9 +29,9 @@ CREATE TABLE `resource_global` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('resources', 'resources', 'application', UNIX_TIMESTAMP(), 'Modulo de registro de los recursos del sistema');
+('resources', 'resources', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo de registro de los recursos del sistema');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

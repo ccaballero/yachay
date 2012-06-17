@@ -20,9 +20,9 @@ CREATE TABLE `file` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('files', 'files', 'application', UNIX_TIMESTAMP(), 'Modulo de gestion de archivos');
+('files', 'files', 'app', 'resources', UNIX_TIMESTAMP(), 'Modulo de gestion de archivos');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

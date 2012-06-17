@@ -3,9 +3,9 @@
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('analytics', 'analytics', 'application', UNIX_TIMESTAMP(), 'Modulo de visualizacion de estadisticas');
+('analytics', 'analytics', 'app', NULL, UNIX_TIMESTAMP(), 'Modulo de visualizacion de estadisticas');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

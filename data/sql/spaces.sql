@@ -1,6 +1,6 @@
 
 /*============================================================================*/
-/* Informacion necesaria para el manejo de valoraciones de los usuarios       */
+/* Registro de manejador generico de espacios virtuales                       */
 /*============================================================================*/
 
 /*============================================================================*/
@@ -9,4 +9,4 @@
 INSERT INTO `package`
 (`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('valorations', 'valorations', 'util', 'resources', UNIX_TIMESTAMP(), 'Modulo manejador de las valoraciones de los usuarios del sistema');
+('spaces', 'spaces', 'middle', 'pages', UNIX_TIMESTAMP(), 'Modulo generico de espacios virtuales');

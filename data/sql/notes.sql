@@ -17,9 +17,9 @@ CREATE TABLE `note` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `tsregister`, `description`)
+(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('notes', 'notes', 'application', UNIX_TIMESTAMP(), 'Modulo de gestion de notas de texto');
+('notes', 'notes', 'app', 'resources', UNIX_TIMESTAMP(), 'Modulo de gestion de notas de texto');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
