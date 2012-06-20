@@ -22,13 +22,11 @@ class Packages_ManagerController extends Yachay_Controller_Action
         }
 
         $model_packages = new Packages();
-
-        $this->view->model_packages = $model_packages;
-        $this->view->packages = $model_packages->selectAll();
+        $this->view->tree = $model_packages->getTree();
 
         $breadcrumb = array();
         if ($this->acl('packages', 'list')) {
-            $breadcrumb['Modulos'] = $this->view->url(array(), 'packages_list');
+            $breadcrumb['Paquetes'] = $this->view->url(array(), 'packages_list');
         }
         $this->breadcrumb($breadcrumb);
     }
@@ -39,7 +37,7 @@ class Packages_ManagerController extends Yachay_Controller_Action
         $request = $this->getRequest();
         if ($request->isPost()) {
             $model_packages = new Packages();
-            $check = $request->getParam("check");
+            $check = $request->getParam('check');
             foreach ($check as $value) {
                 $package = $model_packages->findByIdent($value);
                 $package->status = 'inactive';
@@ -59,7 +57,7 @@ class Packages_ManagerController extends Yachay_Controller_Action
         $request = $this->getRequest();
         if ($request->isPost()) {
             $model_packages = new Packages();
-            $check = $request->getParam("check");
+            $check = $request->getParam('check');
             foreach ($check as $value) {
                 $package = $model_packages->findByIdent($value);
                 $package->status = 'active';

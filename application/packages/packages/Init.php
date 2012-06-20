@@ -6,19 +6,19 @@ class Packages_Init extends Yachay_Init
     public $install = 'packages';
 
     public $routes = array (
-        'packages_package_lock'                    => array('packages/:mod/lock',
+        'packages_package_lock'                    => array('packages/:package/lock',
                                                     array(
                                                         'module'     => 'packages',
                                                         'controller' => 'package',
                                                         'action'     => 'lock',
                                                     )),
-        'packages_package_unlock'                  => array('packages/:mod/unlock',
+        'packages_package_unlock'                  => array('packages/:package/unlock',
                                                     array(
                                                         'module'     => 'packages',
                                                         'controller' => 'package',
                                                         'action'     => 'unlock',
                                                     )),
-        'packages_package_view'                    => array('packages/:mod',
+        'packages_package_view'                    => array('packages/:package',
                                                     array(
                                                         'module'     => 'packages',
                                                         'controller' => 'package',

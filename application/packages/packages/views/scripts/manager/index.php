@@ -19,45 +19,42 @@ echo '</tr></table>';
 
 echo '<hr />';
 
-if (count($this->packages)) {
-    echo '<center>';
-    echo '<table width="100%"><tr><th>&nbsp;</th>';
-    echo '<th>Etiqueta</th>';
-    echo '<th>Tipo</th>';
-    echo '<th>Opciones</th>';
-    echo '<th>Fecha de Registro</th>';
-    echo '</tr>';
+echo '<center>';
+echo '<table width="100%"><tr><th>&nbsp;</th>';
+echo '<th>Paquete</th>';
+echo '<th>Tipo</th>';
+echo '<th>Opciones</th>';
+echo '<th>Fecha de Registro</th>';
+echo '</tr>';
 
-    foreach ($this->packages as $package) {
-        echo '<tr><td>';
-        if (Yachay_Acl::hasPermission('packages', 'lock')) {
-            echo '<input type="checkbox" name="check[]" value="' . $package->ident . '" />';
-        }
-        echo '</td>';
-        echo '<td>' . $package->label . '</td>';
-        echo '<td>' . $package->type . '</td>';
-        echo '<td><center>';
+foreach ($this->tree as $node) {
+    echo '<tr><td>';
+    if (Yachay_Acl::hasPermission('packages', 'lock')) {
+        echo '<input type="checkbox" name="check[]" value="' . $node['node']->ident . '" />';
+    }
+    echo '</td>';
+    echo '<td>' . str_repeat('&nbsp;', $node['level']) . $node['node']->label . '</td>';
+    echo '<td>' . $node['node']->type . '</td>';
+    echo '<td><center>';
 
-        if (Yachay_Acl::hasPermission('packages', 'view')) {
-            echo '<a href="' . $this->url(array('mod' => $package->url), 'packages_package_view') . '">Ver</a> ';
+    if (Yachay_Acl::hasPermission('packages', 'view')) {
+        echo '<a href="' . $this->url(array('package' => $node['node']->url), 'packages_package_view') . '">Ver</a> ';
+    }
+    if (Yachay_Acl::hasPermission('packages', 'lock')) {
+        if ($node['node']->status == 'active') {
+            echo '<a href="' . $this->url(array('package' => $node['node']->url), 'packages_package_lock') . '">Desactivar</a>';
+        } else {
+            echo '<a href="' . $this->url(array('package' => $node['node']->url), 'packages_package_unlock') . '">Activar</a>';
         }
-        if (Yachay_Acl::hasPermission('packages', 'lock')) {
-            if ($package->status == 'active') {
-                echo '<a href="' . $this->url(array('mod' => $package->url), 'packages_package_lock') . '">Desactivar</a>';
-            } else {
-                echo '<a href="' . $this->url(array('mod' => $package->url), 'packages_package_unlock') . '">Activar</a>';
-            }
-        }
-
-        echo '</center></td>';
-        echo '<td><center>' . $this->timestamp($package->tsregister) . '</center></td>';
-        echo '</tr>';
     }
 
-    echo '</table></center>';
-} else {
-    echo '<p>No existen modulos registrados</p>';
+    echo '</center></td>';
+    echo '<td><center>' . $this->timestamp($node['node']->tsregister) . '</center></td>';
+    echo '</tr>';
 }
+
+echo '</table></center>';
+
 echo '<hr />';
 
 echo '<table><tr>';

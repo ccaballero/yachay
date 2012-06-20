@@ -11,9 +11,9 @@ class Packages extends Yachay_Models_Table
         'Dependency'            => array(
             'columns'           => 'dependency',
             'refTableClass'     => 'Packages',
-            'refColumns'        => 'ident',
+            'refColumns'        => 'label',
             'onDelete'          => self::RESTRICT,
-            'onUpdate'          => self::RESTRICT,
+            'onUpdate'          => self::CASCADE,
         ),
     );
 
@@ -41,5 +41,24 @@ class Packages extends Yachay_Models_Table
 
     public function selectByType($type) {
         return $this->fetchAll($this->select()->where('type = ?', $type));
+    }
+
+    public function getTree() {
+        $tree = new Structures_Tree();
+
+        foreach ($this->selectAll() as $package) {
+            $tree->addNode($package);
+        }
+        $tree->indexAll();
+
+        return $tree;
+    }
+
+    public function locks($packages) {
+        $this->update(array('status' => 'inactive'), array('label IN (?)' => $packages));
+    }
+    
+    public function unlocks($packages) {
+        $this->update(array('status' => 'active'), array('label IN (?)' => $packages));
     }
 }

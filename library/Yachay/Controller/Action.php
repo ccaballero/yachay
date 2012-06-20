@@ -2,6 +2,8 @@
 
 abstract class Yachay_Controller_Action extends Yachay_Controller_Require
 {
+    protected $_useForward = false;
+
     public function init() {
         parent::init();
     }
@@ -9,13 +11,13 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
     public function preDispatch() {
         // settings for the page
         $route = $this->getFrontController()->getRouter()->getCurrentRouteName();
+
         $model_pages = new Pages();
         $this->page = $model_pages->findByRoute($route);
 
         // add the views in path
         $this->view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
         $this->view->doctype($this->template->doctype);
-
         if (!isset($this->_ignoreContextDefault)) {
             $this->context('global');
         }
@@ -26,7 +28,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
 
         // Add the helpers of application
         $model_packages = new Packages();
-        $packages = $model_packages->selectByType('application');
+        $packages = $model_packages->selectByType('app');
         foreach ($packages as $package) {
             //FIXME Considerar las posibles alternativas en tipos de modulos
             if ($this->page->controller != 'manager') {
@@ -81,7 +83,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             $view = new Zend_View();
             $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
             $view->setScriptPath(APPLICATION_PATH . '/packages/' . $widget->package . '/views/scripts/widgets/');
-            
+
             $view->config = $this->config;
             $view->page = $this->page;
             $view->user = $this->user;
@@ -104,7 +106,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
                 );
             }
         }
-        
+
         // Register last login
         $this->user->lastLogin();
         if ($this->user->needFillProfile()) {

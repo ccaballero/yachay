@@ -27,6 +27,12 @@ class Frontpage_Init extends Yachay_Init
                                                        'controller'  => 'index',
                                                        'action'      => 'spaces',
                                                    )),
+        'frontpage_confirm'                     => array('confirm',
+                                                   array(
+                                                       'module'      => 'frontpage',
+                                                       'controller'  => 'index',
+                                                       'action'      => 'confirm',
+                                                   )),
         'frontpage_development'                 => array('development',
                                                    array(
                                                        'module'      => 'frontpage',

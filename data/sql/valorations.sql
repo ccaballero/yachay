@@ -9,4 +9,4 @@
 INSERT INTO `package`
 (`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('valorations', 'valorations', 'util', 'resources', UNIX_TIMESTAMP(), 'Modulo manejador de las valoraciones de los usuarios del sistema');
+('valorations', 'valorations', 'app', 'resources', UNIX_TIMESTAMP(), 'Modulo manejador de las valoraciones de los usuarios del sistema');

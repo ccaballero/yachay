@@ -22,7 +22,7 @@ class Structures_Tree implements Iterator
         
         $this->values[$ident] = $node;
 
-        $this->list[$ident] = new Structures_Tree_Node($ident);
+        $this->list[$ident] = new Structures_Tree_Node($ident, $parent);
 
         if (empty($parent)) {
             $this->root->addChild($this->list[$ident]);
@@ -47,6 +47,27 @@ class Structures_Tree implements Iterator
 
     public function getOrphans() {
         return $this->orphans;
+    }
+
+    public function getRoot() {
+        return $this->root;
+    }
+
+    public function getNode($ident) {
+        return $this->list[$ident];
+    }
+
+    public function arrayUp($ident) {
+        $ident = $this->list[$ident]->getIdent();
+        $parent = $this->list[$ident]->getParent();
+        
+        $array = array($ident);
+
+        if (!empty($parent)) {
+            $array = array_merge($array, $this->arrayUp($parent));
+        }
+
+        return $array;
     }
     
     public function __toString() {

@@ -4,13 +4,13 @@ class Packages_View_Helper_Type
 {
     public function type($val) {
         switch ($val) {
-            case 'platform':
+            case 'base':
                 return 'Modulo componente de la plataforma';
-            case 'middleware':
+            case 'middle':
                 return 'Modulo componente de interconexion entre la plataforma y las aplicaciones';
-            case 'application':
+            case 'app':
                 return 'Modulo de aplicacion';
-            case 'automagic':
+            case 'util':
                 return 'Modulo de funciones agregadas';
         }
     }

@@ -2,13 +2,7 @@
 
 class Packages_Package extends Zend_Db_Table_Row_Abstract implements Structures_Tree_Structurable
 {
-    public function element() {
-        return 'package';
-    }
-
-    public function url() {
-        return $this->label;
-    }
+    private $tree = null;
 
     public function getIdent() {
         return $this->label;
@@ -16,5 +10,28 @@ class Packages_Package extends Zend_Db_Table_Row_Abstract implements Structures_
 
     public function getParent() {
         return $this->dependency;
+    }
+
+    public function setTree(Structures_Tree $tree) {
+        $this->tree = $tree;
+    }
+
+    public function getTree() {
+        if (empty($this->tree)) {
+            $model_packages = new Packages();
+            $this->tree = $model_packages->getTree();
+        }
+        return $this->tree;
+    }
+
+    public function arrayDown() {
+        $tree = $this->getTree();
+        $node = $tree->getNode($this->getIdent());
+        return $node->arrayDown();
+    }
+
+    public function arrayUp() {
+        $tree = $this->getTree();
+        return $tree->arrayUp($this->getIdent());
     }
 }
