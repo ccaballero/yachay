@@ -40,7 +40,7 @@ class Templates_TemplateController extends Yachay_Controller_Action
             $this->history('templates/view/' . $template->label);
         }
 
-        $this->view->template = $template;
+        $this->view->tpl = $template;
 
         $user_template = $model_templates_users->findByTemplateAndUser($template->ident, $this->user->ident);
         if (empty($user_template)) {

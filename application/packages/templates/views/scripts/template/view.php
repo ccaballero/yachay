@@ -3,15 +3,15 @@
 <table width="100%">
     <tr>
         <td>Tema: </td>
-        <td><?php echo $this->template->label ?></td>
+        <td><?php echo $this->tpl->label ?></td>
     </tr>
     <tr>
         <td>Descripción: </td>
-        <td><?php echo $this->template->description ?></td>
+        <td><?php echo $this->tpl->description ?></td>
     </tr>
     <tr>
         <td>Doctype: </td>
-        <td><?php echo $this->template->doctype ?></td>
+        <td><?php echo $this->tpl->doctype ?></td>
     </tr>
 </table>
 

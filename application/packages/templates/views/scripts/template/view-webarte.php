@@ -1,9 +1,9 @@
 <h1><?php echo $this->page->label ?></h1>
 
 <p>
-    <span class="mark">Tema:</span> <?php echo $this->template->label ?><br />
-    <span class="mark">Descripción:</span> <?php echo $this->template->description ?><br />
-    <span class="mark">Doctype:</span> <?php echo $this->template->doctype ?><br />
+    <span class="mark">Tema:</span> <?php echo $this->tpl->label ?><br />
+    <span class="mark">Descripción:</span> <?php echo $this->tpl->description ?><br />
+    <span class="mark">Doctype:</span> <?php echo $this->tpl->doctype ?><br />
 </p>
 
 <h2>Esquema de colores</h2>
