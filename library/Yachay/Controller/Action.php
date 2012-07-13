@@ -17,6 +17,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
 
         // add the views in path
         $this->view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
+        $this->view->addHelperPath(APPLICATION_PATH . '/library/Yachay/View/Helper', 'Yachay_View_Helper');
         $this->view->doctype($this->template->doctype);
         if (!isset($this->_ignoreContextDefault)) {
             $this->context('global');
