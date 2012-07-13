@@ -9,7 +9,7 @@
 INSERT INTO `package`
 (`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
 VALUES
-('frontpage', 'frontpage', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de la pagina de inicio');
+('base', 'base', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de la pagina de inicio');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
@@ -30,4 +30,4 @@ VALUES
 INSERT INTO `widget`
 (`label`, `title`, `package`, `script`)
 VALUES
-('Espacios Disponibles', 'Espacios Disponibles', 'frontpage', 'context');
+('Espacios Disponibles', 'Espacios Disponibles', 'base', 'context');

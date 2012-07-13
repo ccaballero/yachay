@@ -110,7 +110,7 @@ class Files_FileController extends Yachay_Controller_Action
         header('Content-Length: '. $file->size . '; ');
         ob_clean();
         flush();
-        readfile(APPLICATION_PATH . '/../public/media/files/' . $file->resource);
+        readfile(APPLICATION_PATH . '/public/media/files/' . $file->resource);
         exit;
     }
 
@@ -143,7 +143,7 @@ class Files_FileController extends Yachay_Controller_Action
             }
         }
 
-        unlink(APPLICATION_PATH . '/../public/media/files/' . $file->resource);
+        unlink(APPLICATION_PATH . '/public/media/files/' . $file->resource);
 
         $file->delete();
         $resource->delete();
@@ -182,7 +182,7 @@ class Files_FileController extends Yachay_Controller_Action
             }
         }
 
-        unlink(APPLICATION_PATH . '/../public/media/files/' . $file->resource);
+        unlink(APPLICATION_PATH . '/public/media/files/' . $file->resource);
 
         $file->delete();
         $resource->delete();

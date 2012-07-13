@@ -1,6 +1,6 @@
 <?php
 
-class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
+class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
     protected function _initConfig() {
         $config = new Zend_Config($this->getOptions());
@@ -43,15 +43,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $config = Zend_Registry::get('config');
         // Set for localization
-        setlocale(LC_CTYPE, $config->yachay->properties->locale);
-        Zend_Locale::setDefault($config->yachay->properties->locale);
+        setlocale(LC_CTYPE, $config->system->locale);
+        Zend_Locale::setDefault($config->system->locale);
     }
     
     protected function _initTimezone() {
         $this->bootstrap('config');
 
         $config = Zend_Registry::get('config');
-        date_default_timezone_set($config->yachay->properties->timezone);
+        date_default_timezone_set($config->system->timezone);
     }
 
     protected function _initUser() {

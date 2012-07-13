@@ -22,9 +22,9 @@ $_list = array(
     array('2', null),
 );
 
-$tree = new Structures_Tree();
+$tree = new Collections_Tree();
 foreach ($_list as $elements) {
-    $node = new Structures_Tree_Node_Default($elements[0], $elements[1]);
+    $node = new Collections_Tree_Node_Default($elements[0], $elements[1]);
     $tree->addNode($node);
 }
 

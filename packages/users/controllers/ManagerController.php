@@ -82,7 +82,7 @@ class Users_ManagerController extends Yachay_Controller_Action
                     // Password generation
                     $generateCode = new Yachay_Helpers_GenerateCode();
                     $password = $generateCode->generateCode($user->password, $user->code);
-                    $user->password = md5($this->config->yachay->properties->key . $password);
+                    $user->password = md5($this->config->system->key . $password);
 
                     $user->tsregister = time();
                     $user->save();
@@ -90,18 +90,18 @@ class Users_ManagerController extends Yachay_Controller_Action
                     if (!empty($user->email)) {
                         // email notification
                         $view = new Zend_View();
-                        $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
+                        $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
                         $view->setScriptPath(APPLICATION_PATH . '/packages/users/views/scripts/user/');
 
                         $view->user       = $user;
-                        $view->servername = $this->config->yachay->properties->servername;
+                        $view->servername = $this->config->system->servername;
                         $view->author     = $this->user->label;
                         $view->password   = $password;
 
                         $content = $view->render('mail.php');
                         $mail = new Zend_Mail('UTF-8');
                         $mail->setBodyHtml($content)
-                             ->setFrom($this->config->yachay->properties->email_direction, $this->config->yachay->properties->email_name)
+                             ->setFrom($this->config->system->email_direction, $this->config->system->email_name)
                              ->addTo($user->email, $user->getFullName())
                              ->setSubject('Notificacion de registro de usuario')
                              ->send();
@@ -268,7 +268,7 @@ class Users_ManagerController extends Yachay_Controller_Action
                 }
 
                 $upload = new Zend_File_Transfer_Adapter_Http();
-                $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
+                $upload->setDestination(APPLICATION_PATH . '/data/upload/');
                 $upload->addValidator('Size', false, 2097152)
                        ->addValidator('Extension', false, array('csv'));
 
@@ -384,7 +384,7 @@ class Users_ManagerController extends Yachay_Controller_Action
                                 // Password generation
                                 $generateCode = new Yachay_Helpers_GenerateCode();
                                 $password = $generateCode->generateCode($result['PASSWORD'], $result['CODIGO']);
-                                $user->password = md5($this->config->yachay->properties->key . $password);
+                                $user->password = md5($this->config->system->key . $password);
                             }
                             if (!$result['CODIGO_NUE'] && Yachay_Acl::hasPermission('users', 'edit')) {
                                 $user = $model_users->findByCode($result['CODIGO']);
@@ -406,16 +406,16 @@ class Users_ManagerController extends Yachay_Controller_Action
                                     if ($result['CODIGO_NUE'] && !empty($user->email)) {
                                         // email notification
                                         $view = new Zend_View();
-                                        $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
+                                        $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
                                         $view->setScriptPath(APPLICATION_PATH . '/packages/users/views/scripts/user/');
                                         $view->user       = $user;
-                                        $view->servername = $this->config->yachay->properties->servername;
+                                        $view->servername = $this->config->system->servername;
                                         $view->author     = $this->user->label;
                                         $view->password   = $password;
                                         $content = $view->render('mail.php');
                                         $mail = new Zend_Mail('UTF-8');
                                         $mail->setBodyHtml($content)
-                                             ->setFrom($this->config->yachay->properties->email_direction, $this->config->yachay->properties->email_name)
+                                             ->setFrom($this->config->system->email_direction, $this->config->system->email_name)
                                              ->addTo($user->email, $user->getFullName())
                                              ->setSubject('Notificacion de registro de usuario')
                                              ->send(); // FIXME agregar opcion smtp al gestor de correos

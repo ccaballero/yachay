@@ -1,6 +1,6 @@
 <?php
 
-class Structures_Tree_Node
+class Collections_Tree_Node
 {
     private $ident;
     private $parent;
@@ -24,7 +24,7 @@ class Structures_Tree_Node
         return $this->children;
     }
     
-    public function addChild(Structures_Tree_Node $node) {
+    public function addChild(Collections_Tree_Node $node) {
         $this->children[] = $node;
     }
 

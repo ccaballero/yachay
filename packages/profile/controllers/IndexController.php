@@ -53,16 +53,16 @@ class Profile_IndexController extends Yachay_Controller_Action
             if ($this->user->isValid()) {
                 // config of avatar
                 $upload = new Zend_File_Transfer_Adapter_Http();
-                $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
+                $upload->setDestination(APPLICATION_PATH . '/data/upload/');
                 $upload->addValidator('Size', false, 2097152)
                        ->addValidator('Extension', false, array('jpg', 'png', 'gif'));
                 if ($upload->receive()) {
                     $filename = $upload->getFileName('file');
 
                     $thumbnail = new Yachay_Helpers_Thumbnail();
-                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/users/thumbnail_large/' . $this->user->ident . '.jpg', 200, 200);
-                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/users/thumbnail_medium/' . $this->user->ident . '.jpg', 100, 100);
-                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/users/thumbnail_small/' . $this->user->ident . '.jpg', 50, 50);
+                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/public/media/users/thumbnail_large/' . $this->user->ident . '.jpg', 200, 200);
+                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/public/media/users/thumbnail_medium/' . $this->user->ident . '.jpg', 100, 100);
+                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/public/media/users/thumbnail_small/' . $this->user->ident . '.jpg', 50, 50);
 
                     unlink($filename);
                 }

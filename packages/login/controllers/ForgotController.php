@@ -43,17 +43,17 @@ class Login_ForgotController extends Yachay_Controller_Action
 	                        $forgot = $model_login->createRow();
 	                    }
 	                    $forgot->user = $user->ident;
-	                    $forgot->password = md5($this->config->yachay->properties->key . $code);
+	                    $forgot->password = md5($this->config->system->key . $code);
 	                    $forgot->tsregister = time();
 	                    $forgot->tstimeout = 86400; // 24 horas
 	                    $forgot->save();
 	
 	                    // Sending to mail
 	                    $view = new Zend_View();
-	                    $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
+	                    $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
 	                    $view->setScriptPath(APPLICATION_PATH . '/packages/login/views/scripts/forgot/');
 	
-	                    $view->servername = $this->config->yachay->properties->servername;
+	                    $view->servername = $this->config->system->servername;
 	                    $view->code       = $code;
 	                    $view->petition   = $forgot->tsregister;
 	                    $view->expiration = $forgot->tsregister + $forgot->tstimeout;
@@ -62,7 +62,7 @@ class Login_ForgotController extends Yachay_Controller_Action
 	
 	                    $mail = new Zend_Mail('UTF-8');
 	                    $mail->setBodyHtml($content)
-                                 ->setFrom($this->config->yachay->properties->email_direction, $this->config->yachay->properties->email_name)
+                                 ->setFrom($this->config->system->email_direction, $this->config->system->email_name)
 	                         ->addTo($user->email, $user->getFullName())
 	                         ->setSubject('Petición de cambio de contraseña')
 	                         ->send();

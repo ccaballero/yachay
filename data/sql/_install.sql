@@ -3,146 +3,146 @@
 /* Instalador de los paquetes originales de la distribucion                   */
 /*============================================================================*/
 
-SELECT '_system';
-\. _system.sql
+SELECT 'base';
+\. packages/base.sql
 
 SELECT 'packages';
-\. packages.sql
+\. packages/packages.sql
 
 SELECT 'frontpage';
-\. frontpage.sql
+\. packages/frontpage.sql
 
 SELECT 'pages';
-\. pages.sql
+\. packages/pages.sql
 
 SELECT 'regions';
-\. regions.sql
+\. packages/regions.sql
 
 SELECT 'widgets';
-\. widgets.sql
+\. packages/widgets.sql
 
 SELECT 'privileges';
-\. privileges.sql
+\. packages/privileges.sql
 
 /*============================================================================*/
 
 SELECT 'menus';
-\. menus.sql
+\. packages/menus.sql
 
 SELECT 'toolbar';
-\. toolbar.sql
+\. packages/toolbar.sql
 
 /*============================================================================*/
 
 SELECT 'roles';
-\. roles.sql
+\. packages/roles.sql
 
 SELECT 'spaces';
-\. spaces.sql
+\. packages/spaces.sql
 
 /*============================================================================*/
 
 SELECT 'login';
-\. login.sql
+\. packages/login.sql
 
 SELECT 'users';
-\. users.sql
+\. packages/users.sql
 
 SELECT 'profile';
-\. profile.sql
+\. packages/profile.sql
 
 SELECT 'settings';
-\. settings.sql
+\. packages/settings.sql
 
 /*============================================================================*/
 
 SELECT 'friends';
-\. friends.sql
+\. packages/friends.sql
 
 SELECT 'invitations';
-\. invitations.sql
+\. packages/invitations.sql
 
 /*============================================================================*/
 
 SELECT 'gestions';
-\. gestions.sql
+\. packages/gestions.sql
 
 SELECT 'subjects';
-\. subjects.sql
+\. packages/subjects.sql
 
 SELECT 'areas';
-\. areas.sql
+\. packages/areas.sql
 
 SELECT 'careers';
-\. careers.sql
+\. packages/careers.sql
 
 SELECT 'groups';
-\. groups.sql
+\. packages/groups.sql
 
 SELECT 'teams';
-\. teams.sql
+\. packages/teams.sql
 
 SELECT 'communities';
-\. communities.sql
+\. packages/communities.sql
 
 /*============================================================================*/
 
 SELECT 'groupsets';
-\. groupsets.sql
+\. packages/groupsets.sql
 
 SELECT 'resources';
-\. resources.sql
+\. packages/resources.sql
 
 SELECT 'notes';
-\. notes.sql
+\. packages/notes.sql
 
 SELECT 'links';
-\. links.sql
+\. packages/links.sql
 
 SELECT 'files';
-\. files.sql
+\. packages/files.sql
 
 SELECT 'events';
-\. events.sql
+\. packages/events.sql
 
 SELECT 'photos';
-\. photos.sql
+\. packages/photos.sql
 
 SELECT 'videos';
-\. videos.sql
+\. packages/videos.sql
 
 /*============================================================================*/
 
 SELECT 'evaluations';
-\. evaluations.sql
+\. packages/evaluations.sql
 
 SELECT 'califications';
-\. califications.sql
+\. packages/califications.sql
 
 /*============================================================================*/
 
 SELECT 'comments';
-\. comments.sql
+\. packages/comments.sql
 
 SELECT 'ratings';
-\. ratings.sql
+\. packages/ratings.sql
 
 SELECT 'valorations';
-\. valorations.sql
+\. packages/valorations.sql
 
 SELECT 'tags';
-\. tags.sql
+\. packages/tags.sql
 
 SELECT 'feedback';
-\. feedback.sql
+\. packages/feedback.sql
 
 SELECT 'templates';
-\. templates.sql
+\. packages/templates.sql
 
 /*============================================================================*/
 
 SELECT 'analytics';
-\. analytics.sql
+\. packages/analytics.sql
 
 /*============================================================================*/
 

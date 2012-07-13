@@ -30,4 +30,4 @@ $FOOTER->items[] = array(
     'label' => 'Codigo fuente',
 );
 
-$FOOTER->copyright = 'yachay ' . $this->config->yachay->properties->version;
+$FOOTER->copyright = 'yachay ' . $this->config->system->version;

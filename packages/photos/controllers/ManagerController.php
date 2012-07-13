@@ -20,7 +20,7 @@ class Photos_ManagerController extends Yachay_Controller_Action
             $session = new Zend_Session_Namespace('yachay');
 
             $upload = new Zend_File_Transfer_Adapter_Http();
-            $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
+            $upload->setDestination(APPLICATION_PATH . '/data/upload/');
             $upload->addValidator('Size', false, 2097152)
                    ->addValidator('Extension', false, array('jpg', 'png', 'gif'));
              
@@ -52,9 +52,9 @@ class Photos_ManagerController extends Yachay_Controller_Action
                         $photo->save();
 
                         $thumbnail = new Yachay_Helpers_Thumbnail();
-                        $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/photos/' . $photo->resource . '.thumb', 300, 300);
+                        $thumbnail->thumbnail($filename, APPLICATION_PATH . '/public/media/photos/' . $photo->resource . '.thumb', 300, 300);
 
-                        rename(APPLICATION_PATH . '/../data/upload/' . $photo->filename, APPLICATION_PATH . '/../public/media/photos/' . $photo->resource);
+                        rename(APPLICATION_PATH . '/data/upload/' . $photo->filename, APPLICATION_PATH . '/public/media/photos/' . $photo->resource);
 
                         $resource->saveContext($request);
                         $model_valorations->addActivity(2);

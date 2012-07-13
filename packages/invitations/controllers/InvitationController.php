@@ -12,7 +12,7 @@ class Invitations_InvitationController extends Yachay_Controller_Action
 
         $model_invitations = new Invitations();
 
-        $invitation = $model_invitations->findByCode(md5($this->config->yachay->properties->key . $code));
+        $invitation = $model_invitations->findByCode(md5($this->config->system->key . $code));
         $this->requireExistence($invitation, 'invitation', 'frontpage_user', 'frontpage_user');
 
         if ($invitation->accepted) {
@@ -42,7 +42,7 @@ class Invitations_InvitationController extends Yachay_Controller_Action
                 // Password generation
                 $generateCode = new Yachay_Helpers_GenerateCode();
                 $password = $generateCode->generateCode($user->password, $user->code);
-                $user->password = md5($this->config->yachay->properties->key . $password);
+                $user->password = md5($this->config->system->key . $password);
 
                 $user->sociability = 1;
                 $user->tsregister = time();
@@ -50,18 +50,18 @@ class Invitations_InvitationController extends Yachay_Controller_Action
 
                 // email notification
                 $view = new Zend_View();
-                $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
+                $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
                 $view->setScriptPath(APPLICATION_PATH . '/packages/users/views/scripts/user/');
 
                 $view->user       = $user;
-                $view->servername = $this->config->yachay->properties->servername;
+                $view->servername = $this->config->system->servername;
                 $view->author     = NULL;
                 $view->password   = $password;
 
                 $content = $view->render('mail.php');
                 $mail = new Zend_Mail('UTF-8');
                 $mail->setBodyHtml($content)
-                     ->setFrom($this->config->yachay->properties->email_direction, $this->config->yachay->properties->email_name)
+                     ->setFrom($this->config->system->email_direction, $this->config->system->email_name)
                      ->addTo($user->email, $user->getFullName())
                      ->setSubject('Notificacion de registro de usuario')
                      ->send();

@@ -1,6 +1,6 @@
 <?php
 
-class Frontpage_Init extends Yachay_Init
+class Base_Init extends Yachay_Init
 {
     public $routes = array (
         'frontpage'                             => array('',

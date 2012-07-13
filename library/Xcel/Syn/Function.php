@@ -4,7 +4,7 @@ class Xcel_Syn_Function
 {
     public static function isFunctionValid($function) {
         $function = ucfirst(strtolower(trim($function)));
-        if (file_exists(APPLICATION_PATH . '/../library/Xcel/Functions/' . $function . '.php')) {
+        if (file_exists(APPLICATION_PATH . '/library/Xcel/Functions/' . $function . '.php')) {
             return TRUE;
         }
         return FALSE;

@@ -16,7 +16,7 @@ class Settings_IndexController extends Yachay_Controller_Action
             $password2 = $request->getParam('password2');
 
             if (!empty($password1) && !empty($password2) && $password1 == $password2) {
-                $this->user->password = md5($this->config->yachay->properties->key . $password1);
+                $this->user->password = md5($this->config->system->key . $password1);
                 $this->user->save();
 
                 $this->_helper->flashMessenger->addMessage('Tu has cambiado tus preferencias correctamente');

@@ -1,6 +1,6 @@
 <?php
 
-class Structures_Tree implements Iterator
+class Collections_Tree implements Iterator
 {
     private $root;
     private $list;
@@ -9,20 +9,20 @@ class Structures_Tree implements Iterator
     private $orphans;
 
     public function  __construct() {
-        $this->root = new Structures_Tree_Node(0);
+        $this->root = new Collections_Tree_Node(0);
         $this->list = array();
         $this->keys = array();
         $this->values = array();
         $this->orphans = array();
     }
 
-    public function addNode(Structures_Tree_Structurable $node) {
+    public function addNode(Collections_Tree_Structurable $node) {
         $ident = $node->getIdent();
         $parent = $node->getParent();
         
         $this->values[$ident] = $node;
 
-        $this->list[$ident] = new Structures_Tree_Node($ident, $parent);
+        $this->list[$ident] = new Collections_Tree_Node($ident, $parent);
 
         if (empty($parent)) {
             $this->root->addChild($this->list[$ident]);

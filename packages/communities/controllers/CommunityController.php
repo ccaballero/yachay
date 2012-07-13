@@ -73,7 +73,7 @@ class Communities_CommunityController extends Yachay_Controller_Action
             if ($community->isValid()) {
                 // config of avatar
                 $upload = new Zend_File_Transfer_Adapter_Http();
-                $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
+                $upload->setDestination(APPLICATION_PATH . '/data/upload/');
                 $upload->addValidator('Size', false, 2097152)
                        ->addValidator('Extension', false, array('jpg', 'png', 'gif'));
                 if ($upload->receive()) {
@@ -81,9 +81,9 @@ class Communities_CommunityController extends Yachay_Controller_Action
 
                     $thumbnail = new Yachay_Helpers_Thumbnail();
 
-                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/communities/thumbnail_large/' . $community->ident . '.jpg', 200, 200);
-                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/communities/thumbnail_medium/' . $community->ident . '.jpg', 100, 100);
-                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/../public/media/communities/thumbnail_small/' . $community->ident . '.jpg', 50, 50);
+                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/public/media/communities/thumbnail_large/' . $community->ident . '.jpg', 200, 200);
+                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/public/media/communities/thumbnail_medium/' . $community->ident . '.jpg', 100, 100);
+                    $thumbnail->thumbnail($filename, APPLICATION_PATH . '/public/media/communities/thumbnail_small/' . $community->ident . '.jpg', 50, 50);
 
                     unlink($filename);
                 }

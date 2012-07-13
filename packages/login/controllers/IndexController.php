@@ -39,7 +39,7 @@ class Login_IndexController extends Yachay_Controller_Action
             $session = new Zend_Session_Namespace('yachay');
             if ($input->isValid()) {
                 $model_users = new Users();
-                $user = $model_users->findByLogin($input->username, md5($this->config->yachay->properties->key . $input->password));
+                $user = $model_users->findByLogin($input->username, md5($this->config->system->key . $input->password));
                 if (!empty($user)) {
                     if ($user->status == 'active') {
                         $session->user = $user;
@@ -55,7 +55,7 @@ class Login_IndexController extends Yachay_Controller_Action
                     if (!empty($user)) {
                         $forgot = $model_login->selectByUser($user->ident);
                         if (!empty($forgot)) {
-                            if (md5($this->config->yachay->properties->key . $input->password) == $forgot->password) {
+                            if (md5($this->config->system->key . $input->password) == $forgot->password) {
                                 $now = time();
                                 $expiration = $forgot->tsregister + $forgot->tstimeout;
                                 $forgot->delete();

@@ -28,7 +28,7 @@ class Invitations_ManagerController extends Yachay_Controller_Action
             while (!$code_valid) {
                 $generateCode = new Yachay_Helpers_GenerateCode();
                 $code = $generateCode->generateCode('alphanum', NULL, 64);
-                $existent_invitation = $model_invitations->findByCode(md5($this->config->yachay->properties->key . $code));
+                $existent_invitation = $model_invitations->findByCode(md5($this->config->system->key . $code));
                 if (empty($existent_invitation)) {
                     $code_valid = true;
                 }
@@ -39,27 +39,27 @@ class Invitations_ManagerController extends Yachay_Controller_Action
             $invitation->message = $request->getParam('message');
 
             if ($invitation->isValid()) {
-                $invitation->code = md5($this->config->yachay->properties->key . $code);
+                $invitation->code = md5($this->config->system->key . $code);
                 $invitation->tsregister = time();
                 $invitation->save();
 
                 // Sending to mail
                 $view = new Zend_View();
-                $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
+                $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
                 $view->setScriptPath(APPLICATION_PATH . '/packages/invitations/views/scripts/invitation/');
 
                 $view->url = $this->view->url(array('code' => $code), 'invitations_invitation_proceed');
                 $view->message = $invitation->message;
                 $view->user = $this->user;
-                $view->site = $this->config->yachay->properties->servername;
+                $view->site = $this->config->system->servername;
 
                 $content = $view->render('mail.php');
 
                 $mail = new Zend_Mail('UTF-8');
                 $mail->setBodyHtml($content)
-                     ->setFrom($this->config->yachay->properties->email_direction, $this->config->yachay->properties->email_name)
+                     ->setFrom($this->config->system->email_direction, $this->config->system->email_name)
                      ->addTo($invitation->email)
-                     ->setSubject($this->user->label . ' te ha invitado a ' . $this->config->yachay->properties->servername)
+                     ->setSubject($this->user->label . ' te ha invitado a ' . $this->config->system->servername)
                      ->send();
 
                 $this->_helper->flashMessenger->addMessage('La invitación ha sido enviada al correo electronico');

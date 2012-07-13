@@ -16,7 +16,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         $this->page = $model_pages->findByRoute($route);
 
         // add the views in path
-        $this->view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
+        $this->view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
         $this->view->doctype($this->template->doctype);
         if (!isset($this->_ignoreContextDefault)) {
             $this->context('global');
@@ -38,7 +38,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
 
         // Regions settings
         global $TITLE;
-        $TITLE->title = $this->config->yachay->properties->title;
+        $TITLE->title = $this->config->system->title;
 
         global $ICON;
         $ICON->icon = $this->config->resources->frontController->baseUrl . '/media/favicon.ico';
@@ -64,7 +64,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         if (!empty($regions)) {
             foreach ($regions as $region) {
                 $view = new Zend_View();
-                $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
+                $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
                 $view->setScriptPath(APPLICATION_PATH . '/packages/' . $region->package . '/views/scripts/' . $region->region . '/');
 
                 $view->config = $this->config;
@@ -81,7 +81,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         $model_widgets_pages = new Widgets_Pages();
         foreach ($widgets as $widget) {
             $view = new Zend_View();
-            $view->addHelperPath(APPLICATION_PATH . '/../library/Yachay/Helpers', 'Yachay_Helpers');
+            $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
             $view->setScriptPath(APPLICATION_PATH . '/packages/' . $widget->package . '/views/scripts/widgets/');
 
             $view->config = $this->config;

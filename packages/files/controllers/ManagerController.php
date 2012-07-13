@@ -20,7 +20,7 @@ class Files_ManagerController extends Yachay_Controller_Action
             $session = new Zend_Session_Namespace('yachay');
 
             $upload = new Zend_File_Transfer_Adapter_Http();
-            $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
+            $upload->setDestination(APPLICATION_PATH . '/data/upload/');
             $upload->addValidator('Size', false, 2097152);
              
             $publish = $request->getParam('publish');
@@ -51,7 +51,7 @@ class Files_ManagerController extends Yachay_Controller_Action
                         $file->resource = $resource->ident;
                         $file->save();
 
-                        rename(APPLICATION_PATH . '/../data/upload//' . $file->filename, APPLICATION_PATH . '/../public/media/files/' . $file->resource);
+                        rename(APPLICATION_PATH . '/../data/upload//' . $file->filename, APPLICATION_PATH . '/public/media/files/' . $file->resource);
 
                         $resource->saveContext($request);
                         $model_valorations->addActivity(2);

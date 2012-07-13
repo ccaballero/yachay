@@ -44,7 +44,7 @@ class Packages extends Yachay_Models_Table
     }
 
     public function getTree() {
-        $tree = new Structures_Tree();
+        $tree = new Collections_Tree();
 
         foreach ($this->selectAll() as $package) {
             $tree->addNode($package);

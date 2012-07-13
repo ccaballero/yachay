@@ -21,7 +21,7 @@ class Videos_ManagerController extends Yachay_Controller_Action
             $session = new Zend_Session_Namespace('yachay');
 
             $upload = new Zend_File_Transfer_Adapter_Http();
-            $upload->setDestination(APPLICATION_PATH . '/../data/upload/');
+            $upload->setDestination(APPLICATION_PATH . '/data/upload/');
             $upload->addValidator('Size', false, 2097152)
                    ->addValidator('Extension', false, array('flv'));
 
@@ -53,7 +53,7 @@ class Videos_ManagerController extends Yachay_Controller_Action
                         $video->resource = $resource->ident;
                         $video->save();
 
-                        rename(APPLICATION_PATH . '/../data/upload/' . $video->filename, APPLICATION_PATH . '/../public/media/videos/' . $video->resource);
+                        rename(APPLICATION_PATH . '/data/upload/' . $video->filename, APPLICATION_PATH . '/public/media/videos/' . $video->resource);
 
                         $resource->saveContext($request);
                         $model_valorations->addActivity(8);

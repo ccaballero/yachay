@@ -1,6 +1,6 @@
 <?php
 
-class Structures_Tree_Node_Default implements Structures_Tree_Structurable
+class Collections_Tree_Node_Default implements Collections_Tree_Structurable
 {
     public $ident;
     public $parent = null;

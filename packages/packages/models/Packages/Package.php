@@ -1,6 +1,6 @@
 <?php
 
-class Packages_Package extends Zend_Db_Table_Row_Abstract implements Structures_Tree_Structurable
+class Packages_Package extends Zend_Db_Table_Row_Abstract implements Collections_Tree_Structurable
 {
     private $tree = null;
 
@@ -12,7 +12,7 @@ class Packages_Package extends Zend_Db_Table_Row_Abstract implements Structures_
         return $this->dependency;
     }
 
-    public function setTree(Structures_Tree $tree) {
+    public function setTree(Collections_Tree $tree) {
         $this->tree = $tree;
     }
 

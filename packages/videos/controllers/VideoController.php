@@ -117,7 +117,7 @@ class Videos_VideoController extends Yachay_Controller_Action
             }
         }
 
-        unlink(APPLICATION_PATH . '/../public/media/videos/' . $video->resource);
+        unlink(APPLICATION_PATH . '/public/media/videos/' . $video->resource);
 
         $video->delete();
         $resource->delete();
@@ -156,7 +156,7 @@ class Videos_VideoController extends Yachay_Controller_Action
             }
         }
 
-        unlink(APPLICATION_PATH . '/../public/media/videos/' . $video->resource);
+        unlink(APPLICATION_PATH . '/public/media/videos/' . $video->resource);
 
         $video->delete();
         $resource->delete();
