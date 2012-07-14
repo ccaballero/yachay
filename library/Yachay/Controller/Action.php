@@ -33,7 +33,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         foreach ($packages as $package) {
             //FIXME Considerar las posibles alternativas en tipos de modulos
             if ($this->page->controller != 'manager') {
-                $this->view->addScriptPath(APPLICATION_PATH . '/packages/' . $package->url . '/views/scripts/application');
+                $this->view->addScriptPath($this->config->resources->frontController->moduleDirectory . '/' . $package->url . '/views/scripts/application');
             }
         }
 
@@ -66,7 +66,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             foreach ($regions as $region) {
                 $view = new Zend_View();
                 $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
-                $view->setScriptPath(APPLICATION_PATH . '/packages/' . $region->package . '/views/scripts/' . $region->region . '/');
+                $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/' . $region->package . '/views/scripts/' . $region->region . '/');
 
                 $view->config = $this->config;
                 $view->page = $this->page;
@@ -83,7 +83,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         foreach ($widgets as $widget) {
             $view = new Zend_View();
             $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
-            $view->setScriptPath(APPLICATION_PATH . '/packages/' . $widget->package . '/views/scripts/widgets/');
+            $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/' . $widget->package . '/views/scripts/widgets/');
 
             $view->config = $this->config;
             $view->page = $this->page;
@@ -93,7 +93,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             $widget_page = $model_widgets_pages->getPosition($this->page->ident, $widget->ident);
             $position = $widget_page->position;
 
-            $script = APPLICATION_PATH . "/packages/{$widget->package}/views/scripts/widgets/{$widget->script}-{$this->template->label}.php";
+            $script = $this->config->resources->frontController->moduleDirectory . "/{$widget->package}/views/scripts/widgets/{$widget->script}-{$this->template->label}.php";
             if (file_exists($script)) {
                 $to_render = "{$widget->script}-{$this->template->label}.php";
             } else {

@@ -46,7 +46,7 @@ class Invitations_ManagerController extends Yachay_Controller_Action
                 // Sending to mail
                 $view = new Zend_View();
                 $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
-                $view->setScriptPath(APPLICATION_PATH . '/packages/invitations/views/scripts/invitation/');
+                $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/invitations/views/scripts/invitation/');
 
                 $view->url = $this->view->url(array('code' => $code), 'invitations_invitation_proceed');
                 $view->message = $invitation->message;

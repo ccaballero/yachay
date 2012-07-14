@@ -13,7 +13,9 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     }
 
     protected function _initRouter() {
-        $this->bootstrap(array('autoload','frontController','db'));
+        $this->bootstrap(array('config', 'autoload','frontController','db'));
+
+        $config = Zend_Registry::geT('config');
 
         $ctrl = Zend_Controller_Front::getInstance();
         $router = $ctrl->getRouter();
@@ -22,7 +24,7 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $model_packages = new Db_Packages();
         $packages = $model_packages->selectByStatus('active');
         foreach ($packages as $package) {
-            $path = APPLICATION_PATH . '/packages/' . $package->url;
+            $path = $config->resources->frontController->moduleDirectory . '/' . $package->url;
             if (is_dir($path)) {
                 if (file_exists("$path/Init.php")) {
                     include "$path/Init.php";

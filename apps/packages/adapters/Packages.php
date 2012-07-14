@@ -18,15 +18,11 @@ class Db_Packages extends Yachay_Model_Table
         ),
     );
 
-//    // Find uniques indexes
-//    public function findByIdent($ident) {
-//        return $this->fetchRow($this->getAdapter()->quoteInto('ident = ?', $ident));
-//    }
-//
-//    public function findByLabel($label) {
-//        return $this->fetchRow($this->getAdapter()->quoteInto('label = ?', $label));
-//    }
-//
+    // Find uniques indexes
+    public function findByIdent($ident) {
+        return $this->fetchRow($this->getAdapter()->quoteInto('ident = ?', $ident));
+    }
+
     public function findByUrl($url) {
         return $this->fetchRow($this->getAdapter()->quoteInto('url = ?', $url));
     }
@@ -71,10 +67,10 @@ class Db_Packages extends Yachay_Model_Table
     }
 
     public function locks($packages) {
-        $this->update(array('status' => 'inactive'), array('label IN (?)' => $packages));
+        $this->update(array('status' => 'inactive'), array('url IN (?)' => $packages));
     }
     
     public function unlocks($packages) {
-        $this->update(array('status' => 'active'), array('label IN (?)' => $packages));
+        $this->update(array('status' => 'active'), array('url IN (?)' => $packages));
     }
 }

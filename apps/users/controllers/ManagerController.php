@@ -91,7 +91,7 @@ class Users_ManagerController extends Yachay_Controller_Action
                         // email notification
                         $view = new Zend_View();
                         $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
-                        $view->setScriptPath(APPLICATION_PATH . '/packages/users/views/scripts/user/');
+                        $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/users/views/scripts/user/');
 
                         $view->user       = $user;
                         $view->servername = $this->config->system->servername;
@@ -407,7 +407,7 @@ class Users_ManagerController extends Yachay_Controller_Action
                                         // email notification
                                         $view = new Zend_View();
                                         $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
-                                        $view->setScriptPath(APPLICATION_PATH . '/packages/users/views/scripts/user/');
+                                        $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/users/views/scripts/user/');
                                         $view->user       = $user;
                                         $view->servername = $this->config->system->servername;
                                         $view->author     = $this->user->label;

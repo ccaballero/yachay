@@ -21,6 +21,10 @@ class Yachay_Loader implements Zend_Loader_Autoloader_Interface
         $file = array_pop($list) . '.php';
         $dir = $package . '/' . $subdir . '/' . implode('/', $list);
 
-        Zend_Loader::loadFile($file, APPLICATION_PATH . '/packages/' . $dir, true);
+        $config = Zend_Registry::get('config');
+        $module = $config->resources->frontController->moduleDirectory;
+
+        Zend_Loader::loadFile($file, $module . '/' . $dir, true);
+        
     }
 }

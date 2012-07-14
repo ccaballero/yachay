@@ -85,7 +85,7 @@ class Profile_IndexController extends Yachay_Controller_Action
             $this->history('profile/edit');
         }
 
-        $this->view->addHelperPath(APPLICATION_PATH . '/packages/users/views/helpers', 'Users_View_Helper_');
+        $this->view->addHelperPath($this->config->resources->frontController->moduleDirectory . '/users/views/helpers', 'Users_View_Helper_');
         $this->view->tags = implode(', ', $_tags);
 
         $breadcrumb = array();

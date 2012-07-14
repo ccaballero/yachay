@@ -51,7 +51,7 @@ class Login_ForgotController extends Yachay_Controller_Action
 	                    // Sending to mail
 	                    $view = new Zend_View();
 	                    $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
-	                    $view->setScriptPath(APPLICATION_PATH . '/packages/login/views/scripts/forgot/');
+	                    $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/login/views/scripts/forgot/');
 	
 	                    $view->servername = $this->config->system->servername;
 	                    $view->code       = $code;

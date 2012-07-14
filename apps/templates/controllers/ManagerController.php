@@ -17,7 +17,7 @@ class Templates_ManagerController extends Yachay_Controller_Action
         $properties = json_decode($json_properties, true);
 
         $view = new Zend_View();
-        $view->setScriptPath(APPLICATION_PATH . '/packages/templates/views/scripts/manager/');
+        $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/templates/views/scripts/manager/');
 
         $view->config = $this->config;
 
