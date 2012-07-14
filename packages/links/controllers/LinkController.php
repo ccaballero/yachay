@@ -9,7 +9,7 @@ class Links_LinkController extends Yachay_Controller_Action
         $url_link = $request->getParam('link');
         $model_links = new Links();
         $link = $model_links->findByResource($url_link);
-        $this->requireExistence($link, 'link', 'links_link_view', 'frontpage_user');
+        $this->requireExistence($link, 'link', 'links_link_view', 'base_user');
 
         $model_resources = new Resources();
         $resource = $model_resources->findByIdent($link->resource);
@@ -45,7 +45,7 @@ class Links_LinkController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_link);
         $link = $model_links->findByResource($url_link);
 
-        $this->requireExistence($link, 'link', 'links_link_view', 'frontpage_user');
+        $this->requireExistence($link, 'link', 'links_link_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $_tags = array();
@@ -106,7 +106,7 @@ class Links_LinkController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_link);
         $link = $model_links->findByResource($url_link);
 
-        $this->requireExistence($link, 'link', 'links_link_view', 'frontpage_user');
+        $this->requireExistence($link, 'link', 'links_link_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $tags = $resource->findTagsViaTags_Resources();
@@ -144,7 +144,7 @@ class Links_LinkController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_link);
         $link = $model_links->findByResource($url_link);
 
-        $this->requireExistence($link, 'link', 'links_link_view', 'frontpage_user');
+        $this->requireExistence($link, 'link', 'links_link_view', 'base_user');
 
         $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {

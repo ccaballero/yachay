@@ -19,7 +19,7 @@ CREATE TABLE `video` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('videos', 'videos', 'app', 'files', UNIX_TIMESTAMP(), 'Modulo de gestion de videos online');
 

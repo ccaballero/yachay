@@ -3,7 +3,7 @@
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('widgets', 'widgets', 'middle', 'templates', UNIX_TIMESTAMP(), 'Modulo de configuracion para los widgets de las paginas');
 

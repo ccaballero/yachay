@@ -1,6 +1,6 @@
 <?php
 
-class Friends_Friend extends Yachay_Models_Row_Validation
+class Friends_Friend extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array(
         'user' => array(

@@ -5,8 +5,10 @@ class Packages_IndexController extends Yachay_Controller_Action
     public function indexAction() {
         $this->requirePermission('packages', 'list');
 
-        $model_packages = new Packages();
-        $this->view->tree = $model_packages->getTree();
+        $db_packages = new Db_Packages();
+
+        $tree = $db_packages->getTree();
+        $this->view->list = $tree;
 
         $this->history('packages');
         $breadcrumb = array();

@@ -7,7 +7,7 @@ class Profile_IndexController extends Yachay_Controller_Action
             $this->_redirect($this->view->url(array(), 'frontpage'));
         }
 
-        $this->requireExistence($this->user, 'user', 'profile_view', 'frontpage_user');
+        $this->requireExistence($this->user, 'user', 'profile_view', 'base_user');
 
         $this->context('user', $this->user);
         $this->history('profile');
@@ -23,7 +23,7 @@ class Profile_IndexController extends Yachay_Controller_Action
 
         $model_tags = new Tags();
 
-        $this->requireExistence($this->user, 'user', 'profile_view', 'frontpage_user');
+        $this->requireExistence($this->user, 'user', 'profile_view', 'base_user');
 
         $this->context('user', $this->user);
 

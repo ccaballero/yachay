@@ -1,6 +1,6 @@
 <?php
 
-class Videos extends Yachay_Models_Table
+class Videos extends Yachay_Model_Table
 {
     protected $_name            = 'video';
     protected $_primary         = 'resource';

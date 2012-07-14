@@ -1,6 +1,6 @@
 <?php
 
-class Careers_Career extends Yachay_Models_Row_Validation
+class Careers_Career extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(

@@ -1,6 +1,6 @@
 <?php
 
-class Templates_Users extends Yachay_Models_Table
+class Templates_Users extends Yachay_Model_Table
 {
     protected $_name            = 'template_user';
     protected $_referenceMap    = array(

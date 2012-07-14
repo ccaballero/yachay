@@ -1,6 +1,6 @@
 <?php
 
-class Events_Event extends Yachay_Models_Row_Validation
+class Events_Event extends Yachay_Model_Row_Validation
 {
     public $__type = 'event';
     public $__element = 'events';

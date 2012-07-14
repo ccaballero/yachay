@@ -9,7 +9,7 @@ class Yachay_Helpers_Recipient
 
         switch ($element) {
             case 'global':
-                return '<a href="' . $url->url(array(), 'frontpage_user') . '">Pagina principal</a>';
+                return '<a href="' . $url->url(array(), 'base_user') . '">Pagina principal</a>';
             case 'area':
                 $model_areas = new Areas();
                 $area = $model_areas->findByIdent($ident);

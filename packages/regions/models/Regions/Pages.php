@@ -1,6 +1,6 @@
 <?php
 
-class Regions_Pages extends Yachay_Models_Table
+class Regions_Pages extends Yachay_Model_Table
 {
     protected $_name            = 'region_page';
     protected $_referenceMap    = array(

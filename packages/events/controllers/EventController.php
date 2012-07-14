@@ -9,7 +9,7 @@ class Events_EventController extends Yachay_Controller_Action
         $url_event = $request->getParam('event');
         $model_events = new Events();
         $event = $model_events->findByResource($url_event);
-        $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
+        $this->requireExistence($event, 'event', 'events_event_view', 'base_user');
 
         $model_resources = new Resources();
         $resource = $model_resources->findByIdent($event->resource);
@@ -45,7 +45,7 @@ class Events_EventController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_event);
         $event = $model_events->findByResource($url_event);
 
-        $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
+        $this->requireExistence($event, 'event', 'events_event_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $_tags = array();
@@ -115,7 +115,7 @@ class Events_EventController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_event);
         $event = $model_events->findByResource($url_event);
 
-        $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
+        $this->requireExistence($event, 'event', 'events_event_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $tags = $resource->findTagsViaTags_Resources();
@@ -153,7 +153,7 @@ class Events_EventController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_event);
         $event = $model_events->findByResource($url_event);
 
-        $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
+        $this->requireExistence($event, 'event', 'events_event_view', 'base_user');
 
         $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {

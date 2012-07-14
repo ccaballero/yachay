@@ -1,6 +1,6 @@
 <?php
 
-class Teams_Team extends Yachay_Models_Row_Validation
+class Teams_Team extends Yachay_Model_Row_Validation
 {
     protected $_foreignkey = 'group';
 

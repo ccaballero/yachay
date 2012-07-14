@@ -1,6 +1,6 @@
 <?php
 
-class Photos_Photo extends Yachay_Models_Row_Validation
+class Photos_Photo extends Yachay_Model_Row_Validation
 {
     public $__type = 'photo';
     public $__element = 'photos';

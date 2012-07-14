@@ -1,20 +1,11 @@
 <?php
 
-class Collections_Tree_Node_Default implements Collections_Tree_Structurable
+class Collections_Tree_Node_Default extends Collections_Tree_Node
 {
-    public $ident;
-    public $parent = null;
-
     public function __construct($ident, $parent = null) {
-        $this->ident = $ident;
-        $this->parent = $parent;
-    }
+        $this->_ident = $ident;
+        $this->_parent = $parent;
 
-    public function getIdent() {
-        return $this->ident;
-    }
-
-    public function getParent() {
-        return $this->parent;
+        parent::__construct();
     }
 }

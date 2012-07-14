@@ -1,6 +1,6 @@
 <?php
 
-class Regions extends Yachay_Models_Table
+class Regions extends Yachay_Model_Table
 {
     protected $_name            = 'region';
     protected $_primary         = 'ident';

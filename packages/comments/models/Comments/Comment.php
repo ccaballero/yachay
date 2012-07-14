@@ -1,6 +1,6 @@
 <?php
 
-class Comments_Comment extends Yachay_Models_Row_Validation
+class Comments_Comment extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array(
         'comment' => array(

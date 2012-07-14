@@ -1,6 +1,6 @@
 <?php
 
-class Areas_Resources extends Yachay_Models_Table
+class Areas_Resources extends Yachay_Model_Table
 {
     protected $_name            = 'area_resource';
     protected $_referenceMap    = array(

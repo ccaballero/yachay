@@ -1,6 +1,6 @@
 <?php
 
-class Groupsets extends Yachay_Models_Table
+class Groupsets extends Yachay_Model_Table
 {
     protected $_name            = 'groupset';
     protected $_primary         = 'ident';

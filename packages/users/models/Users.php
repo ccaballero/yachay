@@ -1,6 +1,6 @@
 <?php
 
-class Users extends Yachay_Models_Table
+class Users extends Yachay_Model_Table
 {
     protected $_name            = 'user';
     protected $_primary         = 'ident';

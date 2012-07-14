@@ -19,7 +19,7 @@ CREATE TABLE `photo` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('photos', 'photos', 'app', 'files', UNIX_TIMESTAMP(), 'Modulo de gestion de imagenes');
 

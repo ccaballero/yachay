@@ -1,6 +1,6 @@
 <?php
 
-class Gestions_Gestion extends Yachay_Models_Row_Validation
+class Gestions_Gestion extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(

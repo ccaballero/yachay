@@ -1,6 +1,6 @@
 <?php
 
-class Groupsets_Groupset extends Yachay_Models_Row_Validation
+class Groupsets_Groupset extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(

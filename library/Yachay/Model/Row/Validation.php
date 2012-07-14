@@ -1,6 +1,6 @@
 <?php
 
-class Yachay_Models_Row_Validation extends Zend_Db_Table_Row_Abstract
+class Yachay_Model_Row_Validation extends Zend_Db_Table_Row_Abstract
 {
     protected $_validationMessages;
 

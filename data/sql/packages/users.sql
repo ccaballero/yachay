@@ -55,7 +55,7 @@ CREATE TABLE `user_resource` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('users', 'users', 'middle', 'roles', UNIX_TIMESTAMP(), 'Modulo manejador de los usuarios');
 

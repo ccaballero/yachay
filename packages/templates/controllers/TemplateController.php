@@ -13,7 +13,7 @@ class Templates_TemplateController extends Yachay_Controller_Action
 
         $template = $model_templates->findByLabel($label_template);
 
-        $this->requireExistence($template, 'template', 'template_template_view', 'frontpage_user');
+        $this->requireExistence($template, 'template', 'template_template_view', 'base_user');
 
         if ($request->isPost()) {
             $class = new StdClass();

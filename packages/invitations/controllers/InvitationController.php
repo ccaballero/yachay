@@ -13,11 +13,11 @@ class Invitations_InvitationController extends Yachay_Controller_Action
         $model_invitations = new Invitations();
 
         $invitation = $model_invitations->findByCode(md5($this->config->system->key . $code));
-        $this->requireExistence($invitation, 'invitation', 'frontpage_user', 'frontpage_user');
+        $this->requireExistence($invitation, 'invitation', 'base_user', 'base_user');
 
         if ($invitation->accepted) {
             $this->_helper->flashMessenger->addMessage('El recurso solicitado no existe');
-            $this->_redirect($this->view->url(array(), 'frontpage_visitor'));
+            $this->_redirect($this->view->url(array(), 'base_visitor'));
         }
 
         $this->view->user = new Users_Empty();
@@ -107,7 +107,7 @@ class Invitations_InvitationController extends Yachay_Controller_Action
         $model_invitations = new Invitations();
         $invitation = $model_invitations->findByIdent($ident_invitation);
 
-        $this->requireExistence($invitation, 'invitation', 'invitations_manager', 'frontpage_user');
+        $this->requireExistence($invitation, 'invitation', 'invitations_manager', 'base_user');
         $this->requireResourceAuthor($invitation);
 
         if (!$invitation->accepted) {

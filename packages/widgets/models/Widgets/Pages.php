@@ -1,6 +1,6 @@
 <?php
 
-class Widgets_Pages extends Yachay_Models_Table
+class Widgets_Pages extends Yachay_Model_Table
 {
     protected $_name            = 'widget_page';
     protected $_referenceMap    = array(

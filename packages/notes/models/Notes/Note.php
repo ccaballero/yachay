@@ -1,6 +1,6 @@
 <?php
 
-class Notes_Note extends Yachay_Models_Row_Validation
+class Notes_Note extends Yachay_Model_Row_Validation
 {
     public $__type = 'note';
     public $__element = 'notes';

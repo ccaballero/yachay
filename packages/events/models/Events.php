@@ -1,6 +1,6 @@
 <?php
 
-class Events extends Yachay_Models_Table
+class Events extends Yachay_Model_Table
 {
     protected $_name            = 'event';
     protected $_primary         = 'resource';

@@ -1,6 +1,6 @@
 <?php
 
-class Pages_Page extends Yachay_Models_Row_Validation
+class Pages_Page extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array(
         'title' => array(

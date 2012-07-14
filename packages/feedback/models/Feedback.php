@@ -1,6 +1,6 @@
 <?php
 
-class Feedback extends Yachay_Models_Table
+class Feedback extends Yachay_Model_Table
 {
     protected $_name            = 'feedback';
     protected $_primary         = 'resource';

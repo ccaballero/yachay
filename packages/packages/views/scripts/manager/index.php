@@ -27,29 +27,29 @@ echo '<th>Opciones</th>';
 echo '<th>Fecha de Registro</th>';
 echo '</tr>';
 
-foreach ($this->tree as $node) {
+foreach ($this->list as $node) {
     echo '<tr><td>';
     if (Yachay_Acl::hasPermission('packages', 'lock')) {
-        echo '<input type="checkbox" name="check[]" value="' . $node['node']->ident . '" />';
+        echo '<input type="checkbox" name="check[]" value="' . $node->ident . '" />';
     }
     echo '</td>';
-    echo '<td>' . str_repeat('&nbsp;', $node['level']) . $node['node']->label . '</td>';
-    echo '<td>' . $node['node']->type . '</td>';
+    echo '<td>' . str_repeat('&nbsp;', $node['level']) . $node->label . '</td>';
+    echo '<td>' . $node->type . '</td>';
     echo '<td><center>';
 
     if (Yachay_Acl::hasPermission('packages', 'view')) {
-        echo '<a href="' . $this->url(array('package' => $node['node']->url), 'packages_package_view') . '">Ver</a> ';
+        echo '<a href="' . $this->url(array('package' => $node->url), 'packages_package_view') . '">Ver</a> ';
     }
     if (Yachay_Acl::hasPermission('packages', 'lock')) {
-        if ($node['node']->status == 'active') {
-            echo '<a href="' . $this->url(array('package' => $node['node']->url), 'packages_package_lock') . '">Desactivar</a>';
+        if ($node->status == 'active') {
+            echo '<a href="' . $this->url(array('package' => $node->url), 'packages_package_lock') . '">Desactivar</a>';
         } else {
-            echo '<a href="' . $this->url(array('package' => $node['node']->url), 'packages_package_unlock') . '">Activar</a>';
+            echo '<a href="' . $this->url(array('package' => $node->url), 'packages_package_unlock') . '">Activar</a>';
         }
     }
 
     echo '</center></td>';
-    echo '<td><center>' . $this->timestamp($node['node']->tsregister) . '</center></td>';
+    echo '<td><center>' . $this->timestamp($node->tsregister) . '</center></td>';
     echo '</tr>';
 }
 

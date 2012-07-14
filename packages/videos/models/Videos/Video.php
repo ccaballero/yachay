@@ -1,6 +1,6 @@
 <?php
 
-class Videos_Video extends Yachay_Models_Row_Validation
+class Videos_Video extends Yachay_Model_Row_Validation
 {
     public $__type = 'video';
     public $__element = 'videos';

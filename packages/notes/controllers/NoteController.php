@@ -9,7 +9,7 @@ class Notes_NoteController extends Yachay_Controller_Action
         $url_note = $request->getParam('note');
         $model_notes = new Notes();
         $note = $model_notes->findByResource($url_note);
-        $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
+        $this->requireExistence($note, 'note', 'notes_note_view', 'base_user');
 
         $model_resources = new Resources();
         $resource = $model_resources->findByIdent($note->resource);
@@ -45,7 +45,7 @@ class Notes_NoteController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_note);
         $note = $model_notes->findByResource($url_note);
 
-        $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
+        $this->requireExistence($note, 'note', 'notes_note_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $_tags = array();
@@ -105,7 +105,7 @@ class Notes_NoteController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_note);
         $note = $model_notes->findByResource($url_note);
 
-        $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
+        $this->requireExistence($note, 'note', 'notes_note_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $tags = $resource->findTagsViaTags_Resources();
@@ -143,7 +143,7 @@ class Notes_NoteController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_note);
         $note = $model_notes->findByResource($url_note);
 
-        $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
+        $this->requireExistence($note, 'note', 'notes_note_view', 'base_user');
 
         $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {

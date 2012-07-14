@@ -1,6 +1,6 @@
 <?php
 
-class Templates extends Yachay_Models_Table
+class Templates extends Yachay_Model_Table
 {
     protected $_name            = 'template';
     protected $_primary         = 'ident';

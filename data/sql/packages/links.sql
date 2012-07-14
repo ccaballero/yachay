@@ -17,7 +17,7 @@ CREATE TABLE `link` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('links', 'links', 'app', 'resources', UNIX_TIMESTAMP(), 'Modulo de gestion de enlaces');
 

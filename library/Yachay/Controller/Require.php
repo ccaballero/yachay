@@ -120,7 +120,7 @@ class Yachay_Controller_Require extends Zend_Controller_Action
     public function requireResourceAuthor($resource) {
         if (!$resource->amAuthor()) {
             $this->_helper->flashMessenger->addMessage('Usted debe ser el autor de este recurso');
-            $this->_redirect($this->view->url(array(), 'frontpage_user'));
+            $this->_redirect($this->view->url(array(), 'base_user'));
         }
     }
 
@@ -129,7 +129,7 @@ class Yachay_Controller_Require extends Zend_Controller_Action
         $spaces_valids = $context->context(NULL, 'plain');
         if (!in_array($resource->recipient, $spaces_valids)) {
             $this->_helper->flashMessenger->addMessage('Usted debe ser parte de ese espacio para realizar esa acción');
-            $this->_redirect($this->view->url(array(), 'frontpage_user'));
+            $this->_redirect($this->view->url(array(), 'base_user'));
         }
     }
 }

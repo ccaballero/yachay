@@ -5,7 +5,7 @@ class Settings_IndexController extends Yachay_Controller_Action
     public function indexAction() {
         $request = $this->getRequest();
 
-        $this->requireExistence($this->user, 'user', 'profile_view', 'frontpage_user');
+        $this->requireExistence($this->user, 'user', 'profile_view', 'base_user');
 
         $this->context('user', $this->user);
 

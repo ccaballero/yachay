@@ -21,7 +21,7 @@ CREATE TABLE `calification` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('califications', 'califications', 'app', 'evaluations', UNIX_TIMESTAMP(), 'Modulo manejador de las calificaciones de los estudiantes del sistema');
 

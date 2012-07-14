@@ -28,7 +28,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         }
 
         // Add the helpers of application
-        $model_packages = new Packages();
+        $model_packages = new Db_Packages();
         $packages = $model_packages->selectByType('app');
         foreach ($packages as $package) {
             //FIXME Considerar las posibles alternativas en tipos de modulos

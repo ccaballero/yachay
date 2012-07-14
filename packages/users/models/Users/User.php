@@ -1,6 +1,6 @@
 <?php
 
-class Users_User extends Yachay_Models_Row_Validation
+class Users_User extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array(
         'role' => array(

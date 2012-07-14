@@ -1,6 +1,6 @@
 <?php
 
-class Evaluations_Evaluation extends Yachay_Models_Row_Validation
+class Evaluations_Evaluation extends Yachay_Model_Row_Validation
 {
     public $__type = 'evaluation';
     public $__element = 'evaluations';

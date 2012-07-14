@@ -21,8 +21,8 @@ class Packages_ManagerController extends Yachay_Controller_Action
             $this->history('packages/manager');
         }
 
-        $model_packages = new Packages();
-        $this->view->tree = $model_packages->getTree();
+        $db_packages = new Db_Packages();
+        $this->view->list = $db_packages->getTree();
 
         $breadcrumb = array();
         if ($this->acl('packages', 'list')) {

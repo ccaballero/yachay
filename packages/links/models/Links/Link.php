@@ -1,6 +1,6 @@
 <?php
 
-class Links_Link extends Yachay_Models_Row_Validation
+class Links_Link extends Yachay_Model_Row_Validation
 {
     public $__type = 'link';
     public $__element = 'links';

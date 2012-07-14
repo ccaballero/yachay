@@ -9,7 +9,7 @@ class Files_FileController extends Yachay_Controller_Action
         $url_file = $request->getParam('file');
         $model_files = new Files();
         $file = $model_files->findByResource($url_file);
-        $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+        $this->requireExistence($file, 'file', 'files_file_view', 'base_user');
 
         $model_resources = new Resources();
         $resource = $model_resources->findByIdent($file->resource);
@@ -45,7 +45,7 @@ class Files_FileController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_file);
         $file = $model_files->findByResource($url_file);
 
-        $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+        $this->requireExistence($file, 'file', 'files_file_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $_tags = array();
@@ -94,7 +94,7 @@ class Files_FileController extends Yachay_Controller_Action
         $url_file = $request->getParam('file');
         $model_files = new Files();
         $file = $model_files->findByResource($url_file);
-        $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+        $this->requireExistence($file, 'file', 'files_file_view', 'base_user');
 
         $model_resources = new Resources();
         $resource = $model_resources->findByIdent($file->resource);
@@ -127,7 +127,7 @@ class Files_FileController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_file);
         $file = $model_files->findByResource($url_file);
 
-        $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+        $this->requireExistence($file, 'file', 'files_file_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $tags = $resource->findTagsViaTags_Resources();
@@ -167,7 +167,7 @@ class Files_FileController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_file);
         $file = $model_files->findByResource($url_file);
 
-        $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+        $this->requireExistence($file, 'file', 'files_file_view', 'base_user');
 
         $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {

@@ -1,6 +1,6 @@
 <?php
 
-class Groups_Group extends Yachay_Models_Row_Validation
+class Groups_Group extends Yachay_Model_Row_Validation
 {
     protected $_foreignkey = 'subject';
 

@@ -1,6 +1,6 @@
 <?php
 
-class Groupsets_Groups extends Yachay_Models_Table
+class Groupsets_Groups extends Yachay_Model_Table
 {
     protected $_name            = 'groupset_group';
     protected $_referenceMap    = array(

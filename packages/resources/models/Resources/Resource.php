@@ -1,6 +1,6 @@
 <?php
 
-class Resources_Resource extends Yachay_Models_Row_Validation
+class Resources_Resource extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array();
 

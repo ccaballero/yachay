@@ -1,6 +1,6 @@
 <?php
 
-class Careers extends Yachay_Models_Table
+class Careers extends Yachay_Model_Table
 {
     protected $_name            = 'career';
     protected $_primary         = 'ident';

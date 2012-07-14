@@ -10,7 +10,7 @@ class Feedback_EntryController extends Yachay_Controller_Action
         $url_entry = $request->getParam('entry');
         $model_feedback = new Feedback();
         $entry = $model_feedback->findByResource($url_entry);
-        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'base_user');
 
         $model_resources = new Resources();
         $resource = $model_resources->findByIdent($entry->resource);
@@ -47,7 +47,7 @@ class Feedback_EntryController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_entry);
         $entry = $model_feedback->findByResource($url_entry);
 
-        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $_tags = array();
@@ -96,7 +96,7 @@ class Feedback_EntryController extends Yachay_Controller_Action
         $model_feedback = new Feedback();
         $entry = $model_feedback->findByResource($url_entry);
 
-        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'base_user');
 
         $entry->mark = true;
         $entry->save();
@@ -113,7 +113,7 @@ class Feedback_EntryController extends Yachay_Controller_Action
         $model_feedback = new Feedback();
         $entry = $model_feedback->findByResource($url_entry);
 
-        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'base_user');
 
         $entry->mark = false;
         $entry->save();
@@ -130,7 +130,7 @@ class Feedback_EntryController extends Yachay_Controller_Action
         $model_feedback = new Feedback();
         $entry = $model_feedback->findByResource($url_entry);
 
-        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'base_user');
 
         $entry->resolved = true;
         $entry->save();
@@ -147,7 +147,7 @@ class Feedback_EntryController extends Yachay_Controller_Action
         $model_feedback = new Feedback();
         $entry = $model_feedback->findByResource($url_entry);
 
-        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'base_user');
 
         $entry->resolved = false;
         $entry->save();
@@ -170,7 +170,7 @@ class Feedback_EntryController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_entry);
         $entry = $model_feedback->findByResource($url_entry);
 
-        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $tags = $resource->findTagsViaTags_Resources();
@@ -207,7 +207,7 @@ class Feedback_EntryController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_entry);
         $entry = $model_feedback->findByResource($url_entry);
 
-        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+        $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'base_user');
 
         $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {

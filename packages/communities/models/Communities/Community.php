@@ -1,6 +1,6 @@
 <?php
 
-class Communities_Community extends Yachay_Models_Row_Validation
+class Communities_Community extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(

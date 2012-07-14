@@ -1,6 +1,6 @@
 <?php
 
-class Evaluations_Tests_Values_Value extends Yachay_Models_Row_Validation
+class Evaluations_Tests_Values_Value extends Yachay_Model_Row_Validation
 {
     protected $_foreignkey = 'test';
 

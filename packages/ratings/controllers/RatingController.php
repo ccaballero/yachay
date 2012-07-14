@@ -20,32 +20,32 @@ class Ratings_RatingController extends Yachay_Controller_Action
             case 'note':
                 $model_notes = new Notes();
                 $note = $model_notes->findByResource($url_resource);
-                $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
+                $this->requireExistence($note, 'note', 'notes_note_view', 'base_user');
                 break;
             case 'link':
                 $model_links = new Links();
                 $link = $model_links->findByResource($url_resource);
-                $this->requireExistence($link, 'link', 'links_link_view', 'frontpage_user');
+                $this->requireExistence($link, 'link', 'links_link_view', 'base_user');
                 break;
             case 'file':
                 $model_files = new Files();
                 $file = $model_files->findByResource($url_resource);
-                $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+                $this->requireExistence($file, 'file', 'files_file_view', 'base_user');
                 break;
             case 'event':
                 $model_events = new Events();
                 $event = $model_events->findByResource($url_resource);
-                $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
+                $this->requireExistence($event, 'event', 'events_event_view', 'base_user');
                 break;
             case 'photo':
                 $model_photos = new Photos();
                 $photo = $model_photos->findByResource($url_resource);
-                $this->requireExistence($photo, 'photo', 'photos_photo_view', 'frontpage_user');
+                $this->requireExistence($photo, 'photo', 'photos_photo_view', 'base_user');
                 break;
             case 'entry':
                 $model_feedback = new Feedback();
                 $entry = $model_feedback->findByResource($url_resource);
-                $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+                $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'base_user');
                 break;
         }
 
@@ -102,22 +102,22 @@ class Ratings_RatingController extends Yachay_Controller_Action
             case 'note':
                 $model_notes = new Notes();
                 $note = $model_notes->findByResource($url_resource);
-                $this->requireExistence($note, 'note', 'notes_note_view', 'frontpage_user');
+                $this->requireExistence($note, 'note', 'notes_note_view', 'base_user');
                 break;
             case 'file':
                 $model_files = new Files();
                 $file = $model_files->findByResource($url_resource);
-                $this->requireExistence($file, 'file', 'files_file_view', 'frontpage_user');
+                $this->requireExistence($file, 'file', 'files_file_view', 'base_user');
                 break;
             case 'event':
                 $model_events = new Events();
                 $event = $model_events->findByResource($url_resource);
-                $this->requireExistence($event, 'event', 'events_event_view', 'frontpage_user');
+                $this->requireExistence($event, 'event', 'events_event_view', 'base_user');
                 break;
             case 'entry':
                 $model_feedback = new Feedback();
                 $entry = $model_feedback->findByResource($url_resource);
-                $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'frontpage_user');
+                $this->requireExistence($entry, 'entry', 'feedback_entry_view', 'base_user');
                 break;
         }
 

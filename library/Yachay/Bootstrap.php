@@ -19,7 +19,7 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $router = $ctrl->getRouter();
 
         // Routes join
-        $model_packages = new Packages();
+        $model_packages = new Db_Packages();
         $packages = $model_packages->selectByStatus('active');
         foreach ($packages as $package) {
             $path = APPLICATION_PATH . '/packages/' . $package->url;

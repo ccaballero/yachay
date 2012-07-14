@@ -4,9 +4,9 @@ class IndexController extends Yachay_Controller_Action
 {
     public function indexAction() {
         if ($this->user->role == 1) {
-            $this->_redirect($this->view->url(array(), 'frontpage_visitor'));
+            $this->_redirect($this->view->url(array(), 'base_visitor'));
         } else {
-            $this->_redirect($this->view->url(array(), 'frontpage_user'));
+            $this->_redirect($this->view->url(array(), 'base_user'));
         }
     }
 
@@ -37,11 +37,11 @@ class IndexController extends Yachay_Controller_Action
 
             $this->view->resources = $paginator;
             $this->view->route = array (
-            	'key' => 'frontpage_visitor',
+            	'key' => 'base_visitor',
                 'params' => array (),
             );
         } else {
-            $this->_redirect($this->view->url(array(), 'frontpage_user'));
+            $this->_redirect($this->view->url(array(), 'base_user'));
         }
     }
 
@@ -191,11 +191,11 @@ class IndexController extends Yachay_Controller_Action
 
             $this->view->resources = $paginator;
             $this->view->route = array (
-            	'key' => 'frontpage_user',
+            	'key' => 'base_user',
                 'params' => array(),         
             );
         } else {
-            $this->_redirect($this->view->url(array(), 'frontpage_visitor'));
+            $this->_redirect($this->view->url(array(), 'base_visitor'));
         }
     }
 
@@ -221,5 +221,13 @@ class IndexController extends Yachay_Controller_Action
         }
 
         $this->_redirect($request->getParam('return'));
+    }
+
+    public function confirmAction() {
+        $session = new Zend_Session_Namespace('yachay');
+        $confirm = $session->confirm;
+
+        $this->view->message = $confirm['message'];
+        $this->view->return = $confirm['return'];
     }
 }

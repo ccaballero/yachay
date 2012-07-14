@@ -1,50 +1,102 @@
 <?php
 
-class Collections_Tree_Node
+abstract class Collections_Tree_Node implements Collections_Tree_Nodeable, Iterator
 {
-    private $ident;
-    private $parent;
-    private $children;
+    protected $_ident;
+    protected $_parent;
 
-    public function __construct($ident, $parent = null) {
-        $this->ident = $ident;
-        $this->parent = $parent;
-        $this->children = array();
+    protected $_children;
+
+    public function __construct() {
+        $this->_children = array();
+        $this->_level = 0;
     }
 
-    public function getIdent() {
-        return $this->ident;
+    public function ident() {
+        return $this->_ident;
     }
 
-    public function getParent() {
-        return $this->parent;
+    public function parent() {
+        return $this->_parent;
     }
 
-    public function getChildren() {
-        return $this->children;
-    }
-    
-    public function addChild(Collections_Tree_Node $node) {
-        $this->children[] = $node;
+    public function children() {
+        return $this->_children;
     }
 
-    public function arrayDown() {
-        $array = array($this->ident);
+    public function add(Collections_Tree_Nodeable $child) {
+        $this->_children[$child->ident()] = $child;
+    }
 
-        foreach ($this->children as $child) {
-            $array = array_merge($array, $child->arrayDown());
+    public function remove($ident) {
+        unset($this->_children[$ident]);
+    }
+
+//    public function toPrint($indent = '') {
+//        $str = $indent . $this->ident() . PHP_EOL;
+//        foreach ($this->_children as $child) {
+//            $str .= $child->toPrint($indent . '  ');
+//        }
+//        return $str;
+//    }
+
+    // Iterator functions
+    protected $_visitable = true;
+
+    public function setvisitable($visitable) {
+        $this->_visitable = $visitable;
+    }
+
+    public function visitable() {
+        return $this->_visitable;
+    }
+
+    protected $_visited = false;
+
+    public function rewind() {
+        $this->_visited = false;
+        foreach ($this->_children as $child) {
+            $child->rewind();
         }
-
-        return $array;
     }
 
-    public function __toString() {
-        $string = (string) $this->ident;
+    public function key() {}
 
-        foreach ($this->children as $child) {
-            $string .= (string) $child;
+    public function current() {
+        if (!$this->_visited && $this->_visitable) {
+            $this->_visited = true;
+            return $this;
+        } else {
+            foreach ($this->_children as $child) {
+                if ($child->valid()) {
+                    return $child->current();
+                }
+            }
         }
+    }
 
-        return '(' . $string . ')';
+    public function next() {}
+
+    public function valid() {
+        if (!$this->_visited && $this->_visitable) {
+            return true;
+        } else {
+            $flag = false;
+            foreach ($this->_children as $child) {
+                $flag |= $child->valid();
+            }
+            return $flag;
+        }
+    }
+
+    // Levels
+    protected $_level = 0;
+
+    public function setlevel($level) {
+        $this->_level = $level;
+    }
+
+    public function level() {
+        return $this->_level;
     }
 }

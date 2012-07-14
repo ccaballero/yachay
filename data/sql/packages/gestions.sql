@@ -19,7 +19,7 @@ CREATE TABLE `gestion` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('gestions', 'gestions', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo guia de informacion para el manejo de periodos academicos');
 

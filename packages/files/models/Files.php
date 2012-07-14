@@ -1,6 +1,6 @@
 <?php
 
-class Files extends Yachay_Models_Table
+class Files extends Yachay_Model_Table
 {
     protected $_name            = 'file';
     protected $_primary         = 'resource';

@@ -41,7 +41,7 @@ CREATE TABLE `area_resource` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('areas', 'areas', 'app', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de las las areas de agrupacion de las materias');
 

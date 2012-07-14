@@ -22,7 +22,7 @@ CREATE TABLE `invitation` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('invitations', 'invitations', 'app', 'users', UNIX_TIMESTAMP(), 'Modulo utilidad para el manejo de invitaciones');
 

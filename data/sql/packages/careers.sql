@@ -41,7 +41,7 @@ CREATE TABLE `career_resource` (
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('careers', 'careers', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de las las carreras');
 

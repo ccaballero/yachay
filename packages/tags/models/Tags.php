@@ -1,6 +1,6 @@
 <?php
 
-class Tags extends Yachay_Models_Table
+class Tags extends Yachay_Model_Table
 {
     protected $_name            = 'tag';
     protected $_primary         = 'ident';

@@ -9,8 +9,8 @@ class Packages_PackageController extends Yachay_Controller_Action
 
         $url = $request->getParam('package');
 
-        $model_packages = new Packages();
-        $package = $model_packages->findByUrl($url);
+        $db_packages = new Db_Packages();
+        $package = $db_packages->findByUrl($url);
 
         $this->requireExistence($package, 'package', 'packages_package_view', 'packages_list');
 
@@ -31,20 +31,42 @@ class Packages_PackageController extends Yachay_Controller_Action
         $this->requirePermission('packages', 'lock');
 
         $request = $this->getRequest();
+        $url = $request->getParam('package');
+
+        $db_packages = new Db_Packages();
+        $package = $db_packages->findByUrl($url);
+
+        $this->requireExistence($package, 'package', 'packages_package_view', 'packages_list');
+
         if ($request->isPost()) {
-            $url = $request->getParam('package');
-
-            $model_packages = new Packages();
-            $package = $model_packages->findByUrl($url);
-
-            $this->requireExistence($package, 'package', 'packages_package_view', 'packages_list');
-
+            $return = $request->getParam('return');
+            
             if ($package->type != 'base') {
-                $model_packages->locks($package->arrayDown());
+                $tree = $db_packages->getTree();
+                $node = $tree->getNode($package->url);
+
+                $list = array();
+                foreach ($node as $children) {
+                    $list[] = $children->ident();
+                }
+                
+                $db_packages->locks($list);
                 $this->_helper->flashMessenger->addMessage("El paquete {$package->label} ha sido deshabilitado");
             }
 
-            $this->_redirect($this->view->currentPage());
+            if (!empty($return)) {
+                $this->_redirect($return);
+            } else {
+                $this->_redirect($this->view->currentPage());
+            }
+        } else {
+            $session = new Zend_Session_Namespace('yachay');
+            $session->confirm = array(
+                'message' => '¿Esta seguro que quiere deshabilitar el paquete ' . $package->label . '?',
+                'return'  => $this->view->url(array('package' => $package->url), 'packages_package_lock'),
+            );
+
+            $this->_redirect($this->view->url(array(), 'base_confirm'));
         }
     }
 
@@ -52,19 +74,42 @@ class Packages_PackageController extends Yachay_Controller_Action
         $this->requirePermission('packages', 'lock');
 
         $request = $this->getRequest();
-
         $url = $request->getParam('package');
 
-        $model_packages = new Packages();
-        $package = $model_packages->findByUrl($url);
+        $db_packages = new Db_Packages();
+        $package = $db_packages->findByUrl($url);
 
         $this->requireExistence($package, 'package', 'packages_package_view', 'packages_list');
 
-        if ($package->type != 'base') {
-            $model_packages->unlocks($package->arrayUp());
-            $this->_helper->flashMessenger->addMessage("El paquete {$package->label} ha sido habilitado");
-        }
+        if ($request->isPost()) {
+            $return = $request->getParam('return');
 
-        $this->_redirect($this->view->currentPage());
+            if ($package->type != 'base') {
+                $tree = $db_packages->getTree();
+                $path = $tree->path($package->url);
+
+                $list = array();
+                foreach ($path as $parent) {
+                    $list[] = $parent->ident();
+                }
+
+                $db_packages->unlocks($list);
+                $this->_helper->flashMessenger->addMessage("El paquete {$package->label} ha sido habilitado");
+            }
+
+            if (!empty($return)) {
+                $this->_redirect($return);
+            } else {
+                $this->_redirect($this->view->currentPage());
+            }
+        } else {
+            $session = new Zend_Session_Namespace('yachay');
+            $session->confirm = array(
+                'message' => '¿Esta seguro que quiere habilitar el paquete ' . $package->label . '?',
+                'return'  => $this->view->url(array('package' => $package->url), 'packages_package_unlock'),
+            );
+
+            $this->_redirect($this->view->url(array(), 'base_confirm'));
+        }
     }
 }

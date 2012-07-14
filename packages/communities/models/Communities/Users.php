@@ -1,6 +1,6 @@
 <?php
 
-class Communities_Users extends Yachay_Models_Table
+class Communities_Users extends Yachay_Model_Table
 {
     protected $_name            = 'community_user';
     protected $_referenceMap    = array(

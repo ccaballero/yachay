@@ -1,6 +1,6 @@
 <?php
 
-class Ratings extends Yachay_Models_Table
+class Ratings extends Yachay_Model_Table
 {
     protected $_name            = 'rating';
     protected $_referenceMap    = array(

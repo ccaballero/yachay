@@ -16,12 +16,12 @@ CREATE TABLE `package` (
     `type`        enum('base', 'middle', 'app', 'util') NOT NULL,
     `description` text                                  NOT NULL DEFAULT '',
     `tsregister`  int unsigned                          NOT NULL,
-    `dependency`  varchar(64)                           NULL,
+    `parent`      varchar(64)                           NULL,
     PRIMARY KEY (`ident`),
-    UNIQUE INDEX (`label`),
+    INDEX (`label`),
     UNIQUE INDEX (`url`),
-    INDEX (`dependency`),
-    FOREIGN KEY (`dependency`) REFERENCES `package`(`label`) ON UPDATE CASCADE ON DELETE RESTRICT
+    INDEX (`parent`),
+    FOREIGN KEY (`parent`) REFERENCES `package`(`url`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
 /*============================================================================*/
@@ -114,3 +114,11 @@ CREATE TABLE `widget_page` (
     INDEX (`widget`),
     FOREIGN KEY (`widget`)        REFERENCES `widget`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
+
+/*============================================================================*/
+/* Registro del paquete                                                       */
+/*============================================================================*/
+INSERT INTO `package`
+(`ident`, `label`, `url`, `type`, `parent`, `tsregister`, `description`)
+VALUES
+(1, 'base', 'base', 'base', NULL, UNIX_TIMESTAMP(), 'Paquete gestor de pagina principal');

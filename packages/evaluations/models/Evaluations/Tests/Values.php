@@ -1,6 +1,6 @@
 <?php
 
-class Evaluations_Tests_Values extends Yachay_Models_Table
+class Evaluations_Tests_Values extends Yachay_Model_Table
 {
     protected $_name            = 'evaluation_test_value';
     protected $_primary         = 'ident';

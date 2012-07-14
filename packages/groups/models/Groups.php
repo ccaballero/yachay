@@ -1,6 +1,6 @@
 <?php
 
-class Groups extends Yachay_Models_Table
+class Groups extends Yachay_Model_Table
 {
     protected $_name            = 'group';
     protected $_primary         = 'ident';

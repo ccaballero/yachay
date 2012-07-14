@@ -240,7 +240,7 @@ VALUES
 /*============================================================================*/
 /* Conecciones adicionales para la habilitacion de los menus                  */
 /*============================================================================*/
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 1 WHERE `ident` =  4; /* frontpage_visitor */
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 1 WHERE `ident` =  4; /* base_visitor */
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 2 WHERE `ident` = 24; /* users_list */
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 3 WHERE `ident` = 34; /* friends_friends */
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 4 WHERE `ident` = 40; /* gestions_list */
@@ -250,9 +250,9 @@ UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 7 WHERE `ident` = 45; /*
 UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 8 WHERE `ident` = 81; /* communities_list */
 
 UPDATE `page` SET `menutype` = 'footer', `menuorder` =  4 WHERE `ident` =   1; /* packages_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 11 WHERE `ident` =   7; /* frontpage_development */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 12 WHERE `ident` =   8; /* frontpage_terms */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 13 WHERE `ident` =   9; /* frontpage_privacy */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 11 WHERE `ident` =   7; /* base_development */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 12 WHERE `ident` =   8; /* base_terms */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 13 WHERE `ident` =   9; /* base_privacy */
 UPDATE `page` SET `menutype` = 'footer', `menuorder` =  5 WHERE `ident` =  10; /* pages_list */
 UPDATE `page` SET `menutype` = 'footer', `menuorder` =  6 WHERE `ident` =  12; /* regions_list */
 UPDATE `page` SET `menutype` = 'footer', `menuorder` =  7 WHERE `ident` =  14; /* widgets_list */
@@ -653,3 +653,9 @@ INSERT INTO `template`
 VALUES
 ('minimal', 'Plantilla basica diseñada especialmente para navegadores antiguos o de compatibilidades dudosas', 'HTML4_LOOSE', UNIX_TIMESTAMP(), '{}'),
 ('webarte', 'Plantilla simple que utiliza hoja de estilos y no javascript', 'XHTML1_STRICT', UNIX_TIMESTAMP(), '{"background":"#FFFFFF", "background_headers":"#3B5998","background_headers2":"#627AAD","background_messages":"#FEFFDD","color_headers":"#FFFFFF","color_borders":"#E2E2E2","color_letters":"#333333"}');
+
+/* FIXME: move this block to the original position */
+INSERT INTO `page`
+(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+VALUES
+('Confirmación', 'Confirmación', FALSE, 'base', 'index', 'confirm', '', 'base_confirm');

@@ -1,6 +1,6 @@
 <?php
 
-class Templates_Template extends Yachay_Models_Row_Validation
+class Templates_Template extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array(
         'label' => array(

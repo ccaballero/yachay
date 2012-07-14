@@ -1,6 +1,6 @@
 <?php
 
-class Feedback_Entry extends Yachay_Models_Row_Validation
+class Feedback_Entry extends Yachay_Model_Row_Validation
 {
     public $__type = 'entry';
     public $__element = 'feedback';

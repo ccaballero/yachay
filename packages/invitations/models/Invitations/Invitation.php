@@ -1,6 +1,6 @@
 <?php
 
-class Invitations_Invitation extends Yachay_Models_Row_Validation
+class Invitations_Invitation extends Yachay_Model_Row_Validation
 {
     protected $_validationRules = array(
         'email' => array(

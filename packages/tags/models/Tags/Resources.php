@@ -1,6 +1,6 @@
 <?php
 
-class Tags_Resources extends Yachay_Models_Table
+class Tags_Resources extends Yachay_Model_Table
 {
     protected $_name            = 'tag_resource';
     protected $_referenceMap    = array(

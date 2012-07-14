@@ -9,7 +9,7 @@ class Videos_VideoController extends Yachay_Controller_Action
         $url_video = $request->getParam('video');
         $model_videos = new Videos();
         $video = $model_videos->findByResource($url_video);
-        $this->requireExistence($video, 'video', 'videos_video_view', 'frontpage_user');
+        $this->requireExistence($video, 'video', 'videos_video_view', 'base_user');
 
         $model_resources = new Resources();
         $resource = $model_resources->findByIdent($video->resource);
@@ -45,7 +45,7 @@ class Videos_VideoController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_video);
         $video = $model_videos->findByResource($url_video);
 
-        $this->requireExistence($video, 'video', 'videos_video_view', 'frontpage_user');
+        $this->requireExistence($video, 'video', 'videos_video_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $_tags = array();
@@ -101,7 +101,7 @@ class Videos_VideoController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_video);
         $video = $model_videos->findByResource($url_video);
 
-        $this->requireExistence($video, 'video', 'videos_video_view', 'frontpage_user');
+        $this->requireExistence($video, 'video', 'videos_video_view', 'base_user');
         $this->requireResourceAuthor($resource);
 
         $tags = $resource->findTagsViaTags_Resources();
@@ -141,7 +141,7 @@ class Videos_VideoController extends Yachay_Controller_Action
         $resource = $model_resources->findByIdent($url_video);
         $video = $model_videos->findByResource($url_video);
 
-        $this->requireExistence($video, 'video', 'videos_video_view', 'frontpage_user');
+        $this->requireExistence($video, 'video', 'videos_video_view', 'base_user');
 
         $tags = $resource->findTagsViaTags_Resources();
         foreach ($tags as $tag) {

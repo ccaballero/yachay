@@ -3,7 +3,7 @@
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
-(`label`, `url`, `type`, `dependency`, `tsregister`, `description`)
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('settings', 'settings', 'app', 'users', UNIX_TIMESTAMP(), 'Modulo para la configuracion de usuario en el sistema');
 

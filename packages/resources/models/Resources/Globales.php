@@ -1,6 +1,6 @@
 <?php
 
-class Resources_Globales extends Yachay_Models_Table
+class Resources_Globales extends Yachay_Model_Table
 {
     protected $_name            = 'resource_global';
     protected $_referenceMap    = array(
