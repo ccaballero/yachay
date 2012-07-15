@@ -4,7 +4,7 @@ class Login_ForgotController extends Yachay_Controller_Action
 {
     public function indexAction() {
         if ($this->user->role != 1) {
-            $this->_redirect($this->view->url(array(), 'frontpage'));
+            $this->_redirect($this->view->url(array(), 'base'));
         }
 
         $request = $this->getRequest();

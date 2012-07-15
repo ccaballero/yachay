@@ -4,7 +4,7 @@ class Profile_IndexController extends Yachay_Controller_Action
 {
     public function viewAction() {
         if ($this->user->role == 1) {
-            $this->_redirect($this->view->url(array(), 'frontpage'));
+            $this->_redirect($this->view->url(array(), 'base'));
         }
 
         $this->requireExistence($this->user, 'user', 'profile_view', 'base_user');
@@ -16,7 +16,7 @@ class Profile_IndexController extends Yachay_Controller_Action
 
     public function editAction() {
         if ($this->user->role == 1) {
-            $this->_redirect($this->view->url(array(), 'frontpage'));
+            $this->_redirect($this->view->url(array(), 'base'));
         }
 
         $request = $this->getRequest();

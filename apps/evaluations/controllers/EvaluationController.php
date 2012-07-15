@@ -38,7 +38,7 @@ class Evaluations_EvaluationController extends Yachay_Controller_Action
         $this->requireExistence($evaluation, 'evaluation', 'evaluations_evaluation_view', 'resources_list');
 
         if ($evaluation->author != $this->user->ident) {
-            $this->_redirect($this->view->url(array(), 'frontpage'));
+            $this->_redirect($this->view->url(array(), 'base'));
         }
 
         if ($request->isPost()) {

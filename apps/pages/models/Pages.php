@@ -5,7 +5,7 @@ class Pages extends Yachay_Model_Table
     protected $_name            = 'page';
     protected $_primary         = 'ident';
     protected $_rowClass        = 'Pages_Page';
-    protected $_dependentTables = array('Regions_Pages', 'Widgets_Pages', );
+    protected $_dependentTables = array('Widgets_Pages');
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Pagina',

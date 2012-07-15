@@ -4,7 +4,7 @@ class Invitations_InvitationController extends Yachay_Controller_Action
 {
     public function proceedAction() {
         if ($this->user->role != 1) {
-            $this->_redirect($this->view->url(array(), 'frontpage'));
+            $this->_redirect($this->view->url(array(), 'base'));
         }
 
         $request = $this->getRequest();

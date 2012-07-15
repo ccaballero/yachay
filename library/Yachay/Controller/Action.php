@@ -59,25 +59,12 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             return;
         }
 
-        global $WIDGETS;
-
-        $regions = $this->page->findRegionsViaRegions_Pages();
-        if (!empty($regions)) {
-            foreach ($regions as $region) {
-                $view = new Zend_View();
-                $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
-                $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/' . $region->package . '/views/scripts/' . $region->region . '/');
-
-                $view->config = $this->config;
-                $view->page = $this->page;
-                $view->user = $this->user;
-                $view->template = $this->template;
-
-                $view->render($region->script . '.php');
-            }
-        }
+        $this->renderToolbar();
+        $this->renderMenubar();
+        $this->renderFooter();
 
         // FIXME Control de privilegios
+        global $WIDGETS;
         $widgets = $this->page->findWidgetsViaWidgets_Pages();
         $model_widgets_pages = new Widgets_Pages();
         foreach ($widgets as $widget) {
@@ -173,5 +160,85 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
     
     public function acl($package, $privilege) {
         return Yachay_Acl::hasPermission($package, $privilege);
+    }
+
+    public function renderToolbar() {
+        global $TOOLBAR;
+
+        $model_roles = new Roles();
+        $role = $model_roles->findByIdent($this->user->role);
+
+        $session = new Zend_Session_Namespace('yachay');
+        $TOOLBAR->items[] = $this->view->contextLabel($session->context_type, $session->context_label);
+
+        if ($this->user->role == 1) {
+            $TOOLBAR->items[] = $role->label;
+            $TOOLBAR->items[] = '<a href="' . $this->view->url(array(), 'login_in') . '">Ingresar</a>';
+        } else {
+            $TOOLBAR->items[] = '<a href="' . $this->view->url(array('user' => $this->user->url), 'profile_view') . '">' . $this->user->getFullName() . '</a>';
+            $TOOLBAR->items[] = '<a href="' . $this->view->url(array('user' => $this->user->url), 'settings') . '">Preferencias</a>';
+            $TOOLBAR->items[] = '<a href="' . $this->view->url(array(), 'login_out') . '">Salir</a>';
+        }
+    }
+
+    public function renderMenubar() {
+        global $MENUBAR;
+
+        $model_pages = new Pages();
+        $items = $model_pages->selectByMenutype('menubar');
+
+        foreach ($items as $item) {
+            $perms = explode('|', $item->privilege);
+
+            $bool = false;
+            foreach ($perms as $perm) {
+                if ($perm == '') {
+                    $bool |= true;
+                } else {
+                    $bool |= $this->user->hasPermission($item->package, $perm);
+                }
+            }
+
+            if ($bool) {
+                $MENUBAR->items[] = array (
+                    'link'  => $this->view->url(array(), $item->route),
+                    'label' => ucfirst($item->title),
+                );
+            }
+        }
+    }
+
+    public function renderFooter() {
+        global $FOOTER;
+
+        $model_pages = new Pages();
+        $items = $model_pages->selectByMenutype('footer');
+
+        foreach ($items as $item) {
+            $perms = explode('|', $item->privilege);
+
+            $bool = false;
+            foreach ($perms as $perm) {
+                if ($perm == '') {
+                    $bool |= true;
+                } else {
+                    $bool |= $this->user->hasPermission($item->package, $perm);
+                }
+            }
+
+            if ($bool) {
+                $FOOTER->items[] = array (
+                    'link' => $this->view->url(array(), $item->route),
+                    'label' => ucfirst($item->title),
+                );
+            }
+        }
+
+        $FOOTER->items[] = array(
+            'link' => 'https://github.com/ccaballero/yachay',
+            'label' => 'Codigo fuente',
+        );
+
+        $FOOTER->copyright = 'yachay ' . $this->config->system->version;
     }
 }

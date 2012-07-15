@@ -24,3 +24,11 @@ INSERT INTO `privilege`
 VALUES
 ('Listar la configuracion de los widgets por pagina', 'widgets', 'list'),
 ('Configuracion de las widgets por pagina',           'widgets', 'manage');
+
+/*============================================================================*/
+/* Registro de widgets para el paquete                                        */
+/*============================================================================*/
+INSERT INTO `widget`
+(`label`, `title`, `package`, `script`)
+VALUES
+('Enlaces', 'Enlaces recomendados', 'widgets', 'quicklinks');

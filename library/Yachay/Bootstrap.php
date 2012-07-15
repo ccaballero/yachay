@@ -36,10 +36,6 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         }
     }
 
-    protected function _initSession() {
-        Zend_Session::start();
-    }
-    
     protected function _initLocale() {
         $this->bootstrap('config');
 
@@ -48,12 +44,16 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         setlocale(LC_CTYPE, $config->system->locale);
         Zend_Locale::setDefault($config->system->locale);
     }
-    
+
     protected function _initTimezone() {
         $this->bootstrap('config');
 
         $config = Zend_Registry::get('config');
         date_default_timezone_set($config->system->timezone);
+    }
+
+    protected function _initSession() {
+        Zend_Session::start();
     }
 
     protected function _initUser() {
@@ -90,7 +90,7 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $session->context_id = 0;
         }
     }
-    
+
     protected function _initHistory() {
         $this->bootstrap(array('config','session'));
 
@@ -104,7 +104,7 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $session->lastPage = $config->resources->frontController->baseUrl;
         }
     }
-    
+
     protected function _initTemplate() {
         $this->bootstrap(array('autoload','user'));
 
@@ -122,7 +122,7 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $user_template->description = $template->description;
         $user_template->css_properties = $template->css_properties;
         $user_template->htmlbase = $config->resources->frontController->baseUrl . '/templates/' . $user_template->label . '/';
-        
+
         Zend_Registry::set('template', $user_template);
 
         // Set of color palette
@@ -135,7 +135,7 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         Zend_Registry::set('palette', $palette);
     }
-    
+
     protected function _initPlaceholder() {
         // Set of web regions
         global $TITLE;
@@ -165,7 +165,7 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $renderer->setViewSuffix('php');
         Zend_Controller_Action_HelperBroker::addHelper($renderer);
     }
-    
+
     protected function _initLayout() {
         $this->bootstrap(array('config', 'template'));
 

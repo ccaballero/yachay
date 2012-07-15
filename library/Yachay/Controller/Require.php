@@ -23,7 +23,7 @@ class Yachay_Controller_Require extends Zend_Controller_Action
         if (!is_array($privilege)) {
             if (!$this->user->hasPermission($package, $privilege)) {
                 $this->_helper->flashMessenger->addMessage('Usted no tiene permisos suficientes');
-                $this->_redirect($this->view->url(array(), 'frontpage'));
+                $this->_redirect($this->view->url(array(), 'base'));
             }
         } else {
             $flag = false;
@@ -32,7 +32,7 @@ class Yachay_Controller_Require extends Zend_Controller_Action
             }
             if (!$flag) {
                 $this->_helper->flashMessenger->addMessage('Usted no tiene permisos suficientes');
-                $this->_redirect($this->view->url(array(), 'frontpage'));
+                $this->_redirect($this->view->url(array(), 'base'));
             }
         }
     }

@@ -4,7 +4,7 @@ class Login_IndexController extends Yachay_Controller_Action
 {
     public function inAction() {
         if ($this->user->role != 1) {
-            $this->_redirect($this->view->url(array(), 'frontpage'));
+            $this->_redirect($this->view->url(array(), 'base'));
         }
 
         $request = $this->getRequest();
@@ -62,7 +62,7 @@ class Login_IndexController extends Yachay_Controller_Action
                                 if ($now < $expiration) {
                                     $this->_helper->flashMessenger->addMessage('Le recomiendamos que establezca su nueva contraseña');
                                     $session->user = $user;
-                                    $this->_redirect($this->view->url(array(), 'frontpage'));
+                                    $this->_redirect($this->view->url(array(), 'base'));
                                 }
                             }
                         }
