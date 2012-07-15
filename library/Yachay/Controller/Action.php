@@ -37,13 +37,6 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             }
         }
 
-        // Regions settings
-        global $TITLE;
-        $TITLE->title = $this->config->system->title;
-
-        global $ICON;
-        $ICON->icon = $this->config->resources->frontController->baseUrl . '/media/favicon.ico';
-
         $this->view->config = $this->config;
         $this->view->page = $this->page;
         $this->view->user = $this->user;
@@ -102,10 +95,8 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         }
 
         // Assign global variables to view
-        global $TITLE, $ICON, $TOOLBAR, $SEARCH, $MENUBAR, $BREADCRUMB, $WIDGETS, $FOOTER;
+        global $TOOLBAR, $SEARCH, $MENUBAR, $BREADCRUMB, $WIDGETS, $FOOTER;
 
-        $this->view->TITLE = $TITLE;
-        $this->view->ICON = $ICON;
         $this->view->TOOLBAR = $TOOLBAR;
         $this->view->SEARCH = $SEARCH;
         $this->view->MENUBAR = $MENUBAR;

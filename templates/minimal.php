@@ -2,7 +2,7 @@
 
 echo $this->doctype();
 echo '<html><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8" />';
-echo '<title>' . $this->TITLE->toString() . '</title>';
+echo '<title>' . $this->config->system->title . '</title>';
 echo '</head><body>';
 echo renderToolbar($this->TOOLBAR);
 echo renderMenubar($this->MENUBAR);

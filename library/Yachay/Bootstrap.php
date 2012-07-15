@@ -138,10 +138,6 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
     protected function _initPlaceholder() {
         // Set of web regions
-        global $TITLE;
-        $TITLE = new Yachay_Regions_Title();
-        global $ICON;
-        $ICON = new Yachay_Regions_Icon();
         global $TOOLBAR;
         $TOOLBAR = new Yachay_Regions_Toolbar();
         global $SEARCH;
