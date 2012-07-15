@@ -1,6 +1,6 @@
 <?php
 
-class Roles_Privileges extends Yachay_Model_Table
+class Roles_Privileges extends Yachay_Db_Table
 {
     protected $_name            = 'role_privilege';
     protected $_referenceMap    = array(

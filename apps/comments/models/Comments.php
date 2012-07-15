@@ -1,6 +1,6 @@
 <?php
 
-class Comments extends Yachay_Model_Table
+class Comments extends Yachay_Db_Table
 {
     protected $_name            = 'comment';
     protected $_primary         = 'ident';

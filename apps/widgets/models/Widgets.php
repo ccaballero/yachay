@@ -1,6 +1,6 @@
 <?php
 
-class Widgets extends Yachay_Model_Table
+class Widgets extends Yachay_Db_Table
 {
     protected $_name            = 'widget';
     protected $_primary         = 'ident';

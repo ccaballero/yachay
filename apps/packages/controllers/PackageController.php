@@ -40,18 +40,20 @@ class Packages_PackageController extends Yachay_Controller_Action
 
         if ($request->isPost()) {
             $return = $request->getParam('return');
-            
+
             if ($package->type != 'base') {
-                $tree = $db_packages->getTree();
+                $tree = $db_packages->tree();
                 $node = $tree->getNode($package->url);
 
                 $list = array();
                 foreach ($node as $children) {
-                    $list[] = $children->ident();
+                    $list[] = $children->ident;
                 }
-                
-                $db_packages->locks($list);
-                $this->_helper->flashMessenger->addMessage("El paquete {$package->label} ha sido deshabilitado");
+
+                $count = $db_packages->lock($list);
+                if ($count <> 0) {
+                    $this->_helper->flashMessenger->addMessage("El paquete {$package->label} ha sido deshabilitado");
+                }
             }
 
             if (!empty($return)) {
@@ -85,16 +87,18 @@ class Packages_PackageController extends Yachay_Controller_Action
             $return = $request->getParam('return');
 
             if ($package->type != 'base') {
-                $tree = $db_packages->getTree();
+                $tree = $db_packages->tree();
                 $path = $tree->path($package->url);
 
                 $list = array();
                 foreach ($path as $parent) {
-                    $list[] = $parent->ident();
+                    $list[] = $parent->ident;
                 }
 
-                $db_packages->unlocks($list);
-                $this->_helper->flashMessenger->addMessage("El paquete {$package->label} ha sido habilitado");
+                $count = $db_packages->unlock($list);
+                if ($count <> 0) {
+                    $this->_helper->flashMessenger->addMessage("El paquete {$package->label} ha sido habilitado");
+                }
             }
 
             if (!empty($return)) {

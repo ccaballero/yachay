@@ -1,6 +1,6 @@
 <?php
 
-class Communities extends Yachay_Model_Table
+class Communities extends Yachay_Db_Table
 {
     protected $_name            = 'community';
     protected $_primary         = 'ident';

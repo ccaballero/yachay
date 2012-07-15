@@ -1,6 +1,6 @@
 <?php
 
-class Califications extends Yachay_Model_Table
+class Califications extends Yachay_Db_Table
 {
     protected $_name            = 'calification';
     protected $_dependentTables = array();

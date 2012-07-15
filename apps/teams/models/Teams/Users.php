@@ -1,6 +1,6 @@
 <?php
 
-class Teams_Users extends Yachay_Model_Table
+class Teams_Users extends Yachay_Db_Table
 {
     protected $_name            = 'team_user';
     protected $_referenceMap    = array(

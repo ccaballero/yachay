@@ -1,6 +1,6 @@
 <?php
 
-class Tags_Communities extends Yachay_Model_Table
+class Tags_Communities extends Yachay_Db_Table
 {
     protected $_name            = 'tag_community';
     protected $_referenceMap    = array(

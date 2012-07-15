@@ -1,6 +1,6 @@
 <?php
 
-class Areas extends Yachay_Model_Table
+class Areas extends Yachay_Db_Table
 {
     protected $_name            = 'area';
     protected $_primary         = 'ident';

@@ -1,6 +1,6 @@
 <?php
 
-class Login extends Yachay_Model_Table
+class Login extends Yachay_Db_Table
 {
     protected $_name            = 'login_forgot';
     protected $_primary         = 'ident';

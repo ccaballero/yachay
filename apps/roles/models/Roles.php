@@ -1,6 +1,6 @@
 <?php
 
-class Roles extends Yachay_Model_Table
+class Roles extends Yachay_Db_Table
 {
     protected $_name            = 'role';
     protected $_primary         = 'ident';

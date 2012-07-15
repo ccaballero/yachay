@@ -1,6 +1,6 @@
 <?php
 
-class Subjects extends Yachay_Model_Table
+class Subjects extends Yachay_Db_Table
 {
     protected $_name            = 'subject';
     protected $_primary         = 'ident';

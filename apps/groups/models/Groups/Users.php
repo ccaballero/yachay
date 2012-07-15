@@ -1,6 +1,6 @@
 <?php
 
-class Groups_Users extends Yachay_Model_Table
+class Groups_Users extends Yachay_Db_Table
 {
     protected $_name            = 'group_user';
     protected $_referenceMap    = array(

@@ -1,6 +1,6 @@
 <?php
 
-class Friends extends Yachay_Model_Table
+class Friends extends Yachay_Db_Table
 {
     protected $_name            = 'friend';
     protected $_rowClass        = 'Friends_Friend';

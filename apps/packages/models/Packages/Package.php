@@ -11,7 +11,11 @@ class Packages_Package extends Collections_Tree_Node_Default
     public $tsregister;
     public $parent;
 
-    public function __construct($ident, $parent = null) {
-        parent::__construct($ident, $parent);
+    public function ident() {
+        return $this->url;
+    }
+
+    public function parent() {
+        return $this->parent;
     }
 }

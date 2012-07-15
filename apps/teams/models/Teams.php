@@ -1,6 +1,6 @@
 <?php
 
-class Teams extends Yachay_Model_Table
+class Teams extends Yachay_Db_Table
 {
     protected $_name            = 'team';
     protected $_primary         = 'ident';

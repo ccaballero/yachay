@@ -1,6 +1,6 @@
 <?php
 
-class Pages extends Yachay_Model_Table
+class Pages extends Yachay_Db_Table
 {
     protected $_name            = 'page';
     protected $_primary         = 'ident';

@@ -13,6 +13,10 @@ abstract class Collections_Tree_Node implements Collections_Tree_Nodeable, Itera
     }
 
     public function ident() {
+        if (empty($this->_ident)) {
+            throw new Exception('Node is used without ident');
+        }
+
         return $this->_ident;
     }
 
@@ -31,14 +35,6 @@ abstract class Collections_Tree_Node implements Collections_Tree_Nodeable, Itera
     public function remove($ident) {
         unset($this->_children[$ident]);
     }
-
-//    public function toPrint($indent = '') {
-//        $str = $indent . $this->ident() . PHP_EOL;
-//        foreach ($this->_children as $child) {
-//            $str .= $child->toPrint($indent . '  ');
-//        }
-//        return $str;
-//    }
 
     // Iterator functions
     protected $_visitable = true;

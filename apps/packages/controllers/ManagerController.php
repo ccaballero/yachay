@@ -22,7 +22,7 @@ class Packages_ManagerController extends Yachay_Controller_Action
         }
 
         $db_packages = new Db_Packages();
-        $this->view->list = $db_packages->getTree();
+        $this->view->list = $db_packages->tree();
 
         $breadcrumb = array();
         if ($this->acl('packages', 'list')) {
@@ -37,31 +37,28 @@ class Packages_ManagerController extends Yachay_Controller_Action
         $request = $this->getRequest();
         if ($request->isPost()) {
             $db_packages = new Db_Packages();
-            $tree = $db_packages->getTree();
+            $tree = $db_packages->tree();
 
             $check = $request->getParam('check');
-            $packages_check = array();
+            $list = array();
 
-            foreach ($check as $value) {
-                $package = $db_packages->findByIdent($value);
-                $node = $tree->getNode($package->url);
+            foreach ($check as $ident) {
+                $package = $db_packages->findByIdent($ident);
 
                 if (!empty($package) && $package->type != 'base') {
-                    $list = array();
+                    $node = $tree->getNode($package->url);
+
+                    $sub_list = array();
                     foreach ($node as $children) {
-                        $list[] = $children->ident();
+                        $sub_list[] = $children->ident;
                     }
 
-                    $packages_check = array_merge($packages_check, $list);
+                    $list = array_merge($sub_list, $list);
                 }
             }
 
-            if (count($packages_check) > 0) {
-                $db_packages->locks($packages_check);
-            }
-
-            $count = count($packages_check);
-            $this->_helper->flashMessenger->addMessage("Se han desactivado $count modulos");
+            $count = $db_packages->lock($list);
+            $this->_helper->flashMessenger->addMessage("Se han desactivado $count paquetes");
         }
 
         $this->_redirect($this->view->currentPage());
@@ -75,36 +72,30 @@ class Packages_ManagerController extends Yachay_Controller_Action
         $request = $this->getRequest();
         if ($request->isPost()) {
             $db_packages = new Db_Packages();
-            $tree = $db_packages->getTree();
+            $tree = $db_packages->tree();
 
             $check = $request->getParam('check');
-            $packages_check = array();
+            $list = array();
 
-            foreach ($check as $value) {
-                $package = $db_packages->findByIdent($value);
-                
-                if (!empty($package)) {
+            foreach ($check as $ident) {
+                $package = $db_packages->findByIdent($ident);
+
+                if (!empty($package) && $package->type != 'base') {
                     $path = $tree->path($package->url);
 
-                    $list = array();
+                    $sub_list = array();
                     foreach ($path as $parent) {
-                        $list[] = $parent->ident();
+                        $sub_list[] = $parent->ident;
                     }
 
-                    $packages_check = array_merge($packages_check, $list);
+                    $list = array_merge($sub_list, $list);
                 }
             }
 
-            if (count($packages_check) > 0) {
-                $db_packages->unlocks($packages_check);
-            }
-
-            $count = count($packages_check);
-            $this->_helper->flashMessenger->addMessage("Se han activado $count modulos");
+            $count = $db_packages->unlock($list);
+            $this->_helper->flashMessenger->addMessage("Se han activado $count paquetes");
         }
 
         $this->_redirect($this->view->currentPage());
     }
-
-
 }

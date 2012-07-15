@@ -1,6 +1,6 @@
 <?php
 
-class Invitations extends Yachay_Model_Table
+class Invitations extends Yachay_Db_Table
 {
     protected $_name            = 'invitation';
     protected $_primary         = 'ident';

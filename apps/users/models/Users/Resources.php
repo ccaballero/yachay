@@ -1,6 +1,6 @@
 <?php
 
-class Users_Resources extends Yachay_Model_Table
+class Users_Resources extends Yachay_Db_Table
 {
     protected $_name            = 'user_resource';
     protected $_referenceMap    = array(

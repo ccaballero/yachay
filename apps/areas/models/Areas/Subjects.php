@@ -1,6 +1,6 @@
 <?php
 
-class Areas_Subjects extends Yachay_Model_Table
+class Areas_Subjects extends Yachay_Db_Table
 {
     protected $_name            = 'area_subject';
     protected $_referenceMap    = array(

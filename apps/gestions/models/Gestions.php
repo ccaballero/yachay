@@ -1,6 +1,6 @@
 <?php
 
-class Gestions extends Yachay_Model_Table
+class Gestions extends Yachay_Db_Table
 {
     protected $_name            = 'gestion';
     protected $_primary         = 'ident';

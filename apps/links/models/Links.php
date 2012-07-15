@@ -1,6 +1,6 @@
 <?php
 
-class Links extends Yachay_Model_Table
+class Links extends Yachay_Db_Table
 {
     protected $_name            = 'link';
     protected $_primary         = 'resource';
