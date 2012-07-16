@@ -5,7 +5,7 @@ class Tags extends Yachay_Db_Table
     protected $_name            = 'tag';
     protected $_primary         = 'ident';
     protected $_rowClass        = 'Tags_Tag';
-    protected $_dependentTables = array('Tags_Resources', 'Tags_Communities', 'Tags_Users', );
+    protected $_dependentTables = array('Tags_Resources', 'Tags_Communities', 'Tags_Users');
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Etiqueta',

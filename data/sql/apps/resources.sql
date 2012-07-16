@@ -34,6 +34,18 @@ VALUES
 ('resources', 'resources', 'app', 'pages', UNIX_TIMESTAMP(), 'Modulo de registro de los recursos del sistema');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Publicar nuevo recurso',                    'resources', 'new'),
+('Ver recurso publicado',                     'resources', 'view'),
+('Edicion del recurso por parte de su autor', 'resources', 'edit'),
+('Eliminar recurso por parte de su autor',    'resources', 'delete'),
+('Eliminar cualquier recurso',                'resources', 'drop');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -41,18 +53,6 @@ INSERT INTO `page`
 VALUES
 ('Lista de recursos',          'Recursos', TRUE,  'resources', 'index', 'list',     'new', 'resources_list'),
 ('Lista de recursos por tipo', '',         FALSE, 'resources', 'index', 'filtered', 'new', 'resources_filtered');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Publicar nuevo recurso',                    'resources', 'new'),
-('Ver recurso publicado',                     'resources', 'view'),
-('Edicion del recurso por parte de su autor', 'resources', 'edit'),
-('Eliminar recurso por parte de su autor',    'resources', 'delete'),
-('Eliminar cualquier recurso',                'resources', 'drop');
 
 /*============================================================================*/
 /* Registro de widgets para el paquete                                        */

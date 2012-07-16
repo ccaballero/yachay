@@ -5,7 +5,7 @@ class Groupsets extends Yachay_Db_Table
     protected $_name            = 'groupset';
     protected $_primary         = 'ident';
     protected $_rowClass        = 'Groupsets_Groupset';
-    protected $_dependentTables = array('Groupsets_Groups', );
+    protected $_dependentTables = array('Groupsets_Groups');
     protected $_referenceMap    = array(
         'Author'                => array(
             'columns'           => 'author',

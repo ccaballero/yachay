@@ -2,17 +2,17 @@
 
 class Yachay_Acl
 {
-    public static function hasPermission($package, $privilege) {
+    public static function hasPermission($package, $privileges) {
         $user = Zend_Registry::get('user');
 
-        if (!is_array($privilege)) {
-            if (!$user->hasPermission($package, $privilege)) {
+        if (!is_array($privileges)) {
+            if (!$user->hasPermission($package, $privileges)) {
                 return false;
             }
         } else {
             $flag = false;
-            foreach ($privilege as $priv) {
-                $flag |= $user->hasPermission($package, $priv);
+            foreach ($privileges as $privilege) {
+                $flag |= $user->hasPermission($package, $privilege);
             }
             if (!$flag) {
                 return false;

@@ -36,6 +36,15 @@ VALUES
 ('templates', 'templates', 'middle', 'pages', UNIX_TIMESTAMP(), 'Modulo manejador de las plantillas web del sistema');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Cambiar la plantilla', 'templates', 'switch'),
+('Personalizar la plantilla', 'templates', 'configure');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -43,12 +52,3 @@ INSERT INTO `page`
 VALUES
 ('Lista de temas',       'Temas', TRUE,  'templates', 'index',    'index', 'switch',    'templates_list'),
 ('Propiedades del tema', '',      FALSE, 'templates', 'template', 'view',  'configure', 'templates_template_view');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Cambiar la plantilla', 'templates', 'switch'),
-('Personalizar la plantilla', 'templates', 'configure');

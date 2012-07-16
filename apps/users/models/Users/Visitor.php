@@ -14,15 +14,15 @@ class Users_Visitor
 
         $privileges = $visitor->findPrivilegesViaRoles_Privileges();
         foreach ($privileges as $privilege) {
-            $this->_acl[] = $privilege->package . '_' . $privilege->privilege;
+            $this->_acl[] = $privilege->package . '_' . $privilege->label;
         }
 
         $config = Zend_Registry::get('config');
         $this->template = $config->resources->layout->layout;
     }
 
-    public function hasPermission($package, $privilege) {
-        return in_array($package . '_' . $privilege, $this->_acl);
+    public function hasPermission($package, $label) {
+        return in_array($package . '_' . $label, $this->_acl);
     }
 
     public function lastLogin() {}

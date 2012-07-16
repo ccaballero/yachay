@@ -62,6 +62,26 @@ VALUES
 ('subjects', 'subjects', 'middle', 'gestions', UNIX_TIMESTAMP(), 'Modulo manejador de las materias');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Listar las materias disponibles',           'subjects', 'list'),
+('Crear nuevas materias',                     'subjects', 'new'),
+('Importar materias',                         'subjects', 'import'),
+('Exportar materias',                         'subjects', 'export'),
+('Ver las caracteristicas de una materia',    'subjects', 'view'),
+('Editar las caracteristicas de una materia', 'subjects', 'edit'),
+('Activar/desactivar materias',               'subjects', 'lock'),
+('Eliminar materias',                         'subjects', 'delete'),
+('Ser moderador de materias',                 'subjects', 'moderate'),
+('Ser docente de materias',                   'subjects', 'teach'),
+('Ser auxiliar de materias',                  'subjects', 'helper'),
+('Ser estudiante de materias',                'subjects', 'study'),
+('Ser visitante de materias',                 'subjects', 'participate');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -78,23 +98,3 @@ VALUES
 ('Agregar miembros a una materia',   '',              FALSE, 'subjects', 'assign',  'new',    '',                'subjects_subject_assign_new'),
 ('Importar miembros a una materia',  '',              FALSE, 'subjects', 'assign',  'import', '',                'subjects_subject_assign_import'),
 ('Exportar miembros de una materia', '',              FALSE, 'subjects', 'assign',  'export', '',                'subjects_subject_assign_export');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Listar las materias disponibles',           'subjects', 'list'),
-('Crear nuevas materias',                     'subjects', 'new'),
-('Importar materias',                         'subjects', 'import'),
-('Exportar materias',                         'subjects', 'export'),
-('Ver las caracteristicas de una materia',    'subjects', 'view'),
-('Editar las caracteristicas de una materia', 'subjects', 'edit'),
-('Activar/desactivar materias',               'subjects', 'lock'),
-('Eliminar materias',                         'subjects', 'delete'),
-('Ser moderador de materias',                 'subjects', 'moderate'),
-('Ser docente de materias',                   'subjects', 'teach'),
-('Ser auxiliar de materias',                  'subjects', 'helper'),
-('Ser estudiante de materias',                'subjects', 'study'),
-('Ser visitante de materias',                 'subjects', 'participate');

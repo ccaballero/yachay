@@ -46,6 +46,18 @@ VALUES
 ('careers', 'careers', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de las las carreras');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Listar las carreras disponibles',          'careers', 'list'),
+('Crear nueva carrera',                      'careers', 'new'),
+('Eliminar carreras',                        'careers', 'delete'),
+('Ver las caracteristicas de una carrera',   'careers', 'view'),
+('Editar las caracteristicas de un carrera', 'careers', 'edit');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -56,15 +68,3 @@ VALUES
 ('Nueva carrera',             'Nueva carrera', TRUE,  'careers', 'manager', 'new',   'new',        'careers_new'),
 ('Vista de una carrera',      '',              FALSE, 'careers', 'career',  'view',  '',           'careers_career_view'),
 ('Edicion de una carrera',    '',              FALSE, 'careers', 'career',  'edit',  '',           'careers_career_edit');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Listar las carreras disponibles',          'careers', 'list'),
-('Crear nueva carrera',                      'careers', 'new'),
-('Eliminar carreras',                        'careers', 'delete'),
-('Ver las caracteristicas de una carrera',   'careers', 'view'),
-('Editar las caracteristicas de un carrera', 'careers', 'edit');

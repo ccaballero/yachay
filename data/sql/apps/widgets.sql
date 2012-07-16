@@ -8,6 +8,15 @@ VALUES
 ('widgets', 'widgets', 'middle', 'templates', UNIX_TIMESTAMP(), 'Modulo de configuracion para los widgets de las paginas');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Listar la configuracion de los widgets por pagina', 'widgets', 'list'),
+('Configuracion de las widgets por pagina',           'widgets', 'manage');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -15,15 +24,6 @@ INSERT INTO `page`
 VALUES
 ('Lista de widgets',         'Widgets', TRUE, 'widgets', 'index',   'index', 'list',   'widgets_list'),
 ('Administrador de widgets', 'Widgets', TRUE, 'widgets', 'manager', 'index', 'manage', 'widgets_manager');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Listar la configuracion de los widgets por pagina', 'widgets', 'list'),
-('Configuracion de las widgets por pagina',           'widgets', 'manage');
 
 /*============================================================================*/
 /* Registro de widgets para el paquete                                        */

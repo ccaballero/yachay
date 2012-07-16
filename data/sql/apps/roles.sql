@@ -34,6 +34,19 @@ VALUES
 ('roles', 'roles', 'middle', 'privileges', UNIX_TIMESTAMP(), 'Modulo manejador de los roles de los usuarios');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Listar los roles disponibles',            'roles', 'list'),
+('Crear nuevos roles de usuarios',          'roles', 'new'),
+('Asignar roles a usuarios',                'roles', 'assign'),
+('Ver las caracteristicas de los roles',    'roles', 'view'),
+('Editar las caracteristicas de los roles', 'roles', 'edit'),
+('Eliminar roles',                          'roles', 'delete');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -45,16 +58,3 @@ VALUES
 ('Asignacion usuario/rol', 'Asig. Rol/Us.', TRUE,  'roles', 'assign',  'index', 'assign',            'roles_assign'),
 ('Vista de un rol',        '',              FALSE, 'roles', 'role',    'view',  '',                  'roles_role_view'),
 ('Edicion de un rol',      '',              FALSE, 'roles', 'role',    'edit',  '',                  'roles_role_edit');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Listar los roles disponibles',            'roles', 'list'),
-('Crear nuevos roles de usuarios',          'roles', 'new'),
-('Asignar roles a usuarios',                'roles', 'assign'),
-('Ver las caracteristicas de los roles',    'roles', 'view'),
-('Editar las caracteristicas de los roles', 'roles', 'edit'),
-('Eliminar roles',                          'roles', 'delete');

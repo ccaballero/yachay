@@ -5,7 +5,7 @@ class Templates extends Yachay_Db_Table
     protected $_name            = 'template';
     protected $_primary         = 'ident';
     protected $_rowClass        = 'Templates_Template';
-    protected $_dependentTables = array('Users', );
+    protected $_dependentTables = array('Users');
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Tema',

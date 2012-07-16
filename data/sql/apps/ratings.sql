@@ -16,17 +16,17 @@ CREATE TABLE `rating` (
 ) DEFAULT CHARACTER SET UTF8;
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Calificar un recurso', 'ratings', 'new');
+
+/*============================================================================*/
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`
 (`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
 ('ratings', 'ratings', 'util', 'resources', UNIX_TIMESTAMP(), 'Modulo manejador de las puntuaciones en todos los recursos disponibles del sistema');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Calificar un recurso', 'ratings', 'new');

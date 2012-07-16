@@ -60,6 +60,21 @@ VALUES
 ('users', 'users', 'middle', 'roles', UNIX_TIMESTAMP(), 'Modulo manejador de los usuarios');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Listar los usuarios disponibles',            'users', 'list'),
+('Crear nuevos usuarios',                      'users', 'new'),
+('Importar usuarios',                          'users', 'import'),
+('Exportar usuarios',                          'users', 'export'),
+('Ver las caracteristicas de los usuarios',    'users', 'view'),
+('Editar las caracteristicas de los usuarios', 'users', 'edit'),
+('Activar/desactivar usuarios',                'users', 'lock'),
+('Eliminar usuarios',                          'users', 'delete');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -72,18 +87,3 @@ VALUES
 ('Exportar usuarios',         'Exp. usuarios', TRUE,  'users', 'manager', 'export', 'export',          'users_export'),
 ('Vista de un usuario',       '',              FALSE, 'users', 'user',    'view',   '',                'users_user_view'),
 ('Edicion de un usuario',     '',              FALSE, 'users', 'user',    'edit',   '',                'users_user_edit');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Listar los usuarios disponibles',            'users', 'list'),
-('Crear nuevos usuarios',                      'users', 'new'),
-('Importar usuarios',                          'users', 'import'),
-('Exportar usuarios',                          'users', 'export'),
-('Ver las caracteristicas de los usuarios',    'users', 'view'),
-('Editar las caracteristicas de los usuarios', 'users', 'edit'),
-('Activar/desactivar usuarios',                'users', 'lock'),
-('Eliminar usuarios',                          'users', 'delete');

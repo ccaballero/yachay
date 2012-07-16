@@ -156,17 +156,17 @@ class Users_User extends Yachay_Model_Row_Validation
 
     public $_acl = array();
 
-    public function hasPermission($package, $privilege) {
+    public function hasPermission($package, $label) {
         if (count($this->_acl) == 0) {
             $model_roles = new Roles();
             $role = $model_roles->findByIdent($this->role);
             $privileges = $role->findPrivilegesViaRoles_Privileges();
 
             foreach ($privileges as $priv) {
-                $this->_acl[] = $priv->package . '_' . $priv->privilege;
+                $this->_acl[] = $priv->package . '_' . $priv->label;
             }
         }
-        return in_array($package . '_' . $privilege, $this->_acl);
+        return in_array($package . '_' . $label, $this->_acl);
     }
 
     public function hasFewerPrivileges($user) {

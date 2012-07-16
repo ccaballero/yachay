@@ -40,9 +40,9 @@ if (count($this->privileges)) {
 
     foreach ($this->privileges as $privilege) {
         echo '<tr>';
-        echo '<td>' . $privilege->label . '</td>';
+        echo '<td>' . $privilege->description . '</td>';
         echo '<td>' . $privilege->package . '</td>';
-        echo '<td>' . $privilege->privilege . '</td>';
+        echo '<td>' . $privilege->label . '</td>';
         echo '</tr>';
     }
 

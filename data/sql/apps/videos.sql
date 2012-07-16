@@ -24,6 +24,14 @@ VALUES
 ('videos', 'videos', 'app', 'files', UNIX_TIMESTAMP(), 'Modulo de gestion de videos online');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Subir videos', 'videos', 'upload');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -32,11 +40,3 @@ VALUES
 ('Nuevo video',      'Nuevo video', TRUE,  'videos', 'manager', 'new',  '', 'videos_new'),
 ('Visor de videos',  '',            FALSE, 'videos', 'video',   'view', '', 'videos_video_view'),
 ('Editor de videos', '',            FALSE, 'videos', 'video',   'edit', '', 'videos_video_edit');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Subir videos', 'videos', 'upload');

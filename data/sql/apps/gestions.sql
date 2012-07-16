@@ -24,6 +24,18 @@ VALUES
 ('gestions', 'gestions', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo guia de informacion para el manejo de periodos academicos');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Listar las gestiones disponibles',      'gestions', 'list'),
+('Crear una gestion',                     'gestions', 'new'),
+('Definir la gestion actual',             'gestions', 'active'),
+('Eliminar una gestion',                  'gestions', 'delete'),
+('Ver las caracteristicas de la gestion', 'gestions', 'view');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -34,15 +46,3 @@ VALUES
 ('Nueva gestion',               'Nueva gestion', TRUE,  'gestions', 'manager', 'new',   'new',               'gestions_new'),
 ('Vista de un gestion',         '',              FALSE, 'gestions', 'gestion', 'view',  '',                  'gestions_gestion_view'),
 ('Vista de materia en gestion', '',              FALSE, 'subjects', 'subject', 'view',  '',                  'gestions_gestion_subject');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Listar las gestiones disponibles',      'gestions', 'list'),
-('Crear una gestion',                     'gestions', 'new'),
-('Definir la gestion actual',             'gestions', 'active'),
-('Eliminar una gestion',                  'gestions', 'delete'),
-('Ver las caracteristicas de la gestion', 'gestions', 'view');

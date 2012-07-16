@@ -149,8 +149,8 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         }
     }
     
-    public function acl($package, $privilege) {
-        return Yachay_Acl::hasPermission($package, $privilege);
+    public function acl($package, $label) {
+        return Yachay_Acl::hasPermission($package, $label);
     }
 
     public function renderToolbar() {

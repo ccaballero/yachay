@@ -46,6 +46,18 @@ VALUES
 ('areas', 'areas', 'app', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de las las areas de agrupacion de las materias');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Listar las areas disponibles',          'areas', 'list'),
+('Crear nueva area',                      'areas', 'new'),
+('Eliminar areas',                        'areas', 'delete'),
+('Ver las caracteristicas de un area',    'areas', 'view'),
+('Editar las caracteristicas de un area', 'areas', 'edit');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -56,15 +68,3 @@ VALUES
 ('Nueva area',             'Nueva area', TRUE,  'areas', 'manager', 'new',   'new',        'areas_new'),
 ('Vista de un area',       '',           FALSE, 'areas', 'area',    'view',  '',           'areas_area_view'),
 ('Edicion de un area',     '',           FALSE, 'areas', 'area',    'edit',  '',           'areas_area_edit');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Listar las areas disponibles',          'areas', 'list'),
-('Crear nueva area',                      'areas', 'new'),
-('Eliminar areas',                        'areas', 'delete'),
-('Ver las caracteristicas de un area',    'areas', 'view'),
-('Editar las caracteristicas de un area', 'areas', 'edit');

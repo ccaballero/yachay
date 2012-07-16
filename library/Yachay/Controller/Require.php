@@ -19,16 +19,16 @@ class Yachay_Controller_Require extends Zend_Controller_Action
         $this->_flashMessenger->setNamespace('yachay');
     }
 
-    public function requirePermission($package, $privilege) {
-        if (!is_array($privilege)) {
-            if (!$this->user->hasPermission($package, $privilege)) {
+    public function requirePermission($package, $privileges) {
+        if (!is_array($privileges)) {
+            if (!$this->user->hasPermission($package, $privileges)) {
                 $this->_helper->flashMessenger->addMessage('Usted no tiene permisos suficientes');
                 $this->_redirect($this->view->url(array(), 'base'));
             }
         } else {
             $flag = false;
-            foreach ($privilege as $priv) {
-                $flag |= $this->user->hasPermission($package, $priv);
+            foreach ($privileges as $privilege) {
+                $flag |= $this->user->hasPermission($package, $privilege);
             }
             if (!$flag) {
                 $this->_helper->flashMessenger->addMessage('Usted no tiene permisos suficientes');

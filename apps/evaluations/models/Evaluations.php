@@ -5,7 +5,7 @@ class Evaluations extends Yachay_Db_Table
     protected $_name            = 'evaluation';
     protected $_primary         = 'ident';
     protected $_rowClass        = 'Evaluations_Evaluation';
-    protected $_dependentTables = array('Groups', 'Evaluations_Tests', );
+    protected $_dependentTables = array('Groups', 'Evaluations_Tests');
     protected $_referenceMap    = array(
         'Author'                => array(
             'columns'           => 'author',

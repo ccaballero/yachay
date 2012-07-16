@@ -27,6 +27,14 @@ VALUES
 ('invitations', 'invitations', 'app', 'users', UNIX_TIMESTAMP(), 'Modulo utilidad para el manejo de invitaciones');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Enviar invitaciones', 'invitations', 'invite');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -35,11 +43,3 @@ VALUES
 ('Administrador de invitaciones', 'Invitaciones',     TRUE,  'invitations', 'manager',    'index',   'invite', 'invitations_manager'),
 ('Nueva invitacion de acceso',    'Nueva Invitacion', TRUE,  'invitations', 'manager',    'new',     'invite', 'invitations_new'),
 ('Registro de usuario',           '',                 FALSE, 'invitations', 'invitation', 'proceed', '',       'invitations_invitation_proceed');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Enviar invitaciones', 'invitations', 'invite');

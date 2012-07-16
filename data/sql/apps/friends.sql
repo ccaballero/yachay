@@ -24,6 +24,14 @@ VALUES
 ('friends', 'friends', 'middle', 'users', UNIX_TIMESTAMP(), 'Modulo de conecciones entre usuarios');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Agregar contactos', 'friends', 'contact');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -32,14 +40,6 @@ VALUES
 ('Lista de contactos',   'Contactos',   TRUE, 'friends', 'index', 'friends',    'contact', 'friends_friends'),
 ('Lista de solicitudes', 'Solicitudes', TRUE, 'friends', 'index', 'followings', 'contact', 'friends_followings'),
 ('Lista de peticiones',  'Peticiones',  TRUE, 'friends', 'index', 'followers',  'contact', 'friends_followers');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Agregar contactos', 'friends', 'contact');
 
 /*============================================================================*/
 /* Registro de widgets para el paquete                                        */

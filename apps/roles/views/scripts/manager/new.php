@@ -12,7 +12,7 @@ echo '</td></tr><tr><td colspan="2"><b>Privilegios:</b></td></tr>';
 
 foreach ($this->privileges as $privilege) {
     echo '<tr>';
-    echo '<td><b>[' . $privilege->package . ']</b>&nbsp;' . $privilege->label . '</td>';
+    echo '<td><b>[' . $privilege->package . ']</b>&nbsp;' . $privilege->description . '</td>';
     echo '<td align="right">';
     echo '<input type="checkbox"' . (in_array($privilege->ident, $this->role_privilege) ? ' checked="checked" ' : ' ') . 'name="privileges[]" value="' . $privilege->ident . '" />';
     echo '</td></tr>';

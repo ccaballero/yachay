@@ -5,7 +5,7 @@ class Teams extends Yachay_Db_Table
     protected $_name            = 'team';
     protected $_primary         = 'ident';
     protected $_rowClass        = 'Teams_Team';
-    protected $_dependentTables = array('Teams_Users', 'Teams_Resources', );
+    protected $_dependentTables = array('Teams_Users', 'Teams_Resources');
     protected $_referenceMap    = array(
         'Group'                 => array(
             'columns'           => 'group',

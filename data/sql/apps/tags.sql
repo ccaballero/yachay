@@ -56,6 +56,15 @@ VALUES
 ('tags', 'tags', 'util', 'resources', UNIX_TIMESTAMP(), 'Modulo manejador de las etiquetas en todos los recursos disponibles del sistema');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Ver nube de etiquetas', 'tags', 'list'),
+('Eliminar etiqueta',     'tags', 'delete');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -64,12 +73,3 @@ VALUES
 ('Nube de etiquetas',          'Etiquetas', TRUE,  'tags', 'index',   'index', 'list',   'tags_list'),
 ('Administrador de etiquetas', 'Etiquetas', TRUE,  'tags', 'manager', 'index', 'delete', 'tags_manager'),
 ('Ver etiqueta',               '',          FALSE, 'tags', 'tag',     'view',  'list',   'tags_tag_view');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Ver nube de etiquetas', 'tags', 'list'),
-('Eliminar etiqueta',     'tags', 'delete');

@@ -23,13 +23,13 @@ CREATE TABLE `comment` (
 INSERT INTO `package`
 (`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
-('comments', 'comments', 'util', 'resources', UNIX_TIMESTAMP(), 'Modulo manejador de comentarios en los recursos disponibles del sistema');
+('comments', 'comments', 'app', 'resources', UNIX_TIMESTAMP(), 'Modulo manejador de comentarios en los recursos disponibles del sistema');
 
 /*============================================================================*/
 /* Registro de privilegios para el paquete                                    */
 /*============================================================================*/
 INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
+(`description`, `package`, `label`)
 VALUES
 ('Publicar comentario',                       'comments', 'new'),
 ('Ver comentarios',                           'comments', 'view'),

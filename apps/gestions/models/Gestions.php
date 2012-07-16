@@ -5,7 +5,7 @@ class Gestions extends Yachay_Db_Table
     protected $_name            = 'gestion';
     protected $_primary         = 'ident';
     protected $_rowClass        = 'Gestions_Gestion';
-    protected $_dependentTables = array('Subjects', );
+    protected $_dependentTables = array('Subjects');
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Gestion',

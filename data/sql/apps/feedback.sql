@@ -22,6 +22,17 @@ VALUES
 ('feedback', 'feedback', 'app', 'notes', UNIX_TIMESTAMP(), 'Modulo de registro de sugerencias del sistema');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Ver sugerencias',                 'feedback', 'list'),
+('Marcar sugerencias solucionadas', 'feedback', 'resolv'),
+('Marcar sugerencias interesantes', 'feedback', 'mark'),
+('Eliminar sugerencias inutiles',   'feedback', 'delete');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -32,14 +43,3 @@ VALUES
 ('Nueva sugerencia',             'Nueva Sugerencia', TRUE,  'feedback', 'manager', 'new',   '',                   'feedback_new'),
 ('Visor de sugerencias',         '',                 FALSE, 'feedback', 'entry',   'view',  '',                   'feedback_entry_view'),
 ('Editor de sugerencias',        '',                 FALSE, 'feedback', 'entry',   'edit',  '',                   'feedback_entry_edit');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Ver sugerencias',                 'feedback', 'list'),
-('Marcar sugerencias solucionadas', 'feedback', 'resolv'),
-('Marcar sugerencias interesantes', 'feedback', 'mark'),
-('Eliminar sugerencias inutiles',   'feedback', 'delete');

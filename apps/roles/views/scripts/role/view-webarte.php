@@ -38,9 +38,9 @@
         </tr>
     <?php foreach ($this->privileges as $key => $privilege) { ?>
         <tr class="<?php echo $key % 2 == 0 ? 'even' : 'odd' ?>">
-            <td><?php echo $privilege->label ?></td>
+            <td><?php echo $privilege->description ?></td>
             <td><?php echo $privilege->package ?></td>
-            <td><?php echo $privilege->privilege ?></td>
+            <td><?php echo $privilege->label ?></td>
         </tr>
     <?php } ?>
     </table>

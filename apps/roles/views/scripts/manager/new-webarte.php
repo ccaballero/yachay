@@ -10,7 +10,7 @@
     <p>
         <label>&nbsp;</label>
         <input type="checkbox" <?php echo in_array($privilege->ident, $this->role_privilege) ? 'checked="checked" ' : '' ?>name="privileges[]" value="<?php echo $privilege->ident ?>" />
-        <span class="mark form"><?php echo $privilege->package ?></span><span class="form"><?php echo $privilege->label ?></span>
+        <span class="mark form"><?php echo $privilege->package ?></span><span class="form"><?php echo $privilege->description ?></span>
     </p>
 <?php } ?>
     <p>(*) Campos obligatorios.</p>

@@ -66,6 +66,16 @@ VALUES
 ('communities', 'communities', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de las comunidades');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Listar las comunidades disponibles',       'communities', 'list'),
+('Crear e ingresar comunidades',             'communities', 'enter'),
+('Ver las caracteristicas de una comunidad', 'communities', 'view');
+
+/*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `page`
@@ -78,13 +88,3 @@ VALUES
 ('Edicion de una comunidad',     '',                FALSE, 'communities', 'community', 'edit',  '',           'communities_community_edit'),
 ('Miembros de una comunidad',    '',                FALSE, 'communities', 'assign',    'index', '',           'communities_community_assign'),
 ('Peticiones de una comunidad',  '',                FALSE, 'communities', 'petition',  'index', '',           'communities_community_petition');
-
-/*============================================================================*/
-/* Registro de privilegios para el paquete                                    */
-/*============================================================================*/
-INSERT INTO `privilege`
-(`label`, `package`, `privilege`)
-VALUES
-('Listar las comunidades disponibles',       'communities', 'list'),
-('Crear e ingresar comunidades',             'communities', 'enter'),
-('Ver las caracteristicas de una comunidad', 'communities', 'view');

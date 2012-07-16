@@ -5,7 +5,7 @@ class Communities extends Yachay_Db_Table
     protected $_name            = 'community';
     protected $_primary         = 'ident';
     protected $_rowClass        = 'Communities_Community';
-    protected $_dependentTables = array('Communities_Petitions', 'Communities_Users', 'Communities_Resources', );
+    protected $_dependentTables = array('Communities_Petitions', 'Communities_Users', 'Communities_Resources');
     protected $_referenceMap    = array(
         'Author'                => array(
             'columns'           => 'author',

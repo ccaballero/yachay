@@ -5,7 +5,7 @@ class Roles extends Yachay_Db_Table
     protected $_name            = 'role';
     protected $_primary         = 'ident';
     protected $_rowClass        = 'Roles_Role';
-    protected $_dependentTables = array('Users', 'Roles_Privileges', );
+    protected $_dependentTables = array('Users', 'Roles_Privileges');
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Privilegio',

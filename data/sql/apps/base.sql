@@ -6,7 +6,6 @@
 /*============================================================================*/
 /* Tablas requeridas para el registro de paquetes                             */
 /*============================================================================*/
-
 DROP TABLE IF EXISTS `package`;
 CREATE TABLE `package` (
     `ident`       int unsigned                          NOT NULL auto_increment,
@@ -18,16 +17,28 @@ CREATE TABLE `package` (
     `tsregister`  int unsigned                          NOT NULL,
     `parent`      varchar(64)                           NULL,
     PRIMARY KEY (`ident`),
-    INDEX (`label`),
+    UNIQUE INDEX (`label`),
     UNIQUE INDEX (`url`),
     INDEX (`parent`),
     FOREIGN KEY (`parent`) REFERENCES `package`(`url`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
 /*============================================================================*/
+/* Tablas necesarias para el registro de privilegios                          */
+/*============================================================================*/
+DROP TABLE IF EXISTS `privilege`;
+CREATE TABLE `privilege` (
+    `ident`       int unsigned NOT NULL auto_increment,
+    `label`       varchar(64)  NOT NULL,
+    `package`     varchar(64)  NOT NULL,
+    `description` text         NOT NULL DEFAULT '',
+    PRIMARY KEY (`ident`),
+    UNIQUE INDEX (`package`, `label`)
+) DEFAULT CHARACTER SET UTF8;
+
+/*============================================================================*/
 /* Tabla necesaria para el manejo de paginas en el sistema                    */
 /*============================================================================*/
-
 DROP TABLE IF EXISTS `page`;
 CREATE TABLE `page` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
@@ -45,21 +56,6 @@ CREATE TABLE `page` (
     PRIMARY KEY (`ident`),
     UNIQUE INDEX (`label`),
     UNIQUE INDEX (`route`)
-) DEFAULT CHARACTER SET UTF8;
-
-/*============================================================================*/
-/* Tablas necesarias para el registro de privilegios                          */
-/*============================================================================*/
-
-DROP TABLE IF EXISTS `privilege`;
-CREATE TABLE `privilege` (
-    `ident`             int unsigned                                                NOT NULL auto_increment,
-    `label`             varchar(64)                                                 NOT NULL,
-    `package`           varchar(32)                                                 NOT NULL,
-    `privilege`         varchar(256)                                                NOT NULL,
-    PRIMARY KEY (`ident`),
-    UNIQUE INDEX (`label`),
-    UNIQUE INDEX (`package`, `privilege`)
 ) DEFAULT CHARACTER SET UTF8;
 
 /*============================================================================*/
