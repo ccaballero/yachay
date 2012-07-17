@@ -32,3 +32,15 @@ VALUES
 ('Nueva imagen',       'Nueva imagen', TRUE,  'photos', 'manager', 'new',  '', 'photos_new'),
 ('Visor de imagenes',  '',             FALSE, 'photos', 'photo',   'view', '', 'photos_photo_view'),
 ('Editor de imagenes', '',             FALSE, 'photos', 'photo',   'edit', '', 'photos_photo_edit');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Nueva imagen',       'view',   'resources_list',    'photos_new',          'photos/new',           'photos', 'manager', 'new'),
+('Visor de imagenes',  'view',   'resources_list',    'photos_photo_view',   'photos/:photo',        'photos', 'photo',   'view'),
+('Editor de imagenes', 'view',   'photos_photo_view', 'photos_photo_edit',   'photos/:photo/edit',   'photos', 'photo',   'edit'),
+('',                   'action', 'photos_photo_view', 'photos_photo_delete', 'photos/:photo/delete', 'photos', 'photo',   'delete'),
+('',                   'action', 'photos_photo_view', 'photos_photo_drop',   'photos/:photo/drop',   'photos', 'photo',   'drop');

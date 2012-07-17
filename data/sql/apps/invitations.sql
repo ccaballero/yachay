@@ -43,3 +43,14 @@ VALUES
 ('Administrador de invitaciones', 'Invitaciones',     TRUE,  'invitations', 'manager',    'index',   'invite', 'invitations_manager'),
 ('Nueva invitacion de acceso',    'Nueva Invitacion', TRUE,  'invitations', 'manager',    'new',     'invite', 'invitations_new'),
 ('Registro de usuario',           '',                 FALSE, 'invitations', 'invitation', 'proceed', '',       'invitations_invitation_proceed');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Administrador de invitaciones', 'list',   'base',                'invitations_manager',            'invitations/manager',            'invitations', 'manager',    'index'),
+('Nueva invitación de acceso',    'view',   'invitations_manager', 'invitations_new',                'invitations/new',                'invitations', 'manager',    'new'),
+('Registro de usuario',           'view',   'invitations_manager', 'invitations_invitation_proceed', 'invitations/:code',              'invitations', 'invitation', 'proceed'),
+('',                              'action', 'invitations_manager', 'invitations_invitation_delete',  'invitations/:invitation/delete', 'invitations', 'invitation', 'delete');

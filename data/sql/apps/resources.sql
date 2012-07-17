@@ -61,3 +61,12 @@ INSERT INTO `widget`
 (`label`, `title`, `package`, `script`)
 VALUES
 ('Manejo de recursos', 'Manejo de recursos', 'resources', 'manager');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Lista de recursos',          'list', 'base',           'resources_list',     'resources',         'resources', 'index', 'list'),
+('Lista de recursos por tipo', 'list', 'resources_list', 'resources_filtered', 'resources/:filter', 'resources', 'index', 'filtered');

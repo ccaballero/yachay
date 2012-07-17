@@ -30,3 +30,15 @@ VALUES
 ('Nuevo enlace',      'Nuevo enlace', TRUE,  'links', 'manager', 'new',  '', 'links_new'),
 ('Visor de enlaces',  '',             FALSE, 'links', 'link',    'view', '', 'links_link_view'),
 ('Editor de enlaces', '',             FALSE, 'links', 'link',    'edit', '', 'links_link_edit');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Nuevo enlace',      'view',   'resources_list',  'links_new',         'links/new',          'links', 'manager', 'new'),
+('Visor de enlaces',  'view',   'resources_list',  'links_link_view',   'links/:link',        'links', 'link',    'view'),
+('Editor de enlaces', 'view',   'links_link_view', 'links_link_edit',   'links/:link/edit',   'links', 'link',    'edit'),
+('',                  'action', 'links_link_view', 'links_link_delete', 'links/:link/delete', 'links', 'link',    'delete'),
+('',                  'action', 'links_link_view', 'links_link_drop',   'links/:link/drop',   'links', 'link',    'drop');

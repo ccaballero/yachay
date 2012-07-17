@@ -88,3 +88,25 @@ VALUES
 ('Edicion de una comunidad',     '',                FALSE, 'communities', 'community', 'edit',  '',           'communities_community_edit'),
 ('Miembros de una comunidad',    '',                FALSE, 'communities', 'assign',    'index', '',           'communities_community_assign'),
 ('Peticiones de una comunidad',  '',                FALSE, 'communities', 'petition',  'index', '',           'communities_community_petition');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Lista de comunidades',         'list',   'base',                           'communities_list',                                 'communities',                                   'communities', 'index',     'index'),
+('Administrador de comunidades', 'list',   'communities_list',               'communities_manager',                              'communities/manager',                           'communities', 'manager',   'index'),
+('Nueva comunidad',              'view',   'communities_manager',            'communities_new',                                  'communities/new',                               'communities', 'manager',   'new'),
+('Comunidad: $community',        'view',   'communities_manager',            'communities_community_view',                       'communities/:community',                        'communities', 'community', 'view'),
+('Editar: $community',           'view',   'communities_community_view',     'communities_community_edit',                       'communities/:community/edit',                   'communities', 'community', 'edit'),
+('',                             'action', 'communities_community_view',     'communities_community_join',                       'communities/:community/join',                   'communities', 'assign',    'join'),
+('',                             'action', 'communities_community_view',     'communities_community_leave',                      'communities/:community/leave',                  'communities', 'assign',    'leave'),
+('',                             'action', 'communities_community_view',     'communities_community_delete',                     'communities/:community/delete',                 'communities', 'community', 'delete'),
+('Integrantes: $community',      'view',   'communities_community_view',     'communities_community_assign',                     'communities/:community/assign',                 'communities', 'assign',    'index'),
+('',                             'action', 'communities_community_assign',   'communities_community_assign_member_lock',         'communities/:community/assign/:user/lock',      'communities', 'member',    'lock'),
+('',                             'action', 'communities_community_assign',   'communities_community_assign_member_unlock',       'communities/:community/assign/:user/unlock',    'communities', 'member',    'unlock'),
+('',                             'action', 'communities_community_assign',   'communities_community_assign_member_delete',       'communities/:community/assign/:user/delete',    'communities', 'member',    'delete'),
+('Peticiones: $community',       'view',   'communities_community_view',     'communities_community_petition',                   'communities/:community/petition',               'communities', 'petition',  'index'),
+('',                             'action', 'communities_community_petition', 'communities_community_petition_applicant_accept',  'communities/:community/petition/:user/accept',  'communities', 'applicant', 'accept'),
+('',                             'action', 'communities_community_petition', 'communities_community_petition_applicant_decline', 'communities/:community/petition/:user/decline', 'communities', 'applicant', 'decline');

@@ -40,3 +40,15 @@ VALUES
 ('Nuevo video',      'Nuevo video', TRUE,  'videos', 'manager', 'new',  '', 'videos_new'),
 ('Visor de videos',  '',            FALSE, 'videos', 'video',   'view', '', 'videos_video_view'),
 ('Editor de videos', '',            FALSE, 'videos', 'video',   'edit', '', 'videos_video_edit');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Nuevo video',       'view',   'resources_list',    'videos_new',          'videos/new',           'videos', 'manager', 'new'),
+('Video: $resource',  'view',   'resources_list',    'videos_video_view',   'videos/:video',        'videos', 'video',   'view'),
+('Editar: $resource', 'view',   'videos_video_view', 'videos_video_edit',   'videos/:video/edit',   'videos', 'video',   'edit'),
+('',                  'action', 'videos_video_view', 'videos_video_delete', 'videos/:video/delete', 'videos', 'video',   'delete'),
+('',                  'action', 'videos_video_view', 'videos_video_drop',   'videos/:video/drop',   'videos', 'video',   'drop');

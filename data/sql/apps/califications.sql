@@ -43,3 +43,14 @@ INSERT INTO `widget`
 (`label`, `title`, `package`, `script`)
 VALUES
 ('Ver Calificaciones', 'Ver Calificaciones', 'califications', 'califications');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Ver calificaciones',       'view', 'base',               'califications_view',    'califications',                                        'califications', 'index',   'index'),
+('Gestor de calificaciones', 'view', 'groups_groups_view', 'califications_manager', 'subjects/:subject/groups/:group/califications',        'califications', 'manager', 'index'),
+('Importar calificaciones',  'view', 'groups_groups_view', 'califications_import',  'subjects/:subject/groups/:group/califications/import', 'califications', 'manager', 'import'),
+('Exportar calificaciones',  'view', 'groups_groups_view', 'califications_export',  'subjects/:subject/groups/:group/califications/export', 'califications', 'manager', 'export');

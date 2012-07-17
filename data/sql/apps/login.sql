@@ -34,3 +34,13 @@ INSERT INTO `page`
 VALUES
 ('Ingresar al sistema',  'Ingresar',   TRUE, 'login', 'index',  'in',    'in',     'login_in'),
 ('Olvide mi contraseña', 'Contraseña', TRUE, 'login', 'forgot', 'index', 'forgot', 'login_forgot');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Ingresar al sistema',  'view',   'base', 'login_in',     'login',  'login', 'index',  'in'),
+('',                     'action', 'base', 'login_out',    'logout', 'login', 'index',  'out'),
+('Olvide mi contraseña', 'view',   'base', 'login_forgot', 'forgot', 'login', 'forgot', 'index');

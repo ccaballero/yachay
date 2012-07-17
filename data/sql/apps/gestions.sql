@@ -46,3 +46,17 @@ VALUES
 ('Nueva gestion',               'Nueva gestion', TRUE,  'gestions', 'manager', 'new',   'new',               'gestions_new'),
 ('Vista de un gestion',         '',              FALSE, 'gestions', 'gestion', 'view',  '',                  'gestions_gestion_view'),
 ('Vista de materia en gestion', '',              FALSE, 'subjects', 'subject', 'view',  '',                  'gestions_gestion_subject');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Lista de gestiones',         'list',   'base',                  'gestions_list',            'gestions',                   'gestions', 'index',   'index'),
+('Administrador de gestiones', 'list',   'gestions_list',         'gestions_manager',         'gestions/manager',           'gestions', 'manager', 'index'),
+('Nueva gestion',              'view',   'gestions_manager',      'gestions_new' ,            'gestions/new',               'gestions', 'manager', 'new'),
+('Gestion: $gestion',          'list',   'gestions_manager',      'gestions_gestion_view',    'gestions/:gestion',          'gestions', 'gestion', 'view'),
+('',                           'action', 'gestions_gestion_view', 'gestions_gestion_active',  'gestions/:gestion/active',   'gestions', 'gestion', 'active'),
+('Subject: $subject',          'list',   'gestions_gestion_view', 'gestions_gestion_subject', 'gestions/:gestion/:subject', 'subjects', 'subject', 'view'),
+('',                           'action', 'gestions_gestion_view', 'gestions_gestion_delete',  'gestions/:gestion/delete',   'gestions', 'gestion', 'delete');

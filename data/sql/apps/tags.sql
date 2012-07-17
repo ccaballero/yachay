@@ -73,3 +73,14 @@ VALUES
 ('Nube de etiquetas',          'Etiquetas', TRUE,  'tags', 'index',   'index', 'list',   'tags_list'),
 ('Administrador de etiquetas', 'Etiquetas', TRUE,  'tags', 'manager', 'index', 'delete', 'tags_manager'),
 ('Ver etiqueta',               '',          FALSE, 'tags', 'tag',     'view',  'list',   'tags_tag_view');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Nube de etiquetas',          'list',   'base',           'tags_list',       'tags',             'tags', 'index',   'index'),
+('Administrador de etiquetas', 'list',   'tags_list',      'tags_manager',    'tags/manager',     'tags', 'manager', 'index'),
+('Etiqueta: $tag',             'view',   'tags_manager',   'tags_tag_view',   'tags/:tag',        'tags', 'tag',     'view'),
+('',                           'action', 'tags_tags_view', 'tags_tag_delete', 'tags/:tag/delete', 'tags', 'tag',     'delete');

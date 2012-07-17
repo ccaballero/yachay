@@ -48,3 +48,15 @@ INSERT INTO `widget`
 (`label`, `title`, `package`, `script`)
 VALUES
 ('Lista de contactos', 'Contactos', 'friends', 'contacts');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Lista de contactos',   'list',   'base',            'friends_friends',    'friends',              'friends', 'index',  'friends'),
+('Lista de solicitudes', 'list',   'friends_friends', 'friends_followings', 'friends/followings',   'friends', 'index',  'followings'),
+('Lista de peticiones',  'list',   'friends_friends', 'friends_followers',  'friends/followers',    'friends', 'index',  'followers'),
+('',                     'action', 'friends_friends', 'friends_add',        'friends/:user/add',    'friends', 'friend', 'add'),
+('',                     'action', 'friends_friends', 'friends_delete',     'friends/:user/delete', 'friends', 'friend', 'delete');

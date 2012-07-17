@@ -46,3 +46,16 @@ VALUES
 ('Nuevo conjunto',             '', FALSE, 'groupsets', 'manager',  'new',   'new', 'groupsets_new'),
 ('Vista de un conjunto',       '', FALSE, 'groupsets', 'groupset', 'view',  '',    'groupsets_groupset_view'),
 ('Edicion de un conjunto',     '', FALSE, 'groupsets', 'groupset', 'edit',  '',    'groupsets_groupset_edit');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Administrador de conjuntos', 'list',   'base',                    'groupsets_manager',         'groupsets/manager',          'groupsets', 'manager',  'index'),
+('Nuevo conjunto',             'view',   'groupsets_manager',       'groupsets_new',             'groupsets/new',              'groupsets', 'manager',  'new'),
+('',                           'action', 'groupsets_manager',       'groupsets_delete',          'groupsets/delete',           'groupsets', 'manager',  'delete'),
+('Vista de un conjunto',       'view',   'groupsets_manager',       'groupsets_groupset_view',   'groupsets/:groupset',        'groupsets', 'groupset', 'view'),
+('Edicion de un conjunto',     'view',   'groupsets_groupset_view', 'groupsets_groupset_edit',   'groupsets/:groupset/edit',   'groupsets', 'groupset', 'edit'),
+('',                           'action', 'groupsets_groupset_view', 'groupsets_groupset_delete', 'groupsets/:groupset/delete', 'groupsets', 'groupset', 'delete');

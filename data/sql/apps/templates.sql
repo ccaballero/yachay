@@ -52,3 +52,14 @@ INSERT INTO `page`
 VALUES
 ('Lista de temas',       'Temas', TRUE,  'templates', 'index',    'index', 'switch',    'templates_list'),
 ('Propiedades del tema', '',      FALSE, 'templates', 'template', 'view',  'configure', 'templates_template_view');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Lista de temas',  'list',   'base',                    'templates_list',            'templates',                  'templates', 'index',    'index'),
+('',                'action', 'templates_list',          'templates_css',             'templates/css/properties',   'templates', 'manager',  'css'),
+('Tema: $template', 'view',   'templates_list',          'templates_template_view',   'templates/view/:template',   'templates', 'template', 'view'),
+('',                'action', 'templates_template_view', 'templates_template_switch', 'templates/switch/:template', 'templates', 'template', 'switch');

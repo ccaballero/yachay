@@ -33,3 +33,17 @@ VALUES
 ('Nuevo archivo',      'Nuevo archivo', TRUE,  'files', 'manager', 'new',  '', 'files_new'),
 ('Visor de archivos',  '',              FALSE, 'files', 'file',    'view', '', 'files_file_view'),
 ('Editor de archivos', '',              FALSE, 'files', 'file',    'edit', '', 'files_file_edit');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Nuevo archivo',      'view',   'resources_list',  'files_new',           'files/new',            'files', 'manager', 'new'),
+('Visor de archivos',  'view',   'resources_list',  'files_file_view',     'files/:file',          'files', 'file',    'view'),
+('Editor de archivos', 'view',   'files_file_view', 'files_file_edit',     'files/:file/edit',     'files', 'file',    'edit'),
+('',                   'action', 'files_file_view', 'files_file_download', 'files/:file/download', 'files', 'file',    'download'),
+('',                   'action', 'files_file_view', 'files_file_delete',   'files/:file/delete',   'files', 'file',    'delete'),
+('',                   'action', 'files_file_view', 'files_file_drop',     'files/:file/drop',     'files', 'file',    'drop');
+

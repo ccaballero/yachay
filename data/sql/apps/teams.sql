@@ -64,3 +64,22 @@ VALUES
 ('Vista de un equipo',               '', FALSE, 'teams', 'team',    'view',  '', 'teams_team_view'),
 ('Edicion de un equipo',             '', FALSE, 'teams', 'team',    'edit',  '', 'teams_team_edit'),
 ('Asignacion de miembros a equipos', '', FALSE, 'teams', 'assign',  'index', '', 'teams_assign');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Administrador de equipos',            'list',   'groups_group_view', 'teams_manager',            'subjects/:subject/groups/:group/teams/manager',            'teams', 'manager', 'index'),
+('Nuevo equipo',                        'view',   'teams_manager',     'teams_new',                'subjects/:subject/groups/:group/teams/new',                'teams', 'manager', 'new'),
+('Asignación de integrantes a equipos', 'view',   'teams_manager',     'teams_assign',             'subjects/:subject/groups/:group/teams/assign',             'teams', 'assign',  'index'),
+('',                                    'action', 'teams_manager',     'teams_lock',               'subjects/:subject/groups/:group/teams/lock',               'teams', 'manager', 'lock'),
+('',                                    'action', 'teams_manager',     'teams_unlock',             'subjects/:subject/groups/:group/teams/unlock',             'teams', 'manager', 'unlock'),
+('',                                    'action', 'teams_manager',     'teams_delete',             'subjects/:subject/groups/:group/teams/delete',             'teams', 'manager', 'delete'),
+('Equipo: $team',                       'view',   'teams_manager',     'teams_team_view',          'subjects/:subject/groups/:group/teams/:team',              'teams', 'team',    'view'),
+('Edicion: $team',                      'view',   'teams_team_view',   'teams_team_edit',          'subjects/:subject/groups/:group/teams/:team/edit',         'teams', 'team',    'edit'),
+('',                                    'action', 'teams_team_view',   'teams_team_lock',          'subjects/:subject/groups/:group/teams/:team/lock',         'teams', 'team',    'lock'),
+('',                                    'action', 'teams_team_view',   'teams_team_unlock',        'subjects/:subject/groups/:group/teams/:team/unlock',       'teams', 'team',    'unlock'),
+('',                                    'action', 'teams_team_view',   'teams_team_delete',        'subjects/:subject/groups/:group/teams/:team/delete',       'teams', 'team',    'delete'),
+('',                                    'action', 'teams_team_view',   'teams_team_member_delete', 'subjects/:subject/groups/:group/teams/:team/:user/delete', 'teams', 'member',  'delete');

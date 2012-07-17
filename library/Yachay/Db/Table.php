@@ -2,24 +2,13 @@
 
 abstract class Yachay_Db_Table extends Zend_Db_Table_Abstract
 {
-    // General selections
-    public function selectAll() {
-        $list = array();
-
-        foreach ($this->fetchAll() as $row) {
-            $list[] = $this->_construcObject($row);
-        }
-
-        return $list;
-    }
-
     // Find by unique indexes
     public function findByIdent($ident) {
         $row = $this->fetchRow(
                $this->getAdapter()
                     ->quoteInto('ident = ?', $ident));
 
-        return $this->_construcObject($row);
+        return $this->_constructObject($row);
     }
 
     public function findByLabel($label) {
@@ -27,7 +16,7 @@ abstract class Yachay_Db_Table extends Zend_Db_Table_Abstract
                $this->getAdapter()
                     ->quoteInto('label = ?', $label));
 
-        return $this->_construcObject($row);
+        return $this->_constructObject($row);
     }
 
     public function findByUrl($url) {
@@ -35,10 +24,25 @@ abstract class Yachay_Db_Table extends Zend_Db_Table_Abstract
                $this->getAdapter()
                     ->quoteInto('url = ?', $url));
 
-        return $this->_construcObject($row);
+        return $this->_constructObject($row);
     }
 
-    private function _construcObject($row) {
+    // General selections
+    public function selectAll() {
+        $result = $this->fetchAll();
+        return $this->_constructList($result);
+    }
+
+    // Generic constructors of bean objects
+    protected function _constructList(Iterator $resultset) {
+        $list = array();
+        foreach ($resultset as $row) {
+            $list[] = $this->_constructObject($row);
+        }
+        return $list;
+    }
+
+    protected function _constructObject($row) {
         $object = new $this->_modelClass();
         $reflect = new ReflectionObject($object);
 

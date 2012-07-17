@@ -34,3 +34,15 @@ VALUES
 ('Nuevo evento',      'Nuevo evento', TRUE,  'events', 'manager', 'new',  '', 'events_new'),
 ('Visor de eventos',  '',             FALSE, 'events', 'event',   'view', '', 'events_event_view'),
 ('Editor de eventos', '',             FALSE, 'events', 'event',   'edit', '', 'events_event_edit');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Nuevo evento',      'view',   'resources_list',    'events_new',          'events/new',           'events', 'manager', 'new'),
+('Visor de eventos',  'view',   'resources_list',    'events_event_view',   'events/:event',        'events', 'event',   'view'),
+('Editor de eventos', 'view',   'events_event_view', 'events_event_edit',   'events/:event/edit',   'events', 'event',   'edit'),
+('',                  'action', 'events_event_view', 'events_event_delete', 'events/:event/delete', 'events', 'event',   'delete'),
+('',                  'action', 'events_event_view', 'events_event_drop',   'events/:event/drop',   'events', 'event',   'drop');

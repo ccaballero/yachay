@@ -98,3 +98,33 @@ VALUES
 ('Agregar miembros a una materia',   '',              FALSE, 'subjects', 'assign',  'new',    '',                'subjects_subject_assign_new'),
 ('Importar miembros a una materia',  '',              FALSE, 'subjects', 'assign',  'import', '',                'subjects_subject_assign_import'),
 ('Exportar miembros de una materia', '',              FALSE, 'subjects', 'assign',  'export', '',                'subjects_subject_assign_export');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Lista de materias',         'list',   'base',                    'subjects_list',                         'subjects',                              'subjects', 'index',   'index'),
+('Administrador de materias', 'list',   'subjects_list',           'subjects_manager',                      'subjects/manager',                      'subjects', 'manager', 'index'),
+('Nueva materia',             'view',   'subjects_manager',        'subjects_new' ,                         'subjects/new',                          'subjects', 'manager', 'new'),
+('',                          'action', 'subjects_manager',        'subjects_lock',                         'subjects/lock',                         'subjects', 'manager', 'lock'),
+('',                          'action', 'subjects_manager',        'subjects_unlock',                       'subjects/unlock',                       'subjects', 'manager', 'unlock'),
+('Importar materias',         'view',   'subjects_manager',        'subjects_import',                       'subjects/import',                       'subjects', 'manager', 'import'),
+('Exportar materias',         'view',   'subjects_manager',        'subjects_export',                       'subjects/export',                       'subjects', 'manager', 'export'),
+('',                          'action', 'subjects_manager',        'subjects_delete',                       'subjects/delete',                       'subjects', 'manager', 'delete'),
+('Materia: $subject',         'view',   'subjects_manager',        'subjects_subject_view',                 'subjects/:subject/',                    'subjects', 'subject', 'view'),
+('Editar: $subject',          'view',   'subjects_subject_view',   'subjects_subject_edit',                 'subjects/:subject/edit',                'subjects', 'subject', 'edit'),
+('',                          'action', 'subjects_subject_view',   'subjects_subject_lock',                 'subjects/:subject/lock',                'subjects', 'subject', 'lock'),
+('',                          'action', 'subjects_subject_view',   'subjects_subject_unlock',               'subjects/:subject/unlock',              'subjects', 'subject', 'unlock'),
+('',                          'action', 'subjects_subject_view',   'subjects_subject_delete',               'subjects/:subject/delete',              'subjects', 'subject', 'delete'),
+('Integrantes: $subject',     'list',   'subjects_subject_view',   'subjects_subject_assign',               'subjects/:subject/assign',              'subjects', 'assign',  'index'),
+('Agregar integrantes',       'view',   'subjects_subject_assign', 'subjects_subject_assign_new',           'subjects/:subject/assign/new',          'subjects', 'assign',  'new'),
+('',                          'action', 'subjects_subject_assign', 'subjects_subject_assign_lock',          'subjects/:subject/assign/lock',         'subjects', 'assign',  'lock'),
+('',                          'action', 'subjects_subject_assign', 'subjects_subject_assign_unlock',        'subjects/:subject/assign/unlock',       'subjects', 'assign',  'unlock'),
+('Importar integrantes',      'view',   'subjects_subject_assign', 'subjects_subject_assign_import',        'subjects/:subject/assign/import',       'subjects', 'assign',  'import'),
+('Exportar integrantes',      'view',   'subjects_subject_assign', 'subjects_subject_assign_export',        'subjects/:subject/assign/export',       'subjects', 'assign',  'export'),
+('',                          'action', 'subjects_subject_assign', 'subjects_subject_assign_delete',        'subjects/:subject/assign/delete',       'subjects', 'assign',  'delete'),
+('',                          'action', 'subjects_subject_assign', 'subjects_subject_assign_member_lock',   'subjects/:subject/assign/:user/lock',   'subjects', 'member',  'lock'),
+('',                          'action', 'subjects_subject_assign', 'subjects_subject_assign_member_unlock', 'subjects/:subject/assign/:user/unlock', 'subjects', 'member',  'unlock'),
+('',                          'action', 'subjects_subject_assign', 'subjects_subject_assign_member_delete', 'subjects/:subject/assign/:user/delete', 'subjects', 'member',  'delete');

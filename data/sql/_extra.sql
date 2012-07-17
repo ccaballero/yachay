@@ -2,27 +2,27 @@
 /*============================================================================*/
 /* Conecciones adicionales para la habilitacion de los menus                  */
 /*============================================================================*/
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 1 WHERE `ident` =  4; /* base_visitor */
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 2 WHERE `ident` = 22; /* users_list */
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 3 WHERE `ident` = 32; /* friends_friends */
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 4 WHERE `ident` = 38; /* gestions_list */
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 5 WHERE `ident` = 59; /* careers_list */
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 6 WHERE `ident` = 54; /* areas_list */
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 7 WHERE `ident` = 43; /* subjects_list */
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 8 WHERE `ident` = 79; /* communities_list */
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 1 WHERE `route` = 'base_visitor';
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 2 WHERE `route` = 'users_list';
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 3 WHERE `route` = 'friends_friends';
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 4 WHERE `route` = 'gestions_list';
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 5 WHERE `route` = 'careers_list';
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 6 WHERE `route` = 'areas_list';
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 7 WHERE `route` = 'subjects_list';
+UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 8 WHERE `route` = 'communities_list';
 
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  1 WHERE `ident` =   1; /* packages_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  2 WHERE `ident` =  10; /* pages_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  3 WHERE `ident` =  12; /* widgets_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  4 WHERE `ident` =  14; /* roles_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  5 WHERE `ident` =  90; /* resources_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  6 WHERE `ident` = 128; /* templates_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  7 WHERE `ident` = 120; /* tags_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  8 WHERE `ident` = 130; /* analytics_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  9 WHERE `ident` = 123; /* feedback_list */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 10 WHERE `ident` =   7; /* base_development */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 11 WHERE `ident` =   8; /* base_terms */
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 12 WHERE `ident` =   9; /* base_privacy */
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  1 WHERE `route` = 'packages_list';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  2 WHERE `route` = 'pages_list';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  3 WHERE `route` = 'widgets_list';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  4 WHERE `route` = 'roles_list';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  5 WHERE `route` = 'resources_list';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  6 WHERE `route` = 'templates_list';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  7 WHERE `route` = 'tags_list';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  8 WHERE `route` = 'analytics_list';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` =  9 WHERE `route` = 'feedback_list';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 10 WHERE `route` = 'base_development';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 11 WHERE `route` = 'base_terms';
+UPDATE `page` SET `menutype` = 'footer', `menuorder` = 12 WHERE `route` = 'base_privacy';
 
 /*============================================================================*/
 /* Conecciones adicionales para la habilitacion de los widgets                */
@@ -34,138 +34,138 @@ VALUES
 /* Inserciones extra para el paquete MENUS                                    */
 /*============================================================================*/
 /* Pagina principal anonima */
-( 4, 5, 2), /* Calificaciones */
-( 4, 1, 3), /* Espacios */
-( 4, 2, 4), /* Links */
+( 1, 5, 2), /* Calificaciones */
+( 1, 1, 3), /* Espacios */
+( 1, 2, 4), /* Links */
 
 /* Pagina principal de usuario */
-( 5, 4, 1), /* Recursos */
-( 5, 5, 2), /* Calificaciones */
-( 5, 1, 3), /* Espacios */
-( 5, 3, 4), /* Contactos */
+( 2, 4, 1), /* Recursos */
+( 2, 5, 2), /* Calificaciones */
+( 2, 1, 3), /* Espacios */
+( 2, 3, 4), /* Contactos */
 
 /* USERS */
-( 28, 1, 3),
-( 28, 4, 1),
+( 27, 1, 3),
+( 27, 4, 1),
 
 /* PROFILE */
-( 31, 1, 3),
-( 31, 4, 1),
+( 29, 1, 3),
+( 29, 4, 1),
 
 /* SUBJECTS */
+( 48, 1, 3),
+( 48, 4, 1),
 ( 50, 1, 3),
 ( 50, 4, 1),
-( 52, 1, 3),
-( 52, 4, 1),
 
 /* AREAS */
-( 59, 1, 3),
-( 59, 4, 1),
+( 57, 1, 3),
+( 57, 4, 1),
 
 /* CAREERS */
-( 64, 1, 3),
-( 64, 4, 1),
+( 62, 1, 3),
+( 62, 4, 1),
 
 /* GROUPS */
-( 68, 1, 3),
-( 68, 4, 1),
-( 69, 1, 3),
-( 69, 4, 1),
+( 67, 1, 3),
+( 67, 4, 1),
+( 70, 1, 3),
+( 70, 4, 1),
 
 /* TEAMS */
-( 78, 1, 3),
-( 78, 4, 1),
+( 76, 1, 3),
+( 76, 4, 1),
 
 /* COMMUNITIES */
+( 82, 1, 3),
+( 82, 4, 1),
 ( 84, 1, 3),
 ( 84, 4, 1),
-( 86, 1, 3),
-( 86, 4, 1),
 
 /* SETS */
+( 86, 1, 3),
+( 86, 4, 1),
+( 87, 1, 3),
+( 87, 4, 1),
 ( 88, 1, 3),
 ( 88, 4, 1),
-( 89, 1, 3),
-( 89, 4, 1),
-( 90, 1, 3),
-( 90, 4, 1),
 
 /* RESOURCES */
+( 90, 1, 3),
+( 90, 4, 1),
+( 91, 1, 3),
+( 91, 4, 1),
+
+/* NOTES */
 ( 92, 1, 3),
 ( 92, 4, 1),
 ( 93, 1, 3),
 ( 93, 4, 1),
-
-/* NOTES */
 ( 94, 1, 3),
 ( 94, 4, 1),
+
+/* LINKS */
 ( 95, 1, 3),
 ( 95, 4, 1),
 ( 96, 1, 3),
 ( 96, 4, 1),
-
-/* LINKS */
 ( 97, 1, 3),
 ( 97, 4, 1),
+
+/* FILES */
 ( 98, 1, 3),
 ( 98, 4, 1),
 ( 99, 1, 3),
 ( 99, 4, 1),
-
-/* FILES */
 (100, 1, 3),
 (100, 4, 1),
+
+/* EVENTS */
 (101, 1, 3),
 (101, 4, 1),
 (102, 1, 3),
 (102, 4, 1),
-
-/* EVENTS */
 (103, 1, 3),
 (103, 4, 1),
+
+/* PHOTOS */
 (104, 1, 3),
 (104, 4, 1),
 (105, 1, 3),
 (105, 4, 1),
-
-/* PHOTOS */
 (106, 1, 3),
 (106, 4, 1),
+
+/* VIDEOS */
 (107, 1, 3),
 (107, 4, 1),
 (108, 1, 3),
 (108, 4, 1),
-
-/* VIDEOS */
 (109, 1, 3),
 (109, 4, 1),
+
+/* EVALUATIONS */
 (110, 1, 3),
 (110, 4, 1),
 (111, 1, 3),
 (111, 4, 1),
-
-/* EVALUATIONS */
 (112, 1, 3),
 (112, 4, 1),
-(113, 1, 3),
-(113, 4, 1),
-(114, 1, 3),
-(114, 4, 1),
 
 /* CALIFICATIONS */
-(121, 5, 3), /* Calificaciones */
+(119, 5, 3),
 
 /* FEEDBACK */
+(123, 1, 3),
+(123, 4, 1),
+(124, 1, 3),
+(124, 4, 1),
 (125, 1, 3),
 (125, 4, 1),
 (126, 1, 3),
 (126, 4, 1),
 (127, 1, 3),
-(127, 4, 1),
-(128, 1, 3),
-(128, 4, 1),
-(129, 1, 3),
-(129, 4, 1);
+(127, 4, 1);
 
 /*============================================================================*/
 /* Insercion de roles del sistema                                             */
@@ -408,9 +408,3 @@ INSERT INTO `template`
 VALUES
 ('minimal', 'Plantilla basica diseñada especialmente para navegadores antiguos o de compatibilidades dudosas', 'HTML4_LOOSE', UNIX_TIMESTAMP(), '{}'),
 ('webarte', 'Plantilla simple que utiliza hoja de estilos y no javascript', 'XHTML1_STRICT', UNIX_TIMESTAMP(), '{"background":"#FFFFFF", "background_headers":"#3B5998","background_headers2":"#627AAD","background_messages":"#FEFFDD","color_headers":"#FFFFFF","color_borders":"#E2E2E2","color_letters":"#333333"}');
-
-/* FIXME: move this block to the original position */
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Confirmación', 'Confirmación', FALSE, 'base', 'index', 'confirm', '', 'base_confirm');

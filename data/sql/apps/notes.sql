@@ -30,3 +30,15 @@ VALUES
 ('Nueva nota',      'Nueva nota', TRUE,  'notes', 'manager', 'new',  '', 'notes_new'),
 ('Visor de notas',  '',           FALSE, 'notes', 'note',    'view', '', 'notes_note_view'),
 ('Editor de notas', '',           FALSE, 'notes', 'note',    'edit', '', 'notes_note_edit');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Nueva nota',      'view',   'resources_list',  'notes_new',         'notes/new',          'notes', 'manager', 'new'),
+('Visor de notas',  'view',   'resources_list',  'notes_note_view',   'notes/:note',        'notes', 'note',    'view'),
+('Editor de notas', 'view',   'notes_note_view', 'notes_note_edit',   'notes/:note/edit',   'notes', 'note',    'edit'),
+('',                'action', 'notes_note_view', 'notes_note_delete', 'notes/:note/delete', 'notes', 'note',    'delete'),
+('',                'action', 'notes_note_view', 'notes_note_drop',   'notes/:note/drop',   'notes', 'note',    'drop');

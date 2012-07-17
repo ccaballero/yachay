@@ -9,9 +9,6 @@ SELECT 'base';
 SELECT 'packages';
 \. apps/packages.sql
 
-SELECT 'frontpage';
-\. apps/frontpage.sql
-
 SELECT 'pages';
 \. apps/pages.sql
 

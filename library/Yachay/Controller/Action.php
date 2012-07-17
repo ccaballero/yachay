@@ -124,7 +124,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
     public function breadcrumb($elements = array()) {
         global $BREADCRUMB;
         $BREADCRUMB->items[] = array(
-            'link'  => $this->config->resources->frontController->baseUrl,
+            'link'  => $this->config->resources->frontController->baseUrl . '/',
             'label' => 'Inicio',
         );
 

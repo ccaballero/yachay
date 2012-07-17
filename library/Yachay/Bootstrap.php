@@ -7,35 +7,6 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         Zend_Registry::set('config', $config);
     }
 
-    protected function _initAutoload() {
-        $loader = Zend_Loader_Autoloader::getInstance();
-        $loader->pushAutoloader(new Yachay_Loader());
-    }
-
-    protected function _initRouter() {
-        $this->bootstrap(array('config', 'autoload','frontController','db'));
-
-        $config = Zend_Registry::geT('config');
-
-        $ctrl = Zend_Controller_Front::getInstance();
-        $router = $ctrl->getRouter();
-
-        // Routes join
-        $model_packages = new Db_Packages();
-        $packages = $model_packages->selectByStatus('active');
-        foreach ($packages as $package) {
-            $path = $config->resources->frontController->moduleDirectory . '/' . $package->url;
-            if (is_dir($path)) {
-                if (file_exists("$path/Init.php")) {
-                    include "$path/Init.php";
-                    $class = ucfirst(strtolower($package->url)) . '_Init';
-                    $obj = new $class();
-                    $obj->setRoutes($router);
-                }
-            }
-        }
-    }
-
     protected function _initLocale() {
         $this->bootstrap('config');
 
@@ -50,6 +21,54 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         $config = Zend_Registry::get('config');
         date_default_timezone_set($config->system->timezone);
+    }
+
+    protected function _initAutoload() {
+        $loader = Zend_Loader_Autoloader::getInstance();
+        $loader->pushAutoloader(new Yachay_Loader());
+    }
+
+    protected function _initRouter() {
+        $this->bootstrap(array('config', 'autoload','frontController','db'));
+
+        $config = Zend_Registry::get('config');
+
+        $ctrl = Zend_Controller_Front::getInstance();
+        $router = $ctrl->getRouter();
+
+        // Routes select by enabled package
+        $db_routes = new Db_Routes();
+        $routes = $db_routes->selectByEnabledPackages();
+
+//        Zend_Registry::set('routes', $routes);
+
+        foreach ($routes as $route) {
+            $path = $config->resources->frontController->moduleDirectory . '/' . $route->module;
+            if (is_dir($path)) {
+                $router->addRoute($route->route,
+                    new Zend_Controller_Router_Route(
+                        $route->mapping, array(
+                            'module' => $route->module,
+                            'controller' => $route->controller,
+                            'action' => $route->action,
+                )));
+            }
+        }
+
+        // Routes join
+//        $model_packages = new Db_Packages();
+//        $packages = $model_packages->selectByStatus('active');
+//        foreach ($packages as $package) {
+//            $path = $config->resources->frontController->moduleDirectory . '/' . $package->url;
+//            if (is_dir($path)) {
+//                if (file_exists("$path/Init.php")) {
+//                    include "$path/Init.php";
+//                    $class = ucfirst(strtolower($package->url)) . '_Init';
+//                    $obj = new $class();
+//                    $obj->setRoutes($router);
+//                }
+//            }
+//        }
     }
 
     protected function _initSession() {

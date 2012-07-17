@@ -68,3 +68,16 @@ VALUES
 ('Nueva carrera',             'Nueva carrera', TRUE,  'careers', 'manager', 'new',   'new',        'careers_new'),
 ('Vista de una carrera',      '',              FALSE, 'careers', 'career',  'view',  '',           'careers_career_view'),
 ('Edicion de una carrera',    '',              FALSE, 'careers', 'career',  'edit',  '',           'careers_career_edit');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Lista de carreras',         'list',   'base',                'careers_list',          'careers',                'careers', 'index',   'index'),
+('Administrador de carreras', 'list',   'careers_list',        'careers_manager',       'careers/manager',        'careers', 'manager', 'index'),
+('Nueva carrera',             'view',   'careers_manager',     'careers_new',           'careers/new',            'careers', 'manager', 'new'),
+('Carrera: $career',          'view',   'careers_manager',     'careers_career_view',   'careers/:career',        'careers', 'career',  'view'),
+('Editar: $career',           'view',   'careers_career_view', 'careers_career_edit',   'careers/:career/edit',   'careers', 'career',  'edit'),
+('',                          'action', 'careers_career_view', 'careers_career_delete', 'careers/:career/delete', 'careers', 'career',  'delete');

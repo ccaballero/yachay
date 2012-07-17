@@ -87,3 +87,23 @@ VALUES
 ('Exportar usuarios',         'Exp. usuarios', TRUE,  'users', 'manager', 'export', 'export',          'users_export'),
 ('Vista de un usuario',       '',              FALSE, 'users', 'user',    'view',   '',                'users_user_view'),
 ('Edicion de un usuario',     '',              FALSE, 'users', 'user',    'edit',   '',                'users_user_edit');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Lista de usuarios',         'list',   'base',            'users_list',        'users',              'users', 'index',   'index'),
+('Administrador de usuarios', 'list',   'users_list',      'users_manager',     'users/manager',      'users', 'manager', 'index'),
+('Nuevo usuario',             'view',   'users_manager',   'users_new',         'users/new',          'users', 'manager', 'new'),
+('Importar usuarios',         'view',   'users_manager',   'users_import',      'users/import',       'users', 'manager', 'import'),
+('Exportar usuarios',         'view',   'users_manager',   'users_export',      'users/export',       'users', 'manager', 'export'),
+('',                          'action', 'users_manager',   'users_lock',        'users/lock',         'users', 'manager', 'lock'),
+('',                          'action', 'users_manager',   'users_unlock',      'users/unlock',       'users', 'manager', 'unlock'),
+('',                          'action', 'users_manager',   'users_delete',      'users/delete',       'users', 'manager', 'delete'),
+('Usuario: $user',            'view',   'users_manager',   'users_user_view',   'users/:user',        'users', 'user',    'view'),
+('Editar: $user',             'view',   'users_user_view', 'users_user_edit',   'users/:user/edit',   'users', 'user',    'edit'),
+('',                          'action', 'users_user_view', 'users_user_lock',   'users/:user/lock',   'users', 'user',    'lock'),
+('',                          'action', 'users_user_view', 'users_user_unlock', 'users/:user/unlock', 'users', 'user',    'unlock'),
+('',                          'action', 'users_user_view', 'users_user_delete', 'users/:user/delete', 'users', 'user',    'delete');

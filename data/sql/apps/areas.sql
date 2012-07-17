@@ -68,3 +68,16 @@ VALUES
 ('Nueva area',             'Nueva area', TRUE,  'areas', 'manager', 'new',   'new',        'areas_new'),
 ('Vista de un area',       '',           FALSE, 'areas', 'area',    'view',  '',           'areas_area_view'),
 ('Edicion de un area',     '',           FALSE, 'areas', 'area',    'edit',  '',           'areas_area_edit');
+
+/*============================================================================*/
+/* Registro de rutas para el paquete                                          */
+/*============================================================================*/
+INSERT INTO `route`
+(`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
+VALUES
+('Lista de areas',         'list',   'base',            'areas_list',        'areas',              'areas', 'index',   'index'),
+('Administrador de areas', 'list',   'areas_list',      'areas_manager',     'areas/manager',      'areas', 'manager', 'index'),
+('Nueva area',             'view',   'areas_manager',   'areas_new',         'areas/new',          'areas', 'manager', 'new'),
+('Area: $area',            'view',   'areas_manager',   'areas_area_view',   'areas/:area',        'areas', 'area',    'view'),
+('',                       'action', 'areas_area_view', 'areas_area_delete', 'areas/:area/delete', 'areas', 'area',    'delete'),
+('',                       'action', 'areas_area_view', 'areas_area_edit',   'areas/:area/edit',   'areas', 'area',    'edit');
