@@ -34,24 +34,24 @@ class Teams extends Yachay_Db_Table
         return $this->fetchRow($this->getAdapter()->quoteInto('ident = ?', $ident));
     }
 
-    public function findByLabel($group, $label) {
+    public function findByLabel($label, $group = null) {
         return $this->fetchRow($this->select()->where('`group` = ?', $group)->where('label = ?', $label));
     }
 
-    public function findByUrl($group, $url) {
+    public function findByUrl($url, $group = null) {
         return $this->fetchRow($this->select()->where('`group` = ?', $group)->where('url = ?', $url));
     }
 
     // Selects in table
-    public function selectAll($group) {
+    public function selectAll($group = null) {
         return $this->fetchAll($this->select()->where('`group` = ?', $group)->order('label ASC'));
     }
 
-    public function selectByAuthor($group, $author) {
+    public function selectByAuthor($author, $group = null) {
         return $this->fetchAll($this->select()->where('`group` = ?', $group)->where('author = ?', $author));
     }
 
-    public function selectByStatus($group, $status) {
+    public function selectByStatus($status, $group = null) {
         return $this->fetchAll($this->select()->where('`group` = ?', $group)->where('status = ?', $status));
     }
 }

@@ -20,7 +20,7 @@ class Subjects_SubjectController extends Yachay_Controller_Action
             $historial = true;
         }
 
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $this->context('subject', $subject);
@@ -58,7 +58,7 @@ class Subjects_SubjectController extends Yachay_Controller_Action
                 break;
         }
 
-        $list_groups = $model_groups->selectByStatus($subject->ident, 'active');
+        $list_groups = $model_groups->selectByStatus('active', $subject->ident);
         $list_areas = $subject->findAreasViaAreas_Subjects();
 
         $resources = $subject->findResourcesViaSubjects_Resources($subject->select()->order('tsregister DESC'));
@@ -120,7 +120,7 @@ class Subjects_SubjectController extends Yachay_Controller_Action
         $model_gestions = new Gestions();
 
         $gestion = $model_gestions->findByActive();
-        $subject = $model_subjects->findByUrl($gestion->ident, $request->getParam('subject'));
+        $subject = $model_subjects->findByUrl($request->getParam('subject'), $gestion->ident);
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
@@ -203,7 +203,7 @@ class Subjects_SubjectController extends Yachay_Controller_Action
         $model_gestions = new Gestions();
 
         $gestion = $model_gestions->findByActive();
-        $subject = $model_subjects->findByUrl($gestion->ident, $url);
+        $subject = $model_subjects->findByUrl($url, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $label = $subject->label;
@@ -224,7 +224,7 @@ class Subjects_SubjectController extends Yachay_Controller_Action
         $model_gestions = new Gestions();
 
         $gestion = $model_gestions->findByActive();
-        $subject = $model_subjects->findByUrl($gestion->ident, $url);
+        $subject = $model_subjects->findByUrl($url, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $label = $subject->label;
@@ -245,7 +245,7 @@ class Subjects_SubjectController extends Yachay_Controller_Action
         $model_gestions = new Gestions();
 
         $gestion = $model_gestions->findByActive();
-        $subject = $model_subjects->findByUrl($gestion->ident, $url);
+        $subject = $model_subjects->findByUrl($url, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $label = $subject->label;

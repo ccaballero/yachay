@@ -18,7 +18,7 @@ class Gestions_GestionController extends Yachay_Controller_Action
         $model_subjects = new Subjects();
         $model_subjects_users = new Subjects_Users();
 
-        $subjects1 = $model_subjects->selectByStatus($gestion->ident, 'active');
+        $subjects1 = $model_subjects->selectByStatus('active', $gestion->ident);
         $subjects2 = array();
 
         foreach ($subjects1 as $subject) {

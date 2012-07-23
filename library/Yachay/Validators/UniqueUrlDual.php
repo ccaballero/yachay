@@ -14,7 +14,7 @@ class Yachay_Validators_UniqueUrlDual extends Zend_Validate_Abstract
 
     public function isValid($value) {
         $model = new $this->_model();
-        $element = $model->findByUrl($this->_foreign, $value);
+        $element = $model->findByUrl($value, $this->_foreign);
         if (empty($element)) {
             return true;
         } else {

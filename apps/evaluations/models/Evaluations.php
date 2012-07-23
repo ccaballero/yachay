@@ -27,7 +27,7 @@ class Evaluations extends Yachay_Db_Table
         return $this->fetchRow($this->getAdapter()->quoteInto('ident = ?', $ident));
     }
 
-    public function findByLabel($author, $label) {
+    public function findByLabel($label, $author = null) {
         return $this->fetchRow($this->select()
                                     ->where('author = ?', $author)
                                     ->where('label = ?', $label));

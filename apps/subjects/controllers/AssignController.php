@@ -27,7 +27,7 @@ class Subjects_AssignController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $this->context('subject', $subject);
@@ -72,7 +72,7 @@ class Subjects_AssignController extends Yachay_Controller_Action
 
         $gestion = $model_gestions->findByActive();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
@@ -151,7 +151,7 @@ class Subjects_AssignController extends Yachay_Controller_Action
 
             $model_subjects_model = new Subjects();
             $subject_url = $request->getParam('subject');
-            $subject = $model_subjects_model->findByUrl($gestion->ident, $subject_url);
+            $subject = $model_subjects_model->findByUrl($subject_url, $gestion->ident);
             $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
             $this->requireModerator($subject);
 
@@ -185,7 +185,7 @@ class Subjects_AssignController extends Yachay_Controller_Action
             $model_users = new Users();
             $model_subjects_model = new Subjects();
             $subject_url = $request->getParam('subject');
-            $subject = $model_subjects_model->findByUrl($gestion->ident, $subject_url);
+            $subject = $model_subjects_model->findByUrl($subject_url, $gestion->ident);
             $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
             $this->requireModerator($subject);
 
@@ -219,7 +219,7 @@ class Subjects_AssignController extends Yachay_Controller_Action
             $model_users = new Users();
             $model_subjects_model = new Subjects();
             $subject_url = $request->getParam('subject');
-            $subject = $model_subjects_model->findByUrl($gestion->ident, $subject_url);
+            $subject = $model_subjects_model->findByUrl($subject_url, $gestion->ident);
             $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
             $this->requireModerator($subject);
 
@@ -252,7 +252,7 @@ class Subjects_AssignController extends Yachay_Controller_Action
         $request = $this->getRequest();
 
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
@@ -431,7 +431,7 @@ class Subjects_AssignController extends Yachay_Controller_Action
         $this->view->gestion = $gestion;
 
         $subject_url = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $subject_url);
+        $subject = $model_subjects->findByUrl($subject_url, $gestion->ident);
         $this->view->subject = $subject;
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');

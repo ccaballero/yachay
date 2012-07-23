@@ -4,7 +4,7 @@ class Teams_View_Helper_Teams
 {
     public function teams($name, $value, $group, $member) {
         $model_teams = new Teams();
-        $teams = $model_teams->selectByStatus($group->ident, 'active');
+        $teams = $model_teams->selectByStatus('active', $group->ident);
 
         $options = array();
         $options[] = '<option value="' . $value . '">-------------------</option>';

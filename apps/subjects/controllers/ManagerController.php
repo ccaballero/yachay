@@ -267,7 +267,7 @@ class Subjects_ManagerController extends Yachay_Controller_Action
                                     $result = array();
 
                                     $result['CODIGO'] = trim($row[$_headers['CODIGO']]);
-                                    $subject = $model_subjects->findByCode($gestion->ident, $result['CODIGO']);
+                                    $subject = $model_subjects->findByCode($result['CODIGO'], $gestion->ident);
                                     if (empty($subject)) {
                                         $result['CODIGO_NUE'] = TRUE;
                                     } else {
@@ -336,7 +336,7 @@ class Subjects_ManagerController extends Yachay_Controller_Action
                                 $subject->tsregister = time();
                             }
                             if (!$result['CODIGO_NUE'] && $this->acl('subjects', 'edit')) {
-                                $subject = $model_subjects->findByCode($gestion->ident, $result['CODIGO']);
+                                $subject = $model_subjects->findByCode($result['CODIGO'], $gestion->ident);
                             }
                             if (isset($subject)) {
                                 $subject->label = $result['MATERIA'];

@@ -17,7 +17,7 @@ class Subjects_MemberController extends Yachay_Controller_Action
         $url_subject = $request->getParam('subject');
 
         $user = $model_users->findByUrl($url_user);
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
@@ -44,7 +44,7 @@ class Subjects_MemberController extends Yachay_Controller_Action
         $url_subject = $request->getParam('subject');
 
         $user = $model_users->findByUrl($url_user);
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
@@ -71,7 +71,7 @@ class Subjects_MemberController extends Yachay_Controller_Action
         $url_subject = $request->getParam('subject');
 
         $user = $model_users->findByUrl($url_user);
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
 
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);

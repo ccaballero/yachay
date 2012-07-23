@@ -11,17 +11,17 @@ class Teams_MemberController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
         $this->requireExistenceGroup($group, $subject);
 
         $model_teams = new Teams();
         $url_team = $request->getParam('team');
-        $team = $model_teams->findByUrl($group->ident, $url_team);
+        $team = $model_teams->findByUrl($url_team, $group->ident);
         $this->requireExistenceTeam($team, $group, $subject);
         $this->requireMemberTeam($team);
 

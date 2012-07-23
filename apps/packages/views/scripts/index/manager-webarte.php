@@ -2,7 +2,7 @@
 
 <form method="post" action="" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?php echo $this->currentPage() ?>" />
-    <?php echo $this->partial('manager/toolbar-webarte.php') ?>
+    <?php echo $this->partial('index/toolbar-webarte.php') ?>
 
     <table>
         <tr>
@@ -45,6 +45,5 @@
         </tr>
     <?php } ?>
     </table>
-
-    <?php echo $this->partial('manager/toolbar-webarte.php') ?>
+    <?php echo $this->partial('index/toolbar-webarte.php') ?>
 </form>

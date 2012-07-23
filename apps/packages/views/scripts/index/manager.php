@@ -33,7 +33,7 @@ foreach ($this->list as $node) {
         echo '<input type="checkbox" name="check[]" value="' . $node->ident . '" />';
     }
     echo '</td>';
-    echo '<td>' . str_repeat('&nbsp;', $node['level']) . $node->label . '</td>';
+    echo '<td>' . str_repeat('&nbsp;', $node->level()) . $node->label . '</td>';
     echo '<td>' . $node->type . '</td>';
     echo '<td><center>';
 

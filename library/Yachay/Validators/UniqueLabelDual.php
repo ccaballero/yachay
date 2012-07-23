@@ -14,7 +14,7 @@ class Yachay_Validators_UniqueLabelDual extends Zend_Validate_Abstract
 
     public function isValid($value) {
         $model = new $this->_model();
-        $element = $model->findByLabel($this->_foreign, $value);
+        $element = $model->findByLabel($value, $this->_foreign);
         if (empty($element)) {
             return true;
         } else {

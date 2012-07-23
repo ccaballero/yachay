@@ -11,18 +11,18 @@ class Groups_GroupController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
         $this->requireExistenceGroup($group, $subject);
 
         $this->context('group', $group);
 
         $model_teams = new Teams();
-        $list_teams = $model_teams->selectByStatus($group->ident, 'active');
+        $list_teams = $model_teams->selectByStatus('active', $group->ident);
 
         $resources = $group->findResourcesViaGroups_Resources($group->select()->order('tsregister DESC'));
 
@@ -73,13 +73,13 @@ class Groups_GroupController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
         $this->requireExistenceGroup($group, $subject);
 
         $this->context('group', $group);
@@ -136,12 +136,12 @@ class Groups_GroupController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
         $this->requireExistenceGroup($group, $subject);
 
         $evaluation = $group->getEvaluation();
@@ -193,13 +193,13 @@ class Groups_GroupController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
 
         $group->status = 'inactive';
         $group->save();
@@ -219,13 +219,13 @@ class Groups_GroupController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
 
         $group->status = 'active';
         $group->save();
@@ -245,13 +245,13 @@ class Groups_GroupController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
         $this->requireModerator($subject);
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
 
         if ($group->isEmpty()) {
             $group->delete();

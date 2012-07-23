@@ -47,36 +47,48 @@ class Subjects extends Yachay_Db_Table
         return $this->fetchRow($this->getAdapter()->quoteInto('ident = ?', $ident));
     }
 
-    public function findByCode($gestion, $code) {
-        return $this->fetchRow($this->select()->where('gestion = ?', $gestion)->where('code = ?', $code));
+    public function findByCode($code, $gestion = null) {
+        return $this->fetchRow($this->select()->where('gestion = ?', $this->getGestion($gestion))->where('code = ?', $code));
     }
 
-    public function findByLabel($gestion, $label) {
-        return $this->fetchRow($this->select()->where('gestion = ?', $gestion)->where('label = ?', $label));
+    public function findByLabel($label, $gestion = null) {
+        return $this->fetchRow($this->select()->where('gestion = ?', $this->getGestion($gestion))->where('label = ?', $label));
     }
 
-    public function findByUrl($gestion, $url) {
-        return $this->fetchRow($this->select()->where('gestion = ?', $gestion)->where('url = ?', $url));
+    public function findByUrl($url, $gestion = null) {
+        return $this->fetchRow($this->select()->where('gestion = ?', $this->getGestion($gestion))->where('url = ?', $url));
     }
 
     // Selects in table
-    public function selectAll($gestion) {
-        return $this->fetchAll($this->select()->where('gestion = ?', $gestion)->order('label ASC'));
+    public function selectAll($gestion = null) {
+        return $this->fetchAll($this->select()->where('gestion = ?', $this->getGestion($gestion))->order('label ASC'));
     }
 
-    public function selectByAuthor($gestion, $author) {
-        return $this->fetchAll($this->select()->where('gestion = ?', $gestion)->where('author = ?', $author));
+    public function selectByAuthor($author, $gestion = null) {
+        return $this->fetchAll($this->select()->where('gestion = ?', $this->getGestion($gestion))->where('author = ?', $author));
     }
 
-    public function selectByModerator($gestion, $moderator) {
-        return $this->fetchAll($this->select()->where('gestion = ?', $gestion)->where('moderator = ?', $moderator));
+    public function selectByModerator($moderator, $gestion = null) {
+        return $this->fetchAll($this->select()->where('gestion = ?', $this->getGestion($gestion))->where('moderator = ?', $moderator));
     }
 
-    public function selectByStatus($gestion, $status) {
-        return $this->fetchAll($this->select()->where('gestion = ?', $gestion)->where('status = ?', $status)->order('label ASC'));
+    public function selectByStatus($status, $gestion = null) {
+        return $this->fetchAll($this->select()->where('gestion = ?', $this->getGestion($gestion))->where('status = ?', $status)->order('label ASC'));
     }
 
-    public function selectByVisibility($gestion, $visibility) {
-        return $this->fetchAll($this->select()->where('gestion = ?', $gestion)->where('visibility = ?', $visibility)->order('label ASC'));
+    public function selectByVisibility($visibility, $gestion = null) {
+        return $this->fetchAll($this->select()->where('gestion = ?', $this->getGestion($gestion))->where('visibility = ?', $visibility)->order('label ASC'));
+    }
+
+    private function getGestion($gestion) {
+        if ($gestion == null) {
+            $model_gestions = new Gestions();
+            $gestion = $model_gestions->findByActive();
+            $ident_gestion = $gestion->ident;
+        } else {
+            $ident_gestion = intval($gestion);
+        }
+        
+        return $ident_gestion;
     }
 }

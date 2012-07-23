@@ -50,36 +50,36 @@ class Groups extends Yachay_Db_Table
         return $this->fetchRow($this->getAdapter()->quoteInto('ident = ?', $ident));
     }
 
-    public function findByLabel($subject, $label) {
+    public function findByLabel($label, $subject = null) {
         return $this->fetchRow($this->select()
                                     ->where('subject = ?', $subject)
                                     ->where('label = ?', $label));
     }
 
-    public function findByUrl($subject, $url) {
+    public function findByUrl($url, $subject = null) {
         return $this->fetchRow($this->select()
                                     ->where('subject = ?', $subject)
                                     ->where('url = ?', $url));
     }
 
     // Selects in table
-    public function selectAll($subject) {
+    public function selectAll($subject = null) {
         return $this->fetchAll($this->select()->where('subject = ?', $subject)->order('label ASC'));
     }
 
-    public function selectByAuthor($subject, $author) {
+    public function selectByAuthor($author, $subject = null) {
         return $this->fetchAll($this->select()->where('subject = ?', $subject)->where('author = ?', $author));
     }
 
-    public function selectByTeacher($subject, $teacher) {
+    public function selectByTeacher($teacher, $subject = null) {
         return $this->fetchAll($this->select()->where('subject = ?', $subject)->where('teacher = ?', $teacher));
     }
 
-    public function selectByEvaluation($subject, $evaluation) {
+    public function selectByEvaluation($evaluation, $subject = null) {
         return $this->fetchAll($this->select()->where('subject = ?', $subject)->where('evaluation = ?', $evaluation));
     }
 
-    public function selectByStatus($subject, $status) {
+    public function selectByStatus($status, $subject = null) {
         return $this->fetchAll($this->select()->where('subject = ?', $subject)->where('status = ?', $status)->order('label ASC'));
     }
 

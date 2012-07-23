@@ -14,7 +14,7 @@ class Yachay_Validators_UniqueCodeDual extends Zend_Validate_Abstract
 
     public function isValid($value) {
         $model = new $this->_model();
-        $element = $model->findByCode($this->_foreign, $value);
+        $element = $model->findByCode($value, $this->_foreign);
         if (empty($element)) {
             return true;
         } else {

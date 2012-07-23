@@ -27,12 +27,12 @@ class Teams_ManagerController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
@@ -75,12 +75,12 @@ class Teams_ManagerController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
@@ -149,12 +149,12 @@ class Teams_ManagerController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
@@ -185,12 +185,12 @@ class Teams_ManagerController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
@@ -221,12 +221,12 @@ class Teams_ManagerController extends Yachay_Controller_Action
 
         $model_subjects = new Subjects();
         $url_subject = $request->getParam('subject');
-        $subject = $model_subjects->findByUrl($gestion->ident, $url_subject);
+        $subject = $model_subjects->findByUrl($url_subject, $gestion->ident);
         $this->requireExistence($subject, 'subject', 'subjects_subject_view', 'subjects_list');
 
         $model_groups = new Groups();
         $url_group = $request->getParam('group');
-        $group = $model_groups->findByUrl($subject->ident, $url_group);
+        $group = $model_groups->findByUrl($url_group, $subject->ident);
         $this->requireExistenceGroup($group, $subject);
         $this->requireTeacher($group);
 
