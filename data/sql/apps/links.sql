@@ -24,12 +24,12 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Nuevo enlace',      'Nuevo enlace', TRUE,  'links', 'manager', 'new',  '', 'links_new'),
-('Visor de enlaces',  '',             FALSE, 'links', 'link',    'view', '', 'links_link_view'),
-('Editor de enlaces', '',             FALSE, 'links', 'link',    'edit', '', 'links_link_edit');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Nuevo enlace',      'Nuevo enlace', TRUE,  'links', 'manager', 'new',  '', 'links_new'),
+-- ('Visor de enlaces',  '',             FALSE, 'links', 'link',    'view', '', 'links_link_view'),
+-- ('Editor de enlaces', '',             FALSE, 'links', 'link',    'edit', '', 'links_link_edit');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

@@ -29,4 +29,12 @@ class Db_Routes extends Yachay_Db_Table
                 ->order('route.ident DESC'));
         return $this->_constructList($result);
     }
+
+    public function findByRoute($route) {
+        $row = $this->fetchRow(
+        $this->getAdapter()
+             ->quoteInto('route = ?', $route));
+
+        return $this->_constructObject($row);
+    }
 }

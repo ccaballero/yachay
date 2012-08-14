@@ -60,14 +60,14 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de carreras',         'Carreras',      TRUE,  'careers', 'index',   'index', 'list',       'careers_list'),
-('Administrador de carreras', 'Carreras',      TRUE,  'careers', 'manager', 'index', 'new|delete', 'careers_manager'),
-('Nueva carrera',             'Nueva carrera', TRUE,  'careers', 'manager', 'new',   'new',        'careers_new'),
-('Vista de una carrera',      '',              FALSE, 'careers', 'career',  'view',  '',           'careers_career_view'),
-('Edicion de una carrera',    '',              FALSE, 'careers', 'career',  'edit',  '',           'careers_career_edit');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de carreras',         'Carreras',      TRUE,  'careers', 'index',   'index', 'list',       'careers_list'),
+-- ('Administrador de carreras', 'Carreras',      TRUE,  'careers', 'manager', 'index', 'new|delete', 'careers_manager'),
+-- ('Nueva carrera',             'Nueva carrera', TRUE,  'careers', 'manager', 'new',   'new',        'careers_new'),
+-- ('Vista de una carrera',      '',              FALSE, 'careers', 'career',  'view',  '',           'careers_career_view'),
+-- ('Edicion de una carrera',    '',              FALSE, 'careers', 'career',  'edit',  '',           'careers_career_edit');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

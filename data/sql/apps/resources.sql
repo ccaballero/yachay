@@ -48,11 +48,11 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de recursos',          'Recursos', TRUE,  'resources', 'index', 'list',     'new', 'resources_list'),
-('Lista de recursos por tipo', '',         FALSE, 'resources', 'index', 'filtered', 'new', 'resources_filtered');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de recursos',          'Recursos', TRUE,  'resources', 'index', 'list',     'new', 'resources_list'),
+-- ('Lista de recursos por tipo', '',         FALSE, 'resources', 'index', 'filtered', 'new', 'resources_filtered');
 
 /*============================================================================*/
 /* Registro de widgets para el paquete                                        */

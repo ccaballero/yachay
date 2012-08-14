@@ -60,14 +60,14 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de areas',         'Areas',      TRUE,  'areas', 'index',   'index', 'list',       'areas_list'),
-('Administrador de areas', 'Areas',      TRUE,  'areas', 'manager', 'index', 'new|delete', 'areas_manager'),
-('Nueva area',             'Nueva area', TRUE,  'areas', 'manager', 'new',   'new',        'areas_new'),
-('Vista de un area',       '',           FALSE, 'areas', 'area',    'view',  '',           'areas_area_view'),
-('Edicion de un area',     '',           FALSE, 'areas', 'area',    'edit',  '',           'areas_area_edit');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de areas',         'Areas',      TRUE,  'areas', 'index',   'index', 'list',       'areas_list'),
+-- ('Administrador de areas', 'Areas',      TRUE,  'areas', 'manager', 'index', 'new|delete', 'areas_manager'),
+-- ('Nueva area',             'Nueva area', TRUE,  'areas', 'manager', 'new',   'new',        'areas_new'),
+-- ('Vista de un area',       '',           FALSE, 'areas', 'area',    'view',  '',           'areas_area_view'),
+-- ('Edicion de un area',     '',           FALSE, 'areas', 'area',    'edit',  '',           'areas_area_edit');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

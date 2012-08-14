@@ -38,14 +38,14 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de gestiones',          'Gestiones',     TRUE,  'gestions', 'index',   'index', 'list',              'gestions_list'),
-('Administrador de gestiones',  'Gestiones',     TRUE,  'gestions', 'manager', 'index', 'new|active|delete', 'gestions_manager'),
-('Nueva gestion',               'Nueva gestion', TRUE,  'gestions', 'manager', 'new',   'new',               'gestions_new'),
-('Vista de un gestion',         '',              FALSE, 'gestions', 'gestion', 'view',  '',                  'gestions_gestion_view'),
-('Vista de materia en gestion', '',              FALSE, 'subjects', 'subject', 'view',  '',                  'gestions_gestion_subject');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de gestiones',          'Gestiones',     TRUE,  'gestions', 'index',   'index', 'list',              'gestions_list'),
+-- ('Administrador de gestiones',  'Gestiones',     TRUE,  'gestions', 'manager', 'index', 'new|active|delete', 'gestions_manager'),
+-- ('Nueva gestion',               'Nueva gestion', TRUE,  'gestions', 'manager', 'new',   'new',               'gestions_new'),
+-- ('Vista de un gestion',         '',              FALSE, 'gestions', 'gestion', 'view',  '',                  'gestions_gestion_view'),
+-- ('Vista de materia en gestion', '',              FALSE, 'subjects', 'subject', 'view',  '',                  'gestions_gestion_subject');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

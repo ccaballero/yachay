@@ -18,11 +18,11 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Estadisticas', 'Estadisticas', TRUE, 'analytics', 'index', 'index', 'view', 'analytics_view');
-
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Estadisticas', 'Estadisticas', TRUE, 'analytics', 'index', 'index', 'view', 'analytics_view');
+-- 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/

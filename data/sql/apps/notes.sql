@@ -24,12 +24,12 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Nueva nota',      'Nueva nota', TRUE,  'notes', 'manager', 'new',  '', 'notes_new'),
-('Visor de notas',  '',           FALSE, 'notes', 'note',    'view', '', 'notes_note_view'),
-('Editor de notas', '',           FALSE, 'notes', 'note',    'edit', '', 'notes_note_edit');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Nueva nota',      'Nueva nota', TRUE,  'notes', 'manager', 'new',  '', 'notes_new'),
+-- ('Visor de notas',  '',           FALSE, 'notes', 'note',    'view', '', 'notes_note_view'),
+-- ('Editor de notas', '',           FALSE, 'notes', 'note',    'edit', '', 'notes_note_edit');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

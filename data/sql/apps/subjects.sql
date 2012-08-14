@@ -84,20 +84,20 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de materias',                'Materias',      TRUE,  'subjects', 'index',   'index',  'list',            'subjects_list'),
-('Administrador de materias',        'Materias',      TRUE,  'subjects', 'manager', 'index',  'new|lock|delete', 'subjects_manager'),
-('Nueva materia',                    'Nueva materia', TRUE,  'subjects', 'manager', 'new',    'new',             'subjects_new'),
-('Importar materias',                'Imp. materias', TRUE,  'subjects', 'manager', 'import', 'import',          'subjects_import'),
-('Exportar materias',                'Exp. materias', TRUE,  'subjects', 'manager', 'export', 'export',          'subjects_export'),
-('Vista de una materia',             '',              FALSE, 'subjects', 'subject', 'view',   '',                'subjects_subject_view'),
-('Edicion de una materia',           '',              FALSE, 'subjects', 'subject', 'edit',   '',                'subjects_subject_edit'),
-('Miembros de una materia',          '',              FALSE, 'subjects', 'assign',  'index',  '',                'subjects_subject_assign'),
-('Agregar miembros a una materia',   '',              FALSE, 'subjects', 'assign',  'new',    '',                'subjects_subject_assign_new'),
-('Importar miembros a una materia',  '',              FALSE, 'subjects', 'assign',  'import', '',                'subjects_subject_assign_import'),
-('Exportar miembros de una materia', '',              FALSE, 'subjects', 'assign',  'export', '',                'subjects_subject_assign_export');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de materias',                'Materias',      TRUE,  'subjects', 'index',   'index',  'list',            'subjects_list'),
+-- ('Administrador de materias',        'Materias',      TRUE,  'subjects', 'manager', 'index',  'new|lock|delete', 'subjects_manager'),
+-- ('Nueva materia',                    'Nueva materia', TRUE,  'subjects', 'manager', 'new',    'new',             'subjects_new'),
+-- ('Importar materias',                'Imp. materias', TRUE,  'subjects', 'manager', 'import', 'import',          'subjects_import'),
+-- ('Exportar materias',                'Exp. materias', TRUE,  'subjects', 'manager', 'export', 'export',          'subjects_export'),
+-- ('Vista de una materia',             '',              FALSE, 'subjects', 'subject', 'view',   '',                'subjects_subject_view'),
+-- ('Edicion de una materia',           '',              FALSE, 'subjects', 'subject', 'edit',   '',                'subjects_subject_edit'),
+-- ('Miembros de una materia',          '',              FALSE, 'subjects', 'assign',  'index',  '',                'subjects_subject_assign'),
+-- ('Agregar miembros a una materia',   '',              FALSE, 'subjects', 'assign',  'new',    '',                'subjects_subject_assign_new'),
+-- ('Importar miembros a una materia',  '',              FALSE, 'subjects', 'assign',  'import', '',                'subjects_subject_assign_import'),
+-- ('Exportar miembros de una materia', '',              FALSE, 'subjects', 'assign',  'export', '',                'subjects_subject_assign_export');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

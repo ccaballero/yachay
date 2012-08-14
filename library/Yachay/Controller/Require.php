@@ -3,7 +3,7 @@
 class Yachay_Controller_Require extends Zend_Controller_Action
 {
     protected $config = null;
-    protected $page = null;
+    protected $route = null;
     protected $user = null;
     protected $template = null;
 

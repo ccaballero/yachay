@@ -9,11 +9,10 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
     }
 
     public function preDispatch() {
-        // settings for the page
+        // Set the route of request
+        $model_routes = new Db_Routes();
         $route = $this->getFrontController()->getRouter()->getCurrentRouteName();
-
-        $model_pages = new Pages();
-        $this->page = $model_pages->findByRoute($route);
+        $this->route = $model_routes->findByRoute($route);
 
         // add the views in path
         $this->view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
@@ -23,22 +22,18 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             $this->context('global');
         }
 
-        if (empty($this->page)) {
-            return;
-        }
-
         // Add the helpers of application
         $model_packages = new Db_Packages();
         $packages = $model_packages->selectByType('app');
         foreach ($packages as $package) {
             //FIXME Considerar las posibles alternativas en tipos de modulos
-            if ($this->page->controller != 'manager') {
+            if ($this->route->controller != 'manager') {
                 $this->view->addScriptPath($this->config->resources->frontController->moduleDirectory . '/' . $package->url . '/views/scripts/application');
             }
         }
 
         $this->view->config = $this->config;
-        $this->view->page = $this->page;
+        $this->view->route = $this->route;
         $this->view->user = $this->user;
         $this->view->template = $this->template;
     }
@@ -48,45 +43,41 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             return;
         }
 
-        if (empty($this->page)) {
-            return;
-        }
-
         $this->renderToolbar();
-        $this->renderMenubar();
-        $this->renderFooter();
+//        $this->renderMenubar();
+//        $this->renderFooter();
 
         // FIXME Control de privilegios
-        global $WIDGETS;
-        $widgets = $this->page->findWidgetsViaWidgets_Pages();
-        $model_widgets_pages = new Widgets_Pages();
-        foreach ($widgets as $widget) {
-            $view = new Zend_View();
-            $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
-            $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/' . $widget->package . '/views/scripts/widgets/');
-
-            $view->config = $this->config;
-            $view->page = $this->page;
-            $view->user = $this->user;
-            $view->template = $this->template;
-
-            $widget_page = $model_widgets_pages->getPosition($this->page->ident, $widget->ident);
-            $position = $widget_page->position;
-
-            $script = $this->config->resources->frontController->moduleDirectory . "/{$widget->package}/views/scripts/widgets/{$widget->script}-{$this->template->label}.php";
-            if (file_exists($script)) {
-                $to_render = "{$widget->script}-{$this->template->label}.php";
-            } else {
-                $to_render = "{$widget->script}.php";
-            }
-            $widget_content = $view->render($to_render);
-            if (!empty($widget_content)) {
-                $WIDGETS[$position] = array (
-                    'title'   => $widget->title,
-                    'content' => $widget_content,
-                );
-            }
-        }
+//        global $WIDGETS;
+//        $widgets = $this->page->findWidgetsViaWidgets_Pages();
+//        $model_widgets_pages = new Widgets_Pages();
+//        foreach ($widgets as $widget) {
+//            $view = new Zend_View();
+//            $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
+//            $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/' . $widget->package . '/views/scripts/widgets/');
+//
+//            $view->config = $this->config;
+//            $view->page = $this->page;
+//            $view->user = $this->user;
+//            $view->template = $this->template;
+//
+//            $widget_page = $model_widgets_pages->getPosition($this->page->ident, $widget->ident);
+//            $position = $widget_page->position;
+//
+//            $script = $this->config->resources->frontController->moduleDirectory . "/{$widget->package}/views/scripts/widgets/{$widget->script}-{$this->template->label}.php";
+//            if (file_exists($script)) {
+//                $to_render = "{$widget->script}-{$this->template->label}.php";
+//            } else {
+//                $to_render = "{$widget->script}.php";
+//            }
+//            $widget_content = $view->render($to_render);
+//            if (!empty($widget_content)) {
+//                $WIDGETS[$position] = array (
+//                    'title'   => $widget->title,
+//                    'content' => $widget_content,
+//                );
+//            }
+//        }
 
         // Register last login
         $this->user->lastLogin();
@@ -109,16 +100,16 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         $this->_helper->getHelper('FlashMessenger')->clearMessages();
 
         // Rendering customized theme
-        $script = $this->view->getScriptPath($this->page->controller) . '/' . $this->page->action . '-' . $this->template->label . '.php';
+        $script = $this->view->getScriptPath($this->route->controller) . '/' . $this->route->action . '-' . $this->template->label . '.php';
         if (file_exists($script)) {
-            $this->render($this->page->action . '-' . $this->template->label);
+            $this->render($this->route->action . '-' . $this->template->label);
         }
     }
 
-    public function history($url_page = '') {
+    public function history($url = '') {
         $session = new Zend_Session_Namespace('yachay');
         $session->lastPage = $session->currentPage;
-        $session->currentPage = $this->config->resources->frontController->baseUrl . '/' . $url_page;
+        $session->currentPage = $this->config->resources->frontController->baseUrl . '/' . $url;
     }
     
     public function breadcrumb($elements = array()) {

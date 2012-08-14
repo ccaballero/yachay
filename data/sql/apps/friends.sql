@@ -34,12 +34,12 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de contactos',   'Contactos',   TRUE, 'friends', 'index', 'friends',    'contact', 'friends_friends'),
-('Lista de solicitudes', 'Solicitudes', TRUE, 'friends', 'index', 'followings', 'contact', 'friends_followings'),
-('Lista de peticiones',  'Peticiones',  TRUE, 'friends', 'index', 'followers',  'contact', 'friends_followers');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de contactos',   'Contactos',   TRUE, 'friends', 'index', 'friends',    'contact', 'friends_friends'),
+-- ('Lista de solicitudes', 'Solicitudes', TRUE, 'friends', 'index', 'followings', 'contact', 'friends_followings'),
+-- ('Lista de peticiones',  'Peticiones',  TRUE, 'friends', 'index', 'followers',  'contact', 'friends_followers');
 
 /*============================================================================*/
 /* Registro de widgets para el paquete                                        */

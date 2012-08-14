@@ -78,16 +78,16 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de comunidades',         'Comunidades',     TRUE,  'communities', 'index',     'index', 'list',       'communities_list'),
-('Administrador de comunidades', 'Comunidades',     TRUE,  'communities', 'manager',   'index', 'list|enter', 'communities_manager'),
-('Nueva comunidad',              'Nueva comunidad', TRUE,  'communities', 'manager',   'new',   'enter',      'communities_new'),
-('Vista de una comunidad',       '',                FALSE, 'communities', 'community', 'view',  '',           'communities_community_view'),
-('Edicion de una comunidad',     '',                FALSE, 'communities', 'community', 'edit',  '',           'communities_community_edit'),
-('Miembros de una comunidad',    '',                FALSE, 'communities', 'assign',    'index', '',           'communities_community_assign'),
-('Peticiones de una comunidad',  '',                FALSE, 'communities', 'petition',  'index', '',           'communities_community_petition');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de comunidades',         'Comunidades',     TRUE,  'communities', 'index',     'index', 'list',       'communities_list'),
+-- ('Administrador de comunidades', 'Comunidades',     TRUE,  'communities', 'manager',   'index', 'list|enter', 'communities_manager'),
+-- ('Nueva comunidad',              'Nueva comunidad', TRUE,  'communities', 'manager',   'new',   'enter',      'communities_new'),
+-- ('Vista de una comunidad',       '',                FALSE, 'communities', 'community', 'view',  '',           'communities_community_view'),
+-- ('Edicion de una comunidad',     '',                FALSE, 'communities', 'community', 'edit',  '',           'communities_community_edit'),
+-- ('Miembros de una comunidad',    '',                FALSE, 'communities', 'assign',    'index', '',           'communities_community_assign'),
+-- ('Peticiones de una comunidad',  '',                FALSE, 'communities', 'petition',  'index', '',           'communities_community_petition');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

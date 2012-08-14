@@ -20,12 +20,12 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de paquetes',         'Paquetes', TRUE,  'packages', 'index',   'index', 'list',     'packages_list'),
-('Administrador de paquetes', 'Paquetes', TRUE,  'packages', 'manager', 'index', 'new|lock', 'packages_manager'),
-('Vista de un paquete',       '',         FALSE, 'packages', 'package', 'view',  '',         'packages_package_view');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de paquetes',         'Paquetes', TRUE,  'packages', 'index',   'index', 'list',     'packages_list'),
+-- ('Administrador de paquetes', 'Paquetes', TRUE,  'packages', 'manager', 'index', 'new|lock', 'packages_manager'),
+-- ('Vista de un paquete',       '',         FALSE, 'packages', 'package', 'view',  '',         'packages_package_view');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

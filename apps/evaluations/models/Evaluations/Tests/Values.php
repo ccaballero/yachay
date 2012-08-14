@@ -22,11 +22,11 @@ class Evaluations_Tests_Values extends Yachay_Db_Table
         return $this->fetchRow($this->select()->where('ident = ?', $ident));
     }
 
-    public function findByLabel($test, $label) {
+    public function findByLabel($label, $test = null) {
         return $this->fetchRow($this->select()->where('test = ?', $test)->where('label = ?', $label));
     }
 
-    public function findByValue($test, $value) {
+    public function findByValue($value, $test = null) {
         return $this->fetchRow($this->select()->where('test = ?', $test)->where('value = ?', $value));
     }
 }

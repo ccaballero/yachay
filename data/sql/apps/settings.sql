@@ -10,10 +10,10 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Preferencias de usuario', '', FALSE, 'settings', 'index', 'index', '', 'settings');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Preferencias de usuario', '', FALSE, 'settings', 'index', 'index', '', 'settings');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

@@ -65,19 +65,19 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de grupos',               '', FALSE, 'groups', 'index',   'index',        '', 'groups_list'),
-('Administrador de grupos',       '', FALSE, 'groups', 'manager', 'index',        '', 'groups_manager'),
-('Nuevo grupo',                   '', FALSE, 'groups', 'manager', 'new',          '', 'groups_new'),
-('Vista de un grupo',             '', FALSE, 'groups', 'group',   'view',         '', 'groups_group_view'),
-('Edicion de un grupo',           '', FALSE, 'groups', 'group',   'edit',         '', 'groups_group_edit'),
-('Calificacion de un grupo',      '', FALSE, 'groups', 'group',   'calification', '', 'groups_group_calification'),
-('Miembros de un grupo',          '', FALSE, 'groups', 'assign',  'index',        '', 'groups_group_assign'),
-('Agregar miembros a un grupo',   '', FALSE, 'groups', 'assign',  'new',          '', 'groups_group_assign_new'),
-('Importar miembros a un grupo',  '', FALSE, 'groups', 'assign',  'import',       '', 'groups_group_assign_import'),
-('Exportar miembros de un grupo', '', FALSE, 'groups', 'assign',  'export',       '', 'groups_group_assign_export');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de grupos',               '', FALSE, 'groups', 'index',   'index',        '', 'groups_list'),
+-- ('Administrador de grupos',       '', FALSE, 'groups', 'manager', 'index',        '', 'groups_manager'),
+-- ('Nuevo grupo',                   '', FALSE, 'groups', 'manager', 'new',          '', 'groups_new'),
+-- ('Vista de un grupo',             '', FALSE, 'groups', 'group',   'view',         '', 'groups_group_view'),
+-- ('Edicion de un grupo',           '', FALSE, 'groups', 'group',   'edit',         '', 'groups_group_edit'),
+-- ('Calificacion de un grupo',      '', FALSE, 'groups', 'group',   'calification', '', 'groups_group_calification'),
+-- ('Miembros de un grupo',          '', FALSE, 'groups', 'assign',  'index',        '', 'groups_group_assign'),
+-- ('Agregar miembros a un grupo',   '', FALSE, 'groups', 'assign',  'new',          '', 'groups_group_assign_new'),
+-- ('Importar miembros a un grupo',  '', FALSE, 'groups', 'assign',  'import',       '', 'groups_group_assign_import'),
+-- ('Exportar miembros de un grupo', '', FALSE, 'groups', 'assign',  'export',       '', 'groups_group_assign_export');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

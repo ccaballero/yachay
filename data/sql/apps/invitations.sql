@@ -37,12 +37,12 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Administrador de invitaciones', 'Invitaciones',     TRUE,  'invitations', 'manager',    'index',   'invite', 'invitations_manager'),
-('Nueva invitacion de acceso',    'Nueva Invitacion', TRUE,  'invitations', 'manager',    'new',     'invite', 'invitations_new'),
-('Registro de usuario',           '',                 FALSE, 'invitations', 'invitation', 'proceed', '',       'invitations_invitation_proceed');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Administrador de invitaciones', 'Invitaciones',     TRUE,  'invitations', 'manager',    'index',   'invite', 'invitations_manager'),
+-- ('Nueva invitacion de acceso',    'Nueva Invitacion', TRUE,  'invitations', 'manager',    'new',     'invite', 'invitations_new'),
+-- ('Registro de usuario',           '',                 FALSE, 'invitations', 'invitation', 'proceed', '',       'invitations_invitation_proceed');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

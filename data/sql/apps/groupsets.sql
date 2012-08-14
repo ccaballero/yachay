@@ -39,13 +39,13 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Administrador de conjuntos', '', FALSE, 'groupsets', 'manager',  'index', '',    'groupsets_manager'),
-('Nuevo conjunto',             '', FALSE, 'groupsets', 'manager',  'new',   'new', 'groupsets_new'),
-('Vista de un conjunto',       '', FALSE, 'groupsets', 'groupset', 'view',  '',    'groupsets_groupset_view'),
-('Edicion de un conjunto',     '', FALSE, 'groupsets', 'groupset', 'edit',  '',    'groupsets_groupset_edit');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Administrador de conjuntos', '', FALSE, 'groupsets', 'manager',  'index', '',    'groupsets_manager'),
+-- ('Nuevo conjunto',             '', FALSE, 'groupsets', 'manager',  'new',   'new', 'groupsets_new'),
+-- ('Vista de un conjunto',       '', FALSE, 'groupsets', 'groupset', 'view',  '',    'groupsets_groupset_view'),
+-- ('Edicion de un conjunto',     '', FALSE, 'groupsets', 'groupset', 'edit',  '',    'groupsets_groupset_edit');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

@@ -40,8 +40,6 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $db_routes = new Db_Routes();
         $routes = $db_routes->selectByEnabledPackages();
 
-//        Zend_Registry::set('routes', $routes);
-
         foreach ($routes as $route) {
             $path = $config->resources->frontController->moduleDirectory . '/' . $route->module;
             if (is_dir($path)) {
@@ -54,21 +52,8 @@ class Yachay_Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 )));
             }
         }
-
-        // Routes join
-//        $model_packages = new Db_Packages();
-//        $packages = $model_packages->selectByStatus('active');
-//        foreach ($packages as $package) {
-//            $path = $config->resources->frontController->moduleDirectory . '/' . $package->url;
-//            if (is_dir($path)) {
-//                if (file_exists("$path/Init.php")) {
-//                    include "$path/Init.php";
-//                    $class = ucfirst(strtolower($package->url)) . '_Init';
-//                    $obj = new $class();
-//                    $obj->setRoutes($router);
-//                }
-//            }
-//        }
+        
+        return $router;
     }
 
     protected function _initSession() {

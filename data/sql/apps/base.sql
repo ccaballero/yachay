@@ -62,28 +62,19 @@ CREATE TABLE `route_privilege` (
     `route`     varchar(64) NOT NULL,
     `package`   varchar(64) NOT NULL,
     `privilege` varchar(64) NOT NULL,
-    UNIQUE INDEX (`route`, `package`, `privilege`),
+    PRIMARY KEY (`route`, `package`, `privilege`),
     INDEX (`package`, `privilege`),
     FOREIGN KEY (`package`, `privilege`) REFERENCES `privilege`(`package`, `privilege`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `page`;
-CREATE TABLE `page` (
-    `ident`             int unsigned                                                NOT NULL auto_increment,
-    `label`             varchar(64)                                                 NOT NULL,
-    `title`             varchar(16)                                                 NOT NULL,
-    `package`           varchar(32)                                                 NOT NULL,
-    `controller`        varchar(64)                                                 NOT NULL,
-    `action`            varchar(64)                                                 NOT NULL,
-    `route`             varchar(64)                                                 NOT NULL,
-    `privilege`         varchar(256)                                                NOT NULL DEFAULT '',
-    `menuable`          boolean                                                     NOT NULL DEFAULT FALSE,
-    `menutype`          enum('', 'menubar', 'secondary', 'footer')                  NOT NULL DEFAULT '',
-    `menuparent`        int unsigned                                                NOT NULL DEFAULT 0,
-    `menuorder`         int unsigned                                                NOT NULL DEFAULT 0,
-    PRIMARY KEY (`ident`),
-    UNIQUE INDEX (`label`),
-    UNIQUE INDEX (`route`)
+DROP TABLE IF EXISTS `route_menu`;
+CREATE TABLE `route_menu` (
+    `route` varchar(64)               NOT NULL,
+    `label` varchar(64)               NOT NULL DEFAULT '',
+    `type`  enum('menubar', 'footer') NOT NULL,
+    `order` int unsigned              NOT NULL DEFAULT 0,
+    PRIMARY KEY (`route`),
+    INDEX (`label`)
 ) DEFAULT CHARACTER SET UTF8;
 
 /*============================================================================*/
@@ -151,15 +142,15 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `route`)
-VALUES
-('Pagina inicial',         'Inicio',          TRUE,  'base', 'index',  'visitor',     'base_visitor'),
-('Pagina de usuario',      '',                FALSE, 'base', 'index',  'user',        'base_user'),
-('Pagina 404',             '',                FALSE, 'base', 'error',  'error',       'default'),
-('Colabora',               'Desarrollo',      TRUE,  'base', 'static', 'development', 'base_development'),
-('Terminos de uso',        'Terminos de uso', TRUE,  'base', 'static', 'terms',       'base_terms'),
-('Politica de privacidad', 'Privacidad',      TRUE,  'base', 'static', 'privacy',     'base_privacy');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `route`)
+-- VALUES
+-- ('Pagina inicial',         'Inicio',          TRUE,  'base', 'index',  'visitor',     'base_visitor'),
+-- ('Pagina de usuario',      '',                FALSE, 'base', 'index',  'user',        'base_user'),
+-- ('Pagina 404',             '',                FALSE, 'base', 'error',  'error',       'default'),
+-- ('Colabora',               'Desarrollo',      TRUE,  'base', 'static', 'development', 'base_development'),
+-- ('Terminos de uso',        'Terminos de uso', TRUE,  'base', 'static', 'terms',       'base_terms'),
+-- ('Politica de privacidad', 'Privacidad',      TRUE,  'base', 'static', 'privacy',     'base_privacy');
 
 /*============================================================================*/
 /* Registro de widgets para el paquete                                        */

@@ -35,14 +35,14 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de sugerencias',         'Sugerencias',      TRUE,  'feedback', 'index',   'index', 'list',               'feedback_list'),
-('Administrador de sugerencias', 'Sugerencias',      TRUE,  'feedback', 'manager', 'index', 'resolv|mark|delete', 'feedback_manager'),
-('Nueva sugerencia',             'Nueva Sugerencia', TRUE,  'feedback', 'manager', 'new',   '',                   'feedback_new'),
-('Visor de sugerencias',         '',                 FALSE, 'feedback', 'entry',   'view',  '',                   'feedback_entry_view'),
-('Editor de sugerencias',        '',                 FALSE, 'feedback', 'entry',   'edit',  '',                   'feedback_entry_edit');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de sugerencias',         'Sugerencias',      TRUE,  'feedback', 'index',   'index', 'list',               'feedback_list'),
+-- ('Administrador de sugerencias', 'Sugerencias',      TRUE,  'feedback', 'manager', 'index', 'resolv|mark|delete', 'feedback_manager'),
+-- ('Nueva sugerencia',             'Nueva Sugerencia', TRUE,  'feedback', 'manager', 'new',   '',                   'feedback_new'),
+-- ('Visor de sugerencias',         '',                 FALSE, 'feedback', 'entry',   'view',  '',                   'feedback_entry_view'),
+-- ('Editor de sugerencias',        '',                 FALSE, 'feedback', 'entry',   'edit',  '',                   'feedback_entry_edit');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

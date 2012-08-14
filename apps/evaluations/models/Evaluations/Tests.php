@@ -18,11 +18,11 @@ class Evaluations_Tests extends Yachay_Db_Table
         return $this->fetchRow($this->select()->where('ident = ?', $ident));
     }
 
-    public function findByLabel($evaluation, $label) {
+    public function findByLabel($label, $evaluation = null) {
         return $this->fetchRow($this->select()->where('evaluation = ?', $evaluation)->where('label = ?', $label));
     }
 
-    public function findByKey($evaluation, $key) {
+    public function findByKey($key, $evaluation = null) {
         return $this->fetchRow($this->select()->where('`evaluation` = ?', $evaluation)->where('`key` = ?', $key));
     }
 }

@@ -26,12 +26,12 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Nueva imagen',       'Nueva imagen', TRUE,  'photos', 'manager', 'new',  '', 'photos_new'),
-('Visor de imagenes',  '',             FALSE, 'photos', 'photo',   'view', '', 'photos_photo_view'),
-('Editor de imagenes', '',             FALSE, 'photos', 'photo',   'edit', '', 'photos_photo_edit');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Nueva imagen',       'Nueva imagen', TRUE,  'photos', 'manager', 'new',  '', 'photos_new'),
+-- ('Visor de imagenes',  '',             FALSE, 'photos', 'photo',   'view', '', 'photos_photo_view'),
+-- ('Editor de imagenes', '',             FALSE, 'photos', 'photo',   'edit', '', 'photos_photo_edit');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

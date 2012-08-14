@@ -28,13 +28,13 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Gestor de calificaciones', '', FALSE, 'califications', 'manager', 'index',  '', 'califications_manager'),
-('Importar calificaciones',  '', FALSE, 'califications', 'manager', 'import', '', 'califications_import'),
-('Exportar calificaciones',  '', FALSE, 'califications', 'manager', 'export', '', 'califications_export'),
-('Ver calificaciones',       '', FALSE, 'califications', 'index',   'index',  '', 'califications_view');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Gestor de calificaciones', '', FALSE, 'califications', 'manager', 'index',  '', 'califications_manager'),
+-- ('Importar calificaciones',  '', FALSE, 'califications', 'manager', 'import', '', 'califications_import'),
+-- ('Exportar calificaciones',  '', FALSE, 'califications', 'manager', 'export', '', 'califications_export'),
+-- ('Ver calificaciones',       '', FALSE, 'califications', 'index',   'index',  '', 'califications_view');
 
 /*============================================================================*/
 /* Registro de widgets para el paquete                                        */

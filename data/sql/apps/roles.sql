@@ -49,15 +49,15 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de roles',         'Roles',         TRUE,  'roles', 'index',   'index', 'list',              'roles_list'),
-('Administrador de roles', 'Roles',         TRUE,  'roles', 'manager', 'index', 'new|assign|delete', 'roles_manager'),
-('Nuevo rol',              'Nuevo rol',     TRUE,  'roles', 'manager', 'new',   'new',               'roles_new'),
-('Asignacion usuario/rol', 'Asig. Rol/Us.', TRUE,  'roles', 'assign',  'index', 'assign',            'roles_assign'),
-('Vista de un rol',        '',              FALSE, 'roles', 'role',    'view',  '',                  'roles_role_view'),
-('Edicion de un rol',      '',              FALSE, 'roles', 'role',    'edit',  '',                  'roles_role_edit');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de roles',         'Roles',         TRUE,  'roles', 'index',   'index', 'list',              'roles_list'),
+-- ('Administrador de roles', 'Roles',         TRUE,  'roles', 'manager', 'index', 'new|assign|delete', 'roles_manager'),
+-- ('Nuevo rol',              'Nuevo rol',     TRUE,  'roles', 'manager', 'new',   'new',               'roles_new'),
+-- ('Asignacion usuario/rol', 'Asig. Rol/Us.', TRUE,  'roles', 'assign',  'index', 'assign',            'roles_assign'),
+-- ('Vista de un rol',        '',              FALSE, 'roles', 'role',    'view',  '',                  'roles_role_view'),
+-- ('Edicion de un rol',      '',              FALSE, 'roles', 'role',    'edit',  '',                  'roles_role_edit');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

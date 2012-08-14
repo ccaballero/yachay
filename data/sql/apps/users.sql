@@ -77,16 +77,16 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de usuarios',         'Usuarios',      TRUE,  'users', 'index',   'index',  'list',            'users_list'),
-('Administrador de usuarios', 'Usuarios',      TRUE,  'users', 'manager', 'index',  'new|lock|delete', 'users_manager'),
-('Nuevo usuario',             'Nuevo usuario', TRUE,  'users', 'manager', 'new',    'new',             'users_new'),
-('Importar usuarios',         'Imp. usuarios', TRUE,  'users', 'manager', 'import', 'import',          'users_import'),
-('Exportar usuarios',         'Exp. usuarios', TRUE,  'users', 'manager', 'export', 'export',          'users_export'),
-('Vista de un usuario',       '',              FALSE, 'users', 'user',    'view',   '',                'users_user_view'),
-('Edicion de un usuario',     '',              FALSE, 'users', 'user',    'edit',   '',                'users_user_edit');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de usuarios',         'Usuarios',      TRUE,  'users', 'index',   'index',  'list',            'users_list'),
+-- ('Administrador de usuarios', 'Usuarios',      TRUE,  'users', 'manager', 'index',  'new|lock|delete', 'users_manager'),
+-- ('Nuevo usuario',             'Nuevo usuario', TRUE,  'users', 'manager', 'new',    'new',             'users_new'),
+-- ('Importar usuarios',         'Imp. usuarios', TRUE,  'users', 'manager', 'import', 'import',          'users_import'),
+-- ('Exportar usuarios',         'Exp. usuarios', TRUE,  'users', 'manager', 'export', 'export',          'users_export'),
+-- ('Vista de un usuario',       '',              FALSE, 'users', 'user',    'view',   '',                'users_user_view'),
+-- ('Edicion de un usuario',     '',              FALSE, 'users', 'user',    'edit',   '',                'users_user_edit');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

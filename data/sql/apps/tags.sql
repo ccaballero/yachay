@@ -67,12 +67,12 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Nube de etiquetas',          'Etiquetas', TRUE,  'tags', 'index',   'index', 'list',   'tags_list'),
-('Administrador de etiquetas', 'Etiquetas', TRUE,  'tags', 'manager', 'index', 'delete', 'tags_manager'),
-('Ver etiqueta',               '',          FALSE, 'tags', 'tag',     'view',  'list',   'tags_tag_view');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Nube de etiquetas',          'Etiquetas', TRUE,  'tags', 'index',   'index', 'list',   'tags_list'),
+-- ('Administrador de etiquetas', 'Etiquetas', TRUE,  'tags', 'manager', 'index', 'delete', 'tags_manager'),
+-- ('Ver etiqueta',               '',          FALSE, 'tags', 'tag',     'view',  'list',   'tags_tag_view');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

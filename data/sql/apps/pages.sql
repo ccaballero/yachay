@@ -20,11 +20,11 @@ VALUES
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
 /*============================================================================*/
-INSERT INTO `page`
-(`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
-VALUES
-('Lista de paginas',         'Paginas', TRUE, 'pages', 'index',   'index', 'list',   'routes_list'),
-('Administrador de paginas', 'Paginas', TRUE, 'pages', 'manager', 'index', 'manage', 'routes_manager');
+-- INSERT INTO `page`
+-- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
+-- VALUES
+-- ('Lista de paginas',         'Paginas', TRUE, 'pages', 'index',   'index', 'list',   'routes_list'),
+-- ('Administrador de paginas', 'Paginas', TRUE, 'pages', 'manager', 'index', 'manage', 'routes_manager');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */

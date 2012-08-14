@@ -2,27 +2,34 @@
 /*============================================================================*/
 /* Conecciones adicionales para la habilitacion de los menus                  */
 /*============================================================================*/
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 1 WHERE `route` = 'base_visitor';
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 2 WHERE `route` = 'users_list';
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 3 WHERE `route` = 'friends_friends';
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 4 WHERE `route` = 'gestions_list';
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 5 WHERE `route` = 'careers_list';
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 6 WHERE `route` = 'areas_list';
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 7 WHERE `route` = 'subjects_list';
-UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 8 WHERE `route` = 'communities_list';
+INSERT INTO `route_menu`
+(`route`, `label`, `type`, `order`)
+VALUES
+('base_visitor', 'Inicio', 'menubar', 1),
+('users_list', 'Usuarios', 'menubar', 2),
+('communities_list', 'Comunidades', 'menubar', 8);
 
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  1 WHERE `route` = 'packages_list';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  2 WHERE `route` = 'pages_list';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  3 WHERE `route` = 'widgets_list';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  4 WHERE `route` = 'roles_list';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  5 WHERE `route` = 'resources_list';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  6 WHERE `route` = 'templates_list';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  7 WHERE `route` = 'tags_list';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  8 WHERE `route` = 'analytics_list';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` =  9 WHERE `route` = 'feedback_list';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 10 WHERE `route` = 'base_development';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 11 WHERE `route` = 'base_terms';
-UPDATE `page` SET `menutype` = 'footer', `menuorder` = 12 WHERE `route` = 'base_privacy';
+-- UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 1 WHERE `route` = 'base_visitor';
+-- UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 2 WHERE `route` = 'users_list';
+-- UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 3 WHERE `route` = 'friends_friends';
+-- UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 4 WHERE `route` = 'gestions_list';
+-- UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 5 WHERE `route` = 'careers_list';
+-- UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 6 WHERE `route` = 'areas_list';
+-- UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 7 WHERE `route` = 'subjects_list';
+-- UPDATE `page` SET `menutype` = 'menubar', `menuorder` = 8 WHERE `route` = 'communities_list';
+-- 
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` =  1 WHERE `route` = 'packages_list';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` =  2 WHERE `route` = 'pages_list';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` =  3 WHERE `route` = 'widgets_list';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` =  4 WHERE `route` = 'roles_list';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` =  5 WHERE `route` = 'resources_list';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` =  6 WHERE `route` = 'templates_list';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` =  7 WHERE `route` = 'tags_list';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` =  8 WHERE `route` = 'analytics_list';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` =  9 WHERE `route` = 'feedback_list';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` = 10 WHERE `route` = 'base_development';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` = 11 WHERE `route` = 'base_terms';
+-- UPDATE `page` SET `menutype` = 'footer', `menuorder` = 12 WHERE `route` = 'base_privacy';
 
 /*============================================================================*/
 /* Conecciones adicionales para la habilitacion de los widgets                */
