@@ -75,20 +75,6 @@ VALUES
 ('Eliminar usuarios',                          'users', 'delete');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Lista de usuarios',         'Usuarios',      TRUE,  'users', 'index',   'index',  'list',            'users_list'),
--- ('Administrador de usuarios', 'Usuarios',      TRUE,  'users', 'manager', 'index',  'new|lock|delete', 'users_manager'),
--- ('Nuevo usuario',             'Nuevo usuario', TRUE,  'users', 'manager', 'new',    'new',             'users_new'),
--- ('Importar usuarios',         'Imp. usuarios', TRUE,  'users', 'manager', 'import', 'import',          'users_import'),
--- ('Exportar usuarios',         'Exp. usuarios', TRUE,  'users', 'manager', 'export', 'export',          'users_export'),
--- ('Vista de un usuario',       '',              FALSE, 'users', 'user',    'view',   '',                'users_user_view'),
--- ('Edicion de un usuario',     '',              FALSE, 'users', 'user',    'edit',   '',                'users_user_edit');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`
@@ -107,3 +93,14 @@ VALUES
 ('',                          'action', 'users_user_view', 'users_user_lock',   'users/:user/lock',   'users', 'user',    'lock'),
 ('',                          'action', 'users_user_view', 'users_user_unlock', 'users/:user/unlock', 'users', 'user',    'unlock'),
 ('',                          'action', 'users_user_view', 'users_user_delete', 'users/:user/delete', 'users', 'user',    'delete');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('users_list',    'users', 'list'),
+('users_manager', 'users', 'new'),
+('users_manager', 'users', 'lock'),
+('users_manager', 'users', 'delete'),
+('users_new',     'users', 'new'),
+('users_import',  'users', 'import'),
+('users_export',  'users', 'export');

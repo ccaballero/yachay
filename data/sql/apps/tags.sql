@@ -65,16 +65,6 @@ VALUES
 ('Eliminar etiqueta',     'tags', 'delete');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Nube de etiquetas',          'Etiquetas', TRUE,  'tags', 'index',   'index', 'list',   'tags_list'),
--- ('Administrador de etiquetas', 'Etiquetas', TRUE,  'tags', 'manager', 'index', 'delete', 'tags_manager'),
--- ('Ver etiqueta',               '',          FALSE, 'tags', 'tag',     'view',  'list',   'tags_tag_view');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`
@@ -84,3 +74,10 @@ VALUES
 ('Administrador de etiquetas', 'list',   'tags_list',      'tags_manager',    'tags/manager',     'tags', 'manager', 'index'),
 ('Etiqueta: $tag',             'view',   'tags_manager',   'tags_tag_view',   'tags/:tag',        'tags', 'tag',     'view'),
 ('',                           'action', 'tags_tags_view', 'tags_tag_delete', 'tags/:tag/delete', 'tags', 'tag',     'delete');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('tags_list',     'tags', 'list'),
+('tags_manager',  'tags', 'delete'),
+('tags_tag_view', 'tags', 'list');

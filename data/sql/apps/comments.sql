@@ -36,7 +36,6 @@ VALUES
 ('Eliminar comentario por parte de su autor', 'comments', 'delete'),
 ('Eliminar cualquier comentario',             'comments', 'drop');
 
-
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/

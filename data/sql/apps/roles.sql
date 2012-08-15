@@ -47,19 +47,6 @@ VALUES
 ('Eliminar roles',                          'roles', 'delete');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Lista de roles',         'Roles',         TRUE,  'roles', 'index',   'index', 'list',              'roles_list'),
--- ('Administrador de roles', 'Roles',         TRUE,  'roles', 'manager', 'index', 'new|assign|delete', 'roles_manager'),
--- ('Nuevo rol',              'Nuevo rol',     TRUE,  'roles', 'manager', 'new',   'new',               'roles_new'),
--- ('Asignacion usuario/rol', 'Asig. Rol/Us.', TRUE,  'roles', 'assign',  'index', 'assign',            'roles_assign'),
--- ('Vista de un rol',        '',              FALSE, 'roles', 'role',    'view',  '',                  'roles_role_view'),
--- ('Edicion de un rol',      '',              FALSE, 'roles', 'role',    'edit',  '',                  'roles_role_edit');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`
@@ -72,3 +59,13 @@ VALUES
 ('Rol: $rol',              'view',   'roles_manager',   'roles_role_view',   'roles/:role',        'roles', 'role',    'view'),
 ('Editar: $rol',           'action', 'roles_role_view', 'roles_role_edit',   'roles/:role/edit',   'roles', 'role',    'edit'),
 ('',                       'action', 'roles_role_view', 'roles_role_delete', 'roles/:role/delete', 'roles', 'role',    'delete');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('roles_list', 'roles', 'list'),
+('roles_manager', 'roles', 'new'),
+('roles_manager', 'roles', 'assign'),
+('roles_manager', 'roles', 'delete'),
+('roles_new', 'roles', 'new'),
+('roles_assing', 'roles', 'assign');

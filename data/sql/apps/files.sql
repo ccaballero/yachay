@@ -25,16 +25,6 @@ VALUES
 ('files', 'files', 'app', 'resources', UNIX_TIMESTAMP(), 'Modulo de gestion de archivos');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Nuevo archivo',      'Nuevo archivo', TRUE,  'files', 'manager', 'new',  '', 'files_new'),
--- ('Visor de archivos',  '',              FALSE, 'files', 'file',    'view', '', 'files_file_view'),
--- ('Editor de archivos', '',              FALSE, 'files', 'file',    'edit', '', 'files_file_edit');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`

@@ -32,16 +32,6 @@ VALUES
 ('Subir videos', 'videos', 'upload');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Nuevo video',      'Nuevo video', TRUE,  'videos', 'manager', 'new',  '', 'videos_new'),
--- ('Visor de videos',  '',            FALSE, 'videos', 'video',   'view', '', 'videos_video_view'),
--- ('Editor de videos', '',            FALSE, 'videos', 'video',   'edit', '', 'videos_video_edit');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`

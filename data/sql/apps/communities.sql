@@ -76,20 +76,6 @@ VALUES
 ('Ver las caracteristicas de una comunidad', 'communities', 'view');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Lista de comunidades',         'Comunidades',     TRUE,  'communities', 'index',     'index', 'list',       'communities_list'),
--- ('Administrador de comunidades', 'Comunidades',     TRUE,  'communities', 'manager',   'index', 'list|enter', 'communities_manager'),
--- ('Nueva comunidad',              'Nueva comunidad', TRUE,  'communities', 'manager',   'new',   'enter',      'communities_new'),
--- ('Vista de una comunidad',       '',                FALSE, 'communities', 'community', 'view',  '',           'communities_community_view'),
--- ('Edicion de una comunidad',     '',                FALSE, 'communities', 'community', 'edit',  '',           'communities_community_edit'),
--- ('Miembros de una comunidad',    '',                FALSE, 'communities', 'assign',    'index', '',           'communities_community_assign'),
--- ('Peticiones de una comunidad',  '',                FALSE, 'communities', 'petition',  'index', '',           'communities_community_petition');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`
@@ -110,3 +96,10 @@ VALUES
 ('Peticiones: $community',       'view',   'communities_community_view',     'communities_community_petition',                   'communities/:community/petition',               'communities', 'petition',  'index'),
 ('',                             'action', 'communities_community_petition', 'communities_community_petition_applicant_accept',  'communities/:community/petition/:user/accept',  'communities', 'applicant', 'accept'),
 ('',                             'action', 'communities_community_petition', 'communities_community_petition_applicant_decline', 'communities/:community/petition/:user/decline', 'communities', 'applicant', 'decline');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('communities_list', 'communities', 'list'),
+('communities_manager', 'communities', 'enter'),
+('communities_new', 'communities', 'enter');

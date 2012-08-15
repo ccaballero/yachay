@@ -81,3 +81,11 @@ VALUES
 ('Area: $area',            'view',   'areas_manager',   'areas_area_view',   'areas/:area',        'areas', 'area',    'view'),
 ('',                       'action', 'areas_area_view', 'areas_area_delete', 'areas/:area/delete', 'areas', 'area',    'delete'),
 ('',                       'action', 'areas_area_view', 'areas_area_edit',   'areas/:area/edit',   'areas', 'area',    'edit');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('areas_list', 'areas', 'list'),
+('areas_manager', 'areas', 'new'),
+('areas_manager', 'areas', 'delete'),
+('areas_new', 'areas', 'new');

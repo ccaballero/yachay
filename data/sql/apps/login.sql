@@ -27,15 +27,6 @@ VALUES
 ('login', 'login', 'middle', 'users', UNIX_TIMESTAMP(), 'Modulo manejador de acceso de los usuarios');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Ingresar al sistema',  'Ingresar',   TRUE, 'login', 'index',  'in',    'in',     'login_in'),
--- ('Olvide mi contraseña', 'Contraseña', TRUE, 'login', 'forgot', 'index', 'forgot', 'login_forgot');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`
@@ -44,3 +35,9 @@ VALUES
 ('Ingresar al sistema',  'view',   'base', 'login_in',     'login',  'login', 'index',  'in'),
 ('',                     'action', 'base', 'login_out',    'logout', 'login', 'index',  'out'),
 ('Olvide mi contraseña', 'view',   'base', 'login_forgot', 'forgot', 'login', 'forgot', 'index');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('login_in',     'login', 'in'),
+('login_forgot', 'login', 'forgot');

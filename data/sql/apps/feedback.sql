@@ -33,18 +33,6 @@ VALUES
 ('Eliminar sugerencias inutiles',   'feedback', 'delete');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Lista de sugerencias',         'Sugerencias',      TRUE,  'feedback', 'index',   'index', 'list',               'feedback_list'),
--- ('Administrador de sugerencias', 'Sugerencias',      TRUE,  'feedback', 'manager', 'index', 'resolv|mark|delete', 'feedback_manager'),
--- ('Nueva sugerencia',             'Nueva Sugerencia', TRUE,  'feedback', 'manager', 'new',   '',                   'feedback_new'),
--- ('Visor de sugerencias',         '',                 FALSE, 'feedback', 'entry',   'view',  '',                   'feedback_entry_view'),
--- ('Editor de sugerencias',        '',                 FALSE, 'feedback', 'entry',   'edit',  '',                   'feedback_entry_edit');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`
@@ -61,3 +49,11 @@ VALUES
 ('',                             'action', '', 'feedback_entry_unmark',   'feedback/:entry/unmark',   'feedback', 'entry',   'unmark'),
 ('',                             'action', '', 'feedback_entry_delete',   'feedback/:entry/delete',   'feedback', 'entry',   'delete'),
 ('',                             'action', '', 'feedback_entry_drop',     'feedback/:entry/drop',     'feedback', 'entry',   'drop');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('feedback_list', 'feedback', 'list'),
+('feedback_manager', 'feedback', 'resolv'),
+('feedback_manager', 'feedback', 'mark'),
+('feedback_manager', 'feedback', 'delete');

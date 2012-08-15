@@ -9,7 +9,7 @@ SELECT 'base';
 SELECT 'packages';
 \. apps/packages.sql
 
-SELECT 'pages';
+SELECT 'routes';
 \. apps/pages.sql
 
 SELECT 'widgets';

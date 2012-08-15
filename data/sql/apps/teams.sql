@@ -54,18 +54,6 @@ VALUES
 ('teams', 'teams', 'middle', 'groups', UNIX_TIMESTAMP(), 'Modulo manejador de los equipos de trabajo de los usuarios');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Administrador de equipos',         '', FALSE, 'teams', 'manager', 'index', '', 'teams_manager'),
--- ('Nuevo equipo',                     '', FALSE, 'teams', 'manager', 'new',   '', 'teams_new'),
--- ('Vista de un equipo',               '', FALSE, 'teams', 'team',    'view',  '', 'teams_team_view'),
--- ('Edicion de un equipo',             '', FALSE, 'teams', 'team',    'edit',  '', 'teams_team_edit'),
--- ('Asignacion de miembros a equipos', '', FALSE, 'teams', 'assign',  'index', '', 'teams_assign');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`

@@ -43,9 +43,20 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
             return;
         }
 
+        global $MENUBAR;
+        global $FOOTER;
+
         $this->renderToolbar();
-//        $this->renderMenubar();
-//        $this->renderFooter();
+        $this->renderMenus($MENUBAR, 'menubar');
+        $this->renderMenus($FOOTER, 'footer');
+        
+        // Special add for footer menu
+        $FOOTER->items[] = array(
+            'link' => 'https://github.com/ccaballero/yachay',
+            'label' => 'Codigo fuente',
+        );
+
+        $FOOTER->copyright = 'yachay ' . $this->config->system->version;
 
         // FIXME Control de privilegios
 //        global $WIDGETS;
@@ -163,64 +174,30 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         }
     }
 
-    public function renderMenubar() {
-        global $MENUBAR;
+    public function renderMenus($container, $type) {
+        $model_routes = new Db_Routes();
+        $model_routes_privileges = new Db_Routes_Privileges();
 
-        $model_pages = new Pages();
-        $items = $model_pages->selectByMenutype('menubar');
+        $items = $model_routes->selectByMenu($type);
 
         foreach ($items as $item) {
-            $perms = explode('|', $item->privilege);
+            $privileges = $model_routes_privileges->findByRoute($item->route);
 
-            $bool = false;
-            foreach ($perms as $perm) {
-                if ($perm == '') {
-                    $bool |= true;
-                } else {
-                    $bool |= $this->user->hasPermission($item->package, $perm);
+            if (count($privileges) == 0) {
+                $bool = true;
+            } else {
+                $bool = false;
+                foreach ($privileges as $privilege) {
+                    $bool |= $this->user->hasPermission($privilege->package, $privilege->privilege);
                 }
             }
 
             if ($bool) {
-                $MENUBAR->items[] = array (
+                $container->items[] = array (
                     'link'  => $this->view->url(array(), $item->route),
-                    'label' => ucfirst($item->title),
+                    'label' => ucfirst($item->label),
                 );
             }
         }
-    }
-
-    public function renderFooter() {
-        global $FOOTER;
-
-        $model_pages = new Pages();
-        $items = $model_pages->selectByMenutype('footer');
-
-        foreach ($items as $item) {
-            $perms = explode('|', $item->privilege);
-
-            $bool = false;
-            foreach ($perms as $perm) {
-                if ($perm == '') {
-                    $bool |= true;
-                } else {
-                    $bool |= $this->user->hasPermission($item->package, $perm);
-                }
-            }
-
-            if ($bool) {
-                $FOOTER->items[] = array (
-                    'link' => $this->view->url(array(), $item->route),
-                    'label' => ucfirst($item->title),
-                );
-            }
-        }
-
-        $FOOTER->items[] = array(
-            'link' => 'https://github.com/ccaballero/yachay',
-            'label' => 'Codigo fuente',
-        );
-
-        $FOOTER->copyright = 'yachay ' . $this->config->system->version;
     }
 }

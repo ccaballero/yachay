@@ -46,15 +46,6 @@ VALUES
 ('Eliminar cualquier recurso',                'resources', 'drop');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Lista de recursos',          'Recursos', TRUE,  'resources', 'index', 'list',     'new', 'resources_list'),
--- ('Lista de recursos por tipo', '',         FALSE, 'resources', 'index', 'filtered', 'new', 'resources_filtered');
-
-/*============================================================================*/
 /* Registro de widgets para el paquete                                        */
 /*============================================================================*/
 INSERT INTO `widget`
@@ -70,3 +61,9 @@ INSERT INTO `route`
 VALUES
 ('Lista de recursos',          'list', 'base',           'resources_list',     'resources',         'resources', 'index', 'list'),
 ('Lista de recursos por tipo', 'list', 'resources_list', 'resources_filtered', 'resources/:filter', 'resources', 'index', 'filtered');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('resources_list',     'resources', 'new'),
+('resources_filtered', 'resources', 'new');

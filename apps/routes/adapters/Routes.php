@@ -15,7 +15,6 @@ class Db_Routes extends Yachay_Db_Table
         }
 
         $tree->indexAll();
-
         return $tree;
     }
 
@@ -30,6 +29,17 @@ class Db_Routes extends Yachay_Db_Table
         return $this->_constructList($result);
     }
 
+    public function selectByMenu($type) {
+        $result = $this->fetchAll($this
+                ->select()
+                ->setIntegrityCheck(false)
+                ->from($this, array('ident', 'type', 'route' , 'mapping', 'module', 'controller', 'action', 'parent'))
+                ->join('route_menu', 'route.route = route_menu.route', array('label'))
+                ->where('route_menu.type = ?', $type)
+                ->order('route_menu.order ASC'));
+        return $this->_constructList($result);
+    }
+    
     public function findByRoute($route) {
         $row = $this->fetchRow(
         $this->getAdapter()

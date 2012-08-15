@@ -37,15 +37,12 @@ VALUES
 ('groupsets', 'groupsets', 'middle', 'groups', UNIX_TIMESTAMP(), 'Modulo manejador de las agrupaciones de los grupos');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
+/* Registro de privilegios para el paquete                                    */
 /*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Administrador de conjuntos', '', FALSE, 'groupsets', 'manager',  'index', '',    'groupsets_manager'),
--- ('Nuevo conjunto',             '', FALSE, 'groupsets', 'manager',  'new',   'new', 'groupsets_new'),
--- ('Vista de un conjunto',       '', FALSE, 'groupsets', 'groupset', 'view',  '',    'groupsets_groupset_view'),
--- ('Edicion de un conjunto',     '', FALSE, 'groupsets', 'groupset', 'edit',  '',    'groupsets_groupset_edit');
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Crear conjuntos de materias', 'groupsets', 'new');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */
@@ -59,3 +56,8 @@ VALUES
 ('Vista de un conjunto',       'view',   'groupsets_manager',       'groupsets_groupset_view',   'groupsets/:groupset',        'groupsets', 'groupset', 'view'),
 ('Edicion de un conjunto',     'view',   'groupsets_groupset_view', 'groupsets_groupset_edit',   'groupsets/:groupset/edit',   'groupsets', 'groupset', 'edit'),
 ('',                           'action', 'groupsets_groupset_view', 'groupsets_groupset_delete', 'groupsets/:groupset/delete', 'groupsets', 'groupset', 'delete');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('groupsets_new', 'groupsets', 'new');

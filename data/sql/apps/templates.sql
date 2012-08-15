@@ -45,15 +45,6 @@ VALUES
 ('Personalizar la plantilla', 'templates', 'configure');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Lista de temas',       'Temas', TRUE,  'templates', 'index',    'index', 'switch',    'templates_list'),
--- ('Propiedades del tema', '',      FALSE, 'templates', 'template', 'view',  'configure', 'templates_template_view');
--- 
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`
@@ -63,3 +54,9 @@ VALUES
 ('',                'action', 'templates_list',          'templates_css',             'templates/css/properties',   'templates', 'manager',  'css'),
 ('Tema: $template', 'view',   'templates_list',          'templates_template_view',   'templates/view/:template',   'templates', 'template', 'view'),
 ('',                'action', 'templates_template_view', 'templates_template_switch', 'templates/switch/:template', 'templates', 'template', 'switch');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('templates_list', 'templates', 'switch'),
+('templates_template_view', 'templates', 'configure');

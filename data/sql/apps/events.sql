@@ -26,16 +26,6 @@ VALUES
 ('events', 'events', 'app', 'resources', UNIX_TIMESTAMP(), 'Modulo de gestion de calendarios y eventos');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Nuevo evento',      'Nuevo evento', TRUE,  'events', 'manager', 'new',  '', 'events_new'),
--- ('Visor de eventos',  '',             FALSE, 'events', 'event',   'view', '', 'events_event_view'),
--- ('Editor de eventos', '',             FALSE, 'events', 'event',   'edit', '', 'events_event_edit');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`

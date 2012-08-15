@@ -8,15 +8,6 @@ VALUES
 ('profile', 'profile', 'util', 'users', UNIX_TIMESTAMP(), 'Modulo para la visualizacion de los datos del usuario');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Perfil de usuario',        '', FALSE, 'profile', 'index', 'view', '', 'profile_view'),
--- ('Editar perfil de usuario', '', FALSE, 'profile', 'index', 'edit', '', 'profile_edit');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`

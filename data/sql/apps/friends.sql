@@ -32,24 +32,6 @@ VALUES
 ('Agregar contactos', 'friends', 'contact');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Lista de contactos',   'Contactos',   TRUE, 'friends', 'index', 'friends',    'contact', 'friends_friends'),
--- ('Lista de solicitudes', 'Solicitudes', TRUE, 'friends', 'index', 'followings', 'contact', 'friends_followings'),
--- ('Lista de peticiones',  'Peticiones',  TRUE, 'friends', 'index', 'followers',  'contact', 'friends_followers');
-
-/*============================================================================*/
-/* Registro de widgets para el paquete                                        */
-/*============================================================================*/
-INSERT INTO `widget`
-(`label`, `title`, `package`, `script`)
-VALUES
-('Lista de contactos', 'Contactos', 'friends', 'contacts');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`
@@ -60,3 +42,18 @@ VALUES
 ('Lista de peticiones',  'list',   'friends_friends', 'friends_followers',  'friends/followers',    'friends', 'index',  'followers'),
 ('',                     'action', 'friends_friends', 'friends_add',        'friends/:user/add',    'friends', 'friend', 'add'),
 ('',                     'action', 'friends_friends', 'friends_delete',     'friends/:user/delete', 'friends', 'friend', 'delete');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('friends_friends', 'friends', 'contact'),
+('friends_followings', 'friends', 'contact'),
+('friends_followers', 'friends', 'contact');
+
+/*============================================================================*/
+/* Registro de widgets para el paquete                                        */
+/*============================================================================*/
+INSERT INTO `widget`
+(`label`, `title`, `package`, `script`)
+VALUES
+('Lista de contactos', 'Contactos', 'friends', 'contacts');

@@ -58,18 +58,6 @@ VALUES
 ('Editar las caracteristicas de un carrera', 'careers', 'edit');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Lista de carreras',         'Carreras',      TRUE,  'careers', 'index',   'index', 'list',       'careers_list'),
--- ('Administrador de carreras', 'Carreras',      TRUE,  'careers', 'manager', 'index', 'new|delete', 'careers_manager'),
--- ('Nueva carrera',             'Nueva carrera', TRUE,  'careers', 'manager', 'new',   'new',        'careers_new'),
--- ('Vista de una carrera',      '',              FALSE, 'careers', 'career',  'view',  '',           'careers_career_view'),
--- ('Edicion de una carrera',    '',              FALSE, 'careers', 'career',  'edit',  '',           'careers_career_edit');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`
@@ -81,3 +69,11 @@ VALUES
 ('Carrera: $career',          'view',   'careers_manager',     'careers_career_view',   'careers/:career',        'careers', 'career',  'view'),
 ('Editar: $career',           'view',   'careers_career_view', 'careers_career_edit',   'careers/:career/edit',   'careers', 'career',  'edit'),
 ('',                          'action', 'careers_career_view', 'careers_career_delete', 'careers/:career/delete', 'careers', 'career',  'delete');
+
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('careers_list',    'careers', 'list'),
+('careers_manager', 'careers', 'new'),
+('careers_manager', 'careers', 'delete'),
+('careers_new',     'careers', 'new');

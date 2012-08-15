@@ -26,25 +26,6 @@ VALUES
 ('califications', 'califications', 'app', 'evaluations', UNIX_TIMESTAMP(), 'Modulo manejador de las calificaciones de los estudiantes del sistema');
 
 /*============================================================================*/
-/* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `privilege`, `route`)
--- VALUES
--- ('Gestor de calificaciones', '', FALSE, 'califications', 'manager', 'index',  '', 'califications_manager'),
--- ('Importar calificaciones',  '', FALSE, 'califications', 'manager', 'import', '', 'califications_import'),
--- ('Exportar calificaciones',  '', FALSE, 'califications', 'manager', 'export', '', 'califications_export'),
--- ('Ver calificaciones',       '', FALSE, 'califications', 'index',   'index',  '', 'califications_view');
-
-/*============================================================================*/
-/* Registro de widgets para el paquete                                        */
-/*============================================================================*/
-INSERT INTO `widget`
-(`label`, `title`, `package`, `script`)
-VALUES
-('Ver Calificaciones', 'Ver Calificaciones', 'califications', 'califications');
-
-/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`
@@ -54,3 +35,11 @@ VALUES
 ('Gestor de calificaciones', 'view', 'groups_groups_view', 'califications_manager', 'subjects/:subject/groups/:group/califications',        'califications', 'manager', 'index'),
 ('Importar calificaciones',  'view', 'groups_groups_view', 'califications_import',  'subjects/:subject/groups/:group/califications/import', 'califications', 'manager', 'import'),
 ('Exportar calificaciones',  'view', 'groups_groups_view', 'califications_export',  'subjects/:subject/groups/:group/califications/export', 'califications', 'manager', 'export');
+
+/*============================================================================*/
+/* Registro de widgets para el paquete                                        */
+/*============================================================================*/
+INSERT INTO `widget`
+(`label`, `title`, `package`, `script`)
+VALUES
+('Ver Calificaciones', 'Ver Calificaciones', 'califications', 'califications');
