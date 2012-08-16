@@ -28,145 +28,101 @@ VALUES
 /*============================================================================*/
 /* Conecciones adicionales para la habilitacion de los widgets                */
 /*============================================================================*/
-INSERT INTO `widget_page`
-(`page`, `widget`, `position`)
-VALUES
-/*============================================================================*/
-/* Inserciones extra para el paquete MENUS                                    */
-/*============================================================================*/
-/* Pagina principal anonima */
-( 1, 5, 2), /* Calificaciones */
-( 1, 1, 3), /* Espacios */
-( 1, 2, 4), /* Links */
-
-/* Pagina principal de usuario */
-( 2, 4, 1), /* Recursos */
-( 2, 5, 2), /* Calificaciones */
-( 2, 1, 3), /* Espacios */
-( 2, 3, 4), /* Contactos */
-
-/* USERS */
-( 27, 1, 3),
-( 27, 4, 1),
-
-/* PROFILE */
-( 29, 1, 3),
-( 29, 4, 1),
-
-/* SUBJECTS */
-( 48, 1, 3),
-( 48, 4, 1),
-( 50, 1, 3),
-( 50, 4, 1),
-
-/* AREAS */
-( 57, 1, 3),
-( 57, 4, 1),
-
-/* CAREERS */
-( 62, 1, 3),
-( 62, 4, 1),
-
-/* GROUPS */
-( 67, 1, 3),
-( 67, 4, 1),
-( 70, 1, 3),
-( 70, 4, 1),
-
-/* TEAMS */
-( 76, 1, 3),
-( 76, 4, 1),
-
-/* COMMUNITIES */
-( 82, 1, 3),
-( 82, 4, 1),
-( 84, 1, 3),
-( 84, 4, 1),
-
-/* SETS */
-( 86, 1, 3),
-( 86, 4, 1),
-( 87, 1, 3),
-( 87, 4, 1),
-( 88, 1, 3),
-( 88, 4, 1),
-
-/* RESOURCES */
-( 90, 1, 3),
-( 90, 4, 1),
-( 91, 1, 3),
-( 91, 4, 1),
-
-/* NOTES */
-( 92, 1, 3),
-( 92, 4, 1),
-( 93, 1, 3),
-( 93, 4, 1),
-( 94, 1, 3),
-( 94, 4, 1),
-
-/* LINKS */
-( 95, 1, 3),
-( 95, 4, 1),
-( 96, 1, 3),
-( 96, 4, 1),
-( 97, 1, 3),
-( 97, 4, 1),
-
-/* FILES */
-( 98, 1, 3),
-( 98, 4, 1),
-( 99, 1, 3),
-( 99, 4, 1),
-(100, 1, 3),
-(100, 4, 1),
-
-/* EVENTS */
-(101, 1, 3),
-(101, 4, 1),
-(102, 1, 3),
-(102, 4, 1),
-(103, 1, 3),
-(103, 4, 1),
-
-/* PHOTOS */
-(104, 1, 3),
-(104, 4, 1),
-(105, 1, 3),
-(105, 4, 1),
-(106, 1, 3),
-(106, 4, 1),
-
-/* VIDEOS */
-(107, 1, 3),
-(107, 4, 1),
-(108, 1, 3),
-(108, 4, 1),
-(109, 1, 3),
-(109, 4, 1),
-
-/* EVALUATIONS */
-(110, 1, 3),
-(110, 4, 1),
-(111, 1, 3),
-(111, 4, 1),
-(112, 1, 3),
-(112, 4, 1),
-
-/* CALIFICATIONS */
-(119, 5, 3),
-
-/* FEEDBACK */
-(123, 1, 3),
-(123, 4, 1),
-(124, 1, 3),
-(124, 4, 1),
-(125, 1, 3),
-(125, 4, 1),
-(126, 1, 3),
-(126, 4, 1),
-(127, 1, 3),
-(127, 4, 1);
+INSERT INTO `widget_route`                        /* 1 - espacios disponibles */
+(`route`, `widget`, `position`)                   /* 2 - enlaces              */
+VALUES                                            /* 3 - contactos            */
+('base_visitor', 5, 2),                           /* 4 - recursos             */
+('base_visitor', 1, 3),                           /* 5 - calificaciones       */
+('base_visitor', 2, 4),
+('base_user', 4, 1),
+('base_user', 5, 2),
+('base_user', 1, 3),
+('base_user', 3, 4),
+('users_view', 1, 3),
+('users_view', 4, 1),
+('profile_view', 1, 3),
+('profile_view', 4, 1),
+('subjects_subject_view', 1, 3),
+('subjects_subject_view', 4, 1),
+('subjects_subject_assign', 1, 3),
+('subjects_subject_assign', 4, 1),
+('areas_area_view', 1, 3),
+('areas_area_view', 4, 1),
+('careers_career_view', 1, 3),
+('careers_career_view', 4, 1),
+('groups_groups_view', 1, 3),
+('groups_groups_view', 4, 1),
+('groups_groups_assign', 1, 3),
+('groups_groups_assign', 4, 1),
+('teams_team_view', 1, 3),
+('teams_team_view', 4, 1),
+('communities_community_view', 1, 3),
+('communities_community_view', 4, 1),
+('communities_community_assign', 1, 3),
+('communities_community_assign', 4, 1),
+('groupsets_manager', 1, 3),
+('groupsets_manager', 4, 1),
+('groupsets_new', 1, 3),
+('groupsets_new', 4, 1),
+('groupsets_groupset_view', 1, 3),
+('groupsets_groupset_view', 4, 1),
+('resources_list', 1, 3),
+('resources_list', 4, 1),
+('resources_filtered', 1, 3),
+('resources_filtered', 4, 1),
+('notes_new', 1, 3),
+('notes_new', 4, 1),
+('notes_note_view', 1, 3),
+('notes_note_view', 4, 1),
+('notes_note_edit', 1, 3),
+('notes_note_edit', 4, 1),
+('links_new', 1, 3),
+('links_new', 4, 1),
+('links_link_view', 1, 3),
+('links_link_view', 4, 1),
+('links_link_edit', 1, 3),
+('links_link_edit', 4, 1),
+('files_new', 1, 3),
+('files_new', 4, 1),
+('files_file_view', 1, 3),
+('files_file_view', 4, 1),
+('files_file_edit', 1, 3),
+('files_file_edit', 4, 1),
+('events_new', 1, 3),
+('events_new', 4, 1),
+('events_event_view', 1, 3),
+('events_event_view', 4, 1),
+('events_event_edit', 1, 3),
+('events_event_edit', 4, 1),
+('photos_new', 1, 3),
+('photos_new', 4, 1),
+('photos_photo_view', 1, 3),
+('photos_photo_view', 4, 1),
+('photos_photo_edit', 1, 3),
+('photos_photo_edit', 4, 1),
+('videos_new', 1, 3),
+('videos_new', 4, 1),
+('videos_video_view', 1, 3),
+('videos_video_view', 4, 1),
+('videos_video_edit', 1, 3),
+('videos_video_edit', 4, 1),
+('evaluations_new', 1, 3),
+('evaluations_new', 4, 1),
+('evaluations_evaluation_view', 1, 3),
+('evaluations_evaluation_view', 4, 1),
+('evaluations_evaluation_edit', 1, 3),
+('evaluations_evaluation_edit', 4, 1),
+('califications_view', 5, 3),
+('feedback_list', 1, 3),
+('feedback_list', 4, 1),
+('feedback_manager', 1, 3),
+('feedback_manager', 4, 1),
+('feedback_new', 1, 3),
+('feedback_new', 4, 1),
+('feedback_entry_view', 1, 3),
+('feedback_entry_view', 4, 1),
+('feedback_entry_edit', 1, 3),
+('feedback_entry_edit', 4, 1);
 
 /*============================================================================*/
 /* Insercion de roles del sistema                                             */

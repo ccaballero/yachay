@@ -59,36 +59,46 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         $FOOTER->copyright = 'yachay ' . $this->config->system->version;
 
         // FIXME Control de privilegios
-//        global $WIDGETS;
-//        $widgets = $this->page->findWidgetsViaWidgets_Pages();
-//        $model_widgets_pages = new Widgets_Pages();
-//        foreach ($widgets as $widget) {
-//            $view = new Zend_View();
-//            $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
-//            $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/' . $widget->package . '/views/scripts/widgets/');
-//
-//            $view->config = $this->config;
-//            $view->page = $this->page;
-//            $view->user = $this->user;
-//            $view->template = $this->template;
-//
-//            $widget_page = $model_widgets_pages->getPosition($this->page->ident, $widget->ident);
-//            $position = $widget_page->position;
-//
-//            $script = $this->config->resources->frontController->moduleDirectory . "/{$widget->package}/views/scripts/widgets/{$widget->script}-{$this->template->label}.php";
-//            if (file_exists($script)) {
-//                $to_render = "{$widget->script}-{$this->template->label}.php";
-//            } else {
-//                $to_render = "{$widget->script}.php";
-//            }
-//            $widget_content = $view->render($to_render);
-//            if (!empty($widget_content)) {
-//                $WIDGETS[$position] = array (
-//                    'title'   => $widget->title,
-//                    'content' => $widget_content,
-//                );
-//            }
-//        }
+        global $WIDGETS;
+        
+        $model_routes = new Db_Routes();
+        $db_route = $model_routes->findAdapterByRoute($this->route->route);
+
+        $widgets = $db_route->findWidgetsViaWidgets_Routes();
+
+        $model_widgets_routes = new Widgets_Routes();
+//        $widgets = $model_widgets_routes->selectByRoute($this->route->route);
+
+        foreach ($widgets as $widget) {
+            $view = new Zend_View();
+            $view->addHelperPath(
+                APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
+            $view->setScriptPath(
+                $this->config->resources->frontController->moduleDirectory .
+                '/' . $widget->package . '/views/scripts/widgets/');
+
+            $view->config = $this->config;
+            $view->route = $this->route;
+            $view->user = $this->user;
+            $view->template = $this->template;
+
+            $widget_page = $model_widgets_routes->getPosition($this->route->route, $widget->ident);
+            $position = $widget_page->position;
+
+            $script = $this->config->resources->frontController->moduleDirectory . "/{$widget->package}/views/scripts/widgets/{$widget->script}-{$this->template->label}.php";
+            if (file_exists($script)) {
+                $to_render = "{$widget->script}-{$this->template->label}.php";
+            } else {
+                $to_render = "{$widget->script}.php";
+            }
+            $widget_content = $view->render($to_render);
+            if (!empty($widget_content)) {
+                $WIDGETS[$position] = array (
+                    'title'   => $widget->title,
+                    'content' => $widget_content,
+                );
+            }
+        }
 
         // Register last login
         $this->user->lastLogin();

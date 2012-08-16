@@ -5,31 +5,31 @@ class Widgets_IndexController extends Yachay_Controller_Action
     public function indexAction() {
         $this->requirePermission('widgets', 'list');
 
-        $model_pages = new Pages();
+        $model_routes = new Db_Routes();
         $model_widgets = new Widgets();
-        $model_widgets_pages = new Widgets_Pages();
+        $model_widgets_routes = new Widgets_Routes();
 
         $matrix = array();
-        foreach ($model_pages->selectAll() as $page) {
-            $matrix[$page->ident] = array(
+        foreach ($model_routes->selectByRenderable() as $route) {
+            $matrix[$route->ident] = array(
                 '1' => new Widgets_Empty(),
                 '2' => new Widgets_Empty(),
                 '3' => new Widgets_Empty(),
                 '4' => new Widgets_Empty(),
             );
-            $widgets_in_page = $page->findWidgetsViaWidgets_Pages();
-            foreach ($widgets_in_page as $widget) {
-                $widget_page = $model_widgets_pages->getPosition($page->ident, $widget->ident);
-                $position = $widget_page->position;
-                $matrix[$page->ident][$position] = $widget;
+            $widgets_in_route = $route->findWidgetsViaWidgets_Routes();
+            foreach ($widgets_in_route as $widget) {
+                $widget_route = $model_widgets_routes->getPosition($route->route, $widget->ident);
+                $position = $widget_route->position;
+                $matrix[$route->ident][$position] = $widget;
             }
         }
 
-        $this->view->model_pages = $model_pages;
-        $this->view->pages = $model_pages->selectAll();
+        $this->view->model_routes = $model_routes;
+        $this->view->routes = $model_routes->selectByRenderable();
         $this->view->model_widgets = $model_widgets;
         $this->view->widgets = $model_widgets->selectAll();
-        $this->view->widgets_pages = $matrix;
+        $this->view->widgets_routes = $matrix;
 
         $this->history('widgets');
         $breadcrumb = array();

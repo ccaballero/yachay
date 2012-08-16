@@ -4,6 +4,8 @@ class Db_Routes extends Yachay_Db_Table
 {
     protected $_name = 'route';
     protected $_primary = 'ident';
+    protected $_dependentTables = array('Widgets_Routes');
+
     protected $_modelClass = 'Routes_Route';
 
     public function tree() {
@@ -39,12 +41,18 @@ class Db_Routes extends Yachay_Db_Table
                 ->order('route_menu.order ASC'));
         return $this->_constructList($result);
     }
-    
-    public function findByRoute($route) {
-        $row = $this->fetchRow(
+
+    public function selectByRenderable() {
+        return $this->fetchAll($this->select()->where('type = ?', 'list')->orwhere('type = ?', 'view'));
+    }
+
+    public function findAdapterByRoute($route) {
+        return $this->fetchRow(
         $this->getAdapter()
              ->quoteInto('route = ?', $route));
+    }
 
-        return $this->_constructObject($row);
+    public function findByRoute($route) {
+        return $this->_constructObject($this->findAdapterByRoute($route));
     }
 }

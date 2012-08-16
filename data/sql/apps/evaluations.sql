@@ -63,12 +63,12 @@ VALUES
 INSERT INTO `route`
 (`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
 VALUES
-('Nueva evaluación',                         '', '', 'evaluations_new',                          'evaluations/new',                             'evaluations', 'manager',    'new'),
-('Evaluador de formulas',                    '', '', 'evaluations_sandbox',                      'evaluations/sandbox',                         'evaluations', 'manager',    'sandbox'),
-('Vista de una evaluación',                  '', '', 'evaluations_evaluation_view',              'evaluations/:evaluation',                     'evaluations', 'evaluation', 'view'),
-('Agregar calificación a un criterio',       '', '', 'evaluations_evaluation_test_add',          'evaluations/:evaluation/add',                 'evaluations', 'test',       'add'),
-('Edición de una evaluación',                '', '', 'evaluations_evaluation_edit',              'evaluations/:evaluation/edit',                'evaluations', 'evaluation', 'edit'),
-('',                                         '', '', 'evaluations_evaluation_delete',            'evaluations/:evaluation/delete',              'evaluations', 'evaluation', 'delete'),
-('Configuración de criterios de evaluación', '', '', 'evaluations_evaluation_test_config',       'evaluations/:evaluation/:test',               'evaluations', 'test',       'config'),
-('',                                         '', '', 'evaluations_evaluation_test_delete',       'evaluations/:evaluation/:test/delete',        'evaluations', 'test',       'delete'),
-('',                                         '', '', 'evaluations_evaluation_test_value_delete', 'evaluations/:evaluation/:test/:value/delete', 'evaluations', 'test',       'value');
+('Nueva evaluación',                         'view', '', 'evaluations_new',                          'evaluations/new',                             'evaluations', 'manager',    'new'),
+('Evaluador de formulas',                    'view', '', 'evaluations_sandbox',                      'evaluations/sandbox',                         'evaluations', 'manager',    'sandbox'),
+('Vista de una evaluación',                  'view', '', 'evaluations_evaluation_view',              'evaluations/:evaluation',                     'evaluations', 'evaluation', 'view'),
+('Agregar calificación a un criterio',       'view', '', 'evaluations_evaluation_test_add',          'evaluations/:evaluation/add',                 'evaluations', 'test',       'add'),
+('Edición de una evaluación',                'view', '', 'evaluations_evaluation_edit',              'evaluations/:evaluation/edit',                'evaluations', 'evaluation', 'edit'),
+('',                                         'action', '', 'evaluations_evaluation_delete',            'evaluations/:evaluation/delete',              'evaluations', 'evaluation', 'delete'),
+('Configuración de criterios de evaluación', 'view', '', 'evaluations_evaluation_test_config',       'evaluations/:evaluation/:test',               'evaluations', 'test',       'config'),
+('',                                         'action', '', 'evaluations_evaluation_test_delete',       'evaluations/:evaluation/:test/delete',        'evaluations', 'test',       'delete'),
+('',                                         'action', '', 'evaluations_evaluation_test_value_delete', 'evaluations/:evaluation/:test/:value/delete', 'evaluations', 'test',       'value');

@@ -8,7 +8,7 @@
 <?php if ($this->acl('widgets', 'manage')) { ?><input type="submit" value="Actualizar" /><?php } ?>
     </div>
 
-<?php if (count($this->pages)) { ?>
+<?php if (count($this->routes)) { ?>
     <table>
         <tr>
             <th>Widget</th>
@@ -17,13 +17,13 @@
             <th>3ª Posición</th>
             <th>4ª Posición</th>
         </tr>
-    <?php foreach ($this->pages as $key => $page) { ?>
+    <?php foreach ($this->routes as $key => $route) { ?>
         <tr class="<?php echo $key % 2 == 0 ? 'even' : 'odd' ?>">
-            <td><?php echo $page->label ?></td>
-            <td><?php echo $this->widget('widgets[' . $page->ident . '][1]', $this->widgets_pages[$page->ident]['1']) ?></td>
-            <td><?php echo $this->widget('widgets[' . $page->ident . '][2]', $this->widgets_pages[$page->ident]['2']) ?></td>
-            <td><?php echo $this->widget('widgets[' . $page->ident . '][3]', $this->widgets_pages[$page->ident]['3']) ?></td>
-            <td><?php echo $this->widget('widgets[' . $page->ident . '][4]', $this->widgets_pages[$page->ident]['4']) ?></td>
+            <td><?php echo $route->label ?></td>
+            <td><?php echo $this->widget('widgets[' . $route->ident . '][1]', $this->widgets_routes[$route->ident]['1']) ?></td>
+            <td><?php echo $this->widget('widgets[' . $route->ident . '][2]', $this->widgets_routes[$route->ident]['2']) ?></td>
+            <td><?php echo $this->widget('widgets[' . $route->ident . '][3]', $this->widgets_routes[$route->ident]['3']) ?></td>
+            <td><?php echo $this->widget('widgets[' . $route->ident . '][4]', $this->widgets_routes[$route->ident]['4']) ?></td>
         </tr>
     <?php } ?>
     </table>

@@ -91,16 +91,16 @@ CREATE TABLE `widget` (
     UNIQUE INDEX (`package`, `script`)
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `widget_page`;
-CREATE TABLE `widget_page` (
-    `page`              int unsigned                                                NOT NULL,
+DROP TABLE IF EXISTS `widget_route`;
+CREATE TABLE `widget_route` (
+    `route`             varchar(64)                                                 NOT NULL,
     `widget`            int unsigned                                                NOT NULL,
     `position`          enum('1', '2', '3', '4')                                    NOT NULL DEFAULT '1',
-    PRIMARY KEY (`page`, `widget`, `position`),
-    INDEX (`page`),
-    FOREIGN KEY (`page`)          REFERENCES `page`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    PRIMARY KEY (`route`, `widget`, `position`),
+    INDEX (`route`),
+    FOREIGN KEY (`route`) REFERENCES `route`(`route`) ON UPDATE CASCADE ON DELETE RESTRICT,
     INDEX (`widget`),
-    FOREIGN KEY (`widget`)        REFERENCES `widget`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
+    FOREIGN KEY (`widget`) REFERENCES `widget`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
 /*============================================================================*/

@@ -3,12 +3,14 @@
 abstract class Yachay_Db_Table extends Zend_Db_Table_Abstract
 {
     // Find by unique indexes
-    public function findByIdent($ident) {
-        $row = $this->fetchRow(
+    public function findAdapterByIdent($ident) {
+        return $this->fetchRow(
                $this->getAdapter()
                     ->quoteInto('ident = ?', $ident));
+    }
 
-        return $this->_constructObject($row);
+    public function findByIdent($ident) {
+        return $this->_constructObject($this->findAdapterByIdent($ident));
     }
 
     public function findByLabel($label) {
@@ -28,9 +30,12 @@ abstract class Yachay_Db_Table extends Zend_Db_Table_Abstract
     }
 
     // General selections
+    public function selectAllAdapters() {
+        return $this->fetchAll();
+    }
+
     public function selectAll() {
-        $result = $this->fetchAll();
-        return $this->_constructList($result);
+        return $this->_constructList($this->selectAllAdapters());
     }
 
     // Generic constructors of bean objects

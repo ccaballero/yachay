@@ -4,7 +4,7 @@ class Widgets extends Yachay_Db_Table
 {
     protected $_name            = 'widget';
     protected $_primary         = 'ident';
-    protected $_dependentTables = array('Widgets_Pages');
+    protected $_dependentTables = array('Widgets_Routes');
     public    $_mapping         = array(
         'ident'                 => 'Codigo',
         'label'                 => 'Widget',
