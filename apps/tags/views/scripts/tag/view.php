@@ -40,4 +40,4 @@ if (count($this->users) <> 0) {
 }
 echo '</tr>';
 echo '</table>';
-echo $this->partial('resource.php', array('resources' => $this->resources, 'route' => $this->route));
+echo $this->partial('resource.php', array('resources' => $this->resources, 'pager' => $this->pager));

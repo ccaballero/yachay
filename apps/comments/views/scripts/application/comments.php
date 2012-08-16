@@ -11,7 +11,7 @@ if (count($comments)) {
         echo '<tr><td colspan="2" valign="top">' . $this->specialEscape($this->escape($comment->comment)) . '</td></tr>';
         echo '<tr><td>';
         if ($comment->amAuthor()) {
-            echo '[<a href="' . $this->url(array('resource' => $resource->ident, 'comment' => $comment->ident), $this->route . '_delete') . '">Eliminar</a>]';
+            echo '[<a href="' . $this->url(array('resource' => $resource->ident, 'comment' => $comment->ident), $this->comment_route . '_delete') . '">Eliminar</a>]';
         } else if ($this->acl('comments', 'drop')) {
             echo '[<a href="' . $this->url(array('comment' => $comment->ident), 'comments_drop') . '">Eliminar</a>]';
         }

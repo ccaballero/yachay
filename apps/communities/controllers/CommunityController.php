@@ -22,7 +22,7 @@ class Communities_CommunityController extends Yachay_Controller_Action
         $paginator->setPageRange(10);
 
         $this->view->resources = $paginator;
-        $this->view->route = array (
+        $this->view->pager = array (
             'key' => 'communities_community_view',
             'params' => array (
                 'community' => $community->url,

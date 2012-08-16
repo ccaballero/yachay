@@ -41,7 +41,7 @@ class Tags_TagController extends Yachay_Controller_Action
         $this->view->resources = $paginator;
         $this->view->communities = $tag->findCommunitiesViaTags_Communities($tag->select()->order('tsregister DESC'));
         $this->view->users = $tag->findUsersViaTags_Users($tag->select()->order('tsregister DESC'));
-        $this->view->route = array (
+        $this->view->pager = array (
             'key' => 'tags_list',
             'params' => array(),
         );

@@ -16,7 +16,7 @@ class Communities_IndexController extends Yachay_Controller_Action
         $paginator->setPageRange(10);
 
         $this->view->communities = $paginator;
-        $this->view->route = array (
+        $this->view->pager = array (
             'key' => 'communities_list',
             'params' => array(),
         );

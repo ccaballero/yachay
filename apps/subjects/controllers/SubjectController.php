@@ -78,7 +78,7 @@ class Subjects_SubjectController extends Yachay_Controller_Action
         $this->view->groups = $list_groups;
         $this->view->model_groups_users = new Groups_Users();
         $this->view->resources = $paginator;
-        $this->view->route = array (
+        $this->view->pager = array (
             'key' => 'subjects_subject_view',
             'params' => array (
                 'subject' => $subject->url,

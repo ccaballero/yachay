@@ -36,9 +36,9 @@ class IndexController extends Yachay_Controller_Action
             $paginator->setPageRange(10);
 
             $this->view->resources = $paginator;
-            $this->view->route = array (
+            $this->view->pager = array (
             	'key' => 'base_visitor',
-                'params' => array (),
+                'params' => array(),
             );
         } else {
             $this->_redirect($this->view->url(array(), 'base_user'));
@@ -190,7 +190,7 @@ class IndexController extends Yachay_Controller_Action
             $paginator->setPageRange(10);
 
             $this->view->resources = $paginator;
-            $this->view->route = array (
+            $this->view->pager = array (
             	'key' => 'base_user',
                 'params' => array(),         
             );

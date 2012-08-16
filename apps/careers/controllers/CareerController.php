@@ -57,7 +57,7 @@ class Careers_CareerController extends Yachay_Controller_Action
         $paginator->setPageRange(10);
 
         $this->view->resources = $paginator;
-        $this->view->route = array (
+        $this->view->pager = array (
             'key' => 'careers_career_view',
             'params' => array (
                 'career' => $career->url,

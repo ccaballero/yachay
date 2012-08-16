@@ -25,7 +25,7 @@ if (count($this->pages)) {
 
     foreach ($this->pages as $page) {
         echo '<tr><td>';
-        echo '<a target="_BLANK" href="' . $this->url(array(), $page->route ) . '">' . $page->label . '</a>';
+        echo '<a target="_BLANK" href="' . $this->url(array(), $page->route) . '">' . $page->label . '</a>';
         echo '</td>';
         echo '<td>' . $page->package . '</td>';
         echo '<td><input type="text" name="pages[' . $page->ident . '][title]" value="' . $page->title . '" /></td>';

@@ -43,7 +43,7 @@ class Teams_TeamController extends Yachay_Controller_Action
         $this->view->team = $team;
         $this->view->members = $members;
         $this->view->resources = $paginator;
-        $this->view->route = array (
+        $this->view->pager = array (
             'key' => 'teams_team_view',
             'params' => array (
             	'subject' => $subject->url,

@@ -43,8 +43,8 @@
 
 <?php if ($this->acl('comments', 'view')) { ?>
     <h2>Comentarios</h2>
-    <?php echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'files_file_comment', 'config' => $this->config, 'template' => $this->template)) ?>
+    <?php echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'comment_route' => 'files_file_comment', 'config' => $this->config, 'template' => $this->template)) ?>
     <?php if ($this->acl('comments', 'new')) { ?>
-    <?php echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'files_file_comment', 'config' => $this->config, 'template' => $this->template, 'user' => $this->user)) ?>
+    <?php echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'comment_route' => 'files_file_comment', 'config' => $this->config, 'template' => $this->template, 'user' => $this->user)) ?>
     <?php } ?>
 <?php } ?>

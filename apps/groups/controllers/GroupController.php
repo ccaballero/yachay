@@ -38,7 +38,7 @@ class Groups_GroupController extends Yachay_Controller_Action
         $this->view->group = $group;
         $this->view->teams = $list_teams;
         $this->view->resources = $paginator;
-        $this->view->route = array (
+        $this->view->pager = array (
             'key' => 'groups_group_view',
             'params' => array (
                 'subject' => $subject->url,

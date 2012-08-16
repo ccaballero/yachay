@@ -36,8 +36,8 @@ echo '<center>' . $this->mime($this->file->mime) . '&nbsp;<a href="' . $this->ur
 
 if ($this->acl('comments', 'view')) {
     echo '<h2>Comentarios</h2>';
-    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'files_file_comment', 'config' => $this->config, 'template' => $this->template));
+    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'comment_route' => 'files_file_comment', 'config' => $this->config, 'template' => $this->template));
     if ($this->acl('comments', 'new')) {
-        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'files_file_comment', 'config' => $this->config, 'template' => $this->template, 'user' => $this->user));
+        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'comment_route' => 'files_file_comment', 'config' => $this->config, 'template' => $this->template, 'user' => $this->user));
     }
 }

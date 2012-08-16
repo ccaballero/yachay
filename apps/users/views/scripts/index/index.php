@@ -4,7 +4,7 @@ echo '<h1>' . $this->page->label . '</h1>';
 
 if (count($this->users)) {
     echo '<center>';
-    echo $this->paginator($this->users, $this->route);
+    echo $this->paginator($this->users, $this->pager);
     echo '<table width="100%">';
     foreach ($this->users as $user) {
         echo '<tr><td valign="top">';
@@ -54,7 +54,7 @@ if (count($this->users)) {
     }
 
     echo '</table>';
-    echo $this->paginator($this->users, $this->route);
+    echo $this->paginator($this->users, $this->pager);
     echo '</center>';
 } else {
     echo '<p>No existen usuarios registrados</p>';

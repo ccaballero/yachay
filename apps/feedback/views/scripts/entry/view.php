@@ -46,8 +46,8 @@ echo '<p>' . $this->specialEscape($this->escape($this->entry->description)) . '<
 
 if ($this->acl('comments', 'view')) {
     echo '<h2>Comentarios</h2>';
-    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'route' => 'notes_note_comment', 'config' => $this->config, 'template' => $this->template));
+    echo $this->partial($this->template('comments', 'comments'), array('resource' => $this->resource, 'comment_route' => 'notes_note_comment', 'config' => $this->config, 'template' => $this->template));
     if ($this->acl('comments', 'new')) {
-        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'route' => 'notes_note_comment', 'config' => $this->config, 'template' => $this->template));
+        echo $this->partial($this->template('comments', 'comment/post'), array('resource' => $this->resource, 'comment_route' => 'notes_note_comment', 'config' => $this->config, 'template' => $this->template));
     }
 }

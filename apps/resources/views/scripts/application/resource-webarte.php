@@ -2,7 +2,7 @@
 <h2>Publicaciones</h2>
     <?php if (count($this->resources)) { ?>
         <?php if ($this->paginator) { ?>
-        <?php echo $this->paginator($this->resources, $this->route) ?>
+        <?php echo $this->paginator($this->resources, $this->pager) ?>
         <?php } ?>
         <div id="resources">
         <?php foreach ($this->resources as $resource) { ?>
@@ -55,7 +55,7 @@
         <?php } ?>
         </div>
         <?php if ($this->paginator) { ?>
-        <?php echo $this->paginator($this->resources, $this->route) ?>
+        <?php echo $this->paginator($this->resources, $this->pager) ?>
         <?php } ?>
     <?php } else { ?>
         <p>No se registraron recursos aún.</p>

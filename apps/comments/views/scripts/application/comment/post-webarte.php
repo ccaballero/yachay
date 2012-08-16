@@ -1,6 +1,6 @@
 <h2>Insertar nuevo comentario</h2>
 
-<form method="post" action="<?php echo $this->url(array('resource' => $this->resource->ident), $this->route) ?>" accept-charset="utf-8">
+<form method="post" action="<?php echo $this->url(array('resource' => $this->resource->ident), $this->comment_route) ?>" accept-charset="utf-8">
     <input type="hidden" name="return" value="<?php echo $this->lastPage() ?>" />
     <div class="resource">
         <div class="avatar">

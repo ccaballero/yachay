@@ -4,7 +4,7 @@ if ($this->acl('resources', 'view')) {
     echo '<h2>Publicaciones</h2>';
     if (count($this->resources)) {
         echo '<center>';
-        echo $this->paginator($this->resources, $this->route);
+        echo $this->paginator($this->resources, $this->pager);
         echo '<table width="100%">';
         foreach ($this->resources as $resource) {
             echo '<tr><td>';
@@ -37,7 +37,7 @@ if ($this->acl('resources', 'view')) {
             echo '</td></tr><tr><td colspan="3">&nbsp;</td></tr>';
         }
         echo '</table>';
-        echo $this->paginator($this->resources, $this->route);
+        echo $this->paginator($this->resources, $this->pager);
         echo '</center>';
     } else {
         echo '<p>No se registraron recursos aún.</p>';

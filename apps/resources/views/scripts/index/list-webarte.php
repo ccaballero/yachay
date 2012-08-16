@@ -15,7 +15,7 @@
     </div>
 
 <?php if (count($this->resources)) { ?>
-    <?php echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'route' => $this->route, 'config' => $this->config, 'template' => $this->template, 'paginator' => false,)) ?>
+    <?php echo $this->partial($this->template('resources', 'resource'), array('resources' => $this->resources, 'pager' => $this->pager, 'config' => $this->config, 'template' => $this->template, 'paginator' => false,)) ?>
 <?php } else { ?>
     <p>No existen recursos registrados</p>
 <?php } ?>

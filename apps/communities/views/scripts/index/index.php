@@ -2,7 +2,7 @@
 
 echo '<h1>' . $this->page->label . '</h1>';
 if (count($this->communities)) {
-    echo '<center>' . $this->paginator($this->communities, $this->route) . '</center>';
+    echo '<center>' . $this->paginator($this->communities, $this->pager) . '</center>';
     foreach ($this->communities as $community) {
         echo '<table width="100%">';
         echo '<tr>';
@@ -46,7 +46,7 @@ if (count($this->communities)) {
         echo '</tr>';
         echo '</table>';
     }
-    echo '<center>' . $this->paginator($this->communities, $this->route) . '</center>';
+    echo '<center>' . $this->paginator($this->communities, $this->pager) . '</center>';
 } else {
     echo '<p>No existen communidades registradas</p>';
 }

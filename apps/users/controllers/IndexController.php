@@ -19,7 +19,7 @@ class Users_IndexController extends Yachay_Controller_Action
         $this->view->model_users = $model_users;
         $this->view->model_friends = $model_friends;
         $this->view->users = $paginator;
-        $this->view->route = array (
+        $this->view->pager = array (
             'key' => 'users_list',
             'params' => array(),
         );

@@ -29,7 +29,7 @@ class Users_UserController extends Yachay_Controller_Action
         $this->view->me = $this->user;
         $this->view->model_friends = $model_friends;
         $this->view->resources = $paginator;
-        $this->view->route = array (
+        $this->view->pager = array (
             'key' => 'users_user_view',
             'params' => array (
                 'user' => $user->url,
