@@ -1,6 +1,6 @@
 <?php 
 
-echo '<h1>' . $this->page->label . ' [<i><a href="' . $this->url(array('user' => $this->user->url), 'profile_edit') . '">Editar</a></i>]</h1>';
+echo '<h1>' . $this->route->label . ' [<i><a href="' . $this->url(array('user' => $this->user->url), 'profile_edit') . '">Editar</a></i>]</h1>';
 echo '<hr />';
 echo '<p>En esta pagina usted puede ver sus datos registrados en el sistema, se recomienda que mantenga al dia esta información de manera que pueda sacarle el maximo provecho a este sistema.</p>';
 

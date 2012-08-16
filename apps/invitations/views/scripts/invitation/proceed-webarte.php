@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?></h1>
+<h1><?php echo $this->route->label ?></h1>
 <p>Para finalizar el proceso de registro, debe escoger su nombre de usuario y sus datos personales.</p>
 
 <form method="post" action="" accept-charset="utf-8">

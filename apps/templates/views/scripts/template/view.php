@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?></h1>
+<h1><?php echo $this->route->label ?></h1>
 
 <table width="100%">
     <tr>

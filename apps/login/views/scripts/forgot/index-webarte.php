@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?></h1>
+<h1><?php echo $this->route->label ?></h1>
 <p>Escriba su dirección de correo electrónico para que le enviemos una nueva contraseña.</p>
 
 <form method="post" action="" accept-charset="utf-8">

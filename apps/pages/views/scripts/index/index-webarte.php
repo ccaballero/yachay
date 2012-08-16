@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?></h1>
+<h1><?php echo $this->route->label ?></h1>
 <table>
     <tr>
         <th><?php echo $this->model_pages->_mapping['label'] ?></th>

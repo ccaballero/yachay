@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?></h1>
+<h1><?php echo $this->route->label ?></h1>
 
 <?php foreach ($this->templates as $template) { ?>
     <h2>

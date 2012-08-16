@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?></h1>
+<h1><?php echo $this->route->label ?></h1>
 <p>En esta pagina usted puede configurar algunos aspectos del comportamiento del sistema, como por ejemplo: su contraseña, las notificaciones, los boletines y otros dependiendo de los modulos que esten instalados.</p>
 
 <form method="post" action="" accept-charset="utf-8">

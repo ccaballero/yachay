@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->page->label . '</h1>';
+echo '<h1>' . $this->route->label . '</h1>';
 echo '<p>Escriba su dirección de correo electrónico para que le enviemos una nueva contraseña.</p>';
 echo '<center><form method="post" action="" accept-charset="utf-8">';
 echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';

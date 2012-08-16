@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->page->label . '</h1>';
+echo '<h1>' . $this->route->label . '</h1>';
 
 echo '<form method="post" action="" accept-charset="utf-8">';
 echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';

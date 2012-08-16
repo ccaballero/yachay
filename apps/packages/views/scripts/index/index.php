@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->page->label . '</h1>';
+echo '<h1>' . $this->route->label . '</h1>';
 echo '<table>';
 foreach ($this->list as $node) {
     echo '<tr><td>';

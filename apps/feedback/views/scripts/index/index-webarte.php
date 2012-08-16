@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?></h1>
+<h1><?php echo $this->route->label ?></h1>
 
     <div>
 <?php if ($this->acl('resources', 'new')) { ?><input type="button" name="new" value="Crear nueva sugerencia" onclick="location.href='<?php echo $this->url(array(), 'feedback_new') ?>'" /><?php } ?>

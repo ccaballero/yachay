@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?>
+<h1><?php echo $this->route->label ?>
 <strong class="task">
     <?php echo $this->partial($this->template('valorations', 'valoration'), array('type' => 'activity', 'value' => $this->user->activity, 'template' => $this->template)) ?>
     <?php echo $this->partial($this->template('valorations', 'valoration'), array('type' => 'participation', 'value' => $this->user->participation, 'template' => $this->template)) ?>

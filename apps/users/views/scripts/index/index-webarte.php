@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label; ?></h1>
+<h1><?php echo $this->route->label ?></h1>
 
 <?php if (count($this->users)) { ?>
     <?php echo $this->paginator($this->users, $this->pager) ?>

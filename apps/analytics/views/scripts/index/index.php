@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?></h1>
+<h1><?php echo $this->route->label ?></h1>
 
 <div class="tabs top">
     <a class="<?php echo $this->active == 'users'       ? 'active' : 'inactive' ?>" href="<?php echo $this->url(array('page' => 'users'), 'analytics_view') ?>">Usuarios</a>

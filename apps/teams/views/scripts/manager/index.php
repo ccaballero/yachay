@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->page->label . '</h1>';
+echo '<h1>' . $this->route->label . '</h1>';
 echo '<b>Grupo: </b><i>' . $this->group->label . '</i>';
 echo '<br />';
 echo '<b>Materia: </b><i>' . $this->subject->label . '</i>';

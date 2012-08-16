@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?></h1>
+<h1><?php echo $this->route->label ?></h1>
 <p>Para acceder al sistema, debe colocar su nombre de usuario y la contraseña que le haya sido provista.</p>
 
 <form method="post" action="" accept-charset="utf-8">

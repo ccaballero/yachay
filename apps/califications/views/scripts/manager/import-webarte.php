@@ -1,4 +1,4 @@
-<h1><?php echo $this->page->label ?>: Grupo <?php echo $this->group->label ?></h1>
+<h1><?php echo $this->route->label ?>: Grupo <?php echo $this->group->label ?></h1>
 <p>
     <span class="mark">Dictada por:</span> <?php echo $this->group->getTeacher()->getFullName() ?><br />
     <span class="mark">Método de evaluación:</span> <?php echo $this->group->getEvaluation()->label ?><br />

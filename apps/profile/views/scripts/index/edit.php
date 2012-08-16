@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->page->label . '</h1>';
+echo '<h1>' . $this->route->label . '</h1>';
 echo '<p>En esta pagina usted debe establecer la informacion que es solicitada, asegurese de mantenerla siempre actualizada, para no tener problemas en el uso del sistema.</p>';
 echo '<center><form method="post" action="" enctype="multipart/form-data" accept-charset="utf-8">';
 echo '<input type="hidden" name="return" value="' . $this->lastPage() . '" />';

@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>' . $this->page->label . '</h1>';
+echo '<h1>' . $this->route->label . '</h1>';
 if ($this->step == 1) {
     echo '<p>Para importar las calificaciones de los usuarios se toman en cuenta las siguientes filas:</p>';
     echo '<ul><li>Código (Imprescindible)</li><li>Los codigos definidos por el sistema de evaluación</li><li>En caso de presentarse valores cualitativos, debe ingresar el valor numerico</li></ul>';
