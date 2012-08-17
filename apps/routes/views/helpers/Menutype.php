@@ -1,6 +1,6 @@
 <?php
 
-class Pages_View_Helper_Menutype
+class Routes_View_Helper_Menutype
 {
     public function menutype($name, $value = '') {
     	$menutypes = array ('menubar' => 'Barra superior', 'footer' => 'Barra inferior');

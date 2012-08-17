@@ -5,7 +5,6 @@
 INSERT INTO `package`
 (`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
-('pages', 'pages', 'base', NULL, UNIX_TIMESTAMP(), 'Modulo de informacion para las paginas registradas'),
 ('routes', 'routes', 'base', NULL, UNIX_TIMESTAMP(), 'Modulo de informacion para las paginas registradas');
 
 /*============================================================================*/
@@ -14,8 +13,8 @@ VALUES
 INSERT INTO `privilege`
 (`description`, `package`, `label`)
 VALUES
-('Listar las paginas disponibles',   'pages', 'list'),
-('Configurar los menus del sistema', 'pages', 'manage');
+('Listar las paginas disponibles',   'routes', 'list'),
+('Configurar los menus del sistema', 'routes', 'manage');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
@@ -23,8 +22,8 @@ VALUES
 INSERT INTO `route`
 (`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
 VALUES
-('Lista de rutas',         'list', 'base',        'routes_list',    'routes',         'pages', 'index',   'index'),
-('Administrador de rutas', 'list', 'routes_list', 'routes_manager', 'routes/manager', 'pages', 'manager', 'index');
+('Lista de rutas',         'list', 'base',        'routes_list',    'routes',         'routes', 'index',   'index'),
+('Administrador de rutas', 'list', 'routes_list', 'routes_manager', 'routes/manager', 'routes', 'manager', 'index');
 
 INSERT INTO `route_privilege`
 (`route`, `package`, `privilege`)

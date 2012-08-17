@@ -33,7 +33,7 @@ CREATE TABLE `template_user` (
 INSERT INTO `package`
 (`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
-('templates', 'templates', 'middle', 'pages', UNIX_TIMESTAMP(), 'Modulo manejador de las plantillas web del sistema');
+('templates', 'templates', 'middle', 'routes', UNIX_TIMESTAMP(), 'Modulo manejador de las plantillas web del sistema');
 
 /*============================================================================*/
 /* Registro de privilegios para el paquete                                    */

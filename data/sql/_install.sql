@@ -10,7 +10,7 @@ SELECT 'packages';
 \. apps/packages.sql
 
 SELECT 'routes';
-\. apps/pages.sql
+\. apps/routes.sql
 
 SELECT 'widgets';
 \. apps/widgets.sql

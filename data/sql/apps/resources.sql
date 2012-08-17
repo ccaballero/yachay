@@ -31,7 +31,7 @@ CREATE TABLE `resource_global` (
 INSERT INTO `package`
 (`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
-('resources', 'resources', 'app', 'pages', UNIX_TIMESTAMP(), 'Modulo de registro de los recursos del sistema');
+('resources', 'resources', 'app', 'routes', UNIX_TIMESTAMP(), 'Modulo de registro de los recursos del sistema');
 
 /*============================================================================*/
 /* Registro de privilegios para el paquete                                    */

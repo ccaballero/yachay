@@ -45,6 +45,10 @@ class Db_Routes extends Yachay_Db_Table
     public function selectByRenderable() {
         return $this->fetchAll($this->select()->where('type = ?', 'list')->orwhere('type = ?', 'view'));
     }
+    
+    public function selectByType($type) {
+        return $this->fetchAll($this->select()->where('type = ?', $type));
+    }
 
     public function findAdapterByRoute($route) {
         return $this->fetchRow(

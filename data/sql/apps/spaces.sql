@@ -9,7 +9,7 @@
 INSERT INTO `package`
 (`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
-('spaces', 'spaces', 'middle', 'pages', UNIX_TIMESTAMP(), 'Modulo generico de espacios virtuales');
+('spaces', 'spaces', 'middle', 'routes', UNIX_TIMESTAMP(), 'Modulo generico de espacios virtuales');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

@@ -74,7 +74,7 @@ CREATE TABLE `route_menu` (
     `type`  enum('menubar', 'footer') NOT NULL,
     `order` int unsigned              NOT NULL DEFAULT 0,
     PRIMARY KEY (`route`),
-    INDEX (`label`)
+    FOREIGN KEY (`route`) REFERENCES `route`(`route`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
 /*============================================================================*/
