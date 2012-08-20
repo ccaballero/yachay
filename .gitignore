@@ -17,6 +17,8 @@ syntax: glob
 .buildpath
 .project
 
+configs/local.ini
+
 library/Zend
 public/media/users/
 public/media/communities/
