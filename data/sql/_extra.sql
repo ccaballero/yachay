@@ -17,7 +17,7 @@ VALUES
 ('routes_list',      'Rutas',        'footer',  2),
 ('widgets_list',     'Widgets',      'footer',  3),
 ('roles_list',       'Roles',        'footer',  4),
-('resources_lsit',   'Recursos',     'footer',  5),
+('resources_list',   'Recursos',     'footer',  5),
 ('templates_list',   'Plantillas',   'footer',  6),
 ('tags_list',        'Etiquetas',    'footer',  7),
 ('feedback_list',    'Sugerencias',  'footer',  8),
