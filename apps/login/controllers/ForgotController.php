@@ -53,7 +53,7 @@ class Login_ForgotController extends Yachay_Controller_Action
 	                    $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
 	                    $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/login/views/scripts/forgot/');
 	
-	                    $view->servername = $this->config->system->servername;
+                            $view->servername = $this->config->system->url;
 	                    $view->code       = $code;
 	                    $view->petition   = $forgot->tsregister;
 	                    $view->expiration = $forgot->tsregister + $forgot->tstimeout;

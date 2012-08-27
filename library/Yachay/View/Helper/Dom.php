@@ -8,7 +8,7 @@ class Yachay_View_Helper_Dom
         $config = Zend_Registry::get('config');
         
         $implementation = new DOMImplementation();
-        $dtd = $implementation->createDocumentType('yachay', '', $config->system->url . 'yachay.dtd');
+        $dtd = $implementation->createDocumentType('yachay', '', $config->system->url . '/yachay.dtd');
 
         $this->_dom = $implementation->createDocument('', '', $dtd);
         $this->_dom->encoding = 'utf-8';        

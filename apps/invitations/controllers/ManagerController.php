@@ -51,7 +51,7 @@ class Invitations_ManagerController extends Yachay_Controller_Action
                 $view->url = $this->view->url(array('code' => $code), 'invitations_invitation_proceed');
                 $view->message = $invitation->message;
                 $view->user = $this->user;
-                $view->site = $this->config->system->servername;
+                $view->site = $this->config->system->url;
 
                 $content = $view->render('mail.php');
 
@@ -59,7 +59,7 @@ class Invitations_ManagerController extends Yachay_Controller_Action
                 $mail->setBodyHtml($content)
                      ->setFrom($this->config->system->email_direction, $this->config->system->email_name)
                      ->addTo($invitation->email)
-                     ->setSubject($this->user->label . ' te ha invitado a ' . $this->config->system->servername)
+                     ->setSubject($this->user->label . ' te ha invitado a ' . $this->config->system->url)
                      ->send();
 
                 $this->_helper->flashMessenger->addMessage('La invitación ha sido enviada al correo electronico');

@@ -23,5 +23,5 @@ de acceso para formar parte de esta comunidad.</p>
 </p>
 
 <center>
-    <a href="<?php echo $this->url ?>">Acceder al sistema</a>
+    <a href="<?php echo $this->site . $this->url ?>">Acceder al sistema</a>
 </center>

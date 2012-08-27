@@ -94,7 +94,7 @@ class Users_ManagerController extends Yachay_Controller_Action
                         $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/users/views/scripts/user/');
 
                         $view->user       = $user;
-                        $view->servername = $this->config->system->servername;
+                        $view->servername = $this->config->system->url;
                         $view->author     = $this->user->label;
                         $view->password   = $password;
 
@@ -409,7 +409,7 @@ class Users_ManagerController extends Yachay_Controller_Action
                                         $view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
                                         $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/users/views/scripts/user/');
                                         $view->user       = $user;
-                                        $view->servername = $this->config->system->servername;
+                                        $view->servername = $this->config->system->url;
                                         $view->author     = $this->user->label;
                                         $view->password   = $password;
                                         $content = $view->render('mail.php');

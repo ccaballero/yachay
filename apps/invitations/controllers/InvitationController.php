@@ -54,7 +54,7 @@ class Invitations_InvitationController extends Yachay_Controller_Action
                 $view->setScriptPath($this->config->resources->frontController->moduleDirectory . '/users/views/scripts/user/');
 
                 $view->user       = $user;
-                $view->servername = $this->config->system->servername;
+                $view->servername = $this->config->system->url;
                 $view->author     = NULL;
                 $view->password   = $password;
 
