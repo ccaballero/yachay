@@ -1,49 +1,32 @@
 \chapter{El modelo base}
 
-Como parte del análisis requerido para la desarrollo del sistema, en este capítulo describiremos las características y
-limitaciones del sistema Yeah!, antecesor del cuál se basaron las primeras ideas e intenciones del presente trabajo.
+Como parte del análisis requerido para la desarrollo del sistema, en este capítulo describiremos las características y limitaciones del sistema Yeah!, antecesor del cuál se basaron las primeras ideas e intenciones del presente trabajo.
 
 \section{Reseña histórica}
-El proyecto Yeah! se inicia en febrero del 2009, con la intención de desarrollar un sistema web de administración de
-cursos y notas, pasadas varias situaciones, se llega a una versión estable en junio del mismo año, dándose por terminado
-el desarrollo e intenciones iniciales (versión 0.1).
+El proyecto Yeah! se inicia en febrero del 2009, con la intención de desarrollar un sistema web de administración de cursos y notas, pasadas varias situaciones, se llega a una versión estable en junio del mismo año, dándose por terminado el desarrollo e intenciones iniciales (versión 0.1).
 
-Transcurridos varios años, se reactiva el proyecto en mayo del 2010, con la intención inicial de mejorar las funciones
-inicialmente propuestas, además de complementar con ideas que nacieron en el transcurso del tiempo. Llegando a un nuevo
-producto estable en noviembre del 2010, y cambiando el nombre a proyecto Yachay  (versión 0.2).
+Transcurridos varios años, se reactiva el proyecto en mayo del 2010, con la intención inicial de mejorar las funciones inicialmente propuestas, además de complementar con ideas que nacieron en el transcurso del tiempo. Llegando a un nuevo producto estable en noviembre del 2010, y cambiando el nombre a proyecto Yachay  (versión 0.2).
 
-En este año 2011, se fueron realizando varias adaptaciones, necesarias para la utilización en un contexto real
-(instalación de la primera instancia en colaboración con el centro MEMI), que ha su vez fueron develando muchas
-necesidades de reestructuración; el resultado final fue la versión 0.3, siendo esta la que esta siendo evaluada y
-utilizada.
+En este año 2011, se fueron realizando varias adaptaciones, necesarias para la utilización en un contexto real (instalación de la primera instancia en colaboración con el centro MEMI), que ha su vez fueron develando muchas necesidades de reestructuración; el resultado final fue la versión 0.3, siendo esta la que fue evaluada y utilizada por 2 gestiones.
 
 \section{Primeras intenciones}
 El objetivo del proyecto Yeah!, estaba definido como:
 
-\emph{Desarrollar una plataforma social basada en tecnologías web 2.0, que posea fines educativos, de manera que mejore
-el proceso enseñanza-aprendizaje y la interacción entre docentes y estudiantes.}
+\emph{Desarrollar una plataforma social basada en tecnologías web 2.0, que posea fines educativos, de manera que mejore el proceso enseñanza-aprendizaje y la interacción entre docentes y estudiantes.}
 
 \section{Funciones que moldean el sistema}
 \begin{description}
 \item [Gestión de usuarios] Componente encargado de la gestión de usuarios y roles de usuarios.
-\item [Gestión de espacios virtuales] Componente encargado de la gestión de espacios de materias, espacios de discusión
-y espacios privados.
-\item [Gestión de equipos de trabajo] Componente encargado de la gestión de equipos de trabajo entre los usuarios del
-sistema.
+\item [Gestión de espacios virtuales] Componente encargado de la gestión de espacios de materias, espacios de discusión y espacios privados.
+\item [Gestión de equipos de trabajo] Componente encargado de la gestión de equipos de trabajo entre los usuarios del sistema.
 \item [Sub-sistema de administración del sistema] Componente encargado de facilitar la administración del sistema.
 \item [Sub-sistema de administración de módulos] Componente encargado de la gestión de los módulos del sistema.
 \end{description}
 
 \section{Estructura}
-La estructura del sistema siempre estuvo regida por las recomendaciones de la librería Zend en su versión 1.8.x, desde
-ese entonces hasta ahora (versión 1.11.x), varios métodos y aspectos han cambiado, con la salida de nuevas versiones, lo
-que hizó que la estructura requiera cambios importantes\footnote{Todos los cambios requeridos, estan basados en la
-documentación oficial alojada en http://framework.zend.com/manual/en/learning.quickstart.create-project.html}.
+La estructura del sistema siempre estuvo regida por las recomendaciones de la librería Zend en su versión 1.8.x, desde ese entonces hasta ahora (versión 1.11.x), varios métodos y aspectos han cambiado, con la salida de nuevas versiones, lo que hizo que la estructura requiera cambios importantes\footnote{Todos los cambios requeridos, están basados en la documentación oficial alojada en http://framework.zend.com/manual/en/learning.quickstart.create-project.html}.
 
-En la gráfica~\ref{estructura_base} se muestra la estructura antigua, mucho mas simple que la nueva que puede verse en la
-gráfica~\ref{estructura_actual}, la estructura ahora utilizada frecuentemente por la librería Zend, que está por demás
-demostrado posee una mejor adecuación a los nuevos requerimientos en el desarrollo web, ademas de ofrecer mayor control
-y seguridad que la versiones mas antiguas\cite{Gilmore}.
+En la gráfica~\ref{estructura_base} se muestra la estructura antigua, mucho mas simple que la nueva, que puede verse en la gráfica~\ref{estructura_actual}, la estructura ahora utilizada frecuentemente por la librería Zend, que está por demás demostrado posee una mejor adecuación a los nuevos requerimientos en el desarrollo web, ademas de ofrecer mayor control y seguridad que la versiones mas antiguas\cite{Gilmore}.
 
 \begin{figure}
 \small
@@ -78,7 +61,7 @@ y seguridad que la versiones mas antiguas\cite{Gilmore}.
 .2 media.
 .3 upload.
 .3 \ldots{}.
-.2 packages \ldots{} \begin{minipage}[t]{8cm} Módulos instalados.\end{minipage}.
+.2 modules \ldots{} \begin{minipage}[t]{8cm} Módulos instalados.\end{minipage}.
 .3 \ldots{}.
 .2 templates \ldots{} \begin{minipage}[t]{8cm} Plantillas instaladas.\end{minipage}.
 .3 \ldots{}.
@@ -94,44 +77,39 @@ y seguridad que la versiones mas antiguas\cite{Gilmore}.
 \small
 \dirtree{%
 .1 /.
-.2 application \ldots{} \begin{minipage}[t]{8cm} Librerías especificas del sistema.\end{minipage}.
-.3 configs.
-.4 application.ini \ldots{} \begin{minipage}[t]{8cm} Archivo de configuración del sistema.\end{minipage}.
-.3 packages \ldots{} \begin{minipage}[t]{8cm} Módulos habilitados.\end{minipage}.
-.4 \ldots{}.
-.3 Bootstrap.php.
-.2 data \ldots{} \begin{minipage}[t]{8cm} Carpetas para información especifica de la instancia instalada.\end{minipage}.
-.3 dtd.
-.3 sql \ldots{} \begin{minipage}[t]{8cm} Plantillas SQL de instalación de los módulos.\end{minipage}.
-.3 src \ldots{} \begin{minipage}[t]{8cm} Paquetes disponibles para uso.\end{minipage}.
+.2 apps \ldots{} \begin{minipage}[t]{8cm} Paquetes instalados en el sistema.\end{minipage}.
 .3 \ldots{}.
+.2 configs.
+.3 application.ini \ldots{} \begin{minipage}[t]{8cm} Archivo base de configuración del sistema.\end{minipage}.
+.3 local.ini \ldots{} \begin{minipage}[t]{8cm} Archivo especifico de configuración del sistema.\end{minipage}.
+.2 data \ldots{} \begin{minipage}[t]{8cm} Carpetas para información especifica de la instancia instalada.\end{minipage}.
+.3 sql \ldots{} \begin{minipage}[t]{8cm} Plantillas SQL de instalación de los módulos.\end{minipage}.
+.3 upload \ldots{} \begin{minipage}[t]{8cm} Archivos subidos al servidor.\end{minipage}.
 .2 library.
+.3 Collections \ldots{} \begin{minipage}[t]{8cm} Librería de estructuras de datos.\end{minipage}.
+.3 File \ldots{} \begin{minipage}[t]{8cm} Librería de funciones para manejo de CSV.\end{minipage}.
+.3 Xcel \ldots{} \begin{minipage}[t]{8cm} Librería de funciones para manejo de formulas matemáticas.\end{minipage}.
 .3 Yachay.
 .4 Controller.
-.5 Plugins.
-.6 Formatter.php.
-.5 Templates.
-.6 \ldots{}.
+.5 Plugin.
+.6 Format.php.
 .5 Action.php.
+.5 Require.php.
 .4 Db.
-.5 Table.
-.6 Row.php.
 .5 Table.php.
 .4 Model.
-.5 Loader.php.
-.4 Console.php.
-.3 Zend.
-.4 \ldots{}.
-.3 \ldots{}.
-.2 logs.
-.3 \ldots{}.
+.5 Row.
+.6 Validation.php.
+.4 Acl.php.
+.4 Bootstrap.php.
+.4 Init.php.
+.4 Loader.php.
 .2 public \ldots{} \begin{minipage}[t]{8cm} Carpeta para archivos estáticos.\end{minipage}.
 .3 media.
+.3 templates \ldots{} \begin{minipage}[t]{8cm} Carpeta de recursos propios de una plantilla.\end{minipage}.
 .4 \ldots{}.
 .3 index.php.
-.2 shell \ldots{} \begin{minipage}[t]{8cm} Herramientas del sistema por consola.\end{minipage}.
-.3 \_\_header.php.
-.3 installer.php.
+.2 templates \ldots{} \begin{minipage}[t]{8cm} Plantillas propiamente dichas.\end{minipage}.
 .3 \ldots{}.
 }
 \caption{Estructura de ficheros del modelo actual.}
