@@ -1,6 +1,6 @@
 <?php
 
-echo '<h1>Miembros: Grupo ' . $this->group->label . '</h1>';
+echo '<h1>Integrantes: Grupo ' . $this->group->label . '</h1>';
 echo '<i><b>Materia: </b>' . $this->subject->label . '</i>';
 
 echo '<form method="post" action="" accept-charset="utf-8">';

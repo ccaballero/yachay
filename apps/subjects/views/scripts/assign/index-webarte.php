@@ -1,4 +1,4 @@
-<h1>Miembros: <?php echo $this->subject->label ?></h1>
+<h1>Integrantes: <?php echo $this->subject->label ?></h1>
 <p><span class="mark">Gestion: </span><?php echo $this->subject->getGestion()->label ?></p>
 
 <form method="post" action="" accept-charset="utf-8">

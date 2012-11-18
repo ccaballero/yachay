@@ -1,4 +1,4 @@
-<h1><?php echo $this->route->label ?></h1>
+<h1>Tema: <?php echo $this->tpl->label ?></h1>
 
 <p>
     <span class="mark">Tema:</span> <?php echo $this->tpl->label ?><br />
