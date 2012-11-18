@@ -51,7 +51,7 @@ class Files_ManagerController extends Yachay_Controller_Action
                         $file->resource = $resource->ident;
                         $file->save();
 
-                        rename(APPLICATION_PATH . '/../data/upload//' . $file->filename, APPLICATION_PATH . '/public/media/files/' . $file->resource);
+                        rename(APPLICATION_PATH . '/data/upload/' . $file->filename, APPLICATION_PATH . '/public/media/files/' . $file->resource);
 
                         $resource->saveContext($request);
                         $model_valorations->addActivity(2);
