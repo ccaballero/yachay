@@ -13,7 +13,7 @@ abstract class Yachay_Controller_Action extends Yachay_Controller_Require
         $model_routes = new Db_Routes();
         $route = $this->getFrontController()->getRouter()->getCurrentRouteName();
         $this->route = $model_routes->findByRoute($route);
-        
+
         // add the views in path
         $this->view->addHelperPath(APPLICATION_PATH . '/library/Yachay/Helpers', 'Yachay_Helpers');
         $this->view->addHelperPath(APPLICATION_PATH . '/library/Yachay/View/Helper', 'Yachay_View_Helper');

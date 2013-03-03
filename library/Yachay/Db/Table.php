@@ -48,9 +48,12 @@ abstract class Yachay_Db_Table extends Zend_Db_Table_Abstract
     }
 
     protected function _constructObject($row) {
+        if (empty($row)) {
+            return null;
+        }
+
         $object = new $this->_modelClass();
         $reflect = new ReflectionObject($object);
-
         $properties = $reflect->getProperties(ReflectionProperty::IS_PUBLIC);
         foreach ($properties as $property) {
             $key = $property->getName();
