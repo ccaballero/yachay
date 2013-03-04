@@ -130,6 +130,9 @@ SELECT 'templates';
 SELECT 'analytics';
 \. apps/analytics.sql
 
+SELECT 'register';
+\. apps/register.sql
+
 /*============================================================================*/
 
 SELECT 'extra';

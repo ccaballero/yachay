@@ -194,12 +194,15 @@ class Califications_ManagerController extends Yachay_Controller_Action
 
         if ($request->isPost()) {
             $session = new Zend_Session_Namespace('yachay');
+            
+            $config = Zend_Registry::get('config');
+            $max_size = $config->system->upload->max_size;
 
             $selections = $request->getParam('student');
             if (empty($selections)) {
                 $upload = new Zend_File_Transfer_Adapter_Http();
                 $upload->setDestination(APPLICATION_PATH . '/data/upload/');
-                $upload->addValidator('Size', false, 2097152)
+                $upload->addValidator('Size', false, $max_size)
                        ->addValidator('Extension', false, array('csv'));
 
                 if ($upload->receive()) {

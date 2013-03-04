@@ -51,10 +51,13 @@ class Profile_IndexController extends Yachay_Controller_Action
             $this->user->description = $request->getParam('description');
 
             if ($this->user->isValid()) {
+                $config = Zend_Registry::get('config');
+                $max_size = $config->system->upload->max_size;
+                
                 // config of avatar
                 $upload = new Zend_File_Transfer_Adapter_Http();
                 $upload->setDestination(APPLICATION_PATH . '/data/upload/');
-                $upload->addValidator('Size', false, 2097152)
+                $upload->addValidator('Size', false, $max_size)
                        ->addValidator('Extension', false, array('jpg', 'png', 'gif'));
                 if ($upload->receive()) {
                     $filename = $upload->getFileName('file');
