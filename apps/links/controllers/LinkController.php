@@ -13,7 +13,7 @@ class Links_LinkController extends Yachay_Controller_Action
 
         $model_resources = new Resources();
         $resource = $model_resources->findByIdent($link->resource);
-        $this->requireContext($resource);
+//        $this->requireContext($resource);
 
         $resource->viewers = $resource->viewers + 1;
         $resource->save();

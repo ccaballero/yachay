@@ -15,8 +15,7 @@ class Yachay_Controller_Require extends Zend_Controller_Action
         $this->_redirector = $this->_helper->getHelper('Redirector');
         $this->_redirector->setPrependBase(false);
 
-        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
-        $this->_flashMessenger->setNamespace('yachay');
+//        $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
     }
 
     public function requirePermission($package, $privileges) {
@@ -100,7 +99,7 @@ class Yachay_Controller_Require extends Zend_Controller_Action
             $this->_redirect($this->view->url(array('subject' => $subject->url, 'group' => $group->url), 'groups_group_view'));
         }
     }
-    
+
     public function requireMemberTeam($team) {
         if (!$team->amMemberTeam()) {
             $group = $team->getGroup();
@@ -127,6 +126,7 @@ class Yachay_Controller_Require extends Zend_Controller_Action
     public function requireContext($resource) {
         $context = new Yachay_Helpers_Context();
         $spaces_valids = $context->context(NULL, 'plain');
+
         if (!in_array($resource->recipient, $spaces_valids)) {
             $this->_helper->flashMessenger->addMessage('Usted debe ser parte de ese espacio para realizar esa acción');
             $this->_redirect($this->view->url(array(), 'base_user'));

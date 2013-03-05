@@ -93,8 +93,6 @@ class Login_IndexController extends Yachay_Controller_Action
         }
 
         $this->_helper->flashMessenger->addMessage('Usted salió del sistema');
-
-        $url = new Zend_View_Helper_Url();
-        $this->_redirect($url->url(array(), 'login_in'));
+        $this->_redirect($this->view->url(array(), 'login_in'));
     }
 }
