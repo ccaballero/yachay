@@ -13,6 +13,7 @@
     </div>
 
 <?php if (count($this->users)) { ?>
+    <?php echo $this->paginator($this->users, $this->pager) ?>
     <table>
         <tr>
             <th>&nbsp;</th>
@@ -58,6 +59,7 @@
         </tr>
     <?php } ?>
     </table>
+    <?php echo $this->paginator($this->users, $this->pager) ?>
 <?php } else { ?>
     <p>No existen usuarios registrados</p>
 <?php } ?>

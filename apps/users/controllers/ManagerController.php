@@ -29,8 +29,19 @@ class Users_ManagerController extends Yachay_Controller_Action
 
         $model_users = new Users();
 
+        $page = $request->getParam('page', 1);
+
+        $paginator = Zend_Paginator::factory($model_users->selectByStatus('active'));
+        $paginator->setItemCountPerPage(25);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setPageRange(10);
+
         $this->view->model = $model_users;
-        $this->view->users = $model_users->selectAll();
+        $this->view->users = $paginator;
+        $this->view->pager = array(
+            'key' => 'users_manager',
+            'params' => array(),
+        );
 
         $breadcrumb = array();
         if ($this->acl('users', 'list')) {

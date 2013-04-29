@@ -49,7 +49,10 @@ class Yachay_Helpers_Recipient
             case 'community':
                 $model_communities = new Communities();
                 $community = $model_communities->findByIdent($ident);
-                return '<a href="' . $url->url(array('community' => $community->url), 'communities_community_view') . '">' . $community->label . '</a>';
+
+                if (!empty($community)) {
+                    return '<a href="' . $url->url(array('community' => $community->url), 'communities_community_view') . '">' . $community->label . '</a>';
+                }
             case 'user':
                 $model_users = new Users();
                 $user = $model_users->findByIdent($ident);
