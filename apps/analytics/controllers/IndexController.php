@@ -3,16 +3,52 @@
 class Analytics_IndexController extends Yachay_Controller_Action
 {
     private $sql1 = "
-         SELECT role.label as role, a.count as total, b.count as logged, c.count as email, d.count as username FROM role 
-         LEFT JOIN (SELECT user.role, count(*) as count FROM user                               GROUP BY user.role) as a ON role.ident = a.role
-         LEFT JOIN (SELECT user.role, count(*) as count FROM user WHERE user.tslastlogin <> 0   GROUP BY user.role) as b ON role.ident = b.role
-         LEFT JOIN (SELECT user.role, count(*) as count FROM user WHERE user.email <> 0         GROUP BY user.role) as c ON role.ident = c.role
-         LEFT JOIN (SELECT user.role, count(*) as count FROM user WHERE user.label <> user.code GROUP BY user.role) as d ON role.ident = d.role
+         SELECT role.label as role,
+                a.count as total,
+                b.count as logged,
+                c.count as email,
+                d.count as username
+         FROM role 
+         LEFT JOIN (
+            SELECT user.role, count(*) as count
+            FROM user
+            GROUP BY user.role) as a
+         ON role.ident = a.role
+         LEFT JOIN (
+            SELECT user.role, count(*) as count
+            FROM user
+            WHERE user.tslastlogin <> 0
+            GROUP BY user.role) as b
+         ON role.ident = b.role
+         LEFT JOIN (
+            SELECT user.role, count(*) as count
+            FROM user
+            WHERE user.email <> 0
+            GROUP BY user.role) as c
+         ON role.ident = c.role
+         LEFT JOIN (
+            SELECT user.role, count(*) as count
+            FROM user
+            WHERE user.label <> user.code
+            GROUP BY user.role) as d
+         ON role.ident = d.role
          ORDER BY role.ident ASC";
     
     private $sql2 = "
-        SELECT role.label as role, a.activity, a.participation, a.sociability, a.popularity FROM role
-        LEFT JOIN (SELECT user.role, sum(user.activity) as activity, sum(user.participation) as participation, sum(user.sociability) as sociability, sum(user.popularity) as popularity FROM user GROUP BY user.role) as a
+        SELECT role.label as role,
+               a.activity,
+               a.participation,
+               a.sociability,
+               a.popularity
+        FROM role
+        LEFT JOIN (
+            SELECT user.role,
+                   sum(user.activity) as activity,
+                   sum(user.participation) as participation,
+                   sum(user.sociability) as sociability,
+                   sum(user.popularity) as popularity
+            FROM user
+            GROUP BY user.role) as a
         ON role.ident = a.role
         ORDER BY role.ident ASC";
 
