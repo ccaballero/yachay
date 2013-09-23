@@ -1,0 +1,181 @@
+\chapter{El sistema}
+
+En lo que respecta al sistema creado, antes de describir paso a paso, lo referente a sus funciones, primeramente describiremos aspectos referentes a las decisiones tomadas respecto a su instalación, tareas de mantenimiento y puesta en marcha.
+
+Uno de los cambios mas trascendentales que se realizó sobre el sistema antiguo, fue el cambio en la estructura de ficheros, esta ahora requiere estar alojado en un servidor virtual, es decir, no debe
+compartir espacio de sesión con ninguna otra aplicación, se ha sacrificado cierto nivel de versatilidad a cambio de la seguridad de la información; solo el tiempo evaluará si esto valió la pena o no.
+
+\section{Instalación}
+Cabe recalcar que toda la hermenéutica descrita, se restringe al sistema operativo Linux, no siendo probado o corregido para ningún otro sistema operativo.
+
+\subsection{Archivo de hosts}
+Edición del archivo de hosts (/etc/hosts) para la creación del dominio:
+
+\small
+\begin{verbatim}
+127.0.0.1    yachay.local    yachay
+\end{verbatim}
+
+En este caso \emph{yachay.local} es el dominio sobre el que estamos instalando.
+
+\subsection{Host virtual}
+Hecho esto, se pasa a configurar un host virtual para el servidor de aplicaciones web, para el caso del servidor apache, este se realizó de la siguiente manera:
+
+\small
+\begin{verbatim}
+<VirtualHost *:80>
+    ServerName yachay.local
+    ServerAlias *.yachay.local
+    DocumentRoot /var/www/yachay/public
+
+    SetEnv APPLICATION_ENV "production"
+
+    LogLevel info
+    ErrorLog "/var/www/yachay/logs/error.log"
+    CustomLog "/var/www/yachay/logs/user-agent.log" "%{User-agent}i"
+    CustomLog "/var/www/yachay/logs/referer.log" "%{Referer}i"
+    CustomLog "/var/www/yachay/logs/resume.log" "%v %m %U%q"
+
+    <Directory /var/www/yachay/public>
+        DirectoryIndex index.php
+        AllowOverride All
+        Order allow,deny
+        Allow from all
+    </Directory>
+</VirtualHost>
+\end{verbatim}
+
+Adicionalmente se realizaron pruebas sobre el servidor nginx, basados en el siguiente archivo de configuracion:
+
+\small
+\begin{verbatim}
+server {
+    listen 80;
+    server_name yachay.local;
+    root /var/www/yachay/public;
+    index index.php;
+
+    client_max_body_size 40m;
+    client_body_buffer_size 128k;
+
+    access_log /var/log/nginx/yachay.access_log main;
+    error_log /var/log/nginx/yachay.error_log debug;
+
+    include /etc/nginx/drop.conf;
+    location / {
+        if (!-f $request_filename) {
+            rewrite ^(.*)$ /index.php last;
+            break;
+        }
+    }
+    location ~ \.php$ {
+        include /etc/nginx/fastcgi.conf;
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_index /index.php;
+        fastcgi_param APPLICATION_ENV development;
+    }
+}
+\end{verbatim}
+
+En ambos casos \emph{/var/www/yachay} es el sitio donde esta instalado.
+
+\subsection{Archivo .htaccess}
+Como parte de la definición de la arquitectura diseñada. se detalla también el archivo .htaccess utilizado, para manejar varios formatos de respuesta de la petición, y asegurar la calidad de las url, se define como se muestra a continuación:
+
+\begin{verbatim}
+RewriteEngine on
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{HTTP_HOST} ^([a-z]*)\.yachay\.local$ [NC]
+RewriteRule ^(.*)$ index.php?format=%1 [L,QSA]
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{HTTP_HOST} ^yachay\.local$ [NC]
+RewriteRule ^(.*)$ index.php?format=www [L,QSA]
+\end{verbatim}
+
+Pueden verse dos reglas; la primera para cualquier subdominio que los paquetes requieran; la segunda para el dominio principal, de modo tal que en cualquier caso se envié por petición GET la variable "format" que define el tipo de respuesta que se espera.
+
+\section{Sobre módulos, controladores y acciones}
+Todo los recursos (no importando de que tipo, es decir, en su mayor grado de abstracción) poseen en esencia dos controladores iniciales:
+
+\begin{description}
+\item [index (list)] Que presenta una lista de los recursos disponibles.
+\item [manager (admin)] Que presenta el conjunto de funciones disponibles sobre los recursos.
+\end{description}
+
+Estas funciones sobre los recursos, dependiendo del paquete, pueden ser:
+
+\begin{description}
+\item [new (put)] Función de creación de un nuevo recurso.
+\item [view (get)] Función de presentación de la información de un recurso.
+\item [edit (post)] Función de edición del recurso.
+\item [delete (delete)] Función de eliminación del recurso.
+\item [lock] Función de bloqueo o deshabilitación del recurso.
+\item [unlock] Función de desbloqueo o habilitación del recurso.
+\end{description}
+
+\section{Paquetes construidos}
+Si bien, ya existían una gran cantidad de paquetes (antes denominados módulos), contemplando varios aspectos, como la modularidad, el acoplamiento, entre otros; fueron readecuados a los nuevos requerimientos, muchos fueron eliminados, otros nuevos se construyeron, o fusionaron. En el cuadro~\ref{modulos_actuales} se detallan los paquetes de los que se dispone en la actualidad y la función que desempeñan.
+
+\begin{table}
+\begin{tabular}{l|l}
+Paquete & Descripción \\
+\hline
+base & Paquete gestor de pagina principal. \\
+packages & Modulo registro de los paquetes del sistema. \\
+routes & Modulo de información para las paginas registradas. \\
+  spaces & Modulo genérico de espacios virtuales. \\
+   gestions & Modulo guiá de información para el manejo de periodos académicos. \\
+    subjects & Modulo manejador de las materias. \\
+     groups & Modulo manejador de los grupos para las materias. \\
+      teams & Modulo manejador de los equipos de trabajo de los usuarios. \\
+      groupsets & Modulo manejador de las agrupaciones de los grupos. \\
+      evaluations & Modulo manejador de los criterios del sistema. \\
+       califications & Modulo manejador de las calificaciones de los estudiantes del sistema. \\
+   areas & Modulo manejador de las las áreas de agrupación de las materias. \\
+   careers & Modulo manejador de las las carreras. \\
+   communities & Modulo manejador de las comunidades. \\
+  resources & Modulo de registro de los recursos del sistema. \\
+   notes & Modulo de gestión de notas de texto. \\
+    feedback & Modulo de registro de sugerencias del sistema. \\
+   links & Modulo de gestión de enlaces. \\
+   files & Modulo de gestión de archivos. \\
+    photos & Modulo de gestión de imágenes. \\
+    videos & Modulo de gestión de videos online. \\
+   events & Modulo de gestión de calendarios y eventos. \\
+   comments & Modulo manejador de comentarios en los recursos disponibles del sistema. \\
+   ratings & Modulo manejador de las puntuaciones en todos los recursos disponibles del sistema. \\
+   valorations & Modulo manejador de las valoraciones de los usuarios del sistema. \\
+   tags & Modulo manejador de las etiquetas en todos los recursos disponibles del sistema. \\
+  templates & Modulo manejador de las plantillas web del sistema. \\
+   widgets & Modulo de configuración para los widgets de las paginas. \\
+privileges & Modulo registro de los privilegios del sistema. \\
+  roles & Modulo manejador de los roles de los usuarios. \\
+   users & Modulo manejador de los usuarios. \\
+    login & Modulo manejador de acceso de los usuarios. \\
+    profile & Modulo para la visualización de los datos del usuario. \\
+    settings & Modulo para la configuración de usuario en el sistema. \\
+    friends & Modulo de conexiones entre usuarios. \\
+    invitations & Modulo utilidad para el manejo de invitaciones. \\
+analytics & Modulo de visualización de estadísticas. \\
+\end{tabular}
+\caption{Paquetes construidos durante el proyecto.}
+\label{modulos_actuales}
+\end{table}
+
+El objetivo de los siguientes capítulos tratan exclusivamente de la explicación detallada de estos paquetes, detallando sus especificaciones y justificación de existencia, enfatizando en como están relacionados con los objetivos del proyecto.
+
+Adicionalmente, en el cuadro~\ref{modulos_eliminados} se detallan los que antes eran módulos y ahora no están presentes, también se justifica su eliminación.
+
+\begin{table}
+\begin{tabular}{l|l}
+Modulo & Detalle \\
+\hline
+frontpage & Sus funciones fueron incluidas en el paquete \emph{spaces}. \\
+menus & Sus funciones fueron incluidas en el paquete \emph{templates}. \\
+paginator & Sus funciones fueron incluidas en el paquete \emph{spaces}. \\
+regions & Sus funciones fueron incluidas en el paquete \emph{templates}. \\
+toolbar & Sus funciones fueron incluidas en el paquete \emph{templates}. \\
+\end{tabular}
+\caption{Módulos que no llegaron a ser paquetes.}
+\label{modulos_eliminados}
+\end{table}
