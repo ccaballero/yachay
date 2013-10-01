@@ -18,3 +18,72 @@
 \contentsline {subsubsection}{Principios del conectivismo}{9}{section*.2}
 \contentsline {section}{\numberline {2.3}Teor\IeC {\'\i }a del aprendizaje social}{9}{section.2.3}
 \contentsline {section}{\numberline {2.4}Estrategias a tomar en cuenta}{10}{section.2.4}
+\contentsline {chapter}{\numberline {3}El proceso de desarrollo}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Metodolog\IeC {\'\i }a de desarrollo}{14}{section.3.1}
+\contentsline {section}{\numberline {3.2}Objetivo 1: Construcci\IeC {\'o}n de espacios virtuales}{14}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Historias de usuario}{14}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Dise\IeC {\~n}o de interfaces}{14}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Objetivo 2: Intercambio de recursos}{14}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Historias de usuario}{14}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Dise\IeC {\~n}o de interfaces}{14}{subsection.3.3.2}
+\contentsline {section}{\numberline {3.4}Objetivo 3: Instancias m\IeC {\'u}ltiples del sistema}{14}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Historias de usuario}{14}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Dise\IeC {\~n}o de interfaces}{14}{subsection.3.4.2}
+\contentsline {section}{\numberline {3.5}Objetivo 4: Canales de comunicaci\IeC {\'o}n}{14}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Historias de usuario}{14}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Dise\IeC {\~n}o de interfaces}{14}{subsection.3.5.2}
+\contentsline {section}{\numberline {3.6}Objetivo 5: Fomento a la participaci\IeC {\'o}n}{14}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Historias de usuario}{14}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3.6.2}Dise\IeC {\~n}o de interfaces}{14}{subsection.3.6.2}
+\contentsline {chapter}{\numberline {4}El producto desarrollado}{15}{chapter.4}
+\contentsline {section}{\numberline {4.1}Arquitectura del sistema}{17}{section.4.1}
+\contentsline {section}{\numberline {4.2}Plataforma}{17}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}El gestor de paquetes \emph {packages}}{17}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}El manejo de privilegios \emph {privileges}}{17}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}El manejo de rutas y navegaci\IeC {\'o}n \emph {routes}}{17}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}El sistema de plantillas \emph {templates}}{17}{subsection.4.2.4}
+\contentsline {section}{\numberline {4.3}Conectitividad}{17}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}La inteligencia colectiva \emph {axon}}{17}{subsection.4.3.1}
+\contentsline {section}{\numberline {4.4}Personas}{17}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}El espacio personal \emph {users}}{17}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}El control de las funciones \emph {roles}}{17}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}Red de contactos}{17}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Las redes sociales \emph {contacts}}{17}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Los c\IeC {\'\i }rculos \emph {sets}}{17}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}La propagaci\IeC {\'o}n \emph {invitations}}{17}{subsection.4.5.3}
+\contentsline {section}{\numberline {4.6}Espacios virtuales}{17}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}El espacio gen\IeC {\'e}rico \emph {spaces}}{17}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Los espacios formales \emph {gestions}, \emph {careers}, \emph {areas}}{17}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}El espacio informal \emph {communities}}{17}{subsection.4.6.3}
+\contentsline {subsection}{\numberline {4.6.4}Los espacios jer\IeC {\'a}rquicos \emph {subjects}, \emph {groups}, \emph {teams}}{17}{subsection.4.6.4}
+\contentsline {subsection}{\numberline {4.6.5}Las utilidades sobre grupos \emph {groupsets}}{17}{subsection.4.6.5}
+\contentsline {section}{\numberline {4.7}B-learning}{17}{section.4.7}
+\contentsline {subsection}{\numberline {4.7.1}Los sistemas de evaluaci\IeC {\'o}n \emph {evaluations}}{17}{subsection.4.7.1}
+\contentsline {subsection}{\numberline {4.7.2}Las calificaciones \emph {califications}}{17}{subsection.4.7.2}
+\contentsline {section}{\numberline {4.8}Recursos}{17}{section.4.8}
+\contentsline {subsection}{\numberline {4.8.1}Los componentes gen\IeC {\'e}ricos \emph {resources}}{17}{subsection.4.8.1}
+\contentsline {subsection}{\numberline {4.8.2}El recurso mas b\IeC {\'a}sico \emph {notes}}{17}{subsection.4.8.2}
+\contentsline {subsection}{\numberline {4.8.3}Los archivos en general \emph {files}}{17}{subsection.4.8.3}
+\contentsline {subsection}{\numberline {4.8.4}Los archivos especiales \emph {photos}, \emph {videos}}{17}{subsection.4.8.4}
+\contentsline {subsection}{\numberline {4.8.5}Los recursos espacio-temporales \emph {events}}{17}{subsection.4.8.5}
+\contentsline {subsection}{\numberline {4.8.6}La reenderizacion personalizada \emph {links}}{17}{subsection.4.8.6}
+\contentsline {subsection}{\numberline {4.8.7}Las sugerencias \emph {feedback}}{17}{subsection.4.8.7}
+\contentsline {section}{\numberline {4.9}Web 2.0}{17}{section.4.9}
+\contentsline {subsection}{\numberline {4.9.1}Los comentarios \emph {comments}}{17}{subsection.4.9.1}
+\contentsline {subsection}{\numberline {4.9.2}La calidad del recurso \emph {ratings}}{17}{subsection.4.9.2}
+\contentsline {subsection}{\numberline {4.9.3}Las nuevas interpretaciones \emph {tags}}{17}{subsection.4.9.3}
+\contentsline {subsection}{\numberline {4.9.4}Los sistemas de reputaci\IeC {\'o}n \emph {valorations}}{17}{subsection.4.9.4}
+\contentsline {section}{\numberline {4.10}Sistemas de control}{17}{section.4.10}
+\contentsline {subsection}{\numberline {4.10.1}Los indicadores medibles \emph {stats}}{17}{subsection.4.10.1}
+\contentsline {subsection}{\numberline {4.10.2}El panel de control \emph {panels}}{17}{subsection.4.10.2}
+\contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{19}{chapter.5}
+\contentsline {section}{\numberline {5.1}Nomenclatura}{19}{section.5.1}
+\contentsline {section}{\numberline {5.2}Resultados}{20}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Contexto}{21}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Usuarios}{21}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Contactos}{21}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.4}Espacios Virtuales}{21}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.5}Recursos}{21}{subsection.5.2.5}
+\contentsline {subsection}{\numberline {5.2.6}Linea de tiempo}{21}{subsection.5.2.6}
+\contentsline {section}{\numberline {5.3}Conclusiones}{21}{section.5.3}
+\contentsline {section}{\numberline {5.4}Recomendaciones}{21}{section.5.4}
