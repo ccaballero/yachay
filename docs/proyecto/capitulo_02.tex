@@ -1,197 +1,242 @@
-\chapter{El modelo base}
+\chapter{Marco teórico}
 
-Como parte del análisis requerido para la desarrollo del sistema, en este capítulo describiremos las características y limitaciones del sistema Yeah!, antecesor del cuál se basaron las primeras ideas e intenciones del presente trabajo.
+En este capitulo desglosaremos, y analizaremos los conceptos utilizados para la
+fundamentación del proyecto.
 
-\section{Reseña histórica}
-El proyecto Yeah! se inicia en febrero del 2009, con la intención de desarrollar un sistema web de administración de cursos y notas, pasadas varias situaciones, se llega a una versión estable en junio del mismo año, dándose por terminado el desarrollo e intenciones iniciales (versión 0.1).
+Primero se analizará el concepto de \emph{aprendizaje}, veremos los avances
+que se realizaron a lo largo de los años, ademas de las tendencias y las
+diversas corrientes de pensamiento que han aportado a una mejor comprensión
+acerca de como los seres humanos aprendemos.
 
-Transcurridos varios años, se reactiva el proyecto en mayo del 2010, con la intención inicial de mejorar las funciones inicialmente propuestas, además de complementar con ideas que nacieron en el transcurso del tiempo. Llegando a un nuevo producto estable en noviembre del 2010, y cambiando el nombre a proyecto Yachay  (versión 0.2).
+A partir de ahí, describiremos las diversas teorías de aprendizaje, y los
+nuevos paradigmas encaminados a abordar como la tecnología esta cambiando las
+formas clásicas de aprendizaje.
 
-En este año 2011, se fueron realizando varias adaptaciones, necesarias para la utilización en un contexto real (instalación de la primera instancia en colaboración con el centro MEMI), que ha su vez fueron develando muchas necesidades de reestructuración; el resultado final fue la versión 0.3, siendo esta la que fue evaluada y utilizada por 2 gestiones.
+\section{Aprendizaje}
 
-\section{Primeras intenciones}
-El objetivo del proyecto Yeah!, estaba definido como:
+El aprendizaje\footnote{Definición extraída de
+http://es.wikipedia.org/wiki/Aprendizaje} es el proceso a través del cual se
+adquieren o modifican habilidades, destrezas, conocimientos, conductas o
+valores como resultado del estudio, la experiencia, la instrucción, el
+razonamiento y la observación.
 
-\emph{Desarrollar una plataforma social basada en tecnologías web 2.0, que posea fines educativos, de manera que mejore el proceso enseñanza-aprendizaje y la interacción entre docentes y estudiantes.}
+El aprendizaje humano resulta de la interacción de la persona con el medio
+ambiente. Es el resultado de la experiencia, del contacto del hombre con su
+entorno. Este proceso, inicialmente es natural, nace en el entorno familiar y
+social; luego, simultáneamente, se hace deliberado (previamente planificado).
+La evidencia de un nuevo aprendizaje se manifiesta cuando la persona expresa
+una respuesta adecuada interna o externamente.\cite{Rojas}
 
-\section{Funciones que moldean el sistema}
-\begin{description}
-\item [Gestión de usuarios] Componente encargado de la gestión de usuarios y roles de usuarios.
-\item [Gestión de espacios virtuales] Componente encargado de la gestión de espacios de materias, espacios de discusión y espacios privados.
-\item [Gestión de equipos de trabajo] Componente encargado de la gestión de equipos de trabajo entre los usuarios del sistema.
-\item [Sub-sistema de administración del sistema] Componente encargado de facilitar la administración del sistema.
-\item [Sub-sistema de administración de módulos] Componente encargado de la gestión de los módulos del sistema.
-\end{description}
+Basados en estas definiciones, vemos al aprendizaje como un proceso natural, 
+que puede ser reforzado con técnicas especificas para el dominio de 
+conocimiento requerido. Esta claro que el objetivo final del proyecto es 
+mejorar las técnicas de adquisición de conocimiento por parte de los 
+estudiantes, para esto es necesario primero analizar las diferentes corrientes
+desarrolladas en el ámbito de la teoría del aprendizaje.
 
-\section{Estructura}
-La estructura del sistema siempre estuvo regida por las recomendaciones de la librería Zend en su versión 1.8.x, desde ese entonces hasta ahora (versión 1.11.x), varios métodos y aspectos han cambiado, con la salida de nuevas versiones, lo que hizo que la estructura requiera cambios importantes\footnote{Todos los cambios requeridos, están basados en la documentación oficial alojada en http://framework.zend.com/manual/en/learning.quickstart.create-project.html}.
+\section{Teorías del aprendizaje}
+Las teorías de aprendizaje tratan los procesos de adquisición de
+conocimiento, en el ultimo siglo estas se han hecho cada vez mas importantes,
+creciendo estas a partir de los descubrimientos realizados en los campos de la 
+psicología, la pedagogía, y la misma informática.
 
-En la gráfica~\ref{estructura_base} se muestra la estructura antigua, mucho mas simple que la nueva, que puede verse en la gráfica~\ref{estructura_actual}, la estructura ahora utilizada frecuentemente por la librería Zend, que está por demás demostrado posee una mejor adecuación a los nuevos requerimientos en el desarrollo web, ademas de ofrecer mayor control y seguridad que la versiones mas antiguas\cite{Gilmore}.
+De las diversas corrientes postuladas en los últimos tiempos, describiremos
+aquellas que se han hecho fundamentales para la comprensión del concepto de 
+aprendizaje.
 
-\begin{figure}
-\small
-\dirtree{%
-.1 /.
-.2 libs \ldots{} \begin{minipage}[t]{8cm} Carpeta contenedora de las clases php.\end{minipage}.
-.3 File.
-.3 Xcel.
-.3 Yeah \ldots{} \begin{minipage}[t]{8cm} Librerías propias del sistema.\end{minipage}.
-.4 Helpers.
-.4 Model.
-.5 Row.
-.6 Validation.php \ldots{} \begin{minipage}[t]{8cm} Validador automático de modelos.\end{minipage}.
-.5 Table.php \ldots{} \begin{minipage}[t]{8cm} Superclase base de todos los adaptadores de base de datos.\end{minipage}.
-.4 Regions.
-.5 \ldots{}.
-.4 Settings.
-.5 Config.php \ldots{} \begin{minipage}[t]{8cm} Archivo de configuración del sistema.\end{minipage}.
-.5 Database.php \ldots{} \begin{minipage}[t]{8cm} Archivo de configuración de la base de datos.\end{minipage}.
-.5 \ldots{}.
-.4 Validators.
-.5 \ldots{}.
-.4 Acl.php.
-.4 Action.php \ldots{} \begin{minipage}[t]{8cm} Superclase base de todos los controladores.\end{minipage}.
-.4 Adapter.php.
-.4 Bootstrap.php \ldots{} \begin{minipage}[t]{8cm} Inicializador del motor de Zend Framework.\end{minipage}.
-.4 Init.php.
-.4 Loader.php \ldots{} \begin{minipage}[t]{8cm} Cargador automático de modelos.\end{minipage}.
-.4 Utils.php.
-.3 Zend.
-.4 \ldots{}.
-.2 media.
-.3 upload.
-.3 \ldots{}.
-.2 modules \ldots{} \begin{minipage}[t]{8cm} Módulos instalados.\end{minipage}.
-.3 \ldots{}.
-.2 templates \ldots{} \begin{minipage}[t]{8cm} Plantillas instaladas.\end{minipage}.
-.3 \ldots{}.
-.2 .htaccess.
-.2 index.php.
-.2 yeah.log \ldots{} \begin{minipage}[t]{8cm} Archivo de log de rutas visitadas.\end{minipage}.
-}
-\caption{Estructura de ficheros del modelo base.}
-\label{estructura_base}
-\end{figure}
+\subsection{Conductismo}
+Se conoce como conductismo a la corriente que dentro de la psicología fue
+desarrollada primeramente por el psicólogo John B. Watson hacia finales del
+siglo XIX y que consiste en el empleo de procedimientos estrictamente
+experimentales para estudiar el comportamiento humano observable, es decir,
+lisa y llanamente la conducta que despliega una persona y lo hará entendiendo
+al entorno de esta como un conjunto de estímulos-respuesta.\cite{ABC}
 
-\begin{figure}
-\small
-\dirtree{%
-.1 /.
-.2 apps \ldots{} \begin{minipage}[t]{8cm} Paquetes instalados en el sistema.\end{minipage}.
-.3 \ldots{}.
-.2 configs.
-.3 application.ini \ldots{} \begin{minipage}[t]{8cm} Archivo base de configuración del sistema.\end{minipage}.
-.3 local.ini \ldots{} \begin{minipage}[t]{8cm} Archivo especifico de configuración del sistema.\end{minipage}.
-.2 data \ldots{} \begin{minipage}[t]{8cm} Carpetas para información especifica de la instancia instalada.\end{minipage}.
-.3 sql \ldots{} \begin{minipage}[t]{8cm} Plantillas SQL de instalación de los módulos.\end{minipage}.
-.3 upload \ldots{} \begin{minipage}[t]{8cm} Archivos subidos al servidor.\end{minipage}.
-.2 library.
-.3 Collections \ldots{} \begin{minipage}[t]{8cm} Librería de estructuras de datos.\end{minipage}.
-.3 File \ldots{} \begin{minipage}[t]{8cm} Librería de funciones para manejo de CSV.\end{minipage}.
-.3 Xcel \ldots{} \begin{minipage}[t]{8cm} Librería de funciones para manejo de formulas matemáticas.\end{minipage}.
-.3 Yachay.
-.4 Controller.
-.5 Plugin.
-.6 Format.php.
-.5 Action.php.
-.5 Require.php.
-.4 Db.
-.5 Table.php.
-.4 Model.
-.5 Row.
-.6 Validation.php.
-.4 Acl.php.
-.4 Bootstrap.php.
-.4 Init.php.
-.4 Loader.php.
-.2 public \ldots{} \begin{minipage}[t]{8cm} Carpeta para archivos estáticos.\end{minipage}.
-.3 media.
-.3 templates \ldots{} \begin{minipage}[t]{8cm} Carpeta de recursos propios de una plantilla.\end{minipage}.
-.4 \ldots{}.
-.3 index.php.
-.2 templates \ldots{} \begin{minipage}[t]{8cm} Plantillas propiamente dichas.\end{minipage}.
-.3 \ldots{}.
-}
-\caption{Estructura de ficheros del modelo actual.}
-\label{estructura_actual}
-\end{figure}
+El conductismo surgió como oposición directa al énfasis que había puesto el
+psicoanálisis en los impulsos ocultos e inconscientes. El problema era que
+tales impulsos no podían estudiarse y cuantificarse, lo que implicaba que la
+psicología parecía no ser científica. A comienzos del siglo XX, John Watson
+(1878-1958) expuso que, para que la psicología fuera considerada una ciencia,
+los psicólogos debían examinar solo lo que pudieran ver y medir: la conducta y
+no los pensamientos y los impulsos ocultos.\footnote{Definición extraída de
+https://es.wikipedia.org/wiki/Conductismo}.
 
-\section{Módulos}
-El proyecto tenía desarrollados varios módulos, cuyas funciones iban desde la manipulación de menús, hasta el manejo de
-comunidades. Una de las máximas desventajas del modelo base fue su alto acoplamiento, que hizó a los módulos
-tremendamente interdependientes, haciendo de todo el sistema algo complejo de mantener.
+El conductismo introducirá el concepto de \emph{repertorios básicos de
+conducta}, como principal herramienta para explicar la conducta humana. Para
+esta corriente, el proceso de aprendizaje que tiene lugar a lo largo de la
+historia individual es acumulativo y jerárquico, esto quiere decir que las
+conductas aprendidas tienden a acumularse con el paso del tiempo y se organizan
+de modo que algunas tendrán más preeminencia sobre otras.
 
-En el cuadro~\ref{modulos_base} se detallan los módulos que ya estaban construidos con anterioridad y la función que
-desempeñan.
+Los repertorios básicos son la base para la adquisición de otras conductas. Son
+repertorios básicos: la atención, la imitación, y el seguimiento de 
+instrucciones. Estos repertorios básicos son el requisito o el repertorio de
+entrada para la aplicación de cualquier otro programa. Es obvio que el sujeto
+que carece de los repertorios básicos no posee tampoco los demás. También es
+obvio que un sujeto que posee repertorios básicos, sociales y verbales tiene un
+grado de adaptación muy elevado, y que el que carece de los básicos tiene una
+mayor discapacidad.\cite{Glez}
 
-\begin{table}
-\begin{tabular}{l|l}
-Módulo & Descripción \\
-\hline
-areas & Administración de áreas temáticas. \\
-califications & Manejo de notas en los cursos. \\
-careers & Administración de carreras. \\
-comments & Manejo de comentarios. \\
-communities & Administración de comunidades. \\
-evaluations & Manejo de las formas de evaluación en los cursos. \\
-events & Manejo de recursos tipo evento. \\
-feedback & Manejo de mensajes de retroalimentación. \\
-files & Manejo de recursos tipo archivo. \\
-friends & Administración de la red de contactos. \\
-frontpage & Manejo de pagina principal. \\
-gestions & Administración de periodos académicos. \\
-groups & Administración de grupos de estudio. \\
-groupsets & Utilitario de manejo de múltiples grupos. \\
-invitations & Manejo de invitaciones de registro. \\
-links & Manejo de recursos tipo enlace. \\
-login & Autentificación de usuarios. \\
-menus & Manejo de regiones en plantilla. \\
-packages & Administración de módulos. \\
-notes & Manejo de recursos tipo nota. \\
-pages & Administración de paginas. \\
-paginator & Utilidad de paginación de recursos. \\
-photos & Manejo de recursos tipo fotografía. \\
-privileges & Administración de privilegios del sistema. \\
-profile & Utilidad de configuración de información de usuario. \\
-ratings & Manejo de rankings sobre recursos. \\
-regions & Manejo genérico de regiones. \\
-resources & Administración genérica de recursos. \\
-roles & Administración de grupos de privilegios. \\
-settings & Utilidad de configuración de usuario. \\
-subjects & Administración de materias. \\
-tags & Manejo de etiquetas sobre recursos. \\
-teams & Administración de equipos de trabajo. \\
-templates & Manejo de plantillas. \\
-toolbar & Manejo de la region toolbar en plantilla. \\
-users & Administración de usuarios. \\
-valorations & Manejo de valoraciones en los usuarios. \\
-videos & Manejo de recursos tipo video. \\
-widgets & Manejo de widgets en plantilla. \\
-\end{tabular}
-\caption{Módulos existentes en el modelo base.}
-\label{modulos_base}
-\end{table}
+\subsection{Cognitivismo}
+Las teorías cognitivas se focalizan en estudio de los procesos internos que
+conducen al aprendizaje. Se interesa por los fenómenos y procesos internos que
+ocurren en el individuo cuando aprende, como ingresa la información a aprender,
+como se transforma en el individuo, considera al aprendizaje como un proceso en
+el cual cambian las estructuras cognoscitivas, debido a su interacción con los
+factores del medio ambiente.
 
-\section{Críticas al modelo establecido}
-Aunque se han discutido ya los problemas concernientes a la ya casi caduca estructuración del sistema, y el problema del
-alto acoplamiento de los módulos; existían otros problemas menores que requerían plantearse.
+El cognitivismo explica los procesos cognitivos en términos de procesamiento de
+la información y considera que la mente, o al menos la parte cognitiva de ésta,
+es susceptible de entenderse como un gran ordenador. Desde esta perspectiva, ha
+sido frecuente considerar los procesos mentales como una serie de
+manipulaciones de símbolos, con una estructura sintáctica y semántica, de
+acuerdo con reglas computacionales.
 
-\subsection{Sistema de plantillas}
-Se tenían creadas dos plantillas, una de ellas, construida en html, y la otra, en xhtml con hojas de estilo (css2). Si
-bien era posible crear plantillas que aprovechen toda la potencia de html, css, y javascript, resultaba este, un proceso
-altamente costoso, debido al uso de paginas muy personalizadas, lo que conducía al casi imposible uso de la tecnología
-ajax, haciendo de toda la arquitectura de plantillas implementada, cuestión de imperioso reemplazo.
+Aunque la ciencia cognitiva es hoy por hoy un saber interdisciplinar, lo cierto
+es que cuando se habla de cognitivismo se está haciendo frecuentemente
+referencia al ámbito de la psicología cognitiva, que es el campo en el que
+converge el fruto de las investigaciones del resto de las ciencias que se
+llaman “cognitivas”. Por ello, un tratamiento más extenso del significado de
+este concepto puede encontrarse en las voces psicología cognitiva e
+inteligencia artificial.\footnote{Definiciones extraídas de:
+http://www.lahistoriaconmapas.com/historia/historia2/definicion-de-cognitivismo/}
 
-\subsection{Instalación}
-El sistema no poseía un método cómodo o claramente establecido para la instalación, lo que complicaba el uso de esta
-herramienta a los administradores.
+El aprendizaje bajo esta concepción, no se limita a una conducta observable; es
+conocimiento, significativo, sentimiento, creatividad, pensamientos. Los 
+educadores y psicólogos que estudian el aprendizaje humano están interesados en
+explicar como éste tiene lugar y como se recupera la información almacenada en
+la memoria.\cite{Rojas}
 
-\subsection{Conectitividad}
-Una de las características más llamativas para el sistema, es la conexión con otros sistemas, su bien las redes sociales
-populares tienden hacia la centralización, el objetivo prioritario en este sistema será la descentralización de la
-información, una cuestión muy análoga a lo referente a las tecnologías p2p.
+\subsection{Constructivismo}
 
-\subsection{Modelos muy teoricos}
-El problema final encontrado era la falta de roce del sistema con la vida real, lo que resultó un modelo de soluciones a
-un campo de visión muy estrecho, siendo prioridad para este nuevo recorrido escuchar a los usuarios en todo su espectro
-y categorización.
+Hasta ahora, los dos enfoque anteriores, tienden a presentar el aprendizaje
+como un ente objetivo, real. Es decir, una vez procesada la información,
+podemos verificar el aprendizaje a partir de los resultados externos.
+
+No obstante, algunos psicólogos cognoscitivos plantean que la persona construye
+significado a partir de sus propias experiencias. Se trata de una postura que
+intenta explicar cómo el ser humano conoce y cómo modifica lo
+conocido\cite{Rojas}.
+
+El constructivismo está basado en los postulados de Jean Piaget. Este psicólogo
+señaló que el desarrollo de las habilidades de la inteligencia es impulsado por
+la propia persona mediante sus interacciones con el medio.
+
+Además de este citado autor también hay que subrayar el relevante papel que
+ejercieron otros dentro de esta rama del constructivismo tales como Lev
+Vygotski. En su caso la principal idea que emana de sus teorías y 
+planteamientos es que el ser humano y en concreto su desarrollo sólo puede ser
+explicado desde el punto de vista de la interacción social.\footnote{Definición
+extraída de: http://definicion.de/constructivismo/}
+
+\subsection{Conectivismo}
+
+El conectivismo fue presentado como una teoría del aprendizaje basado en la
+premisa de que el conocimiento existe en el mundo en lugar de encontrarse en la
+cabeza de un individuo. El Conectivismo propone una perspectiva similar a la
+teoría de la actividad(AT) \footnote{Wikipedia: La Teoría de la actividad es
+una meta-teoría, paradigma, o marco de estudio no psicológico, con raíces dadas
+por la psicología histórica-cultural del psicólogo soviético Lev Vygotsky.}
+de Vygotsky, ya que se refiere al conocimiento que existe dentro de los
+sistemas que se accede a través de las personas que participan en las 
+actividades.
+
+El artículo “Conectivismo: una teoría del aprendizaje para la era digital”,
+propuesto por George Siemens define que el conectivismo es la integración de
+principios explorados por las teorías de caos, redes, complejidad y auto-
+organización. El aprendizaje es un proceso que ocurre al interior de ambientes
+difusos de elementos centrales cambiantes - que no están por completo bajo
+control del individuo. El aprendizaje (definido como conocimiento aplicable)
+puede residir fuera de nosotros (al interior de una organización o una base de
+datos), está enfocado en conectar conjuntos de información especializada, y las
+conexiones que nos permiten aprender más tienen mayor importancia que nuestro
+estado actual de conocimiento.
+
+El conectivismo es orientado por la comprensión que las decisiones están
+basadas en principios que cambian rápidamente. Continuamente se está
+adquiriendo nueva información. La habilidad de realizar distinciones entre la
+información importante y no importante resulta vital. También es crítica la
+habilidad de reconocer cuándo una nueva información altera un entorno basado en
+las decisiones tomadas anteriormente.
+
+\subsubsection{Principios del conectivismo}
+
+\begin{itemize}
+\item El aprendizaje y el conocimiento dependen de la diversidad de opiniones.
+\item El aprendizaje es un proceso de conectar nodos o fuentes de información
+especializados.
+\item El aprendizaje puede residir en dispositivos no humanos.
+\item La capacidad de saber más es más crítica que aquello que se sabe en un
+momento dado.
+\item La alimentación y mantenimiento de las conexiones es necesaria para
+facilitar el aprendizaje continuo.
+\item La habilidad de ver conexiones entre áreas, ideas y conceptos es una
+habilidad clave.
+\item La actualización (conocimiento preciso y actual) es la intención de todas
+las actividades conectivistas de aprendizaje.
+\item La toma de decisiones es, en sí misma, un proceso de aprendizaje. El acto
+de escoger qué aprender y el significado de la información que se recibe, es
+visto a través del lente de una realidad cambiante. Una decisión correcta hoy,
+puede estar equivocada mañana debido a alteraciones en el entorno informativo
+que afecta la decisión. 
+\end{itemize}
+
+\section{Teoría del aprendizaje social}
+
+La \emph{teoría del aprendizaje social} es un término utilizado en psicología,
+educación y comunicación, plantea que parte de la adquisición de conocimiento
+de un individuo puede estar directamente relacionado con la observación de los
+demás en el contexto de las interacciones sociales, las experiencias y los
+medios de comunicación influyentes en el exterior.\footnote{Definición extraída
+de: http://en.wikipedia.org/wiki/Social\_learning\_theory}
+
+La teoría del aprendizaje social se deriva de la obra de Albert Bandura, que
+propuso que el aprendizaje social se produce a través de cuatro etapas
+principales de la imitación:
+
+\begin{enumerate}
+\item Contacto cercano.
+\item Imitación de los superiores.
+\item Comprensión de los conceptos.
+\item Comportamiento del modelo a seguir.
+\end{enumerate}
+
+Albert Bandura, concluye que el ambiente causa el comportamiento, pero que el
+comportamiento causa el ambiente también, esto lo definió con el nombre de
+\emph{determinismo reciproco}. El mundo y el comportamiento de una persona se
+causan mutuamente; a partir de esto empezó a considerar a la personalidad como
+una interacción entre tres cosas:
+
+\begin{enumerate}
+\item El ambiente.
+\item El comportamiento.
+\item Los procesos psicológicos de la persona.
+\end{enumerate}
+
+En definitiva el comportamiento depende del ambiente así como de los factores
+personales como: motivación, atención, retención, y reproducción
+\footnote{Extraído de 
+http://socialpsychology43.lacoctelera.net/post/2008/07/21/aprendizaje-social-teorias-albert-bandura}.
+
+Julian Rotter sugiere que el efecto de la conducta tiene un impacto en la
+motivación de la gente a participar en ese comportamiento específico. La gente
+quiere evitar consecuencias negativas, mientras que desean resultados positivos
+o efectos. Si uno espera un resultado positivo de una conducta, o cree que hay
+una alta probabilidad de un resultado positivo, entonces serán más propensos a
+involucrarse en este comportamiento.
+
+El comportamiento se ve reforzado, con resultados positivos, lo que lleva a una
+persona a repetir el comportamiento. Esta teoría del aprendizaje social sugiere
+que el comportamiento está influenciado por estos factores ambientales o
+estímulos, y no solo los factores psicológicos.
+
+\section{Estrategias a tomar en cuenta}
+
+Ahora que se ha revisado las teorías de aprendizaje, se plantearán un conjunto
+de medidas a tomar en cuenta el optimo aprovechamiento de los objetivos del
+proyecto. Aprovechando las metodologías que estas corrientes en el aprendizaje han experimentado, pasamos a describir las estrategias ha plantearse:
+
+\begin{itemize}
+\item{Se plantea la construcción de un sistema b-learning\footnote{Blended learning: El aprendizaje semipresencial es el aprendizaje facilitado a través
+de la combinación eficiente de diferentes métodos de impartición, modelos de enseñanza y estilos de aprendizaje, y basado en una comunicación transparente de todas las áreas implicadas en el curso.}}, que no sustituya la educación presencial, sino mas bien asista a esta basado en un enfoque conectivista.
+\end{itemize}

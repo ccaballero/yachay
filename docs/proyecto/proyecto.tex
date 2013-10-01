@@ -6,7 +6,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
     
-%\usepackage{dirtree}
 \usepackage{graphicx}
 
 \usepackage[
@@ -19,18 +18,30 @@ linkcolor=black,%
 urlcolor=black
 pdftex]{hyperref}
 
+\newcommand{\blankpage}{
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+}
+
 \begin{document}
 \frontmatter
-\title{\bf Red social académica \\ para la mejora de los métodos \\ de adquisición de conocimiento.}
+\title{\bf Red social académica
+\\ para la mejora de los métodos
+\\ de adquisición de conocimiento.}
 \author{Carlos Eduardo Caballero Burgoa}
 \maketitle
+\blankpage
 
 \include{dedicatoria}
+\blankpage
+
 \tableofcontents
 
 \mainmatter
 \include{capitulo_01}
-%\include{capitulo_02}
+\include{capitulo_02}
 %\include{capitulo_03}
 %\include{capitulo_04}
 %\include{capitulo_05}

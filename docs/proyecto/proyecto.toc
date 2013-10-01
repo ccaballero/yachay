@@ -6,4 +6,15 @@
 \contentsline {subsection}{\numberline {1.3.1}Objetivo General}{3}{subsection.1.3.1}
 \contentsline {subsection}{\numberline {1.3.2}Objetivos Espec\IeC {\'\i }ficos}{3}{subsection.1.3.2}
 \contentsline {section}{\numberline {1.4}Justificaci\IeC {\'o}n}{3}{section.1.4}
-\contentsline {section}{\numberline {1.5}Teor\IeC {\'\i }a del aprendizaje social}{4}{section.1.5}
+\contentsline {section}{\numberline {1.5}Innovaci\IeC {\'o}n tecnol\IeC {\'o}gica}{4}{section.1.5}
+\contentsline {section}{\numberline {1.6}Alcance}{4}{section.1.6}
+\contentsline {chapter}{\numberline {2}Marco te\IeC {\'o}rico}{5}{chapter.2}
+\contentsline {section}{\numberline {2.1}Aprendizaje}{5}{section.2.1}
+\contentsline {section}{\numberline {2.2}Teor\IeC {\'\i }as del aprendizaje}{6}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Conductismo}{6}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Cognitivismo}{7}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Constructivismo}{7}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Conectivismo}{8}{subsection.2.2.4}
+\contentsline {subsubsection}{Principios del conectivismo}{9}{section*.2}
+\contentsline {section}{\numberline {2.3}Teor\IeC {\'\i }a del aprendizaje social}{9}{section.2.3}
+\contentsline {section}{\numberline {2.4}Estrategias a tomar en cuenta}{10}{section.2.4}
