@@ -1,11 +1,56 @@
 \chapter{Metodología de desarrollo}
 
-En este capítulo, se tratan los asuntos concernientes a la construcción de las
-funciones vitales del sistema, sobre las que recaerán el control de los
-recursos, y la extensibilidad que pueda darsele a todo el proyecto.
+En este capítulo, se desarrollan los aspectos necesarios para la definición del 
+proceso de desarrollo, primeramente se hará referencia a las cuestiones 
+relacionadas a la metodología de desarrollo, posteriormente se verán los
+documentos propios que se han definido para las diferentes etapas; luego se
+tratarán las etapas de la planificación ha tomarse en cuenta.
 
-\section{Desarrollo ágil}
-\section{Estándares de análisis}
-\section{Estándares de diseño}
-\section{Estándares de codificación}
-\section{Estándares de testing}
+\section{Modelo iterativo}
+
+Considerando el contexto de desarrollo, se ha visto conveniente seguir un modelo
+de desarrollo que sea iterativo e incremental\footnote{Para una definición exacta
+puede consultarse: https://es.wikipedia.org/wiki/Desarrollo\_iterativo\_y\_creciente}.
+
+La idea central es que, en cada una de esas iteraciones, se construye una parte
+pequeña del sistema. Para esa parte del sistema, se realiza todo el proceso:
+análisis, diseño, programación y pruebas. Se acaba la iteración con un
+ejecutable que incluye todas las partes del sistema construidas hasta el
+momento. Los aspectos del sistema con más riesgo (por ejemplo, la arquitectura) 
+se construyen en las primeras iteraciones.
+
+Las ventajas de este tipo de modelo son las siguientes:
+\begin{description}
+\item [Flexibilidad] Los requerimientos no quedan totalmente fijados hasta el
+final del proyecto de desarrollo. Por ello, se pueden realizar cambios de forma
+flexible. Por una parte, el conocimiento que se adquiere en una iteración sirve
+para plantear de forma más realista los requerimientos de la siguiente. Por
+otra parte, este conocimiento nos puede hacer reformar partes del sistema
+construidas en iteraciones anteriores. En una palabra, todos los documentos del
+sistema (requerimientos, diseño y código) no son rígidos sino que pueden
+cambiarse durante todo el proceso de desarrollo. (Típicamente suelen ser
+modificados en mayor medida en las primeras iteraciones y en menor medida en
+las últimas).
+\item [Mitigación de riesgos] Como las pruebas se hacen desde el principio del
+proyecto, puede determinarse la viabilidad o eficiencia de las decisiones de
+diseño. Además, los elementos con más riesgo se tratan en las primeras
+iteraciones, con lo cual se puede implementar una mitigación de riesgos más 
+temprana y exitosa.
+\item [Retroalimentación] Como hay prototipos desde el mismo comienzo del
+proyecto, estos pueden examinarse, y revalorizarse. También existe una rápida
+retroalimentación de lo que funciona y lo que no, ya que las pruebas se 
+realizan desde el comienzo mismo del proyecto y no se debe esperar al final
+para hacer las modificaciones necesarias.
+\end{description}
+
+\section{Estandarización}
+\subsection{Estándares de análisis}
+\subsection{Estándares de diseño}
+\subsection{Estándares de codificación}
+\subsection{Estándares de pruebas}
+
+\section{Requerimientos funcionales}
+\section{Requerimientos no funcionales}
+
+\section{Planificación}
+\subsection{Iteraciones}

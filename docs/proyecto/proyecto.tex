@@ -31,6 +31,8 @@ pdftex]{hyperref}
 \newpage
 }
 
+\usepackage[nottoc]{tocbibind}
+
 \begin{document}
 \frontmatter
 \title{\bf Red social académica
@@ -51,6 +53,12 @@ pdftex]{hyperref}
 \include{capitulo_03}
 \include{capitulo_04}
 \include{capitulo_05}
+
+\begin{appendix}
+\include{apendice_a}
+\include{apendice_b}
+\include{apendice_c}
+\end{appendix}
 
 \backmatter
 \include{bibliografia}
