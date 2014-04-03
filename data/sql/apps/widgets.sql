@@ -5,7 +5,7 @@
 INSERT INTO `package`
 (`label`, `url`, `type`, `parent`, `tsregister`, `description`)
 VALUES
-('widgets', 'widgets', 'middle', 'templates', UNIX_TIMESTAMP(), 'Modulo de configuracion para los widgets de las paginas');
+('widgets', 'widgets', 'middle', 'routes', UNIX_TIMESTAMP(), 'Modulo de configuracion para los widgets de las paginas');
 
 /*============================================================================*/
 /* Registro de privilegios para el paquete                                    */

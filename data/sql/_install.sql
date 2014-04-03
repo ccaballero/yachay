@@ -3,19 +3,19 @@
 /* Instalador de los paquetes originales de la distribucion                   */
 /*============================================================================*/
 
-SELECT 'base';
+SELECT 'base' AS '';
 \. apps/base.sql
 
-SELECT 'packages';
+SELECT 'packages' AS '';
 \. apps/packages.sql
 
-SELECT 'routes';
+SELECT 'routes' AS '';
 \. apps/routes.sql
 
-SELECT 'widgets';
+SELECT 'widgets' AS '';
 \. apps/widgets.sql
 
-SELECT 'privileges';
+SELECT 'privileges' AS '';
 \. apps/privileges.sql
 
 /*============================================================================*/
@@ -48,7 +48,7 @@ SELECT 'friends';
 SELECT 'invitations';
 \. apps/invitations.sql
 
-/*============================================================================*/
+/*============================================================================*
 
 SELECT 'gestions';
 \. apps/gestions.sql
@@ -71,7 +71,7 @@ SELECT 'teams';
 SELECT 'communities';
 \. apps/communities.sql
 
-/*============================================================================*/
+/*============================================================================*
 
 SELECT 'groupsets';
 \. apps/groupsets.sql
@@ -97,7 +97,7 @@ SELECT 'photos';
 SELECT 'videos';
 \. apps/videos.sql
 
-/*============================================================================*/
+/*============================================================================*
 
 SELECT 'evaluations';
 \. apps/evaluations.sql
@@ -105,7 +105,7 @@ SELECT 'evaluations';
 SELECT 'califications';
 \. apps/califications.sql
 
-/*============================================================================*/
+/*============================================================================*
 
 SELECT 'comments';
 \. apps/comments.sql
@@ -125,7 +125,7 @@ SELECT 'feedback';
 SELECT 'templates';
 \. apps/templates.sql
 
-/*============================================================================*/
+/*============================================================================*
 
 SELECT 'analytics';
 \. apps/analytics.sql
@@ -133,7 +133,7 @@ SELECT 'analytics';
 SELECT 'register';
 \. apps/register.sql
 
-/*============================================================================*/
+/*============================================================================*
 
 SELECT 'extra';
 \. _extra.sql

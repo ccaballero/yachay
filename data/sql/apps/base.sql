@@ -6,8 +6,7 @@
 /*============================================================================*/
 /* Tablas requeridas para el registro de paquetes                             */
 /*============================================================================*/
-DROP TABLE IF EXISTS `package`;
-CREATE TABLE `package` (
+CREATE TABLE IF NOT EXISTS `package` (
     `ident`       int unsigned                          NOT NULL auto_increment,
     `label`       varchar(64)                           NOT NULL,
     `url`         varchar(64)                           NOT NULL,
@@ -26,8 +25,7 @@ CREATE TABLE `package` (
 /*============================================================================*/
 /* Tablas necesarias para el registro de privilegios                          */
 /*============================================================================*/
-DROP TABLE IF EXISTS `privilege`;
-CREATE TABLE `privilege` (
+CREATE TABLE IF NOT EXISTS `privilege` (
     `ident`       int unsigned NOT NULL auto_increment,
     `label`       varchar(64)  NOT NULL,
     `package`     varchar(64)  NOT NULL,
@@ -39,13 +37,12 @@ CREATE TABLE `privilege` (
 /*============================================================================*/
 /* Tabla necesaria para el manejo de rutas en el sistema                      */
 /*============================================================================*/
-DROP TABLE IF EXISTS `route`;
-CREATE TABLE `route` (
+CREATE TABLE IF NOT EXISTS `route` (
     `ident`       int unsigned                     NOT NULL auto_increment,
     `label`       varchar(64)                      NOT NULL,
     `type`        enum('list', 'view', 'action')   NOT NULL,
     `route`       varchar(64)                      NOT NULL,
-    `mapping`     varchar(256)                     NOT NULL,
+    `mapping`     varchar(128)                     NOT NULL,
     `module`      varchar(64)                      NOT NULL,
     `controller`  varchar(64)                      NOT NULL,
     `action`      varchar(64)                      NOT NULL,
@@ -57,18 +54,16 @@ CREATE TABLE `route` (
     FOREIGN KEY (`parent`) REFERENCES `route`(`route`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `route_privilege`;
-CREATE TABLE `route_privilege` (
+CREATE TABLE IF NOT EXISTS `route_privilege` (
     `route`     varchar(64) NOT NULL,
     `package`   varchar(64) NOT NULL,
     `privilege` varchar(64) NOT NULL,
     PRIMARY KEY (`route`, `package`, `privilege`),
     INDEX (`package`, `privilege`),
-    FOREIGN KEY (`package`, `privilege`) REFERENCES `privilege`(`package`, `privilege`) ON UPDATE CASCADE ON DELETE RESTRICT
+    FOREIGN KEY (`package`, `privilege`) REFERENCES `privilege`(`package`, `label`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `route_menu`;
-CREATE TABLE `route_menu` (
+CREATE TABLE IF NOT EXISTS `route_menu` (
     `route` varchar(64)               NOT NULL,
     `label` varchar(64)               NOT NULL DEFAULT '',
     `type`  enum('menubar', 'footer') NOT NULL,
@@ -80,8 +75,7 @@ CREATE TABLE `route_menu` (
 /*============================================================================*/
 /* Tablas necesarias para el registro de manejadores de widgets               */
 /*============================================================================*/
-DROP TABLE IF EXISTS `widget`;
-CREATE TABLE `widget` (
+CREATE TABLE IF NOT EXISTS `widget` (
     `ident`             int unsigned                                                NOT NULL auto_increment,
     `label`             varchar(64)                                                 NOT NULL,
     `title`             varchar(32)                                                 NOT NULL,
@@ -91,8 +85,7 @@ CREATE TABLE `widget` (
     UNIQUE INDEX (`package`, `script`)
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `widget_route`;
-CREATE TABLE `widget_route` (
+CREATE TABLE IF NOT EXISTS `widget_route` (
     `route`             varchar(64)                                                 NOT NULL,
     `widget`            int unsigned                                                NOT NULL,
     `position`          enum('1', '2', '3', '4')                                    NOT NULL DEFAULT '1',
@@ -133,24 +126,24 @@ VALUES
 
 /*============================================================================*/
 /* Registro del paquete                                                       */
-/*============================================================================*/
--- INSERT INTO `package`
--- (`label`, `url`, `type`, `parent`, `tsregister`, `description`)
--- VALUES
--- ('base', 'base', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de la pagina de inicio');
+/*============================================================================*
+INSERT INTO `package`
+(`label`, `url`, `type`, `parent`, `tsregister`, `description`)
+VALUES
+('base', 'base', 'middle', 'spaces', UNIX_TIMESTAMP(), 'Modulo manejador de la pagina de inicio');
 
 /*============================================================================*/
 /* Registro de paginas para el paquete                                        */
-/*============================================================================*/
--- INSERT INTO `page`
--- (`label`, `title`, `menuable`, `package`, `controller`, `action`, `route`)
--- VALUES
--- ('Pagina inicial',         'Inicio',          TRUE,  'base', 'index',  'visitor',     'base_visitor'),
--- ('Pagina de usuario',      '',                FALSE, 'base', 'index',  'user',        'base_user'),
--- ('Pagina 404',             '',                FALSE, 'base', 'error',  'error',       'default'),
--- ('Colabora',               'Desarrollo',      TRUE,  'base', 'static', 'development', 'base_development'),
--- ('Terminos de uso',        'Terminos de uso', TRUE,  'base', 'static', 'terms',       'base_terms'),
--- ('Politica de privacidad', 'Privacidad',      TRUE,  'base', 'static', 'privacy',     'base_privacy');
+/*============================================================================*
+INSERT INTO `page`
+(`label`, `title`, `menuable`, `package`, `controller`, `action`, `route`)
+VALUES
+('Pagina inicial',         'Inicio',          TRUE,  'base', 'index',  'visitor',     'base_visitor'),
+('Pagina de usuario',      '',                FALSE, 'base', 'index',  'user',        'base_user'),
+('Pagina 404',             '',                FALSE, 'base', 'error',  'error',       'default'),
+('Colabora',               'Desarrollo',      TRUE,  'base', 'static', 'development', 'base_development'),
+('Terminos de uso',        'Terminos de uso', TRUE,  'base', 'static', 'terms',       'base_terms'),
+('Politica de privacidad', 'Privacidad',      TRUE,  'base', 'static', 'privacy',     'base_privacy');
 
 /*============================================================================*/
 /* Registro de widgets para el paquete                                        */

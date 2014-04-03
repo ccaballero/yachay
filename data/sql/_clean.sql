@@ -53,11 +53,11 @@ DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `login_forgot`;
 DROP TABLE IF EXISTS `role_privilege`;
 DROP TABLE IF EXISTS `role`;
-DROP TABLE IF EXISTS `widget_page`;
+DROP TABLE IF EXISTS `widget_route`;
 DROP TABLE IF EXISTS `widget`;
-
 DROP TABLE IF EXISTS `route_menu`;
 DROP TABLE IF EXISTS `route_privilege`;
 DROP TABLE IF EXISTS `route`;
 DROP TABLE IF EXISTS `privilege`;
 DROP TABLE IF EXISTS `package`;
+

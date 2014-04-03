@@ -6,8 +6,7 @@
 /*============================================================================*/
 /* Tablas requeridas para el registro de peticiones de nueva contraseña       */
 /*============================================================================*/
-DROP TABLE IF EXISTS `login_forgot`;
-CREATE TABLE `login_forgot` (
+CREATE TABLE IF NOT EXISTS `login_forgot` (
     `ident`      int unsigned NOT NULL auto_increment,
     `user`       int unsigned NOT NULL,
     `password`   varchar(64)  NOT NULL,

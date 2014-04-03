@@ -19,7 +19,9 @@
 \contentsline {section}{\numberline {2.3}Teor\IeC {\'\i }a del aprendizaje social}{8}{section.2.3}
 \contentsline {section}{\numberline {2.4}Ludificaci\IeC {\'o}n}{9}{section.2.4}
 \contentsline {subsection}{\numberline {2.4.1}T\IeC {\'e}cnicas utilizadas}{10}{subsection.2.4.1}
-\contentsline {section}{\numberline {2.5}Estrategias a tomar en cuenta}{10}{section.2.5}
+\contentsline {section}{\numberline {2.5}Cultura de la adhesi\IeC {\'o}n}{10}{section.2.5}
+\contentsline {section}{\numberline {2.6}Tipos de usuarios}{10}{section.2.6}
+\contentsline {section}{\numberline {2.7}Estrategias a tomar en cuenta}{11}{section.2.7}
 \contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de desarrollo}{13}{chapter.3}
 \contentsline {section}{\numberline {3.1}Modelo iterativo}{13}{section.3.1}
 \contentsline {section}{\numberline {3.2}Estandarizaci\IeC {\'o}n}{14}{section.3.2}
