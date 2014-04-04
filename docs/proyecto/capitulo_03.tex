@@ -2,24 +2,26 @@
 
 En este capítulo, se desarrollan los aspectos necesarios para la definición del 
 proceso de desarrollo, primeramente se hará referencia a las cuestiones 
-relacionadas a la metodología de desarrollo, posteriormente se verán los
+relacionadas con la metodología de desarrollo, posteriormente se verán los
 documentos propios que se han definido para las diferentes etapas; luego se
 tratarán las etapas de la planificación ha tomarse en cuenta.
 
 \section{Modelo iterativo}
 
-Considerando el contexto de desarrollo, se ha visto conveniente seguir un modelo
-de desarrollo que sea iterativo e incremental\footnote{Para una definición exacta
-puede consultarse: https://es.wikipedia.org/wiki/Desarrollo\_iterativo\_y\_creciente}.
+Considerando el contexto de desarrollo (el contexto esta descrito mas adelante
+en este capitulo), se ha visto conveniente seguir un modelo de desarrollo que
+sea iterativo e incremental\footnote{Para una definición exacta puede
+consultarse: https://es.wikipedia.org/wiki/Desarrollo\_iterativo\_y\_creciente}.
 
 La idea central es que, en cada una de esas iteraciones, se construye una parte
 pequeña del sistema. Para esa parte del sistema, se realiza todo el proceso:
 análisis, diseño, programación y pruebas. Se acaba la iteración con un
-ejecutable que incluye todas las partes del sistema construidas hasta el
-momento. Los aspectos del sistema con más riesgo (por ejemplo, la arquitectura) 
-se construyen en las primeras iteraciones.
+prototipo funcional, que incluya todas las partes del sistema construidas hasta
+el momento. Los aspectos del sistema con más riesgo (por ejemplo, la
+arquitectura) se definen y construyen en las primeras iteraciones.
 
 Las ventajas de este tipo de modelo son las siguientes:
+
 \begin{description}
 \item [Flexibilidad] Los requerimientos no quedan totalmente fijados hasta el
 final del proyecto de desarrollo. Por ello, se pueden realizar cambios de forma
@@ -43,14 +45,124 @@ realizan desde el comienzo mismo del proyecto y no se debe esperar al final
 para hacer las modificaciones necesarias.
 \end{description}
 
+\section{Requerimientos funcionales}
+
+A partir de la solución y la estrategia planteada, se pasa a establecer el
+conjunto de funciones que el sistema debe tener, para esto se ha optado por
+crear un conjunto de categorias, de forma que agrupen las tareas que son comunes
+a un objetivo especifico.
+
+\subsection{Espacios virtuales}
+
+Para la correcta navegación sobre el sistema se han establecido, varios tipos de
+espacios agrupadores de recursos.
+
+\begin{itemize}
+\item Gestiones
+\item Carreras
+\item Areas
+\item Comunidades
+\item Materias
+\item Grupos
+\item Equipos
+\end{itemize}
+
+Cada uno de ellos posee la funcionalidad caracteristica de un recurso
+administrable, es decir, posee las siguientes operaciones\footnote{Para una
+definición exacta puede consultarse:
+https://es.wikipedia.org/wiki/Create,\_read,\_update\_and\_delete}:
+
+\begin{itemize}
+\item Crear un nuevo elemento (CREATE).
+\item Visualizar el elemento a detalle (READ).
+\item Editar las caracteristicas del elemento (UPDATE).
+\item Eliminación del elemento (DELETE).
+\end{itemize}
+
+A su vez se han establecido un conjunto de tareas por lote para facilitar la
+correcta manipulación de amplios volumenes de información. Estas tareas son:
+
+\begin{itemize}
+\item Importación de datos desde un archivo CSV.
+\item Exportación de datos hacia un archivo CSV.
+\item Habilitación/Inhabilitación de elementos, ya sea individualmente o en
+      grupos de elementos.
+\end{itemize}
+
+\subsection{Intercambio de recursos}
+
+Cada espacio virtual debe poseer la capacidad de contener información en
+distintos formatos, y para diversos propositos. El objetivo principal es poder
+compartir piezas de información entre usuarios del sistema.
+
+Para este proposito, se han definido piezas atomicas de información básica,
+estas son:
+
+\begin{itemize}
+\item Notas
+\item Archivos
+\item Imagenes
+\item Videos
+\item Eventos
+\item Enlaces
+\end{itemize}
+
+Todos estos tipos de recursos poseen tambien caracteristicas de espacio virtual,
+es decir, que cada una de ellas posee operaciones CRUD, ademas de
+funcionalidades para el fomento a la participación.
+
+\subsection{Instancias multiples}
+
+Se considera la creación de feeds de
+sindicación\footnote{Definición disponible en:
+http://es.wikipedia.org/wiki/Redifusión\_web}.
+
+\subsection{Canales de comunicación}
+
+Para la mejora de los canales de comunicación se ha definido el manejo de otros
+tipos de espacios-recursos, estos son:
+
+\begin{itemize}
+\item Usuarios
+\item Roles
+\item Contactos
+\end{itemize}
+
+Estos recursos, son los componentes propios de un sitio web, ademas de darle las
+caracteristicas de una red social propiamente dicha.
+
+\subsection{Fomento a la participación}
+
+La parte mas fundamental del sistema, y el factor clave para el exito de toda
+red social, son las funcionalidades que propicien la cultura de participación.
+
+Estos elementos, que estan inspirados en la tendencia de los sitios considerados
+dentro de la web 2.0\footnote{Definición disponible en:
+http://es.wikipedia.org/wiki/Web\_2.0}, han sido considerados como base para el
+establecimiento y definición siguiente.
+
+Para tal proposito se han definido los siguientes elementos:
+
+\begin{itemize}
+\item Comentarios
+\item Valoraciones
+\item Etiquetado
+\item Sistema de reputación\footnote{Si bien vamos a ahondar en este concepto,
+pueden verse los detalles introductorios en:
+http://en.wikipedia.org/wiki/Reputation\_system}.
+\end{itemize}
+
+Estos elementos deben estar disponibles para cualquiera de los recursos
+intercambiables definidos anteriormente.
+
+\section{Requerimientos no funcionales}
+
 \section{Estandarización}
 \subsection{Estándares de análisis}
 \subsection{Estándares de diseño}
 \subsection{Estándares de codificación}
 \subsection{Estándares de pruebas}
 
-\section{Requerimientos funcionales}
-\section{Requerimientos no funcionales}
-
 \section{Planificación}
 \subsection{Iteraciones}
+

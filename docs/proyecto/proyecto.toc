@@ -24,42 +24,47 @@
 \contentsline {section}{\numberline {2.7}Estrategias a tomar en cuenta}{11}{section.2.7}
 \contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de desarrollo}{13}{chapter.3}
 \contentsline {section}{\numberline {3.1}Modelo iterativo}{13}{section.3.1}
-\contentsline {section}{\numberline {3.2}Estandarizaci\IeC {\'o}n}{14}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Est\IeC {\'a}ndares de an\IeC {\'a}lisis}{14}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Est\IeC {\'a}ndares de dise\IeC {\~n}o}{14}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Est\IeC {\'a}ndares de codificaci\IeC {\'o}n}{14}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Est\IeC {\'a}ndares de pruebas}{14}{subsection.3.2.4}
-\contentsline {section}{\numberline {3.3}Requerimientos funcionales}{14}{section.3.3}
-\contentsline {section}{\numberline {3.4}Requerimientos no funcionales}{14}{section.3.4}
-\contentsline {section}{\numberline {3.5}Planificaci\IeC {\'o}n}{14}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Iteraciones}{14}{subsection.3.5.1}
-\contentsline {chapter}{\numberline {4}Desarrollo del proyecto}{15}{chapter.4}
-\contentsline {section}{\numberline {4.1}Arquitectura del sistema}{15}{section.4.1}
-\contentsline {section}{\numberline {4.2}Construcci\IeC {\'o}n de espacios virtuales}{15}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Espacios virtuales}{15}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}B-learning}{15}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Intercambio de recursos}{15}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Recursos}{15}{subsection.4.3.1}
-\contentsline {section}{\numberline {4.4}Instancias m\IeC {\'u}ltiples del sistema}{15}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Conectitividad}{15}{subsection.4.4.1}
-\contentsline {section}{\numberline {4.5}Canales de comunicaci\IeC {\'o}n}{16}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Las Personas}{16}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}Red de contactos}{16}{subsection.4.5.2}
-\contentsline {section}{\numberline {4.6}Fomento a la participaci\IeC {\'o}n}{16}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}Web 2.0}{16}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}Plataforma}{16}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}Sistemas de control}{16}{subsection.4.6.3}
-\contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{17}{chapter.5}
-\contentsline {section}{\numberline {5.1}Resultados}{17}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Contexto}{17}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Usuarios}{17}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Contactos}{17}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}Espacios Virtuales}{17}{subsection.5.1.4}
-\contentsline {subsection}{\numberline {5.1.5}Recursos}{17}{subsection.5.1.5}
-\contentsline {subsection}{\numberline {5.1.6}Linea de tiempo}{17}{subsection.5.1.6}
-\contentsline {section}{\numberline {5.2}Conclusiones}{17}{section.5.2}
-\contentsline {section}{\numberline {5.3}Recomendaciones}{17}{section.5.3}
-\contentsline {chapter}{\numberline {A}Glosario de t\IeC {\'e}rminos}{19}{appendix.Alph1}
-\contentsline {chapter}{\numberline {B}Manual de instalaci\IeC {\'o}n}{21}{appendix.Alph2}
-\contentsline {chapter}{\numberline {C}Manual de usuario}{23}{appendix.Alph3}
-\contentsline {chapter}{Bibliograf\'{\i }a}{25}{appendix*.3}
+\contentsline {section}{\numberline {3.2}Requerimientos funcionales}{14}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Espacios virtuales}{14}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Intercambio de recursos}{15}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Instancias multiples}{15}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Canales de comunicaci\IeC {\'o}n}{15}{subsection.3.2.4}
+\contentsline {subsection}{\numberline {3.2.5}Fomento a la participaci\IeC {\'o}n}{15}{subsection.3.2.5}
+\contentsline {section}{\numberline {3.3}Requerimientos no funcionales}{16}{section.3.3}
+\contentsline {section}{\numberline {3.4}Estandarizaci\IeC {\'o}n}{16}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Est\IeC {\'a}ndares de an\IeC {\'a}lisis}{16}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Est\IeC {\'a}ndares de dise\IeC {\~n}o}{16}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Est\IeC {\'a}ndares de codificaci\IeC {\'o}n}{16}{subsection.3.4.3}
+\contentsline {subsection}{\numberline {3.4.4}Est\IeC {\'a}ndares de pruebas}{16}{subsection.3.4.4}
+\contentsline {section}{\numberline {3.5}Planificaci\IeC {\'o}n}{16}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Iteraciones}{16}{subsection.3.5.1}
+\contentsline {chapter}{\numberline {4}Desarrollo del proyecto}{17}{chapter.4}
+\contentsline {section}{\numberline {4.1}Arquitectura del sistema}{17}{section.4.1}
+\contentsline {section}{\numberline {4.2}Construcci\IeC {\'o}n de espacios virtuales}{17}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Espacios virtuales}{17}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}B-learning}{17}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Intercambio de recursos}{17}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Recursos}{17}{subsection.4.3.1}
+\contentsline {section}{\numberline {4.4}Instancias m\IeC {\'u}ltiples del sistema}{17}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Conectitividad}{17}{subsection.4.4.1}
+\contentsline {section}{\numberline {4.5}Canales de comunicaci\IeC {\'o}n}{18}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Las Personas}{18}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Red de contactos}{18}{subsection.4.5.2}
+\contentsline {section}{\numberline {4.6}Fomento a la participaci\IeC {\'o}n}{18}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Web 2.0}{18}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Plataforma}{18}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Sistemas de control}{18}{subsection.4.6.3}
+\contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{19}{chapter.5}
+\contentsline {section}{\numberline {5.1}Resultados}{19}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Contexto}{19}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Usuarios}{19}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Contactos}{19}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Espacios Virtuales}{19}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}Recursos}{19}{subsection.5.1.5}
+\contentsline {subsection}{\numberline {5.1.6}Linea de tiempo}{19}{subsection.5.1.6}
+\contentsline {section}{\numberline {5.2}Conclusiones}{19}{section.5.2}
+\contentsline {section}{\numberline {5.3}Recomendaciones}{19}{section.5.3}
+\contentsline {chapter}{\numberline {A}Glosario de t\IeC {\'e}rminos}{21}{appendix.Alph1}
+\contentsline {chapter}{\numberline {B}Manual de instalaci\IeC {\'o}n}{23}{appendix.Alph2}
+\contentsline {chapter}{\numberline {C}Manual de usuario}{25}{appendix.Alph3}
+\contentsline {chapter}{Bibliograf\'{\i }a}{27}{appendix*.3}
