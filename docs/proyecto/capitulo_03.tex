@@ -289,7 +289,7 @@ módulos a ser desarrollados, estos se detallan en la sección siguiente.
 \section{Diseño de paquetes}
 
 Para la construcción del sistema se han determinado un conjunto de modulos ha
-ser desarrollados, estos se detallan en la figura \ref{paquetes}
+ser desarrollados, estos se detallan en la figura \ref{paquetes}.
 
 \begin{figure}
 \centering
@@ -297,6 +297,36 @@ ser desarrollados, estos se detallan en la figura \ref{paquetes}
 \caption{Módulos a ser desarrollados, y sus grados de dependencia}
 \label{paquetes}
 \end{figure}
+
+Se ha definido cuatro tipos de módulos en el sistema, eston son:
+
+\begin{description}
+\item [base] Módulos que pertenecen al nucleo del sistema (estos estan
+representados con color rojo, en la parte superior de diagrama).
+\item [middle] Módulos para creación de espacios y recursos (representados con
+color morado en el diagrama).
+\item [app] Módulos para administración de recursos, perfiles, y otros
+(representados con verde en la parte inferior del diagrama).
+\item [util] Módulos que agregan funcionalidad a otros módulos (representados
+con color cafe en el diagrama).
+\end{description}
+
+Las modularidad establecida en el sistema representa un modelo básico de
+separación y en ningun caso podría considerarse totalmente refinado (eso escapa
+del alcance de los objetivos del sistema).
+
+\section{Grupos y privilegios}
+
+Tambien es ha contemplado la creación de dos módulos vitales para el sistema,
+eston son:
+
+\begin{description}
+\item [Roles] Para la administración de grupos de usuarios, este debe contemplar
+todas las operaciones CRUD, mencionadas para un recurso, ademas de la
+manipulación de grupos de permisos para un rol de usuarios común.
+\item [Privileges] Para la administración de credenciales en el sistema, debe
+contemplar la creación dinamica de permisos definidos por algun móalgun o.
+\end{description}
 
 \section{Planificación}
 

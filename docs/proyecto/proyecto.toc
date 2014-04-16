@@ -36,8 +36,9 @@
 \contentsline {subsection}{\numberline {3.3.3}Base de datos}{18}{subsection.3.3.3}
 \contentsline {subsection}{\numberline {3.3.4}Lenguaje de programaci\IeC {\'o}n}{19}{subsection.3.3.4}
 \contentsline {section}{\numberline {3.4}Dise\IeC {\~n}o de paquetes}{19}{section.3.4}
-\contentsline {section}{\numberline {3.5}Planificaci\IeC {\'o}n}{19}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Iteraciones}{19}{subsection.3.5.1}
+\contentsline {section}{\numberline {3.5}Grupos y privilegios}{19}{section.3.5}
+\contentsline {section}{\numberline {3.6}Planificaci\IeC {\'o}n}{19}{section.3.6}
+\contentsline {subsection}{\numberline {3.6.1}Iteraciones}{19}{subsection.3.6.1}
 \contentsline {chapter}{\numberline {4}Desarrollo del proyecto}{21}{chapter.4}
 \contentsline {section}{\numberline {4.1}Arquitectura del sistema}{21}{section.4.1}
 \contentsline {section}{\numberline {4.2}Construcci\IeC {\'o}n de espacios virtuales}{21}{section.4.2}
