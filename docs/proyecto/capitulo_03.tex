@@ -207,36 +207,102 @@ caracteristicas de una red social propiamente dicha.
 
 \subsection{Fomento a la participación}
 
-La parte mas fundamental del sistema, y el factor clave para el exito de toda
-red social, son las funcionalidades que propicien la cultura de participación.
+Una parte fundamental del sistema, y el factor clave para el exito de toda red
+social, son sus politicas que propician la cultura de participación.
 
 Estos elementos, que estan inspirados en la tendencia de los sitios considerados
 dentro de la web 2.0\footnote{Definición disponible en:
 http://es.wikipedia.org/wiki/Web\_2.0}, han sido considerados como base para el
-establecimiento de las definiciónes siguientes.
+establecimiento de las definiciónes siguientes:
 
-Para tal proposito se han definido los siguientes elementos:
-
-\begin{itemize}
-\item Comentarios
-\item Valoraciones
-\item Etiquetado
-\item Sistema de reputación\footnote{Si bien vamos a ahondar en este concepto,
+\begin{description}
+\item [Comentarios] Los comentarios crean el espacio de debate entre usuarios,
+estos se encuentran en cada tipo de recursos que es provisto por el sistema.
+\item [Valoraciones] Una valoración es un voto a favor o en contra de un recurso
+determinado, y define la calidad misma del recurso.
+\item [Etiquetado] Las etiquetas\footnote{Puede verse la definición extendida
+en: http://es.wikipedia.org/wiki/Etiqueta\_(metadato)} son palabras clave que
+son asignadas a un recurso, estas son de tipo informal (es decir, definidas por
+el creador del recurso), y sirven como un medio alternativo de clasificación de
+los recursos conocido como folcsonomias\footnote{Puede verse la definición
+extendida en http://es.wikipedia.org/wiki/Folcsonomía}.
+\item [Sistema de reputación]\footnote{Si bien vamos a ahondar en este concepto,
 pueden verse los detalles introductorios en:
-http://en.wikipedia.org/wiki/Reputation\_system}.
-\end{itemize}
+http://en.wikipedia.org/wiki/Reputation\_system} Un sistema de reputación
+define un conjunto de politicas de fomento a la interacción o participación de
+los usuarios, entre los multiples metodos que pueden encontrarse en los sitios
+web actuales, se han definido cuatro indicadores a ser tomados en cuenta:
+    \begin{description}
+    \item [Actividad] El indicador de actividad, se basa en el numero de
+    recursos que un usuario ha creado en el sistema.
+    \item [Participación] El indicador de participación mide el numero de
+    comentarios creados por el usuarios en los recursos del sistema.
+    \item [Popularidad] El indicador de popularidad mide el apoyo de los
+    usuarios hacia la calidad de los recursos que crea el usuario, es media a
+    partir de las valoraciones realizadas en el recurso.
+    \item [Sociabilidad] El indicador de sociabilidad mide el numero de
+    conexiones (contactos) que posee un usuario.
+    \end{description}
+\end{description}
 
 Estos elementos deben estar disponibles para cualquiera de los recursos
 intercambiables definidos anteriormente.
 
 \section{Requerimientos no funcionales}
 
-\section{Estandarización}
-\subsection{Estándares de análisis}
-\subsection{Estándares de diseño}
-\subsection{Estándares de codificación}
-\subsection{Estándares de pruebas}
+Para la construcción de esta aplicación web, se han definido un conjunto de
+herramientas, estas se describen en esta sección.
+
+\subsection{Contexto de despliegue}
+Se ha de construir el sistema, considerando a disposición del desarrollo un
+servidor que se ejecute en un sistema operativo GNU/Linux, esto implica varias
+consideraciones; como la disposicion de un amplio conjunto de
+herramientas disponibles para tareas de automatización y scripting.
+
+\subsection{Servidor web}
+Se ha determinado que el sitio web, puede ser ejecutado en el servidor web mas
+popular que existe, ademas de en el segundo, estos son:
+
+\begin{itemize}
+\item Apache Web Server 2
+\item EngineX\footnote{Pueden apreciarse sus caracteristicas en:
+http://es.wikipedia.org/wiki/Nginx}
+\end{itemize}
+
+Se crearan las pruebas necesarias para asegurar el correcto funcionamiento del
+sistema en estos dos servidores HTTP.
+
+\subsection{Base de datos}
+
+Se ha determinado usar el DBMS mas popular: MySQL, ademas de probar el sistema
+en la versión alternativa de este: MariaDB.
+
+\subsection{Lenguaje de programación}
+
+Para la creación del sistema, se ha optado por el uso del lenguaje PHP 5, con la
+utilización de las librerias, estandares, y conceptos  que componen el marco
+de trabajo denominado Zend Framework.
+
+Para la implementación con Zend Framework, se ha establecido un conjunto de
+módulos a ser desarrollados, estos se detallan en la sección siguiente.
+
+\section{Diseño de paquetes}
+
+Para la construcción del sistema se han determinado un conjunto de modulos ha
+ser desarrollados, estos se detallan en la figura \ref{paquetes}
+
+\begin{figure}
+\centering
+\input{graphics/cap3_3.tex}
+\caption{Módulos a ser desarrollados, y sus grados de dependencia}
+\label{paquetes}
+\end{figure}
 
 \section{Planificación}
+
+Una vez definidas las funcionalidades a ser desarrolladas, y las herramientas
+con las que se cuenta para tal desarrollo, se pasa ha definir la planificación
+que se ha determinado.
+
 \subsection{Iteraciones}
 
