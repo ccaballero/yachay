@@ -47,25 +47,53 @@ para hacer las modificaciones necesarias.
 
 \section{Requerimientos funcionales}
 
-A partir de la solución y la estrategia planteada, se pasa a establecer el
-conjunto de funciones que el sistema debe tener, para esto se ha optado por
-crear un conjunto de categorias, de forma que agrupen las tareas que son comunes
-a un objetivo especifico.
+A partir de los objetivos del proyecto, se pasa a establecer el conjunto de
+funciones que el sistema debe tener, para esto se ha optado por crear un
+conjunto de categorias, de forma que agrupen las tareas que son comunes a un
+objetivo especifico.
 
 \subsection{Espacios virtuales}
 
 Para la correcta navegación sobre el sistema se han establecido, varios tipos de
 espacios agrupadores de recursos.
 
-\begin{itemize}
-\item Gestiones
-\item Carreras
-\item Areas
-\item Comunidades
-\item Materias
-\item Grupos
-\item Equipos
-\end{itemize}
+Estos recursos ademas pueden clasificarse según su temporalidad, es decir si
+poseen alguna forma de caducidad, o si no poseen tal cualidad. Estos son:
+
+\begin{description}
+\item [Gestiones] Una gestión representa la division básica de periodos
+academicos, estos trazan un marco de referencia temporal (es decir, su valor de
+caducidad) para muchos de los espacios restantes.
+\item [Materias] Una materia es el espacio que concentra todos los recursos de
+una materia, (esta a su vez concentra a otros sub-espacios). Este espacio es a
+su vez un sub-espacio de algún espacio de gestión.
+\item [Grupos] Los grupos son espacios de separación de una materia, esta está
+basada en el sistema utilizado en el dominio de implementacion del sistema
+(UMSS).
+\item [Equipos] Los equipos son espacios opcionales de creación, que pueden
+utilizarse para dividir aún mas un grupo de estudio, segun el metodo que el
+docente pretenda utilizar.
+\item [Carreras] Las carreras representan una concentración de materias que a su
+vez estan agrupadas segun gestiones especificas.
+\item [Areas] Un area es otra forma de agrupación de materias, que carecen de
+una cualidad temporal, es decir, que no poseen caducidad.
+\item [Comunidades] Una comunidad es una forma de espacio virtual independiente
+de toda gestión (lo que implica que no tiene caducidad), y la intención es poder
+agrupar a los usuarios segun un interes en particular.
+\end{description}
+
+Los elementos pueden resurmirse como se muestra en la figura \ref{espacios}.
+Como se verá a la larga la clasificación de los espacios según su temporalidad,
+es imprescindible para corregir los incovenientes creados por la formalidad que
+poseen algunos espacios, brindando espacios que poseen un caracter mas libre.
+
+\begin{figure}
+\centering
+\input{graphics/cap3_1.tex}
+\caption{Espacios virtuales que se han de contruir y su clasificación en el
+sistema}
+\label{espacios}
+\end{figure}
 
 Cada uno de ellos posee la funcionalidad caracteristica de un recurso
 administrable, es decir, posee las siguientes operaciones\footnote{Para una
@@ -98,14 +126,26 @@ compartir piezas de información entre usuarios del sistema.
 Para este proposito, se han definido piezas atomicas de información básica,
 estas son:
 
-\begin{itemize}
-\item Notas
-\item Archivos
-\item Imagenes
-\item Videos
-\item Eventos
-\item Enlaces
-\end{itemize}
+\begin{description}
+\item [Notas] Son piezas de texto que no poseen formato, y representan la unidad
+de información mas básica que ha de construirse.
+\item [Archivos] Los archivos representan recursos que los usuarios suben al
+sistema, y no esta contemplado ninguna tarea adicional, a parte de alojarlos y
+brindar la capacidad de ser descargados por otros usuarios.
+\item [Imagenes] Una imágen es la unica pieza provista para representación
+visual en el sistema. Esta adicionalmente a ser subida por un usuario debe
+poder ser visualizada y descargada por parte de los demas usuarios.
+\item [Videos] Inicialmente los videos representan archivos en el formato flv,
+que puedan ser reproducibles en un player de adobe flash.
+\item [Eventos] Los eventos son piezas que demarcan la iniciación y duración de
+una actividad, estas pueden ser creadas por algún usuario y visualizados por
+otros usuarios, según el espacio virtual en el que se encuentre.
+\item [Enlaces] Inicialmente se contempla unicamente la publicación de enlaces,
+sin analisis del lugar a donde conducen, a la larga se plantea la posibilidad de
+analizar el recurso destino y poder reenderizarse la información segun tal
+inspecccióni (es deseable, pero no esta contemplado en los alcances de este
+proyecto).
+\end{description}
 
 Todos estos tipos de recursos poseen tambien caracteristicas de espacio virtual,
 es decir, que cada una de ellas posee operaciones CRUD, ademas de
@@ -115,18 +155,52 @@ funcionalidades para el fomento a la participación.
 
 Se considera la creación de feeds de
 sindicación\footnote{Definición disponible en:
-http://es.wikipedia.org/wiki/Redifusión\_web}.
+http://es.wikipedia.org/wiki/Redifusión\_web}, para ser exactos se utilizará
+el formato RSS.
 
 \subsection{Canales de comunicación}
 
 Para la mejora de los canales de comunicación se ha definido el manejo de otros
-tipos de espacios-recursos, estos son:
+tipos de espacios-recursos adicionales que poseen diferentes propositos
+utilitarios, estos son:
 
-\begin{itemize}
-\item Usuarios
-\item Roles
-\item Contactos
-\end{itemize}
+\begin{description}
+\item [Usuarios] Para incrementar la afinidad de los usuarios hacia el sistema
+que conforma este proyecto, se han definido la construcción de espacios propios
+para cada usuario. De modo que este pueda controlar los recursos que produzca y
+que sean realmente suyos.
+\item [Roles] Un rol define el tipo de participación que puede poseer un usuario
+en el sistema, inicialmente se han creado un conjunto de roles, que esta acordes
+a la logica del contexto de implantación (UMSS):
+    \begin{itemize}
+    \item Administrador
+    \item Desarrollador
+    \item Moderador
+    \item Docente
+    \item Auxiliar
+    \item Estudiante
+    \item Invitado
+    \end{itemize}
+\item [Contactos] La caracteristica mas propia de una red social esta basada en
+la creación de vinculos entre usuarios del sistema, para esto se ha creado una
+cadena de contactos, estos vinculos pueden ser de tres tipos (estos estan
+basados en la forma que son manejados por la red social twitter) (figura
+\ref{contactos}):
+    \begin{description}
+    \item [Follower] Representa una relación uni-direccional, de un usuario que
+    ve los recursos que produce otro usuario.
+    \item [Following] Representa una relación uni-direccional, de un usuario que
+    produce los recursos que otros usuarios pueden ver.
+    \item [Friend] Representa una relación bi-direccional, entre dos usuarios,
+    que comparten los recursos que producen.
+    \end{description}
+    \begin{figure}
+    \centering
+    \input{graphics/cap3_2.tex}
+    \caption{Tipos de relacionamientos entre usuarios}
+    \label{contactos}
+    \end{figure}
+\end{description}
 
 Estos recursos, son los componentes propios de un sitio web, ademas de darle las
 caracteristicas de una red social propiamente dicha.
@@ -139,7 +213,7 @@ red social, son las funcionalidades que propicien la cultura de participación.
 Estos elementos, que estan inspirados en la tendencia de los sitios considerados
 dentro de la web 2.0\footnote{Definición disponible en:
 http://es.wikipedia.org/wiki/Web\_2.0}, han sido considerados como base para el
-establecimiento y definición siguiente.
+establecimiento de las definiciónes siguientes.
 
 Para tal proposito se han definido los siguientes elementos:
 

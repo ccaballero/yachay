@@ -1,3 +1,5 @@
+
 default:
-	pdflatex proyecto.tex
+	latex proyecto.tex
+	dvipdf proyecto.dvi
 
