@@ -91,7 +91,7 @@ poseen algunos espacios, brindando espacios que poseen un caracter mas libre.
 \centering
 \input{graphics/cap3_1.tex}
 \caption{Espacios virtuales que se han de contruir y su clasificación en el
-sistema}
+sistema.}
 \label{espacios}
 \end{figure}
 
@@ -197,7 +197,7 @@ basados en la forma que son manejados por la red social twitter) (figura
     \begin{figure}
     \centering
     \input{graphics/cap3_2.tex}
-    \caption{Tipos de relacionamientos entre usuarios}
+    \caption{Tipos de relacionamientos entre usuarios.}
     \label{contactos}
     \end{figure}
 \end{description}
@@ -294,7 +294,7 @@ ser desarrollados, estos se detallan en la figura \ref{paquetes}.
 \begin{figure}
 \centering
 \input{graphics/cap3_3.tex}
-\caption{Módulos a ser desarrollados, y sus grados de dependencia}
+\caption{Módulos a ser desarrollados, y sus grados de dependencia.}
 \label{paquetes}
 \end{figure}
 
@@ -317,22 +317,100 @@ del alcance de los objetivos del sistema).
 
 \section{Grupos y privilegios}
 
-Tambien es ha contemplado la creación de dos módulos vitales para el sistema,
-eston son:
+Adicionalmente a la implementación de una logica modular para el sistema, es
+deseable el manejo dinamico de permisos, de forma que un administrador pueda
+definir una conjunto de funcionalidades disponibles para ciertas categorias de
+usuarios.
+
+Para esto se han establecido dos modulos:
 
 \begin{description}
-\item [Roles] Para la administración de grupos de usuarios, este debe contemplar
-todas las operaciones CRUD, mencionadas para un recurso, ademas de la
-manipulación de grupos de permisos para un rol de usuarios común.
-\item [Privileges] Para la administración de credenciales en el sistema, debe
-contemplar la creación dinamica de permisos definidos por algun móalgun o.
+\item [Roles] Módulo para la administración de grupos de usuarios, este debe
+contemplar todas las operaciones CRUD, mencionadas para un recurso, ademas de la
+manipulación de grupos de permisos para un rol común.
+\item [Privileges] Módulo para la administración de credenciales en el sistema,
+se debe contemplar la creación dinamica de permisos definidos por algun módulo.
+\end{description}
+
+
+\section{Gestión de contenido}
+
+Para finalizar el conjunto de requerimientos que se han establecido desarrollar
+para el sistema, se plantea la necesitad de creación y administración de
+diversas plantillas web, ademas de poder definirse pequeños utilitarios
+alrededor de una cierta página.
+
+Para esto se ha definido la creación de un modulo:
+
+\begin{description}
+\item [Templates] Módulo encargado de la reenderización de contenido, ademas de
+la administración de funcionalidad adicional a una página (widgets), y la
+definición de regiones para el sistema (debe cumplir las funciones mas básicas
+de un sistema de administración de contenido CMS).
 \end{description}
 
 \section{Planificación}
 
 Una vez definidas las funcionalidades a ser desarrolladas, y las herramientas
-con las que se cuenta para tal desarrollo, se pasa ha definir la planificación
-que se ha determinado.
+con las que se cuenta para tal desarrollo, en esta sección se ha de definir la
+planificación que se ha determinado seguir.
 
 \subsection{Iteraciones}
+
+Para comenzar se ha determinado realizar el desarrollo del proyecto en
+iteraciones, estas estan detalladas en el cuadro \ref{iteraciones}:
+
+\begin{table}
+\centering
+\begin{tabular}{|c|l|p{8.0cm}|}
+\hline
+Iteración & Módulo & Descripción \\
+\hline
+1 & Usuarios (USERS) & \multirow{2}{8cm}{Análisis, diseño, e implementación de
+las funciones para el manejo de usuarios, ademas de la creación de datos de
+prueba, e implementación de la lógica de autentificación.}\\
+  & Autentificación \\
+\hline
+2 & Paquetes/Módules (PACKAGES) & \multirow{3}{8cm}{Analisis, diseño, implementacion, evaluaciones de las funciones que proveen modularidad, manejo de credenciales, y manejo de roles de usuarios en el sistema.}\\
+  & Privilegios (PRIVILEGES) \\
+  & Roles (ROLES) \\
+\hline
+3 & Rutas (ROUTES) \\
+  & Plantillas (TEMPLATES) \\
+\hline
+4 & Espacios (SPACES) \\
+  & Areas (AREAS) \\
+  & Gestiones (GESTIONS) \\
+\hline
+5 & Materias (SUBJECTS) \\
+  & Grupos (GROUPS) \\
+  & Equipos (TEAMS) \\
+\hline
+6 & Comunidades (COMMUNITIES) \\
+  & Carreras (CARRERS) \\
+\hline
+7 & Evaluaciones (EVALUATIONS) \\
+  & Calificaciones (CALIFICATIONS) \\
+  & Conjuntos (GROUPSETS) \\
+\hline
+8 & Contactos (CONTACTS) \\
+  & Invitaciones (INVITATIONS) \\
+\hline
+9 & Recursos (RESOURCES) \\
+  & Notas (NOTES) \\
+  & Enlaces (LINKS) \\
+  & Sugerencias (FEEDBACK) \\
+\hline
+10 & Archivos (FILES) \\
+   & Imágenenes (PHOTOS) \\
+   & Videos (VIDEOS) \\
+\hline
+11 & Etiquetas (TAGS) \\
+   & Comentarios (COMMENTS) \\
+   & Valoraciones (VALORATIONS) \\
+\hline
+\end{tabular}
+\caption{Definición de iteraciones para el proyecto.}
+\label{iteraciones}
+\end{table}
 

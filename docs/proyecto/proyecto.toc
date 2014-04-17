@@ -37,43 +37,44 @@
 \contentsline {subsection}{\numberline {3.3.4}Lenguaje de programaci\IeC {\'o}n}{19}{subsection.3.3.4}
 \contentsline {section}{\numberline {3.4}Dise\IeC {\~n}o de paquetes}{19}{section.3.4}
 \contentsline {section}{\numberline {3.5}Grupos y privilegios}{19}{section.3.5}
-\contentsline {section}{\numberline {3.6}Planificaci\IeC {\'o}n}{19}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}Iteraciones}{19}{subsection.3.6.1}
-\contentsline {chapter}{\numberline {4}Desarrollo del proyecto}{21}{chapter.4}
-\contentsline {section}{\numberline {4.1}Arquitectura del sistema}{21}{section.4.1}
-\contentsline {section}{\numberline {4.2}Construcci\IeC {\'o}n de espacios virtuales}{21}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Espacios virtuales}{21}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}B-learning}{21}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Intercambio de recursos}{21}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Recursos}{21}{subsection.4.3.1}
-\contentsline {section}{\numberline {4.4}Instancias m\IeC {\'u}ltiples del sistema}{21}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Conectitividad}{21}{subsection.4.4.1}
-\contentsline {section}{\numberline {4.5}Canales de comunicaci\IeC {\'o}n}{22}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Las Personas}{22}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}Red de contactos}{22}{subsection.4.5.2}
-\contentsline {section}{\numberline {4.6}Fomento a la participaci\IeC {\'o}n}{22}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}Web 2.0}{22}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}Plataforma}{22}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}Sistemas de control}{22}{subsection.4.6.3}
-\contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{23}{chapter.5}
-\contentsline {section}{\numberline {5.1}Indicadores de medici\IeC {\'o}n}{23}{section.5.1}
-\contentsline {section}{\numberline {5.2}Creaci\IeC {\'o}n de analiticas}{23}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Usuarios}{23}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Valoraciones}{23}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}Contactos}{23}{subsection.5.2.3}
-\contentsline {subsection}{\numberline {5.2.4}Espacios}{23}{subsection.5.2.4}
-\contentsline {subsection}{\numberline {5.2.5}Recursos}{23}{subsection.5.2.5}
-\contentsline {subsection}{\numberline {5.2.6}Linea de tiempo}{23}{subsection.5.2.6}
-\contentsline {section}{\numberline {5.3}Resultados}{23}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Contexto}{24}{subsection.5.3.1}
-\contentsline {subsection}{\numberline {5.3.2}Usuarios}{24}{subsection.5.3.2}
-\contentsline {subsection}{\numberline {5.3.3}Contactos}{24}{subsection.5.3.3}
-\contentsline {subsection}{\numberline {5.3.4}Espacios Virtuales}{24}{subsection.5.3.4}
-\contentsline {subsection}{\numberline {5.3.5}Recursos}{24}{subsection.5.3.5}
-\contentsline {subsection}{\numberline {5.3.6}Linea de tiempo}{24}{subsection.5.3.6}
-\contentsline {section}{\numberline {5.4}Conclusiones}{24}{section.5.4}
-\contentsline {section}{\numberline {5.5}Recomendaciones}{24}{section.5.5}
-\contentsline {chapter}{\numberline {A}Glosario de t\IeC {\'e}rminos}{25}{appendix.Alph1}
-\contentsline {chapter}{\numberline {B}Manual de instalaci\IeC {\'o}n}{27}{appendix.Alph2}
-\contentsline {chapter}{\numberline {C}Manual de usuario}{29}{appendix.Alph3}
-\contentsline {chapter}{Bibliograf\'{\i }a}{31}{appendix*.3}
+\contentsline {section}{\numberline {3.6}Gesti\IeC {\'o}n de contenido}{19}{section.3.6}
+\contentsline {section}{\numberline {3.7}Planificaci\IeC {\'o}n}{21}{section.3.7}
+\contentsline {subsection}{\numberline {3.7.1}Iteraciones}{21}{subsection.3.7.1}
+\contentsline {chapter}{\numberline {4}Desarrollo del proyecto}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}Arquitectura del sistema}{23}{section.4.1}
+\contentsline {section}{\numberline {4.2}Construcci\IeC {\'o}n de espacios virtuales}{23}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Espacios virtuales}{23}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}B-learning}{23}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Intercambio de recursos}{23}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Recursos}{23}{subsection.4.3.1}
+\contentsline {section}{\numberline {4.4}Instancias m\IeC {\'u}ltiples del sistema}{23}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Conectitividad}{23}{subsection.4.4.1}
+\contentsline {section}{\numberline {4.5}Canales de comunicaci\IeC {\'o}n}{24}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}Las Personas}{24}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}Red de contactos}{24}{subsection.4.5.2}
+\contentsline {section}{\numberline {4.6}Fomento a la participaci\IeC {\'o}n}{24}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Web 2.0}{24}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}Plataforma}{24}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Sistemas de control}{24}{subsection.4.6.3}
+\contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{25}{chapter.5}
+\contentsline {section}{\numberline {5.1}Indicadores de medici\IeC {\'o}n}{25}{section.5.1}
+\contentsline {section}{\numberline {5.2}Creaci\IeC {\'o}n de analiticas}{25}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Usuarios}{25}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Valoraciones}{25}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Contactos}{25}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.4}Espacios}{25}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.5}Recursos}{25}{subsection.5.2.5}
+\contentsline {subsection}{\numberline {5.2.6}Linea de tiempo}{25}{subsection.5.2.6}
+\contentsline {section}{\numberline {5.3}Resultados}{25}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Contexto}{26}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Usuarios}{26}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}Contactos}{26}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.4}Espacios Virtuales}{26}{subsection.5.3.4}
+\contentsline {subsection}{\numberline {5.3.5}Recursos}{26}{subsection.5.3.5}
+\contentsline {subsection}{\numberline {5.3.6}Linea de tiempo}{26}{subsection.5.3.6}
+\contentsline {section}{\numberline {5.4}Conclusiones}{26}{section.5.4}
+\contentsline {section}{\numberline {5.5}Recomendaciones}{26}{section.5.5}
+\contentsline {chapter}{\numberline {A}Glosario de t\IeC {\'e}rminos}{27}{appendix.Alph1}
+\contentsline {chapter}{\numberline {B}Manual de instalaci\IeC {\'o}n}{29}{appendix.Alph2}
+\contentsline {chapter}{\numberline {C}Manual de usuario}{31}{appendix.Alph3}
+\contentsline {chapter}{Bibliograf\'{\i }a}{33}{appendix*.3}
