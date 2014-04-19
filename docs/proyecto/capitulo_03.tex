@@ -2,9 +2,9 @@
 
 En este capítulo, se desarrollan los aspectos necesarios para la definición del 
 proceso de desarrollo, primeramente se hará referencia a las cuestiones 
-relacionadas con la metodología de desarrollo, posteriormente se verán los
-documentos propios que se han definido para las diferentes etapas; luego se
-tratarán las etapas de la planificación ha tomarse en cuenta.
+relacionadas con la metodología de desarrollo, posteriormente los requerimientos
+a detalle; para terminar con una descripción de las etapas en la planificación
+del proyecto.
 
 \section{Modelo iterativo}
 
@@ -226,13 +226,13 @@ son asignadas a un recurso, estas son de tipo informal (es decir, definidas por
 el creador del recurso), y sirven como un medio alternativo de clasificación de
 los recursos conocido como folcsonomias\footnote{Puede verse la definición
 extendida en http://es.wikipedia.org/wiki/Folcsonomía}.
-\item [Sistema de reputación]\footnote{Si bien vamos a ahondar en este concepto,
-pueden verse los detalles introductorios en:
-http://en.wikipedia.org/wiki/Reputation\_system} Un sistema de reputación
-define un conjunto de politicas de fomento a la interacción o participación de
-los usuarios, entre los multiples metodos que pueden encontrarse en los sitios
-web actuales, se han definido cuatro indicadores a ser tomados en cuenta:
-    \begin{description}
+\item [Sistema de reputación] Un sistema de reputación\footnote{Si bien vamos a
+ahondar en este concepto, pueden verse los detalles introductorios en:
+http://en.wikipedia.org/wiki/Reputation\_system} define un conjunto de politicas
+de fomento a la interacción o participación de los usuarios, entre los multiples
+metodos que pueden encontrarse en los sitios web actuales, se han definido
+cuatro indicadores a ser tomados en cuenta:
+\begin{description}
     \item [Actividad] El indicador de actividad, se basa en el numero de
     recursos que un usuario ha creado en el sistema.
     \item [Participación] El indicador de participación mide el numero de
@@ -358,7 +358,7 @@ planificación que se ha determinado seguir.
 \subsection{Iteraciones}
 
 Para comenzar se ha determinado realizar el desarrollo del proyecto en
-iteraciones, estas estan detalladas en el cuadro \ref{iteraciones}:
+iteraciones, estas estan detalladas en el cuadro \ref{iteraciones}.
 
 \begin{table}
 \centering
@@ -366,48 +366,111 @@ iteraciones, estas estan detalladas en el cuadro \ref{iteraciones}:
 \hline
 Iteración & Módulo & Descripción \\
 \hline
-1 & Usuarios (USERS) & \multirow{2}{8cm}{Análisis, diseño, e implementación de
-las funciones para el manejo de usuarios, ademas de la creación de datos de
-prueba, e implementación de la lógica de autentificación.}\\
-  & Autentificación \\
+
+\multirow{4}{*}{1} &
+Usuarios (USERS) &
+\multirow{4}{8cm}{Análisis, diseño, e implementación de las funciones para el
+manejo de usuarios, ademas de la creación de datos de prueba, e implementación
+de la lógica de autentificación.} \\
+ &  & \\
+ &  & \\
+ &  & \\
 \hline
-2 & Paquetes/Módules (PACKAGES) & \multirow{3}{8cm}{Analisis, diseño, implementacion, evaluaciones de las funciones que proveen modularidad, manejo de credenciales, y manejo de roles de usuarios en el sistema.}\\
-  & Privilegios (PRIVILEGES) \\
-  & Roles (ROLES) \\
+
+\multirow{4}{*}{2} &
+Paquetes (PACKAGES) &
+\multirow{4}{8cm}{Analisis, diseño, implementacion, evaluaciones de las
+funciones que proveen modularidad, manejo de credenciales, y manejo de roles de
+usuarios en el sistema.} \\
+ & Privilegios (PRIVILEGES) & \\
+ & Roles (ROLES) & \\
+ &  & \\
 \hline
-3 & Rutas (ROUTES) \\
-  & Plantillas (TEMPLATES) \\
+
+\multirow{3}{*}{3} &
+Rutas (ROUTES) &
+\multirow{3}{8cm}{Analisis, diseño, e implementación de las funciones para el
+manejo de peticiones HTTP, y gestion de contenido.} \\
+ & Plantillas (TEMPLATES) & \\
+ & & \\
 \hline
-4 & Espacios (SPACES) \\
-  & Areas (AREAS) \\
-  & Gestiones (GESTIONS) \\
+
+\multirow{4}{*}{4} &
+Espacios (SPACES) &
+\multirow{4}{8cm}{Analisis, diseño, e implentacion de las funciones de
+administración de espacios virtuales, ademas de la creación de las funciones
+generales para la adicion de recursos, y funciones utilitarias.} \\
+ & Areas (AREAS) & \\
+ & Gestiones (GESTIONS) & \\
+ & & \\
 \hline
-5 & Materias (SUBJECTS) \\
-  & Grupos (GROUPS) \\
-  & Equipos (TEAMS) \\
+
+\multirow{4}{*}{5} &
+Materias (SUBJECTS) &
+\multirow{4}{8cm}{Analisis, diseño, e implementación de los espacios virtuales
+formales, de acuerdo a la estructura que se aplica en el contexto de
+implantación (UMSS).} \\
+ & Grupos (GROUPS) & \\
+ & Equipos (TEAMS) & \\
+ & & \\
 \hline
-6 & Comunidades (COMMUNITIES) \\
-  & Carreras (CARRERS) \\
+
+\multirow{4}{*}{6} &
+Comunidades (COMMUNITIES) &
+\multirow{4}{8cm}{Analisis, diseño, e implementacion de los espacios virtuales
+informales, de acuerdo a las estructuras clasicas que pueden verse en Internet.}
+\\
+ & Carreras (CARRERS) & \\
+ & & \\
+ & & \\
 \hline
-7 & Evaluaciones (EVALUATIONS) \\
-  & Calificaciones (CALIFICATIONS) \\
-  & Conjuntos (GROUPSETS) \\
+
+\multirow{3}{*}{7} &
+Evaluaciones (EVALUATIONS) &
+\multirow{3}{8cm}{Analisis, diseño, e implementacion de las funciones para la
+evaluación y calificaciones de los estudiantes, por parte de los docentes.} \\
+ & Calificaciones (CALIFICATIONS) & \\
+ & Conjuntos (GROUPSETS) & \\
 \hline
-8 & Contactos (CONTACTS) \\
-  & Invitaciones (INVITATIONS) \\
+
+\multirow{3}{*}{8} &
+Contactos (CONTACTS) &
+\multirow{3}{8cm}{Analisis, diseño, e implementacion de la logica de red social,
+es decir, la gestion de contactos entre usuarios.} \\
+ & Invitaciones (INVITATIONS) & \\
+ & & \\
 \hline
-9 & Recursos (RESOURCES) \\
-  & Notas (NOTES) \\
-  & Enlaces (LINKS) \\
-  & Sugerencias (FEEDBACK) \\
+
+\multirow{7}{*}{9} &
+Recursos (RESOURCES) &
+\multirow{7}{8cm}{Analisis, diseño, e implementacion de la gestion de recursos
+básicos, ademas de la adicion de estos a espacios virtuales determinados, y la
+generalización de estos para brindar la posibilidad de extender su funcionalidad
+para la posterior implementacion de paquetes utilitarios.} \\
+ & Notas (NOTES) & \\
+ & Enlaces (LINKS) & \\
+ & Sugerencias (FEEDBACK) & \\
+ & & \\
+ & & \\
+ & & \\
 \hline
-10 & Archivos (FILES) \\
-   & Imágenenes (PHOTOS) \\
-   & Videos (VIDEOS) \\
+
+\multirow{3}{*}{10} &
+Archivos (FILES) &
+\multirow{3}{8cm}{Analisis, diseño, e implementacion de los recursos básicos
+extendidos, es decir, aquellos que requieren manipular archivos adjuntos.} \\
+ & Imágenenes (PHOTOS) & \\
+ & Videos (VIDEOS) & \\
 \hline
-11 & Etiquetas (TAGS) \\
-   & Comentarios (COMMENTS) \\
-   & Valoraciones (VALORATIONS) \\
+
+\multirow{4}{*}{11} &
+Etiquetas (TAGS) &
+\multirow{4}{8cm}{Analisis, diseño, e implementacion de las funciones
+utilitarias para valoraciones sobre los recursos, ademas de la implementacion
+del sistema de reputacion.} \\
+ & Comentarios (COMMENTS) & \\
+ & Valoraciones (VALORATIONS) & \\
+ & & \\
 \hline
 \end{tabular}
 \caption{Definición de iteraciones para el proyecto.}

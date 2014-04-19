@@ -41,21 +41,11 @@
 \contentsline {section}{\numberline {3.7}Planificaci\IeC {\'o}n}{21}{section.3.7}
 \contentsline {subsection}{\numberline {3.7.1}Iteraciones}{21}{subsection.3.7.1}
 \contentsline {chapter}{\numberline {4}Desarrollo del proyecto}{23}{chapter.4}
-\contentsline {section}{\numberline {4.1}Arquitectura del sistema}{23}{section.4.1}
-\contentsline {section}{\numberline {4.2}Construcci\IeC {\'o}n de espacios virtuales}{23}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Espacios virtuales}{23}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}B-learning}{23}{subsection.4.2.2}
-\contentsline {section}{\numberline {4.3}Intercambio de recursos}{23}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}Recursos}{23}{subsection.4.3.1}
-\contentsline {section}{\numberline {4.4}Instancias m\IeC {\'u}ltiples del sistema}{23}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Conectitividad}{23}{subsection.4.4.1}
-\contentsline {section}{\numberline {4.5}Canales de comunicaci\IeC {\'o}n}{24}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}Las Personas}{24}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}Red de contactos}{24}{subsection.4.5.2}
-\contentsline {section}{\numberline {4.6}Fomento a la participaci\IeC {\'o}n}{24}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}Web 2.0}{24}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}Plataforma}{24}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}Sistemas de control}{24}{subsection.4.6.3}
+\contentsline {section}{\numberline {4.1}Base funcional del sistema}{23}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Gestion de paquetes \emph {packages}}{23}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Manejo de privilegios \emph {privileges}}{23}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Manejo de rutas y navegaci\IeC {\'o}n \emph {routes}}{23}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}Sistema de plantillas \emph {templates}}{23}{subsection.4.1.4}
 \contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{25}{chapter.5}
 \contentsline {section}{\numberline {5.1}Indicadores de medici\IeC {\'o}n}{25}{section.5.1}
 \contentsline {section}{\numberline {5.2}Creaci\IeC {\'o}n de analiticas}{25}{section.5.2}

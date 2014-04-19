@@ -1,56 +1,80 @@
 \chapter{Desarrollo del proyecto}
 
-En este capítulo, trataremos los asuntos concernientes a la construcción de
-las funciones vitales del sistema, sobre las que recaerán el control de los
-recursos, y la extensibilidad que pueda darsele a todo el proyecto. Si bien en el anterior capitulo el tema fundamental era el \emph{proceso de desarrollo}, este capitulo esta centrado en el \emph{producto de software}.
+En este capítulo, trataremos los asuntos concernientes a la construcción de las
+funciones del sistema, sobre las que recaerán el control de los recursos, y la
+extensibilidad que pueda darsele a todo el proyecto. Si bien en el anterior
+capitulo el tema fundamental era el \emph{proceso de desarrollo}, este capitulo
+esta centrado en el \emph{producto de software}.
 
-\section{Arquitectura del sistema}
+\section{Base funcional del sistema}
 
-\section{Construcción de espacios virtuales}
-\subsection{Espacios virtuales}
-El espacio genérico \emph{spaces}
-Los espacios formales \emph{gestions}, \emph{careers}, \emph{areas}
-El espacio informal \emph{communities}
-Los espacios jerárquicos \emph{subjects}, \emph{groups}, \emph{teams}
-Las utilidades sobre grupos \emph{groupsets}
-\subsection{B-learning}
-Los sistemas de evaluación \emph{evaluations}
-Las calificaciones \emph{califications}
+Una de las caracteristicas deseables a tomar en cuenta para el desarrollo del
+sistema, era obtener un perfecto equilibrio entre modularidad y rendimiento,
+pero sin incrementar la complejidad del sistema de modo apreciable.
 
-\section{Intercambio de recursos}
-\subsection{Recursos}
-Los componentes genéricos \emph{resources}
-El recurso mas básico \emph{notes}
-Los archivos en general \emph{files}
-Los archivos especiales \emph{photos}, \emph{videos}
-Los recursos espacio-temporales \emph{events}
-La reenderizacion personalizada \emph{links}
-Las sugerencias \emph{feedback}
+Para conseguir tal caracteristica, se opto por utilizar una arquitectura basada
+en capas, muy similar a como son diseñados los sistemas operativos, pero sin
+llegar a la complejidad que estos mismos poseen. En la capa mas básica de la
+arquitectura del sistema, se encuentran tres paquetes que son fundamentales para
+cualquier funcion que el sistema quiera desempeñar. En esta sección se tratan
+estos tres paquetes, ademas de la solución que se plantea para proveer al
+usuario final de una personalización mas atractiva.
 
-\section{Instancias múltiples del sistema}
-\subsection{Conectitividad}
-La inteligencia colectiva \emph{axon}
+\subsection{Gestion de paquetes \emph{packages}}
 
-\section{Canales de comunicación}
-\subsection{Las Personas}
-El espacio personal \emph{users}
-El control de las funciones \emph{roles}
-\subsection{Red de contactos}
-Las redes sociales \emph{contacts}
-Los círculos \emph{sets}
-La propagación \emph{invitations}
 
-\section{Fomento a la participación}
-\subsection{Web 2.0}
-Los comentarios \emph{comments}
-La calidad del recurso \emph{ratings}
-Las nuevas interpretaciones \emph{tags}
-Los sistemas de reputación \emph{valorations}
-\subsection{Plataforma}
-El gestor de paquetes \emph{packages}
-El manejo de privilegios \emph{privileges}
-El manejo de rutas y navegación \emph{routes}
-El sistema de plantillas \emph{templates}
-\subsection{Sistemas de control}
-Los indicadores medibles \emph{stats}
-El panel de control \emph{panels}
+\subsection{Manejo de privilegios \emph{privileges}}
+\subsection{Manejo de rutas y navegación \emph{routes}}
+\subsection{Sistema de plantillas \emph{templates}}
+
+%\section{Construcción de espacios virtuales}
+
+%\subsection{Espacios virtuales}
+%\subsubsection{El espacio genérico \emph{spaces}}
+%\section{Los espacios formales \emph{gestions}, \emph{careers}, \emph{areas}}
+%\subsubsection{El espacio informal \emph{communities}}
+%\section{Los espacios jerárquicos \emph{subjects}, \emph{groups}, \emph{teams}}
+%\subsubsection{Las utilidades sobre grupos \emph{groupsets}}
+
+%\subsection{B-learning}
+%\subsubsection{Los sistemas de evaluación \emph{evaluations}}
+%\subsubsection{Las calificaciones \emph{califications}}
+
+%\section{Intercambio de recursos}
+
+%\subsection{Recursos}
+%\subsubsection{Los componentes genéricos \emph{resources}}
+%\subsubsection{El recurso mas básico \emph{notes}}
+%\subsubsection{Los archivos en general \emph{files}}
+%\subsubsection{Los archivos especiales \emph{photos}, \emph{videos}}
+%\subsubsection{Los recursos espacio-temporales \emph{events}}
+%\subsubsection{La reenderizacion personalizada \emph{links}}
+%\subsubsection{Las sugerencias \emph{feedback}}
+
+%\section{Instancias múltiples del sistema}
+%\subsection{Conectitividad}
+%\subsubsection{La inteligencia colectiva \emph{axon}}
+
+%\section{Canales de comunicación}
+
+%\subsection{Las Personas}
+%\subsubsection{El espacio personal \emph{users}}
+%\subsubsection{El control de las funciones \emph{roles}}
+
+%\subsection{Red de contactos}
+%\subsubsection{Las redes sociales \emph{contacts}}
+%\subsubsection{Los círculos \emph{sets}}
+%\subsubsection{La propagación \emph{invitations}}
+
+%\section{Fomento a la participación}
+
+%\subsection{Web 2.0}
+%\subsubsection{Los comentarios \emph{comments}}
+%\subsubsection{La calidad del recurso \emph{ratings}}
+%\subsubsection{Las nuevas interpretaciones \emph{tags}}
+%\subsubsection{Los sistemas de reputación \emph{valorations}}
+
+%\subsection{Sistemas de control}
+%\subsubsection{Los indicadores medibles \emph{stats}}
+%\subsubsection{El panel de control \emph{panels}}
+
