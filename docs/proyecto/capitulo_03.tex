@@ -49,7 +49,7 @@ para hacer las modificaciones necesarias.
 
 A partir de los objetivos del proyecto, se pasa a establecer el conjunto de
 funciones que el sistema debe tener, para esto se ha optado por crear un
-conjunto de categorias, de forma que agrupen las tareas que son comunes a un
+conjunto de categorías, de forma que agrupen las tareas que son comunes a un
 objetivo especifico.
 
 \subsection{Espacios virtuales}
@@ -57,45 +57,45 @@ objetivo especifico.
 Para la correcta navegación sobre el sistema se han establecido, varios tipos de
 espacios agrupadores de recursos.
 
-Estos recursos ademas pueden clasificarse según su temporalidad, es decir si
+Estos recursos además pueden clasificarse según su temporalidad, es decir si
 poseen alguna forma de caducidad, o si no poseen tal cualidad. Estos son:
 
 \begin{description}
-\item [Gestiones] Una gestión representa la division básica de periodos
-academicos, estos trazan un marco de referencia temporal (es decir, su valor de
+\item [Gestiones] Una gestión representa la división básica de periodos
+académicos, estos trazan un marco de referencia temporal (es decir, su valor de
 caducidad) para muchos de los espacios restantes.
 \item [Materias] Una materia es el espacio que concentra todos los recursos de
 una materia, (esta a su vez concentra a otros sub-espacios). Este espacio es a
 su vez un sub-espacio de algún espacio de gestión.
 \item [Grupos] Los grupos son espacios de separación de una materia, esta está
-basada en el sistema utilizado en el dominio de implementacion del sistema
+basada en el sistema utilizado en el dominio de implementación del sistema
 (UMSS).
 \item [Equipos] Los equipos son espacios opcionales de creación, que pueden
-utilizarse para dividir aún mas un grupo de estudio, segun el metodo que el
+utilizarse para dividir aún mas un grupo de estudio, según el método que el
 docente pretenda utilizar.
 \item [Carreras] Las carreras representan una concentración de materias que a su
-vez estan agrupadas segun gestiones especificas.
-\item [Areas] Un area es otra forma de agrupación de materias, que carecen de
+vez están agrupadas según gestiones especificas.
+\item [Áreas] Un área es otra forma de agrupación de materias, que carecen de
 una cualidad temporal, es decir, que no poseen caducidad.
 \item [Comunidades] Una comunidad es una forma de espacio virtual independiente
 de toda gestión (lo que implica que no tiene caducidad), y la intención es poder
-agrupar a los usuarios segun un interes en particular.
+agrupar a los usuarios según un interés en particular.
 \end{description}
 
-Los elementos pueden resurmirse como se muestra en la figura \ref{espacios}.
+Los elementos pueden resumirse como se muestra en la figura \ref{espacios}.
 Como se verá a la larga la clasificación de los espacios según su temporalidad,
-es imprescindible para corregir los incovenientes creados por la formalidad que
-poseen algunos espacios, brindando espacios que poseen un caracter mas libre.
+es imprescindible para corregir los inconvenientes creados por la formalidad que
+poseen algunos espacios, brindando espacios que poseen un carácter mas libre.
 
 \begin{figure}
 \centering
 \input{graphics/cap3_1.tex}
-\caption{Espacios virtuales que se han de contruir y su clasificación en el
+\caption{Espacios virtuales que se han de construir y su clasificación en el
 sistema.}
 \label{espacios}
 \end{figure}
 
-Cada uno de ellos posee la funcionalidad caracteristica de un recurso
+Cada uno de ellos posee la funcionalidad característica de un recurso
 administrable, es decir, posee las siguientes operaciones\footnote{Para una
 definición exacta puede consultarse:
 https://es.wikipedia.org/wiki/Create,\_read,\_update\_and\_delete}:
@@ -103,12 +103,12 @@ https://es.wikipedia.org/wiki/Create,\_read,\_update\_and\_delete}:
 \begin{itemize}
 \item Crear un nuevo elemento (CREATE).
 \item Visualizar el elemento a detalle (READ).
-\item Editar las caracteristicas del elemento (UPDATE).
+\item Editar las características del elemento (UPDATE).
 \item Eliminación del elemento (DELETE).
 \end{itemize}
 
 A su vez se han establecido un conjunto de tareas por lote para facilitar la
-correcta manipulación de amplios volumenes de información. Estas tareas son:
+correcta manipulación de amplios volúmenes de información. Estas tareas son:
 
 \begin{itemize}
 \item Importación de datos desde un archivo CSV.
@@ -120,10 +120,10 @@ correcta manipulación de amplios volumenes de información. Estas tareas son:
 \subsection{Intercambio de recursos}
 
 Cada espacio virtual debe poseer la capacidad de contener información en
-distintos formatos, y para diversos propositos. El objetivo principal es poder
+distintos formatos, y para diversos propósitos. El objetivo principal es poder
 compartir piezas de información entre usuarios del sistema.
 
-Para este proposito, se han definido piezas atomicas de información básica,
+Para este propósito, se han definido piezas atómicas de información básica,
 estas son:
 
 \begin{description}
@@ -132,26 +132,26 @@ de información mas básica que ha de construirse.
 \item [Archivos] Los archivos representan recursos que los usuarios suben al
 sistema, y no esta contemplado ninguna tarea adicional, a parte de alojarlos y
 brindar la capacidad de ser descargados por otros usuarios.
-\item [Imagenes] Una imágen es la unica pieza provista para representación
+\item [Imágenes] Una imagen es la única pieza provista para representación
 visual en el sistema. Esta adicionalmente a ser subida por un usuario debe
-poder ser visualizada y descargada por parte de los demas usuarios.
-\item [Videos] Inicialmente los videos representan archivos en el formato flv,
+poder ser visualizada y descargada por parte de los demás usuarios.
+\item [Vídeos] Inicialmente los vídeos representan archivos en el formato flv,
 que puedan ser reproducibles en un player de adobe flash.
 \item [Eventos] Los eventos son piezas que demarcan la iniciación y duración de
 una actividad, estas pueden ser creadas por algún usuario y visualizados por
 otros usuarios, según el espacio virtual en el que se encuentre.
-\item [Enlaces] Inicialmente se contempla unicamente la publicación de enlaces,
-sin analisis del lugar a donde conducen, a la larga se plantea la posibilidad de
-analizar el recurso destino y poder reenderizarse la información segun tal
-inspecccióni (es deseable, pero no esta contemplado en los alcances de este
+\item [Enlaces] Inicialmente se contempla únicamente la publicación de enlaces,
+sin análisis del lugar a donde conducen, a la larga se plantea la posibilidad de
+analizar el recurso destino y poder reenderizarse la información según tal
+inspección (es deseable, pero no esta contemplado en los alcances de este
 proyecto).
 \end{description}
 
-Todos estos tipos de recursos poseen tambien caracteristicas de espacio virtual,
-es decir, que cada una de ellas posee operaciones CRUD, ademas de
+Todos estos tipos de recursos poseen también características de espacio virtual,
+es decir, que cada una de ellas posee operaciones CRUD, además de
 funcionalidades para el fomento a la participación.
 
-\subsection{Instancias multiples}
+\subsection{Instancias múltiples}
 
 Se considera la creación de feeds de
 sindicación\footnote{Definición disponible en:
@@ -161,7 +161,7 @@ el formato RSS.
 \subsection{Canales de comunicación}
 
 Para la mejora de los canales de comunicación se ha definido el manejo de otros
-tipos de espacios-recursos adicionales que poseen diferentes propositos
+tipos de espacios-recursos adicionales que poseen diferentes propósitos
 utilitarios, estos son:
 
 \begin{description}
@@ -171,7 +171,7 @@ para cada usuario. De modo que este pueda controlar los recursos que produzca y
 que sean realmente suyos.
 \item [Roles] Un rol define el tipo de participación que puede poseer un usuario
 en el sistema, inicialmente se han creado un conjunto de roles, que esta acordes
-a la logica del contexto de implantación (UMSS):
+a la lógica del contexto de implantación (UMSS):
     \begin{itemize}
     \item Administrador
     \item Desarrollador
@@ -181,15 +181,15 @@ a la logica del contexto de implantación (UMSS):
     \item Estudiante
     \item Invitado
     \end{itemize}
-\item [Contactos] La caracteristica mas propia de una red social esta basada en
-la creación de vinculos entre usuarios del sistema, para esto se ha creado una
-cadena de contactos, estos vinculos pueden ser de tres tipos (estos estan
+\item [Contactos] La característica mas propia de una red social esta basada en
+la creación de vínculos entre usuarios del sistema, para esto se ha creado una
+cadena de contactos, estos vínculos pueden ser de tres tipos (estos están
 basados en la forma que son manejados por la red social twitter) (figura
 \ref{contactos}):
     \begin{description}
-    \item [Follower] Representa una relación uni-direccional, de un usuario que
+    \item [Follower] Representa una relación uní-direccional, de un usuario que
     ve los recursos que produce otro usuario.
-    \item [Following] Representa una relación uni-direccional, de un usuario que
+    \item [Following] Representa una relación uní-direccional, de un usuario que
     produce los recursos que otros usuarios pueden ver.
     \item [Friend] Representa una relación bi-direccional, entre dos usuarios,
     que comparten los recursos que producen.
@@ -202,18 +202,18 @@ basados en la forma que son manejados por la red social twitter) (figura
     \end{figure}
 \end{description}
 
-Estos recursos, son los componentes propios de un sitio web, ademas de darle las
-caracteristicas de una red social propiamente dicha.
+Estos recursos, son los componentes propios de un sitio web, además de darle las
+características de una red social propiamente dicha.
 
 \subsection{Fomento a la participación}
 
-Una parte fundamental del sistema, y el factor clave para el exito de toda red
-social, son sus politicas que propician la cultura de participación.
+Una parte fundamental del sistema, y el factor clave para el éxito de toda red
+social, son sus políticas que propician la cultura de participación.
 
-Estos elementos, que estan inspirados en la tendencia de los sitios considerados
+Estos elementos, que están inspirados en la tendencia de los sitios considerados
 dentro de la web 2.0\footnote{Definición disponible en:
 http://es.wikipedia.org/wiki/Web\_2.0}, han sido considerados como base para el
-establecimiento de las definiciónes siguientes:
+establecimiento de las definiciones siguientes:
 
 \begin{description}
 \item [Comentarios] Los comentarios crean el espacio de debate entre usuarios,
@@ -224,13 +224,13 @@ determinado, y define la calidad misma del recurso.
 en: http://es.wikipedia.org/wiki/Etiqueta\_(metadato)} son palabras clave que
 son asignadas a un recurso, estas son de tipo informal (es decir, definidas por
 el creador del recurso), y sirven como un medio alternativo de clasificación de
-los recursos conocido como folcsonomias\footnote{Puede verse la definición
+los recursos conocido como folcsonomías\footnote{Puede verse la definición
 extendida en http://es.wikipedia.org/wiki/Folcsonomía}.
 \item [Sistema de reputación] Un sistema de reputación\footnote{Si bien vamos a
 ahondar en este concepto, pueden verse los detalles introductorios en:
-http://en.wikipedia.org/wiki/Reputation\_system} define un conjunto de politicas
-de fomento a la interacción o participación de los usuarios, entre los multiples
-metodos que pueden encontrarse en los sitios web actuales, se han definido
+http://en.wikipedia.org/wiki/Reputation\_system} define un conjunto de políticas
+de fomento a la interacción o participación de los usuarios, entre los múltiples
+métodos que pueden encontrarse en los sitios web actuales, se han definido
 cuatro indicadores a ser tomados en cuenta:
 \begin{description}
     \item [Actividad] El indicador de actividad, se basa en el numero de
@@ -256,16 +256,16 @@ herramientas, estas se describen en esta sección.
 \subsection{Contexto de despliegue}
 Se ha de construir el sistema, considerando a disposición del desarrollo un
 servidor que se ejecute en un sistema operativo GNU/Linux, esto implica varias
-consideraciones; como la disposicion de un amplio conjunto de
+consideraciones; como la disposición de un amplio conjunto de
 herramientas disponibles para tareas de automatización y scripting.
 
 \subsection{Servidor web}
 Se ha determinado que el sitio web, puede ser ejecutado en el servidor web mas
-popular que existe, ademas de en el segundo, estos son:
+popular que existe, además de en el segundo, estos son:
 
 \begin{itemize}
 \item Apache Web Server 2
-\item EngineX\footnote{Pueden apreciarse sus caracteristicas en:
+\item EngineX\footnote{Pueden apreciarse sus características en:
 http://es.wikipedia.org/wiki/Nginx}
 \end{itemize}
 
@@ -274,13 +274,13 @@ sistema en estos dos servidores HTTP.
 
 \subsection{Base de datos}
 
-Se ha determinado usar el DBMS mas popular: MySQL, ademas de probar el sistema
+Se ha determinado usar el DBMS mas popular: MySQL, además de probar el sistema
 en la versión alternativa de este: MariaDB.
 
 \subsection{Lenguaje de programación}
 
 Para la creación del sistema, se ha optado por el uso del lenguaje PHP 5, con la
-utilización de las librerias, estandares, y conceptos  que componen el marco
+utilización de las librerías, estándares, y conceptos  que componen el marco
 de trabajo denominado Zend Framework.
 
 Para la implementación con Zend Framework, se ha establecido un conjunto de
@@ -288,7 +288,7 @@ módulos a ser desarrollados, estos se detallan en la sección siguiente.
 
 \section{Diseño de paquetes}
 
-Para la construcción del sistema se han determinado un conjunto de modulos ha
+Para la construcción del sistema se han determinado un conjunto de módulos ha
 ser desarrollados, estos se detallan en la figura \ref{paquetes}.
 
 \begin{figure}
@@ -298,38 +298,38 @@ ser desarrollados, estos se detallan en la figura \ref{paquetes}.
 \label{paquetes}
 \end{figure}
 
-Se ha definido cuatro tipos de módulos en el sistema, eston son:
+Se ha definido cuatro tipos de módulos en el sistema, estos son:
 
 \begin{description}
-\item [base] Módulos que pertenecen al nucleo del sistema (estos estan
+\item [base] Módulos que pertenecen al núcleo del sistema (estos están
 representados con color rojo, en la parte superior de diagrama).
 \item [middle] Módulos para creación de espacios y recursos (representados con
 color morado en el diagrama).
 \item [app] Módulos para administración de recursos, perfiles, y otros
 (representados con verde en la parte inferior del diagrama).
 \item [util] Módulos que agregan funcionalidad a otros módulos (representados
-con color cafe en el diagrama).
+con color café en el diagrama).
 \end{description}
 
 Las modularidad establecida en el sistema representa un modelo básico de
-separación y en ningun caso podría considerarse totalmente refinado (eso escapa
+separación y en ningún caso podría considerarse totalmente refinado (eso escapa
 del alcance de los objetivos del sistema).
 
 \section{Grupos y privilegios}
 
-Adicionalmente a la implementación de una logica modular para el sistema, es
-deseable el manejo dinamico de permisos, de forma que un administrador pueda
-definir una conjunto de funcionalidades disponibles para ciertas categorias de
+Adicionalmente a la implementación de una lógica modular para el sistema, es
+deseable el manejo dinámico de permisos, de forma que un administrador pueda
+definir una conjunto de funcionalidades disponibles para ciertas categorías de
 usuarios.
 
-Para esto se han establecido dos modulos:
+Para esto se han establecido dos módulos:
 
 \begin{description}
 \item [Roles] Módulo para la administración de grupos de usuarios, este debe
-contemplar todas las operaciones CRUD, mencionadas para un recurso, ademas de la
+contemplar todas las operaciones CRUD, mencionadas para un recurso, además de la
 manipulación de grupos de permisos para un rol común.
 \item [Privileges] Módulo para la administración de credenciales en el sistema,
-se debe contemplar la creación dinamica de permisos definidos por algun módulo.
+se debe contemplar la creación dinámica de permisos definidos por algún módulo.
 \end{description}
 
 
@@ -337,13 +337,13 @@ se debe contemplar la creación dinamica de permisos definidos por algun módulo
 
 Para finalizar el conjunto de requerimientos que se han establecido desarrollar
 para el sistema, se plantea la necesitad de creación y administración de
-diversas plantillas web, ademas de poder definirse pequeños utilitarios
+diversas plantillas web, además de poder definirse pequeños utilitarios
 alrededor de una cierta página.
 
 Para esto se ha definido la creación de un modulo:
 
 \begin{description}
-\item [Templates] Módulo encargado de la reenderización de contenido, ademas de
+\item [Templates] Módulo encargado de la reenderización de contenido, además de
 la administración de funcionalidad adicional a una página (widgets), y la
 definición de regiones para el sistema (debe cumplir las funciones mas básicas
 de un sistema de administración de contenido CMS).
@@ -358,7 +358,7 @@ planificación que se ha determinado seguir.
 \subsection{Iteraciones}
 
 Para comenzar se ha determinado realizar el desarrollo del proyecto en
-iteraciones, estas estan detalladas en el cuadro \ref{iteraciones}.
+iteraciones, estas están detalladas en el cuadro \ref{iteraciones}.
 
 \begin{table}
 \centering
@@ -370,8 +370,8 @@ Iteración & Módulo & Descripción \\
 \multirow{4}{*}{1} &
 Usuarios (USERS) &
 \multirow{4}{8cm}{Análisis, diseño, e implementación de las funciones para el
-manejo de usuarios, ademas de la creación de datos de prueba, e implementación
-de la lógica de autentificación.} \\
+manejo de usuarios, además de la creación de datos de prueba, e implementación
+de la lógica de autenticación.} \\
  &  & \\
  &  & \\
  &  & \\
@@ -379,7 +379,7 @@ de la lógica de autentificación.} \\
 
 \multirow{4}{*}{2} &
 Paquetes (PACKAGES) &
-\multirow{4}{8cm}{Analisis, diseño, implementacion, evaluaciones de las
+\multirow{4}{8cm}{Análisis, diseño, implementación, evaluaciones de las
 funciones que proveen modularidad, manejo de credenciales, y manejo de roles de
 usuarios en el sistema.} \\
  & Privilegios (PRIVILEGES) & \\
@@ -389,25 +389,25 @@ usuarios en el sistema.} \\
 
 \multirow{3}{*}{3} &
 Rutas (ROUTES) &
-\multirow{3}{8cm}{Analisis, diseño, e implementación de las funciones para el
-manejo de peticiones HTTP, y gestion de contenido.} \\
+\multirow{3}{8cm}{Análisis, diseño, e implementación de las funciones para el
+manejo de peticiones HTTP, y gestión de contenido.} \\
  & Plantillas (TEMPLATES) & \\
  & & \\
 \hline
 
 \multirow{4}{*}{4} &
 Espacios (SPACES) &
-\multirow{4}{8cm}{Analisis, diseño, e implentacion de las funciones de
-administración de espacios virtuales, ademas de la creación de las funciones
-generales para la adicion de recursos, y funciones utilitarias.} \\
- & Areas (AREAS) & \\
+\multirow{4}{8cm}{Análisis, diseño, e implementación de las funciones de
+administración de espacios virtuales, además de la creación de las funciones
+generales para la adición de recursos, y funciones utilitarias.} \\
+ & Áreas (AREAS) & \\
  & Gestiones (GESTIONS) & \\
  & & \\
 \hline
 
 \multirow{4}{*}{5} &
 Materias (SUBJECTS) &
-\multirow{4}{8cm}{Analisis, diseño, e implementación de los espacios virtuales
+\multirow{4}{8cm}{Análisis, diseño, e implementación de los espacios virtuales
 formales, de acuerdo a la estructura que se aplica en el contexto de
 implantación (UMSS).} \\
  & Grupos (GROUPS) & \\
@@ -417,8 +417,8 @@ implantación (UMSS).} \\
 
 \multirow{4}{*}{6} &
 Comunidades (COMMUNITIES) &
-\multirow{4}{8cm}{Analisis, diseño, e implementacion de los espacios virtuales
-informales, de acuerdo a las estructuras clasicas que pueden verse en Internet.}
+\multirow{4}{8cm}{Análisis, diseño, e implementación de los espacios virtuales
+informales, de acuerdo a las estructuras clásicas que pueden verse en Internet.}
 \\
  & Carreras (CARRERS) & \\
  & & \\
@@ -427,7 +427,7 @@ informales, de acuerdo a las estructuras clasicas que pueden verse en Internet.}
 
 \multirow{3}{*}{7} &
 Evaluaciones (EVALUATIONS) &
-\multirow{3}{8cm}{Analisis, diseño, e implementacion de las funciones para la
+\multirow{3}{8cm}{Análisis, diseño, e implementación de las funciones para la
 evaluación y calificaciones de los estudiantes, por parte de los docentes.} \\
  & Calificaciones (CALIFICATIONS) & \\
  & Conjuntos (GROUPSETS) & \\
@@ -435,18 +435,18 @@ evaluación y calificaciones de los estudiantes, por parte de los docentes.} \\
 
 \multirow{3}{*}{8} &
 Contactos (CONTACTS) &
-\multirow{3}{8cm}{Analisis, diseño, e implementacion de la logica de red social,
-es decir, la gestion de contactos entre usuarios.} \\
+\multirow{3}{8cm}{Análisis, diseño, e implementación de la lógica de red social,
+es decir, la gestión de contactos entre usuarios.} \\
  & Invitaciones (INVITATIONS) & \\
  & & \\
 \hline
 
 \multirow{7}{*}{9} &
 Recursos (RESOURCES) &
-\multirow{7}{8cm}{Analisis, diseño, e implementacion de la gestion de recursos
-básicos, ademas de la adicion de estos a espacios virtuales determinados, y la
+\multirow{7}{8cm}{Análisis, diseño, e implementación de la gestión de recursos
+básicos, además de la adición de estos a espacios virtuales determinados, y la
 generalización de estos para brindar la posibilidad de extender su funcionalidad
-para la posterior implementacion de paquetes utilitarios.} \\
+para la posterior implementación de paquetes utilitarios.} \\
  & Notas (NOTES) & \\
  & Enlaces (LINKS) & \\
  & Sugerencias (FEEDBACK) & \\
@@ -457,17 +457,17 @@ para la posterior implementacion de paquetes utilitarios.} \\
 
 \multirow{3}{*}{10} &
 Archivos (FILES) &
-\multirow{3}{8cm}{Analisis, diseño, e implementacion de los recursos básicos
+\multirow{3}{8cm}{Análisis, diseño, e implementación de los recursos básicos
 extendidos, es decir, aquellos que requieren manipular archivos adjuntos.} \\
- & Imágenenes (PHOTOS) & \\
- & Videos (VIDEOS) & \\
+ & Imágenes (PHOTOS) & \\
+ & Vídeos (VIDEOS) & \\
 \hline
 
 \multirow{4}{*}{11} &
 Etiquetas (TAGS) &
-\multirow{4}{8cm}{Analisis, diseño, e implementacion de las funciones
-utilitarias para valoraciones sobre los recursos, ademas de la implementacion
-del sistema de reputacion.} \\
+\multirow{4}{8cm}{Análisis, diseño, e implementación de las funciones
+utilitarias para valoraciones sobre los recursos, además de la implementación
+del sistema de reputación.} \\
  & Comentarios (COMMENTS) & \\
  & Valoraciones (VALORATIONS) & \\
  & & \\
