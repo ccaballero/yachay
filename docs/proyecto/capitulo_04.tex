@@ -3,11 +3,10 @@
 En este capítulo, trataremos los asuntos concernientes a la construcción de las
 funciones del sistema, sobre las que recaerán el control de los recursos, y la
 extensibilidad que pueda darse a todo el proyecto. Si bien en el anterior
-capitulo el tema fundamental era el \emph{proceso de desarrollo}, este capitulo
-esta centrado en el \emph{producto de software}.
+capitulo el tema fundamental era el \emph{proceso de desarrollo}, el objeto
+central de este capitulo es el \emph{producto de software}.
 
 \section{Base funcional del sistema}
-
 Una de las características deseables a tomar en cuenta para el desarrollo del
 sistema, era obtener un perfecto equilibrio entre modularidad y rendimiento,
 pero sin incrementar la complejidad del sistema de modo apreciable.
@@ -20,67 +19,96 @@ cualquier funcion que el sistema quiera desempeñar. En esta sección se tratan
 estos tres paquetes, ademas de la solución que se plantea para proveer al
 usuario final de una personalización mas atractiva.
 
-\subsection{Gestion de paquetes \emph{packages}}
-
+\subsection{\emph{packages}: Manejador de paquetes}
 Las principales funciones de este paquete son:
 \begin{itemize}
 \item Instalación de paquetes en el sistema.
 \item Manejo de dependencias entre paquetes del sistema.
-\item Establecimiento de rutas para un paquete.
+\item Establecimiento de rutas para un paquete determinado.
 \end{itemize}
 
-\subsection{Manejo de privilegios \emph{privileges}}
-\subsection{Manejo de rutas y navegación \emph{routes}}
-\subsection{Sistema de plantillas \emph{templates}}
+\subsection{\emph{privileges}: Manejador de privilegios}
+Las principales funciones de este paquete son:
+\begin{itemize}
+\item Registro de privilegios reservados por cada paquete.
+\item Control de acceso a recursos y acciones especificas.
+\end{itemize}
 
-%\section{Construcción de espacios virtuales}
+\subsection{\emph{routes}: Manejador de rutas de navegación}
+Las principales funciones de este paquete son:
+\begin{itemize}
+\item Registro de rutas reservadas por cada paquete.
+\end{itemize}
 
-%\subsection{Espacios virtuales}
-%\subsubsection{El espacio genérico \emph{spaces}}
-%\section{Los espacios formales \emph{gestions}, \emph{careers}, \emph{areas}}
-%\subsubsection{El espacio informal \emph{communities}}
-%\section{Los espacios jerárquicos \emph{subjects}, \emph{groups}, \emph{teams}}
-%\subsubsection{Las utilidades sobre grupos \emph{groupsets}}
+\subsection{\emph{templates}: Manejador de plantillas}
+Las principales funciones de este paquete son:
+\begin{itemize}
+\item Gestión de la presentación del sistema.
+\item Administración de las utilidades adicionales que presentan las paginas
+del sistema.
+\end{itemize}
 
-%\subsection{B-learning}
-%\subsubsection{Los sistemas de evaluación \emph{evaluations}}
-%\subsubsection{Las calificaciones \emph{califications}}
+\section{Construcción de espacios virtuales}
+Uno de los puntos fundamentales en la construcción del sistema, es el control y
+manejo organizado de los espacios disponibles del sistema, estos espacios
+constituyen los lugares, de intercambio, producción, y discusión de los
+recursos que posea el sistema.
 
-%\section{Intercambio de recursos}
+\subsection{\emph{spaces}: La abstracción de todos los espacios}
+Las principales funciones de este paquete son:
+\begin{itemize}
+\item Concentrar las funciones sobre los recursos del sistema.
+\item Generación de una capa de abstracción para la creacion de espacios con
+condiciones de uso diferente.
+\end{itemize}
 
-%\subsection{Recursos}
-%\subsubsection{Los componentes genéricos \emph{resources}}
-%\subsubsection{El recurso mas básico \emph{notes}}
-%\subsubsection{Los archivos en general \emph{files}}
-%\subsubsection{Los archivos especiales \emph{photos}, \emph{videos}}
-%\subsubsection{Los recursos espacio-temporales \emph{events}}
-%\subsubsection{La reenderizacion personalizada \emph{links}}
-%\subsubsection{Las sugerencias \emph{feedback}}
+\subsection{\emph{gestions}, \emph{careers}, \emph{areas}: Los espacios
+formales}
+Las principales funciones de estos paquetes son:
+\begin{itemize}
+\item Conformación de los espacios organizaciones acordes a la estructura real
+observada en el contexto del sistema.
+\end{itemize}
 
-%\section{Instancias múltiples del sistema}
-%\subsection{Conectitividad}
-%\subsubsection{La inteligencia colectiva \emph{axon}}
+\subsection{\emph{subjects}, \emph{groups}, \emph{teams}: Los espacios
+jerarquicos}
+Las principales funciones de estos paquetes son:
+\begin{itemize}
+\item Creación de la estructura jerarquica que es tambien un reflejo de la
+estructura real observada en el contexto del sistema.
+\end{itemize}
 
-%\section{Canales de comunicación}
+\subsection{\emph{communities}: El espacio informal}
+Las principales funciones de estos paquetes son:
+\begin{itemize}
+\item Creación de un espacio comun, transversal a las estructuras del contexto
+del sistema.
+\end{itemize}
 
-%\subsection{Las Personas}
-%\subsubsection{El espacio personal \emph{users}}
-%\subsubsection{El control de las funciones \emph{roles}}
+\section{B-learning}
+\subsection{\emph{evaluations}: Los sistemas de evaluación}
+\subsection{\emph{califications}: Las calificaciones}
 
-%\subsection{Red de contactos}
-%\subsubsection{Las redes sociales \emph{contacts}}
-%\subsubsection{Los círculos \emph{sets}}
-%\subsubsection{La propagación \emph{invitations}}
+\section{Recursos}
+\subsection{\emph{resources}: La abstracción de todos los recursos}
+\subsection{\emph{notes}, \emph{links}: Los recursos mas básicos}
+\subsection{\emph{files}: El administrador de archivos}
+\subsection{\emph{photos}, \emph{videos}: Los recursos especiales}
+\subsection{\emph{events}: El recurso espacio-temporale}
+\subsection{\emph{feedback}: El manejador de sugerencias}
 
-%\section{Fomento a la participación}
+\section{Los usuarios y su red de contactos}
+\subsection{\emph{users}: El espacio personal}
+\subsection{\emph{roles}: El controlador de las privilegios}
+\subsection{\emph{contacts}: Las redes sociales}
+\subsection{\emph{invitations}: Estrategia de propagación del sistema}
 
-%\subsection{Web 2.0}
-%\subsubsection{Los comentarios \emph{comments}}
-%\subsubsection{La calidad del recurso \emph{ratings}}
-%\subsubsection{Las nuevas interpretaciones \emph{tags}}
-%\subsubsection{Los sistemas de reputación \emph{valorations}}
+\section{Fomento a la participación}
+\subsection{\emph{comments}: Los comentarios}
+\subsection{\emph{ratings}: La calidad del recurso}
+\subsection{\emph{tags}: Las nuevas interpretaciones}
+\subsection{\emph{valorations}: Los sistemas de reputación}
 
-%\subsection{Sistemas de control}
-%\subsubsection{Los indicadores medibles \emph{stats}}
-%\subsubsection{El panel de control \emph{panels}}
+\section{Sistemas de control}
+\subsection{\emph{stats}: Los indicadores medibles}
 
