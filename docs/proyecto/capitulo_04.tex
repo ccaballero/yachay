@@ -2,7 +2,7 @@
 
 En este capítulo, trataremos los asuntos concernientes a la construcción de las
 funciones del sistema, sobre las que recaerán el control de los recursos, y la
-extensibilidad que pueda darse a todo el proyecto. Si bien en el anterior
+expansibilidad que pueda darse a todo el proyecto. Si bien en el anterior
 capitulo el tema fundamental era el \emph{proceso de desarrollo}, el objeto
 central de este capitulo es el \emph{producto de software}.
 
@@ -15,8 +15,8 @@ Para conseguir tal característica, se opto por utilizar una arquitectura basada
 en capas, muy similar a como son diseñados los sistemas operativos, pero sin
 llegar a la complejidad que estos mismos poseen. En la capa mas básica de la
 arquitectura del sistema, se encuentran tres paquetes que son fundamentales para
-cualquier funcion que el sistema quiera desempeñar. En esta sección se tratan
-estos tres paquetes, ademas de la solución que se plantea para proveer al
+cualquier función que el sistema quiera desempeñar. En esta sección se tratan
+estos tres paquetes, además de la solución que se plantea para proveer al
 usuario final de una personalización mas atractiva.
 
 \subsection{\emph{packages}: Manejador de paquetes}
@@ -58,7 +58,7 @@ recursos que posea el sistema.
 Las principales funciones de este paquete son:
 \begin{itemize}
 \item Concentrar las funciones sobre los recursos del sistema.
-\item Generación de una capa de abstracción para la creacion de espacios con
+\item Generación de una capa de abstracción para la creación de espacios con
 condiciones de uso diferente.
 \end{itemize}
 
@@ -71,17 +71,17 @@ observada en el contexto del sistema.
 \end{itemize}
 
 \subsection{\emph{subjects}, \emph{groups}, \emph{teams}: Los espacios
-jerarquicos}
+jerárquicos}
 Las principales funciones de estos paquetes son:
 \begin{itemize}
-\item Creación de la estructura jerarquica que es tambien un reflejo de la
+\item Creación de la estructura jerárquica que es también un reflejo de la
 estructura real observada en el contexto del sistema.
 \end{itemize}
 
 \subsection{\emph{communities}: El espacio informal}
 Las principales funciones de estos paquetes son:
 \begin{itemize}
-\item Creación de un espacio comun, transversal a las estructuras del contexto
+\item Creación de un espacio común, transversal a las estructuras del contexto
 del sistema.
 \end{itemize}
 
@@ -94,7 +94,7 @@ del sistema.
 \subsection{\emph{notes}, \emph{links}: Los recursos mas básicos}
 \subsection{\emph{files}: El administrador de archivos}
 \subsection{\emph{photos}, \emph{videos}: Los recursos especiales}
-\subsection{\emph{events}: El recurso espacio-temporale}
+\subsection{\emph{events}: El recurso espacio-temporales}
 \subsection{\emph{feedback}: El manejador de sugerencias}
 
 \section{Los usuarios y su red de contactos}

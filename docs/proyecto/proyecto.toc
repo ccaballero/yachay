@@ -49,7 +49,7 @@
 \contentsline {section}{\numberline {4.2}Construcci\IeC {\'o}n de espacios virtuales}{24}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}\emph {spaces}: La abstracci\IeC {\'o}n de todos los espacios}{24}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}\emph {gestions}, \emph {careers}, \emph {areas}: Los espacios formales}{24}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}\emph {subjects}, \emph {groups}, \emph {teams}: Los espacios jerarquicos}{24}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.3}\emph {subjects}, \emph {groups}, \emph {teams}: Los espacios jer\IeC {\'a}rquicos}{24}{subsection.4.2.3}
 \contentsline {subsection}{\numberline {4.2.4}\emph {communities}: El espacio informal}{24}{subsection.4.2.4}
 \contentsline {section}{\numberline {4.3}B-learning}{25}{section.4.3}
 \contentsline {subsection}{\numberline {4.3.1}\emph {evaluations}: Los sistemas de evaluaci\IeC {\'o}n}{25}{subsection.4.3.1}
