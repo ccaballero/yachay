@@ -26,17 +26,6 @@ CREATE TABLE `career_subject` (
     FOREIGN KEY (`subject`) REFERENCES `subject`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `career_resource`;
-CREATE TABLE `career_resource` (
-    `career`   int unsigned NOT NULL,
-    `resource` int unsigned NOT NULL,
-    PRIMARY KEY (`career`, `resource`),
-    INDEX (`career`),
-    FOREIGN KEY (`career`) REFERENCES `career`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    INDEX (`resource`),
-    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
-) DEFAULT CHARACTER SET UTF8;
-
 /*============================================================================*/
 /* Registro del paquete                                                       */
 /*============================================================================*/

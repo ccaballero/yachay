@@ -9,7 +9,6 @@ CREATE TABLE `group` (
     `subject`     int unsigned               NOT NULL,
     `author`      int unsigned               NOT NULL DEFAULT 1,
     `teacher`     int unsigned               NOT NULL,
-    `evaluation`  int unsigned               NOT NULL,
     `label`       varchar(64)                NOT NULL,
     `url`         varchar(64)                NOT NULL,
     `status`      enum('active', 'inactive') NOT NULL DEFAULT 'inactive',
@@ -23,8 +22,6 @@ CREATE TABLE `group` (
     FOREIGN KEY (`author`) REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
     INDEX (`teacher`),
     FOREIGN KEY (`teacher`) REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    INDEX (`evaluation`),
-    FOREIGN KEY (`evaluation`) REFERENCES `evaluation`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
     UNIQUE INDEX (`subject`, `label`),
     UNIQUE INDEX (`subject`, `url`)
 ) DEFAULT CHARACTER SET UTF8;
@@ -41,17 +38,6 @@ CREATE TABLE `group_user` (
     FOREIGN KEY (`group`) REFERENCES `group`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
     INDEX (`user`),
     FOREIGN KEY (`user`) REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
-) DEFAULT CHARACTER SET UTF8;
-
-DROP TABLE IF EXISTS `group_resource`;
-CREATE TABLE `group_resource` (
-    `group`    int unsigned NOT NULL,
-    `resource` int unsigned NOT NULL,
-    PRIMARY KEY (`group`, `resource`),
-    INDEX (`group`),
-    FOREIGN KEY (`group`) REFERENCES `group`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    INDEX (`resource`),
-    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
 /*============================================================================*/

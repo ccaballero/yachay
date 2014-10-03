@@ -26,6 +26,86 @@ CREATE TABLE `resource_global` (
 ) DEFAULT CHARACTER SET UTF8;
 
 /*============================================================================*/
+/* Registro de recurso por espacio                                            */
+/*============================================================================*/
+DROP TABLE IF EXISTS `user_resource`;
+CREATE TABLE `user_resource` (
+    `user`     int unsigned NOT NULL,
+    `resource` int unsigned NOT NULL,
+    PRIMARY KEY (`user`, `resource`),
+    INDEX (`user`),
+    FOREIGN KEY (`user`) REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    INDEX (`resource`),
+    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
+) DEFAULT CHARACTER SET UTF8;
+
+DROP TABLE IF EXISTS `subject_resource`;
+CREATE TABLE `subject_resource` (
+    `subject`  int unsigned NOT NULL,
+    `resource` int unsigned NOT NULL,
+    PRIMARY KEY (`subject`, `resource`),
+    INDEX (`subject`),
+    FOREIGN KEY (`subject`) REFERENCES `subject`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    INDEX (`resource`),
+    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
+) DEFAULT CHARACTER SET UTF8;
+
+DROP TABLE IF EXISTS `area_resource`;
+CREATE TABLE `area_resource` (
+    `area`     int unsigned NOT NULL,
+    `resource` int unsigned NOT NULL,
+    PRIMARY KEY (`area`, `resource`),
+    INDEX (`area`),
+    FOREIGN KEY (`area`) REFERENCES `area`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    INDEX (`resource`),
+    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
+) DEFAULT CHARACTER SET UTF8;
+
+DROP TABLE IF EXISTS `career_resource`;
+CREATE TABLE `career_resource` (
+    `career`   int unsigned NOT NULL,
+    `resource` int unsigned NOT NULL,
+    PRIMARY KEY (`career`, `resource`),
+    INDEX (`career`),
+    FOREIGN KEY (`career`) REFERENCES `career`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    INDEX (`resource`),
+    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
+) DEFAULT CHARACTER SET UTF8;
+
+DROP TABLE IF EXISTS `group_resource`;
+CREATE TABLE `group_resource` (
+    `group`    int unsigned NOT NULL,
+    `resource` int unsigned NOT NULL,
+    PRIMARY KEY (`group`, `resource`),
+    INDEX (`group`),
+    FOREIGN KEY (`group`) REFERENCES `group`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    INDEX (`resource`),
+    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
+) DEFAULT CHARACTER SET UTF8;
+
+DROP TABLE IF EXISTS `team_resource`;
+CREATE TABLE `team_resource` (
+    `team`     int unsigned NOT NULL,
+    `resource` int unsigned NOT NULL,
+    PRIMARY KEY (`team`, `resource`),
+    INDEX (`team`),
+    FOREIGN KEY (`team`) REFERENCES `team`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    INDEX (`resource`),
+    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
+) DEFAULT CHARACTER SET UTF8;
+
+DROP TABLE IF EXISTS `community_resource`;
+CREATE TABLE `community_resource` (
+    `community` int unsigned NOT NULL,
+    `resource`  int unsigned NOT NULL,
+    PRIMARY KEY (`community`, `resource`),
+    INDEX (`community`),
+    FOREIGN KEY (`community`) REFERENCES `community`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
+    INDEX (`resource`),
+    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
+) DEFAULT CHARACTER SET UTF8;
+
+/*============================================================================*/
 /* Registro del paquete                                                       */
 /*============================================================================*/
 INSERT INTO `package`

@@ -42,17 +42,6 @@ CREATE TABLE `subject_user` (
     FOREIGN KEY (`user`) REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `subject_resource`;
-CREATE TABLE `subject_resource` (
-    `subject`  int unsigned NOT NULL,
-    `resource` int unsigned NOT NULL,
-    PRIMARY KEY (`subject`, `resource`),
-    INDEX (`subject`),
-    FOREIGN KEY (`subject`) REFERENCES `subject`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    INDEX (`resource`),
-    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
-) DEFAULT CHARACTER SET UTF8;
-
 /*============================================================================*/
 /* Registro del paquete                                                       */
 /*============================================================================*/

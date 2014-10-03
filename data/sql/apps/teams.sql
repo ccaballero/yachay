@@ -34,17 +34,6 @@ CREATE TABLE `team_user` (
     FOREIGN KEY (`user`) REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `team_resource`;
-CREATE TABLE `team_resource` (
-    `team`     int unsigned NOT NULL,
-    `resource` int unsigned NOT NULL,
-    PRIMARY KEY (`team`, `resource`),
-    INDEX (`team`),
-    FOREIGN KEY (`team`) REFERENCES `team`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    INDEX (`resource`),
-    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
-) DEFAULT CHARACTER SET UTF8;
-
 /*============================================================================*/
 /* Registro del paquete                                                       */
 /*============================================================================*/

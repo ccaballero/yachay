@@ -26,17 +26,6 @@ CREATE TABLE `area_subject` (
     FOREIGN KEY (`subject`) REFERENCES `subject`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `area_resource`;
-CREATE TABLE `area_resource` (
-    `area`     int unsigned NOT NULL,
-    `resource` int unsigned NOT NULL,
-    PRIMARY KEY (`area`, `resource`),
-    INDEX (`area`),
-    FOREIGN KEY (`area`) REFERENCES `area`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    INDEX (`resource`),
-    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
-) DEFAULT CHARACTER SET UTF8;
-
 /*============================================================================*/
 /* Registro del paquete                                                       */
 /*============================================================================*/

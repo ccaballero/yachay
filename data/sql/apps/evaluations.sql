@@ -1,4 +1,3 @@
-
 /*============================================================================*/
 /* Tablas necesarias para el manejo de los criterios de evaluación            */
 /*============================================================================*/
@@ -16,6 +15,11 @@ CREATE TABLE `evaluation` (
     FOREIGN KEY (`author`) REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
     UNIQUE INDEX (`author`, `label`)
 ) DEFAULT CHARACTER SET UTF8;
+
+ALTER TABLE `group`
+    ADD COLUMN `evaluation` int unsigned NOT NULL,
+    ADD INDEX (`evaluation`),
+    ADD FOREIGN KEY (`evaluation`) REFERENCES `evaluation`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT;
 
 DROP TABLE IF EXISTS `evaluation_test`;
 CREATE TABLE `evaluation_test` (
@@ -42,7 +46,7 @@ CREATE TABLE `evaluation_test_value` (
     `test`       int unsigned NOT NULL,
     `label`      varchar(64)  NOT NULL,
     `value`      int unsigned NOT NULL,
-    PRIMARY KEY (`evaluation`, `test`, `ident`),
+    PRIMARY KEY (`ident`, `evaluation`, `test`),
     INDEX (`evaluation`, `test`),
     FOREIGN KEY (`evaluation`, `test`) REFERENCES `evaluation_test`(`evaluation`, `ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
     UNIQUE INDEX (`evaluation`, `test`, `label`),

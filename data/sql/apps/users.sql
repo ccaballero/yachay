@@ -41,17 +41,6 @@ CREATE TABLE `user` (
     UNIQUE INDEX (`email`)
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `user_resource`;
-CREATE TABLE `user_resource` (
-    `user`     int unsigned NOT NULL,
-    `resource` int unsigned NOT NULL,
-    PRIMARY KEY (`user`, `resource`),
-    INDEX (`user`),
-    FOREIGN KEY (`user`) REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    INDEX (`resource`),
-    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
-) DEFAULT CHARACTER SET UTF8;
-
 /*============================================================================*/
 /* Registro del paquete                                                       */
 /*============================================================================*/

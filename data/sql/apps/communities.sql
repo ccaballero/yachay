@@ -46,17 +46,6 @@ CREATE TABLE `community_petition` (
     FOREIGN KEY (`user`) REFERENCES `user`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 
-DROP TABLE IF EXISTS `community_resource`;
-CREATE TABLE `community_resource` (
-    `community` int unsigned NOT NULL,
-    `resource`  int unsigned NOT NULL,
-    PRIMARY KEY (`community`, `resource`),
-    INDEX (`community`),
-    FOREIGN KEY (`community`) REFERENCES `community`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT,
-    INDEX (`resource`),
-    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`) ON UPDATE CASCADE ON DELETE RESTRICT
-) DEFAULT CHARACTER SET UTF8;
-
 /*============================================================================*/
 /* Registro del paquete                                                       */
 /*============================================================================*/

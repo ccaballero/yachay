@@ -26,6 +26,15 @@ VALUES
 ('login', 'login', 'middle', 'users', UNIX_TIMESTAMP(), 'Modulo manejador de acceso de los usuarios');
 
 /*============================================================================*/
+/* Registro de privilegios para el paquete                                    */
+/*============================================================================*/
+INSERT INTO `privilege`
+(`description`, `package`, `label`)
+VALUES
+('Acceder al sistema',   'login', 'in'),
+('Olvide mi contraseña', 'login', 'forgot');
+
+/*============================================================================*/
 /* Registro de rutas para el paquete                                          */
 /*============================================================================*/
 INSERT INTO `route`

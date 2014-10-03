@@ -20,89 +20,89 @@ SELECT 'privileges' AS '';
 
 /*============================================================================*/
 
-SELECT 'roles';
+SELECT 'roles' AS '';
 \. apps/roles.sql
 
-SELECT 'spaces';
+SELECT 'spaces' AS '';
 \. apps/spaces.sql
 
 /*============================================================================*/
 
-SELECT 'login';
-\. apps/login.sql
-
-SELECT 'users';
+SELECT 'users' AS '';
 \. apps/users.sql
 
-SELECT 'profile';
+SELECT 'login' AS '';
+\. apps/login.sql
+
+SELECT 'profile' AS '';
 \. apps/profile.sql
 
-SELECT 'settings';
+SELECT 'settings' AS '';
 \. apps/settings.sql
 
 /*============================================================================*/
 
-SELECT 'friends';
+SELECT 'friends' AS '';
 \. apps/friends.sql
 
-SELECT 'invitations';
+SELECT 'invitations' AS '';
 \. apps/invitations.sql
 
-/*============================================================================*
+/*============================================================================*/
 
-SELECT 'gestions';
+SELECT 'gestions' AS '';
 \. apps/gestions.sql
 
-SELECT 'subjects';
+SELECT 'subjects' AS '';
 \. apps/subjects.sql
 
-SELECT 'areas';
+SELECT 'areas' AS '';
 \. apps/areas.sql
 
-SELECT 'careers';
+SELECT 'careers' AS '';
 \. apps/careers.sql
 
-SELECT 'groups';
+SELECT 'groups' AS '';
 \. apps/groups.sql
 
-SELECT 'teams';
+SELECT 'teams' AS '';
 \. apps/teams.sql
 
-SELECT 'communities';
+SELECT 'communities' AS '';
 \. apps/communities.sql
 
-/*============================================================================*
+/*============================================================================*/
 
-SELECT 'groupsets';
+SELECT 'groupsets' AS '';
 \. apps/groupsets.sql
 
-SELECT 'resources';
+SELECT 'resources' AS '';
 \. apps/resources.sql
 
-SELECT 'notes';
+SELECT 'notes' AS '';
 \. apps/notes.sql
 
-SELECT 'links';
+SELECT 'links' AS '';
 \. apps/links.sql
 
-SELECT 'files';
+SELECT 'files' AS '';
 \. apps/files.sql
 
-SELECT 'events';
+SELECT 'events' AS '';
 \. apps/events.sql
 
-SELECT 'photos';
+SELECT 'photos' AS '';
 \. apps/photos.sql
 
-SELECT 'videos';
+SELECT 'videos' AS '';
 \. apps/videos.sql
 
-/*============================================================================*
+/*============================================================================*/
 
-SELECT 'evaluations';
+SELECT 'evaluations' AS '';
 \. apps/evaluations.sql
 
-SELECT 'califications';
+SELECT 'califications' AS '';
 \. apps/califications.sql
 
 /*============================================================================*
