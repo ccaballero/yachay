@@ -2,9 +2,10 @@
 
 En este capítulo, se desarrollan los aspectos necesarios para la definición del 
 proceso de desarrollo, primeramente se hará referencia a las cuestiones 
-relacionadas con la metodología de desarrollo, posteriormente los requerimientos
-a detalle; para terminar con una descripción de las etapas en la planificación
-del proyecto.
+relacionadas con la metodología de desarrollo, posteriormente los requisitos del
+sistema a detalle, introduciendo los conceptos claves que se utilizan en el
+producto de sotware; para terminar con una descripción de las etapas
+establecidas segun la planificación del proyecto.
 
 \section{Modelo iterativo}
 
@@ -23,16 +24,16 @@ arquitectura) se definen y construyen en las primeras iteraciones.
 Las ventajas de este tipo de modelo son las siguientes:
 
 \begin{description}
-\item [Flexibilidad] Los requerimientos no quedan totalmente fijados hasta el
-final del proyecto de desarrollo. Por ello, se pueden realizar cambios de forma
-flexible. Por una parte, el conocimiento que se adquiere en una iteración sirve
-para plantear de forma más realista los requerimientos de la siguiente. Por
-otra parte, este conocimiento nos puede hacer reformar partes del sistema
-construidas en iteraciones anteriores. En una palabra, todos los documentos del
-sistema (requerimientos, diseño y código) no son rígidos sino que pueden
-cambiarse durante todo el proceso de desarrollo. (Típicamente suelen ser
-modificados en mayor medida en las primeras iteraciones y en menor medida en
-las últimas).
+\item [Flexibilidad] Los requisitos funcionales no quedan totalmente fijados
+hasta el final del proyecto de desarrollo. Por ello, se pueden realizar cambios
+de forma flexible. Por una parte, el conocimiento que se adquiere en una
+iteración sirve para plantear de forma más realista los requisitos de la
+siguiente. Por otra parte, este conocimiento nos puede hacer reformar partes del
+sistema construidas en iteraciones anteriores. En una palabra, todos los
+documentos del sistema (requisitos funcionales, diseño de datos y código fuente)
+son flexibles y pueden cambiar durante todo el proceso de desarrollo
+(Típicamente suelen ser modificados en mayor medida en las primeras iteraciones
+y en menor medida en las últimas).
 \item [Mitigación de riesgos] Como las pruebas se hacen desde el principio del
 proyecto, puede determinarse la viabilidad o eficiencia de las decisiones de
 diseño. Además, los elementos con más riesgo se tratan en las primeras
@@ -45,20 +46,36 @@ realizan desde el comienzo mismo del proyecto y no se debe esperar al final
 para hacer las modificaciones necesarias.
 \end{description}
 
-\section{Requerimientos funcionales}
+\section{Requisitos funcionales}
 
-A partir de los objetivos del proyecto, se pasa a establecer el conjunto de
-funciones que el sistema debe tener, para esto se ha optado por crear un
-conjunto de categorías, de forma que agrupen las tareas que son comunes a un
-objetivo especifico.
+Un requisito funcional define una función del sistema de software o sus
+componentes\footnote{Para una definición exacta puede consultarse:
+https://es.wikipedia.org/wiki/Requisito\_funcional}, y estos detallan
+completamente las capacidades que un sistema posee; en nuestro caso, estos han
+sido clasificados segun el objetivo especifico del proyecto al cual estos
+contribuyen.
 
 \subsection{Espacios virtuales}
 
-Para la correcta navegación sobre el sistema se han establecido, varios tipos de
-espacios agrupadores de recursos.
+Uno de los puntos fundamentales en la construcción del sistema, es el control y
+manejo organizado de los espacios disponibles del sistema, estos espacios
+constituyen los lugares, de intercambio, producción, y discusión de los recursos
+que posea el sistema.
 
 Estos recursos además pueden clasificarse según su temporalidad, es decir si
 poseen alguna forma de caducidad, o si no poseen tal cualidad. Estos son:
+
+\begin{description}
+\item [Temporales] Es un espacio temporal todo aquel que depende de la gestión
+en la que uno se encuentre; tanto su acceso, como su visibilidad están
+delimitadas por la gestión que este presentándose, estos espacios son lo que se
+construyeron inicialmente, ejemplos de estos son: materias, grupos, etc.
+\item [Atemporales] Es un espacio atemporal aquel que no esta englobado en una
+gestión determinada, su acceso y visibilidad es independiente, ejemplos de
+estos son: comunidades, áreas, etc.
+\end{description}
+
+Los espacios virtuales que se han planificado construir son los siguientes:
 
 \begin{description}
 \item [Gestiones] Una gestión representa la división básica de periodos
@@ -82,10 +99,11 @@ de toda gestión (lo que implica que no tiene caducidad), y la intención es pod
 agrupar a los usuarios según un interés en particular.
 \end{description}
 
-Los elementos pueden resumirse como se muestra en la figura \ref{espacios}.
-Como se verá a la larga la clasificación de los espacios según su temporalidad,
-es imprescindible para corregir los inconvenientes creados por la formalidad que
-poseen algunos espacios, brindando espacios que poseen un carácter mas libre.
+En la figura (\ref{espacios}) pueden apreciarse los espacios virtuales que se
+construiran, remarcando su característica temporal. Como se verá posteriormente
+la clasificación de los espacios según su temporalidad es imprescindible para
+corregir los inconvenientes creados por la formalidad que poseen algunos
+espacios, brindando espacios que poseen un carácter mas libre.
 
 \begin{figure}
 \centering
@@ -248,18 +266,24 @@ cuatro indicadores a ser tomados en cuenta:
 Estos elementos deben estar disponibles para cualquiera de los recursos
 intercambiables definidos anteriormente.
 
-\section{Requerimientos no funcionales}
+\section{Requisitos no funcionales}
 
-Para la construcción de esta aplicación web, se han definido un conjunto de
-herramientas, estas se describen en esta sección.
+Un requisito no funcional es aquel que especifica criterios que pueden usarse
+para juzgar la operación de un sistema en lugar de sus comportamientos
+específicos\footnote{Para una definicion exacta puede consultarse:
+http://es.wikipedia.org/wiki/Requisito\_no\_funcional}. Para la construcción de
+esta aplicación web, se han definido un conjunto de herramientas, estas se
+describen en esta sección.
 
 \subsection{Contexto de despliegue}
+
 Se ha de construir el sistema, considerando a disposición del desarrollo un
 servidor que se ejecute en un sistema operativo GNU/Linux, esto implica varias
 consideraciones; como la disposición de un amplio conjunto de
 herramientas disponibles para tareas de automatización y scripting.
 
 \subsection{Servidor web}
+
 Se ha determinado que el sitio web, puede ser ejecutado en el servidor web mas
 popular que existe, además de en el segundo, estos son:
 
@@ -332,10 +356,9 @@ manipulación de grupos de permisos para un rol común.
 se debe contemplar la creación dinámica de permisos definidos por algún módulo.
 \end{description}
 
-
 \section{Gestión de contenido}
 
-Para finalizar el conjunto de requerimientos que se han establecido desarrollar
+Para finalizar el conjunto de requisitos que se han establecido desarrollar
 para el sistema, se plantea la necesitad de creación y administración de
 diversas plantillas web, además de poder definirse pequeños utilitarios
 alrededor de una cierta página.

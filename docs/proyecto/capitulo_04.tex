@@ -19,6 +19,16 @@ función que el sistema quiera desempeñar. En esta sección se tratan estos tre
 paquetes, además de la solución que se plantea para proveer al usuario final de
 una personalización mas atractiva.
 
+\begin{figure}
+\centering
+\input{graphics/cap4_1.tex}
+\caption{Modelo Entidad-Relación de la base funcional del sistema.}
+\label{modelo1}
+\end{figure}
+
+En la figura (\ref{modelo1}), pueden verse los relacionamientos entre estas
+entidades a nivel de base de datos.
+
 \subsection{\emph{packages}: Manejador de paquetes}
 Las principales funciones de este paquete son:
 
@@ -43,59 +53,165 @@ Las principales funciones de este paquete son:
 \item Registro de rutas reservadas por cada paquete.
 \end{itemize}
 
+\subsection{Creación de un paquete del sistema}
+Despues de contruidas las funcionalidades antes mencionadas se llego a una
+definición precisa en la construcción de funcionalidad nueva, ahora detallaremos
+tal proceso a partir del ultimo paquete construido en el sistema, el paquete de
+sugerencias.
+
+Puede verse en el ejemplo, que este registra cuatro diferentes tipos de
+privilegios; cuatro diferentes tipos de rutas de acceso, aquí puede notarse que
+una ruta no necesariamente atiende exclusivamente a la petición GET, sino a
+cualquier tipo de petición que sea necesario realizar (ya sea POST, PUT, DELETE,
+etc); además puede verse el establecimiento de privilegios para el acceso a las
+rutas.
+
+Este proceso consiste en los siguientes pasos:
+
+\begin{figure}
+\centering
+\begin{SQL}
+CREATE TABLE `feedback` (
+    `resource`    int unsigned NOT NULL,
+    `description` text         NOT NULL,
+    `resolved`    boolean      NOT NULL DEFAULT FALSE,
+    `mark`        boolean      NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (`resource`),
+    INDEX (`resource`),
+    FOREIGN KEY (`resource`) REFERENCES `resource`(`ident`)
+        ON UPDATE CASCADE ON DELETE RESTRICT
+) DEFAULT CHARACTER SET UTF8;
+\end{SQL}
+\caption{Definición de datos para el modulo de sugerencias}
+\label{code1}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{SQL}
+INSERT INTO `package` (
+    `label`, `url`, `type`, `parent`,
+    `tsregister`, `description`)
+VALUES
+    ('feedback', 'feedback', 'app', 'notes',
+    UNIX_TIMESTAMP(),
+   'Modulo de registro de sugerencias del sistema');
+\end{SQL}
+\caption{Inserción del paquete en el registro}
+\label{code2}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{SQL}
+INSERT INTO `privilege` (
+    `description`, `package`, `label`)
+VALUES
+    ('Ver sugerencias',                 'feedback', 'list'),
+    ('Marcar sugerencias solucionadas', 'feedback', 'resolv'),
+    ('Marcar sugerencias interesantes', 'feedback', 'mark'),
+    ('Eliminar sugerencias inutiles',   'feedback', 'delete');
+\end{SQL}
+\caption{Inserciones en el registro de privilegios}
+\label{code3}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{SQL}
+INSERT INTO `route` (
+    `label`,
+    `type`, `parent`, `route`,
+    `mapping`,
+    `module`, `controller`, `action`)
+VALUES
+    ('Lista de sugerencias',
+     'list', '', 'feedback_list',
+     'feedback',
+     'feedback', 'index',   'index'),
+    ('Administrador de sugerencias',
+     'list', '', 'feedback_manager',
+     'feedback/manager',
+     'feedback', 'manager', 'index'),
+    ('Nueva sugerencia',
+     'view', '', 'feedback_new',
+     'feedback/new',
+     'feedback', 'manager', 'new'),
+    ('Sugerencia: \$entry',
+     'view', '', 'feedback_entry_view',
+     'feedback/:entry',
+     'feedback', 'entry', 'view'),
+    ('Editar: \$entry',
+     'view', '', 'feedback_entry_edit',
+     'feedback/:entry/edit',
+     'feedback', 'entry', 'edit'),
+    ('', 'action', '', 'feedback_entry_resolv',
+     'feedback/:entry/resolv',
+     'feedback', 'entry', 'resolv'),
+    ('', 'action', '', 'feedback_entry_unresolv',
+     'feedback/:entry/unresolv',
+     'feedback', 'entry', 'unresolv'),
+    ('', 'action', '', 'feedback_entry_mark',
+     'feedback/:entry/mark',
+     'feedback', 'entry', 'mark'),
+    ('', 'action', '', 'feedback_entry_unmark',
+     'feedback/:entry/unmark',
+     'feedback', 'entry', 'unmark'),
+    ('', 'action', '', 'feedback_entry_delete',
+     'feedback/:entry/delete',
+     'feedback', 'entry', 'delete'),
+    ('', 'action', '', 'feedback_entry_drop',
+     'feedback/:entry/drop',
+     'feedback', 'entry', 'drop');
+\end{SQL}
+\caption{Inserciones en el registro de rutas}
+\label{code4}
+\end{figure}
+
+\begin{figure}
+\centering
+\begin{SQL}
+INSERT INTO `route_privilege`
+(`route`, `package`, `privilege`)
+VALUES
+('feedback_list',    'feedback', 'list'),
+('feedback_manager', 'feedback', 'resolv'),
+('feedback_manager', 'feedback', 'mark'),
+('feedback_manager', 'feedback', 'delete');
+\end{SQL}
+\caption{Inserciones en el registro de rutas-privilegio}
+\label{code5}
+\end{figure}
+
+\begin{itemize}
+\item Creación de un archivo SQL con la definición de las tablas necesarias para
+el nuevo paquete, estas deben estar prefijadas con el nombre del paquete
+(figura \ref{code1}).
+\item Inserción un nuevo registro de paquete (figura \ref{code2}).
+\item Inserción de los registros de privilegios para el paquete nuevo
+(figura \ref{code3}).
+\item Inserción de los registros de ruta para el paquete nuevo
+(figura \ref{code4}).
+\item Registro de los permisos necesarios por ruta creada
+(figura \ref{code5}).
+\end{itemize}
+
+Esta diseño esta basado en la forma de control que puede verse en cualquier
+sistema administrador de contenido básico (CMS).
+
 \subsection{\emph{templates}: Manejador de plantillas}
 Las principales funciones de este paquete son:
 
 \begin{itemize}
 \item Gestión de la presentación del sistema.
+\item Gestión de la presentación personalizada del usuario final.
 \item Administración de las utilidades adicionales que presentan las paginas
 del sistema.
 \end{itemize}
 
-En la figura (figura), pueden verse los relacionamientos entre estas entidades a
-nivel de base de datos, el proceso de creación de un paquete nuevo consiste de
-los siguientes pasos:
-
-\begin{itemize}
-\item Creación de un archivo SQL con la definición de las tablas necesarias para
-el nuevo paquete, estas deben estar prefijadas con el nombre del paquete.
-\item Inserción un nuevo registro de paquete.
-\item Inserción de los registros de privilegios para el paquete nuevo.
-\item Inserción de los registros de ruta para el paquete nuevo.
-\item Registro de los permisos necesarios por ruta creada.
-\end{itemize}
-
-En la figura (figura), puede verse un ejemplo, a partir de ultimo paquete creado
-en el sistema (feedback); este registra cuatro diferentes tipos de privilegios;
-cuatro diferentes tipos de rutas de acceso (aquí puede notarse que una ruta no
-necesariamente atiende exclusivamente a la petición GET, sino a cualquier tipo
-de petición que sea necesario realizar (ya sea POST, PUT, DELETE, etc); además
-puede verse el establecimiento de privilegios para el acceso a las rutas.
-
-Esta diseño esta basado en la forma de control que puede verse en cualquier
-sistema administrador de contenido básico (CMS).
-
 \section{Construcción de espacios virtuales}
-Uno de los puntos fundamentales en la construcción del sistema, es el control y
-manejo organizado de los espacios disponibles del sistema, estos espacios
-constituyen los lugares, de intercambio, producción, y discusión de los
-recursos que posea el sistema.
-
-Para proporcionar las funcionalidades requeridas, se han clasificado los
-espacios según su orden temporal; siendo estos de dos tipos:
-
-\begin{description}
-\item [Temporales] Es un espacio temporal todo aquel que depende de la gestión
-en la que uno se encuentre; tanto su acceso, como su visibilidad están
-delimitadas por la gestión que este presentándose, estos espacios son lo que se
-construyeron inicialmente, ejemplos de estos son: materias, grupos, etc.
-\item [Atemporales] Es un espacio atemporal aquel que no esta englobado en una
-gestión determinada, su acceso y visibilidad es independiente, ejemplos de
-estos son: comunidades, áreas, etc.
-\end{description}
-
-En la figura (figura) pueden apreciarse los paquetes que se han construido para
-el manejo de espacios virtuales, remarcando su característica temporal.
+Para la correcta navegación sobre el sistema se han establecido, varios tipos de
+espacios agrupadores de recursos.
 
 \subsection{\emph{spaces}: La abstracción de todos los espacios}
 Para facilitar el manejo de múltiples tipos de espacios, se ha optado por
