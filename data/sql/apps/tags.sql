@@ -73,7 +73,7 @@ VALUES
 ('Nube de etiquetas',          'list',   'base',           'tags_list',       'tags',             'tags', 'index',   'index'),
 ('Administrador de etiquetas', 'list',   'tags_list',      'tags_manager',    'tags/manager',     'tags', 'manager', 'index'),
 ('Etiqueta: $tag',             'view',   'tags_manager',   'tags_tag_view',   'tags/:tag',        'tags', 'tag',     'view'),
-('',                           'action', 'tags_tags_view', 'tags_tag_delete', 'tags/:tag/delete', 'tags', 'tag',     'delete');
+('',                           'action', 'tags_tag_view',  'tags_tag_delete', 'tags/:tag/delete', 'tags', 'tag',     'delete');
 
 INSERT INTO `route_privilege`
 (`route`, `package`, `privilege`)
@@ -81,3 +81,4 @@ VALUES
 ('tags_list',     'tags', 'list'),
 ('tags_manager',  'tags', 'delete'),
 ('tags_tag_view', 'tags', 'list');
+

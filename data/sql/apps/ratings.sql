@@ -37,17 +37,17 @@ VALUES
 INSERT INTO `route`
 (`label`, `type`, `parent`, `route`, `mapping`, `module`, `controller`, `action`)
 VALUES
-('', 'action', '', 'notes_note_rating_up',       'notes/:resource/rating/up',      'ratings', 'rating', 'up'),
-('', 'action', '', 'links_link_rating_up',       'links/:resource/rating/up',      'ratings', 'rating', 'up'),
-('', 'action', '', 'files_file_rating_up',       'files/:resource/rating/up',      'ratings', 'rating', 'up'),
-('', 'action', '', 'events_event_rating_up',     'events/:resource/rating/up',     'ratings', 'rating', 'up'),
-('', 'action', '', 'photos_photo_rating_up',     'photos/:resource/rating/up',     'ratings', 'rating', 'up'),
-('', 'action', '', 'videos_video_rating_up',     'videos/:resource/rating/up',     'ratings', 'rating', 'up'),
-('', 'action', '', 'feedback_entry_rating_up',   'feedback/:resource/rating/up',   'ratings', 'rating', 'up'),
-('', 'action', '', 'notes_note_rating_down',     'notes/:resource/rating/down',    'ratings', 'rating', 'down'),
-('', 'action', '', 'links_link_rating_down',     'links/:resource/rating/down',    'ratings', 'rating', 'down'),
-('', 'action', '', 'files_file_rating_down',     'files/:resource/rating/down',    'ratings', 'rating', 'down'),
-('', 'action', '', 'events_event_rating_down',   'events/:resource/rating/down',   'ratings', 'rating', 'down'),
-('', 'action', '', 'photos_photo_rating_down',   'photos/:resource/rating/down',   'ratings', 'rating', 'down'),
-('', 'action', '', 'videos_video_rating_down',   'videos/:resource/rating/down',   'ratings', 'rating', 'down'),
-('', 'action', '', 'feedback_entry_rating_down', 'feedback/:resource/rating/down', 'ratings', 'rating', 'down');
+('', 'action', 'base', 'notes_note_rating_up',       'notes/:resource/rating/up',      'ratings', 'rating', 'up'),
+('', 'action', 'base', 'links_link_rating_up',       'links/:resource/rating/up',      'ratings', 'rating', 'up'),
+('', 'action', 'base', 'files_file_rating_up',       'files/:resource/rating/up',      'ratings', 'rating', 'up'),
+('', 'action', 'base', 'events_event_rating_up',     'events/:resource/rating/up',     'ratings', 'rating', 'up'),
+('', 'action', 'base', 'photos_photo_rating_up',     'photos/:resource/rating/up',     'ratings', 'rating', 'up'),
+('', 'action', 'base', 'videos_video_rating_up',     'videos/:resource/rating/up',     'ratings', 'rating', 'up'),
+('', 'action', 'base', 'feedback_entry_rating_up',   'feedback/:resource/rating/up',   'ratings', 'rating', 'up'),
+('', 'action', 'base', 'notes_note_rating_down',     'notes/:resource/rating/down',    'ratings', 'rating', 'down'),
+('', 'action', 'base', 'links_link_rating_down',     'links/:resource/rating/down',    'ratings', 'rating', 'down'),
+('', 'action', 'base', 'files_file_rating_down',     'files/:resource/rating/down',    'ratings', 'rating', 'down'),
+('', 'action', 'base', 'events_event_rating_down',   'events/:resource/rating/down',   'ratings', 'rating', 'down'),
+('', 'action', 'base', 'photos_photo_rating_down',   'photos/:resource/rating/down',   'ratings', 'rating', 'down'),
+('', 'action', 'base', 'videos_video_rating_down',   'videos/:resource/rating/down',   'ratings', 'rating', 'down'),
+('', 'action', 'base', 'feedback_entry_rating_down', 'feedback/:resource/rating/down', 'ratings', 'rating', 'down');

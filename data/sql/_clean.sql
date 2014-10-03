@@ -15,6 +15,8 @@ DROP TABLE IF EXISTS `comment`;
 DROP TABLE IF EXISTS `calification`;
 DROP TABLE IF EXISTS `evaluation_test_value`;
 DROP TABLE IF EXISTS `evaluation_test`;
+ALTER TABLE `group` DROP FOREIGN KEY `fk_eva`;
+ALTER TABLE `group` DROP INDEX `index_eva`;
 ALTER TABLE `group` DROP COLUMN `evaluation`;
 DROP TABLE IF EXISTS `evaluation`;
 DROP TABLE IF EXISTS `video`;

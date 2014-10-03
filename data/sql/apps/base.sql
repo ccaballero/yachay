@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `route` (
     `module`      varchar(64)                      NOT NULL,
     `controller`  varchar(64)                      NOT NULL,
     `action`      varchar(64)                      NOT NULL,
-    `parent`      varchar(64)                      NULL,
+    `parent`      varchar(64)                      NULL DEFAULT '',
     PRIMARY KEY (`ident`),
     UNIQUE INDEX (`route`),
     UNIQUE INDEX (`mapping`),

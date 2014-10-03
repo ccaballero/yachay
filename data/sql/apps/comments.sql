@@ -52,8 +52,9 @@ VALUES
 ('', 'action', 'notes_note_view',     'notes_note_comment_delete',     'notes/:resource/comments/:comment/delete',    'comments', 'comment', 'delete'),
 ('', 'action', 'links_link_view',     'links_link_comment_delete',     'links/:resource/comments/:comment/delete',    'comments', 'comment', 'delete'),
 ('', 'action', 'files_file_view',     'files_file_comment_delete',     'files/:resource/comments/:comment/delete',    'comments', 'comment', 'delete'),
-('', 'action', 'event_event_view',    'events_event_comment_delete',   'events/:resource/comments/:comment/delete',   'comments', 'comment', 'delete'),
+('', 'action', 'events_event_view',    'events_event_comment_delete',   'events/:resource/comments/:comment/delete',   'comments', 'comment', 'delete'),
 ('', 'action', 'photos_photo_view',   'photos_photo_comment_delete',   'photos/:resource/comments/:comment/delete',   'comments', 'comment', 'delete'),
 ('', 'action', 'videos_video_view',   'videos_video_comment_delete',   'videos/:resource/comments/:comment/delete',   'comments', 'comment', 'delete'),
 ('', 'action', 'feedback_entry_view', 'feedback_entry_comment_delete', 'feedback/:resource/comments/:comment/delete', 'comments', 'comment', 'delete'),
 ('', 'action', 'base',                'comments_drop',                 'comments/:comment/drop',                      'comments', 'comment', 'drop');
+

@@ -105,35 +105,36 @@ SELECT 'evaluations' AS '';
 SELECT 'califications' AS '';
 \. apps/califications.sql
 
-/*============================================================================*
+/*============================================================================*/
 
-SELECT 'comments';
-\. apps/comments.sql
-
-SELECT 'ratings';
-\. apps/ratings.sql
-
-SELECT 'valorations';
-\. apps/valorations.sql
-
-SELECT 'tags';
-\. apps/tags.sql
-
-SELECT 'feedback';
+SELECT 'feedback' AS '';
 \. apps/feedback.sql
 
-SELECT 'templates';
+SELECT 'comments' AS '';
+\. apps/comments.sql
+
+SELECT 'ratings' AS '';
+\. apps/ratings.sql
+
+SELECT 'valorations' AS '';
+\. apps/valorations.sql
+
+SELECT 'tags' AS '';
+\. apps/tags.sql
+
+SELECT 'templates' AS '';
 \. apps/templates.sql
 
-/*============================================================================*
+/*============================================================================*/
 
-SELECT 'analytics';
+SELECT 'analytics' AS '';
 \. apps/analytics.sql
 
-SELECT 'register';
+SELECT 'register' AS '';
 \. apps/register.sql
 
-/*============================================================================*
+/*============================================================================*/
 
-SELECT 'extra';
+SELECT 'extra' AS '';
 \. _extra.sql
+
