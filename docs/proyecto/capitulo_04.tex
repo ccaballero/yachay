@@ -53,11 +53,11 @@ del sistema.
 \end{itemize}
 
 En la figura (figura), pueden verse los relacionamientos entre estas entidades a
-nivel de base de datos, el proceso de creacion de un paquete nuevo consiste de
+nivel de base de datos, el proceso de creación de un paquete nuevo consiste de
 los siguientes pasos:
 
 \begin{itemize}
-\item Creacion de un archivo SQL con la definicion de las tablas necesarias para
+\item Creación de un archivo SQL con la definición de las tablas necesarias para
 el nuevo paquete, estas deben estar prefijadas con el nombre del paquete.
 \item Inserción un nuevo registro de paquete.
 \item Inserción de los registros de privilegios para el paquete nuevo.
@@ -67,9 +67,9 @@ el nuevo paquete, estas deben estar prefijadas con el nombre del paquete.
 
 En la figura (figura), puede verse un ejemplo, a partir de ultimo paquete creado
 en el sistema (feedback); este registra cuatro diferentes tipos de privilegios;
-cuatro diferentes tipos de rutas de acceso (aqui puede notarse que una ruta no
-necesariamente atiende exclusivamente a la peticion GET, sino a cualquier tipo
-de petición que sea necesario realizar (ya sea POST, PUT, DELETE, etc); ademas
+cuatro diferentes tipos de rutas de acceso (aquí puede notarse que una ruta no
+necesariamente atiende exclusivamente a la petición GET, sino a cualquier tipo
+de petición que sea necesario realizar (ya sea POST, PUT, DELETE, etc); además
 puede verse el establecimiento de privilegios para el acceso a las rutas.
 
 Esta diseño esta basado en la forma de control que puede verse en cualquier
@@ -82,26 +82,26 @@ constituyen los lugares, de intercambio, producción, y discusión de los
 recursos que posea el sistema.
 
 Para proporcionar las funcionalidades requeridas, se han clasificado los
-espacios segun su orden temporal; siendo estos de dos tipos:
+espacios según su orden temporal; siendo estos de dos tipos:
 
 \begin{description}
 \item [Temporales] Es un espacio temporal todo aquel que depende de la gestión
-en la que uno se encuentre; tanto su acceso, como su visibilidad estan
-delimitadas por la gestión que este presentandose, estos espacios son lo que se
-contruyeron inicialmente, ejemplos de estos son: materias, grupos, etc.
+en la que uno se encuentre; tanto su acceso, como su visibilidad están
+delimitadas por la gestión que este presentándose, estos espacios son lo que se
+construyeron inicialmente, ejemplos de estos son: materias, grupos, etc.
 \item [Atemporales] Es un espacio atemporal aquel que no esta englobado en una
 gestión determinada, su acceso y visibilidad es independiente, ejemplos de
-estos son: comunidades, areas, etc.
+estos son: comunidades, áreas, etc.
 \end{description}
 
 En la figura (figura) pueden apreciarse los paquetes que se han construido para
-el manejo de espacios virtuales, remarcando su caracteristica temporal.
+el manejo de espacios virtuales, remarcando su característica temporal.
 
 \subsection{\emph{spaces}: La abstracción de todos los espacios}
-Para facilitar el manejo de multiples tipos de espacios, se ha optado por
+Para facilitar el manejo de múltiples tipos de espacios, se ha optado por
 abstraer muchas de las funcionalidades comunes (ya sean de presentación, o de
-funcionalidad), es asi como se ha creado este paquete que acumula la mayor parte
-de la funcionalidad para los demas espacios.
+funcionalidad), es así como se ha creado este paquete que acumula la mayor parte
+de la funcionalidad para los demás espacios.
 
 Las principales funciones de este paquete son:
 
@@ -109,7 +109,7 @@ Las principales funciones de este paquete son:
 \item Concentrar las funciones sobre los recursos del sistema.
 \item Generación de una capa de abstracción para la creación de espacios con
 condiciones de uso diferente.
-\item Administración de los espacios (creacion, modificacion, presentación,
+\item Administración de los espacios (creación, modificación, presentación,
 eliminación).
 \item Control de permisos sobre los espacios.
 \end{itemize}
@@ -118,20 +118,20 @@ eliminación).
 formales}
 Al comienzo del diseño se observo que una gran parte de los espacios vitales que
 eran acordes al modelo al uso en la Universidad, eran dependientes de la
-gestión, es decir, que una materia/grupo acumula recursos unicamente validos por
-un determinado periodo de tiempo, es asi como se crearon estos espacios.
+gestión, es decir, que una materia/grupo acumula recursos únicamente validos por
+un determinado periodo de tiempo, es así como se crearon estos espacios.
 
 \begin{description}
-\item [Gestion] Es el espacio que determina el inicio y final de la validez de
-un recurso temporal, esta muy asociado a la idea que se tiene de gestion
-academica en la Universidad.
+\item [Gestión] Es el espacio que determina el inicio y final de la validez de
+un recurso temporal, esta muy asociado a la idea que se tiene de gestión
+académica en la Universidad.
 \item [Área] Un área es un tipo de espacio temporal, se creo para agrupar otros
 tipos de espacio de forma transversal, y de esta forma flexibilizar las
-jerarquias que poseia el model tradicional; un ejemplo de esto se ve en las
+jerarquías que poseía el modelo tradicional; un ejemplo de esto se ve en las
 diferentes relaciones que existen entre diferentes materias o grupos en el
 modelo.
 \item [Carrera] Se creo este espacio para agrupar los espacios que tienen como
-caracteristica principal estar dentro de una malla curricular especifica.
+característica principal estar dentro de una malla curricular especifica.
 \end{description}
 
 Las principales funciones de estos paquetes son:
@@ -139,24 +139,24 @@ Las principales funciones de estos paquetes son:
 \begin{itemize}
 \item Conformación de los espacios organizados acorde a la estructura real
 observada en el contexto del sistema.
-\item Agrupación de otros espacios que comparten algun grado de relacionamiento
+\item Agrupación de otros espacios que comparten algún grado de relacionamiento
 entre si.
 \end{itemize}
 
 \subsection{\emph{subjects}, \emph{groups}, \emph{teams}: Los espacios
 jerárquicos}
 Estos espacios representan el eje central sobre el que se ha construido el
-sistema, tambien estan modelados acorde a la estructura observada en el contexto
-del sistema, estas poseen una estructura de tipo jerarquico (es decir, cada una
+sistema, también están modelados acorde a la estructura observada en el contexto
+del sistema, estas poseen una estructura de tipo jerárquico (es decir, cada una
 esta contenida dentro de otra).
 
 \begin{description}
 \item [Materia] Representa el espacio de materia y a su vez puede poseer varios
 grupos en su propio contexto.
 \item [Grupo] Representa el espacio de trabajo de un grupo especifico de una
-materia, esta a su vez puede contener varios equipos, segun la organización y
-metodos que utilize el instructor del grupo.
-\item [Equipo] Representa el minimo espacio organizacional en un grupo, se
+materia, esta a su vez puede contener varios equipos, según la organización y
+métodos que utilice el instructor del grupo.
+\item [Equipo] Representa el mínimo espacio organizacional en un grupo, se
 construyo para facilitar la organización de estudiantes dentro de un grupo.
 \end{description}
 
@@ -165,15 +165,15 @@ Las principales funciones de estos paquetes son:
 \begin{itemize}
 \item Creación de la estructura jerárquica que es también un reflejo de la
 estructura real observada en el contexto del sistema.
-\item Asignación de usuarios (con algun rol especifico), a los sub-espacios
+\item Asignación de usuarios (con algún rol especifico), a los sub-espacios
 establecidos.
 \end{itemize}
 
 \subsection{\emph{communities}: El espacio informal}
-Como una forma de crear transversales al modelo jerarquico presentado
+Como una forma de crear transversales al modelo jerárquico presentado
 anteriormente, se construyo el espacio de comunidad, que agrupa usuarios a
 partir de criterios no relacionados a una malla curricular, es decir, como una
-forma alternativa de crear relaciones entre usuarios, a partir de un interes
+forma alternativa de crear relaciones entre usuarios, a partir de un interés
 particular. Este es un espacio atemporal, es decir, esta no depende de la
 gestión.
 
@@ -194,10 +194,10 @@ calificaciones.
 
 \subsection{\emph{evaluations}: Los sistemas de evaluación}
 En un comienzo se notó que si bien, los docentes siempre presentan las
-calificaciones con un formato unico (Primer parcial, Segundo parcial, Promedio
+calificaciones con un formato único (Primer parcial, Segundo parcial, Promedio
 de los parciales, Examen final y Segunda instancia), estas solo son la parte
 final de un proceso aun mas complejo, por lo cual se creo un paquete que pueda
-manejar criterios de evaluacion mas elaborados, segun el docente que imparta la
+manejar criterios de evaluación mas elaborados, según el docente que imparta la
 materia.
 
 Las principales funciones de este paquete son:
@@ -206,76 +206,76 @@ Las principales funciones de este paquete son:
 \item Creación y edición de criterios de evaluación.
 \item Publicación y aplicación de un criterio de evaluación sobre un grupo
 determinado por un docente.
-\item Aplicacion de calificaciones segun un criterio de evaluacion especifico.
+\item Aplicación de calificaciones según un criterio de evaluación especifico.
 \end{itemize}
 
 \subsection{\emph{califications}: Las calificaciones}
-A partir del paquete que administra y proporciona diferentes tipos de evaluacion
+A partir del paquete que administra y proporciona diferentes tipos de evaluación
 para un grupo, se han creado las funcionalidades necesarias para establecer las
 calificaciones de un grupo.
 
 Las principales funciones de este paquete son:
 
 \begin{itemize}
-\item Edicion de las calificaciones de los alumnos de un determinado grupo,
-segun un criterio de evaluacion establecido.
-\item Importación automatica a partir de una archivo en formato CSV, de las
+\item Edición de las calificaciones de los alumnos de un determinado grupo,
+según un criterio de evaluación establecido.
+\item Importación automática a partir de una archivo en formato CSV, de las
 calificaciones de una grupo.
-\item Exportacion a formato CSV de las calificaciones de una grupo, segun un
-criterio de evaluacion establecido.
+\item Exportación a formato CSV de las calificaciones de una grupo, según un
+criterio de evaluación establecido.
 \end{itemize}
 
 \section{Recursos}
 Ya creados los espacios virtuales, se han construido los paquetes necesarios
-para la publicacion e intercambio de recursos en el sistema.
+para la publicación e intercambio de recursos en el sistema.
 
 \subsection{\emph{resources}: La abstracción de todos los recursos}
-Al igual que en los espacios virtuales, los recursos tambien comparten un gran
-conjunto de funcionalidad comun a todos ellos (ya sean de presentacion, como de
-funcionalidad), es asi como se han abstraido estas funcionalides en este
+Al igual que en los espacios virtuales, los recursos también comparten un gran
+conjunto de funcionalidad común a todos ellos (ya sean de presentación, como de
+funcionalidad), es así como se han abstraído estas funcionalidades en este
 paquete.
 
 Las principales funciones de este paquete son:
 
 \begin{itemize}
-\item Concentrar las funciones de valoracion sobre los recursos.
+\item Concentrar las funciones de valoración sobre los recursos.
 \item Generación de una capa de abstracción para la creación de recursos con
 condiciones de uso diferente.
-\item Administración de los recursos (creacion, modificacion, presentación,
+\item Administración de los recursos (creación, modificación, presentación,
 valoración, eliminación).
 \item Control de permisos sobre los recursos.
 \end{itemize}
 
 \subsection{\emph{notes}: Los recursos mas básicos}
 El tipo de recurso mas básico es la nota, que representa esencialmente texto.
-Este recurso ademas se diseño para ser utilizado por otros tipo de recursos mas
+Este recurso además se diseño para ser utilizado por otros tipo de recursos mas
 enriquecidos y especializados.
 
 \subsection{\emph{links}: El administrador de marcadores}
 Este recurso fue construido para compartir recursos, a partir de enlaces sobre
-la red de Internet, se penso para trabajos posterior, hacer de este tipo de
-recurso una funcionalidad de reconocimiento de recurso y una reenderizacion mas
+la red de Internet, se pensó para trabajos posterior, hacer de este tipo de
+recurso una funcionalidad de reconocimiento de recurso y una reenderización mas
 apropiada.
 
 \subsection{\emph{files}: El administrador de archivos}
 Este recurso fue construido para compartir archivos en un espacio virtual,
-tambien se penso para trabajo posterior, una especializacion sobre la
-reenderizacion y reconocimiento de los formatos.
+también se pensó para trabajo posterior, una especialización sobre la
+reenderización y reconocimiento de los formatos.
 
 \subsection{\emph{photos}, \emph{videos}: Los recursos especiales}
-Estos recursos estan basados en el recurso tipo archivo, pero poseen
-caracteristicas que les permiten ser reenderizados apropiadamente.
+Estos recursos están basados en el recurso tipo archivo, pero poseen
+características que les permiten ser reenderizados apropiadamente.
 
 \subsection{\emph{events}: El recurso espacio-temporales}
 Este recurso representa un evento sobre un espacio virtual, a partir de este
 recurso, se considero para trabajo posterior, el que sea tanto un recurso, como
-un espacio virtual independiente, ademas de facilitar el manejo de
+un espacio virtual independiente, además de facilitar el manejo de
 notificaciones.
 
 \subsection{\emph{feedback}: El manejador de sugerencias}
 Este fue el ultimo paquete que se construyo, y fue creado exclusivamente para
 que los usuarios del sistema puedan hacer sus sugerencias sobre nueva
-funcionalidad que podrian implementarse sobre el sistema.
+funcionalidad que podrían implementarse sobre el sistema.
 
 \section{Los usuarios y su red de contactos}
 Una vez establecidos los conceptos de espacio virtual, y recurso, se han
@@ -284,7 +284,7 @@ del sistema.
 
 \subsection{\emph{users}: El espacio personal}
 Representa al usuario final del sistema (docentes, estudiantes, auxiliares,
-etc.), estos ademas estan provistos de las funcionalidades para espacios
+etc.), estos además están provistos de las funcionalidades para espacios
 virtuales.
 
 Las principales funciones de este paquete son:
@@ -300,7 +300,7 @@ espacios virtuales a los que tiene acceso.
 \subsection{\emph{roles}: El controlador de las privilegios}
 Un rol representa el conjunto de privilegios que posee un usuario sobre los
 paquetes del sistema.
-Inicialmente de considero categorizar a los usuarios de forma estatica, segun
+Inicialmente de considero categorizar a los usuarios de forma estática, según
 los criterios del modelo de la Universidad, estos son:
 
 \begin{itemize}
@@ -315,26 +315,26 @@ los criterios del modelo de la Universidad, estos son:
 \end{itemize}
 
 Pero para facilitar la adaptación a otros tipos de organización, se vio
-conveniente crear roles dinamicamente, asi como poder administrar el conjunto
+conveniente crear roles dinámicamente, así como poder administrar el conjunto
 de privilegios que estos posean.
 
 Las principales funciones de este paquete son:
 
 \begin{itemize}
 \item Administración de roles (creación, visualización, edición, eliminación).
-\item Asignación de privilegios dinamicamente.
-\item Control de acceso a los espacios, recursos, y rutas segun un rol
+\item Asignación de privilegios dinámicamente.
+\item Control de acceso a los espacios, recursos, y rutas según un rol
 establecido.
 \end{itemize}
 
 \subsection{\emph{contacts}: Las redes sociales}
-Para proveer las caracteristicas de una red social, se construyo un paquete que
+Para proveer las características de una red social, se construyo un paquete que
 pudiese manejar las relaciones entre diferentes tipos de usuarios.
 
 Las principales funciones de este paquete son:
 
 \begin{itemize}
-\item Agregacion de un contacto.
+\item Agregación de un contacto.
 \item Eliminación de un contacto.
 \item Visualización de los recursos compartidos por los contactos.
 \end{itemize}
@@ -347,14 +347,14 @@ con otro usuario, por tal motivo, se crearon las invitaciones.
 Las principales funciones de este paquete son:
 
 \begin{itemize}
-\item Envio de una invitación de un usuario a un correo electronico.
-\item Gestion de la caducidad de una invitacion.
+\item Envío de una invitación de un usuario a un correo electrónico.
+\item Gestión de la caducidad de una invitación.
 \item Manejo del contacto con el usuario que atiende a la invitación.
 \end{itemize}
 
 \section{Fomento a la participación}
 Como medidas para fomentar la participación de parte de los usuarios, se han
-implementado algunas funcionalidade propias de la web 2.0.
+implementado algunas funcionalidad propias de la web 2.0.
 
 \subsection{\emph{comments}: Los comentarios}
 \subsection{\emph{ratings}: La calidad del recurso}

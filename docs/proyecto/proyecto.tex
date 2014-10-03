@@ -1,16 +1,24 @@
-\documentclass[letterpaper,11pt]{book}
+\documentclass[letterpaper,twoside,11pt]{book}
+
+%fonts related
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{textcomp}
+
+%spell related
 \usepackage[spanish]{babel}
 \usepackage[utf8]{inputenc}
 
-\usepackage{lmodern}
-\usepackage[T1]{fontenc}
-\usepackage{textcomp}
-    
+%graphics related
+\usepackage{adjustbox}
 \usepackage{graphicx}
 \usepackage{pstricks}
 
+%margin related
 \usepackage{anysize}
 \marginsize{3cm}{2cm}{2cm}{2cm}
+
+\setlength{\parskip}{6pt}
 
 \usepackage{multirow}
 
@@ -41,13 +49,9 @@ pdftex]{hyperref}
 
 \begin{document}
 \frontmatter
-\title{\bf Red social académica
-\\ para la mejora de los métodos
-\\ de adquisición de conocimiento.}
-\author{Carlos Eduardo Caballero Burgoa}
-\maketitle
-\blankpage
 
+\include{caratula}
+\blankpage
 \include{dedicatoria}
 \blankpage
 
