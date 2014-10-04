@@ -30,7 +30,7 @@ VALUES
 ('Ver sugerencias',                 'feedback', 'list'),
 ('Marcar sugerencias solucionadas', 'feedback', 'resolv'),
 ('Marcar sugerencias interesantes', 'feedback', 'mark'),
-('Eliminar sugerencias inutiles',   'feedback', 'delete');
+('Eliminar sugerencias inútiles',   'feedback', 'delete');
 
 /*============================================================================*/
 /* Registro de rutas para el paquete                                          */

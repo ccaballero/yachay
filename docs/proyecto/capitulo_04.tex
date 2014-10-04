@@ -371,8 +371,23 @@ criterio de evaluación establecido.
 \end{itemize}
 
 \section{Recursos}
-Ya creados los espacios virtuales, se han construido los paquetes necesarios
-para la publicación e intercambio de recursos en el sistema.
+Una vez concluidos los paquetes que conforman los espacios disponibles que el
+sistema posee, se construyeron los recursos que estos pueden contener, se
+considera un \emph{recurso}, a cualquier pieza de información que un usuario
+haya aportado, y que se util a toda una colectividad, se esta formal o informal.
+
+\begin{figure}
+\centering
+\input{graphics/cap4_4.tex}
+\caption{Modelo Entidad-Relación de las entidades que componen los recursos
+disponibles en el sistema.}
+\label{modelo4}
+\end{figure}
+
+En la figura (\ref{modelo4}), se presenta la parte del modelo entidad-relación
+del sistema, que comprende a las entidades que representan los diferentes
+recursos que el sistema posee, ademas de su generalización como entidad
+\emph{resource}, con el patron \emph{is-a}.
 
 \subsection{\emph{resources}: La abstracción de todos los recursos}
 Al igual que en los espacios virtuales, los recursos también comparten un gran

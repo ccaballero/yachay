@@ -60,21 +60,21 @@
 \contentsline {subsection}{\numberline {4.4.2}\emph {notes}: Los recursos mas b\IeC {\'a}sicos}{34}{subsection.4.4.2}
 \contentsline {subsection}{\numberline {4.4.3}\emph {links}: El administrador de marcadores}{34}{subsection.4.4.3}
 \contentsline {subsection}{\numberline {4.4.4}\emph {files}: El administrador de archivos}{34}{subsection.4.4.4}
-\contentsline {subsection}{\numberline {4.4.5}\emph {photos}, \emph {videos}: Los recursos especiales}{34}{subsection.4.4.5}
-\contentsline {subsection}{\numberline {4.4.6}\emph {events}: El recurso espacio-temporales}{35}{subsection.4.4.6}
-\contentsline {subsection}{\numberline {4.4.7}\emph {feedback}: El manejador de sugerencias}{35}{subsection.4.4.7}
-\contentsline {section}{\numberline {4.5}Los usuarios y su red de contactos}{35}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}\emph {users}: El espacio personal}{35}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}\emph {roles}: El controlador de las privilegios}{35}{subsection.4.5.2}
-\contentsline {subsection}{\numberline {4.5.3}\emph {contacts}: Las redes sociales}{36}{subsection.4.5.3}
-\contentsline {subsection}{\numberline {4.5.4}\emph {invitations}: Estrategia de propagaci\IeC {\'o}n del sistema}{36}{subsection.4.5.4}
-\contentsline {section}{\numberline {4.6}Fomento a la participaci\IeC {\'o}n}{37}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}\emph {comments}: Los comentarios}{37}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}\emph {ratings}: La calidad del recurso}{37}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}\emph {tags}: Las nuevas interpretaciones}{37}{subsection.4.6.3}
-\contentsline {subsection}{\numberline {4.6.4}\emph {valorations}: Los sistemas de reputaci\IeC {\'o}n}{37}{subsection.4.6.4}
-\contentsline {section}{\numberline {4.7}Sistemas de control}{37}{section.4.7}
-\contentsline {subsection}{\numberline {4.7.1}\emph {stats}: Los indicadores medibles}{37}{subsection.4.7.1}
+\contentsline {subsection}{\numberline {4.4.5}\emph {photos}, \emph {videos}: Los recursos especiales}{36}{subsection.4.4.5}
+\contentsline {subsection}{\numberline {4.4.6}\emph {events}: El recurso espacio-temporales}{36}{subsection.4.4.6}
+\contentsline {subsection}{\numberline {4.4.7}\emph {feedback}: El manejador de sugerencias}{36}{subsection.4.4.7}
+\contentsline {section}{\numberline {4.5}Los usuarios y su red de contactos}{36}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}\emph {users}: El espacio personal}{36}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}\emph {roles}: El controlador de las privilegios}{36}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}\emph {contacts}: Las redes sociales}{37}{subsection.4.5.3}
+\contentsline {subsection}{\numberline {4.5.4}\emph {invitations}: Estrategia de propagaci\IeC {\'o}n del sistema}{37}{subsection.4.5.4}
+\contentsline {section}{\numberline {4.6}Fomento a la participaci\IeC {\'o}n}{38}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}\emph {comments}: Los comentarios}{38}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}\emph {ratings}: La calidad del recurso}{38}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}\emph {tags}: Las nuevas interpretaciones}{38}{subsection.4.6.3}
+\contentsline {subsection}{\numberline {4.6.4}\emph {valorations}: Los sistemas de reputaci\IeC {\'o}n}{38}{subsection.4.6.4}
+\contentsline {section}{\numberline {4.7}Sistemas de control}{38}{section.4.7}
+\contentsline {subsection}{\numberline {4.7.1}\emph {stats}: Los indicadores medibles}{38}{subsection.4.7.1}
 \contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{39}{chapter.5}
 \contentsline {section}{\numberline {5.1}Indicadores de medici\IeC {\'o}n}{39}{section.5.1}
 \contentsline {section}{\numberline {5.2}Creaci\IeC {\'o}n de anal\IeC {\'\i }ticas}{39}{section.5.2}
