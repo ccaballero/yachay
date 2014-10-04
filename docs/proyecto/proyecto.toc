@@ -49,51 +49,51 @@
 \contentsline {subsection}{\numberline {4.1.5}\emph {templates}: Manejador de plantillas}{29}{subsection.4.1.5}
 \contentsline {section}{\numberline {4.2}Construcci\IeC {\'o}n de espacios virtuales}{29}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}\emph {spaces}: La abstracci\IeC {\'o}n de todos los espacios}{29}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}\emph {gestions}, \emph {careers}, \emph {areas}: Los espacios formales}{30}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}\emph {subjects}, \emph {groups}, \emph {teams}: Los espacios jer\IeC {\'a}rquicos}{30}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}\emph {communities}: El espacio informal}{31}{subsection.4.2.4}
-\contentsline {section}{\numberline {4.3}B-learning}{31}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}\emph {evaluations}: Los sistemas de evaluaci\IeC {\'o}n}{31}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}\emph {califications}: Las calificaciones}{32}{subsection.4.3.2}
-\contentsline {section}{\numberline {4.4}Recursos}{32}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}\emph {resources}: La abstracci\IeC {\'o}n de todos los recursos}{32}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}\emph {notes}: Los recursos mas b\IeC {\'a}sicos}{32}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}\emph {links}: El administrador de marcadores}{33}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}\emph {files}: El administrador de archivos}{33}{subsection.4.4.4}
-\contentsline {subsection}{\numberline {4.4.5}\emph {photos}, \emph {videos}: Los recursos especiales}{33}{subsection.4.4.5}
-\contentsline {subsection}{\numberline {4.4.6}\emph {events}: El recurso espacio-temporales}{33}{subsection.4.4.6}
-\contentsline {subsection}{\numberline {4.4.7}\emph {feedback}: El manejador de sugerencias}{33}{subsection.4.4.7}
-\contentsline {section}{\numberline {4.5}Los usuarios y su red de contactos}{33}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}\emph {users}: El espacio personal}{33}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}\emph {roles}: El controlador de las privilegios}{34}{subsection.4.5.2}
-\contentsline {subsection}{\numberline {4.5.3}\emph {contacts}: Las redes sociales}{34}{subsection.4.5.3}
-\contentsline {subsection}{\numberline {4.5.4}\emph {invitations}: Estrategia de propagaci\IeC {\'o}n del sistema}{35}{subsection.4.5.4}
-\contentsline {section}{\numberline {4.6}Fomento a la participaci\IeC {\'o}n}{35}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}\emph {comments}: Los comentarios}{35}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}\emph {ratings}: La calidad del recurso}{35}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}\emph {tags}: Las nuevas interpretaciones}{35}{subsection.4.6.3}
-\contentsline {subsection}{\numberline {4.6.4}\emph {valorations}: Los sistemas de reputaci\IeC {\'o}n}{35}{subsection.4.6.4}
-\contentsline {section}{\numberline {4.7}Sistemas de control}{35}{section.4.7}
-\contentsline {subsection}{\numberline {4.7.1}\emph {stats}: Los indicadores medibles}{35}{subsection.4.7.1}
-\contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{37}{chapter.5}
-\contentsline {section}{\numberline {5.1}Indicadores de medici\IeC {\'o}n}{37}{section.5.1}
-\contentsline {section}{\numberline {5.2}Creaci\IeC {\'o}n de anal\IeC {\'\i }ticas}{37}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Usuarios}{37}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}Valoraciones}{37}{subsection.5.2.2}
-\contentsline {subsection}{\numberline {5.2.3}Contactos}{37}{subsection.5.2.3}
-\contentsline {subsection}{\numberline {5.2.4}Espacios}{37}{subsection.5.2.4}
-\contentsline {subsection}{\numberline {5.2.5}Recursos}{37}{subsection.5.2.5}
-\contentsline {subsection}{\numberline {5.2.6}Linea de tiempo}{37}{subsection.5.2.6}
-\contentsline {section}{\numberline {5.3}Resultados}{37}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Contexto}{38}{subsection.5.3.1}
-\contentsline {subsection}{\numberline {5.3.2}Usuarios}{38}{subsection.5.3.2}
-\contentsline {subsection}{\numberline {5.3.3}Contactos}{38}{subsection.5.3.3}
-\contentsline {subsection}{\numberline {5.3.4}Espacios Virtuales}{38}{subsection.5.3.4}
-\contentsline {subsection}{\numberline {5.3.5}Recursos}{38}{subsection.5.3.5}
-\contentsline {subsection}{\numberline {5.3.6}Linea de tiempo}{38}{subsection.5.3.6}
-\contentsline {section}{\numberline {5.4}Conclusiones}{38}{section.5.4}
-\contentsline {section}{\numberline {5.5}Recomendaciones}{38}{section.5.5}
-\contentsline {chapter}{\numberline {A}Glosario de t\IeC {\'e}rminos}{39}{appendix.Alph1}
-\contentsline {chapter}{\numberline {B}Manual de instalaci\IeC {\'o}n}{41}{appendix.Alph2}
-\contentsline {chapter}{\numberline {C}Manual de usuario}{43}{appendix.Alph3}
-\contentsline {chapter}{Bibliograf\'{\i }a}{45}{appendix*.3}
+\contentsline {subsection}{\numberline {4.2.2}\emph {gestions}, \emph {careers}, \emph {areas}: Los espacios formales}{31}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}\emph {subjects}, \emph {groups}, \emph {teams}: Los espacios jer\IeC {\'a}rquicos}{31}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}\emph {communities}: El espacio informal}{32}{subsection.4.2.4}
+\contentsline {section}{\numberline {4.3}B-learning}{32}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}\emph {evaluations}: Los sistemas de evaluaci\IeC {\'o}n}{32}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}\emph {califications}: Las calificaciones}{33}{subsection.4.3.2}
+\contentsline {section}{\numberline {4.4}Recursos}{34}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}\emph {resources}: La abstracci\IeC {\'o}n de todos los recursos}{34}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}\emph {notes}: Los recursos mas b\IeC {\'a}sicos}{34}{subsection.4.4.2}
+\contentsline {subsection}{\numberline {4.4.3}\emph {links}: El administrador de marcadores}{34}{subsection.4.4.3}
+\contentsline {subsection}{\numberline {4.4.4}\emph {files}: El administrador de archivos}{34}{subsection.4.4.4}
+\contentsline {subsection}{\numberline {4.4.5}\emph {photos}, \emph {videos}: Los recursos especiales}{34}{subsection.4.4.5}
+\contentsline {subsection}{\numberline {4.4.6}\emph {events}: El recurso espacio-temporales}{35}{subsection.4.4.6}
+\contentsline {subsection}{\numberline {4.4.7}\emph {feedback}: El manejador de sugerencias}{35}{subsection.4.4.7}
+\contentsline {section}{\numberline {4.5}Los usuarios y su red de contactos}{35}{section.4.5}
+\contentsline {subsection}{\numberline {4.5.1}\emph {users}: El espacio personal}{35}{subsection.4.5.1}
+\contentsline {subsection}{\numberline {4.5.2}\emph {roles}: El controlador de las privilegios}{35}{subsection.4.5.2}
+\contentsline {subsection}{\numberline {4.5.3}\emph {contacts}: Las redes sociales}{36}{subsection.4.5.3}
+\contentsline {subsection}{\numberline {4.5.4}\emph {invitations}: Estrategia de propagaci\IeC {\'o}n del sistema}{36}{subsection.4.5.4}
+\contentsline {section}{\numberline {4.6}Fomento a la participaci\IeC {\'o}n}{37}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}\emph {comments}: Los comentarios}{37}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}\emph {ratings}: La calidad del recurso}{37}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}\emph {tags}: Las nuevas interpretaciones}{37}{subsection.4.6.3}
+\contentsline {subsection}{\numberline {4.6.4}\emph {valorations}: Los sistemas de reputaci\IeC {\'o}n}{37}{subsection.4.6.4}
+\contentsline {section}{\numberline {4.7}Sistemas de control}{37}{section.4.7}
+\contentsline {subsection}{\numberline {4.7.1}\emph {stats}: Los indicadores medibles}{37}{subsection.4.7.1}
+\contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{39}{chapter.5}
+\contentsline {section}{\numberline {5.1}Indicadores de medici\IeC {\'o}n}{39}{section.5.1}
+\contentsline {section}{\numberline {5.2}Creaci\IeC {\'o}n de anal\IeC {\'\i }ticas}{39}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Usuarios}{39}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}Valoraciones}{39}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}Contactos}{39}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.4}Espacios}{39}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.5}Recursos}{39}{subsection.5.2.5}
+\contentsline {subsection}{\numberline {5.2.6}Linea de tiempo}{39}{subsection.5.2.6}
+\contentsline {section}{\numberline {5.3}Resultados}{39}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Contexto}{40}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}Usuarios}{40}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}Contactos}{40}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.4}Espacios Virtuales}{40}{subsection.5.3.4}
+\contentsline {subsection}{\numberline {5.3.5}Recursos}{40}{subsection.5.3.5}
+\contentsline {subsection}{\numberline {5.3.6}Linea de tiempo}{40}{subsection.5.3.6}
+\contentsline {section}{\numberline {5.4}Conclusiones}{40}{section.5.4}
+\contentsline {section}{\numberline {5.5}Recomendaciones}{40}{section.5.5}
+\contentsline {chapter}{\numberline {A}Glosario de t\IeC {\'e}rminos}{41}{appendix.Alph1}
+\contentsline {chapter}{\numberline {B}Manual de instalaci\IeC {\'o}n}{43}{appendix.Alph2}
+\contentsline {chapter}{\numberline {C}Manual de usuario}{45}{appendix.Alph3}
+\contentsline {chapter}{Bibliograf\'{\i }a}{47}{appendix*.3}

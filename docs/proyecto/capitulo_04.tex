@@ -26,8 +26,10 @@ una personalización mas atractiva.
 \label{modelo1}
 \end{figure}
 
-En la figura (\ref{modelo1}), pueden verse los relacionamientos entre estas
-entidades a nivel de base de datos.
+En la figura (\ref{modelo1}), se presenta una parte del modelo entidad-relación
+del sistema, que comprende a las entidades tratadas en esta sección. Puede
+notarse la gran cantidad de relaciones de entidad débil, que será muy
+característico a lo largo de todo el sistema.
 
 \subsection{\emph{packages}: Manejador de paquetes}
 Las principales funciones de este paquete son:
@@ -54,7 +56,7 @@ Las principales funciones de este paquete son:
 \end{itemize}
 
 \subsection{Creación de un paquete del sistema}
-Despues de contruidas las funcionalidades antes mencionadas se llego a una
+Después de construidas las funcionalidades antes mencionadas se llego a una
 definición precisa en la construcción de funcionalidad nueva, ahora detallaremos
 tal proceso a partir del ultimo paquete construido en el sistema, el paquete de
 sugerencias.
@@ -210,8 +212,23 @@ del sistema.
 \end{itemize}
 
 \section{Construcción de espacios virtuales}
-Para la correcta navegación sobre el sistema se han establecido, varios tipos de
-espacios agrupadores de recursos.
+Una vez terminada la construcción de los paquetes que componen la base funcional
+del sistema, se encaminó el proyecto a la construcción de espacios virtuales,
+como se menciono en el capitulo anterior, han sido definido varios tipos de
+espacios, en esta sección se tratan las funcionalidades que poseen cada uno de
+ellos.
+
+\begin{figure}
+\centering
+\input{graphics/cap4_2.tex}
+\caption{Modelo Entidad-Relación de las entidades que representan espacios
+virtuales.}
+\label{modelo2}
+\end{figure}
+
+En la figura (\ref{modelo2}), se presenta la parte del modelo entidad-relación
+del sistema, que comprende a las entidades que representan los espacios
+virtuales, además de su relación necesaria con la entidad \emph{usuario}.
 
 \subsection{\emph{spaces}: La abstracción de todos los espacios}
 Para facilitar el manejo de múltiples tipos de espacios, se ha optado por
@@ -305,8 +322,20 @@ rechazado en la comunidad).
 
 \section{B-learning}
 Para facilitar el manejo por parte del docente asignado a un grupo, se crearon
-dos paquetes que administren las formas de calificación, y la presentación de
+dos paquetes que administran las formas de calificación, y la presentación de
 calificaciones.
+
+\begin{figure}
+\centering
+\input{graphics/cap4_3.tex}
+\caption{Modelo Entidad-Relación de las entidades que apoyan al proceso de
+evaluación por parte del docente.}
+\label{modelo3}
+\end{figure}
+
+En la figura (\ref{modelo3}), se presenta la parte del modelo entidad-relación
+del sistema, que comprende a las entidades que facilitan la evaluación de los
+estudiantes por parte del docente.
 
 \subsection{\emph{evaluations}: Los sistemas de evaluación}
 En un comienzo se notó que si bien, los docentes siempre presentan las
