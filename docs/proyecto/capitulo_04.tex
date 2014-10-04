@@ -374,20 +374,21 @@ criterio de evaluación establecido.
 Una vez concluidos los paquetes que conforman los espacios disponibles que el
 sistema posee, se construyeron los recursos que estos pueden contener, se
 considera un \emph{recurso}, a cualquier pieza de información que un usuario
-haya aportado, y que se util a toda una colectividad, se esta formal o informal.
+haya aportado, y que se útil a toda una colectividad, ya sea esta formal o
+informal.
 
 \begin{figure}
 \centering
 \input{graphics/cap4_4.tex}
-\caption{Modelo Entidad-Relación de las entidades que componen los recursos
-disponibles en el sistema.}
+\caption{Modelo Entidad-Relación de las entidades que conforman los recursos
+del sistema.}
 \label{modelo4}
 \end{figure}
 
 En la figura (\ref{modelo4}), se presenta la parte del modelo entidad-relación
 del sistema, que comprende a las entidades que representan los diferentes
-recursos que el sistema posee, ademas de su generalización como entidad
-\emph{resource}, con el patron \emph{is-a}.
+recursos que el sistema posee, además de su generalización (la entidad
+\emph{resource}), relacionados con el patrón \emph{is-a}.
 
 \subsection{\emph{resources}: La abstracción de todos los recursos}
 Al igual que en los espacios virtuales, los recursos también comparten un gran
@@ -413,9 +414,9 @@ enriquecidos y especializados.
 
 \subsection{\emph{links}: El administrador de marcadores}
 Este recurso fue construido para compartir recursos, a partir de enlaces sobre
-la red de Internet, se pensó para trabajos posterior, hacer de este tipo de
-recurso una funcionalidad de reconocimiento de recurso y una reenderización mas
-apropiada.
+la red de Internet, se construyó y diseño de forma que para un trabajo
+posterior, a este tipo de recurso pudiese agregarse la funcionalidad de
+reconocimiento de recurso para una reenderización mas apropiada.
 
 \subsection{\emph{files}: El administrador de archivos}
 Este recurso fue construido para compartir archivos en un espacio virtual,
@@ -438,9 +439,23 @@ que los usuarios del sistema puedan hacer sus sugerencias sobre nueva
 funcionalidad que podrían implementarse sobre el sistema.
 
 \section{Los usuarios y su red de contactos}
-Una vez establecidos los conceptos de espacio virtual, y recurso, se han
-construido los paquetes necesarios para la representación y manejo de usuarios
-del sistema.
+Habiéndose construido las funciones de espacios virtuales, y las que representan
+recursos, se construyeron las funcionalidades para el manejo de usuarios, y las
+relaciones que pueden existir entre estos.
+
+\begin{figure}
+\centering
+\input{graphics/cap4_5.tex}
+\caption{Modelo Entidad-Relación de las elementos de usuario.}
+\label{modelo5}
+\end{figure}
+
+En la figura (\ref{modelo5}), se presenta la parte del modelo entidad-relación
+del sistema, que comprende a las entidades que relacionan a los usuarios, además
+de las entidades adicionales para los paquetes de invitaciones y
+autenticación. Puede observarse también el atributo \emph{mutual}, el cual es
+un valor lógico que es verdadero para una relación entre usuarios
+bi-direccional; y falso para una relación uní-direccional.
 
 \subsection{\emph{users}: El espacio personal}
 Representa al usuario final del sistema (docentes, estudiantes, auxiliares,
@@ -455,36 +470,6 @@ Las principales funciones de este paquete son:
 \item Administración de los datos personales del usuario.
 \item Manejo de los recursos creados por el usuario sobre los diferentes
 espacios virtuales a los que tiene acceso.
-\end{itemize}
-
-\subsection{\emph{roles}: El controlador de las privilegios}
-Un rol representa el conjunto de privilegios que posee un usuario sobre los
-paquetes del sistema.
-Inicialmente de considero categorizar a los usuarios de forma estática, según
-los criterios del modelo de la Universidad, estos son:
-
-\begin{itemize}
-\item Visitante
-\item Invitado
-\item Estudiante
-\item Auxiliar
-\item Docente
-\item Moderador
-\item Desarrollador
-\item Administrador
-\end{itemize}
-
-Pero para facilitar la adaptación a otros tipos de organización, se vio
-conveniente crear roles dinámicamente, así como poder administrar el conjunto
-de privilegios que estos posean.
-
-Las principales funciones de este paquete son:
-
-\begin{itemize}
-\item Administración de roles (creación, visualización, edición, eliminación).
-\item Asignación de privilegios dinámicamente.
-\item Control de acceso a los espacios, recursos, y rutas según un rol
-establecido.
 \end{itemize}
 
 \subsection{\emph{contacts}: Las redes sociales}
@@ -512,15 +497,160 @@ Las principales funciones de este paquete son:
 \item Manejo del contacto con el usuario que atiende a la invitación.
 \end{itemize}
 
+\subsection{\emph{roles}: El manejador de privilegios}
+Un rol representa el conjunto de privilegios que posee un usuario sobre los
+paquetes del sistema.
+Inicialmente de considero categorizar a los usuarios de forma estática, según
+los criterios del modelo de la Universidad, estos son:
+
+\begin{itemize}
+\item Visitante
+\item Invitado
+\item Estudiante
+\item Auxiliar
+\item Docente
+\item Moderador
+\item Desarrollador
+\item Administrador
+\end{itemize}
+
+Pero para facilitar la adaptación a otros tipos de organización, se vio
+conveniente crear roles dinámicamente, así como poder administrar el conjunto
+de privilegios que estos posean.
+
+\begin{figure}
+\centering
+\input{graphics/cap4_6.tex}
+\caption{Modelo Entidad-Relación de las elementos de control de privilegios.}
+\label{modelo6}
+\end{figure}
+
+En la figura (\ref{modelo6}), se presenta la parte del modelo entidad-relación
+que es la encargada de manejar la información del conjunto de privilegios que
+posee un usuario determinado.
+
+Las principales funciones de este paquete son:
+
+\begin{itemize}
+\item Administración de roles (creación, visualización, edición, eliminación).
+\item Asignación de privilegios dinámicamente.
+\item Control de acceso a los espacios, recursos, y rutas según un rol
+establecido.
+\end{itemize}
+
 \section{Fomento a la participación}
-Como medidas para fomentar la participación de parte de los usuarios, se han
-implementado algunas funcionalidad propias de la web 2.0.
+Habiéndose finalizado las funciones referentes a espacios, recursos, y
+contactos, se realizo la construcción de las funciones utilitarias que sirven
+como medidas para fomentar la participación de parte de los usuarios.
+
+\begin{figure}
+\centering
+\input{graphics/cap4_7.tex}
+\caption{Modelo Entidad-Relación de las entidades de fomento a la interacción y
+participación.}
+\label{modelo7}
+\end{figure}
+
+En la figura (\ref{modelo7}), se presenta la parte del modelo entidad-relación
+de las entidades que apoyan la interacción y participación sobre los recursos
+del sistema.
 
 \subsection{\emph{comments}: Los comentarios}
+Para fomentar la interacción basada en un recurso, se implemento la
+funcionalidad de comentarios sobre el recurso.
+
+Las principales funciones de este paquete son:
+
+\begin{itemize}
+\item Administración de comentarios sobre el recurso por parte de su autor.
+\item Moderación del comentario por parte de los roles que contengan el permiso
+establecido para tal caso.
+\item Notificación de creación de comentario para el paquete de valoraciones.
+\end{itemize}
+
 \subsection{\emph{ratings}: La calidad del recurso}
+Para fomentar a la producción de recursos realmente útiles a las personas del
+espacio virtual, se implemento la funcionalidad de valoración del recurso.
+
+Las principales funciones de este paquete son:
+
+\begin{itemize}
+\item Registro de la valoración que un usuario sobre un recurso determinado.
+\item Control de la decisión del usuario (solo puede valorarse un recurso una
+vez).
+\item Notificación de creación de ranking para el paquete de valoraciones.
+\end{itemize}
+
 \subsection{\emph{tags}: Las nuevas interpretaciones}
+Como un método de clasificación alternativo, también se crearon las clásicas
+funciones de manejo de etiquetas.
+
+Las principales funciones de este paquete son:
+
+\begin{itemize}
+\item Manejo de etiquetas en el momento de la manipulación de un recurso, ya sea
+este nuevo o editado.
+\item Manejo de etiquetas para las comunidades.
+\item Generación de una nube de etiquetas, a partir del conteo del uso de un
+determinado termino.
+\end{itemize}
+
 \subsection{\emph{valorations}: Los sistemas de reputación}
+Como ultimo método para fomentar la participación se crearon indicadores de
+reputación, estos se miden según el grado de participación que el usuario tiene
+en el sistema.
+
+Las principales funciones de este paquete son:
+\begin{itemize}
+\item Seguimiento del numero de recursos producidos por el usuario, para el
+calculo de la valoración de actividad.
+\item Seguimiento del numero de comentarios realizados por el usuario, para el
+calculo de la valoración de participación.
+\item Seguimiento de rankeo de usuarios a un determinado recurso, para el
+calculo de la valoración de popularidad, hacia el autor de dicho recurso.
+\item Seguimiento del numero de contactos con los que el usuario cuenta, para el
+calculo de la valoración de sociabilidad.
+\end{itemize}
 
 \section{Sistemas de control}
+Adicionalmente, y como medida de medición, se ha desarrollado un paquete
+adicional que ayuda a la visualización de diferentes estadísticas, todo esto con
+el objetivo de poder hacer un seguimiento apropiado del contexto, y de como el
+uso del sistema esta progresando.
+
 \subsection{\emph{stats}: Los indicadores medibles}
+Se hizo uso de herramientas para la visualización de gráficas, además de
+realizarse las consultas necesarias para la refinación de la información.
+
+Las principales funciones de este paquete son:
+
+\begin{itemize}
+\item Refinación de la información de la base de datos, para la correcta
+visualización de esta por parte de las funciones de graficación.
+\item Presentación de las gráficas a partir de la información de la base de
+datos.
+\end{itemize}
+
+Los reportes que se han construido son:
+
+\begin{description}
+\item [Usuarios] Reporte en el que por cada categoría de usuario (rol) nos dice
+cuantos son en total, cuantos de estos han ingresado con su cuenta de usuario
+al menos una vez, cuantos han establecido su correo electrónico, y cuantos han
+establecido un nombre de usuario propio.
+\item [Valoraciones] Reporte en el que por cada categoría de usuario (rol) nos
+presente el total de puntuación en cada una de las valoraciones realizadas en el
+sitio.
+\item [Contacto] Reporte sobre los contactos entre los usuarios, mostrando si
+estos son uní-direccionales o bi-direccionales.
+\item [Espacios] Reporte sobre el uso y aprovechamiento de los espacios
+virtuales, clasificados por tipo de espacio.
+\item [Recursos] Reporte sobre el uso y aprovechamiento de los recursos y su
+distribución sobre los espacios virtuales existentes.
+\item [Linea de tiempo] Reporte sobre las actividades de los usuarios sobre el
+sistema, en modo general y sobre una linea de tiempo.
+\end{description}
+
+Cabe destacar que todas las conclusiones presentadas en el siguiente capitulo,
+están generadas por este modulo.
 
