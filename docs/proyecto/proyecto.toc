@@ -27,9 +27,8 @@
 \contentsline {section}{\numberline {3.2}Requisitos funcionales}{14}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Espacios virtuales}{14}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Intercambio de recursos}{16}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Instancias m\IeC {\'u}ltiples}{17}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Canales de comunicaci\IeC {\'o}n}{17}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Fomento a la participaci\IeC {\'o}n}{18}{subsection.3.2.5}
+\contentsline {subsection}{\numberline {3.2.3}Canales de comunicaci\IeC {\'o}n}{17}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Fomento a la participaci\IeC {\'o}n}{18}{subsection.3.2.4}
 \contentsline {section}{\numberline {3.3}Requisitos no funcionales}{19}{section.3.3}
 \contentsline {subsection}{\numberline {3.3.1}Contexto de despliegue}{19}{subsection.3.3.1}
 \contentsline {subsection}{\numberline {3.3.2}Servidor web}{19}{subsection.3.3.2}
@@ -77,8 +76,8 @@
 \contentsline {subsection}{\numberline {4.7.1}\emph {stats}: Los indicadores medibles}{41}{subsection.4.7.1}
 \contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{43}{chapter.5}
 \contentsline {section}{\numberline {5.1}Resultados}{43}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Contexto}{44}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Usuarios}{44}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.1}Contexto}{43}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Usuarios}{43}{subsection.5.1.2}
 \contentsline {subsection}{\numberline {5.1.3}Contactos}{44}{subsection.5.1.3}
 \contentsline {subsection}{\numberline {5.1.4}Espacios Virtuales}{44}{subsection.5.1.4}
 \contentsline {subsection}{\numberline {5.1.5}Recursos}{44}{subsection.5.1.5}
