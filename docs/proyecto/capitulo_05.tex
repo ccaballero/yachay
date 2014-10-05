@@ -2,224 +2,290 @@
 
 Habiendo sido desplegado el sistema en un servidor web provisto por el centro
 MEMI, como un medio para evaluación de la estrategia planteada se han hecho uso
-de la funcionalidad construido para extraer arios indicadores de medición; estos
-habiendo arrojando resultados para el control de los factores críticos han sido
-analizados.
+de la funcionalidad construida para extraer varios indicadores de medición;
+estos habiendo arrojando resultados para el control de los factores críticos son
+analizados en este capitulo.
 
 Este capitulo compendia el tiempo que se ha establecido para evaluación, además
 de mostrar el conjunto de recomendaciones finales que se han planteado, a partir
 de los resultados obtenidos.
 
 \section{Resultados}
+Como se menciono en la parte final del capitulo anterior, se ha desarrollado una
+funcionalidad capaz de generar graficos estadisticos, de forma que puedan
+apreciarse diversos indicadores sobre variables del sistema.
 
-Definidos los términos a utilizarse, a continuación se presentan los resultados
-generados:
+Una vez concluido el sistema, este fue implantado en un servidor del Centro
+MEMI, donde con la colaboración de algunos docentes pudo ser puesta en practica
+en algunos grupos del departamento de Informatica y Sistemas, los resultados
+aqui presentados, se extrayeron de ese tiempo de evaluación.
 
 \subsection{Contexto}
-Para la evaluación del sistema se posterior a la implantación, se planifico una
-etapa de evaluación, en la cuadro \ref{contexto} se presenta el contexto en el
-que esta está comprendida.
+Para ser mas precisos respecto a ese tiempo de evaluación, puede apreciarse en
+el cuadro \ref{contexto} algunos datos de contexto referentes al contexto de
+aquel periodo.
 
 \begin{table}
 \centering
-\begin{tabular}{|l|l|}
-\hline
-Sitio web & yachay.memi.umss.edu.bo \\
-Periodo académico & I/2011 \\
-Tiempo de evaluación: & 325 días. \\
-Fecha de inicio: & 23 de Septiembre del 2010. \\
-Fecha de fin: & 14 de Agosto del 2011. \\
-Lugar de evaluación: & Carrera de Informática y Sistemas (UMSS). \\
-Caídas del servidor: & 4. \\
-Tiempo del servidor fuera de linea: & 2 semanas acumuladas. \\
-Docentes participantes: & 4. \\
-Materias participantes: & 4. \\
-Grupos participantes: & 8. \\
-Usuarios participantes: & 542 (estudiantes de primeros semestres). \\
-Espacios virtuales creados: & 33. \\
-Recursos publicados: & 68. \\
-\hline
+\begin{tabular}{l|l}
+Sitio web                           & http://yachay.memi.umss.edu.bo\\
+Periodo académico                   & I/2011\\
+Tiempo de evaluación:               & 325 días.\\
+Fecha de inicio:                    & 23 de Septiembre del 2010.\\
+Fecha de fin:                       & 14 de Agosto del 2011.\\
+Lugar de evaluación:                & Carrera de Informática y Sistemas.\\
+Caídas del servidor:                & 4.\\
+Tiempo del servidor fuera de linea: & 2 semanas acumuladas.\\
+Docentes participantes:             & 4.\\
+Materias participantes:             & 4.\\
+Grupos participantes:               & 8.\\
+Usuarios participantes:             & 542 (estudiantes de primeros semestres).\\
+Espacios virtuales creados:         & 33.\\
+Recursos publicados:                & 68.\\
 \end{tabular}
 \caption{Variables de Contexto para el periodo de evaluación}
 \label{contexto}
 \end{table}
 
 \subsection{Usuarios}
-En términos de uso, puede apreciarse en la figura \ref{usuarios_tabla_1} las
-diferentes formas de comportamiento de los usuarios, según el rol que desempeñan
-en el sistema.
+El primer objeto a analizar fue el grado de uso de los usuarios con respecto del
+sistema, puede apreciarse en la cuadro \ref{usuarios_tabla_1} un conteo de
+usuarios clasificados por rol, que hicieron cierto conjunto de actividades. Las
+actividades en cuestion son:
 
-%\begin{figure}
-%\centering
-%\includegraphics[width=1.0\textwidth,natwidth=960,natheight=184]{graphics/cap5_1.png}
-%\caption{Intención de los usuarios clasificados por rol}
-%\label{usuarios_tabla_1}
-%\end{figure}
+\begin{itemize}
+\item \emph{Registrados}, conteo del numero real de usuarios que poseen ese rol.
+\item \emph{Logeados}, conteo del numero de usuarios que al menos uso su cuenta
+una vez.
+\item \emph{Correo}, conteo del numero de usuarios que establecio su correo
+electronico en el sistema.
+\item \emph{Usuario}, conteo del numero de usuarios que establecieron un nombre
+de usuario propio.
+\item \emph{Fotografia}, conteo del numero de personas que utilizan una imagen
+de usuario propia.
+\end{itemize}
 
-Destaca en esta tabla la disparidad entre el rol de estudiante y los demás
-roles, como puede verse en la Figura \ref{usuarios_bars_1}, del conjunto de
-usuarios registrados, únicamente el 20\% ingreso alguna vez al sistema, es de
-rescatar además, que los usuarios fueron registrados automáticamente por sus
+\begin{table}
+\centering
+\begin{tabular}{l|c c c c c}
+$Rol$ & $Registrados$ & $Logeados$ & $Correo$ & $Usuario$ & $Fotografia$ \\
+\hline
+$Invitado$      & $ 10$ & $  9$ & $10$ & $10$ & $ 1$ \\
+$Estudiante$    & $517$ & $103$ & $47$ & $15$ & $11$ \\
+$Auxiliar$      & $  7$ & $  6$ & $ 7$ & $ 4$ & $ 3$ \\
+$Docente$       & $  3$ & $  3$ & $ 3$ & $ 3$ & $ 1$ \\
+$Moderador$     & $  1$ & $  1$ & $ 1$ & $ 1$ & $ 0$ \\
+$Desarrollador$ & $  3$ & $  3$ & $ 3$ & $ 3$ & $ 2$ \\
+$Administrador$ & $  1$ & $  1$ & $ 1$ & $ 1$ & $ 1$ \\
+\end{tabular}
+\caption{Intención de los usuarios clasificados por rol}
+\label{usuarios_tabla_1}
+\end{table}
+
+Destaca en este cuadro la disparidad entre el rol de estudiante y los demás
+roles, como puede verse en la figura \ref{usuarios_bars_1}, del conjunto de
+usuarios registrados, únicamente el 20\% ingreso alguna vez al sistema, cabe
+decir además, que los usuarios fueron registrados automáticamente por sus
 respectivos docentes.
 
-%\begin{figure}
-%\centering
-%\includegraphics[width=1.0\textwidth,natwidth=956,natheight=476]{graphics/cap5_2.png}
-%\caption{Diagrama de barras de la intención de los usuarios clasificados por
-%rol}
-%\label{usuarios_bars_1}
-%\end{figure}
+\begin{figure}
+\centering
+\input{graphics/cap5_1.tex}
+\caption{Diagrama de barras de la intención de los usuarios clasificados por
+rol}
+\label{usuarios_bars_1}
+\end{figure}
 
-%Puede verse en la Figura \ref{usuarios_pie_1} como el predominio en cantidad de
-%los estudiantes va decayendo progresivamente en intención frente a los otros
-%roles. Considerando los escasa cantidad de atractivos que posee el sistema es
-%importante considerar una audiencia de 126 personas como el primer paso hacia
-%la construcción de un lugar común para el estudio realizado.\\
+Puede verse en la figura \ref{usuarios_pie_1} como el predominio en cantidad de
+los estudiantes va decayendo progresivamente en intención frente a los otros
+roles. Considerando los escasa cantidad de atractivos que posee el sistema es
+importante considerar una audiencia de 126 personas como el primer paso hacia
+la construcción de un lugar común para el estudio realizado.
 
-%Respecto a la actividad de los usuarios sobre el sistema, puede verse en la
-%Figura \ref{usuarios_tabla_2} la escasisima actividad, participación y
-%popularidad en todos los roles, exceptuando el de los desarrolladores. Puede
-%verse también en la Figura \ref{usuarios_bars_2} el prometedor indicador de
-%sociabilidad, que como puede verse en la Figura \ref{usuarios_pie_2} es el mas
-%homogéneo, lo que augura una conectividad mas que deseable para los usuarios.
+\begin{figure}
+\centering
+\input{graphics/cap5_2.tex}
+\caption{Porcentajes de intención de los usuarios clasificados por rol}
+\label{usuarios_pie_1}
+\end{figure}
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[scale=0.4]{graphics/usuarios_pie_1.png}
-%\caption {Porcentajes de intención de los usuarios clasificados por rol}
-%\label{usuarios_pie_1}
-%\end{figure}
+\subsection{Actividad}
+Respecto a la actividad de los usuarios sobre el sistema, puede verse en el
+cuadro \ref{usuarios_tabla_2} la escasisima actividad, participación y
+popularidad en todos los roles, exceptuando el de los desarrolladores.
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[scale=0.4]{graphics/usuarios_tabla_2.png}
-%\caption {Actividad de los usuarios clasificados por rol}
-%\label {usuarios_tabla_2}
-%\end{figure}
+\begin{table}
+\centering
+\begin{tabular}{l|c c c c}
+$Rol$ & $Actividad$ & $Participacion$ & $Sociabilidad$ & $Popularidad$ \\
+\hline
+$Invitado     $ & $ 2$ & $ 0$ & $25$ & $ 1$ \\
+$Estudiante   $ & $ 3$ & $10$ & $58$ & $ 0$ \\
+$Auxiliar     $ & $ 7$ & $ 0$ & $12$ & $ 0$ \\
+$Docente      $ & $ 4$ & $ 0$ & $ 6$ & $ 0$ \\
+$Moderador    $ & $27$ & $ 0$ & $ 5$ & $ 3$ \\
+$Desarrollador$ & $61$ & $54$ & $96$ & $19$ \\
+$Administrador$ & $ 0$ & $ 2$ & $10$ & $ 0$ \\
+\end{tabular}
+\caption{Actividad de los usuarios clasificados por rol}
+\label{usuarios_tabla_2}
+\end{table}
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[scale=0.4]{graphics/usuarios_bars_2.png}
-%\caption {Diagrama de barras de la actividad de los usuarios clasificados por
-%rol}
-%\label {usuarios_bars_2}
-%\end{figure}
+Puede verse también en la figura \ref{usuarios_bars_2} el prometedor indicador
+de sociabilidad, que como puede verse en la figura \ref{usuarios_pie_2} es el
+mas homogéneo, lo que augura una conectividad mas que deseable para los
+usuarios.
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[scale=0.4]{graphics/usuarios_pie_2.png}
-%\caption {Porcentajes de actividad clasificados por rol}
-%\label {usuarios_pie_2}
-%\end{figure}
+\begin{figure}
+\centering
+\input{graphics/cap5_3.tex}
+\caption{Diagrama de barras de la actividad de los usuarios clasificados por
+rol}
+\label{usuarios_bars_2}
+\end{figure}
+
+\begin{figure}
+\centering
+\input{graphics/cap5_4.tex}
+\caption{Porcentajes de actividad clasificados por rol}
+\label{usuarios_pie_2}
+\end{figure}
 
 \subsection{Contactos}
+Considerando los indicadores de sociabilidad, puede apreciarse la matriz de
+adyacencias (figura \ref{contactos_matriz}) de la red social, puede verse que
+los enlaces fuertes son casi exclusividad propia de los desarrolladores, siendo
+entre los otros roles predominantes los enlaces débiles. Puede verse también
+una sutil relación entre los usuarios que establecieron el nombre de usuario en
+su perfil, y los niveles de sociabilidad. Cuya interrelación, es motivo de
+seguimiento e intención de demostración.
 
-%Considerando los indicadores de sociabilidad, puede apreciarse la matriz de
-%adyacencias (Figura \ref{contactos_matriz}) de la red social, puede verse que
-%los enlaces fuertes son casi exclusividad propia de los desarrolladores, siendo
-%entre los otros roles predominantes los enlaces débiles. Puede verse también
-%una sutil relación entre los usuarios que establecieron el nombre de usuario en
-%su perfil, y los niveles de sociabilidad. Cuya interrelación, es motivo de
-%seguimiento e intención de demostración.
-
-%\begin{figure}[H]
+%\begin{figure}
 %\centering
-%\includegraphics[scale=0.4]{graphics/contactos_matriz.png}
-%\caption {Matriz de adyacencia de la red social}
-%\label {contactos_matriz}
+%\input{graphics/cap5_5.tex}
+%\caption{Matriz de adyacencias de la red social}
+%\label{contactos_matriz}
 %\end{figure}
 
 \subsection{Espacios Virtuales}
+En el cuadro \ref{espacios_tabla_1} pueden verse los distintos tipos de
+espacios virtuales y sus indicadores propios, entre los que destaca la
+supremacía del espacio portada, por sobre cualquier otro espacio, siendo el que 
+capta mas audiencia de entre los espacios. También es notorio el ausente uso de
+espacios para equipos de trabajo en los grupos, cosa que puede ser debida a las
+escasez de grupos registrados. Si bien la portada acapara la mayor audiencia,
+no acapara la mayor cantidad de recursos (figura \ref{espacios_bars_1}),
+llevándose los espacios de comunidades un 45\% del contenido del sitio, 
+reforzando la teoría de fomento hacia los espacios menos formales (figura
+\ref{espacios_pie_1}).
 
-%En la Figura \ref{espacios_tabla_1} pueden verse los distintos tipos de
-%espacios virtuales y sus indicadores propios, entre los que destaca la
-%supremacía del espacio portada, por sobre cualquier otro espacio, siendo el que 
-%capta mas audiencia de entre los espacios. También es notorio el ausente uso de
-%espacios para equipos de trabajo en los grupos, cosa que puede ser debida a las
-%escasez de grupos registrados. Si bien la portada acapara la mayor audiencia,
-%no acapara la mayor cantidad de recursos (Figura \ref{espacios_bars_1}),
-%llevándose los espacios de comunidades un 45\% del contenido del sitio, 
-%reforzando la teoría de fomento hacia los espacios menos formales (Figura
-%\ref{espacios_pie_1}).
+\begin{table}
+\centering
+\begin{tabular}{l|c c c c c}
+$Tipo$ & $Cantidad$ & $Recursos$ & $Audiencia$ &
+$Recursos/Cantidad$ & $Audiencia/Recursos$ \\
+\hline
+$Portada    $ & $ 1$ & $17$ & $1314$ & $17   $ & $77.29$ \\
+$Carreras   $ & $ 4$ & $ 1$ & $  18$ & $ 0.25$ & $18   $ \\
+$Areas      $ & $ 5$ & $ 2$ & $  15$ & $ 0.4 $ & $ 7.5 $ \\
+$Materias   $ & $ 4$ & $13$ & $  85$ & $ 3.25$ & $ 6.54$ \\
+$Grupos     $ & $ 8$ & $ 3$ & $   1$ & $ 0.38$ & $ 0.33$ \\
+$Equipos    $ & $ 0$ & $ 0$ & $   0$ & $    -$ & $ -   $ \\
+$Comunidades$ & $11$ & $30$ & $  96$ & $ 2.73$ & $ 3.2 $ \\
+\end{tabular}
+\caption{Clasificación de los espacios y su actividad}
+\label{espacios_tabla_1}
+\end{table}
 
-%\begin{figure}[H]
+%\begin{figure}
 %\centering
-%\includegraphics[scale=0.4]{graphics/espacios_tabla_1.png}
-%\caption {Clasificación de los espacios y su actividad}
-%\label {espacios_tabla_1}
+%\input{graphics/cap5_6.tex}
+%\caption{Diagrama de barras de los espacios y sus recursos}
+%\label{espacios_bars_1}
 %\end{figure}
 
-%\begin{figure}[H]
+%\begin{figure}
 %\centering
-%\includegraphics[scale=0.4]{graphics/espacios_bars_1.png}
-%\caption {Diagrama de barras de los espacios y sus recursos}
-%\label {espacios_bars_1}
-%\end{figure}
-
-%\begin{figure}[H]
-%\centering
-%\includegraphics[scale=0.4]{graphics/espacios_pie_1.png}
-%\caption {Porcentajes de los espacios y sus recursos seg\'un su tipo}
-%\label {espacios_pie_1}
+%\input{graphics/cap5_7.tex}
+%\caption{Porcentajes de los espacios y sus recursos según su tipo}
+%\label{espacios_pie_1}
 %\end{figure}
 
 \subsection{Recursos}
+Los recursos pueden ser de varios tipos (figura \ref{recursos_tabla_1}),
+destacando la gran cantidad de notas (figura \ref{recursos_bars_1}) por sobre
+los otros tipos de recursos, pudiendo esto deberse a la inmensa facilidad de
+creación de estas. Aun así son las fotografías la que en proporción reciben
+mejor audiencia, y son los archivos los que reciben mayor cantidad de 
+comentarios (figura \ref{recursos_pie_1}).
 
-%Los recursos pueden ser de varios tipos (Figura \ref{recursos_tabla_1}),
-%destacando la gran cantidad de notas (Figura \ref{recursos_bars_1}) por sobre
-%los otros tipos de recursos, pudiendo esto deberse a la inmensa facilidad de
-%creación de estas. Aun así son las fotografías la que en proporción reciben
-%mejor audiencia, y son los archivos los que reciben mayor cantidad de 
-%comentarios (Figura \ref{recursos_pie_1}).
+\begin{table}
+\centering
+\begin{tabular}{l|c c c c c}
+$Tipo$ & $Cantidad$ & $Audiencia$ & $Comentarios$ &
+$Calificadores$ & $Etiquetas$ \\
+\hline
+$Notas      $ & $42$ & $811$ & $17$ & $19$ & $61$ \\
+$Archivos   $ & $13$ & $ 72$ & $ 9$ & $ 1$ & $13$ \\
+$Eventos    $ & $ 4$ & $243$ & $ 2$ & $ 0$ & $ 5$ \\
+$Enlaces    $ & $ 3$ & $ 10$ & $ 1$ & $ 0$ & $ 7$ \\
+$Fotografias$ & $ 5$ & $394$ & $ 4$ & $ 2$ & $12$ \\
+$Videos     $ & $ 1$ & $  1$ & $ 0$ & $ 0$ & $ 2$ \\
+\hline
+ & & $Aud/Can$ & $Com/Aud$ & $Cal/Aud$ & $Eti/Can$ \\
+\hline
+$Notas      $ & & $19.31$ & $0.021$ & $0.023$ & $1.452$ \\
+$Archivos   $ & & $ 5.53$ & $0.125$ & $0.014$ & $1    $ \\
+$Eventos    $ & & $60.75$ & $0.008$ & $0    $ & $1.250$ \\
+$Enlaces    $ & & $ 3.33$ & $0.100$ & $0    $ & $2.333$ \\
+$Fotografias$ & & $78.80$ & $0.010$ & $0.005$ & $2.400$ \\
+$Videos     $ & & $ 1   $ & $0    $ & $0    $ & $2    $ \\
+\end{tabular}
+\caption{Clasificación de los recursos según su tipo}
+\label{recursos_tabla_1}
+\end{table}
 
-%\begin{figure}[H]
+%\begin{figure}
 %\centering
-%\includegraphics[scale=0.4]{graphics/recursos_tabla_1.png}
-%\caption {Clasificación de los recursos según su tipo}
-%\label {recursos_tabla_1}
+%\input{graphics/cap5_8.tex}
+%\caption{Diagrama de barras de los recursos y sus niveles de repercusión}
+%\label{recursos_bars_1}
 %\end{figure}
 
-%\begin{figure}[H]
+%\begin{figure}
 %\centering
-%\includegraphics[scale=0.4]{graphics/recursos_bars_1.png}
-%\caption {Diagrama de barras de los recursos y sus niveles de repercusión}
-%\label {recursos_bars_1}
-%\end{figure}
-
-%\begin{figure}[H]
-%\centering
-%\includegraphics[scale=0.4]{graphics/recursos_pie_1.png}
-%\caption {Porcentajes de los recursos según su tipo}
-%\label {recursos_pie_1}
+%\input{graphics/cap5_9.tex}
+%\caption{Porcentajes de los recursos según su tipo}
+%\label{recursos_pie_1}
 %\end{figure}
 
 \subsection{Linea de tiempo}
+Finalizados los elementos propios de la herramienta, se observan ahora las
+lineas de tiempo, donde se presentan los tiempos en los que estos elementos han
+sido creados.
+En la figura \ref{tiempos_area_1} puede apreciarse en la linea de creación de
+los usuarios, los registros automáticos de los estudiantes, de parte del
+docente de su materia, siendo la creación de usuarios la linea predominante en
+esta gráfica.
 
-%Finalizados los elementos propios de la herramienta, se observan ahora las
-%lineas de tiempo, donde se presentan los tiempos en los que estos elementos han
-%sido creados.
-%En la Figura \ref{tiempos_area_1} puede apreciarse en la linea de creación de
-%los usuarios, los registros automáticos de los estudiantes, de parte del
-%docente de su materia, siendo la creación de usuarios la linea predominante en
-%esta gráfica.
+%\begin{figure}
+%\centering
+%\input{graphics/cap5_10.tex}
+%\caption{Linea de tiempo de la creación de elementos en el sistema}
+%\label{tiempos_area_1}
+%\end{figure}
+
+En la figura \ref{tiempos_area_2} resalta la curiosa relación entre las lineas
+de creación de recursos y la de creación de contactos, siendo esta la linea que
+determina todo el objeto de investigación.
 
 %\begin{figure}[H]
 %\centering
-%\includegraphics[scale=0.25]{graphics/tiempos_area_1.png}
-%\caption {Linea de tiempo de la creación de elementos en el sistema}
-%\label {tiempos_area_1}
+%\input{graphics/cap5_11.tex}
+%\caption{Linea de tiempo de la creación de elementos en el sistema}
+%\label{tiempos_area_2}
 %\end{figure}
 
-%En la Figura \ref{tiempos_area_2} resalta la curiosa relación entre las lineas
-%de creación de recursos y la de creación de contactos, siendo esta la linea que
-%determina todo el objeto de investigación.
+%\section{Conclusiones}
+%\section{Recomendaciones}
 
-%\begin{figure}[H]
-%\centering
-%\includegraphics[scale=0.25]{graphics/tiempos_area_2.png}
-%\caption {Linea de tiempo de la creación de elementos en el sistema}
-%\label {tiempos_area_2}
-%\end{figure}
-
-\section{Conclusiones}
-\section{Recomendaciones}
