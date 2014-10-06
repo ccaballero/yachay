@@ -82,7 +82,7 @@
 \contentsline {subsection}{\numberline {5.1.4}Contactos}{47}{subsection.5.1.4}
 \contentsline {subsection}{\numberline {5.1.5}Espacios Virtuales}{47}{subsection.5.1.5}
 \contentsline {subsection}{\numberline {5.1.6}Recursos}{47}{subsection.5.1.6}
-\contentsline {subsection}{\numberline {5.1.7}Linea de tiempo}{50}{subsection.5.1.7}
+\contentsline {subsection}{\numberline {5.1.7}Linea de tiempo}{51}{subsection.5.1.7}
 \contentsline {chapter}{\numberline {A}Manual de instalaci\IeC {\'o}n}{55}{appendix.Alph1}
 \contentsline {chapter}{\numberline {B}Manual de usuario}{57}{appendix.Alph2}
 \contentsline {chapter}{Bibliograf\'{\i }a}{59}{appendix*.3}
