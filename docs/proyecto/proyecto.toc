@@ -76,13 +76,13 @@
 \contentsline {subsection}{\numberline {4.7.1}\emph {stats}: Los indicadores medibles}{41}{subsection.4.7.1}
 \contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{43}{chapter.5}
 \contentsline {section}{\numberline {5.1}Resultados}{43}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Contexto}{43}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.1}Contexto de despliegue}{44}{subsection.5.1.1}
 \contentsline {subsection}{\numberline {5.1.2}Usuarios}{44}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Actividad}{45}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}Contactos}{47}{subsection.5.1.4}
-\contentsline {subsection}{\numberline {5.1.5}Espacios Virtuales}{47}{subsection.5.1.5}
-\contentsline {subsection}{\numberline {5.1.6}Recursos}{47}{subsection.5.1.6}
-\contentsline {subsection}{\numberline {5.1.7}Linea de tiempo}{51}{subsection.5.1.7}
+\contentsline {subsection}{\numberline {5.1.3}Valoraciones}{45}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Contactos}{48}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}Espacios Virtuales}{48}{subsection.5.1.5}
+\contentsline {subsection}{\numberline {5.1.6}Recursos}{48}{subsection.5.1.6}
+\contentsline {subsection}{\numberline {5.1.7}Linea de tiempo}{52}{subsection.5.1.7}
 \contentsline {chapter}{\numberline {A}Manual de instalaci\IeC {\'o}n}{55}{appendix.Alph1}
 \contentsline {chapter}{\numberline {B}Manual de usuario}{57}{appendix.Alph2}
 \contentsline {chapter}{Bibliograf\'{\i }a}{59}{appendix*.3}

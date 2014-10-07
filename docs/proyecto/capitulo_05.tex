@@ -1,70 +1,77 @@
 \chapter{Conclusiones y Recomendaciones}
 
-Habiendo sido desplegado el sistema en un servidor web provisto por el centro
-MEMI, como un medio para evaluación de la estrategia planteada se ha hecho uso
-de la funcionalidad construida para extraer varios indicadores de medición;
-estos habiendo arrojando resultados para el control de los factores críticos son
-analizados en este capitulo.
+Una vez concluido el desarrollo del sistema, este paso a la etapa de
+implantación y la posterior evaluación, inicialmente el sistema habiendo sido
+desplegado en un servidor web provisto por el centro MEMI, fue evaluado a traves
+de la funcionalidad construida para este proposito, habiendose arrojando
+resultados para el control de los factores críticos del proyecto estos son
+analizados.
 
 Este capitulo compendia el tiempo que se ha establecido para una adecuada
-evaluación, nos mostrará el conjunto de graficas que han sido generadas, además
-de mostrar el conjunto de recomendaciones finales que se han planteado, a partir
-de los resultados obtenidos.
+evaluación, nos mostrará el conjunto de gráficas que han sido generadas, ademas
+de los datos reales tabulados; posteriormente pasaremos a la conclusión misma
+del proyecto, para finalizar presentando las recomendaciones finales que se han
+planteado, a partir de los resultados obtenidos.
 
 \section{Resultados}
-Como se menciono en la parte final del capitulo anterior, se ha desarrollado una
-funcionalidad capaz de generar gráficos estadísticos, de forma que puedan
-apreciarse diversos indicadores sobre variables del sistema.
+Como se describió en la parte final del capitulo anterior, se ha desarrollado
+una funcionalidad especifica capaz de generar gráficas estadísticas, ademas de
+presentar datos tabulados, de forma que puedan apreciarse diversos indicadores
+sobre variables del sistema especificos.
 
-Una vez concluido el sistema, este fue implantado en un servidor del Centro
-MEMI, donde con la colaboración de algunos docentes pudo ser puesta en practica
-en algunos grupos del Departamento de Informática y Sistemas, los resultados
-aquí presentados, se extrajeron de ese tiempo de evaluación.
+Una vez concluido el desarrollo del sistema, este fue implantado en un servidor
+del Centro MEMI, donde con la colaboración de algunos docentes pudo ser puesta
+en practica en algunos grupos del Departamento de Informática y Sistemas, los
+resultados aquí presentados, se extrajeron de ese periodo  de evaluación.
 
-\subsection{Contexto}
-Para ser mas precisos respecto a ese tiempo de evaluación, puede apreciarse en
-el cuadro \ref{contexto} algunos datos de contexto referentes al contexto de
-aquel periodo.
+Inicialmente veremos algunas variables de contexto, necesarias para la
+comprensión de los datos extraidos; posteriormente pasaremos a mostrar los
+resultados obtenidos tanto como datos tabulados, como graficas generadas.
+
+\subsection{Contexto de despliegue}
+En el cuadro \ref{contexto}, puede apreciarse un resumen con los datos mas
+relevantes respecto al periodo de evaluacion; desde el inicio del periodo de
+evaluación, hasta el final de este, pasaron casi dos periodos academicos, pero
+unicamente uno de ellos fue completo.
 
 \begin{table}
 \centering
-\begin{tabular}{l|l}
-Sitio web                           & http://yachay.memi.umss.edu.bo\\
-Periodo académico                   & I/2011\\
-Tiempo de evaluación:               & 325 días.\\
-Fecha de inicio:                    & 23 de Septiembre del 2010.\\
-Fecha de fin:                       & 14 de Agosto del 2011.\\
-Lugar de evaluación:                & Carrera de Informática y Sistemas.\\
-Caídas del servidor:                & 4.\\
-Tiempo del servidor fuera de linea: & 2 semanas acumuladas.\\
-Docentes participantes:             & 4.\\
-Materias participantes:             & 4.\\
-Grupos participantes:               & 8.\\
-Usuarios participantes:             & 542 (estudiantes de primeros semestres).\\
-Espacios virtuales creados:         & 33.\\
-Recursos publicados:                & 68.\\
+\begin{tabular}{|l|l|}
+\hline
+Sitio web                          & http://yachay.memi.umss.edu.bo \\
+Periodo académico                  & I/2011 \\
+Tiempo de evaluación               & 325 días \\
+Fecha de inicio                    & 23 de Septiembre del 2010 \\
+Fecha de fin                       & 14 de Agosto del 2011 \\
+Lugar de evaluación                & Carrera de Informática y Sistemas \\
+Caídas del servidor                & 4 \\
+Tiempo del servidor fuera de linea & 2 semanas acumuladas \\
+Docentes participantes             & 4 \\
+Materias participantes             & 4 \\
+Grupos participantes               & 8 \\
+Usuarios participantes             & 542 (estudiantes de primeros semestres) \\
+Espacios virtuales creados         & 33 \\
+Recursos publicados                & 68 \\
+\hline
 \end{tabular}
-\caption{Variables de Contexto para el periodo de evaluación}
+\caption{Variables de contexto para el periodo de evaluación}
 \label{contexto}
 \end{table}
+
+Durante el periodo II/2010, si bien el sistema estaba en funcionamiento, no se
+pudo incluir a estudiantes, es asi como no existio mucha produccion de recursos,
+ni mucha afluencia de personas al sitio web habilitado (pueden apreciarse estos
+detalles en la linea de tiempo).
+
+Durante el periodo I/2011, si existio un registro apropiado de estudiantes, y es
+realmente este periodo de tiempo el que mas atención se pusieron a los datos
+generados.
 
 \subsection{Usuarios}
 El primer objeto a analizar fue el grado de uso de los usuarios con respecto del
 sistema, puede apreciarse en la cuadro \ref{usuarios_tabla_1} un conteo de
-usuarios clasificados por rol, que hicieron cierto conjunto de actividades. Las
-actividades en cuestión son:
-
-\begin{itemize}
-\item \emph{Registrados}, conteo del numero real de usuarios que poseen ese rol.
-\item \emph{Logeados}, conteo del numero de usuarios que al menos uso su cuenta
-una vez.
-\item \emph{Correo}, conteo del numero de usuarios que estableció su correo
-electrónico en el sistema.
-\item \emph{Usuario}, conteo del numero de usuarios que establecieron un nombre
-de usuario propio.
-\item \emph{Fotografía}, conteo del numero de personas que utilizan una imagen
-de usuario propia.
-\end{itemize}
+usuarios clasificados por rol, con respecto a ciertas actividades que se consideran claves como un reflejo del interes que se muestra hacia el sistema, las
+columnas presentadas son:
 
 \begin{table}
 \centering
@@ -79,41 +86,67 @@ $Moderador$     & $  1$ & $  1$ & $ 1$ & $ 1$ & $ 0$ \\
 $Desarrollador$ & $  3$ & $  3$ & $ 3$ & $ 3$ & $ 2$ \\
 $Administrador$ & $  1$ & $  1$ & $ 1$ & $ 1$ & $ 1$ \\
 \end{tabular}
-\caption{Intención de los usuarios clasificados por rol}
+\caption{Niveles de intención de los usuarios clasificados por rol}
 \label{usuarios_tabla_1}
 \end{table}
 
-Destaca en este cuadro la disparidad entre el rol de estudiante y los demás
-roles, como puede verse en la figura \ref{usuarios_bars_1}, del conjunto de
-usuarios registrados, únicamente el 20\% ingreso alguna vez al sistema, cabe
-decir además, que los usuarios fueron registrados automáticamente por sus
-respectivos docentes.
+\begin{description}
+\item [Registrados] Representa el numero real de registros de usuario que el
+sistema poseen de el rol especificado.
+\item [Logeados] Siendo que el sistema no posee un registro de usuarios libre,
+los usuarios deben ser registrados por sus docentes respectivos, o ser invitados
+por un usuario que ya posea una cuenta, este valor representa el numero de
+usuarios que ingreso a su cuenta de usuario en el sistema al menos una vez.
+\item [Correo] Cuando un estudiante es automaticamente registrado por su
+docente, este no cuenta con un registro de correo electronico (ademas que el
+sistema notifica automaticamente al usuario de este detalle), este valor
+representa el numero de usuarios que establecieron un correo electronico valido
+en el sistema.
+\item [Usuario] Cuando un estudiante es automaticamente registrado por su
+docente, este tendrá el mismo nombre de usuario que su codigo sis, este valor
+representa el numero de usuarios que establecieron un nombre de usuario propio.
+\item [Fotografía] El sistema provee automaticamente a cada usuario de una
+imagen anonima, este valor representa el numero de usuarios que establecieron
+y utilizan una imagen de usuario propia.
+\end{description}
+
+Puede verse cada actividad descrita anteriormente, como un grado de afinidad
+hacia el sistema, que parte inicialmente de ingresar al sistema como primer
+paso, y termina con un grado de afinidad alto cuando se establece una imagen
+de usuario propia.
+
+En la figura \ref{usuarios_bars_1}, se puede apreciar el diagrama de barras de
+los datos presentados en el cuadro \ref{usuarios_tabla_1}, destaca en esta la
+disparidad entre el rol de estudiante y los demás roles, del conjunto de
+usuarios registrados, únicamente el 20\% ingreso alguna vez al sistema.
 
 \begin{figure}
 \centering
 \input{graphics/cap5_1.tex}
-\caption{Diagrama de barras de la intención de los usuarios clasificados por
-rol}
+\caption{Diagrama de barras de los niveles de intención de los usuarios
+clasificados por rol}
 \label{usuarios_bars_1}
 \end{figure}
 
-Puede verse en la figura \ref{usuarios_pie_1} como el predominio en cantidad de
+En la figura \ref{usuarios_pie_1}, se pueden apreciar las graficas circulares,
+de cada una de las variables de actividad presentadas en el cuadro
+\ref{usuarios_tabla_1}; puede notarse en esta, como el predominio en cantidad de
 los estudiantes va decayendo progresivamente en intención frente a los otros
-roles. Considerando los escasa cantidad de atractivos que posee el sistema es
-importante considerar una audiencia de 126 personas como el primer paso hacia
-la construcción de un lugar común para el estudio realizado.
+roles.
 
 \begin{figure}
 \centering
 \input{graphics/cap5_2.tex}
-\caption{Porcentajes de intención de los usuarios clasificados por rol}
+\caption{Graficas circulares de los diferentes niveles de intención de los
+usuarios clasificados por rol}
 \label{usuarios_pie_1}
 \end{figure}
 
-\subsection{Actividad}
-Respecto a la actividad de los usuarios sobre el sistema, puede verse en el
-cuadro \ref{usuarios_tabla_2} la escasa actividad, participación y
-popularidad en todos los roles, exceptuando el de los desarrolladores.
+\subsection{Valoraciones}
+El segundo aspecto a analizar esta referido a las valoraciones que poseen los
+usuarios del sistema, puede verse en el cuadro \ref{usuarios_tabla_2}, el conteo
+de la puntuación por cada rol establecido en el sistema, segun el tipo de
+valoración.
 
 \begin{table}
 \centering
@@ -128,27 +161,33 @@ $Moderador    $ & $27$ & $ 0$ & $ 5$ & $ 3$ \\
 $Desarrollador$ & $61$ & $54$ & $96$ & $19$ \\
 $Administrador$ & $ 0$ & $ 2$ & $10$ & $ 0$ \\
 \end{tabular}
-\caption{Actividad de los usuarios clasificados por rol}
+\caption{Valoraciones de los usuarios clasificados por rol}
 \label{usuarios_tabla_2}
 \end{table}
 
-Puede verse también en la figura \ref{usuarios_bars_2} el prometedor indicador
-de sociabilidad, que como puede verse en la figura \ref{usuarios_pie_2} es el
-mas homogéneo, lo que augura una conectividad mas que deseable para los
-usuarios.
+La figura \ref{usuarios_bars_2}, muestra el diagrama de barras referente al
+cuadro \ref{usuarios_tabla_2}, puede notarse una gran diferencia entre las
+variables \emph{actividad} y \emph{sociabilidad}, en contraste con las variables
+\emph{participación} y \emph{popularidad}.
 
 \begin{figure}
 \centering
 \input{graphics/cap5_3.tex}
-\caption{Diagrama de barras de la actividad de los usuarios clasificados por
+\caption{Diagrama de barras de las valoraciones de los usuarios clasificados por
 rol}
 \label{usuarios_bars_2}
 \end{figure}
 
+En la figura \ref{usuarios_pie_2}, se muestran las graficas circulares para cada
+una de las valoraciones del sistema; puede notarse como el indicador de
+sociabilidad es el mas homogéneo, lo que augura una conectividad mas que
+deseable para los usuarios.
+
 \begin{figure}
 \centering
 \input{graphics/cap5_4.tex}
-\caption{Porcentajes de actividad clasificados por rol}
+\caption{Graficas circulares de las diferentes valoraciones clasificadas por
+rol}
 \label{usuarios_pie_2}
 \end{figure}
 
