@@ -81,8 +81,8 @@
 \contentsline {subsection}{\numberline {5.1.3}Valoraciones}{45}{subsection.5.1.3}
 \contentsline {subsection}{\numberline {5.1.4}Contactos}{48}{subsection.5.1.4}
 \contentsline {subsection}{\numberline {5.1.5}Espacios Virtuales}{48}{subsection.5.1.5}
-\contentsline {subsection}{\numberline {5.1.6}Recursos}{48}{subsection.5.1.6}
-\contentsline {subsection}{\numberline {5.1.7}Linea de tiempo}{52}{subsection.5.1.7}
-\contentsline {chapter}{\numberline {A}Manual de instalaci\IeC {\'o}n}{55}{appendix.Alph1}
-\contentsline {chapter}{\numberline {B}Manual de usuario}{57}{appendix.Alph2}
-\contentsline {chapter}{Bibliograf\'{\i }a}{59}{appendix*.3}
+\contentsline {subsection}{\numberline {5.1.6}Recursos}{52}{subsection.5.1.6}
+\contentsline {subsection}{\numberline {5.1.7}Linea de tiempo}{53}{subsection.5.1.7}
+\contentsline {chapter}{\numberline {A}Manual de instalaci\IeC {\'o}n}{57}{appendix.Alph1}
+\contentsline {chapter}{\numberline {B}Manual de usuario}{59}{appendix.Alph2}
+\contentsline {chapter}{Bibliograf\'{\i }a}{61}{appendix*.3}
