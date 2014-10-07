@@ -620,13 +620,15 @@ estratégicas que reflejen un resultado óptimo en el mediano y largo
 plazo\cite{Silva}.
 
 Adicionalmente, se ha desarrollado un paquete que ayude a la visualización de
-diferentes mediciónes que pueden realizarse en el sistema, todo esto con el
-objetivo de poder hacer un seguimiento apropiado del contexto, y de como el uso
-del sistema esta progresando.
+diferentes mediciones que pueden realizarse en el sistema, todo esto con el
+objetivo de poder hacer un seguimiento apropiado del contexto, y de como los
+objetivos planteados en el proyecto están progresando.
 
 \subsection{\emph{stats}: Los indicadores medibles}
-Se hizo uso de herramientas para la visualización de gráficas, además de
-realizarse las consultas necesarias para la refinación de la información.
+Entre los últimos paquetes desarrollados en el proyecto, se encuentra este, que
+se ocupa netamente de la condensación de información de múltiples entidades de
+sistema, este hace uso de herramientas para la visualización de gráficas, además
+de realizar las consultas necesarias para la refinación de la información.
 
 Las principales funciones de este paquete son:
 
@@ -641,20 +643,30 @@ Los reportes que se han construido son:
 
 \begin{description}
 \item [Usuarios] Reporte en el que por cada categoría de usuario (rol) nos dice
-cuantos son en total, cuantos de estos han ingresado con su cuenta de usuario
-al menos una vez, cuantos han establecido su correo electrónico, y cuantos han
-establecido un nombre de usuario propio.
+cuantos registros existen en total, cuantos de estos han ingresado con su cuenta
+de usuario al menos una vez, cuantos han establecido su correo electrónico,
+cuantos han establecido un nombre de usuario propio, y cuantos han establecido
+una fotografía de usuario propio..
 \item [Valoraciones] Reporte en el que por cada categoría de usuario (rol) nos
-presente el total de puntuación en cada una de las valoraciones realizadas en el
-sitio.
-\item [Contacto] Reporte sobre los contactos entre los usuarios, mostrando si
-estos son uní-direccionales o bi-direccionales.
+presenta el total acumulado en sus puntuaciones por cada una de las valoraciones
+realizadas en el sitio, es decir, los valores de: actividad, participación,
+sociabilidad, y popularidad.
+\item [Contactos] Reporte sobre los contactos existentes (clasificados por rol)
+entre los usuarios, mostrando si estos son uní-direccionales o
+bi-direccionales.
 \item [Espacios] Reporte sobre el uso y aprovechamiento de los espacios
-virtuales, clasificados por tipo de espacio.
+virtuales, clasificados por tipo de espacio, donde se presentan la cantidad
+total de registros, los recursos acumulados en estos, la audiencia que ha
+visualizado el recurso, y los respectivos promedios de audiencia y recursos.
 \item [Recursos] Reporte sobre el uso y aprovechamiento de los recursos y su
-distribución sobre los espacios virtuales existentes.
+distribución sobre los espacios virtuales existentes, donde se presenta la
+cantidad total de recursos agrupados por tipo, la audiencia que están han
+tenido, los conteo de comentarios que estos han recibido, su conteo de
+calificadores, su conteo total de etiquetas, además de su promedios respectivos.
 \item [Linea de tiempo] Reporte sobre las actividades de los usuarios sobre el
-sistema, en modo general y sobre una linea de tiempo.
+sistema, en modo general y sobre una linea de tiempo; estos están clasificados
+en cuatro tipos: actividades de usuarios, actividades de contacto, actividades
+de recursos, y actividades de espacios.
 \end{description}
 
 Cabe destacar que todas las conclusiones presentadas en el siguiente capitulo,
