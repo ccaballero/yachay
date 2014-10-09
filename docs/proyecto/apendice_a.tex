@@ -17,7 +17,8 @@ versionado bajo el sistema de control de versiones \emph{mercurial}, poco
 después de tener un primer prototipo estable, se migro a un repositorio
 publico en el sitio \emph{github.com}, y paso ser versionado bajo el sistema de
 control de versiones \emph{git}; actualmente se puede conseguir una copia del
-software desde este servidor.
+software desde este servidor donde a la fecha existen dos releases estables, se
+recomienda usar el release 0.1.
 
 La dirección oficial para la obtención del código fuente es:
 \begin{quote}
@@ -47,12 +48,12 @@ Ahora describiremos todo el proceso necesario para la instalación de la
 aplicación web, este proceso consta de los siguientes pasos:
 
 \begin{enumerate}
-\item Registro de un dominio.
-\item Configuracion de un host virtual en el servidor web.
 \item Copiado de los archivos en un directorio accesible por el servidor web.
-\item Creación de una base de datos con permisos de creacion de tablas.
+\item Registro de dominio.
+\item Configuracion de host virtual en el servidor web.
+\item Creación de la base de datos y configuración de permisos.
 \item Creación del esquema de base de datos provisto por la aplicación web.
-\item Configuración de la base de datos en la aplicacion web.
+\item Configuración de la aplicacion web.
 \item Primer acceso y configuración de la cuenta administrativa.
 \end{enumerate}
 
@@ -60,11 +61,18 @@ Cabe recalcar que toda la hermenéutica descrita, se restringe a cualquier
 distribución del sistema operativo GNU/Linux, no siendo probado o corregido
 para ningún otro sistema operativo.
 
+\subsection{Copiado de archivos}
+El primer paso es copiar el codigo fuente obtenido a un carpeta accesible al
+servidor web, en la mayoria de los casos esta carpeta se encuentra en
+\emph{/var/www/}, si se obtuvo una copia de formato zip, esta debe ser
+descompresa en ese directorio, si se clono el repositorio, debe clonarse en el
+mismo directorio; de forma tal que exista una carpeta \emph{yachay}.
+
 \subsection{Registro de dominio}
-El primer paso para la instalación del sistema es la creación de un host virtual
-para esto se requiere crear un dominio, dependiendo de la mecánica de resolución
-de nombre de dominio esto puede cambiar, si no se utiliza un servidor DNS, lo
-mas simple es modificar el archivo \emph{/etc/hosts}, para agregar una
+A continuación debe procederse a el registro de un dominio para el despliegue de
+la aplicación web, dependiendo de la mecánica de resolución de nombres de
+dominio y su infraestructura IT esto puede cambiar, si no se utiliza un servidor
+DNS, lo mas simple es modificar el archivo \emph{/etc/hosts}, para agregar una
 resolución de dominio simple, en la figura \ref{config_hosts} puede verse un
 ejemplo de archivo \emph{hosts}, en el cual se agrego la linea para resolución
 del dominio \emph{yachay.local}.
@@ -91,14 +99,18 @@ del dominio \emph{yachay.local}.
 \label{config_hosts}
 \end{figure}
 
-\subsection{Host virtual}
-Una vez agregado un nombre de dominio para resolver, es tiempo de configurar el
-Servidor HTTP que se vaya a utilizar, dependiendo si el servidor sea Apache Web
-Server o Nginx, esto es diferente.
+\subsection{Creación de host virtual}
+Una vez agregado un nombre de dominio, es tiempo de configurar el Servidor HTTP
+que se vaya a utilizar, dependiendo si el servidor sea Apache Web Server o
+Nginx, este es un proceso diferente.
 
-Se presentarán ambas configuraciones, para lo cual se debe tener los ficheros
-de la aplicación web en la dirección \emph{/var/www/yachay}, esta dirección es
-la que se utilizará en los ejemplos.
+El término Hosting Virtual se refiere a hacer funcionar más de un sitio web en
+una sola máquina. Los sitios web virtuales pueden estar ``basados en direcciones
+IP'', lo que significa que cada sitio web tiene una dirección IP diferente, o
+``basados en nombres diferentes'', lo que significa que con una sola dirección
+IP están funcionando sitios web con diferentes nombres (de dominio). El hecho de
+que estén funcionando en la misma máquina física pasa completamente
+desapercibido para el usuario que visita esos sitios web\cite{Apache}.
 
 \subsubsection{Apache Web Server 2.2}
 Para configurar un hosts virtual en el servidor web Apache, es necesario añadir
@@ -138,9 +150,15 @@ anteriormente.
 \end{figure}
 
 \subsubsection{Nginx}
-Adicionalmente se realizaron pruebas sobre el servidor nginx, para el uso de un
-host virtual se debe añadir la configuración presentada en la figura
-\ref{config_nginx}.
+Nginx es un servidor HTTP ligero de alto rendimiento, y actualmente es el
+segundo mas utilizado despues de Apache\footnote{Datos extraido de:
+http://w3techs.com/technologies/overview/web\_server/all}.
+
+Inicialmente el proyecto fue desarrollado y probado para la ejecución en el
+servidor Apache, posteriormente se hicieron pruebas de despliegue sobre el
+servidor Nginx, siendo estas satisfactorias, en la actualidad el sistema esta
+soportado y probado para las dos tecnologias, para el uso de un host virtual se
+debe añadir la configuración presentada en la figura \ref{config_nginx}.
 
 \begin{figure}
 \begin{verbatim}
@@ -174,4 +192,104 @@ server {
 \caption{Host virtual para Nginx}
 \label{config_nginx}
 \end{figure}
+
+\subsection{Creación y configuración de la base de datos}
+Yachay fue construido unicamente para soportar al servidor de base de datos
+MySQL, posteriormente se hicieron pruebas de compatibilidad sobre MariaDB que
+resultaron satisfactorias.
+
+Para este paso debe ser creada una base de datos con codificación de caracteres
+UTF8 sobre un servidor de base de datos que sea accesible desde el servidor
+HTTP, en la figura \ref{config_mysql1} pueden apreciarse los comandos necesarios
+para la creacion y asignación de privilegios a un usuario llamado \emph{carlos}
+e identificado con la contraseña \emph{asdf}.
+
+\begin{figure}
+\begin{verbatim}
+~ $ mysql --user=root --host=127.0.0.1 -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 10.0.14-MariaDB-log Source distribution
+
+Copyright (c) 2000, 2014, Oracle, SkySQL Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE yachay CHARACTER SET UTF8;
+Query OK, 1 row affected (0,02 sec)
+
+MariaDB [(none)]> GRANT all ON yachay.* TO 'carlos'@'127.0.0.1' IDENTIFIED BY 'asdf';
+Query OK, 0 rows affected (0,01 sec)
+
+MariaDB [(none)]> use yachay
+Database changed
+MariaDB [yachay]> show tables;
+Empty set (0,00 sec)
+
+MariaDB [yachay]> 
+\end{verbatim}
+\caption{Configuración del servidor de base de datos}
+\label{config_mysql1}
+\end{figure}
+
+\subsection{Creación del esquema de base de datos}
+Una vez creada y configurada la base de datos, se debe ejecutar el script SQL,
+para la creación de las tablas y los datos básicos en la nueva base de datos.
+
+Los scripts necesarios se encuentran el directorio \emph{/data/sql}, estos deben
+ser ejecutados como se presenta en la figura \ref{config_mysql2}.
+
+\begin{figure}
+\begin{verbatim}
+$ cd /var/www/yachay/data/sql/
+/var/www/yachay/data/sql
+$ mysql --user=carlos --host=127.0.0.1 --database=yachay -p < _install.sql 
+Enter password: 
+base
+packages
+routes
+widgets
+privileges
+roles
+spaces
+users
+login
+profile
+settings
+friends
+invitations
+gestions
+subjects
+areas
+careers
+groups
+teams
+communities
+groupsets
+resources
+notes
+links
+files
+events
+photos
+videos
+evaluations
+califications
+feedback
+comments
+ratings
+valorations
+tags
+templates
+analytics
+register
+extra
+\end{verbatim}
+\caption{Creación del esquema de base de datos}
+\label{config_mysql2}
+\end{figure}
+
+\subsection{Configuración de la aplicación web}
+Una vez creados el esquema y los datos básicos para la aplicación, es necesario
 

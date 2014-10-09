@@ -1,21 +1,14 @@
 \select@language {spanish}
-\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Antecedentes}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}Definici\IeC {\'o}n del problema}{2}{section.1.2}
-\contentsline {section}{\numberline {1.3}Objetivos}{2}{section.1.3}
-\contentsline {subsection}{\numberline {1.3.1}Objetivo General}{2}{subsection.1.3.1}
-\contentsline {subsection}{\numberline {1.3.2}Objetivos Espec\IeC {\'\i }ficos}{3}{subsection.1.3.2}
-\contentsline {section}{\numberline {1.4}Justificaci\IeC {\'o}n}{3}{section.1.4}
-\contentsline {section}{\numberline {1.5}Innovaci\IeC {\'o}n tecnol\IeC {\'o}gica}{3}{section.1.5}
-\contentsline {section}{\numberline {1.6}Alcance}{3}{section.1.6}
-\contentsline {chapter}{\numberline {A}Manual de instalaci\IeC {\'o}n}{5}{appendix.Alph1}
-\contentsline {section}{\numberline {A.1}Licencia de Software}{5}{section.Alph1.1}
-\contentsline {section}{\numberline {A.2}Obtenci\IeC {\'o}n del c\IeC {\'o}digo fuente}{5}{section.Alph1.2}
-\contentsline {section}{\numberline {A.3}Requisitos de software}{6}{section.Alph1.3}
-\contentsline {section}{\numberline {A.4}Instalaci\IeC {\'o}n}{6}{section.Alph1.4}
-\contentsline {subsection}{\numberline {A.4.1}Archivo de hosts}{6}{subsection.Alph1.4.1}
-\contentsline {subsection}{\numberline {A.4.2}Host virtual}{7}{subsection.Alph1.4.2}
-\contentsline {subsubsection}{Apache Web Server 2.2}{7}{section*.4}
-\contentsline {subsubsection}{Nginx}{7}{section*.5}
-\contentsline {chapter}{\numberline {B}Manual de usuario}{11}{appendix.Alph2}
-\contentsline {chapter}{Bibliograf\'{\i }a}{13}{appendix*.6}
+\contentsline {chapter}{\numberline {A}Manual de instalaci\IeC {\'o}n}{1}{appendix.Alph1}
+\contentsline {section}{\numberline {A.1}Licencia de Software}{1}{section.Alph1.1}
+\contentsline {section}{\numberline {A.2}Obtenci\IeC {\'o}n del c\IeC {\'o}digo fuente}{1}{section.Alph1.2}
+\contentsline {section}{\numberline {A.3}Requisitos de software}{2}{section.Alph1.3}
+\contentsline {section}{\numberline {A.4}Instalaci\IeC {\'o}n}{2}{section.Alph1.4}
+\contentsline {subsection}{\numberline {A.4.1}Copiado de archivos}{2}{subsection.Alph1.4.1}
+\contentsline {subsection}{\numberline {A.4.2}Registro de dominio}{3}{subsection.Alph1.4.2}
+\contentsline {subsection}{\numberline {A.4.3}Creaci\IeC {\'o}n de host virtual}{3}{subsection.Alph1.4.3}
+\contentsline {subsubsection}{Apache Web Server 2.2}{3}{section*.2}
+\contentsline {subsubsection}{Nginx}{4}{section*.3}
+\contentsline {subsection}{\numberline {A.4.4}Creaci\IeC {\'o}n y configuraci\IeC {\'o}n de la base de datos}{4}{subsection.Alph1.4.4}
+\contentsline {subsection}{\numberline {A.4.5}Creaci\IeC {\'o}n del esquema de base de datos}{6}{subsection.Alph1.4.5}
+\contentsline {chapter}{Bibliograf\'{\i }a}{9}{appendix*.4}
