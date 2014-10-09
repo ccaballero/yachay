@@ -26,7 +26,7 @@ resultados aquí presentados, se extrajeron de ese periodo  de evaluación.
 
 Inicialmente veremos algunas variables de contexto, necesarias para la
 comprensión de los datos extraídos; posteriormente pasaremos a mostrar los
-resultados obtenidos tanto como datos tabulados, como gráficas generadas.
+resultados obtenidos tanto datos tabulados, como gráficas generadas.
 
 \subsection{Contexto de despliegue}
 En el cuadro \ref{contexto}, puede apreciarse un resumen con los datos mas
@@ -60,11 +60,10 @@ Recursos publicados                & 68 \\
 
 Durante el periodo II/2010, si bien el sistema estaba en funcionamiento, no se
 pudo incluir a estudiantes, es así como no existió mucha producción de recursos,
-ni mucha afluencia de personas al sitio web habilitado (pueden apreciarse estos
-detalles en la linea de tiempo).
+ni mucha afluencia de personas al sitio web habilitado.
 
 Durante el periodo I/2011, si existió un registro apropiado de estudiantes, y es
-realmente este periodo de tiempo el que mas atención se pusieron a los datos
+realmente este periodo de tiempo en el que mas atención se pusieron a los datos
 generados.
 
 \subsection{Usuarios}
@@ -92,18 +91,18 @@ $Administrador$ & $  1$ & $  1$ & $ 1$ & $ 1$ & $ 1$ \\
 
 \begin{description}
 \item [Registrados] Representa el numero real de registros de usuario que el
-sistema poseen de el rol especificado.
-\item [Logeados] Siendo que el sistema no posee un registro de usuarios libre,
+sistema posee del rol especificado.
+\item [Logeados] Siendo que el sistema no posee un registro abierto de usuarios,
 los usuarios deben ser registrados por sus docentes respectivos, o ser invitados
 por un usuario que ya posea una cuenta, este valor representa el numero de
-usuarios que ingreso a su cuenta de usuario en el sistema al menos una vez.
+usuarios que ingresó a su cuenta de usuario en el sistema al menos una vez.
 \item [Correo] Cuando un estudiante es automáticamente registrado por su
 docente, este no cuenta con un registro de correo electrónico (además que el
 sistema notifica automáticamente al usuario de este detalle), este valor
 representa el numero de usuarios que establecieron un correo electrónico valido
 en el sistema.
 \item [Usuario] Cuando un estudiante es automáticamente registrado por su
-docente, este tendrá el mismo nombre de usuario que su código SIS, este valor
+docente, este tendrá como nombre de usuario a su código SIS, este valor
 representa el numero de usuarios que establecieron un nombre de usuario propio.
 \item [Fotografía] El sistema provee automáticamente a cada usuario de una
 imagen anónima, este valor representa el numero de usuarios que establecieron
@@ -123,8 +122,7 @@ usuarios registrados, únicamente el 20\% ingreso alguna vez al sistema.
 \begin{figure}
 \centering
 \input{graphics/cap5_1.tex}
-\caption{Diagrama de barras de los niveles de intención de los usuarios
-clasificados por rol}
+\caption{Niveles de intención de los usuarios clasificados por rol}
 \label{usuarios_bars_1}
 \end{figure}
 
@@ -137,8 +135,7 @@ roles.
 \begin{figure}
 \centering
 \input{graphics/cap5_2.tex}
-\caption{Gráficas circulares de los diferentes niveles de intención de los
-usuarios clasificados por rol}
+\caption{Niveles de intención de los usuarios clasificados por rol}
 \label{usuarios_pie_1}
 \end{figure}
 
@@ -173,8 +170,7 @@ variables \emph{actividad} y \emph{sociabilidad}, en contraste con las variables
 \begin{figure}
 \centering
 \input{graphics/cap5_3.tex}
-\caption{Diagrama de barras de las valoraciones de los usuarios clasificados por
-rol}
+\caption{Valoraciones de los usuarios clasificados por rol}
 \label{usuarios_bars_2}
 \end{figure}
 
@@ -186,8 +182,7 @@ deseable para los usuarios del sistema.
 \begin{figure}
 \centering
 \input{graphics/cap5_4.tex}
-\caption{Gráficas circulares de las diferentes valoraciones clasificadas por
-rol}
+\caption{Valoraciones de los usuarios clasificados por rol}
 \label{usuarios_pie_2}
 \end{figure}
 
@@ -195,10 +190,28 @@ rol}
 La tercera variable que se analizó, fue la relación de contactos de usuario,
 en la figura \ref{contactos_matriz}, se presenta las matriz de adyacencias,
 generada a partir de las relaciones (ya sean fuertes o débiles), entre usuarios
-del sistema, en este únicamente puede apreciarse los usuarios que algún
-contacto, y no así la totalidad de usuarios del sistema.
+del sistema, en este únicamente puede apreciarse los usuarios que poseen algún
+contacto, y no así la totalidad de usuarios del sistema. Esta figura presenta
+varias columnas, estas son:
 
-Considerando los indicadores de sociabilidad,  puede verse que los enlaces
+\begin{description}
+\item [UN] (Username) representa un valor lógico, que nos dice si el usuario
+estableció su nombre de usuario o si no.
+\item [EM] (Email) representa un valor lógico, que nos dice si el usuario
+estableció su correo electrónico real o si no.
+\item [AV] (Avatar) representa un valor lógico, que nos dice si el usuario
+estableció su imagen propia o si mantiene la imagen anónima.
+\item [AC] (Activity) representa un valor entero, que nos indica su valoración
+de actividad.
+\item [PA] (Participation) representa un valor entero, que nos indica su
+valoración de participación.
+\item [PO] (Popularity) representa un valor entero, que nos indica su
+valoración de popularidad.
+\item [SO] (Sociability) representa un valor entero, que nos indica su
+valoración de sociabilidad.
+\end{description}
+
+Considerando los indicadores de sociabilidad, puede verse que los enlaces
 fuertes son casi exclusividad propia de los desarrolladores, siendo entre los
 otros roles predominantes los enlaces débiles. Puede verse también una sutil
 relación entre los usuarios que establecieron el nombre de usuario en su perfil,
@@ -213,9 +226,10 @@ intención de demostración.
 \end{figure}
 
 \subsection{Espacios Virtuales}
-Habiéndose terminado las variables referentes a usuarios del sistema, se pasó a
-evaluar los espacios virtuales, en el cuadro \ref{espacios_tabla_1} pueden verse
-los distintos tipos de espacios virtuales y sus indicadores propios, estos son:
+Habiéndose terminado de presentar las variables referentes a usuarios del
+sistema, se pasó a evaluar los espacios virtuales, en el cuadro
+\ref{espacios_tabla_1} pueden verse los distintos tipos de espacios virtuales y
+sus indicadores propios, estos indicadores se detallan a continuación:
 
 \begin{table}
 \centering
@@ -236,18 +250,18 @@ $Comunidades$ & $11$ & $30$ & $  96$ & $ 2.73$ & $ 3.2 $ \\
 \end{table}
 
 \begin{description}
-\item [Cantidad] Representa la cantidad de espacios que existen de un tipo
-establecido.
-\item [Recursos] Representa la cantidad de recursos que un espacio virtual
-determinado contiene.
+\item [Cantidad] Representa la cantidad total de espacios virtuales que existen
+de un determinado tipo.
+\item [Recursos] Representa la cantidad total de recursos que un tipo
+determinado de espacio virtual contiene.
 \item [Audiencia] Representa la cantidad total de visualizaciones acumuladas de
-los recursos en un espacio virtual determinado.
+los recursos en un tipo determinado de espacio virtual.
 \item [Recursos/Cantidad] Representa el promedio de recursos por espacio virtual
-esta variable puede ser utilizada para ver que tipo de espacio virtual posee
-mayores grados de generación de contenido.
+para cada determinado tipo; esta variable puede ser utilizada para ver que tipo
+de espacio virtual posee mayores grados de generación de contenido.
 \item [Audiencia/Recursos] Representa el promedio de visualizaciones por recurso
-que tiene un espacio, con esta variable podemos ver que tipo de espacio virtual
-tiene mayor grado de visualizaciones.
+que tiene un tipo determinado de espacio virtual; con esta variable podemos ver
+que tipo de espacio virtual tiene mayor grado de visualizaciones.
 \end{description}
 
 En la figura \ref{espacios_bars_1}, podemos apreciar el diagrama de barras de
@@ -258,15 +272,16 @@ total de estos en el sistema; también puede observarse como los espacios de ár
 y carrera carecen de interés por parte de la audiencia, las posibles causas de
 esto, podrían ser la formalidad inherente en el mismo espacio, además de cierto
 grado de desconocimiento del uso y aprovechamiento de estos espacios formales;
-destaca la supremacía del espacio portada, por sobre cualquier otro espacio,
-siendo el que capta mas audiencia de entre los espacios. También es notorio el
-ausente uso de espacios para equipos de trabajo en los grupos, cosa que puede
-ser debida a las escasez de grupos registrados.
+además destaca la supremacía del espacio portada, por sobre cualquier otro
+espacio, siendo el que capta mas audiencia de entre los todos los demás tipos.
+También es notorio el ausente uso de espacios para equipos de trabajo en los
+grupos, cosa que puede ser debida a las escasez de grupos registrados, además
+del desconocimiento de como usar y aprovechar este tipo de espacios.
 
 \begin{figure}
 \centering
 \input{graphics/cap5_6.tex}
-\caption{Diagrama de barras de los espacios y sus recursos}
+\caption{Los espacios virtuales y sus recursos según su tipo}
 \label{espacios_bars_1}
 \end{figure}
 
@@ -280,7 +295,7 @@ fomento hacia los espacios menos formales.
 \begin{figure}
 \centering
 \input{graphics/cap5_7.tex}
-\caption{Porcentajes de los espacios virtuales y sus recursos según su tipo}
+\caption{Los espacios virtuales y sus recursos según su tipo}
 \label{espacios_pie_1}
 \end{figure}
 
@@ -319,48 +334,48 @@ $Videos     $ & & $ 1   $ & $0    $ & $0    $ & $2    $ \\
 
 \begin{description}
 \item [Cantidad] Representa la cantidad total de recursos del sistema de un
-tipo determinado.
+determinado tipo.
 \item [Audiencia] Representa la cantidad total acumulada de visualizaciones que
-se obtuvieron en los recursos de un tipo establecido.
+se obtuvieron en los recursos de un determinado tipo.
 \item [Comentarios] Representa la cantidad total acumulada de comentarios que
-se obtuvieron en los recursos de un tipo establecido.
+se obtuvieron en los recursos de un determinado tipo.
 \item [Calificadores] Representa la cantidad total acumulada de calificadores
-que se obtuvieron en los recursos de un tipo establecido.
+que se obtuvieron en los recursos de un determinado tipo.
 \item [Etiquetas] Representa la cantidad total acumulada de etiquetas utilizadas
-en los recursos de un tipo establecido.
-\item [Aud/Can] Representa el promedio de audiencia que un recurso de un tipo
-establecido obtuvo.
-\item [Com/Aud] Representa el promedio de comentarios que un recurso de un tipo
-establecido obtuvo.
+en los recursos de un determinado tipo.
+\item [Aud/Can] Representa el promedio de audiencia que un recurso de un
+determinado tipo obtuvo.
+\item [Com/Aud] Representa el promedio de comentarios que un recurso de un
+determinado tipo obtuvo.
 \item [Cal/Aud] Representa el promedio de calificadores que un recurso de un
-tipo establecido obtuvo.
-\item [Eti/Can] Representa el promedio de etiquetas que un recurso de un tipo
-establecido a creado o utilizado.
+determinado tipo obtuvo.
+\item [Eti/Can] Representa el promedio de etiquetas que un recurso de un
+determinado tipo a creado o referenciado.
 \end{description}
 
 En la figura \ref{recursos_bars_1}, se presenta el diagrama de barras relativo
 al cuadro \ref{recursos_tabla_1}, destaca la gran cantidad de notas por sobre
 los otros tipos de recursos, pudiendo esto deberse a la inmensa facilidad de
-creación de estas, Aun así son las fotografías la que en proporción reciben
+creación de estas, Aun así son las fotografías las que en proporción reciben
 mejor audiencia, y son los archivos los que reciben mayor cantidad de 
-comentarios
-.
+comentarios.
+
 \begin{figure}
 \centering
 \input{graphics/cap5_8.tex}
-\caption{Diagrama de barras de los recursos y sus niveles de repercusión}
+\caption{Los recursos y sus niveles de repercusión}
 \label{recursos_bars_1}
 \end{figure}
 
 Puede verse en la figura \ref{recursos_pie_1}, las gráficas circulares relativas
-a la distribución de los recursos sobre las diferentes variables a tomadas en
-cuenta, es notorio como el uso de calificadores aún no satisface las respectivas
-que se tienen.
+a la distribución de los recursos sobre las diferentes variables tomadas en
+cuenta, es notorio como el uso de calificadores aún no satisfacen las
+expectativas que se tienen.
 
 \begin{figure}
 \centering
 \input{graphics/cap5_9.tex}
-\caption{Porcentajes de los recursos según su tipo}
+\caption{Los recursos según su tipo}
 \label{recursos_pie_1}
 \end{figure}
 
@@ -381,18 +396,18 @@ estas son:
 \end{figure}
 
 \begin{description}
-\item [Usuarios] Linea que compila las actividades de creacion de usuarios en el
+\item [Usuarios] Linea que compila las actividades de creación de usuarios en el
 sistema.
-\item [Contactos] Linea que compila las actividades de creacion de contactos por
+\item [Contactos] Linea que compila las actividades de creación de contactos por
 parte de los usuarios.
-\item [Espacios] Linea que compila las actividades de creacion de espacios
+\item [Espacios] Linea que compila las actividades de creación de espacios
 virtuales por parte de los usuarios.
-\item [Recursos] Linea que compila las actividades de creacion de recursos por
+\item [Recursos] Linea que compila las actividades de creación de recursos por
 parte de los usuarios.
 \end{description}
 
-Puede notarse como la linea predominante es la de creacion de usaurios, con
-creaciones automaticas de estudiantes por parte de los docentes representada por
+Puede notarse como la linea predominante es la de creación de usuarios, con
+creaciones automáticas de estudiantes por parte de los docentes representada por
 grandes saltos en periodos muy cortos.
 
 En la figura \ref{tiempos_area_2}, se ve con mas claridad la misma linea de
@@ -403,24 +418,55 @@ determina todo el objeto de investigación.
 \begin{figure}
 \centering
 \input{graphics/cap5_11.tex}
-\caption{Linea de tiempo de la creación de elementos en el sistema}
+\caption{Linea de tiempo de la creación de elementos en el sistema ampliada}
 \label{tiempos_area_2}
 \end{figure}
 
 \section{Conclusiones}
-Habiendose presentado los resultados finales del tiempo de evaluación del
+Habiéndose presentado los resultados finales del tiempo de evaluación del
 proyecto, ahora se pasa a detallar las conclusiones a las que a llegado este
 trabajo.
 
 Primeramente, se ha visto que si bien la aplicación esta terminada, para la
-mejora real en los metodos de adquisición de conocimiento, son necesarias dos
-caracteristicas:
+mejora real en los métodos de adquisición de conocimiento, son necesarias dos
+características:
 
 \begin{itemize}
 \item Mantener y fidelizar a los estudiantes en el sistema.
 \item Siempre fomentar la producción de contenido por parte de todos los
-usuarios 
+usuarios del sistema, principalmente de parte de los roles de docente, e
+invitado.
 \end{itemize}
 
-%\section{Recomendaciones}
+Otra cuestión importante, es que aun se considera al tiempo de evaluación del
+sistema, como insuficiente para mostrar un verdadero avance en los objetivos del
+proyecto, además se debe organizar mejor todos los esfuerzos de coordinación
+entre los actores responsables.
+
+Para terminar, se ve mucha proyección a este trabajo, si existen muchas
+alternativas en cuanto a otros productos de software que realizan funciones
+similares, aun no se ha hallado constancia de uno que integre todas las
+funciones que este trabajo posee.
+
+\section{Recomendaciones}
+En el desarrollo del sistema se ha puesto mucho énfasis en el diseño del sistema
+siendo esta su mayor fortaleza, aun así el sistema posee muchas funcionalidades
+que serían deseables, ya que estos en mayor o menor medida apoyarían los
+objetivos original del proyecto.
+
+Entre las perspectivas a proyectar se consideran importantes las siguientes:
+
+\begin{itemize}
+\item Ampliación de las funcionalidades para todos los tipos de recursos
+existentes.
+\item Creación de nuevos tipos de recursos que fomenten la ludificación y el
+aprendizaje social.
+\item 
+\end{itemize}
+
+Otra recomendación que vale la pena recalcar, recae en el hecho que el sistema
+esta construido basado en el lenguaje PHP, para servidores HTTP como Apache Web
+Server o EngineX, debido a la gran popularidad de estas herramientas, pero en la
+actualidad, lo mas recomendable sería migrar todo el sistema a tecnologías
+JavaScript, las cuales están ganando mucho protagonismo en los últimos años.
 

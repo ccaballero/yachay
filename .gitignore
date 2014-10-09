@@ -8,7 +8,7 @@ syntax: glob
 *.aux
 *.out
 *.synctex.gz
-*.toc
+*.dvi
 
 .svn
 .cache/

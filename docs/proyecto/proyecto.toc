@@ -7,83 +7,16 @@
 \contentsline {subsection}{\numberline {1.3.2}Objetivos Espec\IeC {\'\i }ficos}{3}{subsection.1.3.2}
 \contentsline {section}{\numberline {1.4}Justificaci\IeC {\'o}n}{3}{section.1.4}
 \contentsline {section}{\numberline {1.5}Innovaci\IeC {\'o}n tecnol\IeC {\'o}gica}{3}{section.1.5}
-\contentsline {section}{\numberline {1.6}Alcance}{4}{section.1.6}
-\contentsline {chapter}{\numberline {2}Aprendizaje}{5}{chapter.2}
-\contentsline {section}{\numberline {2.1}Definici\IeC {\'o}n}{5}{section.2.1}
-\contentsline {section}{\numberline {2.2}Teor\IeC {\'\i }as del aprendizaje}{6}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Conductismo}{6}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}Cognitivismo}{7}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Constructivismo}{7}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}Conectivismo}{8}{subsection.2.2.4}
-\contentsline {subsubsection}{Principios del conectivismo}{8}{section*.2}
-\contentsline {section}{\numberline {2.3}Teor\IeC {\'\i }a del aprendizaje social}{9}{section.2.3}
-\contentsline {section}{\numberline {2.4}Ludificaci\IeC {\'o}n}{10}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}T\IeC {\'e}cnicas utilizadas}{10}{subsection.2.4.1}
-\contentsline {section}{\numberline {2.5}Cultura de la adhesi\IeC {\'o}n}{11}{section.2.5}
-\contentsline {section}{\numberline {2.6}Tipos de usuarios}{11}{section.2.6}
-\contentsline {section}{\numberline {2.7}Estrategias a tomar en cuenta}{12}{section.2.7}
-\contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de desarrollo}{13}{chapter.3}
-\contentsline {section}{\numberline {3.1}Modelo iterativo}{13}{section.3.1}
-\contentsline {section}{\numberline {3.2}Requisitos funcionales}{14}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Espacios virtuales}{14}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Intercambio de recursos}{16}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Canales de comunicaci\IeC {\'o}n}{17}{subsection.3.2.3}
-\contentsline {subsection}{\numberline {3.2.4}Fomento a la participaci\IeC {\'o}n}{18}{subsection.3.2.4}
-\contentsline {section}{\numberline {3.3}Requisitos no funcionales}{19}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Contexto de despliegue}{19}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Servidor web}{19}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Base de datos}{19}{subsection.3.3.3}
-\contentsline {subsection}{\numberline {3.3.4}Lenguaje de programaci\IeC {\'o}n}{20}{subsection.3.3.4}
-\contentsline {section}{\numberline {3.4}Dise\IeC {\~n}o de paquetes}{20}{section.3.4}
-\contentsline {section}{\numberline {3.5}Grupos y privilegios}{20}{section.3.5}
-\contentsline {section}{\numberline {3.6}Gesti\IeC {\'o}n de contenido}{22}{section.3.6}
-\contentsline {section}{\numberline {3.7}Planificaci\IeC {\'o}n}{22}{section.3.7}
-\contentsline {subsection}{\numberline {3.7.1}Iteraciones}{22}{subsection.3.7.1}
-\contentsline {chapter}{\numberline {4}Desarrollo del proyecto}{25}{chapter.4}
-\contentsline {section}{\numberline {4.1}Base funcional del sistema}{25}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}\emph {packages}: Manejador de paquetes}{25}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}\emph {privileges}: Manejador de privilegios}{26}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}\emph {routes}: Manejador de rutas de navegaci\IeC {\'o}n}{26}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}Creaci\IeC {\'o}n de un paquete del sistema}{26}{subsection.4.1.4}
-\contentsline {subsection}{\numberline {4.1.5}\emph {templates}: Manejador de plantillas}{29}{subsection.4.1.5}
-\contentsline {section}{\numberline {4.2}Construcci\IeC {\'o}n de espacios virtuales}{29}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}\emph {spaces}: La abstracci\IeC {\'o}n de todos los espacios}{31}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}\emph {gestions}, \emph {careers}, \emph {areas}: Los espacios formales}{31}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}\emph {subjects}, \emph {groups}, \emph {teams}: Los espacios jer\IeC {\'a}rquicos}{31}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}\emph {communities}: El espacio informal}{32}{subsection.4.2.4}
-\contentsline {section}{\numberline {4.3}B-learning}{32}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}\emph {evaluations}: Los sistemas de evaluaci\IeC {\'o}n}{32}{subsection.4.3.1}
-\contentsline {subsection}{\numberline {4.3.2}\emph {califications}: Las calificaciones}{33}{subsection.4.3.2}
-\contentsline {section}{\numberline {4.4}Recursos}{34}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}\emph {resources}: La abstracci\IeC {\'o}n de todos los recursos}{34}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}\emph {notes}: Los recursos mas b\IeC {\'a}sicos}{34}{subsection.4.4.2}
-\contentsline {subsection}{\numberline {4.4.3}\emph {links}: El administrador de marcadores}{34}{subsection.4.4.3}
-\contentsline {subsection}{\numberline {4.4.4}\emph {files}: El administrador de archivos}{36}{subsection.4.4.4}
-\contentsline {subsection}{\numberline {4.4.5}\emph {photos}, \emph {videos}: Los recursos especiales}{36}{subsection.4.4.5}
-\contentsline {subsection}{\numberline {4.4.6}\emph {events}: El recurso espacio-temporales}{36}{subsection.4.4.6}
-\contentsline {subsection}{\numberline {4.4.7}\emph {feedback}: El manejador de sugerencias}{36}{subsection.4.4.7}
-\contentsline {section}{\numberline {4.5}Los usuarios y su red de contactos}{36}{section.4.5}
-\contentsline {subsection}{\numberline {4.5.1}\emph {users}: El espacio personal}{36}{subsection.4.5.1}
-\contentsline {subsection}{\numberline {4.5.2}\emph {contacts}: Las redes sociales}{37}{subsection.4.5.2}
-\contentsline {subsection}{\numberline {4.5.3}\emph {invitations}: Estrategia de propagaci\IeC {\'o}n del sistema}{37}{subsection.4.5.3}
-\contentsline {subsection}{\numberline {4.5.4}\emph {roles}: El manejador de privilegios}{38}{subsection.4.5.4}
-\contentsline {section}{\numberline {4.6}Fomento a la participaci\IeC {\'o}n}{39}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}\emph {comments}: Los comentarios}{39}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}\emph {ratings}: La calidad del recurso}{40}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}\emph {tags}: Las nuevas interpretaciones}{40}{subsection.4.6.3}
-\contentsline {subsection}{\numberline {4.6.4}\emph {valorations}: Los sistemas de reputaci\IeC {\'o}n}{40}{subsection.4.6.4}
-\contentsline {section}{\numberline {4.7}Sistemas de control}{41}{section.4.7}
-\contentsline {subsection}{\numberline {4.7.1}\emph {stats}: Los indicadores medibles}{41}{subsection.4.7.1}
-\contentsline {chapter}{\numberline {5}Conclusiones y Recomendaciones}{43}{chapter.5}
-\contentsline {section}{\numberline {5.1}Resultados}{43}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Contexto de despliegue}{44}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Usuarios}{44}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Valoraciones}{45}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}Contactos}{48}{subsection.5.1.4}
-\contentsline {subsection}{\numberline {5.1.5}Espacios Virtuales}{48}{subsection.5.1.5}
-\contentsline {subsection}{\numberline {5.1.6}Recursos}{52}{subsection.5.1.6}
-\contentsline {subsection}{\numberline {5.1.7}Linea de tiempo}{53}{subsection.5.1.7}
-\contentsline {section}{\numberline {5.2}Conclusiones}{55}{section.5.2}
-\contentsline {chapter}{\numberline {A}Manual de instalaci\IeC {\'o}n}{57}{appendix.Alph1}
-\contentsline {chapter}{\numberline {B}Manual de usuario}{59}{appendix.Alph2}
-\contentsline {chapter}{Bibliograf\'{\i }a}{61}{appendix*.3}
+\contentsline {section}{\numberline {1.6}Alcance}{3}{section.1.6}
+\contentsline {chapter}{\numberline {A}Manual de instalaci\IeC {\'o}n}{5}{appendix.Alph1}
+\contentsline {section}{\numberline {A.1}Licencia de Software}{5}{section.Alph1.1}
+\contentsline {section}{\numberline {A.2}Obtenci\IeC {\'o}n del codigo fuente}{5}{section.Alph1.2}
+\contentsline {section}{\numberline {A.3}Requisitos de software}{6}{section.Alph1.3}
+\contentsline {section}{\numberline {A.4}Instalaci\IeC {\'o}n}{6}{section.Alph1.4}
+\contentsline {subsection}{\numberline {A.4.1}Archivo de hosts}{6}{subsection.Alph1.4.1}
+\contentsline {subsection}{\numberline {A.4.2}Host virtual}{6}{subsection.Alph1.4.2}
+\contentsline {subsection}{\numberline {A.4.3}Archivo .htaccess}{8}{subsection.Alph1.4.3}
+\contentsline {section}{\numberline {A.5}Sobre m\IeC {\'o}dulos, controladores y acciones}{8}{section.Alph1.5}
+\contentsline {section}{\numberline {A.6}Paquetes construidos}{8}{section.Alph1.6}
+\contentsline {chapter}{\numberline {B}Manual de usuario}{11}{appendix.Alph2}
+\contentsline {chapter}{Bibliograf\'{\i }a}{13}{appendix*.4}
