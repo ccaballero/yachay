@@ -1,74 +1,116 @@
 \chapter{Manual de instalación}
-En este anexo se presentan algunos aspectos tecnicos del software desarrollado,
-la forma correcta de obtenerlo, ademas de brindar una guia acerca de como debe
+En este anexo se presentan algunos aspectos técnicos del software desarrollado,
+la forma correcta de obtenerlo, además de brindar una guía acerca de como debe
 ser instalado y puesto en marcha.
 
 \section{Licencia de Software}
 Desde la misma concepción de este proyecto se considero la creación de una
-herramienta de software libre, y asi es como se ha mantenido desde entonces.
+herramienta de software libre, y así es como se ha mantenido desde entonces.
 
-Yachay es software libre bajo la licencia GPL version 3\footnote{Puede ahondarse
+Yachay es software libre bajo la licencia GPL versión 3\footnote{Puede ahondarse
 en esta definición en:
 http://es.wikipedia.org/wiki/GNU\_General\_Public\_License}.
 
-\section{Obtención del codigo fuente}
+\section{Obtención del código fuente}
 Inicialmente el proyecto estuvo alojado sobre un repositorio privado y
 versionado bajo el sistema de control de versiones \emph{mercurial}, poco
-despues de tener un primer prototipo estable, se cambio al un repositorio
-publico en el sitio \emph{github}, y paso ser versionado bajo el sistema de
-control de versiones \emph{git}; actualmente puede conseguir una copia del
+después de tener un primer prototipo estable, se migro a un repositorio
+publico en el sitio \emph{github.com}, y paso ser versionado bajo el sistema de
+control de versiones \emph{git}; actualmente se puede conseguir una copia del
 software desde este servidor.
 
-La dirección oficial para la obtencion del codigo fuente es:
+La dirección oficial para la obtención del código fuente es:
 \begin{quote}
 https://github.com/ccaballero/yachay.git
 \end{quote}
 
-Desde este dirección web, puede obtenerse una copia en formato zip
-(recomandable para implantación), o tambien puede clonarse una copia versionada
-con un cliente GIT.
+Desde esta dirección web, puede obtenerse una copia en formato zip
+(recomendable para implantación), o también puede clonarse una copia versionada
+con un cliente GIT (recomendable para modificación).
 
 \section{Requisitos de software}
 El software requiere ser desplegado en un servidor HTTP, que soporte la
 interpretación del lenguaje de programación PHP, siendo recomendables dos de
-ellos: Apache Web Server o EngineX. En esta guia Se presentarán ambas
+ellos: Apache Web Server o Nginx. En esta guia Se presentarán ambas
 posibilidades.
 
-Ademas de un servidor HTTP, se requiere tener acceso a una base de datos MySQL o
+Además de un servidor HTTP, se requiere tener acceso a una base de datos MySQL o
 MariaDB, para el almacenamiento de la información.
 
 Respecto al lenguaje de programación, es requerido tener instalado PHP en su
-version 5.3 o superior. Ademas de necesitarse tener las librerias del framework
+versión 5.3 o superior. Además de necesitarse tener las librerías del framework
 Zend 1 (disponibles en el sitio web:
 http://framework.zend.com/downloads/latest).
 
 \section{Instalación}
+Ahora describiremos todo el proceso necesario para la instalación de la
+aplicación web, este proceso consta de los siguientes pasos:
+
+\begin{enumerate}
+\item Registro de un dominio.
+\item Configuracion de un host virtual en el servidor web.
+\item Copiado de los archivos en un directorio accesible por el servidor web.
+\item Creación de una base de datos con permisos de creacion de tablas.
+\item Creación del esquema de base de datos provisto por la aplicación web.
+\item Configuración de la base de datos en la aplicacion web.
+\item Primer acceso y configuración de la cuenta administrativa.
+\end{enumerate}
+
 Cabe recalcar que toda la hermenéutica descrita, se restringe a cualquier
-distribución dal sistema operativo GNU/Linux, no siendo probado o corregido
+distribución del sistema operativo GNU/Linux, no siendo probado o corregido
 para ningún otro sistema operativo.
 
-\subsection{Archivo de hosts}
-El primer paso para la instalación del sistema es la creacion de un host virtual
-para esto se requiere crear un dominio, dependiendo de la mecanica de resolucion
+\subsection{Registro de dominio}
+El primer paso para la instalación del sistema es la creación de un host virtual
+para esto se requiere crear un dominio, dependiendo de la mecánica de resolución
 de nombre de dominio esto puede cambiar, si no se utiliza un servidor DNS, lo
 mas simple es modificar el archivo \emph{/etc/hosts}, para agregar una
-resolución de dominio simple.
+resolución de dominio simple, en la figura \ref{config_hosts} puede verse un
+ejemplo de archivo \emph{hosts}, en el cual se agrego la linea para resolución
+del dominio \emph{yachay.local}.
 
 \begin{figure}
 \begin{verbatim}
-127.0.0.1    yachay.local    yachay
+# /etc/hosts: Local Host Database
+#
+# This file describes a number of aliases-to-address mappings for the for 
+# local hosts that share this file.
+#
+# In the presence of the domain name service or NIS, this file may not be 
+# consulted at all; see /etc/host.conf for the resolution order.
+#
+
+# IPv4 and IPv6 localhost aliases
+127.0.0.1       localhost
+::1             localhost
+
+# Virtual hosts
+127.0.0.1       yachay.local        yachay
 \end{verbatim}
 \caption{Ejemplo de archivo de hosts}
+\label{config_hosts}
 \end{figure}
 
-En este caso \emph{yachay.local} es el dominio sobre el que estamos instalando.
-
 \subsection{Host virtual}
-Hecho esto, se pasa a configurar un host virtual para el servidor de
-aplicaciones web, para el caso del servidor apache, este se realizó de la
-siguiente manera:
+Una vez agregado un nombre de dominio para resolver, es tiempo de configurar el
+Servidor HTTP que se vaya a utilizar, dependiendo si el servidor sea Apache Web
+Server o Nginx, esto es diferente.
 
-\small
+Se presentarán ambas configuraciones, para lo cual se debe tener los ficheros
+de la aplicación web en la dirección \emph{/var/www/yachay}, esta dirección es
+la que se utilizará en los ejemplos.
+
+\subsubsection{Apache Web Server 2.2}
+Para configurar un hosts virtual en el servidor web Apache, es necesario añadir
+una directiva, dependiendo de la distribución esto puede ser realizado de muchas
+maneras, se recomienda revisar cual es la especifica para la distribución que se
+este utilizando.
+
+En la figura \ref{config_apache} se muestra la directiva a añadir y la
+configuración que esta debe contener, para el dominio que se registro
+anteriormente.
+
+\begin{figure}
 \begin{verbatim}
 <VirtualHost *:80>
     ServerName yachay.local
@@ -91,11 +133,16 @@ siguiente manera:
     </Directory>
 </VirtualHost>
 \end{verbatim}
+\caption{Host virtual para Apache Web Server}
+\label{config_apache}
+\end{figure}
 
-Adicionalmente se realizaron pruebas sobre el servidor nginx, basados en el
-siguiente archivo de configuracion:
+\subsubsection{Nginx}
+Adicionalmente se realizaron pruebas sobre el servidor nginx, para el uso de un
+host virtual se debe añadir la configuración presentada en la figura
+\ref{config_nginx}.
 
-\small
+\begin{figure}
 \begin{verbatim}
 server {
     listen 80;
@@ -124,74 +171,7 @@ server {
     }
 }
 \end{verbatim}
-
-En ambos casos \emph{/var/www/yachay} es el sitio donde esta instalado.
-
-\subsection{Archivo .htaccess}
-Como parte de la definición de la arquitectura diseñada. se detalla también el
-archivo .htaccess utilizado, para manejar varios formatos de respuesta de la
-petición, y asegurar la calidad de las url, se define como se muestra a
-continuación:
-
-\begin{verbatim}
-RewriteEngine on
-RewriteCond %{SCRIPT_FILENAME} !-f
-RewriteCond %{HTTP_HOST} ^([a-z]*)\.yachay\.local$ [NC]
-RewriteRule ^(.*)$ index.php?format=%1 [L,QSA]
-RewriteCond %{SCRIPT_FILENAME} !-f
-RewriteCond %{HTTP_HOST} ^yachay\.local$ [NC]
-RewriteRule ^(.*)$ index.php?format=www [L,QSA]
-\end{verbatim}
-
-Pueden verse dos reglas; la primera para cualquier subdominio que los paquetes
-requieran; la segunda para el dominio principal, de modo tal que en cualquier
-caso se envié por petición GET la variable "format" que define el tipo de
-respuesta que se espera.
-
-\section{Sobre módulos, controladores y acciones}
-Todo los recursos (no importando de que tipo, es decir, en su mayor grado de
-abstracción) poseen en esencia dos controladores iniciales:
-
-\begin{description}
-\item [index (list)] Que presenta una lista de los recursos disponibles.
-\item [manager (admin)] Que presenta el conjunto de funciones disponibles sobre
-los recursos.
-\end{description}
-
-Estas funciones sobre los recursos, dependiendo del paquete, pueden ser:
-
-\begin{description}
-\item [new (put)] Función de creación de un nuevo recurso.
-\item [view (get)] Función de presentación de la información de un recurso.
-\item [edit (post)] Función de edición del recurso.
-\item [delete (delete)] Función de eliminación del recurso.
-\item [lock] Función de bloqueo o deshabilitación del recurso.
-\item [unlock] Función de desbloqueo o habilitación del recurso.
-\end{description}
-
-\section{Paquetes construidos}
-Si bien, ya existían una gran cantidad de paquetes (antes denominados módulos),
-contemplando varios aspectos, como la modularidad, el acoplamiento, entre otros;
-fueron readecuados a los nuevos requerimientos, muchos fueron eliminados, otros
-nuevos se construyeron, o fusionaron. En el cuadro~\ref{modulos_actuales} se
-detallan los paquetes de los que se dispone en la actualidad y la función que
-desempeñan.
-
-El objetivo de los siguientes capítulos tratan exclusivamente de la explicación detallada de estos paquetes, detallando sus especificaciones y justificación de existencia, enfatizando en como están relacionados con los objetivos del proyecto.
-
-Adicionalmente, en el cuadro~\ref{modulos_eliminados} se detallan los que antes eran módulos y ahora no están presentes, también se justifica su eliminación.
-
-\begin{table}
-\begin{tabular}{l|l}
-Modulo & Detalle \\
-\hline
-frontpage & Sus funciones fueron incluidas en el paquete \emph{spaces}. \\
-menus & Sus funciones fueron incluidas en el paquete \emph{templates}. \\
-paginator & Sus funciones fueron incluidas en el paquete \emph{spaces}. \\
-regions & Sus funciones fueron incluidas en el paquete \emph{templates}. \\
-toolbar & Sus funciones fueron incluidas en el paquete \emph{templates}. \\
-\end{tabular}
-\caption{Módulos que no llegaron a ser paquetes.}
-\label{modulos_eliminados}
-\end{table}
+\caption{Host virtual para Nginx}
+\label{config_nginx}
+\end{figure}
 

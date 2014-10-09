@@ -10,13 +10,12 @@
 \contentsline {section}{\numberline {1.6}Alcance}{3}{section.1.6}
 \contentsline {chapter}{\numberline {A}Manual de instalaci\IeC {\'o}n}{5}{appendix.Alph1}
 \contentsline {section}{\numberline {A.1}Licencia de Software}{5}{section.Alph1.1}
-\contentsline {section}{\numberline {A.2}Obtenci\IeC {\'o}n del codigo fuente}{5}{section.Alph1.2}
+\contentsline {section}{\numberline {A.2}Obtenci\IeC {\'o}n del c\IeC {\'o}digo fuente}{5}{section.Alph1.2}
 \contentsline {section}{\numberline {A.3}Requisitos de software}{6}{section.Alph1.3}
 \contentsline {section}{\numberline {A.4}Instalaci\IeC {\'o}n}{6}{section.Alph1.4}
 \contentsline {subsection}{\numberline {A.4.1}Archivo de hosts}{6}{subsection.Alph1.4.1}
-\contentsline {subsection}{\numberline {A.4.2}Host virtual}{6}{subsection.Alph1.4.2}
-\contentsline {subsection}{\numberline {A.4.3}Archivo .htaccess}{8}{subsection.Alph1.4.3}
-\contentsline {section}{\numberline {A.5}Sobre m\IeC {\'o}dulos, controladores y acciones}{8}{section.Alph1.5}
-\contentsline {section}{\numberline {A.6}Paquetes construidos}{8}{section.Alph1.6}
+\contentsline {subsection}{\numberline {A.4.2}Host virtual}{7}{subsection.Alph1.4.2}
+\contentsline {subsubsection}{Apache Web Server 2.2}{7}{section*.4}
+\contentsline {subsubsection}{Nginx}{7}{section*.5}
 \contentsline {chapter}{\numberline {B}Manual de usuario}{11}{appendix.Alph2}
-\contentsline {chapter}{Bibliograf\'{\i }a}{13}{appendix*.4}
+\contentsline {chapter}{Bibliograf\'{\i }a}{13}{appendix*.6}

@@ -1,5 +1,7 @@
 \select@language {spanish}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Ejemplo de archivo de hosts}}{6}{figure.Alph1.1}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Ejemplo de archivo de hosts}}{7}{figure.Alph1.1}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Host virtual para Apache Web Server}}{8}{figure.Alph1.2}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Host virtual para Nginx}}{9}{figure.Alph1.3}
 \addvspace {10\p@ }
