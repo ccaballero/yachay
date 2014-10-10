@@ -32,7 +32,7 @@ con un cliente GIT (recomendable para modificación).
 \section{Requisitos de software}
 El software requiere ser desplegado en un servidor HTTP, que soporte la
 interpretación del lenguaje de programación PHP, siendo probados dos de
-ellos: Apache Web Server o Nginx. En esta guia se presentarán ambas
+ellos: Apache Web Server o Nginx. En esta guía se presentarán ambas
 posibilidades.
 
 Además de un servidor HTTP, se requiere tener acceso a una base de datos MySQL o
@@ -50,11 +50,11 @@ web, este proceso consta de los siguientes pasos:
 \begin{enumerate}
 \item Copiado de los archivos en un directorio accesible por el servidor web.
 \item Registro de dominio.
-\item Configuracion de host virtual en el servidor web.
+\item Configuración de host virtual en el servidor web.
 \item Creación de la base de datos y configuración de permisos.
 \item Creación del esquema de base de datos provisto por la aplicación web.
-\item Configuración de la aplicacion web.
-\item Creación de permisos especiales para la aplicación web.
+\item Configuración de la aplicación web.
+\item Configuración de permisos para la aplicación web.
 \item Primer acceso y configuración de la cuenta administrativa.
 \end{enumerate}
 
@@ -63,8 +63,8 @@ distribución del sistema operativo GNU/Linux, no siendo probado o corregido
 para ningún otro sistema operativo.
 
 \subsection{Copiado de archivos}
-El primer paso es copiar el codigo fuente obtenido a un carpeta accesible al
-servidor web, en la mayoria de los casos esta carpeta se encuentra en
+El primer paso es copiar el código fuente obtenido a un carpeta accesible al
+servidor web, en la mayoría de los casos esta carpeta se encuentra en
 \emph{/var/www/}, si se obtuvo una copia en formato zip, esta debe ser
 descompresa en ese directorio, si se clono el repositorio, debe clonarse en el
 mismo directorio; de forma tal que exista una carpeta \emph{yachay}.
@@ -152,13 +152,13 @@ anteriormente.
 
 \subsubsection{Nginx}
 Nginx es un servidor HTTP ligero de alto rendimiento, y actualmente es el
-segundo mas utilizado despues de Apache\footnote{Datos extraido de:
+segundo mas utilizado después de Apache\footnote{Datos extraído de:
 http://w3techs.com/technologies/overview/web\_server/all}.
 
 Inicialmente el proyecto fue desarrollado y probado para la ejecución en el
 servidor Apache, posteriormente se hicieron pruebas de despliegue sobre el
 servidor Nginx siendo estas satisfactorias, en la actualidad el sistema esta
-soportado y probado para las dos tecnologias, para el uso de un host virtual se
+soportado y probado para las dos tecnologías, para el uso de un host virtual se
 debe añadir la configuración presentada en la figura \ref{config_nginx}.
 
 \begin{figure}
@@ -195,14 +195,14 @@ server {
 \end{figure}
 
 \subsection{Creación y configuración de la base de datos}
-Yachay fue construido unicamente para soportar al servidor de base de datos
+Yachay fue construido únicamente para soportar al servidor de base de datos
 MySQL, posteriormente se hicieron pruebas de compatibilidad sobre MariaDB que
 resultaron satisfactorias.
 
 Para este paso debe ser creada una base de datos con codificación de caracteres
 UTF8 sobre un servidor de base de datos que sea accesible desde el servidor
 HTTP, en la figura \ref{config_mysql1} pueden apreciarse los comandos necesarios
-para la creacion y asignación de privilegios a un usuario llamado \emph{carlos}
+para la creación y asignación de privilegios a un usuario llamado \emph{carlos}
 e identificado con la contraseña \emph{asdf}.
 
 \begin{figure}
@@ -299,14 +299,14 @@ En la aplicación web se cuenta con dos archivos para la configuración, ambos
 ubicados en la carpeta \emph{/configs/}, estos archivos son:
 \emph{application.ini} donde se encuentras los valores por defecto de todas las
 posibles variables que parametrizan a la aplicación web, \emph{local.ini} es el
-archivo donde deben configurarse los parametros que se deseen cambiar. Estos
+archivo donde deben configurarse los parámetros que se deseen cambiar. Estos
 archivos siguen las reglas de configuración de los archivos INI, y pueden ser
-configurados de formas muy complejas, incluso hacerse multiples instancias del
+configurados de formas muy complejas, incluso hacerse múltiples instancias del
 mismo sistema pero con configuraciones diferentes\footnote{Pueden verse la
 estructura y formato en: https://en.wikipedia.org/wiki/INI\_file}.
 
 En la figura \ref{yachay_config1} pueden apreciarse algunas de las variables que
-comunmente son modificadas, y las cuales son detalladas a continuación:
+comúnmente son modificadas, y las cuales son detalladas a continuación:
 
 \begin{figure}
 \begin{verbatim}
@@ -349,11 +349,11 @@ system.locale = "es_BO"
 sobre un hosting compartido.
 \item [resources.layout.layout] Utilizada para la configuración de la
 plantilla por defecto para todo el sistema.
-\item [resources.db.adapter] Segun el tipo de conector de PHP-MySQL se tenga
+\item [resources.db.adapter] Según el tipo de conector de PHP-MySQL se tenga
 este debe tener unos de los siguientes valores: \emph{mysql}, \emph{mysqli}, o
 \emph{pdo\_mysql}.
 \item [resources.db.params.charset] Determina la codificación de caracteres que
-se utilizará para la conexion a la base de datos, se recomienda siempre el uso
+se utilizará para la conexión a la base de datos, se recomienda siempre el uso
 de la codificación UTF8;
 \item [resources.db.params.host] Determina la IP o URL donde se localiza el
 servidor de base de datos.
@@ -363,25 +363,79 @@ en el servidor de base de datos, con el que se manipulara la información.
 autorizado en el servidor de base de datos, con el que se manipulara la
 información.
 \item [resources.db.params.dbname] Determina el nombre de la base de datos donde
-se haya instalado el esquema de base de datos para la aplicacion web.
+se haya instalado el esquema de base de datos para la aplicación web.
 \item [resources.mail.transport.username] Determina el nombre de usuario para el
-servidor SMTP, encargado del manejo de correo electronico.
+servidor SMTP, encargado del manejo de correo electrónico.
 \item [resources.mail.transport.password] Determina la contraseña a utilizar
-para el servidor SMTP, encargado del manejo de correo electronico.
-\item [system.email\_direction] Determina la dirección de correo electronico que
-será el remitente de todo el correo electronico enviado.
-\item [system.email\_name] Determina el nombre para el correo electronico que
-será el remitente de todo el correo electronico enviado.
+para el servidor SMTP, encargado del manejo de correo electrónico.
+\item [system.email\_direction] Determina la dirección de correo electrónico que
+será el remitente de todo el correo electrónico enviado.
+\item [system.email\_name] Determina el nombre para el correo electrónico que
+será el remitente de todo el correo electrónico enviado.
 \item [system.title] Variable que determina el nombre del sistema que se
 mostrará en el navegador.
 \item [system.url] Variable que determina la dirección del sitio web donde se
-instalo la aplicacion web, este es muy usada en el envio de correo electronico.
+instalo la aplicación web, este es muy usada en el envío de correo electrónico.
 \item [system.key] Hash utilizado para la identificación univoca de la
-aplicacion web.
-\item [system.timezone] Determina la zona horaria del lugar geografico donde se
-encuentra el servidor que aloja la aplicacion web.
+aplicación web.
+\item [system.timezone] Determina la zona horaria del lugar geográfico donde se
+encuentra el servidor que aloja la aplicación web.
 \item [system.locale] Un \emph{locale} es un conjunto de parámetros que define
 el idioma, país y cualquier otra preferencia especial que el usuario desee ver
 en su interfaz de usuario. Se utiliza mucho en el framework Zend.
 \end{description}
+
+\subsection{Configuración de permisos para la aplicación web}
+Una vez terminada la configuración de las variables de la aplicación web, se
+necesita hacer que una serie de carpetas dentro de la aplicación web tengan
+permisos de escritura por parte del servidor HTTP. Estos directorios y sus
+funciones se detallan a continuación:
+
+\begin{description}
+\item [/public/media/communities] Carpeta que aloja las imágenes personalizadas
+para los espacios virtuales de comunidad.
+\item [/public/media/files] Carpeta que aloja los archivos propiamente dichos
+del tipo de recurso \emph{files}.
+\item [/public/media/photos] Carpeta que aloja los archivos propiamente dichos
+del tipo de recurso \emph{photos}.
+\item [/public/media/users] Carpeta que aloja las imágenes personalizadas
+para los espacios virtuales de usuario.
+\item [/public/media/videos] Carpeta que aloja los archivos propiamente dichos
+del tipo de recurso \emph{videos}.
+\end{description}
+
+Para conseguir esto, se pueden plantear múltiples soluciones, como ser: cambiar
+los dueños o grupos de estos directorios, cambiar los permisos de estos
+directorios para que tengan permisos de escritura, utilización de tablas ACL
+para configurar apropiadamente el permiso de escritura. Debe encontrarse el
+mejor modo según el grado de seguridad que se quiera obtener en el servidor que
+se tiene a disposición.
+
+\subsection{Primer acceso y configuración de cuenta}
+Una vez configurados los permisos, puede considerarse finalizada la parte de la
+instalación de la aplicación web.
+
+Para acceder al sitio debe utilizarse la dirección que se utilizo al inicio de
+las configuraciones, para acceder al sitio debe irse a la pagina de
+autenticación: \emph{http://yachay.local/login}.
+
+Donde los datos de acceso por defecto, están establecidos como se muestra en el
+cuadro \ref{yachay_auth}.
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|}
+\hline
+Usuario     & admin \\
+\hline
+Contraseña  & asdf \\
+\hline
+\end{tabular}
+\caption{Datos de acceso por defecto}
+\label{yachay_auth}
+\end{table}
+
+Una vez se accede al sistema como administrador, pueden ser configuradas las
+cuentas, los roles, y los privilegios que sean necesarios para los usuarios del
+sistema.
 

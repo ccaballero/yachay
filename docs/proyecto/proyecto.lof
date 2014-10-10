@@ -1,9 +1,39 @@
 \select@language {spanish}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Ejemplo de archivo de hosts}}{7}{figure.Alph1.1}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Host virtual para Apache Web Server}}{8}{figure.Alph1.2}
-\contentsline {figure}{\numberline {A.3}{\ignorespaces Host virtual para Nginx}}{9}{figure.Alph1.3}
-\contentsline {figure}{\numberline {A.4}{\ignorespaces Configuraci\IeC {\'o}n del servidor de base de datos}}{10}{figure.Alph1.4}
-\contentsline {figure}{\numberline {A.5}{\ignorespaces Creaci\IeC {\'o}n del esquema de base de datos}}{11}{figure.Alph1.5}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Espacios virtuales que se han de construir y su clasificaci\IeC {\'o}n en el sistema.}}{16}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Tipos de relacionamientos entre usuarios.}}{18}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces M\IeC {\'o}dulos a ser desarrollados, y sus grados de dependencia.}}{21}{figure.3.3}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Modelo de datos de la base funcional del sistema.}}{26}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Definici\IeC {\'o}n de datos para el modulo de sugerencias}}{27}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Inserci\IeC {\'o}n del paquete en el registro}}{27}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Inserciones en el registro de privilegios}}{27}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Inserciones en el registro de rutas}}{28}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Inserciones en el registro de rutas-privilegio}}{29}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Modelo de datos de las entidades para espacios virtuales.}}{30}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Modelo de datos de las entidades para proceso de evaluaci\IeC {\'o}n.}}{33}{figure.4.8}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Modelo de datos de las entidades para recursos del sistema.}}{35}{figure.4.9}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Modelo de datos de las elementos de usuario.}}{37}{figure.4.10}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Modelo de datos de los elementos para de control de privilegios.}}{38}{figure.4.11}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Modelo de datos de las entidades para interacci\IeC {\'o}n y participaci\IeC {\'o}n.}}{39}{figure.4.12}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Niveles de intenci\IeC {\'o}n de los usuarios clasificados por rol}}{46}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Niveles de intenci\IeC {\'o}n de los usuarios clasificados por rol}}{47}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Valoraciones de los usuarios clasificados por rol}}{48}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Valoraciones de los usuarios clasificados por rol}}{49}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Matriz de adyacencias de los contactos entre usuarios del sistema}}{50}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Los espacios virtuales y sus recursos seg\IeC {\'u}n su tipo}}{51}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Los espacios virtuales y sus recursos seg\IeC {\'u}n su tipo}}{52}{figure.5.7}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Los recursos y sus niveles de repercusi\IeC {\'o}n}}{54}{figure.5.8}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Los recursos seg\IeC {\'u}n su tipo}}{55}{figure.5.9}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Linea de tiempo de la creaci\IeC {\'o}n de elementos en el sistema}}{56}{figure.5.10}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Linea de tiempo de la creaci\IeC {\'o}n de elementos en el sistema ampliada}}{56}{figure.5.11}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Ejemplo de archivo de hosts}}{61}{figure.Alph1.1}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Host virtual para Apache Web Server}}{62}{figure.Alph1.2}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Host virtual para Nginx}}{63}{figure.Alph1.3}
+\contentsline {figure}{\numberline {A.4}{\ignorespaces Configuraci\IeC {\'o}n del servidor de base de datos}}{64}{figure.Alph1.4}
+\contentsline {figure}{\numberline {A.5}{\ignorespaces Creaci\IeC {\'o}n del esquema de base de datos}}{65}{figure.Alph1.5}
+\contentsline {figure}{\numberline {A.6}{\ignorespaces Archivo de configuraci\IeC {\'o}n local.ini}}{67}{figure.Alph1.6}
