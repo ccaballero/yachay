@@ -7,8 +7,9 @@
 \contentsline {subsection}{\numberline {A.4.1}Copiado de archivos}{2}{subsection.Alph1.4.1}
 \contentsline {subsection}{\numberline {A.4.2}Registro de dominio}{3}{subsection.Alph1.4.2}
 \contentsline {subsection}{\numberline {A.4.3}Creaci\IeC {\'o}n de host virtual}{3}{subsection.Alph1.4.3}
-\contentsline {subsubsection}{Apache Web Server 2.2}{3}{section*.2}
+\contentsline {subsubsection}{Apache Web Server 2.2}{4}{section*.2}
 \contentsline {subsubsection}{Nginx}{4}{section*.3}
-\contentsline {subsection}{\numberline {A.4.4}Creaci\IeC {\'o}n y configuraci\IeC {\'o}n de la base de datos}{4}{subsection.Alph1.4.4}
+\contentsline {subsection}{\numberline {A.4.4}Creaci\IeC {\'o}n y configuraci\IeC {\'o}n de la base de datos}{6}{subsection.Alph1.4.4}
 \contentsline {subsection}{\numberline {A.4.5}Creaci\IeC {\'o}n del esquema de base de datos}{6}{subsection.Alph1.4.5}
-\contentsline {chapter}{Bibliograf\'{\i }a}{9}{appendix*.4}
+\contentsline {subsection}{\numberline {A.4.6}Configuraci\IeC {\'o}n de la aplicaci\IeC {\'o}n web}{8}{subsection.Alph1.4.6}
+\contentsline {chapter}{Bibliograf\'{\i }a}{11}{appendix*.4}

@@ -31,8 +31,8 @@ con un cliente GIT (recomendable para modificación).
 
 \section{Requisitos de software}
 El software requiere ser desplegado en un servidor HTTP, que soporte la
-interpretación del lenguaje de programación PHP, siendo recomendables dos de
-ellos: Apache Web Server o Nginx. En esta guia Se presentarán ambas
+interpretación del lenguaje de programación PHP, siendo probados dos de
+ellos: Apache Web Server o Nginx. En esta guia se presentarán ambas
 posibilidades.
 
 Además de un servidor HTTP, se requiere tener acceso a una base de datos MySQL o
@@ -44,8 +44,8 @@ Zend 1 (disponibles en el sitio web:
 http://framework.zend.com/downloads/latest).
 
 \section{Instalación}
-Ahora describiremos todo el proceso necesario para la instalación de la
-aplicación web, este proceso consta de los siguientes pasos:
+Ahora describiremos el proceso necesario para la instalación de la aplicación
+web, este proceso consta de los siguientes pasos:
 
 \begin{enumerate}
 \item Copiado de los archivos en un directorio accesible por el servidor web.
@@ -54,6 +54,7 @@ aplicación web, este proceso consta de los siguientes pasos:
 \item Creación de la base de datos y configuración de permisos.
 \item Creación del esquema de base de datos provisto por la aplicación web.
 \item Configuración de la aplicacion web.
+\item Creación de permisos especiales para la aplicación web.
 \item Primer acceso y configuración de la cuenta administrativa.
 \end{enumerate}
 
@@ -64,7 +65,7 @@ para ningún otro sistema operativo.
 \subsection{Copiado de archivos}
 El primer paso es copiar el codigo fuente obtenido a un carpeta accesible al
 servidor web, en la mayoria de los casos esta carpeta se encuentra en
-\emph{/var/www/}, si se obtuvo una copia de formato zip, esta debe ser
+\emph{/var/www/}, si se obtuvo una copia en formato zip, esta debe ser
 descompresa en ese directorio, si se clono el repositorio, debe clonarse en el
 mismo directorio; de forma tal que exista una carpeta \emph{yachay}.
 
@@ -156,7 +157,7 @@ http://w3techs.com/technologies/overview/web\_server/all}.
 
 Inicialmente el proyecto fue desarrollado y probado para la ejecución en el
 servidor Apache, posteriormente se hicieron pruebas de despliegue sobre el
-servidor Nginx, siendo estas satisfactorias, en la actualidad el sistema esta
+servidor Nginx siendo estas satisfactorias, en la actualidad el sistema esta
 soportado y probado para las dos tecnologias, para el uso de un host virtual se
 debe añadir la configuración presentada en la figura \ref{config_nginx}.
 
@@ -292,4 +293,95 @@ extra
 
 \subsection{Configuración de la aplicación web}
 Una vez creados el esquema y los datos básicos para la aplicación, es necesario
+pasar los datos de acceso a la base de datos a la aplicación web.
+
+En la aplicación web se cuenta con dos archivos para la configuración, ambos
+ubicados en la carpeta \emph{/configs/}, estos archivos son:
+\emph{application.ini} donde se encuentras los valores por defecto de todas las
+posibles variables que parametrizan a la aplicación web, \emph{local.ini} es el
+archivo donde deben configurarse los parametros que se deseen cambiar. Estos
+archivos siguen las reglas de configuración de los archivos INI, y pueden ser
+configurados de formas muy complejas, incluso hacerse multiples instancias del
+mismo sistema pero con configuraciones diferentes\footnote{Pueden verse la
+estructura y formato en: https://en.wikipedia.org/wiki/INI\_file}.
+
+En la figura \ref{yachay_config1} pueden apreciarse algunas de las variables que
+comunmente son modificadas, y las cuales son detalladas a continuación:
+
+\begin{figure}
+\begin{verbatim}
+[production]
+resources.frontController.baseUrl = 
+
+resources.layout.layout = webarte
+
+resources.db.adapter = Mysqli
+resources.db.params.charset = utf8
+resources.db.params.host = localhost
+resources.db.params.username = carlos
+resources.db.params.password = asdf
+resources.db.params.dbname = yachay
+
+resources.mail.transport.username = 
+resources.mail.transport.password = 
+
+system.email_direction = 
+system.email_name = 
+
+system.title = " ~ yachay ~ "
+system.url = http://yachay.local
+system.key = 
+system.timezone = "America/La_Paz"
+system.locale = "es_BO"
+
+[staging : production]
+
+[testing : production]
+
+[development : production]
+\end{verbatim}
+\caption{Archivo de configuración local.ini}
+\label{yachay_config1}
+\end{figure}
+
+\begin{description}
+\item [resources.frontController.baseUrl] Utilizada para la instalación
+sobre un hosting compartido.
+\item [resources.layout.layout] Utilizada para la configuración de la
+plantilla por defecto para todo el sistema.
+\item [resources.db.adapter] Segun el tipo de conector de PHP-MySQL se tenga
+este debe tener unos de los siguientes valores: \emph{mysql}, \emph{mysqli}, o
+\emph{pdo\_mysql}.
+\item [resources.db.params.charset] Determina la codificación de caracteres que
+se utilizará para la conexion a la base de datos, se recomienda siempre el uso
+de la codificación UTF8;
+\item [resources.db.params.host] Determina la IP o URL donde se localiza el
+servidor de base de datos.
+\item [resources.db.params.username] Determina el nombre del usuario autorizado
+en el servidor de base de datos, con el que se manipulara la información.
+\item [resources.db.params.password] Determina la contraseña del usuario
+autorizado en el servidor de base de datos, con el que se manipulara la
+información.
+\item [resources.db.params.dbname] Determina el nombre de la base de datos donde
+se haya instalado el esquema de base de datos para la aplicacion web.
+\item [resources.mail.transport.username] Determina el nombre de usuario para el
+servidor SMTP, encargado del manejo de correo electronico.
+\item [resources.mail.transport.password] Determina la contraseña a utilizar
+para el servidor SMTP, encargado del manejo de correo electronico.
+\item [system.email\_direction] Determina la dirección de correo electronico que
+será el remitente de todo el correo electronico enviado.
+\item [system.email\_name] Determina el nombre para el correo electronico que
+será el remitente de todo el correo electronico enviado.
+\item [system.title] Variable que determina el nombre del sistema que se
+mostrará en el navegador.
+\item [system.url] Variable que determina la dirección del sitio web donde se
+instalo la aplicacion web, este es muy usada en el envio de correo electronico.
+\item [system.key] Hash utilizado para la identificación univoca de la
+aplicacion web.
+\item [system.timezone] Determina la zona horaria del lugar geografico donde se
+encuentra el servidor que aloja la aplicacion web.
+\item [system.locale] Un \emph{locale} es un conjunto de parámetros que define
+el idioma, país y cualquier otra preferencia especial que el usuario desee ver
+en su interfaz de usuario. Se utiliza mucho en el framework Zend.
+\end{description}
 
