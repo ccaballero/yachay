@@ -229,7 +229,7 @@ En la figura (\ref{modelo2}), se presenta la parte del modelo entidad-relación
 del sistema, que comprende a las entidades que representan los espacios
 virtuales, además de su relación necesaria con la entidad \emph{usuario}.
 
-\subsection{\emph{spaces}: La abstracción de todos los espacios}
+\subsection{\emph{spaces}: Abstracción de todos los espacios}
 Para facilitar el manejo de múltiples tipos de espacios, se ha optado por
 abstraer muchas de las funcionalidades comunes (ya sean de presentación, o de
 funcionalidad), es así como se ha creado este paquete que acumula la mayor parte
@@ -246,8 +246,7 @@ eliminación).
 \item Control de permisos sobre los espacios.
 \end{itemize}
 
-\subsection{\emph{gestions}, \emph{careers}, \emph{areas}: Los espacios
-formales}
+\subsection{\emph{gestions}, \emph{careers}, \emph{areas}: Espacios formales}
 Al comienzo del diseño se observo que una gran parte de los espacios vitales que
 eran acordes al modelo al uso en la Universidad, eran dependientes de la
 gestión, es decir, que una materia/grupo acumula recursos únicamente validos por
@@ -275,8 +274,7 @@ observada en el contexto del sistema.
 entre si.
 \end{itemize}
 
-\subsection{\emph{subjects}, \emph{groups}, \emph{teams}: Los espacios
-jerárquicos}
+\subsection{\emph{subjects}, \emph{groups}, \emph{teams}: Espacios jerárquicos}
 Estos espacios representan el eje central sobre el que se ha construido el
 sistema, también están modelados acorde a la estructura observada en el contexto
 del sistema, estas poseen una estructura de tipo jerárquico (es decir, cada una
@@ -335,7 +333,7 @@ En la figura (\ref{modelo3}), se presenta la parte del modelo entidad-relación
 del sistema, que comprende a las entidades que facilitan la evaluación de los
 estudiantes por parte del docente.
 
-\subsection{\emph{evaluations}: Los sistemas de evaluación}
+\subsection{\emph{evaluations}: Sistemas de evaluación}
 En un comienzo se notó que si bien, los docentes siempre presentan las
 calificaciones con un formato único (Primer parcial, Segundo parcial, Promedio
 de los parciales, Examen final y Segunda instancia), estas solo son la parte
@@ -387,7 +385,7 @@ del sistema, que comprende a las entidades que representan los diferentes
 recursos que el sistema posee, además de su generalización (la entidad
 \emph{resource}), relacionados con el patrón \emph{is-a}.
 
-\subsection{\emph{resources}: La abstracción de todos los recursos}
+\subsection{\emph{resources}: Abstracción de todos los recursos}
 Al igual que en los espacios virtuales, los recursos también comparten un gran
 conjunto de funcionalidad común a todos ellos (ya sean de presentación, como de
 funcionalidad), es así como se han abstraído estas funcionalidades en este
@@ -409,13 +407,13 @@ El tipo de recurso mas básico es la nota, que representa esencialmente texto.
 Este recurso además se diseño para ser utilizado por otros tipo de recursos mas
 enriquecidos y especializados.
 
-\subsection{\emph{links}: El administrador de marcadores}
+\subsection{\emph{links}: El manejador de marcadores}
 Este recurso fue construido para compartir recursos, a partir de enlaces sobre
 la red de Internet, se construyó y diseño de forma que para un trabajo
 posterior, a este tipo de recurso pudiese agregarse la funcionalidad de
 reconocimiento de recurso para una reenderización mas apropiada.
 
-\subsection{\emph{files}: El administrador de archivos}
+\subsection{\emph{files}: El manejador de archivos}
 Este recurso fue construido para compartir archivos en un espacio virtual,
 también se pensó para trabajo posterior, una especialización sobre la
 reenderización y reconocimiento de los formatos.
@@ -424,13 +422,13 @@ reenderización y reconocimiento de los formatos.
 Estos recursos están basados en el recurso tipo archivo, pero poseen
 características que les permiten ser reenderizados apropiadamente.
 
-\subsection{\emph{events}: El recurso espacio-temporales}
+\subsection{\emph{events}: El recurso espacio-temporal}
 Este recurso representa un evento sobre un espacio virtual, a partir de este
 recurso, se considero para trabajo posterior, el que sea tanto un recurso, como
 un espacio virtual independiente, además de facilitar el manejo de
 notificaciones.
 
-\subsection{\emph{feedback}: El manejador de sugerencias}
+\subsection{\emph{feedback}: Administrador de sugerencias}
 Este fue el ultimo paquete que se construyo, y fue creado exclusivamente para
 que los usuarios del sistema puedan hacer sus sugerencias sobre nueva
 funcionalidad que podrían implementarse sobre el sistema.
@@ -469,7 +467,7 @@ Las principales funciones de este paquete son:
 espacios virtuales a los que tiene acceso.
 \end{itemize}
 
-\subsection{\emph{contacts}: Las redes sociales}
+\subsection{\emph{contacts}: La red de contactos}
 Para proveer las características de una red social, se construyo un paquete que
 pudiese manejar las relaciones entre diferentes tipos de usuarios.
 
@@ -494,7 +492,7 @@ Las principales funciones de este paquete son:
 \item Manejo del contacto con el usuario que atiende a la invitación.
 \end{itemize}
 
-\subsection{\emph{roles}: El manejador de privilegios}
+\subsection{\emph{roles}: Manejador de privilegios}
 Un rol representa el conjunto de privilegios que posee un usuario sobre los
 paquetes del sistema.
 Inicialmente se considero categorizar a los usuarios de forma estática, según
@@ -518,7 +516,7 @@ de privilegios que estos posean.
 \begin{figure}
 \centering
 \input{graphics/cap4_6.tex}
-\caption{Modelo de datos de los elementos para de control de privilegios.}
+\caption{Modelo de datos de los elementos para control de privilegios.}
 \label{modelo6}
 \end{figure}
 
@@ -564,7 +562,7 @@ establecido para tal caso.
 \item Notificación de creación de comentario para el paquete de valoraciones.
 \end{itemize}
 
-\subsection{\emph{ratings}: La calidad del recurso}
+\subsection{\emph{ratings}: La calidad de los recursos}
 Para fomentar a la producción de recursos realmente útiles a las personas del
 espacio virtual, se implemento la funcionalidad de valoración del recurso.
 
@@ -591,7 +589,7 @@ este nuevo o editado.
 determinado termino.
 \end{itemize}
 
-\subsection{\emph{valorations}: Los sistemas de reputación}
+\subsection{\emph{valorations}: Sistema de reputación}
 Como ultimo método para fomentar la participación se crearon indicadores de
 reputación, estos se miden según el grado de participación que el usuario tiene
 en el sistema.
@@ -620,7 +618,7 @@ diferentes mediciones que pueden realizarse en el sistema, todo esto con el
 objetivo de poder hacer un seguimiento apropiado del contexto, y de como los
 objetivos planteados en el proyecto están progresando.
 
-\subsection{\emph{stats}: Los indicadores medibles}
+\subsection{\emph{stats}: Indicadores medibles}
 Entre los últimos paquetes desarrollados en el proyecto, se encuentra este, que
 se ocupa netamente de la condensación de información de múltiples entidades de
 sistema, este hace uso de herramientas para la visualización de gráficas, además
