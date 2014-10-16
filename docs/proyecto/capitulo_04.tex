@@ -3,8 +3,8 @@
 En este capítulo, trataremos los asuntos concernientes a la construcción de las
 funciones del sistema, sobre las que recaerán el control de los recursos, y la
 expansibilidad que pueda darse a todo el proyecto. Si bien en el anterior
-capitulo el tema fundamental era el \emph{proceso de desarrollo}, el objeto
-central de este capitulo es el \emph{producto de software}.
+capítulo el tema fundamental era el \emph{proceso de desarrollo}, el objeto
+central de este capítulo es el \emph{producto de software}.
 
 \section{Base funcional del sistema}
 Una de las características deseables a tomar en cuenta para el desarrollo del
@@ -214,7 +214,7 @@ del sistema.
 \section{Construcción de espacios virtuales}
 Una vez terminada la construcción de los paquetes que componen la base funcional
 del sistema, se encaminó el proyecto a la construcción de espacios virtuales,
-como se menciono en el capitulo anterior, han sido definido varios tipos de
+como se mencionó en el capítulo anterior, han sido definido varios tipos de
 espacios, en esta sección se tratan las funcionalidades que poseen cada uno de
 ellos.
 
@@ -248,9 +248,9 @@ eliminación).
 
 \subsection{\emph{gestions}, \emph{careers}, \emph{areas}: Espacios formales}
 Al comienzo del diseño se observo que una gran parte de los espacios vitales que
-eran acordes al modelo al uso en la Universidad, eran dependientes de la
-gestión, es decir, que una materia/grupo acumula recursos únicamente validos por
-un determinado periodo de tiempo, es así como se crearon estos espacios.
+eran acordes al modelo de uso en la Universidad eran dependientes de la gestión,
+es decir, que una materia/grupo acumula recursos únicamente validos por un
+determinado periodo de tiempo, es así como se crearon estos espacios.
 
 \begin{description}
 \item [Gestión] Es el espacio que determina el inicio y final de la validez de
@@ -284,10 +284,10 @@ esta contenida dentro de otra).
 \item [Materia] Representa el espacio de materia y a su vez puede poseer varios
 grupos en su propio contexto.
 \item [Grupo] Representa el espacio de trabajo de un grupo especifico de una
-materia, esta a su vez puede contener varios equipos, según la organización y
+materia, está a su vez puede contener varios equipos, según la organización y
 métodos que utilice el instructor del grupo.
 \item [Equipo] Representa el mínimo espacio organizacional en un grupo, se
-construyo para facilitar la organización de estudiantes dentro de un grupo.
+construyó para facilitar la organización de estudiantes dentro de un grupo.
 \end{description}
 
 Las principales funciones de estos paquetes son:
@@ -301,7 +301,7 @@ establecidos.
 
 \subsection{\emph{communities}: El espacio informal}
 Como una forma de crear transversales al modelo jerárquico presentado
-anteriormente, se construyo el espacio de comunidad, que agrupa usuarios a
+anteriormente, se construyó el espacio de comunidad, que agrupa usuarios a
 partir de criterios no relacionados a una malla curricular, es decir, como una
 forma alternativa de crear relaciones entre usuarios, a partir de un interés
 particular. Este es un espacio atemporal, es decir, esta no depende de la
@@ -319,7 +319,7 @@ rechazado en la comunidad).
 
 \section{B-learning}
 Para facilitar el manejo por parte del docente asignado a un grupo, se crearon
-dos paquetes que administran las formas de calificación, y la presentación de
+dos paquetes que administran las formas de calificación y la presentación de
 calificaciones.
 
 \begin{figure}
@@ -370,7 +370,7 @@ criterio de evaluación establecido.
 Una vez concluidos los paquetes que conforman los espacios disponibles que el
 sistema posee, se construyeron los recursos que estos pueden contener, se
 considera un \emph{recurso}, a cualquier pieza de información que un usuario
-haya aportado, y que se útil a toda una colectividad, ya sea esta formal o
+haya aportado, y que sea útil a toda una colectividad, ya sea esta formal o
 informal.
 
 \begin{figure}
@@ -383,7 +383,7 @@ informal.
 En la figura (\ref{modelo4}), se presenta la parte del modelo entidad-relación
 del sistema, que comprende a las entidades que representan los diferentes
 recursos que el sistema posee, además de su generalización (la entidad
-\emph{resource}), relacionados con el patrón \emph{is-a}.
+\emph{resource}), relacionados con el patrón ``\emph{is-a}''.
 
 \subsection{\emph{resources}: Abstracción de todos los recursos}
 Al igual que en los espacios virtuales, los recursos también comparten un gran
@@ -424,12 +424,12 @@ características que les permiten ser reenderizados apropiadamente.
 
 \subsection{\emph{events}: El recurso espacio-temporal}
 Este recurso representa un evento sobre un espacio virtual, a partir de este
-recurso, se considero para trabajo posterior, el que sea tanto un recurso, como
+recurso, se consideró para trabajo posterior, el que sea tanto un recurso, como
 un espacio virtual independiente, además de facilitar el manejo de
 notificaciones.
 
 \subsection{\emph{feedback}: Administrador de sugerencias}
-Este fue el ultimo paquete que se construyo, y fue creado exclusivamente para
+Este fue el ultimo paquete que se construyó, y fue creado exclusivamente para
 que los usuarios del sistema puedan hacer sus sugerencias sobre nueva
 funcionalidad que podrían implementarse sobre el sistema.
 
@@ -468,7 +468,7 @@ espacios virtuales a los que tiene acceso.
 \end{itemize}
 
 \subsection{\emph{contacts}: La red de contactos}
-Para proveer las características de una red social, se construyo un paquete que
+Para proveer las características de una red social, se construyó un paquete que
 pudiese manejar las relaciones entre diferentes tipos de usuarios.
 
 Las principales funciones de este paquete son:
@@ -480,7 +480,7 @@ Las principales funciones de este paquete son:
 \end{itemize}
 
 \subsection{\emph{invitations}: Estrategia de propagación del sistema}
-Se considero que la creación de cuentas en el sistema nunca sea abierta, con el
+Se consideró que la creación de cuentas en el sistema nunca sea abierta, con el
 objetivo de hacer que los usuarios en el sistema, tengan al menos un contacto
 con otro usuario, por tal motivo, se crearon las invitaciones.
 
@@ -495,7 +495,7 @@ Las principales funciones de este paquete son:
 \subsection{\emph{roles}: Manejador de privilegios}
 Un rol representa el conjunto de privilegios que posee un usuario sobre los
 paquetes del sistema.
-Inicialmente se considero categorizar a los usuarios de forma estática, según
+Inicialmente se consideró categorizar a los usuarios de forma estática, según
 los criterios del modelo de la Universidad, estos son:
 
 \begin{itemize}
@@ -509,7 +509,7 @@ los criterios del modelo de la Universidad, estos son:
 \item Administrador
 \end{itemize}
 
-Pero para facilitar la adaptación a otros tipos de organización, se vio
+Pero para facilitar la adaptación a otros tipos de organización, se vió
 conveniente crear roles dinámicamente, así como poder administrar el conjunto
 de privilegios que estos posean.
 
@@ -535,7 +535,7 @@ establecido.
 
 \section{Fomento a la participación}
 Habiéndose finalizado las funciones referentes a espacios, recursos, y
-contactos, se realizo la construcción de las funciones utilitarias que sirven
+contactos, se realizó la construcción de las funciones utilitarias que sirven
 como medidas para fomentar la participación de parte de los usuarios.
 
 \begin{figure}
@@ -550,7 +550,7 @@ de las entidades que apoyan la interacción y participación sobre los recursos
 del sistema.
 
 \subsection{\emph{comments}: Los comentarios}
-Para fomentar la interacción basada en un recurso, se implemento la
+Para fomentar la interacción basada en un recurso, se implementó la
 funcionalidad de comentarios sobre el recurso.
 
 Las principales funciones de este paquete son:
@@ -559,17 +559,18 @@ Las principales funciones de este paquete son:
 \item Administración de comentarios sobre el recurso por parte de su autor.
 \item Moderación del comentario por parte de los roles que contengan el permiso
 establecido para tal caso.
-\item Notificación de creación de comentario para el paquete de valoraciones.
+\item Notificación de creación del comentario para el paquete de valoraciones.
 \end{itemize}
 
 \subsection{\emph{ratings}: La calidad de los recursos}
 Para fomentar a la producción de recursos realmente útiles a las personas del
-espacio virtual, se implemento la funcionalidad de valoración del recurso.
+espacio virtual, se implementó la funcionalidad de valoración del recurso.
 
 Las principales funciones de este paquete son:
 
 \begin{itemize}
-\item Registro de la valoración que un usuario sobre un recurso determinado.
+\item Registro de la valoración que un usuario realizó sobre un recurso
+determinado.
 \item Control de la decisión del usuario (solo puede valorarse un recurso una
 vez).
 \item Notificación de creación de ranking para el paquete de valoraciones.
@@ -586,7 +587,7 @@ Las principales funciones de este paquete son:
 este nuevo o editado.
 \item Manejo de etiquetas para las comunidades.
 \item Generación de una nube de etiquetas, a partir del conteo del uso de un
-determinado termino.
+determinado término.
 \end{itemize}
 
 \subsection{\emph{valorations}: Sistema de reputación}
@@ -596,13 +597,13 @@ en el sistema.
 
 Las principales funciones de este paquete son:
 \begin{itemize}
-\item Seguimiento del numero de recursos producidos por el usuario, para el
+\item Seguimiento del número de recursos producidos por el usuario, para el
 calculo de la valoración de actividad.
-\item Seguimiento del numero de comentarios realizados por el usuario, para el
+\item Seguimiento del número de comentarios realizados por el usuario, para el
 calculo de la valoración de participación.
 \item Seguimiento de rankeo de usuarios a un determinado recurso, para el
 calculo de la valoración de popularidad, hacia el autor de dicho recurso.
-\item Seguimiento del numero de contactos con los que el usuario cuenta, para el
+\item Seguimiento del número de contactos con los que el usuario cuenta, para el
 calculo de la valoración de sociabilidad.
 \end{itemize}
 
@@ -654,8 +655,8 @@ total de registros, los recursos acumulados en estos, la audiencia que ha
 visualizado el recurso, y los respectivos promedios de audiencia y recursos.
 \item [Recursos] Reporte sobre el uso y aprovechamiento de los recursos y su
 distribución sobre los espacios virtuales existentes, donde se presenta la
-cantidad total de recursos agrupados por tipo, la audiencia que están han
-tenido, los conteo de comentarios que estos han recibido, su conteo de
+cantidad total de recursos agrupados por tipo, la audiencia que estos han
+tenido, el conteo de comentarios que estos han recibido, su conteo de
 calificadores, su conteo total de etiquetas, además de su promedios respectivos.
 \item [Linea de tiempo] Reporte sobre las actividades de los usuarios sobre el
 sistema, en modo general y sobre una linea de tiempo; estos están clasificados
@@ -663,6 +664,6 @@ en cuatro tipos: actividades de usuarios, actividades de contacto, actividades
 de recursos, y actividades de espacios.
 \end{description}
 
-Cabe destacar que todas las conclusiones presentadas en el siguiente capitulo,
+Cabe destacar que todas las conclusiones presentadas en el siguiente capítulo,
 están generadas por este modulo.
 
