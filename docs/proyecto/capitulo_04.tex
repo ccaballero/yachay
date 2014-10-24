@@ -61,12 +61,11 @@ definición precisa en la construcción de funcionalidad nueva, ahora detallarem
 tal proceso a partir del ultimo paquete construido en el sistema, el paquete de
 sugerencias.
 
-Puede verse en el ejemplo, que este registra cuatro diferentes tipos de
-privilegios; cuatro diferentes tipos de rutas de acceso, aquí puede notarse que
-una ruta no necesariamente atiende exclusivamente a la petición GET, sino a
-cualquier tipo de petición que sea necesario realizar (ya sea POST, PUT, DELETE,
-etc); además puede verse el establecimiento de privilegios para el acceso a las
-rutas.
+Este paquete registra cuatro diferentes tipos de privilegios; cuatro diferentes
+tipos de rutas de acceso, aquí podrá notarse que una ruta no necesariamente
+atiende exclusivamente a la petición GET, sino a cualquier tipo de petición que
+sea necesario realizar (ya sea POST, PUT, DELETE, etc); además puede verse el
+establecimiento de privilegios para el acceso a las rutas.
 
 Este proceso consiste en los siguientes pasos:
 
@@ -84,7 +83,7 @@ CREATE TABLE `feedback` (
         ON UPDATE CASCADE ON DELETE RESTRICT
 ) DEFAULT CHARACTER SET UTF8;
 \end{SQL}
-\caption{Definición de datos para el modulo de sugerencias}
+\caption{Definición de datos para el modulo de sugerencias.}
 \label{code1}
 \end{figure}
 
@@ -99,7 +98,7 @@ VALUES
     UNIX_TIMESTAMP(),
    'Modulo de registro de sugerencias del sistema');
 \end{SQL}
-\caption{Inserción del paquete en el registro}
+\caption{Inserción del paquete en el registro.}
 \label{code2}
 \end{figure}
 
@@ -114,7 +113,7 @@ VALUES
     ('Marcar sugerencias interesantes', 'feedback', 'mark'),
     ('Eliminar sugerencias inutiles',   'feedback', 'delete');
 \end{SQL}
-\caption{Inserciones en el registro de privilegios}
+\caption{Inserciones en el registro de privilegios.}
 \label{code3}
 \end{figure}
 
@@ -166,7 +165,7 @@ VALUES
      'feedback/:entry/drop',
      'feedback', 'entry', 'drop');
 \end{SQL}
-\caption{Inserciones en el registro de rutas}
+\caption{Inserciones en el registro de rutas.}
 \label{code4}
 \end{figure}
 
@@ -181,7 +180,7 @@ VALUES
 ('feedback_manager', 'feedback', 'mark'),
 ('feedback_manager', 'feedback', 'delete');
 \end{SQL}
-\caption{Inserciones en el registro de rutas-privilegio}
+\caption{Inserciones en el registro de rutas-privilegio.}
 \label{code5}
 \end{figure}
 
@@ -189,7 +188,7 @@ VALUES
 \item Creación de un archivo SQL con la definición de las tablas necesarias para
 el nuevo paquete, estas deben estar prefijadas con el nombre del paquete
 (figura \ref{code1}).
-\item Inserción un nuevo registro de paquete (figura \ref{code2}).
+\item Inserción de un nuevo registro de paquete (figura \ref{code2}).
 \item Inserción de los registros de privilegios para el paquete nuevo
 (figura \ref{code3}).
 \item Inserción de los registros de ruta para el paquete nuevo
@@ -198,7 +197,7 @@ el nuevo paquete, estas deben estar prefijadas con el nombre del paquete
 (figura \ref{code5}).
 \end{itemize}
 
-Esta diseño esta basado en la forma de control que puede verse en cualquier
+Este diseño esta basado en la forma de control que puede verse en cualquier
 sistema administrador de contenido básico (CMS).
 
 \subsection{\emph{templates}: Manejador de plantillas}
@@ -214,7 +213,7 @@ del sistema.
 \section{Construcción de espacios virtuales}
 Una vez terminada la construcción de los paquetes que componen la base funcional
 del sistema, se encaminó el proyecto a la construcción de espacios virtuales,
-como se mencionó en el capítulo anterior, han sido definido varios tipos de
+como se mencionó en el capítulo anterior, han sido definidos varios tipos de
 espacios, en esta sección se tratan las funcionalidades que poseen cada uno de
 ellos.
 
@@ -257,7 +256,7 @@ determinado periodo de tiempo, es así como se crearon estos espacios.
 un recurso temporal, esta muy asociado a la idea que se tiene de gestión
 académica en la Universidad.
 \item [Área] Un área es un tipo de espacio temporal, se creo para agrupar otros
-tipos de espacio de forma transversal, y de esta forma flexibilizar las
+tipos de espacios de forma transversal, y de esta forma flexibilizar las
 jerarquías que poseía el modelo tradicional; un ejemplo de esto se ve en las
 diferentes relaciones que existen entre diferentes materias o grupos en el
 modelo.
@@ -361,8 +360,8 @@ Las principales funciones de este paquete son:
 \item Edición de las calificaciones de los alumnos de un determinado grupo,
 según un criterio de evaluación establecido.
 \item Importación automática a partir de una archivo en formato CSV, de las
-calificaciones de una grupo.
-\item Exportación a formato CSV de las calificaciones de una grupo, según un
+calificaciones de un grupo.
+\item Exportación a formato CSV de las calificaciones de un grupo, según un
 criterio de evaluación establecido.
 \end{itemize}
 
@@ -435,13 +434,13 @@ funcionalidad que podrían implementarse sobre el sistema.
 
 \section{Los usuarios y su red de contactos}
 Habiéndose construido las funciones de espacios virtuales, y las que representan
-recursos, se construyeron las funcionalidades para el manejo de usuarios, y las
-relaciones que pueden existir entre estos.
+recursos, a continuación se construyeron las funcionalidades para el manejo de
+usuarios, y las relaciones que pueden existir entre estos.
 
 \begin{figure}
 \centering
 \input{graphics/cap4_5.tex}
-\caption{Modelo de datos de las elementos de usuario.}
+\caption{Modelo de datos de los elementos de usuario.}
 \label{modelo5}
 \end{figure}
 
@@ -637,11 +636,11 @@ datos.
 Los reportes que se han construido son:
 
 \begin{description}
-\item [Usuarios] Reporte en el que por cada categoría de usuario (rol) nos dice
-cuantos registros existen en total, cuantos de estos han ingresado con su cuenta
-de usuario al menos una vez, cuantos han establecido su correo electrónico,
-cuantos han establecido un nombre de usuario propio, y cuantos han establecido
-una fotografía de usuario propio..
+\item [Usuarios] Reporte en el que por cada categoría de usuario (rol) se nos
+reporta cuantos registros existen en total, cuantos de estos han ingresado con
+su cuenta de usuario al menos una vez, cuantos han establecido su correo
+electrónico, cuantos han establecido un nombre de usuario propio, y cuantos han
+establecido una fotografía de usuario propio..
 \item [Valoraciones] Reporte en el que por cada categoría de usuario (rol) nos
 presenta el total acumulado en sus puntuaciones por cada una de las valoraciones
 realizadas en el sitio, es decir, los valores de: actividad, participación,
