@@ -39,8 +39,8 @@ Además de un servidor HTTP, se requiere tener acceso a una base de datos MySQL 
 MariaDB, para el almacenamiento de la información.
 
 Respecto al lenguaje de programación, es requerido tener instalado PHP en su
-versión 5.3 o superior. Además de necesitarse tener las librerías del framework
-Zend 1 (disponibles en el sitio web:
+versión 5.3 o superior. Además de necesitarse tener desplegado el framework Zend
+1 en el servidor (disponibles en el sitio web:
 http://framework.zend.com/downloads/latest).
 
 \section{Instalación}
@@ -114,7 +114,7 @@ que estén funcionando en la misma máquina física pasa completamente
 desapercibido para el usuario que visita esos sitios web\cite{Apache}.
 
 \subsubsection{Apache Web Server 2.2}
-Para configurar un hosts virtual en el servidor web Apache, es necesario añadir
+Para configurar un host virtual en el servidor web Apache, es necesario añadir
 una directiva, dependiendo de la distribución esto puede ser realizado de muchas
 maneras, se recomienda revisar cual es la especifica para la distribución que se
 este utilizando.
@@ -297,7 +297,7 @@ pasar los datos de acceso a la base de datos a la aplicación web.
 
 En la aplicación web se cuenta con dos archivos para la configuración, ambos
 ubicados en la carpeta \emph{/configs/}, estos archivos son:
-\emph{application.ini} donde se encuentras los valores por defecto de todas las
+\emph{application.ini} donde se encuentran los valores por defecto de todas las
 posibles variables que parametrizan a la aplicación web, \emph{local.ini} es el
 archivo donde deben configurarse los parámetros que se deseen cambiar. Estos
 archivos siguen las reglas de configuración de los archivos INI, y pueden ser
@@ -358,9 +358,9 @@ de la codificación UTF8;
 \item [resources.db.params.host] Determina la IP o URL donde se localiza el
 servidor de base de datos.
 \item [resources.db.params.username] Determina el nombre del usuario autorizado
-en el servidor de base de datos, con el que se manipulara la información.
+en el servidor de base de datos, con el que se manipulará la información.
 \item [resources.db.params.password] Determina la contraseña del usuario
-autorizado en el servidor de base de datos, con el que se manipulara la
+autorizado en el servidor de base de datos, con el que se manipulará la
 información.
 \item [resources.db.params.dbname] Determina el nombre de la base de datos donde
 se haya instalado el esquema de base de datos para la aplicación web.
